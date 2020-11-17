@@ -1,0 +1,32 @@
+import React from 'react';
+import { Page, Main, Header, Section } from '@apps';
+import './styles.scss';
+
+const { P } = Section;
+
+const Component = () => (
+  <Page id="about">
+    <Header title="About" />
+    <Main className="ion-padding">
+      <Section>
+        <P>
+          E-Surveyor helps you to assess the quality of the wildflower habitat
+          you have created on your farm. Using AI technology the app can
+          automatically identify plant species from images you take. Expertise
+          from the UKCEH built into the app can assess the quality of the
+          habitat you have created, quantifying the number and variety of
+          species supported by the flowers you have grown. If you want to know
+          how well your have done compared to others you can compare your
+          results to other farmers in your area on the league table page. The
+          app also compares the species present in your habitat to those in your
+          seedmix, making it quick and easy to see which flowers established and
+          which didn't.
+        </P>
+      </Section>
+    </Main>
+  </Page>
+);
+
+Component.propTypes = {};
+
+export default Component;

@@ -1,0 +1,506 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React from 'react';
+import { observer } from 'mobx-react';
+import {
+  IonItem,
+  IonLabel,
+  IonIcon,
+  IonList,
+  IonBadge,
+  IonItemDivider,
+  IonModal,
+  IonNote,
+} from '@ionic/react';
+import { Main, ModalHeader } from '@apps';
+import CountUp from 'react-countup';
+import PropTypes from 'prop-types';
+import Sample from 'sample';
+import pollination from 'common/data/pollination';
+import dummySurveys from 'common/data/dummy_surveys';
+import Seeds from 'common/images/seeds.svg';
+import './styles.scss';
+import './bee.svg';
+
+const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
+
+const SPECIES_GROUPS = ['Bee', 'Butterfly', 'Hoverfly'];
+
+const byName = ([taxon, name], [taxon2, name2]) => {
+  const selectedName = name || taxon;
+  const selectedName2 = name2 || taxon2;
+  return selectedName.localeCompare(selectedName2);
+};
+
+// TODO:
+const byName2 = (
+  { latin_name: taxon, common_name: name },
+  { latin_name: taxon2, common_name: name2 }
+) => {
+  const selectedName = name || taxon;
+  const selectedName2 = name2 || taxon2;
+  return selectedName.localeCompare(selectedName2);
+};
+
+// TODO: name
+const byName3 = ({ pollinator: taxon }, { pollinator: taxon2 }) => {
+  const selectedName = taxon;
+  const selectedName2 = taxon2;
+  return selectedName.localeCompare(selectedName2);
+};
+
+@observer
+class MainComponent extends React.Component {
+  static propTypes = {
+    sample: PropTypes.object.isRequired,
+  };
+
+  state = {
+    showModal: false,
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.species = this.props.sample.getUniqueSpecies();
+  }
+
+  getPollinators = () => {
+    const getPollinatorsEntries = ([name, commonName]) => {
+      // eslint-disable-next-line camelcase
+      const hasLatinName = ({ latin_name }) => latin_name === name;
+
+      const pollinator = pollination.find(hasLatinName);
+
+      if (!pollinator) {
+        return null;
+      }
+
+      const {
+        pollinator_count: pollinatorCount,
+        pollinator_class: pollinatorClass,
+      } = pollinator;
+
+      const selectedName = commonName || name;
+      return (
+        <IonItem onClick={this.getShowModal(name)}>
+          <IonLabel slot="start">{selectedName}</IonLabel>
+          <IonLabel slot="end" className="pollinator-class">
+            <IonBadge className={`${pollinatorClass}`}>
+              {pollinatorCount}
+            </IonBadge>
+          </IonLabel>
+        </IonItem>
+      );
+    };
+
+    return this.species.sort(byName).map(getPollinatorsEntries);
+  };
+
+  listGroupCounts = species => {
+    const getGroupEntries = groupName => {
+      const byGroupName = ({ group }) => group === groupName;
+
+      const count = species.filter(byGroupName).length;
+
+      if (!count) {
+        return null;
+      }
+
+      return (
+        <IonItem key={groupName} onClick={this.getShowModal(groupName)}>
+          <IonLabel slot="start">{groupName}</IonLabel>
+          <IonLabel slot="end">{count}</IonLabel>
+        </IonItem>
+      );
+    };
+
+    return SPECIES_GROUPS.map(getGroupEntries);
+  };
+
+  getSupportedSpecies = () => {
+    const species = getUniqueSupportedSpecies(this.species);
+
+    return (
+      <>
+        <IonItem>
+          <IonLabel slot="start">
+            <b>
+              <small>Species</small>
+            </b>
+          </IonLabel>
+          <IonLabel className="ion-text-right" slot="end">
+            <b>
+              <small>Counts</small>
+            </b>
+          </IonLabel>
+        </IonItem>
+
+        {this.listGroupCounts(species)}
+      </>
+    );
+  };
+
+  getSpeciesPollinatorsModalList = () => {
+    const getPollinatorsEntries = ({
+      pollinator: taxon,
+      pollinator_common_name: commonName,
+    }) => {
+      return (
+        <IonItem>
+          <IonLabel>{commonName || taxon}</IonLabel>
+        </IonItem>
+      );
+    };
+
+    const species = getUniqueSupportedSpecies(this.species).map(
+      getPollinatorsEntries
+    );
+
+    if (!species.length) {
+      return (
+        <IonList>
+          <IonItemDivider>
+            <IonLabel>Sorry, no species were found</IonLabel>
+          </IonItemDivider>
+        </IonList>
+      );
+    }
+
+    return (
+      <>
+        <IonList>
+          <IonItemDivider>
+            <IonLabel>Found species</IonLabel>
+          </IonItemDivider>
+        </IonList>
+
+        <IonList>{species}</IonList>
+      </>
+    );
+  };
+
+  getSingleSpeciesPollinatorsModalList = speciesName => {
+    const bySpeciesName = ({ plant }) => plant === speciesName;
+    const getPollinatorsEntries = ({
+      pollinator: taxon,
+      pollinator_common_name: commonName,
+    }) => {
+      return (
+        <IonItem>
+          <IonLabel>{commonName || taxon}</IonLabel>
+        </IonItem>
+      );
+    };
+    const species = getSupportedSpeciesList(this.species)
+      .sort(byName3)
+      .filter(bySpeciesName)
+      .map(getPollinatorsEntries);
+
+    if (!species.length) {
+      return (
+        <IonList>
+          <IonItemDivider>
+            <IonLabel>Sorry, no species were found</IonLabel>
+          </IonItemDivider>
+        </IonList>
+      );
+    }
+
+    // eslint-disable-next-line camelcase
+    const hasLatinName = ({ latin_name }) => latin_name === speciesName;
+    const pollinator = pollination.find(hasLatinName);
+
+    const {
+      pollinator_count: pollinatorCount,
+      pollinator_class: pollinatorClass,
+    } = pollinator;
+
+    return (
+      <>
+        <IonItem className="pollinator-class">
+          <IonLabel className="ion-text-wrap">
+            <IonNote color="primary">
+              This is <b className={pollinatorClass}>{pollinatorClass}</b> class
+              flower that supports <b>{pollinatorCount}</b> species
+            </IonNote>
+          </IonLabel>
+        </IonItem>
+
+        <IonList>
+          <IonItemDivider>
+            <IonLabel>Found species</IonLabel>
+          </IonItemDivider>
+        </IonList>
+
+        <IonList>{species}</IonList>
+      </>
+    );
+  };
+
+  getSpeciesGroupModalList = groupName => {
+    const getPollinatorsEntries = ({
+      pollinator: taxon,
+      pollinator_common_name: commonName,
+    }) => {
+      return (
+        <IonItem>
+          <IonLabel>{commonName || taxon}</IonLabel>
+        </IonItem>
+      );
+    };
+    const byGroupName = ({ group }) => group === groupName;
+
+    const species = getUniqueSupportedSpecies(this.species)
+      .sort(byName3)
+      .filter(byGroupName)
+      .map(getPollinatorsEntries);
+
+    if (!species.length) {
+      return (
+        <IonList>
+          <IonItemDivider>
+            <IonLabel>Sorry, no species were found</IonLabel>
+          </IonItemDivider>
+        </IonList>
+      );
+    }
+
+    return (
+      <>
+        <IonList>
+          <IonItemDivider>
+            <IonLabel>Found species</IonLabel>
+          </IonItemDivider>
+        </IonList>
+
+        <IonList>{species}</IonList>
+      </>
+    );
+  };
+
+  getSpeciesSeedmixModalList = () => {
+    const { sample } = this.props;
+    const [
+      selectedSeedmixSpecies,
+      totalSeedmixSpecies,
+    ] = sample.getSeedmixUse();
+
+    const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }) => {
+      const hasLatinName = ([latin]) => latin === latinName;
+      return !selectedSeedmixSpecies.find(hasLatinName);
+    };
+    const missingSeedmixSpecies = totalSeedmixSpecies.filter(
+      getMissingSelectedSeedmixSpecies
+    );
+
+    const selectedSeedmixEntries = ([latin, commonName]) => {
+      return <IonItem>{commonName || latin}</IonItem>;
+    };
+
+    const selectedSeedmixSpeciesList = !!selectedSeedmixSpecies.length && (
+      <IonList>
+        <IonItemDivider>
+          <IonLabel>Found species</IonLabel>
+        </IonItemDivider>
+        {selectedSeedmixSpecies.sort(byName).map(selectedSeedmixEntries)}
+      </IonList>
+    );
+
+    const selectedSeedmixSpeciesEntries = species => {
+      return <IonItem>{species.common_name || species.latin_name}</IonItem>;
+    };
+    const missingSeedmixSpeciesList = !!missingSeedmixSpecies.length && (
+      <IonList>
+        <IonItemDivider>
+          <IonLabel>Missing species</IonLabel>
+        </IonItemDivider>
+        {missingSeedmixSpecies.sort(byName2).map(selectedSeedmixSpeciesEntries)}
+      </IonList>
+    );
+
+    return (
+      <>
+        {selectedSeedmixSpeciesList}
+        {missingSeedmixSpeciesList}
+      </>
+    );
+  };
+
+  getLeagueTable = () => {
+    const pollinators = getUniqueSupportedSpecies(this.species);
+
+    const byPollinationCounts = (a, b) => b.pollinators - a.pollinators;
+
+    const currentSurvey = {
+      name: this.props.sample.attrs.name,
+      species: this.species,
+      pollinators: pollinators.length,
+      current: true,
+    };
+
+    const getPollinatorsEntries = (survey, index) => {
+      return (
+        <IonItem
+          key={survey.name}
+          className={`league-table-item ${
+            survey.current ? 'league-table-current' : ''
+          }`}
+        >
+          <IonLabel>
+            <IonLabel position="stacked">
+              <b>{survey.name}</b>
+            </IonLabel>
+            <IonLabel position="stacked">
+              Pollinators: <b>{survey.pollinators}</b>
+            </IonLabel>
+            <IonLabel position="stacked">
+              {'Recorded species: '}
+              {survey.species.length}
+            </IonLabel>
+          </IonLabel>
+          <IonLabel slot="end">{index + 1}</IonLabel>
+        </IonItem>
+      );
+    };
+
+    const table = [...dummySurveys, currentSurvey]
+      .sort(byPollinationCounts)
+      .map(getPollinatorsEntries);
+
+    return (
+      <IonList>
+        <IonItem>
+          <IonLabel className="ion-text-wrap">
+            <IonNote color="primary">
+              Recorder surveys supporting the most pollinators
+            </IonNote>
+          </IonLabel>
+        </IonItem>
+
+        {table}
+      </IonList>
+    );
+  };
+
+  getModalContents = () => {
+    if (this.state.showModal === 'Seedmix') {
+      return <Main>{this.getSpeciesSeedmixModalList()}</Main>;
+    }
+
+    if (this.state.showModal === 'Pollinators') {
+      return <Main>{this.getSpeciesPollinatorsModalList()}</Main>;
+    }
+
+    if (this.state.showModal === 'League') {
+      return <Main>{this.getLeagueTable()}</Main>;
+    }
+
+    if (SPECIES_GROUPS.includes(this.state.showModal)) {
+      return <Main>{this.getSpeciesGroupModalList(this.state.showModal)}</Main>;
+    }
+
+    const isSpeciesName = !!this.state.showModal;
+    if (isSpeciesName) {
+      return (
+        <Main>
+          {this.getSingleSpeciesPollinatorsModalList(this.state.showModal)}
+        </Main>
+      );
+    }
+
+    return null;
+  };
+
+  getShowModal = modalType => {
+    const showModal = () => this.setState({ showModal: modalType });
+    return showModal;
+  };
+
+  render() {
+    const { sample } = this.props;
+
+    const [
+      selectedSeedmixSpecies,
+      totalSeedmixSpecies,
+    ] = sample.getSeedmixUse();
+
+    const { seedmix } = sample.attrs;
+
+    const species = getUniqueSupportedSpecies(this.species);
+
+    return (
+      <>
+        <Main>
+          <IonList lines="full">
+            <IonItem className="report-header">
+              <div className="seedmix" onClick={this.getShowModal('Seedmix')}>
+                {seedmix && (
+                  <>
+                    <IonIcon icon={Seeds} />
+                    <IonBadge>
+                      <CountUp
+                        end={selectedSeedmixSpecies.length}
+                        duration={2.75}
+                      />
+                      /{totalSeedmixSpecies.length}
+                    </IonBadge>
+                  </>
+                )}
+              </div>
+              <div
+                className="pollinators"
+                onClick={this.getShowModal('Pollinators')}
+              >
+                <IonIcon icon="/images/bee.svg" />
+                <IonBadge>
+                  <CountUp end={species.length} duration={2.75} />
+                </IonBadge>
+              </div>
+            </IonItem>
+
+            <IonItem detail onClick={this.getShowModal('League')}>
+              <IonLabel slot="start">League Table</IonLabel>
+            </IonItem>
+
+            <IonItemDivider mode="ios">
+              <IonLabel className="home-report-label">
+                Pollinators count
+              </IonLabel>
+            </IonItemDivider>
+            <IonItem>
+              <IonLabel slot="start">
+                <b>
+                  <small>Species</small>
+                </b>
+              </IonLabel>
+              <IonLabel className="ion-text-right" slot="end">
+                <b>
+                  <small>Counts</small>
+                </b>
+              </IonLabel>
+            </IonItem>
+            {this.getPollinators()}
+
+            <IonItemDivider mode="ios">
+              <IonLabel className="home-report-label">
+                Supported species groups
+              </IonLabel>
+            </IonItemDivider>
+            {this.getSupportedSpecies()}
+          </IonList>
+        </Main>
+
+        <IonModal isOpen={!!this.state.showModal}>
+          <ModalHeader
+            title={this.state.showModal}
+            onClose={this.getShowModal(false)}
+          />
+          {this.getModalContents()}
+        </IonModal>
+      </>
+    );
+  }
+}
+
+export default MainComponent;
