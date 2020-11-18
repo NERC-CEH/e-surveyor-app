@@ -8,15 +8,10 @@ const exec = grunt => ({
   },
   resources: {
     command: () => {
-      const appMinorVersion = pkg.version.split('.').splice(0, 2).join('.');
-
       return `mkdir -p resources &&
                 cp -R other/designs/android resources &&
+                cp -R other/designs/splash.png resources &&
 
-                cp other/designs/splash.svg resources &&
-                sed -i.bak 's/{{APP_VERSION}}/${appMinorVersion}/g' resources/splash.svg &&
-
-                ./node_modules/.bin/sharp -i resources/splash.svg -o resources/splash.png resize 2737 2737 -- removeAlpha &&
                 ./node_modules/.bin/sharp -i other/designs/icon.svg -o resources/icon.png resize 1024 1024 -- removeAlpha &&
 
                 ./node_modules/.bin/cordova-res ios --skip-config --resources resources --copy &&
