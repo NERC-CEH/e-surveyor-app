@@ -64,6 +64,15 @@ const survey = {
       get: modal => modal.sample.metadata.created_on.toLocaleDateString(),
     },
 
+    location: {
+      id: 'entered_sref',
+      values(location) {
+        return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
+          location.longitude
+        ).toFixed(7)}`;
+      },
+    },
+
     seedmixgroup: {
       label: 'Seedmix Producer',
       type: 'radio',
@@ -80,12 +89,29 @@ const survey = {
   },
 
   smp: {
+    attrs: {
+      location: {
+        id: 'entered_sref',
+        values(location) {
+          return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
+            location.longitude
+          ).toFixed(7)}`;
+        },
+      },
+    },
+
     create(AppSample, Occurrence, photo) {
       const sample = new AppSample({
         metadata: {
           survey: survey.name,
         },
+
+        attrs: {
+          location: null,
+        },
       });
+
+      sample.startGPS();
 
       const occurrence = survey.smp.occ.create(Occurrence, photo);
       sample.occurrences.push(occurrence);
@@ -96,10 +122,9 @@ const survey = {
     occ: {
       attrs: {
         speciesId: null,
-
-  verify() {},
-        },
       },
+
+      verify() {},
 
       create(Occurrence, photo) {
         const occ = new Occurrence({
@@ -120,7 +145,13 @@ const survey = {
         survey: survey.name,
         saved: false,
       },
+
+      attrs: {
+        location: null,
+      },
     });
+
+    sample.startGPS();
 
     return sample;
   },

@@ -1,4 +1,5 @@
 import { Sample } from '@apps';
+import GPSExtension from './sampleGPSExt';
 import surveyConfig from '../../Survey/config';
 import seedmixData from '../data/seedmix';
 import plantInteractions from '../data/plant_interactions';
@@ -7,6 +8,12 @@ import Occurrence from './occurrence';
 import Media from './image';
 
 class AppSample extends Sample {
+  constructor(...args) {
+    super(...args);
+
+    this.gpsExtensionInit();
+  }
+
   static fromJSON(json) {
     return super.fromJSON(json, Occurrence, AppSample, Media);
   }
@@ -133,6 +140,7 @@ class AppSample extends Sample {
   }
 }
 
+AppSample.prototype = Object.assign(AppSample.prototype, GPSExtension);
 AppSample.prototype = Object.assign(AppSample.prototype);
 AppSample.prototype.constructor = AppSample;
 

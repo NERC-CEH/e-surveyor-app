@@ -19,10 +19,12 @@ import {
   helpCircle,
   closeCircle,
   bookmarkOutline,
+  locationOutline,
 } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import config from 'config';
 import Seeds from 'common/images/seeds.svg';
+import GridRefValue from '../../GridRefValue';
 import './styles.scss';
 import 'ionicons/dist/svg/checkmark-circle-outline.svg';
 import 'ionicons/dist/svg/help-circle-outline.svg';
@@ -213,6 +215,8 @@ class Component extends React.Component {
 
     const { seedmixgroup, seedmix, name } = sample.attrs;
 
+    const prettyGridRef = <GridRefValue sample={sample} />;
+
     const baseURL = `/survey/${sample.cid}/edit`;
 
     return (
@@ -223,6 +227,14 @@ class Component extends React.Component {
             icon={bookmarkOutline}
             label="Name"
             value={name}
+          />
+
+          <MenuAttrItem
+            routerLink={`${baseURL}/map`}
+            value={prettyGridRef}
+            icon={locationOutline}
+            label="Location"
+            skipValueTranslation
           />
 
           <IonItemDivider mode="ios">Seedmix</IonItemDivider>

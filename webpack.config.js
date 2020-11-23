@@ -5,7 +5,12 @@ require('dotenv').config({ silent: true }); // get local environment variables f
 const checkEnv = require('@flumens/has-env');
 
 checkEnv({
-  warn: ['APP_TRAINING', 'APP_MANUAL_TESTING', 'APP_HOST'],
+  warn: [
+    'APP_MAPBOX_MAP_KEY',
+    'APP_TRAINING',
+    'APP_MANUAL_TESTING',
+    'APP_HOST',
+  ],
   required: ['APP_SENTRY_KEY'],
 });
 
@@ -159,9 +164,6 @@ const config = {
         ),
         APP_MAPBOX_MAP_KEY: JSON.stringify(
           process.env.APP_MAPBOX_MAP_KEY || ''
-        ),
-        APP_WEATHER_SITE_API_KEY: JSON.stringify(
-          process.env.APP_WEATHER_SITE_API_KEY || ''
         ),
         // compulsory env. variables
         APP_INDICIA_API_HOST: JSON.stringify(

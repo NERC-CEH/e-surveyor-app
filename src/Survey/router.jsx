@@ -1,7 +1,9 @@
 import React from 'react';
-import { RouteWithModels, AttrPage as Attr } from '@apps';
+import { RouteWithModels, AttrPage as Attr, ModelLocation } from '@apps';
 import savedSamples from 'savedSamples';
 import appModel from 'appModel';
+import userModel from 'userModel';
+import config from 'config';
 import StartNewSurvey from './StartNewSurvey';
 import Edit from './Edit';
 import Report from './Report';
@@ -17,10 +19,20 @@ const ReportWrap = props => (
   <Report savedSamples={savedSamples} appModel={appModel} {...props} />
 );
 
+const ModelLocationWrap = props => (
+  <ModelLocation
+    appModel={appModel}
+    userModel={userModel}
+    mapProviderOptions={config.map}
+    {...props}
+  />
+);
+
 const routes = [
   [`${baseURL}`, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId/edit`, EditWrap],
   [`${baseURL}/:smpId/edit/:attr`, Attr],
+  [`${baseURL}/:smpId/edit/map`, ModelLocationWrap],
   [`${baseURL}/:smpId/report`, ReportWrap],
 ];
 
