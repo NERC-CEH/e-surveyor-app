@@ -54,6 +54,7 @@
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-sqlite-storage": "^5.1.0",
     "html-webpack-plugin": "4.5.0",
+    "i18next": "^19.8.4",
     "ionicons": "5.2.3",
     "localforage": "1.9.0",
     "localforage-cordovasqlitedriver": "1.8.0",
@@ -65,6 +66,7 @@
     "react": "17.0.1",
     "react-countup": "^4.3.3",
     "react-dom": "17.0.1",
+    "react-i18next": "^11.7.3",
     "react-router": "^5.1.0",
     "react-router-dom": "5.2.0",
     "yup": "^0.29.3"

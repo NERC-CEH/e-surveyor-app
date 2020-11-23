@@ -5,6 +5,8 @@ import appModel from 'appModel';
 import savedSamples from 'savedSamples';
 import initAnalytics from 'helpers/analytics';
 import { Plugins, StatusBarStyle } from '@capacitor/core';
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 import App from './App';
 
 import '@ionic/core/css/core.css';
@@ -12,6 +14,10 @@ import '@ionic/core/css/ionic.bundle.css';
 import 'common/theme.scss';
 
 const { App: AppPlugin, StatusBar, SplashScreen } = Plugins;
+
+i18n.use(initReactI18next).init({
+  lng: 'en',
+});
 
 setupConfig({
   hardwareBackButton: false, // android back button
