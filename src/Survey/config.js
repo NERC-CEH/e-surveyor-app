@@ -79,7 +79,40 @@ const survey = {
     },
   },
 
+  smp: {
+    create(AppSample, Occurrence, photo) {
+      const sample = new AppSample({
+        metadata: {
+          survey: survey.name,
+        },
+      });
+
+      const occurrence = survey.smp.occ.create(Occurrence, photo);
+      sample.occurrences.push(occurrence);
+
+      return sample;
+    },
+
+    occ: {
+      attrs: {
+        speciesId: null,
+
   verify() {},
+        },
+      },
+
+      create(Occurrence, photo) {
+        const occ = new Occurrence({
+          attrs: {
+            speciesId: 0,
+          },
+        });
+        occ.media.push(photo);
+
+        return occ;
+      },
+    },
+  },
 
   create(Sample) {
     const sample = new Sample({

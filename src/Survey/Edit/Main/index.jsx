@@ -104,9 +104,10 @@ class Component extends React.Component {
     });
   };
 
-  getImage = media => {
-    const { identifying } = media.identification;
-    const { species } = media.attrs;
+  getImage = subSample => {
+    const { identifying } = subSample.occurrences[0].media[0].identification;
+    const { species } = subSample.occurrences[0].media[0].attrs;
+    const photo = subSample.occurrences[0].media[0];
 
     let commonName;
     let scientificName;
@@ -135,18 +136,20 @@ class Component extends React.Component {
       detailIcon = closeCircle;
     }
 
-    const deletePhotoWrap = () => deletePhoto(media);
+    const deletePhotoWrap = () => deletePhoto(subSample);
+
+    const detailsIcon = detailIcon || null;
 
     return (
-      <IonItemSliding className="species-list-item" key={media.cid}>
+      <IonItemSliding className="species-list-item" key={subSample.cid}>
         <IonItem
           detail
-          detailIcon={detailIcon}
+          detailIcon={detailsIcon}
           className={idClass}
           onClick={this.showIdentificationStatuses}
         >
           <div className="photo">
-            <img src={media.getURL()} />
+            <img src={photo.getURL()} />
           </div>
 
           <IonLabel text-wrap>
@@ -176,7 +179,9 @@ class Component extends React.Component {
   getImages = () => {
     const { sample } = this.props;
 
-    if (!sample.media.length) {
+    const subSamples = [...sample.samples];
+
+    if (!sample.samples.length) {
       return (
         <IonList lines="full">
           <IonItem className="empty">
@@ -186,8 +191,8 @@ class Component extends React.Component {
       );
     }
 
-    const reversedMediaList = [...sample.media].reverse();
-    return reversedMediaList.map(this.getImage);
+    const reversedSubSampleList = subSamples.reverse();
+    return reversedSubSampleList.map(this.getImage);
   };
 
   getNewImageButton = () => (

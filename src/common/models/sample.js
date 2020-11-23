@@ -31,28 +31,34 @@ class AppSample extends Sample {
     return survey;
   }
 
-  getUniqueSpecies() {
-    const getScientificName = imageModel =>
-      !imageModel.attrs.species
-        ? null
-        : imageModel.attrs.species.scientificNameWithoutAuthor;
+  getSpecies() {
+    if (!this.parent) {
+      throw new Error('Parent does not exist');
+    }
+    return this.occurrences[0].media[0].attrs.species;
+  }
 
-    let list = this.media.map(getScientificName).filter(species => species);
+  getUniqueSpecies() {
+    const getScientificName = imageModel => {
+      return !imageModel.getSpecies()
+        ? null
+        : imageModel.getSpecies().scientificNameWithoutAuthor;
+    };
+
+    let list = this.samples.map(getScientificName).filter(species => species);
 
     const uniqueSpeciesScientificNames = [...new Set(list)];
 
     const extractUniqueScientificNames = name => {
       const scientificName = image => getScientificName(image) === name;
 
-      const fullSpecies = this.media.find(scientificName);
+      const fullSpecies = this.samples.find(scientificName);
 
+      const { commonNames } = fullSpecies.getSpecies();
       let commonName;
 
-      if (
-        fullSpecies.attrs.species.commonNames &&
-        fullSpecies.attrs.species.commonNames.length
-      ) {
-        [commonName] = fullSpecies.attrs.species.commonNames;
+      if (commonNames && commonNames.length) {
+        [commonName] = commonNames;
       }
 
       return [name, commonName];

@@ -14,8 +14,8 @@ export default class AppMedia extends Media {
     super(...args);
 
     this.attrs = observable({
-      ...this.attrs,
       species: null,
+      ...this.attrs,
     });
   }
 
