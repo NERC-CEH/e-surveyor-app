@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Page, Header, alert } from '@apps';
+import Sample from 'sample';
+import Occurrence from 'occurrence';
 import { observer } from 'mobx-react';
 import { IonButton } from '@ionic/react';
 import config from 'config';
@@ -20,46 +22,57 @@ class Controller extends React.Component {
     sample: PropTypes.object.isRequired,
   };
 
-  /**
-   * Adds a new image to occurrence.
-   */
+  identifyPhoto = async image => {
+    const { sample } = this.props;
+
+    const speciesImg = image;
+
+    speciesImg.identification.identifying = true;
+
+    try {
+      const species = await identifyImage(speciesImg);
+      speciesImg.attrs.species = {
+        ...species[0].species,
+        score: species[0].score,
+      };
+
+      speciesImg.identification.identifying = false;
+      sample.save();
+    } catch (e) {
+      speciesImg.identification.identifying = false;
+    }
+  };
+
   onPhotoAdd = async photo => {
     const { sample } = this.props;
 
     const image = await ImageHelp.getImageModel(ImageModel, photo);
 
-    sample.media.push(image);
-    await sample.save();
+    this.identifyPhoto(image);
 
-    image.identification.identifying = true;
-    try {
-      const species = (await identifyImage(image)) || [];
-      image.identification.identifying = false;
-      image.attrs.species = {
-        ...species[0].species,
-        score: species[0].score,
-      };
-      sample.save();
-    } catch (e) {
-      image.identification.identifying = false;
-    }
+    const survey = sample.getSurvey();
+
+    const newSubSample = survey.smp.create(Sample, Occurrence, image);
+
+    sample.samples.push(newSubSample);
+    sample.save();
   };
 
   navToReport = async () => {
     const { sample } = this.props;
+    const { samples } = this.props.sample;
     const { history } = this.props;
 
     let hasValidSpecies = false;
 
-    const showReportIfScoreHigherThanThreshold = image => {
-      if (
-        image.attrs.species &&
-        image.attrs.species.score > POSSIBLE_THRESHOLD
-      ) {
+    const showReportIfScoreHigherThanThreshold = subSample => {
+      const species = subSample.getSpecies();
+      if (species && species.score > POSSIBLE_THRESHOLD) {
         hasValidSpecies = true;
       }
     };
-    sample.media.forEach(showReportIfScoreHigherThanThreshold);
+
+    samples.forEach(showReportIfScoreHigherThanThreshold);
 
     if (!hasValidSpecies) {
       alert({
