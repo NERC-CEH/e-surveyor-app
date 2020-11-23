@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -82,8 +83,9 @@ class MainComponent extends React.Component {
       } = pollinator;
 
       const selectedName = commonName || name;
+
       return (
-        <IonItem onClick={this.getShowModal(name)}>
+        <IonItem onClick={this.getShowModal(name)} key={selectedName}>
           <IonLabel slot="start">{selectedName}</IonLabel>
           <IonLabel slot="end" className="pollinator-class">
             <IonBadge className={`${pollinatorClass}`}>
@@ -145,13 +147,11 @@ class MainComponent extends React.Component {
     const getPollinatorsEntries = ({
       pollinator: taxon,
       pollinator_common_name: commonName,
-    }) => {
-      return (
-        <IonItem>
-          <IonLabel>{commonName || taxon}</IonLabel>
-        </IonItem>
-      );
-    };
+    }) => (
+      <IonItem key={taxon}>
+        <IonLabel>{commonName || taxon}</IonLabel>
+      </IonItem>
+    );
 
     const species = getUniqueSupportedSpecies(this.species).map(
       getPollinatorsEntries
@@ -183,15 +183,17 @@ class MainComponent extends React.Component {
   getSingleSpeciesPollinatorsModalList = speciesName => {
     const bySpeciesName = ({ plant }) => plant === speciesName;
     const getPollinatorsEntries = ({
-      pollinator: taxon,
+      pollinator: latinName,
       pollinator_common_name: commonName,
     }) => {
+      const taxonName = commonName || latinName;
       return (
-        <IonItem>
-          <IonLabel>{commonName || taxon}</IonLabel>
+        <IonItem key={taxonName}>
+          <IonLabel>{taxonName}</IonLabel>
         </IonItem>
       );
     };
+
     const species = getSupportedSpeciesList(this.species)
       .sort(byName3)
       .filter(bySpeciesName)
@@ -244,7 +246,7 @@ class MainComponent extends React.Component {
       pollinator_common_name: commonName,
     }) => {
       return (
-        <IonItem>
+        <IonItem key={commonName || taxon}>
           <IonLabel>{commonName || taxon}</IonLabel>
         </IonItem>
       );
@@ -294,8 +296,9 @@ class MainComponent extends React.Component {
       getMissingSelectedSeedmixSpecies
     );
 
-    const selectedSeedmixEntries = ([latin, commonName]) => {
-      return <IonItem>{commonName || latin}</IonItem>;
+    const selectedSeedmixEntries = ([latinName, commonName]) => {
+      const taxonName = commonName || latinName;
+      return <IonItem key={taxonName}>{taxonName}</IonItem>;
     };
 
     const selectedSeedmixSpeciesList = !!selectedSeedmixSpecies.length && (
@@ -307,8 +310,9 @@ class MainComponent extends React.Component {
       </IonList>
     );
 
-    const selectedSeedmixSpeciesEntries = species => {
-      return <IonItem>{species.common_name || species.latin_name}</IonItem>;
+    const selectedSeedmixSpeciesEntries = ({ common_name, latin_name }) => {
+      const taxonName = common_name || latin_name;
+      return <IonItem key={taxonName}>{common_name || latin_name}</IonItem>;
     };
     const missingSeedmixSpeciesList = !!missingSeedmixSpecies.length && (
       <IonList>
@@ -340,9 +344,11 @@ class MainComponent extends React.Component {
     };
 
     const getPollinatorsEntries = (survey, index) => {
+      const key = survey.name || survey.pollinators;
+
       return (
         <IonItem
-          key={survey.name}
+          key={key}
           className={`league-table-item ${
             survey.current ? 'league-table-current' : ''
           }`}
@@ -429,6 +435,8 @@ class MainComponent extends React.Component {
 
     const species = getUniqueSupportedSpecies(this.species);
 
+    const title = this.state.showModal || '';
+
     return (
       <>
         <Main>
@@ -492,10 +500,7 @@ class MainComponent extends React.Component {
         </Main>
 
         <IonModal isOpen={!!this.state.showModal}>
-          <ModalHeader
-            title={this.state.showModal}
-            onClose={this.getShowModal(false)}
-          />
+          <ModalHeader title={title} onClose={this.getShowModal(false)} />
           {this.getModalContents()}
         </IonModal>
       </>
