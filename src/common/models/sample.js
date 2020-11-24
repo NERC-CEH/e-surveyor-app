@@ -11,6 +11,7 @@ class AppSample extends Sample {
   constructor(...args) {
     super(...args);
 
+    Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
   }
 
@@ -139,9 +140,5 @@ class AppSample extends Sample {
     return !!this.metadata.synced_on;
   }
 }
-
-AppSample.prototype = Object.assign(AppSample.prototype, GPSExtension);
-AppSample.prototype = Object.assign(AppSample.prototype);
-AppSample.prototype.constructor = AppSample;
 
 export default AppSample;
