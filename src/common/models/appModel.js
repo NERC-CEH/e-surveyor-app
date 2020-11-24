@@ -3,10 +3,7 @@ import { genericStore } from './store';
 
 class AppModel extends Model {}
 
-const defaults = {
-  useGridRef: true,
-  useGridMap: true,
-};
+const defaults = {};
 
 const appModel = new AppModel(genericStore, 'app', defaults);
 
