@@ -18,7 +18,6 @@ import CountUp from 'react-countup';
 import PropTypes from 'prop-types';
 import Sample from 'sample';
 import pollination from 'common/data/pollination';
-import dummySurveys from 'common/data/dummy_surveys';
 import Seeds from 'common/images/seeds.svg';
 import './styles.scss';
 import './bee.svg';
@@ -54,17 +53,15 @@ const byName3 = ({ pollinator: taxon }, { pollinator: taxon2 }) => {
 class MainComponent extends React.Component {
   static propTypes = {
     sample: PropTypes.object.isRequired,
+    getLeagueTable: PropTypes.func.isRequired,
+    getMissingSeedmixSpecies: PropTypes.func.isRequired,
   };
 
   state = {
     showModal: false,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.species = this.props.sample.getUniqueSpecies();
-  }
+  species = this.props.sample.getUniqueSpecies();
 
   getPollinators = () => {
     const getPollinatorsEntries = ([name, commonName]) => {
@@ -281,27 +278,48 @@ class MainComponent extends React.Component {
     );
   };
 
-  getSpeciesSeedmixModalList = () => {
-    const { sample } = this.props;
-    const [
-      selectedSeedmixSpecies,
-      totalSeedmixSpecies,
-    ] = sample.getSeedmixUse();
+  getMissingSeedmixSpeciesList = () => {
+    const { getMissingSeedmixSpecies } = this.props;
 
-    const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }) => {
-      const hasLatinName = ([latin]) => latin === latinName;
-      return !selectedSeedmixSpecies.find(hasLatinName);
+    const missingSeedmixSpecies = getMissingSeedmixSpecies();
+
+    if (!missingSeedmixSpecies.length) {
+      return null;
+    }
+
+    const selectedSeedmixSpeciesEntries = ({ common_name, latin_name }) => {
+      const taxonName = common_name || latin_name;
+      return <IonItem key={taxonName}>{common_name || latin_name}</IonItem>;
     };
-    const missingSeedmixSpecies = totalSeedmixSpecies.filter(
-      getMissingSelectedSeedmixSpecies
+
+    const list = missingSeedmixSpecies
+      .sort(byName2)
+      .map(selectedSeedmixSpeciesEntries);
+
+    return (
+      <IonList>
+        <IonItemDivider>
+          <IonLabel>Missing species</IonLabel>
+        </IonItemDivider>
+        {list}
+      </IonList>
     );
+  };
+
+  getSelectedSeedmixSpeciesList = () => {
+    const { sample } = this.props;
+    const [selectedSeedmixSpecies] = sample.getSeedmixUse();
+
+    if (!selectedSeedmixSpecies.length) {
+      return null;
+    }
 
     const selectedSeedmixEntries = ([latinName, commonName]) => {
       const taxonName = commonName || latinName;
       return <IonItem key={taxonName}>{taxonName}</IonItem>;
     };
 
-    const selectedSeedmixSpeciesList = !!selectedSeedmixSpecies.length && (
+    return (
       <IonList>
         <IonItemDivider>
           <IonLabel>Found species</IonLabel>
@@ -309,41 +327,21 @@ class MainComponent extends React.Component {
         {selectedSeedmixSpecies.sort(byName).map(selectedSeedmixEntries)}
       </IonList>
     );
+  };
 
-    const selectedSeedmixSpeciesEntries = ({ common_name, latin_name }) => {
-      const taxonName = common_name || latin_name;
-      return <IonItem key={taxonName}>{common_name || latin_name}</IonItem>;
-    };
-    const missingSeedmixSpeciesList = !!missingSeedmixSpecies.length && (
-      <IonList>
-        <IonItemDivider>
-          <IonLabel>Missing species</IonLabel>
-        </IonItemDivider>
-        {missingSeedmixSpecies.sort(byName2).map(selectedSeedmixSpeciesEntries)}
-      </IonList>
-    );
-
+  getSpeciesSeedmixModalList = () => {
     return (
       <>
-        {selectedSeedmixSpeciesList}
-        {missingSeedmixSpeciesList}
+        {this.getSelectedSeedmixSpeciesList()}
+        {this.getMissingSeedmixSpeciesList()}
       </>
     );
   };
 
   getLeagueTable = () => {
-    const pollinators = getUniqueSupportedSpecies(this.species);
+    const { getLeagueTable } = this.props;
 
-    const byPollinationCounts = (a, b) => b.pollinators - a.pollinators;
-
-    const currentSurvey = {
-      name: this.props.sample.attrs.name,
-      species: this.species,
-      pollinators: pollinators.length,
-      current: true,
-    };
-
-    const getPollinatorsEntries = (survey, index) => {
+    const getRow = (survey, index) => {
       const key = survey.name || survey.pollinators;
 
       return (
@@ -370,9 +368,7 @@ class MainComponent extends React.Component {
       );
     };
 
-    const table = [...dummySurveys, currentSurvey]
-      .sort(byPollinationCounts)
-      .map(getPollinatorsEntries);
+    const table = getLeagueTable().map(getRow);
 
     return (
       <IonList>
