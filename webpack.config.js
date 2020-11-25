@@ -45,8 +45,6 @@ const config = {
     ],
     alias: {
       '@apps': 'common/appsBitCollection',
-      Lib: 'common/Lib',
-      Components: 'common/Components',
       config: 'common/config/config',
       helpers: 'common/helpers',
       savedSamples: 'common/models/savedSamples',
@@ -54,7 +52,6 @@ const config = {
       occurrence: 'common/models/occurrence',
       appModel: 'common/models/appModel',
       userModel: 'common/models/userModel',
-      modelFactory: 'common/models/modelFactory',
     },
     extensions: ['.js', '.jsx', '.json'],
   },
