@@ -92,7 +92,7 @@
     "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "7.10.4",
     "@capacitor/cli": "^2.4.2",
-    "@flumens/eslint-config": "^0.1.1",
+    "@flumens/eslint-config": "^0.2.0",
     "@flumens/has-env": "1.0.0",
     "autoprefixer": "^9.7.3",
     "axios": "0.20.0",
@@ -237,25 +237,25 @@
       "__DEV__": false,
       "__TEST__": true
     },
-    "moduleFileExtensions": [
-      "ts",
-      "js",
-      "jsx",
-      "json"
-    ],
     "transform": {
-      "^.+\\.js$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest"
     },
     "testRegex": "((\\.|/*.)(spec))\\.js?$",
     "moduleNameMapper": {
       "^.+.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
       "ionic-native": "jest-transform-stub",
       "^@apps$": "<rootDir>/src/common/appsBitCollection.js",
+      "^savedSamples$": "<rootDir>/src/common/models/savedSamples.js",
+      "^sample$": "<rootDir>/src/common/models/sample.js",
+      "^occurrence$": "<rootDir>/src/common/models/occurrence.js",
+      "^appModel$": "<rootDir>/src/common/models/appModel.js",
+      "^userModel$": "<rootDir>/src/common/models/userModel.js",
       "^config$": "<rootDir>/src/common/config/config.js",
       "^helpers/(.*)$": "<rootDir>/src/common/helpers/$1"
     },
     "moduleDirectories": [
       "node_modules",
+      "components",
       "src"
     ],
     "setupFilesAfterEnv": [
