@@ -4,11 +4,13 @@
     "enabled": false
   },
   "env": {
+    "NPM_RC": "@e_surveyor_app_npmrc",
     "PLANT_NET_API_KEY": "@plant_net_api_key",
     "SERVER_SENTRY_KEY": "@agri_server_sentry_key"
   },
   "build": {
     "env": {
+      "NPM_RC": "@e_surveyor_app_npmrc",
       "APP_SENTRY_KEY": "@app_sentry_key",
       "PLANT_NET_API_KEY": "@plant_net_api_key"
     }
