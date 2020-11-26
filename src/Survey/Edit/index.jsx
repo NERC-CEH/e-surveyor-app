@@ -43,10 +43,21 @@ class Controller extends React.Component {
     }
   };
 
+  photoSelectHybrid = async () => {
+    const image = await ImageHelp.getImage();
+
+    if (!image) {
+      return;
+    }
+
+    this.onPhotoAdd(image);
+  };
+
   onPhotoAdd = async photo => {
     const { sample } = this.props;
+    const dataDirPath = config.dataPath;
 
-    const image = await ImageHelp.getImageModel(ImageModel, photo);
+    const image = await ImageHelp.getImageModel(ImageModel, photo, dataDirPath);
 
     this.identifyPhoto(image);
 
@@ -109,6 +120,7 @@ class Controller extends React.Component {
           appModel={appModel}
           url={match.url}
           onPhotoAdd={this.onPhotoAdd}
+          photoSelectHybrid={this.photoSelectHybrid}
         />
       </Page>
     );

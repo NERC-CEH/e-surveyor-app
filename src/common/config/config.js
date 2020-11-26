@@ -1,3 +1,6 @@
+import { Plugins, FilesystemDirectory } from '@capacitor/core';
+import { isPlatform } from '@ionic/react';
+
 const backendUrl = process.env.APP_BACKEND_URL || 'https://'; // TODO:
 const { APP_HOST: HOST = 'https://agri.app.flumens.io' } = process.env;
 
@@ -42,5 +45,15 @@ const CONFIG = {
     },
   },
 };
+
+(async function getMediaDirectory() {
+  if (isPlatform('hybrid')) {
+    const { uri } = await Plugins.Filesystem.getUri({
+      path: '',
+      directory: FilesystemDirectory.Data,
+    });
+    CONFIG.dataPath = uri;
+  }
+})();
 
 export default CONFIG;

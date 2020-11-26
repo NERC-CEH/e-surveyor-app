@@ -1,5 +1,6 @@
 import config from 'config';
 import Log from 'helpers/log';
+import { isPlatform } from '@ionic/react';
 import UKSIPlants from '../data/uksi_plants.list.json';
 import UKPlantNames from '../data/uksi_plants.names.json';
 
@@ -23,9 +24,29 @@ export function dataURItoBlob(dataURI, fileType) {
   });
 }
 
-export function getBlobFromURL(url, mediaType) {
-  const blob = dataURItoBlob(url, mediaType);
+export function URLtoBlob(url) {
+  const cb = resolve => {
+    const xhr = new XMLHttpRequest();
+
+    xhr.onload = function onLoad() {
+      resolve(xhr.response);
+    };
+
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+  };
+
+  return new Promise(cb);
+}
+
+export function getBlobFromURL(uri, mediaType) {
+  if (!isPlatform('hybrid')) {
+    const blob = dataURItoBlob(uri, mediaType);
   return Promise.resolve(blob);
+}
+
+  return URLtoBlob(uri);
 }
 
 async function appendModelToFormData(mediaModel, formData) {
@@ -40,9 +61,11 @@ async function appendModelToFormData(mediaModel, formData) {
   }
 
   const url = mediaModel.getURL();
+
   const blob = await getBlobFromURL(url, mediaType);
 
   const name = mediaModel.cid;
+
   formData.append('images', blob, `${name}.${extension}`);
 }
 

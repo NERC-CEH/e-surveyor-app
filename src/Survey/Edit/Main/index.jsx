@@ -11,6 +11,7 @@ import {
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
+  isPlatform,
 } from '@ionic/react';
 import { Main, alert, MenuAttrItem } from '@apps';
 import {
@@ -57,9 +58,10 @@ class Component extends React.Component {
   static propTypes = {
     sample: PropTypes.object.isRequired,
     onPhotoAdd: PropTypes.func.isRequired,
+    photoSelectHybrid: PropTypes.func.isRequired,
   };
 
-  photoUpload = e => {
+  onPhotoSelectBrowser = e => {
     const onPhotoAddWrap = photo => this.props.onPhotoAdd(photo);
 
     e.target.files.forEach(onPhotoAddWrap);
@@ -197,21 +199,37 @@ class Component extends React.Component {
     return reversedSubSampleList.map(this.getImage);
   };
 
-  getNewImageButton = () => (
+  getNewImageButton = photoSelectHybrid => {
+    if (!isPlatform('hybrid')) {
+      return (
     <IonButton className="img-picker" type="submit" expand="block">
       <IonIcon slot="start" icon={camera} size="large" />
       Plant
       <input
         type="file"
         accept="image/*"
-        onChange={this.photoUpload}
+            onChange={this.onPhotoSelectBrowser}
         multiple
       />
     </IonButton>
   );
+    }
+
+    return (
+      <IonButton
+        className="img-picker"
+        type="submit"
+        expand="block"
+        onClick={photoSelectHybrid}
+      >
+        <IonIcon slot="start" icon={camera} size="large" />
+        Plant
+      </IonButton>
+    );
+  };
 
   render() {
-    const { sample } = this.props;
+    const { sample, photoSelectHybrid } = this.props;
 
     const { seedmixgroup, seedmix, name } = sample.attrs;
 
@@ -255,7 +273,7 @@ class Component extends React.Component {
           />
         </IonList>
 
-        {this.getNewImageButton()}
+        {this.getNewImageButton(photoSelectHybrid)}
 
         {this.getImages()}
       </Main>

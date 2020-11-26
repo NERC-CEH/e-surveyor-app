@@ -73,14 +73,7 @@ export default class AppMedia extends Media {
       return name;
     }
 
-    let pathToFile = path;
-
-    // backwards compatible
-    if (!pathToFile) {
-      pathToFile = config.dataPath.replace('/Documents/', '/Library/NoCloud/');
-    }
-
-    return Capacitor.convertFileSrc(`${pathToFile}/${name}`);
+    return Capacitor.convertFileSrc(`${path}/${name}`);
   }
 
   // eslint-disable-next-line class-methods-use-this
