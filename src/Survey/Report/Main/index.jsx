@@ -492,7 +492,7 @@ class MainComponent extends React.Component {
           </IonList>
         </Main>
 
-        <IonModal isOpen={!!this.state.showModal}>
+        <IonModal mode="md" isOpen={!!this.state.showModal}>
           <ModalHeader title={title} onClose={this.getShowModal(false)} />
           {this.getModalContents()}
         </IonModal>
