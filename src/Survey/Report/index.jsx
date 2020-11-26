@@ -25,7 +25,7 @@ export function getLeagueTable(sample) {
 }
 
 export function getMissingSeedmixSpecies(sample) {
-  const [selectedSeedmixSpecies, totalSeedmixSpecies] = sample.getSeedmixUse();
+  const [selectedSeedmixSpecies, totalSeedmixSpecies = []] = sample.getSeedmixUse();
 
   const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }) => {
     const hasLatinName = ([latin]) => latin === latinName;

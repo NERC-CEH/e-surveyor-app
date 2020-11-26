@@ -47,10 +47,10 @@ class AppSample extends Sample {
   }
 
   getUniqueSpecies() {
-    const getScientificName = imageModel => {
-      return !imageModel.getSpecies()
+    const getScientificName = subSmp => {
+      return !subSmp.getSpecies()
         ? null
-        : imageModel.getSpecies().scientificNameWithoutAuthor;
+        : subSmp.getSpecies().scientificNameWithoutAuthor;
     };
 
     let list = this.samples.map(getScientificName).filter(species => species);
