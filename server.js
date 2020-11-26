@@ -32,10 +32,10 @@ initAnalytics(app);
 // The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
 
-app.use(express.static(join(__dirname, 'dist/main')));
+app.use(express.static(join(__dirname, 'build')));
 app.use(express.static(join(__dirname, 'other')));
 
-app.use(fallback('index.html', { root: 'dist/main' })); // BrowserHistory router
+app.use(fallback('index.html', { root: 'build' })); // BrowserHistory router
 
 app.post(
   '/identify',
