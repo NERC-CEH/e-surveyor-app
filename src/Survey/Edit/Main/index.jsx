@@ -202,17 +202,17 @@ class Component extends React.Component {
   getNewImageButton = photoSelectHybrid => {
     if (!isPlatform('hybrid')) {
       return (
-    <IonButton className="img-picker" type="submit" expand="block">
-      <IonIcon slot="start" icon={camera} size="large" />
-      Plant
-      <input
-        type="file"
-        accept="image/*"
+        <IonButton className="img-picker" type="submit" expand="block">
+          <IonIcon slot="start" icon={camera} size="large" />
+          Plant
+          <input
+            type="file"
+            accept="image/*"
             onChange={this.onPhotoSelectBrowser}
-        multiple
-      />
-    </IonButton>
-  );
+            multiple
+          />
+        </IonButton>
+      );
     }
 
     return (

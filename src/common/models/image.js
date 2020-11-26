@@ -1,6 +1,5 @@
 import { Media } from '@apps';
 import Log from 'helpers/log';
-import config from 'config';
 import { observable } from 'mobx';
 import { isPlatform } from '@ionic/react';
 import { Capacitor, Plugins, FilesystemDirectory } from '@capacitor/core';
