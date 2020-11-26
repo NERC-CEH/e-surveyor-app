@@ -1,6 +1,4 @@
 /* eslint-disable camelcase */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { observer } from 'mobx-react';
 import {
@@ -65,7 +63,6 @@ class MainComponent extends React.Component {
 
   getPollinators = () => {
     const getPollinatorsEntries = ([name, commonName]) => {
-      // eslint-disable-next-line camelcase
       const hasLatinName = ({ latin_name }) => latin_name === name;
 
       const pollinator = pollination.find(hasLatinName);

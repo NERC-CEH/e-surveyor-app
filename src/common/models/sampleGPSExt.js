@@ -30,7 +30,6 @@ const extension = {
   },
 
   startGPS(accuracyLimit = DEFAULT_ACCURACY_LIMIT) {
-    // eslint-disable-next-line
     const that = this;
     const options = {
       accuracyLimit,

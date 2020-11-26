@@ -92,7 +92,7 @@
     "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "7.10.4",
     "@capacitor/cli": "^2.4.2",
-    "@flumens/eslint-config": "^0.2.0",
+    "@flumens/eslint-config": "^0.3.0",
     "@flumens/has-env": "1.0.0",
     "autoprefixer": "^9.7.3",
     "axios": "0.20.0",
