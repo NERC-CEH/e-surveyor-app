@@ -8,18 +8,54 @@ import Occurrence from './occurrence';
 import Media from './image';
 
 class AppSample extends Sample {
+  static fromJSON(json) {
+    return super.fromJSON(json, Occurrence, AppSample, Media);
+  }
+
+  static getSupportedSpeciesList(plants) {
+    const pollinators = [];
+
+    const getList = ([name]) => {
+      const byPlantName = ({ plant }) => plant === name;
+      const sp = plantInteractions.filter(byPlantName);
+      if (!sp.length) {
+        return;
+      }
+
+      pollinators.push(...sp);
+    };
+
+    plants.forEach(getList);
+
+    return pollinators;
+  }
+
+  static getUniqueSupportedSpecies(plants) {
+    const pollinators = AppSample.getSupportedSpeciesList(plants);
+
+    const getPollinatorName = ({ pollinator }) => pollinator;
+
+    const getPollinatorProfile = pollinatorName => {
+      const matchingPollinatorName = ({ pollinator }) =>
+        pollinator === pollinatorName;
+
+      return pollinators.find(matchingPollinatorName);
+    };
+
+    const pollinatorsNameList = pollinators.map(getPollinatorName);
+    const uniquePollinatorsNameList = [...new Set(pollinatorsNameList)];
+
+    return uniquePollinatorsNameList.map(getPollinatorProfile);
+  }
+
+  store = modelStore;
+
   constructor(...args) {
     super(...args);
 
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
   }
-
-  static fromJSON(json) {
-    return super.fromJSON(json, Occurrence, AppSample, Media);
-  }
-
-  store = modelStore;
 
   keys = () => {
     return { ...Sample.keys, ...this.getSurvey().attrs };
@@ -94,42 +130,6 @@ class AppSample extends Sample {
     const selectedSeedmixSpecies = species.filter(seedmixIncludesSpecies);
 
     return [selectedSeedmixSpecies, selectedSeedmix];
-  }
-
-  static getSupportedSpeciesList(plants) {
-    const pollinators = [];
-
-    const getList = ([name]) => {
-      const byPlantName = ({ plant }) => plant === name;
-      const sp = plantInteractions.filter(byPlantName);
-      if (!sp.length) {
-        return;
-      }
-
-      pollinators.push(...sp);
-    };
-
-    plants.forEach(getList);
-
-    return pollinators;
-  }
-
-  static getUniqueSupportedSpecies(plants) {
-    const pollinators = AppSample.getSupportedSpeciesList(plants);
-
-    const getPollinatorName = ({ pollinator }) => pollinator;
-
-    const getPollinatorProfile = pollinatorName => {
-      const matchingPollinatorName = ({ pollinator }) =>
-        pollinator === pollinatorName;
-
-      return pollinators.find(matchingPollinatorName);
-    };
-
-    const pollinatorsNameList = pollinators.map(getPollinatorName);
-    const uniquePollinatorsNameList = [...new Set(pollinatorsNameList)];
-
-    return uniquePollinatorsNameList.map(getPollinatorProfile);
   }
 
   isDisabled() {

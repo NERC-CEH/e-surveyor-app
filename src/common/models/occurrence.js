@@ -2,13 +2,13 @@ import { Occurrence } from '@apps';
 import Media from './image';
 
 export default class AppOccurrence extends Occurrence {
-  keys = () => {
-    return { ...Occurrence.keys, ...this.getSurvey().attrs };
-  };
-
   static fromJSON(json) {
     return super.fromJSON(json, Media);
   }
+
+  keys = () => {
+    return { ...Occurrence.keys, ...this.getSurvey().attrs };
+  };
 
   getSurvey() {
     const survey = this.parent.getSurvey();
