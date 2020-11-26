@@ -61,7 +61,6 @@ const survey = {
       label: 'Survey Name',
       type: 'textarea',
       info: 'You can change your survey name here.',
-      get: modal => modal.sample.metadata.created_on.toLocaleDateString(),
     },
 
     location: {
@@ -77,6 +76,12 @@ const survey = {
       label: 'Seedmix Producer',
       type: 'radio',
       info: 'Please indicate the seedmix producer.',
+      set: (value, sample) => {
+        if (sample.sample.attrs.seedmixgroup !== value) {
+          sample.sample.attrs.seedmixgroup = value; // eslint-disable-line
+          sample.sample.attrs.seedmix = null; // eslint-disable-line
+        }
+      },
       options: getSeedMixGroups(),
     },
 
@@ -147,6 +152,7 @@ const survey = {
       },
 
       attrs: {
+        name: new Date().toLocaleDateString(),
         location: null,
       },
     });
