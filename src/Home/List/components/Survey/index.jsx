@@ -42,6 +42,8 @@ const Survey = ({ sample }) => {
       totalSeedmixSpecies,
     ] = sample.getSeedmixUse();
 
+    const showSpeciesLength = sample.samples.length;
+
     return (
       <div className="species-info">
         <h3>{sample.attrs.name}</h3>
@@ -49,7 +51,7 @@ const Survey = ({ sample }) => {
         <div>
           <span>
             Species:
-            <IonBadge>{sample.media.length}</IonBadge>
+            <IonBadge>{showSpeciesLength}</IonBadge>
           </span>
           {totalSeedmixSpecies && (
             <span>
