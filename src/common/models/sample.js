@@ -79,14 +79,30 @@ class AppSample extends Sample {
     if (!this.parent) {
       throw new Error('Parent does not exist');
     }
+
+    const [occ] = this.occurrences;
+
+    if (!occ.media[0].attrs.species) {
+      return null;
+    }
+
+    const { speciesId } = occ.attrs;
+    return occ.media[0].attrs.species[speciesId];
+  }
+
+  getAllSpecies() {
+    if (!this.parent) {
+      throw new Error('Parent does not exist');
+    }
+
     return this.occurrences[0].media[0].attrs.species;
   }
 
   getUniqueSpecies() {
     const getScientificName = subSmp => {
-      return !subSmp.getSpecies()
+      return !subSmp.getSpecies().species
         ? null
-        : subSmp.getSpecies().scientificNameWithoutAuthor;
+        : subSmp.getSpecies().species.scientificNameWithoutAuthor;
     };
 
     let list = this.samples.map(getScientificName).filter(species => species);

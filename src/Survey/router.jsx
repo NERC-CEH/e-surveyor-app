@@ -6,6 +6,7 @@ import config from 'config';
 import StartNewSurvey from './StartNewSurvey';
 import Edit from './Edit';
 import Report from './Report';
+import EditSpecies from './EditSpecies';
 import survey from './config';
 
 const baseURL = '/survey';
@@ -20,6 +21,7 @@ const ReportWrap = props => (
 
 const ModelLocationWrap = props => (
   <ModelLocation
+    appModel={appModel}
     mapProviderOptions={config.map}
     useGridRef
     useGridMap
@@ -32,6 +34,7 @@ const routes = [
   [`${baseURL}/:smpId/edit`, EditWrap],
   [`${baseURL}/:smpId/edit/:attr`, Attr],
   [`${baseURL}/:smpId/edit/map`, ModelLocationWrap],
+  [`${baseURL}/:smpId/edit/species/:subSmpId`, EditSpecies],
   [`${baseURL}/:smpId/report`, ReportWrap],
 ];
 

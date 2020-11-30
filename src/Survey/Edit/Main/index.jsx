@@ -59,6 +59,7 @@ class Component extends React.Component {
     sample: PropTypes.object.isRequired,
     onPhotoAdd: PropTypes.func.isRequired,
     photoSelectHybrid: PropTypes.func.isRequired,
+    match: PropTypes.object.isRequired,
   };
 
   onPhotoSelectBrowser = e => {
@@ -109,8 +110,9 @@ class Component extends React.Component {
   };
 
   getImage = subSample => {
+    const { match } = this.props;
+    let { species } = subSample.occurrences[0].media[0].attrs;
     const { identifying } = subSample.occurrences[0].media[0].identification;
-    const { species } = subSample.occurrences[0].media[0].attrs;
     const photo = subSample.occurrences[0].media[0];
 
     let commonName;
@@ -119,8 +121,12 @@ class Component extends React.Component {
     let detailIcon;
 
     if (species) {
-      scientificName = species.scientificNameWithoutAuthor;
-      [commonName] = species.commonNames;
+      species = subSample.getSpecies();
+    }
+
+    if (species) {
+      scientificName = species.species.scientificNameWithoutAuthor;
+      [commonName] = species.species.commonNames;
 
       if (species.score > POSITIVE_THRESHOLD) {
         idClass = 'id-green';
@@ -144,13 +150,17 @@ class Component extends React.Component {
 
     const detailsIcon = detailIcon || null;
 
+    const link = !subSample.getSpecies()
+      ? undefined
+      : `${match.url}/species/${subSample.cid}`;
+
     return (
       <IonItemSliding className="species-list-item" key={subSample.cid}>
         <IonItem
           detail
           detailIcon={detailsIcon}
           className={idClass}
-          onClick={this.showIdentificationStatuses}
+          routerLink={link}
         >
           <div className="photo">
             <img src={photo.getURL()} />

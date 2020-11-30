@@ -31,11 +31,7 @@ class Controller extends React.Component {
 
     try {
       const species = await identifyImage(speciesImg);
-      speciesImg.attrs.species = {
-        ...species[0].species,
-        score: species[0].score,
-      };
-
+      speciesImg.attrs.species = species;
       speciesImg.identification.identifying = false;
       sample.save();
     } catch (e) {
@@ -116,6 +112,7 @@ class Controller extends React.Component {
           defaultHref="/home/surveys"
         />
         <Main
+          match={match}
           sample={sample}
           appModel={appModel}
           url={match.url}

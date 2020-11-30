@@ -60,9 +60,6 @@ const Image = {
     return uri;
   },
 
-  /**
-   * Create new record with a photo
-   */
   async getImageModel(ImageModel, imageURL, dataDirPath) {
     if (!imageURL) {
       throw new Error('File not found while creating image model.');
@@ -71,6 +68,7 @@ const Image = {
     let width;
     let height;
     let data;
+    let type;
 
     if (isPlatform('hybrid')) {
       imageURL = Capacitor.convertFileSrc(imageURL); // eslint-disable-line
@@ -80,13 +78,13 @@ const Image = {
       height = imageMetaData.height;
       data = imageURL.split('/').pop();
     } else {
-      [data, width, height] = await Indicia.Media.getDataURI(imageURL);
+      [data, type, width, height] = await Indicia.Media.getDataURI(imageURL);
     }
 
     const imageModel = new ImageModel({
       attrs: {
         data,
-        type: 'jpeg',
+        type,
         width,
         height,
         path: dataDirPath,
