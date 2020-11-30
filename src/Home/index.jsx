@@ -47,10 +47,7 @@ class Component extends React.Component {
       const species = (await identifyImage(image)) || [];
 
       image.identification.identifying = false;
-      image.attrs.species = {
-        ...species[0].species,
-        score: species[0].score,
-      };
+      image.attrs.species = species;
     } catch (err) {
       image.identification.identifying = false;
     }
