@@ -11,6 +11,7 @@
     "clean": "rm -rf build resources",
     "test": "jest --silent",
     "test:watch": "jest --watchAll",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch test",
     "test:eslint": "eslint src --quiet --ext .jsx --ext .js && echo '\\033[37;42;1m PASS \\033[00m'",
     "test:acceptance": "cd other && newman run postman_collection.json --bail --env-var plantnet_api_key=${PLANT_NET_API_KEY}",
     "fetch:data": "cd src/common/data && mkdir -p remote && node make.js",
