@@ -52,9 +52,13 @@ describe('Settings Menu', () => {
 
       const image = new Image({
         attrs: {
-          species: {
-            scientificNameWithoutAuthor: species,
-          },
+          species: [
+            {
+              species: {
+                scientificNameWithoutAuthor: species,
+              },
+            },
+          ],
         },
       });
       const subSmp = config.smp.create(SampleWithNoGPS, Occurrence, image);

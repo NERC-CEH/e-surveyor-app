@@ -248,6 +248,7 @@
     "moduleNameMapper": {
       "^.+.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
       "ionic-native": "jest-transform-stub",
+      "react-photoswipe": "jest-transform-stub",
       "^@apps$": "<rootDir>/src/common/appsBitCollection.js",
       "^savedSamples$": "<rootDir>/src/common/models/savedSamples.js",
       "^sample$": "<rootDir>/src/common/models/sample.js",
