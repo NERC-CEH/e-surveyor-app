@@ -100,9 +100,13 @@ class AppSample extends Sample {
 
   getUniqueSpecies() {
     const getScientificName = subSmp => {
-      return !subSmp.getSpecies().species
-        ? null
-        : subSmp.getSpecies().species.scientificNameWithoutAuthor;
+      const { species } = subSmp.getSpecies() || {};
+
+      if (!species) {
+        return null;
+      }
+
+      return species.scientificNameWithoutAuthor;
     };
 
     let list = this.samples.map(getScientificName).filter(species => species);
