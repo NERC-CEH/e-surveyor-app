@@ -7,6 +7,9 @@ import {
   IonRow,
   IonGrid,
   IonCol,
+  IonList,
+  IonButton,
+  IonImg,
 } from '@ionic/react';
 import { Gallery } from '@apps';
 import PropTypes from 'prop-types';
@@ -21,7 +24,12 @@ Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
     originalDoughnutDraw.apply(this);
 
     const { chart } = this.chart;
-    const { ctx, width } = chart;
+    const { ctx, width, height } = chart;
+
+    const fontSize = (height / 60).toFixed(2);
+    ctx.font = `${fontSize}em Arial`;
+
+    ctx.textBaseline = 'middle';
 
     const { text } = chart.config.data;
     const textX = Math.round((width - ctx.measureText(text).width) / 2);
@@ -130,13 +138,14 @@ class SpeciesCard extends React.Component {
     const onImageClicked = () => this.onSpeciesImageClicked(index);
 
     return (
-      // eslint-disable-next-line
-      <img
-        className="species-images"
-        key={spImage}
-        src={spImage}
-        onClick={onImageClicked}
-      />
+      <IonCol size="3" no-padding no-margin>
+        <IonImg
+          class="species-images"
+          key={spImage}
+          src={spImage}
+          onClick={onImageClicked}
+        />
+      </IonCol>
     );
   };
 
@@ -146,7 +155,7 @@ class SpeciesCard extends React.Component {
     const firstFourImages = fullSpecies.images.slice(0, 4);
     const images = firstFourImages.map(this.getImage);
 
-    return <IonCol size="12">{images}</IonCol>;
+    return images;
   };
 
   render() {
@@ -167,13 +176,12 @@ class SpeciesCard extends React.Component {
           </IonCardHeader>
 
           <IonGrid>
-            <IonRow>{this.getImages()}</IonRow>
+            <IonRow size="12">{this.getImages()}</IonRow>
           </IonGrid>
 
           <Doughnut
             id="doughnut"
             data={getDoughnutData(score)}
-            height={50}
             options={options}
             redraw
           />
