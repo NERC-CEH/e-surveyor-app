@@ -70,8 +70,19 @@ async function appendModelToFormData(mediaModel, formData) {
 }
 
 function filterUKSpeciesWrap(species) {
-  const filterByUKSpecies = ({ species: sp }) =>
-    UKSIPlants.includes(sp.scientificNameWithoutAuthor);
+  const filterByUKSpecies = ({ species: sp }, index) => {
+    if (UKSIPlants.includes(sp.scientificNameWithoutAuthor)) {
+      return true;
+    }
+
+    if (species[index].score >= 0.9) {
+      // eslint-disable-next-line no-param-reassign
+      sp.notFoundInUK = true;
+      return true;
+    }
+
+    return false;
+  };
 
   return species.filter(filterByUKSpecies);
 }

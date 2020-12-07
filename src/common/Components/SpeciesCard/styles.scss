@@ -51,4 +51,27 @@
   ion-list {
     text-align: center;
   }
+
+  .info-background-message {
+    --background: var(--ion-color-warning);
+    color: #fff;
+    margin-bottom: 10px;
+    display: inherit;
+
+    span {
+      font-weight: 400;
+      text-align: left;
+      width: 100%;
+    }
+
+    ion-icon {
+      position: absolute;
+      right: 15px;
+      transform: translateY(-50%);
+      top: 50%;
+      background: none;
+      --ionicon-stroke-width: 25px;
+      font-size: 30px;
+    }
+  }
 }

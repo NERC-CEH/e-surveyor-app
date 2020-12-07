@@ -11,8 +11,10 @@ import {
   IonCol,
   IonList,
   IonButton,
+  IonIcon,
 } from '@ionic/react';
-import { Gallery } from '@apps';
+import { Gallery, InfoBackgroundMessage } from '@apps';
+import { earthOutline } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
@@ -202,6 +204,13 @@ class SpeciesCard extends React.Component {
                 This is My Plant
               </IonButton>
             </IonList>
+          )}
+
+          {species.notFoundInUK && (
+            <InfoBackgroundMessage>
+              This plant is not a UK native
+              <IonIcon icon={earthOutline} />
+            </InfoBackgroundMessage>
           )}
         </IonCard>
       </>

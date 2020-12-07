@@ -21,6 +21,7 @@ import {
   closeCircle,
   bookmarkOutline,
   locationOutline,
+  earth,
 } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import config from 'config';
@@ -119,6 +120,7 @@ class Component extends React.Component {
     let scientificName;
     let idClass;
     let detailIcon;
+    let notFoundInUK;
 
     if (species) {
       species = subSample.getSpecies();
@@ -127,10 +129,13 @@ class Component extends React.Component {
     if (species) {
       scientificName = species.species.scientificNameWithoutAuthor;
       [commonName] = species.species.commonNames;
+      notFoundInUK = species.species.notFoundInUK;
+
+      const earthIcon = notFoundInUK ? earth : checkmarkCircle;
 
       if (species.score > POSITIVE_THRESHOLD) {
         idClass = 'id-green';
-        detailIcon = checkmarkCircle;
+        detailIcon = earthIcon;
       } else if (species.score > POSSIBLE_THRESHOLD) {
         idClass = 'id-amber';
         detailIcon = helpCircle;
