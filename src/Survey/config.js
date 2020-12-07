@@ -126,7 +126,7 @@ const survey = {
 
     occ: {
       attrs: {
-        speciesId: null,
+        taxon: null,
       },
 
       verify() {},
@@ -134,7 +134,7 @@ const survey = {
       create(Occurrence, photo) {
         const occ = new Occurrence({
           attrs: {
-            speciesId: 0,
+            taxon: null,
           },
         });
         occ.media.push(photo);

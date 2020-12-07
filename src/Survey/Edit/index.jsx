@@ -22,9 +22,7 @@ class Controller extends React.Component {
     sample: PropTypes.object.isRequired,
   };
 
-  identifyPhoto = async image => {
-    const { sample } = this.props;
-
+  identifyPhoto = async (image, subSample) => {
     const speciesImg = image;
 
     speciesImg.identification.identifying = true;
@@ -32,8 +30,14 @@ class Controller extends React.Component {
     try {
       const species = await identifyImage(speciesImg);
       speciesImg.attrs.species = species;
+
+      // eslint-disable-next-line
+      subSample.occurrences[0].attrs.taxon = JSON.parse(
+        JSON.stringify(species[0])
+      );
+
       speciesImg.identification.identifying = false;
-      sample.save();
+      subSample.save();
     } catch (e) {
       speciesImg.identification.identifying = false;
     }
@@ -55,11 +59,10 @@ class Controller extends React.Component {
 
     const image = await ImageHelp.getImageModel(ImageModel, photo, dataDirPath);
 
-    this.identifyPhoto(image);
-
     const survey = sample.getSurvey();
-
     const newSubSample = survey.smp.create(Sample, Occurrence, image);
+
+    this.identifyPhoto(image, newSubSample);
 
     sample.samples.push(newSubSample);
     sample.save();

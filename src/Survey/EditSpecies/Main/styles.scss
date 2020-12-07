@@ -1,6 +1,47 @@
 #edit-species {
-  .species-main-image {
-    height: 250px;
-    background-position: center;
+  --background: #f4f4f4;
+
+  .species-main-image-wrapper {
+    height: 215px;
+    width: 100%;
+    background: #f4f4f4;
+    position: fixed;
+    z-index: 2;
+
+    .species-main-image {
+      height: 90%;
+      background-position: center;
+      background-size: cover;
+      border-radius: 0 0 15px 15px;
+    }
+  }
+
+  ion-card {
+    border: 1px solid #d8d8d8;
+    margin: 10% 5%;
+    position: relative;
+    top: 215px;
+
+    &:first-of-type {
+      margin-bottom: 15%;
+      border: 1px solid #b38b38;
+      box-shadow: #735d2e 0px 0px 9px;
+    }
+  }
+
+  .species-add-button {
+    background: transparent;
+    text-align: center;
+    margin: 50px 0px 230px 0px;
+    position: relative;
+    top: 200px;
+
+    ion-button {
+      background: #fff;
+    }
+  }
+
+  ion-list {
+    margin: 5% 0;
   }
 }

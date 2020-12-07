@@ -1,6 +1,5 @@
 import Sample from 'sample';
 import Occurrence from 'occurrence';
-import Image from 'common/models/image';
 import config from 'Survey/config';
 import seedmixData from 'common/data/seedmix';
 import { getLeagueTable, getMissingSeedmixSpecies } from '..';
@@ -50,25 +49,21 @@ describe('Settings Menu', () => {
         },
       });
 
-      const image = new Image({
-        attrs: {
-          species: [
-            {
-              species: {
-                scientificNameWithoutAuthor: species,
-              },
-            },
-          ],
+      const subSmp = config.smp.create(SampleWithNoGPS, Occurrence, {});
+
+      subSmp.occurrences[0].attrs.taxon = {
+        species: {
+          scientificNameWithoutAuthor: species,
         },
-      });
-      const subSmp = config.smp.create(SampleWithNoGPS, Occurrence, image);
+      };
+
       sample.samples.push(subSmp);
 
       // When
-      const missingSpecies = getMissingSeedmixSpecies(sample);
+      const missingSeedmixSpecies = getMissingSeedmixSpecies(sample);
 
       // Then
-      expect(missingSpecies.length).toEqual(seedmix.length - 1);
+      expect(missingSeedmixSpecies.length).toEqual(seedmix.length - 1);
     });
   });
 });

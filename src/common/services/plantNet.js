@@ -43,8 +43,8 @@ export function URLtoBlob(url) {
 export function getBlobFromURL(uri, mediaType) {
   if (!isPlatform('hybrid')) {
     const blob = dataURItoBlob(uri, mediaType);
-  return Promise.resolve(blob);
-}
+    return Promise.resolve(blob);
+  }
 
   return URLtoBlob(uri);
 }
@@ -92,7 +92,10 @@ const response = res => res.json();
 
 const result = ({ results }) => results;
 
-const err = error => Log('error', error);
+const err = error => {
+  Log('error', error);
+  return []; // always empty list
+};
 
 // TODO: use axios
 export default async function identify(image) {

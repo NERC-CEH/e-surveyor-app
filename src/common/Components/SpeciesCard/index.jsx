@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
+import { observer } from 'mobx-react';
 import {
   IonCardHeader,
   IonCardSubtitle,
@@ -9,7 +11,6 @@ import {
   IonCol,
   IonList,
   IonButton,
-  IonImg,
 } from '@ionic/react';
 import { Gallery } from '@apps';
 import PropTypes from 'prop-types';
@@ -139,8 +140,8 @@ class SpeciesCard extends React.Component {
 
     return (
       <IonCol size="3" no-padding no-margin>
-        <IonImg
-          class="species-images"
+        <img
+          className="species-images"
           key={spImage}
           src={spImage}
           onClick={onImageClicked}
@@ -161,7 +162,9 @@ class SpeciesCard extends React.Component {
   render() {
     const { species: fullSpecies, onSelect } = this.props;
 
-    const { species, score } = fullSpecies;
+    const { species, score, images } = fullSpecies;
+
+    const onSelectWrap = () => onSelect(fullSpecies);
 
     return (
       <>
@@ -175,9 +178,11 @@ class SpeciesCard extends React.Component {
             </IonCardSubtitle>
           </IonCardHeader>
 
-          <IonGrid>
-            <IonRow size="12">{this.getImages()}</IonRow>
-          </IonGrid>
+          {!!images.length && (
+            <IonGrid>
+              <IonRow size="12">{this.getImages()}</IonRow>
+            </IonGrid>
+          )}
 
           <Doughnut
             id="doughnut"
@@ -186,11 +191,22 @@ class SpeciesCard extends React.Component {
             redraw
           />
 
-          {onSelect && <button>SELECT</button>}
+          {onSelect && (
+            <IonList>
+              <IonButton
+                mode="md"
+                fill="outline"
+                className="footer"
+                onClick={onSelectWrap}
+              >
+                This is My Plant
+              </IonButton>
+            </IonList>
+          )}
         </IonCard>
       </>
     );
   }
 }
 
-export default SpeciesCard;
+export default observer(SpeciesCard);

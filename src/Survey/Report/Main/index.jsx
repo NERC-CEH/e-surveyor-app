@@ -11,7 +11,7 @@ import {
   IonModal,
   IonNote,
 } from '@ionic/react';
-import { Main, ModalHeader } from '@apps';
+import { Main, ModalHeader, InfoBackgroundMessage } from '@apps';
 import CountUp from 'react-countup';
 import PropTypes from 'prop-types';
 import Sample from 'sample';
@@ -416,6 +416,42 @@ class MainComponent extends React.Component {
     return showModal;
   };
 
+  showPollinatorsData = () => {
+    return (
+      <>
+        <IonItem detail onClick={this.getShowModal('League')}>
+          <IonLabel slot="start">League Table</IonLabel>
+        </IonItem>
+
+        <IonItemDivider mode="ios">
+          <IonLabel className="home-report-label">Pollinators count</IonLabel>
+        </IonItemDivider>
+
+        <IonItem>
+          <IonLabel slot="start">
+            <b>
+              <small>Species</small>
+            </b>
+          </IonLabel>
+          <IonLabel className="ion-text-right" slot="end">
+            <b>
+              <small>Counts</small>
+            </b>
+          </IonLabel>
+        </IonItem>
+
+        {this.getPollinators()}
+
+        <IonItemDivider mode="ios">
+          <IonLabel className="home-report-label">
+            Supported species groups
+          </IonLabel>
+        </IonItemDivider>
+        {this.getSupportedSpecies()}
+      </>
+    );
+  };
+
   render() {
     const { sample } = this.props;
 
@@ -429,6 +465,8 @@ class MainComponent extends React.Component {
     const species = getUniqueSupportedSpecies(this.species);
 
     const title = this.state.showModal || '';
+
+    const numberOfSpecies = species.length;
 
     return (
       <>
@@ -455,40 +493,18 @@ class MainComponent extends React.Component {
               >
                 <IonIcon icon="/images/bee.svg" />
                 <IonBadge>
-                  <CountUp end={species.length} duration={2.75} />
+                  <CountUp end={numberOfSpecies} duration={2.75} />
                 </IonBadge>
               </div>
             </IonItem>
 
-            <IonItem detail onClick={this.getShowModal('League')}>
-              <IonLabel slot="start">League Table</IonLabel>
-            </IonItem>
+            {!!numberOfSpecies && this.showPollinatorsData()}
 
-            <IonItemDivider mode="ios">
-              <IonLabel className="home-report-label">
-                Pollinators count
-              </IonLabel>
-            </IonItemDivider>
-            <IonItem>
-              <IonLabel slot="start">
-                <b>
-                  <small>Species</small>
-                </b>
-              </IonLabel>
-              <IonLabel className="ion-text-right" slot="end">
-                <b>
-                  <small>Counts</small>
-                </b>
-              </IonLabel>
-            </IonItem>
-            {this.getPollinators()}
-
-            <IonItemDivider mode="ios">
-              <IonLabel className="home-report-label">
-                Supported species groups
-              </IonLabel>
-            </IonItemDivider>
-            {this.getSupportedSpecies()}
+            {!numberOfSpecies && (
+              <InfoBackgroundMessage skipTranslations>
+                This report does not have any supported species groups.
+              </InfoBackgroundMessage>
+            )}
           </IonList>
         </Main>
 

@@ -82,12 +82,7 @@ class AppSample extends Sample {
 
     const [occ] = this.occurrences;
 
-    if (!occ.media[0].attrs.species) {
-      return null;
-    }
-
-    const { speciesId } = occ.attrs;
-    return occ.media[0].attrs.species[speciesId];
+    return occ.attrs.taxon;
   }
 
   getAllSpecies() {
