@@ -32,9 +32,7 @@ class Controller extends React.Component {
       speciesImg.attrs.species = species;
 
       // eslint-disable-next-line
-      subSample.occurrences[0].attrs.taxon = JSON.parse(
-        JSON.stringify(species[0])
-      );
+      subSample.setSpecies(species[0]);
 
       speciesImg.identification.identifying = false;
       subSample.save();

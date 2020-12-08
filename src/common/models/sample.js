@@ -85,6 +85,25 @@ class AppSample extends Sample {
     return occ.attrs.taxon;
   }
 
+  setSpecies(species) {
+    if (!this.parent) {
+      throw new Error('Parent does not exist');
+    }
+
+    const defaultSpecies = {
+      warehouseId: 0,
+      gbif: { id: 0 },
+      images: [],
+      score: 0,
+      species: {
+        commonNames: [],
+        scientificNameWithoutAuthor: '',
+      },
+    };
+
+    this.occurrences[0].attrs.taxon = { ...defaultSpecies, ...species };
+  }
+
   getAllSpecies() {
     if (!this.parent) {
       throw new Error('Parent does not exist');

@@ -24,7 +24,7 @@ class MainComponent extends React.Component {
 
   getTaxon = sp => {
     const taxon = JSON.parse(JSON.stringify(sp));
-    taxon.scoreFromAPI = JSON.parse(JSON.stringify(sp.score));
+    taxon.scoreFromAPI = sp.score;
     taxon.score = 1;
 
     return taxon;
@@ -33,7 +33,7 @@ class MainComponent extends React.Component {
   setSpeciesAsMain = sp => {
     const { sample } = this.props;
 
-    sample.occurrences[0].attrs.taxon = this.getTaxon(sp);
+    sample.setSpecies(this.getTaxon(sp));
     sample.save();
   };
 
