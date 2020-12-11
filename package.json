@@ -15,6 +15,8 @@
     "test:eslint": "eslint src --quiet --ext .jsx --ext .js && echo '\\033[37;42;1m PASS \\033[00m'",
     "test:acceptance": "cd other && newman run postman_collection.json --bail --env-var plantnet_api_key=${PLANT_NET_API_KEY}",
     "fetch:data": "cd src/common/data && mkdir -p remote && node make.js",
+    "fetch:species:data": "cd src/common/data/species && node make.js",
+    "fetch:species:commonNames": "cd src/common/data/commonNames && node make.js",
     "bit:export": "eslint components --quiet --ext .jsx --ext .js && bit export flumens.apps -a -e"
   },
   "husky": {
@@ -32,6 +34,7 @@
     "@bit/flumens.apps.helpers.loader": "0.1.1",
     "@bit/flumens.apps.helpers.toast": "0.2.0",
     "@bit/flumens.apps.info-background-message": "0.1.2",
+    "@bit/flumens.apps.long-press-button": "^0.1.1",
     "@bit/flumens.apps.main": "0.2.0",
     "@bit/flumens.apps.menu-attr-item": "^0.5.4",
     "@bit/flumens.apps.modal-header": "^0.1.1",

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import SpeciesCard from 'common/Components/SpeciesCard';
 import { IonButton, IonList, IonIcon, NavContext } from '@ionic/react';
-import { addOutline } from 'ionicons/icons';
+import { searchOutline } from 'ionicons/icons';
 import './styles.scss';
 
 @observer
@@ -46,7 +46,7 @@ class MainComponent extends React.Component {
 
   showAIResults = () => {
     const { sample } = this.props;
-    const species = sample.getAllSpecies();
+    const species = sample.getAISuggestions() || [];
     const { taxon } = sample.occurrences[0].attrs;
 
     const nonSelectedSpecies = sp =>
@@ -68,32 +68,44 @@ class MainComponent extends React.Component {
           fill="outline"
           className="footer"
         >
-          <IonIcon slot="start" src={addOutline} />
-          Add Plant
+          <IonIcon slot="start" src={searchOutline} />
+          Search Species
         </IonButton>
       </IonList>
     );
   };
 
-  render() {
+  showSpeciesMainPhoto = () => {
     const { sample } = this.props;
-    const speciesImage = sample.occurrences[0].media[0].attrs.data;
+
+    const image = sample.occurrences[0].media[0];
+    if (!image) {
+      return null;
+    }
 
     const style = {
-      backgroundImage: `url(${speciesImage})`,
+      backgroundImage: `url(${image.attrs.data})`,
     };
 
     return (
+      <div className="species-main-image-wrapper">
+        <div style={style} className="species-main-image" alt="species" />
+      </div>
+    );
+  };
+
+  render() {
+    return (
       <Main id="edit-species">
-        <div className="species-main-image-wrapper">
-          <div style={style} className="species-main-image" alt="species" />
+        {this.showSpeciesMainPhoto()}
+
+        <div className="species-wrapper">
+          {this.showSelectedSpecies()}
+
+          {this.showAIResults()}
+
+          {this.speciesAddButton()}
         </div>
-
-        {this.showSelectedSpecies()}
-
-        {this.showAIResults()}
-
-        {this.speciesAddButton()}
       </Main>
     );
   }

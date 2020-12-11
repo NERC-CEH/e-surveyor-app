@@ -25,14 +25,22 @@
       height: 60px;
       min-width: 60px;
       max-width: 60px;
-      background-color: #e5eacd;
+      background-color: #f8f2e6;
       border-radius: 5px;
       overflow: hidden;
+      text-align: center;
 
       img {
         height: 100%;
         width: 100%;
         object-fit: cover;
+      }
+
+      ion-icon {
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        color: #b38b39;
       }
     }
 
@@ -66,7 +74,7 @@
       --border-width: 0;
       --background: var(--ion-color-light);
       --color: var(--ion-color-light-contrast);
-  
+
       span {
         margin: 0 auto;
         font-weight: 200;

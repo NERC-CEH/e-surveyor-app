@@ -141,10 +141,9 @@ class SpeciesCard extends React.Component {
     const onImageClicked = () => this.onSpeciesImageClicked(index);
 
     return (
-      <IonCol size="3" no-padding no-margin>
+      <IonCol size="3" key={spImage}>
         <img
           className="species-images"
-          key={spImage}
           src={spImage}
           onClick={onImageClicked}
         />

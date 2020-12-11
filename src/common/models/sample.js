@@ -104,12 +104,17 @@ class AppSample extends Sample {
     this.occurrences[0].attrs.taxon = { ...defaultSpecies, ...species };
   }
 
-  getAllSpecies() {
+  getAISuggestions() {
     if (!this.parent) {
       throw new Error('Parent does not exist');
     }
 
-    return this.occurrences[0].media[0].attrs.species;
+    const images = this.occurrences[0].media;
+    if (!images.length) {
+      return false;
+    }
+
+    return images[0].attrs.species;
   }
 
   getUniqueSpecies() {

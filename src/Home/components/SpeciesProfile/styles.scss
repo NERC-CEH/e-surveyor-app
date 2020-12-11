@@ -10,15 +10,4 @@
     max-height: 30vh;
     object-fit: cover;
   }
-
-  ion-card {
-    border: 1px solid #d8d8d8;
-    margin: 10% 5%;
-
-    &:first-of-type {
-      margin-bottom: 15%;
-      border: 1px solid #b38b38;
-      box-shadow: #735d2e 0px 0px 9px;
-    }
-  }
 }

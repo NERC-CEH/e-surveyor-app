@@ -5,43 +5,42 @@
     height: 215px;
     width: 100%;
     background: #f4f4f4;
-    position: fixed;
-    z-index: 2;
 
     .species-main-image {
-      height: 90%;
+      height: 210px;
       background-position: center;
       background-size: cover;
       border-radius: 0 0 15px 15px;
     }
   }
 
-  ion-card {
-    border: 1px solid #d8d8d8;
-    margin: 10% 5%;
-    position: relative;
-    top: 215px;
+  .species-wrapper {
+    overflow-y: scroll;
+    height: calc(100vh - 215px - 54px); // -image -header
 
-    &:first-of-type {
-      margin-bottom: 15%;
-      border: 1px solid #b38b38;
-      box-shadow: #735d2e 0px 0px 9px;
+    ion-card {
+      border: 1px solid #d8d8d8;
+      margin: 10% 5%;
+      position: relative;
+
+      &:first-of-type {
+        margin-bottom: 15%;
+        border: 1px solid #b38b38;
+        box-shadow: #735d2e 0px 0px 9px;
+      }
     }
-  }
 
-  .species-add-button {
-    background: transparent;
-    text-align: center;
-    margin: 50px 0px 230px 0px;
-    position: relative;
-    top: 200px;
+    .species-add-button {
+      background: transparent;
+      text-align: center;
 
-    ion-button {
-      background: #fff;
+      ion-button {
+        background: #fff;
+      }
     }
-  }
 
-  ion-list {
-    margin: 5% 0;
+    ion-list {
+      margin: 5% 0;
+    }
   }
 }

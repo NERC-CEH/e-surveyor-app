@@ -12,8 +12,9 @@ import {
   IonItemOptions,
   IonItemOption,
   isPlatform,
+  NavContext,
 } from '@ionic/react';
-import { Main, alert, MenuAttrItem } from '@apps';
+import { Main, alert, MenuAttrItem, LongPressButton } from '@apps';
 import {
   camera,
   checkmarkCircle,
@@ -21,7 +22,9 @@ import {
   closeCircle,
   bookmarkOutline,
   locationOutline,
+  searchCircleOutline,
   earth,
+  leaf,
 } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import config from 'config';
@@ -56,6 +59,8 @@ function deletePhoto(image) {
 
 @observer
 class Component extends React.Component {
+  static contextType = NavContext;
+
   static propTypes = {
     sample: PropTypes.object.isRequired,
     onPhotoAdd: PropTypes.func.isRequired,
@@ -110,20 +115,22 @@ class Component extends React.Component {
     });
   };
 
-  getImage = subSample => {
+  getProfile = subSample => {
     const { match } = this.props;
-    let { species } = subSample.occurrences[0].media[0].attrs;
-    const { identifying } = subSample.occurrences[0].media[0].identification;
-    const photo = subSample.occurrences[0].media[0];
+    const species = subSample.getSpecies();
+    const [photo] = subSample.occurrences[0].media;
 
     let commonName;
     let scientificName;
     let idClass;
     let detailIcon;
     let notFoundInUK;
+    let identifying;
+    let speciesPhoto;
 
-    if (species) {
-      species = subSample.getSpecies();
+    if (photo) {
+      identifying = photo.identification.identifying;
+      speciesPhoto = photo.attrs ? photo.getURL() : null;
     }
 
     if (species) {
@@ -159,6 +166,8 @@ class Component extends React.Component {
       ? undefined
       : `${match.url}/species/${subSample.cid}`;
 
+    const profilePhoto = this.getProfilePhoto(speciesPhoto);
+
     return (
       <IonItemSliding className="species-list-item" key={subSample.cid}>
         <IonItem
@@ -167,9 +176,7 @@ class Component extends React.Component {
           className={idClass}
           routerLink={link}
         >
-          <div className="photo">
-            <img src={photo.getURL()} />
-          </div>
+          {profilePhoto}
 
           <IonLabel text-wrap>
             {commonName && (
@@ -195,7 +202,18 @@ class Component extends React.Component {
     );
   };
 
-  getImages = () => {
+  getProfilePhoto = speciesPhoto => {
+    <img src={speciesPhoto} />;
+    const photo = speciesPhoto ? (
+      <img src={speciesPhoto} />
+    ) : (
+      <IonIcon icon={leaf} />
+    );
+
+    return <div className="photo">{photo}</div>;
+  };
+
+  getSpeciesProfiles = () => {
     const { sample } = this.props;
 
     const subSamples = [...sample.samples];
@@ -211,27 +229,50 @@ class Component extends React.Component {
     }
 
     const reversedSubSampleList = subSamples.reverse();
-    return reversedSubSampleList.map(this.getImage);
+    return reversedSubSampleList.map(this.getProfile);
+  };
+
+  navigateToSearch = () => {
+    const { match } = this.props;
+
+    this.context.navigate(`${match.url}/taxon`);
   };
 
   getNewImageButton = photoSelectHybrid => {
     if (!isPlatform('hybrid')) {
       return (
-        <IonButton className="img-picker" type="submit" expand="block">
-          <IonIcon slot="start" icon={camera} size="large" />
-          Plant
-          <input
-            type="file"
-            accept="image/*"
-            onChange={this.onPhotoSelectBrowser}
-            multiple
-          />
-        </IonButton>
+        <>
+          <IonButton className="img-picker" type="submit" expand="block">
+            <IonIcon slot="start" icon={camera} size="large" />
+            Plant
+            <input
+              type="file"
+              accept="image/*"
+              onChange={this.onPhotoSelectBrowser}
+              multiple
+            />
+          </IonButton>
+
+          <IonButton
+            color="primary"
+            id="add"
+            className="img-picker"
+            type="submit"
+            expand="block"
+            onClick={this.navigateToSearch}
+          >
+            <IonIcon slot="start" icon={searchCircleOutline} size="large" />
+            Search
+          </IonButton>
+        </>
       );
     }
 
     return (
-      <IonButton
+      <LongPressButton
+        color="primary"
+        id="add"
+        onLongClick={this.navigateToSearch}
         className="img-picker"
         type="submit"
         expand="block"
@@ -239,7 +280,7 @@ class Component extends React.Component {
       >
         <IonIcon slot="start" icon={camera} size="large" />
         Plant
-      </IonButton>
+      </LongPressButton>
     );
   };
 
@@ -290,7 +331,7 @@ class Component extends React.Component {
 
         {this.getNewImageButton(photoSelectHybrid)}
 
-        {this.getImages()}
+        {this.getSpeciesProfiles()}
       </Main>
     );
   }

@@ -137,7 +137,10 @@ const survey = {
             taxon: null,
           },
         });
-        occ.media.push(photo);
+
+        if (photo) {
+          occ.media.push(photo);
+        }
 
         return occ;
       },
