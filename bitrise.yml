@@ -1,0 +1,55 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+trigger_map:
+- push_branch: "*"
+  workflow: primary
+- pull_request_source_branch: "*"
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@4: {}
+    - cache-pull@2: {}
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+
+            echo "Adding bit.dev to npm registry"
+            npm config set @bit:registry https://node.bit.dev
+            npm config set //node.bit.dev/:_authToken ${BIT_TOKEN}
+            echo "Completed adding bit.dev to npm registry"
+    - nvm@1:
+        inputs:
+        - node_version: '10'
+    - npm@1:
+        inputs:
+        - cache_local_deps: 'true'
+        - command: install
+    - script@1:
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+
+            ./node_modules/.bin/grunt exec:build && ./node_modules/.bin/grunt exec:init && ./node_modules/.bin/grunt exec:resources
+    - certificate-and-profile-installer@1: {}
+    - recreate-user-schemes@1:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+    - xcode-archive@3: {}
+    - deploy-to-bitrise-io@1: {}
+    - cache-push@2: {}
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: ios/App/App.xcworkspace
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: App
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: app-store
