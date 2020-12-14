@@ -6,7 +6,7 @@ const checkEnv = require('@flumens/has-env');
 
 checkEnv({
   warn: ['APP_TRAINING', 'APP_MANUAL_TESTING', 'APP_HOST'],
-  required: ['APP_SENTRY_KEY'],
+  required: ['APP_SENTRY_KEY', 'APP_BACKEND_CLIENT_ID'],
 });
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -52,6 +52,7 @@ const config = {
       occurrence: 'common/models/occurrence',
       appModel: 'common/models/appModel',
       userModel: 'common/models/userModel',
+      Components: 'common/Components',
     },
     extensions: ['.js', '.jsx', '.json'],
   },
@@ -151,18 +152,13 @@ const config = {
         APP_VERSION: JSON.stringify(pkg.version), // no need to be an env value
 
         // mandatory env. variables
-        APP_INDICIA_API_KEY: JSON.stringify(
-          process.env.APP_INDICIA_API_KEY || ''
+        APP_BACKEND_CLIENT_ID: JSON.stringify(
+          process.env.APP_BACKEND_CLIENT_ID || ''
         ),
         APP_MAPBOX_MAP_KEY: JSON.stringify(
           process.env.APP_MAPBOX_MAP_KEY || ''
         ),
         // compulsory env. variables
-        APP_INDICIA_API_HOST: JSON.stringify(
-          process.env.APP_INDICIA_API_HOST || ''
-        ),
-        APP_TRAINING: process.env.APP_TRAINING || false,
-        APP_EXPERIMENTS: process.env.APP_EXPERIMENTS || false,
         APP_SENTRY_KEY: JSON.stringify(process.env.APP_SENTRY_KEY || ''),
 
         // https://github.com/webpack-contrib/karma-webpack/issues/316

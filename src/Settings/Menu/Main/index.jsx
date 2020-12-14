@@ -4,7 +4,6 @@ import { Main, alert } from '@apps';
 import PropTypes from 'prop-types';
 import { IonIcon, IonList, IonItemDivider, IonItem } from '@ionic/react';
 import { arrowUndoSharp } from 'ionicons/icons';
-import config from 'config';
 import './styles.scss';
 
 function resetDialog(resetApp) {
@@ -50,8 +49,6 @@ class Component extends React.Component {
             Reset App
           </IonItem>
         </IonList>
-
-        <p className="app-version">{`v${config.version} (${config.build})`}</p>
       </Main>
     );
   }

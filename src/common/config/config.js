@@ -1,7 +1,8 @@
 import { Plugins, FilesystemDirectory } from '@capacitor/core';
 import { isPlatform } from '@ionic/react';
 
-const backendUrl = process.env.APP_BACKEND_URL || 'https://'; // TODO:
+const backendUrl =
+  process.env.APP_BACKEND_URL || 'https://dev-ceh-esurveyor.pantheonsite.io'; // TODO:
 const { APP_HOST: HOST = 'https://agri.app.flumens.io' } = process.env;
 
 const indiciaUrl =

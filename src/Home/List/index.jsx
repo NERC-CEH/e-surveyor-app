@@ -4,14 +4,12 @@ import {
   IonItem,
   IonTitle,
   IonIcon,
-  IonButton,
-  IonButtons,
+  IonMenuButton,
   IonToolbar,
   IonHeader,
 } from '@ionic/react';
 import { Page, Main } from '@apps';
 import { observer } from 'mobx-react';
-import { menu } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import Survey from './components/Survey';
 import './styles.scss';
@@ -68,11 +66,7 @@ class Component extends React.Component {
       <Page id="surveys-list">
         <IonHeader className="ion-no-border">
           <IonToolbar>
-            <IonButtons slot="start">
-              <IonButton routerLink="/info/menu">
-                <IonIcon slot="icon-only" icon={menu} />
-              </IonButton>
-            </IonButtons>
+            <IonMenuButton slot="start" />
             <IonTitle mode="ios">E-Surveyor</IonTitle>
           </IonToolbar>
         </IonHeader>
