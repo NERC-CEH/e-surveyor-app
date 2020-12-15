@@ -136,7 +136,7 @@ class Component extends React.Component {
     if (species) {
       scientificName = species.species.scientificNameWithoutAuthor;
       [commonName] = species.species.commonNames;
-      notFoundInUK = species.species.notFoundInUK;
+      notFoundInUK = !species.warehouseId;
 
       const earthIcon = notFoundInUK ? earth : checkmarkCircle;
 

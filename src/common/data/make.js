@@ -29,9 +29,14 @@ function filterUKSIPlants() {
   const rawData = fs.readFileSync('./remote/uksi_plants.json');
   const data = JSON.parse(rawData);
 
-  const extractTaxon = ({ preferred_taxon: taxon }) => taxon;
+  // eslint-disable-next-line camelcase
+  const extractTaxon = (agg, { preferred_taxon, id }) => {
+    // eslint-disable-next-line no-param-reassign
+    agg[preferred_taxon] = id;
+    return agg;
+  };
 
-  const filteredData = [...new Set(data.map(extractTaxon))];
+  const filteredData = data.reduce(extractTaxon, {});
 
   fs.writeFileSync(
     './uksi_plants.list.json',

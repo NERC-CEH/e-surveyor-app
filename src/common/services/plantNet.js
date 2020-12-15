@@ -69,15 +69,20 @@ async function appendModelToFormData(mediaModel, formData) {
   formData.append('images', blob, `${name}.${extension}`);
 }
 
+const addWarehouseId = sp => {
+  return {
+    ...sp,
+    warehouseId: UKSIPlants[sp.species.scientificNameWithoutAuthor],
+  };
+};
+const addUKSIId = species => species.map(addWarehouseId);
+
 function filterUKSpeciesWrap(species) {
-  const filterByUKSpecies = ({ species: sp }, index) => {
-    if (UKSIPlants.includes(sp.scientificNameWithoutAuthor)) {
+    if (sp.warehouseId) {
       return true;
     }
 
-    if (species[index].score >= 0.9) {
-      // eslint-disable-next-line no-param-reassign
-      sp.notFoundInUK = true;
+    if (sp.score >= 0.9) {
       return true;
     }
 
@@ -121,6 +126,7 @@ export default async function identify(image) {
   })
     .then(response)
     .then(result)
+    .then(addUKSIId)
     .then(filterUKSpeciesWrap)
     .then(changeUKCommonNamesWrap)
     .catch(err);
