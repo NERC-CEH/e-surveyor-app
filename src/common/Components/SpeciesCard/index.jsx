@@ -139,7 +139,7 @@ class SpeciesCard extends React.Component {
     if (!sp) {
       return (
         <IonCol size="3" key={index}>
-          <img className="species-images" />
+          <div className="species-placeholder-images" />
         </IonCol>
       );
     }
