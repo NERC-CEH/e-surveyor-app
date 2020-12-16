@@ -219,7 +219,7 @@ class SpeciesCard extends React.Component {
             </IonList>
           )}
 
-          {species.notFoundInUK && (
+          {!species.warehouseId && (
             <InfoBackgroundMessage>
               This plant is not a UK native
               <IonIcon icon={earthOutline} />
