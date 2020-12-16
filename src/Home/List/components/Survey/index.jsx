@@ -50,12 +50,11 @@ const Survey = ({ sample }) => {
 
         <div>
           <span>
-            Species:
-            <IonBadge>{showSpeciesLength}</IonBadge>
+            Species: <IonBadge>{showSpeciesLength}</IonBadge>
           </span>
           {totalSeedmixSpecies && (
             <span>
-              Seedmix:
+              Seedmix:{' '}
               <IonBadge>{`${selectedSeedmixSpecies.length}/${totalSeedmixSpecies.length}`}</IonBadge>
             </span>
           )}
