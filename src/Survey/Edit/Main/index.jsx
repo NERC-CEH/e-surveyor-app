@@ -127,6 +127,7 @@ class Component extends React.Component {
     let notFoundInUK;
     let identifying;
     let speciesPhoto;
+    let link;
 
     if (photo) {
       identifying = photo.identification.identifying;
@@ -139,6 +140,7 @@ class Component extends React.Component {
       notFoundInUK = !species.warehouseId;
 
       const earthIcon = notFoundInUK ? earth : checkmarkCircle;
+      const speciesDoesNotExist = species.score === 0;
 
       if (species.score > POSITIVE_THRESHOLD) {
         idClass = 'id-green';
@@ -150,21 +152,21 @@ class Component extends React.Component {
         idClass = 'id-red';
         detailIcon = closeCircle;
       }
-    }
 
-    if (!species && !identifying) {
-      scientificName = 'Not found';
-      idClass = 'id-red';
-      detailIcon = closeCircle;
+      if (speciesDoesNotExist && !identifying) {
+        scientificName = 'Not found';
+        idClass = 'id-red';
+        detailIcon = closeCircle;
+      }
+
+      link = speciesDoesNotExist
+        ? undefined
+        : `${match.url}/species/${subSample.cid}`;
     }
 
     const deletePhotoWrap = () => deletePhoto(subSample);
 
     const detailsIcon = detailIcon || null;
-
-    const link = !subSample.getSpecies()
-      ? undefined
-      : `${match.url}/species/${subSample.cid}`;
 
     const profilePhoto = this.getProfilePhoto(speciesPhoto);
 
