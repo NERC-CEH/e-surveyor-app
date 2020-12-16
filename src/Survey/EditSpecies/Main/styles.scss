@@ -12,6 +12,17 @@
       background-size: cover;
       border-radius: 0 0 15px 15px;
     }
+
+    .species-main-image-empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #676666;
+      font-weight: 400;
+      height: 210px;
+      border-radius: 0 0 15px 15px;
+      background-color: #eaeaea;
+    }
   }
 
   .species-wrapper {

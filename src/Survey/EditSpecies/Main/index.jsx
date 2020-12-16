@@ -79,12 +79,21 @@ class MainComponent extends React.Component {
     const { sample } = this.props;
 
     const image = sample.occurrences[0].media[0];
+
     if (!image) {
-      return null;
+      return (
+        <div className="species-main-image-wrapper">
+          <div className="species-main-image-empty" alt="species">
+            Image does not exist
+          </div>
+        </div>
+      );
     }
 
+    const showImage = image.getURL();
+
     const style = {
-      backgroundImage: `url(${image.attrs.data})`,
+      backgroundImage: `url(${showImage})`,
     };
 
     return (
