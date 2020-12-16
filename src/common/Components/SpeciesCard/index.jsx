@@ -136,6 +136,14 @@ class SpeciesCard extends React.Component {
     });
 
   getImage = (sp, index) => {
+    if (!sp) {
+      return (
+        <IonCol size="3" key={index}>
+          <img className="species-images" />
+        </IonCol>
+      );
+    }
+
     const spImage = sp.url.s;
 
     const onImageClicked = () => this.onSpeciesImageClicked(index);
@@ -155,7 +163,13 @@ class SpeciesCard extends React.Component {
     const { species: fullSpecies } = this.props;
 
     const firstFourImages = fullSpecies.images.slice(0, 4);
-    const images = firstFourImages.map(this.getImage);
+
+    const showImage = [
+      ...firstFourImages,
+      ...new Array(4 - firstFourImages.length),
+    ];
+
+    const images = showImage.map(this.getImage);
 
     return images;
   };
