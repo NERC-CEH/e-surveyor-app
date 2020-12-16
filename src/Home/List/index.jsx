@@ -40,7 +40,7 @@ class Component extends React.Component {
           <IonList lines="full">
             <IonItem className="empty">
               <div>
-                You have no finished suveys.
+                You have no finished surveys.
                 <br />
                 <br />
                 Press
