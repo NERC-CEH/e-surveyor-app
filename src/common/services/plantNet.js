@@ -75,9 +75,13 @@ const addWarehouseId = sp => {
     warehouseId: UKSIPlants[sp.species.scientificNameWithoutAuthor],
   };
 };
+
 const addUKSIId = species => species.map(addWarehouseId);
 
 function filterUKSpeciesWrap(species) {
+  let removedSpeciesScores = 0;
+
+  const filterByUKSpecies = sp => {
     if (sp.warehouseId) {
       return true;
     }
@@ -86,10 +90,22 @@ function filterUKSpeciesWrap(species) {
       return true;
     }
 
+    removedSpeciesScores += sp.score;
+
     return false;
   };
 
-  return species.filter(filterByUKSpecies);
+  const changeScoreValue = sp => {
+    const newScore = sp.score / (1 - removedSpeciesScores);
+
+    return { ...sp, score: newScore };
+  };
+
+  const filteredSpecies = species
+    .filter(filterByUKSpecies)
+    .map(changeScoreValue);
+
+  return filteredSpecies;
 }
 
 function changeUKCommonNamesWrap(species) {
