@@ -68,7 +68,6 @@ const Image = {
     let width;
     let height;
     let data;
-    let type;
 
     if (isPlatform('hybrid')) {
       imageURL = Capacitor.convertFileSrc(imageURL); // eslint-disable-line
@@ -78,13 +77,13 @@ const Image = {
       height = imageMetaData.height;
       data = imageURL.split('/').pop();
     } else {
-      [data, type, width, height] = await Indicia.Media.getDataURI(imageURL);
+      [data, width, height] = await Indicia.Media.getDataURI(imageURL);
     }
 
     const imageModel = new ImageModel({
       attrs: {
         data,
-        type,
+        type: 'jpeg',
         width,
         height,
         path: dataDirPath,
