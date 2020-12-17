@@ -224,6 +224,9 @@
           "config": "./webpack.config.js"
         }
       }
+    },
+    "rules": {
+      "jsx-a11y/accessible-emoji": 0
     }
   },
   "prettier": {
