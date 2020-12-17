@@ -66,6 +66,7 @@ class Component extends React.Component {
     onPhotoAdd: PropTypes.func.isRequired,
     photoSelectHybrid: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
+    appModel: PropTypes.object.isRequired,
   };
 
   onPhotoSelectBrowser = e => {
@@ -286,6 +287,36 @@ class Component extends React.Component {
     );
   };
 
+  showFirstSurveyTip = () => {
+    const { appModel } = this.props;
+
+    if (!appModel.attrs.showFirstSurveyTip) {
+      return;
+    }
+
+    alert({
+      skipTranslation: true,
+      header: 'Your first survey 🌱',
+      message: (
+        <>
+          You can add plant photos using your camera 📷 and we will try to
+          identify them for you. Alternatively, you can long-press the button to
+          enter the species manually 🔎
+        </>
+      ),
+      buttons: [
+        {
+          text: 'OK, got it',
+          role: 'cancel',
+          cssClass: 'primary',
+        },
+      ],
+    });
+
+    appModel.attrs.showFirstSurveyTip = false;
+    appModel.save();
+  };
+
   render() {
     const { sample, photoSelectHybrid } = this.props;
 
@@ -297,6 +328,8 @@ class Component extends React.Component {
 
     return (
       <Main>
+        {this.showFirstSurveyTip()}
+
         <IonList lines="full">
           <MenuAttrItem
             routerLink={`${baseURL}/name`}

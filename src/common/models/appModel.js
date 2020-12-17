@@ -3,7 +3,9 @@ import { genericStore } from './store';
 
 class AppModel extends Model {}
 
-const defaults = {};
+const defaults = {
+  showFirstSurveyTip: true,
+};
 
 const appModel = new AppModel(genericStore, 'app', defaults);
 
