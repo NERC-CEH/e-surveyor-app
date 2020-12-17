@@ -3,8 +3,6 @@
   min-height: 50px;
   margin: 20px 0;
 
-  --inner-padding-bottom: 15px;
-
   .seedmix,
   .pollinators {
     align-self: center;
@@ -52,19 +50,5 @@
   }
   .low {
     --background: gray;
-  }
-}
-
-.league-table-item {
-  &.league-table-current {
-    --background: #f1ffa4;
-  }
-
-  b {
-    font-size: 1.3em;
-  }
-
-  > ion-label {
-    min-height: 80px;
   }
 }

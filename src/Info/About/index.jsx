@@ -15,12 +15,9 @@ const Component = () => (
           automatically identify plant species from images you take. Expertise
           from the UKCEH built into the app can assess the quality of the
           habitat you have created, quantifying the number and variety of
-          species supported by the flowers you have grown. If you want to know
-          how well your have done compared to others you can compare your
-          results to other farmers in your area on the league table page. The
-          app also compares the species present in your habitat to those in your
-          seedmix, making it quick and easy to see which flowers established and
-          which didn't.
+          species supported by the flowers you have grown. The app also compares
+          the species present in your habitat to those in your seedmix, making
+          it quick and easy to see which flowers established and which didn't.
         </P>
       </Section>
     </Main>

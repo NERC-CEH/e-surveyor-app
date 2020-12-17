@@ -51,7 +51,6 @@ const byName3 = ({ pollinator: taxon }, { pollinator: taxon2 }) => {
 class MainComponent extends React.Component {
   static propTypes = {
     sample: PropTypes.object.isRequired,
-    getLeagueTable: PropTypes.func.isRequired,
     getMissingSeedmixSpecies: PropTypes.func.isRequired,
   };
 
@@ -335,53 +334,6 @@ class MainComponent extends React.Component {
     );
   };
 
-  getLeagueTable = () => {
-    const { getLeagueTable } = this.props;
-
-    const getRow = (survey, index) => {
-      const key = survey.name || survey.pollinators;
-
-      return (
-        <IonItem
-          key={key}
-          className={`league-table-item ${
-            survey.current ? 'league-table-current' : ''
-          }`}
-        >
-          <IonLabel>
-            <IonLabel position="stacked">
-              <b>{survey.name}</b>
-            </IonLabel>
-            <IonLabel position="stacked">
-              Pollinators: <b>{survey.pollinators}</b>
-            </IonLabel>
-            <IonLabel position="stacked">
-              {'Recorded species: '}
-              {survey.species.length}
-            </IonLabel>
-          </IonLabel>
-          <IonLabel slot="end">{index + 1}</IonLabel>
-        </IonItem>
-      );
-    };
-
-    const table = getLeagueTable().map(getRow);
-
-    return (
-      <IonList>
-        <IonItem>
-          <IonLabel className="ion-text-wrap">
-            <IonNote color="primary">
-              Recorder surveys supporting the most pollinators
-            </IonNote>
-          </IonLabel>
-        </IonItem>
-
-        {table}
-      </IonList>
-    );
-  };
-
   getModalContents = () => {
     if (this.state.showModal === 'Seedmix') {
       return <Main>{this.getSpeciesSeedmixModalList()}</Main>;
@@ -389,10 +341,6 @@ class MainComponent extends React.Component {
 
     if (this.state.showModal === 'Pollinators') {
       return <Main>{this.getSpeciesPollinatorsModalList()}</Main>;
-    }
-
-    if (this.state.showModal === 'League') {
-      return <Main>{this.getLeagueTable()}</Main>;
     }
 
     if (SPECIES_GROUPS.includes(this.state.showModal)) {
@@ -419,10 +367,6 @@ class MainComponent extends React.Component {
   showPollinatorsData = () => {
     return (
       <>
-        <IonItem detail onClick={this.getShowModal('League')}>
-          <IonLabel slot="start">League Table</IonLabel>
-        </IonItem>
-
         <IonItemDivider mode="ios">
           <IonLabel className="home-report-label">Pollinators count</IonLabel>
         </IonItemDivider>
@@ -472,7 +416,7 @@ class MainComponent extends React.Component {
       <>
         <Main>
           <IonList lines="full">
-            <IonItem className="report-header">
+            <IonItem className="report-header" lines="none">
               <div className="seedmix" onClick={this.getShowModal('Seedmix')}>
                 {seedmix && (
                   <>
