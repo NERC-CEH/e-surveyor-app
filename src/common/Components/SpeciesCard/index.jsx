@@ -44,6 +44,13 @@ Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
 
 const options = {
   cutoutPercentage: 80,
+  tooltips: {
+    // Disable the on-canvas tooltip
+    enabled: false,
+  },
+  animation: {
+    animateRotate: false,
+  },
 };
 
 const getDoughnutData = score => {
@@ -68,7 +75,6 @@ const getDoughnutData = score => {
       {
         data: [scorePercent, remainingScorePercent],
         backgroundColor: [color(), '#f5f5f5'],
-        hoverBackgroundColor: ['#3ec556', 'rgba(0,0,0,0)'],
         borderWidth: [0, 0],
       },
     ],
