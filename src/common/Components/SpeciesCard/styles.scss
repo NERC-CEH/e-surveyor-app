@@ -1,13 +1,9 @@
 #species-profile-card {
   border-radius: 10px;
 
-  ion-card-title {
-    max-width: 85%;
-    padding: 0 20px 0 0;
-  }
-
-  ion-card-subtitle {
-    max-width: 85%;
+  ion-card-header {
+    display: flex;
+    justify-content: space-between;
   }
 
   .species-main-image {
@@ -50,11 +46,14 @@
   }
 
   #doughnut {
-    position: absolute;
-    top: 10px;
-    right: -3%;
-    height: 7vh !important;
-    width: 14vh !important;
+    height: 8vh !important;
+    width: 16vh !important;
+    transform: translate(30%, -20%);
+  }
+
+  ion-icon {
+    color: #4b9a43;
+    --ionicon-stroke-width: 12%;
   }
 
   ion-list {
@@ -75,7 +74,7 @@
 
     ion-icon {
       position: absolute;
-      right: 15px;
+      right: 5%;
       transform: translateY(-50%);
       top: 50%;
       background: none;

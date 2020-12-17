@@ -14,7 +14,7 @@ import {
   IonIcon,
 } from '@ionic/react';
 import { Gallery, InfoBackgroundMessage } from '@apps';
-import { earthOutline } from 'ionicons/icons';
+import { earthOutline, checkmark } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import './styles.scss';
 
@@ -80,6 +80,7 @@ class SpeciesCard extends React.Component {
   static propTypes = {
     species: PropTypes.object.isRequired,
     onSelect: PropTypes.func,
+    selectedSpeciesByUser: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -175,7 +176,11 @@ class SpeciesCard extends React.Component {
   };
 
   render() {
-    const { species: fullSpecies, onSelect } = this.props;
+    const {
+      species: fullSpecies,
+      onSelect,
+      selectedSpeciesByUser,
+    } = this.props;
 
     const { species, score, images } = fullSpecies;
 
@@ -187,10 +192,23 @@ class SpeciesCard extends React.Component {
 
         <IonCard id="species-profile-card">
           <IonCardHeader>
-            <IonCardTitle>{species.commonNames[0]}</IonCardTitle>
-            <IonCardSubtitle>
-              <i>{species.scientificNameWithoutAuthor}</i>
-            </IonCardSubtitle>
+            <div className="species-names-wrapper">
+              <IonCardTitle>{species.commonNames[0]}</IonCardTitle>
+              <IonCardSubtitle>
+                <i>{species.scientificNameWithoutAuthor}</i>
+              </IonCardSubtitle>
+            </div>
+
+            {!selectedSpeciesByUser && (
+              <Doughnut
+                id="doughnut"
+                data={getDoughnutData(score)}
+                options={options}
+                redraw
+              />
+            )}
+
+            {selectedSpeciesByUser && <IonIcon icon={checkmark} size="large" />}
           </IonCardHeader>
 
           {!!images.length && (
@@ -198,13 +216,6 @@ class SpeciesCard extends React.Component {
               <IonRow size="12">{this.getImages()}</IonRow>
             </IonGrid>
           )}
-
-          <Doughnut
-            id="doughnut"
-            data={getDoughnutData(score)}
-            options={options}
-            redraw
-          />
 
           {onSelect && (
             <IonList>

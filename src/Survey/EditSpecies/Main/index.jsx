@@ -40,8 +40,11 @@ class MainComponent extends React.Component {
   showSelectedSpecies = () => {
     const { sample } = this.props;
     const { taxon: sp } = sample.occurrences[0].attrs;
+    const selectedSpeciesByUser = !sp.gbif.id || sp.scoreFromAPI;
 
-    return <SpeciesCard species={sp} />;
+    return (
+      <SpeciesCard species={sp} selectedSpeciesByUser={selectedSpeciesByUser} />
+    );
   };
 
   showAIResults = () => {
