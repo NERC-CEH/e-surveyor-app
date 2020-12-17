@@ -1,0 +1,139 @@
+$dark-brown: #4d380a;
+
+@mixin wave {
+  // https://www.shapedivider.app/
+  .custom-shape-divider-bottom-1593438501 {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+  }
+
+  .custom-shape-divider-bottom-1593438501 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 42px;
+  }
+
+  .custom-shape-divider-bottom-1593438501 .shape-fill {
+    fill: #fff6e4;
+  }
+
+  /** For mobile devices **/
+  .custom-shape-divider-bottom-1593438501 svg {
+    width: calc(152% + 1.3px);
+    height: 42px;
+  }
+}
+
+@mixin slide {
+  .slide-header {
+    background-size: cover;
+    height: 60%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+  @include wave;
+}
+
+#welcome-page {
+  ion-header {
+    position: absolute;
+
+    ion-toolbar {
+      --background: transparent;
+      --border-color: transparent;
+      --ion-color-dark-contrast: #ffffff;
+
+      ion-button {
+        border-radius: 7px;
+        padding: 0px 9px;
+        background: #ffffff7a;
+        color: $dark-brown;
+      }
+    }
+  }
+
+  ion-slide {
+    background: #fff6e4;
+  }
+
+  ion-slide .message {
+    position: absolute;
+    top: 105%;
+  }
+
+  ion-slides {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+
+    ion-slide.first {
+      @include slide;
+
+      .slide-header {
+        background-image: url('/images/first.jpg');
+        background-position: 54%;
+      }
+    }
+
+    ion-slide.second {
+      @include slide;
+
+      .slide-header {
+        background-image: url('/images/second.jpg');
+        background-position: 34%;
+      }
+      ion-button {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: $dark-brown;
+      }
+    }
+
+    p,
+    h2 {
+      margin-top: 1.1rem;
+      text-align: center;
+    }
+
+    h2 {
+      letter-spacing: 2px;
+      font-size: 1.4rem;
+      margin: 0px 4px 4px 2px;
+      text-align: center;
+      color: $dark-brown;
+      padding: 0 20px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 9px;
+      text-align: left;
+      color: $dark-brown;
+      padding: 0px 15px;
+    }
+
+    .swiper-pagination-bullets {
+      bottom: 3%;
+
+      .swiper-pagination-bullet {
+        opacity: 1;
+      }
+
+      .swiper-pagination-bullet-active {
+        opacity: 0.8;
+        background-color: $dark-brown;
+      }
+    }
+  }
+}

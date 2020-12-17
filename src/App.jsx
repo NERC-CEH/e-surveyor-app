@@ -4,11 +4,13 @@ import { IonApp, IonPage, IonRouterOutlet, NavContext } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { observer } from 'mobx-react';
 import userModel from 'userModel';
+import appModel from 'appModel';
 import Menu from 'Components/Menu';
 import Home from './Home';
 import Info from './Info/router';
 import User from './User/router';
 import Settings from './Settings/router';
+import SplashScreenRequired from './Info/SplashScreenRequired';
 import Survey from './Survey/router';
 
 const HomeRedirect = () => {
@@ -19,21 +21,23 @@ const HomeRedirect = () => {
 
 const App = () => (
   <IonApp>
-    <IonReactRouter>
-      <Menu userModel={userModel} />
-      <Route exact path="/" component={HomeRedirect} />
-      <IonPage id="main">
-        <Switch>
-          <Route path="/home" component={Home} />
-          <IonRouterOutlet>
-            {Survey}
-            {Info}
-            {User}
-            {Settings}
-          </IonRouterOutlet>
-        </Switch>
-      </IonPage>
-    </IonReactRouter>
+    <SplashScreenRequired appModel={appModel}>
+      <IonReactRouter>
+        <Menu userModel={userModel} />
+        <Route exact path="/" component={HomeRedirect} />
+        <IonPage id="main">
+          <Switch>
+            <Route path="/home" component={Home} />
+            <IonRouterOutlet>
+              {Survey}
+              {Info}
+              {User}
+              {Settings}
+            </IonRouterOutlet>
+          </Switch>
+        </IonPage>
+      </IonReactRouter>
+    </SplashScreenRequired>
   </IonApp>
 );
 
