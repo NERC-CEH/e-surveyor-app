@@ -33,7 +33,7 @@ $dark-brown: #4d380a;
 @mixin slide {
   .slide-header {
     background-size: cover;
-    height: 60%;
+    height: 50%;
     width: 100%;
     position: absolute;
     top: 0;
@@ -51,11 +51,28 @@ $dark-brown: #4d380a;
       --ion-color-dark-contrast: #ffffff;
 
       ion-button {
-        border-radius: 7px;
-        padding: 0px 9px;
-        background: #ffffff7a;
-        color: $dark-brown;
+        border-radius: 50%;
+        // padding: 0px 9px;
+        height: 40px;
+        width: 40px;
+        margin: 10px;
+        background: #ffffffcf;
+        color: $dark-brown !important;
       }
+    }
+  }
+
+  ion-footer ion-toolbar {
+    --ion-toolbar-background: none;
+
+    ion-button {
+      border-radius: 50%;
+      background: #ffffffcf;
+      color: #4d380a;
+      height: 60px;
+      width: 60px;
+      margin: 10px;
+      color: $dark-brown;
     }
   }
 
@@ -99,6 +116,34 @@ $dark-brown: #4d380a;
       }
     }
 
+    ion-slide.third {
+      @include slide;
+
+      .slide-header {
+        background-image: url('/images/third.jpg');
+        background-position: 34%;
+      }
+      ion-button {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: $dark-brown;
+      }
+    }
+
+    ion-slide.fourth {
+      @include slide;
+
+      .slide-header {
+        background-image: url('/images/fourth.jpg');
+        background-position: 34%;
+      }
+      ion-button {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: $dark-brown;
+      }
+    }
+
     p,
     h2 {
       margin-top: 1.1rem;
@@ -107,20 +152,21 @@ $dark-brown: #4d380a;
 
     h2 {
       letter-spacing: 2px;
-      font-size: 1.4rem;
-      margin: 0px 4px 4px 2px;
+      font-size: 1.9rem;
+      margin: 10px 4px 0 2px;
       text-align: center;
       color: $dark-brown;
       padding: 0 20px;
-      font-weight: bold;
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       margin-bottom: 9px;
       text-align: left;
+      color: #4d380a;
+      line-height: 1.5em;
       color: $dark-brown;
-      padding: 0px 15px;
+      padding: 10px 30px;
     }
 
     .swiper-pagination-bullets {
