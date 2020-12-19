@@ -53,7 +53,7 @@ const routes = {
     },
   ],
   loggedOutPages: [
-    { title: 'Register/Login', path: '/user/register', icon: personOutline },
+    { title: 'Register/Sign In', path: '/user/register', icon: personOutline },
   ],
 };
 
