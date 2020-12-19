@@ -67,17 +67,30 @@ export default () => (
             www.flaticon.com
           </a>
         </P>
-      </Section>
-      <Section>
+
         <H>Photos</H>
-        <IonItem lines="none">
-          <IonLabel class="ion-text-wrap">
-            <i>
-              <T>Home page:</T>{' '}
-            </i>
-            <span>Marten Bjork on Unsplash</span>
-          </IonLabel>
-        </IonItem>
+        <P>
+          Thanks to{' '}
+          <a href="https://unsplash.com/@mkvandergriff?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Maranda Vandergriff
+          </a>
+          ,{' '}
+          <a href="https://unsplash.com/@marcusneto?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Marcus Neto
+          </a>
+          ,{' '}
+          <a href="https://unsplash.com/@freestef?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Free Steph
+          </a>
+          ,{' '}
+          <a href="https://unsplash.com/@mickaeltournier?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Mickael Tournier
+          </a>{' '}
+          from{' '}
+          <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
+            Unsplash
+          </a>
+        </P>
       </Section>
     </Main>
   </Page>
