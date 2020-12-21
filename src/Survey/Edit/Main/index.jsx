@@ -193,7 +193,17 @@ class Component extends React.Component {
           </IonLabel>
 
           {identifying && (
-            <IonSpinner slot="end" className="media-identifying" />
+            <IonLabel slot="end">
+              <b>Identifying...</b>
+            </IonLabel>
+          )}
+
+          {identifying && (
+            <IonSpinner
+              slot="end"
+              className="media-identifying"
+              color="primary"
+            />
           )}
         </IonItem>
         <IonItemOptions side="end">
@@ -273,7 +283,7 @@ class Component extends React.Component {
 
     return (
       <LongPressButton
-        color="primary"
+        color="secondary"
         id="add"
         onLongClick={this.navigateToSearch}
         className="img-picker"
