@@ -421,7 +421,7 @@ class MainComponent extends React.Component {
                 {seedmix && (
                   <>
                     <IonIcon icon={Seeds} />
-                    <IonBadge>
+                    <IonBadge color="secondary">
                       <CountUp
                         end={selectedSeedmixSpecies.length}
                         duration={2.75}
@@ -436,7 +436,7 @@ class MainComponent extends React.Component {
                 onClick={this.getShowModal('Pollinators')}
               >
                 <IonIcon icon="/images/bee.svg" />
-                <IonBadge>
+                <IonBadge color="secondary">
                   <CountUp end={numberOfSpecies} duration={2.75} />
                 </IonBadge>
               </div>
