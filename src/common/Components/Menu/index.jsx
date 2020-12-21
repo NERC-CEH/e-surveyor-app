@@ -135,13 +135,9 @@ function loggingOut(userModel) {
 const getLogoutButton = userModel => {
   const userName = userModel.attrs.fullName || userModel.attrs.email;
   const loggingOutWrap = () => loggingOut(userModel);
-  
+
   return (
-    <IonItem
-      detail={false}
-      routerDirection="none"
-      onClick={loggingOutWrap}
-    >
+    <IonItem detail={false} routerDirection="none" onClick={loggingOutWrap}>
       <IonIcon slot="start" icon={logOut} />
       <IonLabel>
         <T>Logout</T>: {userName}
@@ -154,8 +150,6 @@ const Menu = ({ userModel }) => {
   const location = useLocation();
 
   const getRoutes = routesList => renderMenuRoutes(routesList, location);
-
-  const isLoggedIn = !!userModel.attrs.id;
 
   return (
     <IonMenu type="overlay" contentId="main">
@@ -171,9 +165,7 @@ const Menu = ({ userModel }) => {
           <IonListHeader>
             <T>Account</T>
           </IonListHeader>
-          {isLoggedIn
-            ? getLogoutButton(userModel)
-            : getRoutes(routes.loggedOutPages)}
+          {getLogoutButton(userModel)}
         </IonList>
       </IonContent>
       <IonFooter className="ion-no-border">

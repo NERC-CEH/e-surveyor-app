@@ -170,14 +170,14 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>Let's start!</h2>
+                <h2>🤓 Our Expertise</h2>
                 <p>
-                  Expertise from the UKCEH built into the app can assess the
+                  Research from the UKCEH built into the app can assess the
                   quality of the habitat you have created.
                 </p>
 
                 <IonButton fill="clear" onClick={exit}>
-                  <IonLabel>Sign in</IonLabel>
+                  <IonLabel>Let's start!</IonLabel>
                   <IonIcon slot="end" icon={arrowForward} />
                 </IonButton>
               </div>

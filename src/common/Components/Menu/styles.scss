@@ -6,16 +6,16 @@ ion-menu ion-content {
 
   --background: linear-gradient(
     to top,
-    rgba(227, 211, 177, 1) 0%,
-    rgba(227, 211, 177, 1) 8%,
-    rgba(255, 240, 207, 1) 36%,
+    rgb(253 211 144) 0%,
+    rgb(247 212 154) 17%,
+    rgb(255 216 154) 43%,
     rgb(255, 249, 235) 100%
   );
 }
 
 ion-menu ion-footer {
-  background: rgba(227, 211, 177, 1);
-  border-top: rgba(227, 211, 177, 1) 1px solid;
+  background: rgb(253, 211, 144);
+  border-top: rgb(253, 211, 144) 1px solid;
 
   div {
     text-align: center;

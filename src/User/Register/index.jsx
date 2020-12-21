@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Log from 'helpers/log';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
-import { Page, Header, device, toast, alert, loader } from '@apps';
+import { Page, device, toast, alert, loader } from '@apps';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
@@ -68,7 +68,6 @@ export default function RegisterContainer({ userModel }) {
   
   return (
     <Page id="user-register">
-      <Header className="ion-no-border" />
       <Main
         schema={userModel.registerSchema}
         onSubmit={onRegisterWrap}

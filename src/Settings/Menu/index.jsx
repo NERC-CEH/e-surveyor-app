@@ -7,11 +7,12 @@ import Main from './Main';
 
 const { success, error } = toast;
 
-const resetApp = async (saveSamples, appModel) => {
+const resetApp = async (saveSamples, appModel, userModel) => {
   Log('Settings:Menu:Controller: resetting the application!', 'w');
   try {
     await saveSamples.resetDefaults();
     await appModel.resetDefaults();
+    await userModel.resetDefaults();
     success('Done');
   } catch (e) {
     error(`${e.message}`);
@@ -19,9 +20,9 @@ const resetApp = async (saveSamples, appModel) => {
 };
 
 const MenuController = props => {
-  const { savedSamples, appModel } = props;
+  const { savedSamples, appModel, userModel } = props;
 
-  const resetApplication = () => resetApp(savedSamples, appModel);
+  const resetApplication = () => resetApp(savedSamples, appModel, userModel);
 
   return (
     <Page id="settings">
@@ -32,6 +33,7 @@ const MenuController = props => {
 };
 
 MenuController.propTypes = {
+  userModel: PropTypes.object.isRequired,
   appModel: PropTypes.object.isRequired,
   savedSamples: PropTypes.array.isRequired,
 };

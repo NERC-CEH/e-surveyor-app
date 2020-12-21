@@ -45,6 +45,10 @@ const Image = {
     const file = await Camera.getPhoto(cameraOptions);
     const name = `${Date.now()}.jpeg`;
 
+    if (!isPlatform('hybrid')) {
+      return file.webPath;
+    }
+
     // This example copies a file within the documents directory
     await Filesystem.copy({
       from: file.path,

@@ -1,31 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
 import {
-  IonTabs,
   IonTabButton,
   IonIcon,
   IonLabel,
-  IonTabBar,
-  IonRouterOutlet,
-  IonFab,
-  IonFabButton,
+  IonFooter,
+  IonButton,
   IonModal,
+  IonMenuButton,
+  IonToolbar,
+  IonHeader,
+  NavContext,
 } from '@ionic/react';
-import { ModalHeader } from '@apps';
-import { albumsOutline } from 'ionicons/icons';
+import { ModalHeader, Page } from '@apps';
 import savedSamples from 'savedSamples';
 import appModel from 'appModel';
 import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
 import SpeciesProfile from './components/SpeciesProfile';
-import SurveysList from './List';
+import Main from './Main';
 import './styles.scss';
 import './flower.svg';
 import './route.svg';
+import './transect.svg';
 
 class Component extends React.Component {
+  static contextType = NavContext;
+
   static propTypes = {
     history: PropTypes.object,
   };
@@ -36,8 +38,18 @@ class Component extends React.Component {
     this.state = { image: null };
   }
 
-  photoUpload = async e => {
-    const photo = e.target.files[0];
+  getModal = () => (
+    <IonModal isOpen={!!this.state.image} backdropDismiss={false}>
+      <ModalHeader title="Species" onClose={this.hideSpeciesModal} />
+      {!!this.state.image && <SpeciesProfile species={this.state.image} />}
+    </IonModal>
+  );
+
+  identifyPhoto = async () => {
+    const photo = await ImageHelp.getImage();
+    if (!photo) {
+      return;
+    }
 
     const image = await ImageHelp.getImageModel(ImageModel, photo);
     this.setState({ image });
@@ -53,65 +65,53 @@ class Component extends React.Component {
     }
   };
 
+  startTransect = () => {
+    this.context.navigate('/info/mockup-survey');
+  };
+
+  getFooter = () => (
+    <IonFooter>
+      <div className="inner-wrap">
+        <div onClick={this.identifyPhoto}>
+          <IonTabButton routerLink="/survey">
+            <IonIcon src="/images/flower.svg" />
+            <IonLabel>Plant ID</IonLabel>
+          </IonTabButton>
+        </div>
+
+        <IonButton routerLink="/survey">
+          <IonIcon src="/images/route.svg" />
+        </IonButton>
+
+        <div onClick={this.startTransect}>
+          <IonTabButton>
+            <IonIcon src="/images/transect.svg" />
+            <IonLabel>Transect</IonLabel>
+          </IonTabButton>
+        </div>
+      </div>
+    </IonFooter>
+  );
+
   hideSpeciesModal = () => {
     this.setState({ image: null });
   };
 
-  render() {
-    const SurveysListWrap = props => (
-      <SurveysList appModel={appModel} savedSamples={savedSamples} {...props} />
-    );
-
+  render(props) {
     return (
-      <>
-        <IonModal isOpen={!!this.state.image} backdropDismiss={false}>
-          <ModalHeader title="Species" onClose={this.hideSpeciesModal} />
-          {!!this.state.image && <SpeciesProfile species={this.state.image} />}
-        </IonModal>
+      <Page id="home">
+        <IonHeader className="ion-no-border">
+          <IonToolbar>
+            <IonMenuButton slot="start" />
+          </IonToolbar>
+        </IonHeader>
 
-        <IonFab
-          className="img-picker"
-          vertical="bottom"
-          horizontal="center"
-          slot="fixed"
-        >
-          <IonFabButton size="small">
-            <input type="file" accept="image/*" onChange={this.photoUpload} />
-            <IonIcon src="/images/flower.svg" />
-          </IonFabButton>
-        </IonFab>
+        <Main appModel={appModel} savedSamples={savedSamples} {...props} />
 
-        <IonFab
-          ref={this.fabRef}
-          vertical="bottom"
-          horizontal="center"
-          onClick={this.nav}
-          slot="fixed"
-        >
-          <IonFabButton className="new-survey" href="/survey">
-            <IonIcon src="/images/route.svg" />
-          </IonFabButton>
-        </IonFab>
+        {this.getFooter()}
 
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route path="/home/surveys" render={SurveysListWrap} exact />
-          </IonRouterOutlet>
-
-          <IonTabBar slot="bottom">
-            <IonTabButton>{/* placeholder */}</IonTabButton>
-
-            <IonTabButton>{/* placeholder */}</IonTabButton>
-            <IonTabButton
-              tab="complex-survey-mockup"
-              href="/info/mockup-survey"
-            >
-              <IonIcon icon={albumsOutline} />
-              <IonLabel className="farm-surveys-label">Transects</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
-      </>
+        {this.getModal()}
+      </Page>
     );
   }
 }

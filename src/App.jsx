@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { IonApp, IonPage, IonRouterOutlet, NavContext } from '@ionic/react';
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { observer } from 'mobx-react';
 import userModel from 'userModel';
 import appModel from 'appModel';
 import Menu from 'Components/Menu';
+import RequiresLogin from 'Components/RequiresLogin';
 import Home from './Home';
 import Info from './Info/router';
 import User from './User/router';
@@ -14,28 +15,24 @@ import SplashScreenRequired from './Info/SplashScreenRequired';
 import Survey from './Survey/router';
 
 const HomeRedirect = () => {
-  const { navigate } = useContext(NavContext);
-  navigate('/home/surveys', 'root'); // simple redirect component doesn't work when back from login
-  return null;
+  return <Redirect to="home/surveys" />;
 };
 
 const App = () => (
   <IonApp>
     <SplashScreenRequired appModel={appModel}>
       <IonReactRouter>
-        <Menu userModel={userModel} />
-        <Route exact path="/" component={HomeRedirect} />
-        <IonPage id="main">
-          <Switch>
+        <IonRouterOutlet id="user">{User}</IonRouterOutlet>
+        <RequiresLogin userModel={userModel}>
+          <Menu userModel={userModel} />
+          <IonRouterOutlet id="main">
+            <Route exact path="/" component={HomeRedirect} />
             <Route path="/home" component={Home} />
-            <IonRouterOutlet>
-              {Survey}
-              {Info}
-              {User}
-              {Settings}
-            </IonRouterOutlet>
-          </Switch>
-        </IonPage>
+            {Info}
+            {Survey}
+            {Settings}
+          </IonRouterOutlet>
+        </RequiresLogin>
       </IonReactRouter>
     </SplashScreenRequired>
   </IonApp>

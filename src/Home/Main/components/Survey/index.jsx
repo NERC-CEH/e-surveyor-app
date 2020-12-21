@@ -8,10 +8,11 @@ import {
   IonItemOptions,
   IonItemOption,
   IonBadge,
-  IonAvatar,
   IonLabel,
+  IonIcon,
 } from '@ionic/react';
 import './styles.scss';
+import routeIcon from 'Home/route.svg';
 
 function deleteSurvey(sample) {
   alert({
@@ -68,9 +69,7 @@ const Survey = ({ sample }) => {
   return (
     <IonItemSliding className="survey-list-item">
       <IonItem routerLink={href} detail>
-        <IonAvatar>
-          <img src="/images/route.svg" />
-        </IonAvatar>
+        <IonIcon icon={routeIcon} color="primary" />
         <IonLabel>{getSampleInfo()}</IonLabel>
       </IonItem>
 

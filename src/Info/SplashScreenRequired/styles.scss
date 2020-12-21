@@ -20,7 +20,7 @@ $dark-brown: #4d380a;
   }
 
   .custom-shape-divider-bottom-1593438501 .shape-fill {
-    fill: #fff6e4;
+    fill: rgb(255, 240, 216);
   }
 
   /** For mobile devices **/
@@ -75,9 +75,9 @@ $dark-brown: #4d380a;
       color: $dark-brown;
     }
   }
-
+ 
   ion-slide {
-    background: #fff6e4;
+    background: rgb(255, 240, 216);
   }
 
   ion-slide .message {
