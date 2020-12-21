@@ -3,7 +3,7 @@ import React from 'react';
 import { Main } from '@apps';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
-import { IonSpinner } from '@ionic/react';
+import { IonSpinner, IonLabel } from '@ionic/react';
 import SpeciesCard from 'common/Components/SpeciesCard';
 import './styles.scss';
 
@@ -24,16 +24,49 @@ class Component extends React.Component {
   showPlantList = () => {
     const { species } = this.props;
 
-    if (!species.attrs.species) {
+    if (!species.attrs.species || !species.attrs.species.length) {
       return null;
     }
 
     return species.attrs.species.map(this.getSpeciesCard);
   };
 
-  render() {
+  getIDLoader = () => {
     const { species } = this.props;
     const { identifying } = species.identification;
+
+    if (!identifying) {
+      const hasNoSpecies =
+        !species.attrs.species || !species.attrs.species.length;
+      if (hasNoSpecies) {
+        return (
+          <div className="identifying centered">
+            <IonLabel>
+              <h2>
+                <b>Sorry, we couldn't find any species 😕</b>
+              </h2>
+            </IonLabel>
+          </div>
+        );
+      }
+
+      return null;
+    }
+
+    return (
+      <div className="identifying centered">
+        <IonLabel>
+          <h2>
+            <b>Identifying...</b>
+          </h2>
+        </IonLabel>
+        <IonSpinner color="primary" />
+      </div>
+    );
+  };
+
+  render() {
+    const { species } = this.props;
 
     return (
       <>
@@ -44,7 +77,7 @@ class Component extends React.Component {
             alt="species"
           />
 
-          {identifying && <IonSpinner className="centered" />}
+          {this.getIDLoader()}
 
           {this.showPlantList()}
         </Main>

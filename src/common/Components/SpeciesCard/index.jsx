@@ -86,7 +86,7 @@ class SpeciesCard extends React.Component {
   static propTypes = {
     species: PropTypes.object.isRequired,
     onSelect: PropTypes.func,
-    selectedSpeciesByUser: PropTypes.bool.isRequired,
+    selectedSpeciesByUser: PropTypes.bool,
   };
 
   state = {
