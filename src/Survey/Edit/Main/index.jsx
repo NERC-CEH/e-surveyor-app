@@ -6,12 +6,10 @@ import {
   IonLabel,
   IonIcon,
   IonList,
-  IonButton,
   IonSpinner,
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
-  isPlatform,
   NavContext,
 } from '@ionic/react';
 import { Main, alert, MenuAttrItem, LongPressButton } from '@apps';
@@ -22,7 +20,6 @@ import {
   closeCircle,
   bookmarkOutline,
   locationOutline,
-  searchCircleOutline,
   earth,
   leaf,
 } from 'ionicons/icons';
@@ -252,35 +249,6 @@ class Component extends React.Component {
   };
 
   getNewImageButton = photoSelectHybrid => {
-    if (!isPlatform('hybrid')) {
-      return (
-        <>
-          <IonButton className="img-picker" type="submit" expand="block">
-            <IonIcon slot="start" icon={camera} size="large" />
-            Plant
-            <input
-              type="file"
-              accept="image/*"
-              onChange={this.onPhotoSelectBrowser}
-              multiple
-            />
-          </IonButton>
-
-          <IonButton
-            color="primary"
-            id="add"
-            className="img-picker"
-            type="submit"
-            expand="block"
-            onClick={this.navigateToSearch}
-          >
-            <IonIcon slot="start" icon={searchCircleOutline} size="large" />
-            Search
-          </IonButton>
-        </>
-      );
-    }
-
     return (
       <LongPressButton
         color="secondary"
