@@ -38,11 +38,6 @@ const Survey = ({ sample }) => {
   const href = `/survey/${sample.cid}/edit`;
 
   function getSampleInfo() {
-    const [
-      selectedSeedmixSpecies,
-      totalSeedmixSpecies,
-    ] = sample.getSeedmixUse();
-
     const showSpeciesLength = sample.samples.length;
 
     return (
@@ -53,12 +48,6 @@ const Survey = ({ sample }) => {
           <span>
             Species: <IonBadge>{showSpeciesLength}</IonBadge>
           </span>
-          {totalSeedmixSpecies && (
-            <span>
-              Seedmix:{' '}
-              <IonBadge>{`${selectedSeedmixSpecies.length}/${totalSeedmixSpecies.length}`}</IonBadge>
-            </span>
-          )}
         </div>
       </div>
     );
