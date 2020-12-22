@@ -63,6 +63,8 @@ class AppSample extends Sample {
       Authorization: `Bearer ${await userModel.getAccessToken()}`,
     });
 
+    this.survey = pointSurveyConfig;
+
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
   }
@@ -81,17 +83,15 @@ class AppSample extends Sample {
   };
 
   getSurvey() {
-    const survey = pointSurveyConfig;
-
-    if (!survey) {
+    if (!this.survey) {
       throw new Error('No survey config was found');
     }
 
     if (this.parent) {
-      return survey.smp;
+      return this.survey.smp;
     }
 
-    return survey;
+    return this.survey;
   }
 
   getSpecies() {
