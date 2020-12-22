@@ -12,10 +12,11 @@ import {
 import Sample from 'sample';
 import Occurrence from 'occurrence';
 import { observer } from 'mobx-react';
-import { IonButton, NavContext } from '@ionic/react';
+import { IonButton, NavContext, IonIcon } from '@ionic/react';
 import config from 'config';
 import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
+import { checkmarkCircleOutline } from 'ionicons/icons';
 import identifyImage from 'common/services/plantNet';
 import i18n from 'i18next';
 import Main from './Main';
@@ -180,9 +181,14 @@ class Controller extends React.Component {
     const isDisabled = sample.isDisabled();
 
     const uploadButton = isDisabled ? (
-      <IonButton onClick={this.navToReport}>See Report</IonButton>
+      <IonButton onClick={this.navToReport} color="secondary" fill="solid">
+        See Report
+      </IonButton>
     ) : (
-      <IonButton onClick={this.onUpload}>Upload</IonButton>
+      <IonButton onClick={this.onUpload} color="secondary" fill="solid">
+        <IonIcon icon={checkmarkCircleOutline} slot="start" />
+        Finish
+      </IonButton>
     );
 
     return (

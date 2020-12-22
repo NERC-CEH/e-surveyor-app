@@ -180,3 +180,8 @@ ion-item.locked {
 .menu-attr-item.item-disabled {
   opacity: 0.7 !important;
 }
+
+ion-header ion-toolbar ion-button[fill='solid'] {
+  --padding-end: 15px;
+  --padding-start: 15px;
+}
