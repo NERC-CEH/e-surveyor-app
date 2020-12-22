@@ -297,6 +297,10 @@ class Component extends React.Component {
     appModel.save();
   };
 
+  componentDidMount() {
+    this.showFirstSurveyTip();
+  }
+
   render() {
     const { sample, photoSelect, isDisabled } = this.props;
 
@@ -308,8 +312,6 @@ class Component extends React.Component {
 
     return (
       <Main>
-        {this.showFirstSurveyTip()}
-
         <IonList lines="full">
           <MenuAttrItem
             routerLink={`${baseURL}/name`}
