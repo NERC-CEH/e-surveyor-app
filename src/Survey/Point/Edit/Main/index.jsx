@@ -308,7 +308,7 @@ class Component extends React.Component {
 
     const prettyGridRef = <GridRefValue sample={sample} />;
 
-    const baseURL = `/survey/${sample.cid}/edit`;
+    const baseURL = `/survey/${sample.cid}`;
 
     return (
       <Main>

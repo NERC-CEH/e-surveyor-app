@@ -35,7 +35,7 @@ function deleteSurvey(sample) {
 }
 
 const Survey = ({ sample }) => {
-  const href = `/survey/${sample.cid}/edit`;
+  const href = `/survey/${sample.cid}`;
 
   function getSampleInfo() {
     const showSpeciesLength = sample.samples.length;

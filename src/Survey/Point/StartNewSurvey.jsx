@@ -27,7 +27,7 @@ function StartNewSurvey({ match, survey }) {
 
     const url = match.url.replace('/new', '');
 
-    context.navigate(`${url}/${sample.cid}/edit`, 'none', 'replace');
+    context.navigate(`${url}/${sample.cid}`, 'none', 'replace');
   };
 
   const pickDraftOrCreateSampleWrap = () => createSample(); // effects don't like async
