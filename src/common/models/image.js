@@ -75,6 +75,10 @@ export default class AppMedia extends Media {
     return Capacitor.convertFileSrc(`${path}/${name}`);
   }
 
+  isIdentifying() {
+    return this.identification.identifying;
+  }
+
   // eslint-disable-next-line class-methods-use-this
   validateRemote() {
     return null;

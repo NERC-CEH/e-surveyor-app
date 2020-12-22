@@ -231,8 +231,14 @@ const survey = {
     return sample;
   },
 
-  verify(attrs) {
+  verify(attrs, sample) {
     try {
+      const id = sample.isIdentifying();
+
+      Yup.boolean()
+        .oneOf([false], 'Is still identifying')
+        .validateSync(id, { abortEarly: false });
+
       const transectSchema = Yup.object().shape({
         location: verifyLocationSchema,
       });

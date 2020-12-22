@@ -104,6 +104,20 @@ class AppSample extends Sample {
     return occ.attrs.taxon;
   }
 
+  isIdentifying() {
+    if (!this.parent) {
+      const identifying = s => s.isIdentifying();
+      return this.samples.some(identifying);
+    }
+
+    const [occ] = this.occurrences;
+    if (!occ || !occ.media[0]) {
+      return false;
+    }
+
+    return occ.media[0].isIdentifying();
+  }
+
   setSpecies(species) {
     if (!this.parent) {
       throw new Error('Parent does not exist');

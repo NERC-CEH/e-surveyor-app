@@ -114,7 +114,7 @@ class Controller extends React.Component {
   };
 
   onUpload = async () => {
-    const { sample, userModel } = this.props;
+    const { sample, userModel, history } = this.props;
 
     const invalids = sample.validateRemote();
 
@@ -155,16 +155,20 @@ class Controller extends React.Component {
       }
     }
 
-    sample.saveRemote();
-    this.context.navigate('/home/surveys', 'root');
-  };
+    await loader.show({
+      message: i18n.t('Uploading your survey...'),
+    });
 
-  componentDidUpdate(prevProps) {
-    const { sample, history } = this.props;
-    if (prevProps.sample.metadata.synced_on !== sample.metadata.synced_on) {
+    try {
+      await sample.saveRemote();
+
       history.push(`/survey/${sample.cid}/report`);
+    } catch (e) {
+      // do nothing
     }
-  }
+    // this.context.navigate('/home/surveys', 'root');
+    loader.hide();
+  };
 
   render() {
     const { appModel, match, sample } = this.props;
