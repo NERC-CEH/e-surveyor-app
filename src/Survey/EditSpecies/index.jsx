@@ -8,7 +8,11 @@ function EditSpecies({ subSample, match }) {
   return (
     <Page id="species-profile">
       <Header title="Species" />
-      <Main sample={subSample} match={match} />
+      <Main
+        sample={subSample}
+        match={match}
+        isDisabled={subSample.isDisabled()}
+      />
     </Page>
   );
 }

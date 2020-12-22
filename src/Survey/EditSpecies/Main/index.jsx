@@ -14,12 +14,21 @@ class MainComponent extends React.Component {
   static propTypes = {
     sample: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    isDisabled: PropTypes.bool,
   };
 
   getSpeciesCard = sp => {
+    const { isDisabled } = this.props;
+
     const onSelectWrap = () => this.setSpeciesAsMain(sp);
 
-    return <SpeciesCard key={sp.score} species={sp} onSelect={onSelectWrap} />;
+    return (
+      <SpeciesCard
+        key={sp.score}
+        species={sp}
+        onSelect={!isDisabled ? onSelectWrap : null}
+      />
+    );
   };
 
   getTaxon = sp => {
@@ -59,7 +68,11 @@ class MainComponent extends React.Component {
   };
 
   speciesAddButton = () => {
-    const { match } = this.props;
+    const { match, isDisabled } = this.props;
+
+    if (isDisabled) {
+      return null;
+    }
 
     const navigateToSearch = () => this.context.navigate(`${match.url}/taxon`);
 

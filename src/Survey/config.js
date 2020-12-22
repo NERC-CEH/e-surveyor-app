@@ -1,3 +1,5 @@
+import { date, Sample, Occurrence } from '@apps';
+import * as Yup from 'yup';
 import seedmixData from 'common/data/remote/seedmix';
 
 const getSeedMixGroups = () => {
@@ -51,25 +53,60 @@ const getSeedMix = modal => {
   return [notRecorded, ...seedMixes];
 };
 
+const fixedLocationSchema = Yup.object().shape({
+  latitude: Yup.number().required(),
+  longitude: Yup.number().required(),
+});
+
+const validateLocation = val => {
+  if (!val) {
+    return false;
+  }
+  fixedLocationSchema.validateSync(val);
+  return true;
+};
+
+export const verifyLocationSchema = Yup.mixed().test(
+  'location',
+  'Please select your location.',
+  validateLocation
+);
+
+const dateAttr = {
+  type: 'date',
+  isValid: val => val && val.toString() !== 'Invalid Date',
+  max: () => new Date(),
+  remote: {
+    id: 'date',
+    values: d => date.print(d),
+  },
+};
+
+const locationAttr = {
+  remote: {
+    id: 'entered_sref',
+    values(location) {
+      return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
+        location.longitude
+      ).toFixed(7)}`;
+    },
+  },
+};
+
 const survey = {
-  id: -1,
+  id: 597, // -1 this is dev still
   name: 'point', // transects will be 'trail'
   label: 'Point',
 
   attrs: {
+    date: dateAttr,
+
+    location: locationAttr,
+
     name: {
       label: 'Survey Name',
       type: 'textarea',
       info: 'You can change your survey name here.',
-    },
-
-    location: {
-      id: 'entered_sref',
-      values(location) {
-        return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
-          location.longitude
-        ).toFixed(7)}`;
-      },
     },
 
     seedmixgroup: {
@@ -83,6 +120,7 @@ const survey = {
         }
       },
       options: getSeedMixGroups(),
+      remote: { id: 1503 },
     },
 
     seedmix: {
@@ -90,25 +128,22 @@ const survey = {
       type: 'radio',
       info: 'Please indicate the seedmix you have used.',
       options: getSeedMix,
+      remote: { id: 1504 },
     },
   },
 
   smp: {
     attrs: {
-      location: {
-        id: 'entered_sref',
-        values(location) {
-          return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
-            location.longitude
-          ).toFixed(7)}`;
-        },
-      },
+      date: dateAttr,
+
+      location: locationAttr,
     },
 
-    create(AppSample, Occurrence, photo) {
+    create(AppSample, AppOccurrence, photo) {
       const sample = new AppSample({
         metadata: {
           survey: survey.name,
+          survey_id: survey.id,
         },
 
         attrs: {
@@ -118,7 +153,7 @@ const survey = {
 
       sample.startGPS();
 
-      const occurrence = survey.smp.occ.create(Occurrence, photo);
+      const occurrence = survey.smp.occ.create(AppOccurrence, photo);
       sample.occurrences.push(occurrence);
 
       return sample;
@@ -126,13 +161,18 @@ const survey = {
 
     occ: {
       attrs: {
-        taxon: null,
+        taxon: {
+          id: 'taxa_taxon_list_id',
+          values(taxon) {
+            return taxon.warehouseId;
+          },
+        },
       },
 
       verify() {},
 
-      create(Occurrence, photo) {
-        const occ = new Occurrence({
+      create(AppOccurrence, photo) {
+        const occ = new AppOccurrence({
           attrs: {
             taxon: null,
           },
@@ -144,13 +184,39 @@ const survey = {
 
         return occ;
       },
+
+      getSubmission(sample, ...args) {
+        const submission = Occurrence.prototype.getSubmission.apply(
+          sample,
+          args
+        );
+
+        if (!submission.values.taxa_taxon_list_id) {
+          // for non-UK species
+          return null;
+        }
+
+        return submission;
+      },
+    },
+
+    getSubmission(sample, ...args) {
+      const submission = Sample.prototype.getSubmission.apply(sample, args);
+
+      if (!submission.occurrences.length) {
+        // for non-UK species
+        return null;
+      }
+
+      return submission;
     },
   },
 
-  create(Sample) {
-    const sample = new Sample({
+  create(AppSample) {
+    const sample = new AppSample({
       metadata: {
         survey: survey.name,
+        survey_id: survey.id,
         saved: false,
       },
 
@@ -163,6 +229,40 @@ const survey = {
     sample.startGPS();
 
     return sample;
+  },
+
+  verify(attrs) {
+    try {
+      const transectSchema = Yup.object().shape({
+        location: verifyLocationSchema,
+      });
+
+      transectSchema.validateSync(attrs, { abortEarly: false });
+    } catch (attrError) {
+      return attrError;
+    }
+
+    return null;
+  },
+
+  getSubmission(sample, ...args) {
+    const submission = Sample.prototype.getSubmission.apply(sample, args);
+
+    const subSamples = submission.samples;
+    submission.samples = [];
+
+    const removeSubSamplesLayerIfNoLocation = subSample => {
+      const locationIsMissing = !subSample.values.entered_sref;
+      if (locationIsMissing) {
+        submission.occurrences.push(subSample.occurrences[0]);
+        return;
+      }
+      submission.samples.push(subSample);
+    };
+
+    subSamples.forEach(removeSubSamplesLayerIfNoLocation);
+
+    return submission;
   },
 };
 

@@ -7,7 +7,16 @@ export default class AppOccurrence extends Occurrence {
   }
 
   keys = () => {
-    return { ...Occurrence.keys, ...this.getSurvey().attrs };
+    const getRemoteProps = attrs => {
+      const extractRemoteIfExists = (agg, key) => ({
+        ...agg,
+        [key]: attrs[key].remote || attrs[key],
+      });
+
+      return Object.keys(attrs).reduce(extractRemoteIfExists, {});
+    };
+
+    return { ...Occurrence.keys, ...getRemoteProps(this.getSurvey().attrs) };
   };
 
   getSurvey() {
@@ -23,14 +32,13 @@ export default class AppOccurrence extends Occurrence {
     return this.parent.isDisabled();
   }
 
-  getSubmission() {
-    if (this.getSurvey().name === 'area') {
-      if (!this.attrs.count) {
-        return [];
-      }
+  getSubmission(...args) {
+    const survey = this.getSurvey();
+    if (survey.getSubmission) {
+      return survey.getSubmission(this, ...args);
     }
 
-    return super.getSubmission();
+    return super.getSubmission(...args);
   }
 
   getTaxonName() {

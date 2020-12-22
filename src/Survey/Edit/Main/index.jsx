@@ -60,16 +60,10 @@ class Component extends React.Component {
 
   static propTypes = {
     sample: PropTypes.object.isRequired,
-    onPhotoAdd: PropTypes.func.isRequired,
-    photoSelectHybrid: PropTypes.func.isRequired,
+    photoSelect: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     appModel: PropTypes.object.isRequired,
-  };
-
-  onPhotoSelectBrowser = e => {
-    const onPhotoAddWrap = photo => this.props.onPhotoAdd(photo);
-
-    e.target.files.forEach(onPhotoAddWrap);
+    isDisabled: PropTypes.bool,
   };
 
   showIdentificationStatuses = () => {
@@ -114,7 +108,7 @@ class Component extends React.Component {
   };
 
   getProfile = subSample => {
-    const { match } = this.props;
+    const { match, isDisabled } = this.props;
     const species = subSample.getSpecies();
     const [photo] = subSample.occurrences[0].media;
 
@@ -203,11 +197,13 @@ class Component extends React.Component {
             />
           )}
         </IonItem>
-        <IonItemOptions side="end">
-          <IonItemOption color="danger" onClick={deletePhotoWrap}>
-            Delete
-          </IonItemOption>
-        </IonItemOptions>
+        {!isDisabled && (
+          <IonItemOptions side="end">
+            <IonItemOption color="danger" onClick={deletePhotoWrap}>
+              Delete
+            </IonItemOption>
+          </IonItemOptions>
+        )}
       </IonItemSliding>
     );
   };
@@ -248,7 +244,13 @@ class Component extends React.Component {
     this.context.navigate(`${match.url}/taxon`);
   };
 
-  getNewImageButton = photoSelectHybrid => {
+  getNewImageButton = photoSelect => {
+    const { isDisabled } = this.props;
+
+    if (isDisabled) {
+      return <br />;
+    }
+
     return (
       <LongPressButton
         color="secondary"
@@ -257,7 +259,7 @@ class Component extends React.Component {
         className="img-picker"
         type="submit"
         expand="block"
-        onClick={photoSelectHybrid}
+        onClick={photoSelect}
       >
         <IonIcon slot="start" icon={camera} size="large" />
         Plant
@@ -296,7 +298,7 @@ class Component extends React.Component {
   };
 
   render() {
-    const { sample, photoSelectHybrid } = this.props;
+    const { sample, photoSelect, isDisabled } = this.props;
 
     const { seedmixgroup, seedmix, name } = sample.attrs;
 
@@ -314,6 +316,7 @@ class Component extends React.Component {
             icon={bookmarkOutline}
             label="Name"
             value={name}
+            disabled={isDisabled}
           />
 
           <MenuAttrItem
@@ -322,6 +325,7 @@ class Component extends React.Component {
             icon={locationOutline}
             label="Location"
             skipValueTranslation
+            disabled={isDisabled}
           />
 
           <IonItemDivider mode="ios">Seedmix</IonItemDivider>
@@ -330,6 +334,7 @@ class Component extends React.Component {
             icon={Seeds}
             label="Supplier"
             value={seedmixgroup}
+            disabled={isDisabled}
           />
 
           <MenuAttrItem
@@ -338,11 +343,11 @@ class Component extends React.Component {
             label="Name"
             value={seedmix}
             styles="opacity:0.8"
-            disabled={!seedmixgroup}
+            disabled={!seedmixgroup || isDisabled}
           />
         </IonList>
 
-        {this.getNewImageButton(photoSelectHybrid)}
+        {this.getNewImageButton(photoSelect)}
 
         {this.getSpeciesProfiles()}
       </Main>

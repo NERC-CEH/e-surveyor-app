@@ -160,6 +160,10 @@ const config = {
         ),
         // compulsory env. variables
         APP_SENTRY_KEY: JSON.stringify(process.env.APP_SENTRY_KEY || ''),
+        APP_BACKEND_INDICIA_URL: JSON.stringify(
+          process.env.APP_BACKEND_INDICIA_URL || ''
+        ),
+        APP_BACKEND_URL: JSON.stringify(process.env.APP_BACKEND_URL || ''),
 
         // https://github.com/webpack-contrib/karma-webpack/issues/316
         SAUCE_LABS: JSON.stringify(process.env.SAUCE_LABS),

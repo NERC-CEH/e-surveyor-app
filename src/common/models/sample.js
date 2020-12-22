@@ -1,4 +1,6 @@
-import { Sample } from '@apps';
+import { Sample, validateRemoteModel } from '@apps';
+import userModel from 'userModel';
+import config from 'config';
 import GPSExtension from './sampleGPSExt';
 import surveyConfig from '../../Survey/config';
 import seedmixData from '../data/seedmix';
@@ -50,15 +52,32 @@ class AppSample extends Sample {
 
   store = modelStore;
 
+  validateRemote = validateRemoteModel;
+
   constructor(...args) {
     super(...args);
+
+    this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
+    // eslint-disable-next-line
+    this.remote.headers = async () => ({
+      Authorization: `Bearer ${await userModel.getAccessToken()}`,
+    });
 
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
   }
 
   keys = () => {
-    return { ...Sample.keys, ...this.getSurvey().attrs };
+    const getRemoteProps = attrs => {
+      const extractRemoteIfExists = (agg, key) => ({
+        ...agg,
+        [key]: attrs[key].remote || attrs[key],
+      });
+
+      return Object.keys(attrs).reduce(extractRemoteIfExists, {});
+    };
+
+    return { ...Sample.keys, ...getRemoteProps(this.getSurvey().attrs) };
   };
 
   getSurvey() {
@@ -177,6 +196,20 @@ class AppSample extends Sample {
     }
 
     return !!this.metadata.synced_on;
+  }
+
+  async saveRemote() {
+    await super.saveRemote();
+    return this.save();
+  }
+
+  getSubmission(...args) {
+    const survey = this.getSurvey();
+    if (survey.getSubmission) {
+      return survey.getSubmission(this, ...args);
+    }
+
+    return super.getSubmission(...args);
   }
 }
 

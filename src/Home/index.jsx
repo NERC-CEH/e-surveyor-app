@@ -12,7 +12,7 @@ import {
   IonHeader,
   NavContext,
 } from '@ionic/react';
-import { ModalHeader, Page } from '@apps';
+import { ModalHeader, Page, device, toast } from '@apps';
 import savedSamples from 'savedSamples';
 import appModel from 'appModel';
 import ImageHelp from 'helpers/image';
@@ -24,6 +24,8 @@ import './styles.scss';
 import './flower.svg';
 import './route.svg';
 import './transect.svg';
+
+const { warn } = toast;
 
 class Component extends React.Component {
   static contextType = NavContext;
@@ -46,6 +48,11 @@ class Component extends React.Component {
   );
 
   identifyPhoto = async () => {
+    if (!device.isOnline()) {
+      warn('Looks like you are offline!');
+      return;
+    }
+
     const photo = await ImageHelp.getImage();
     if (!photo) {
       return;

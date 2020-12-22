@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header, alert } from '@apps';
+import { Page, Header, alert, toast, device } from '@apps';
 import Sample from 'sample';
 import Occurrence from 'occurrence';
 import { observer } from 'mobx-react';
@@ -10,6 +10,8 @@ import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
 import Main from './Main';
+
+const { warn } = toast;
 
 const { POSSIBLE_THRESHOLD } = config;
 
@@ -41,7 +43,12 @@ class Controller extends React.Component {
     }
   };
 
-  photoSelectHybrid = async () => {
+  photoSelect = async () => {
+    if (!device.isOnline()) {
+      warn('Looks like you are offline!');
+      return;
+    }
+
     const image = await ImageHelp.getImage();
 
     if (!image) {
@@ -118,7 +125,8 @@ class Controller extends React.Component {
           appModel={appModel}
           url={match.url}
           onPhotoAdd={this.onPhotoAdd}
-          photoSelectHybrid={this.photoSelectHybrid}
+          photoSelect={this.photoSelect}
+          isDisabled={sample.isDisabled()}
         />
       </Page>
     );

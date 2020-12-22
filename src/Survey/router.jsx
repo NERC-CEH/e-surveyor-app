@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteWithModels, AttrPage as Attr, ModelLocation } from '@apps';
 import savedSamples from 'savedSamples';
 import appModel from 'appModel';
+import userModel from 'userModel';
 import config from 'config';
 import StartNewSurvey from './StartNewSurvey';
 import Edit from './Edit';
@@ -17,7 +18,12 @@ const EditWrap = props => (
 );
 
 const ReportWrap = props => (
-  <Report savedSamples={savedSamples} appModel={appModel} {...props} />
+  <Report
+    savedSamples={savedSamples}
+    appModel={appModel}
+    userModel={userModel}
+    {...props}
+  />
 );
 
 const ModelLocationWrap = props => (
