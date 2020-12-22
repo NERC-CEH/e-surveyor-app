@@ -178,7 +178,7 @@ class Controller extends React.Component {
       return null;
     }
 
-    const isDisabled = sample.isDisabled();
+    const isDisabled = sample.isUploaded();
 
     const uploadButton = isDisabled ? (
       <IonButton onClick={this.navToReport} color="secondary" fill="solid">

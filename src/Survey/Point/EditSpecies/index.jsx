@@ -11,7 +11,7 @@ function EditSpecies({ subSample, match }) {
       <Main
         sample={subSample}
         match={match}
-        isDisabled={subSample.isDisabled()}
+        isDisabled={subSample.isUploaded()}
       />
     </Page>
   );

@@ -176,10 +176,6 @@ class AppSample extends Sample {
 
     return [selectedSeedmixSpecies, selectedSeedmix];
   }
-
-  isDisabled() {
-    return this.isUploaded();
-  }
 }
 
 export default AppSample;

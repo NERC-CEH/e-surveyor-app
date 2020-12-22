@@ -1,4 +1,4 @@
-import { date, Sample, Occurrence } from '@apps';
+import { date } from '@apps';
 import * as Yup from 'yup';
 import seedmixData from 'common/data/remote/seedmix';
 
