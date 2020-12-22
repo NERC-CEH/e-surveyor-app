@@ -1,4 +1,4 @@
-import { Sample, validateRemoteModel } from '@apps';
+import { Sample } from '@apps';
 import userModel from 'userModel';
 import config from 'config';
 import pointSurveyConfig from 'Survey/Point/config';
@@ -52,8 +52,6 @@ class AppSample extends Sample {
 
   store = modelStore;
 
-  validateRemote = validateRemoteModel;
-
   constructor(...args) {
     super(...args);
 
@@ -67,31 +65,6 @@ class AppSample extends Sample {
 
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
-  }
-
-  keys = () => {
-    const getRemoteProps = attrs => {
-      const extractRemoteIfExists = (agg, key) => ({
-        ...agg,
-        [key]: attrs[key].remote || attrs[key],
-      });
-
-      return Object.keys(attrs).reduce(extractRemoteIfExists, {});
-    };
-
-    return { ...Sample.keys, ...getRemoteProps(this.getSurvey().attrs) };
-  };
-
-  getSurvey() {
-    if (!this.survey) {
-      throw new Error('No survey config was found');
-    }
-
-    if (this.parent) {
-      return this.survey.smp;
-    }
-
-    return this.survey;
   }
 
   getSpecies() {
@@ -205,25 +178,7 @@ class AppSample extends Sample {
   }
 
   isDisabled() {
-    if (this.parent) {
-      return this.parent.isDisabled();
-    }
-
-    return !!this.metadata.synced_on;
-  }
-
-  async saveRemote() {
-    await super.saveRemote();
-    return this.save();
-  }
-
-  getSubmission(...args) {
-    const survey = this.getSurvey();
-    if (survey.getSubmission) {
-      return survey.getSubmission(this, ...args);
-    }
-
-    return super.getSubmission(...args);
+    return this.isUploaded();
   }
 }
 

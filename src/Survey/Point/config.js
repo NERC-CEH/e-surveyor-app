@@ -186,14 +186,9 @@ const survey = {
         return occ;
       },
 
-      getSubmission(sample, ...args) {
-        const submission = Occurrence.prototype.getSubmission.apply(
-          sample,
-          args
-        );
-
+      modifySubmission(submission) {
+        // for non-UK species
         if (!submission.values.taxa_taxon_list_id) {
-          // for non-UK species
           return null;
         }
 
@@ -201,11 +196,9 @@ const survey = {
       },
     },
 
-    getSubmission(sample, ...args) {
-      const submission = Sample.prototype.getSubmission.apply(sample, args);
-
+    modifySubmission(submission) {
+      // for non-UK species
       if (!submission.occurrences.length) {
-        // for non-UK species
         return null;
       }
 
@@ -252,11 +245,9 @@ const survey = {
     return null;
   },
 
-  getSubmission(sample, ...args) {
-    const submission = Sample.prototype.getSubmission.apply(sample, args);
-
+  modifySubmission(submission) {
     const subSamples = submission.samples;
-    submission.samples = [];
+    submission.samples = []; // eslint-disable-line
 
     const removeSubSamplesLayerIfNoLocation = subSample => {
       const locationIsMissing = !subSample.values.entered_sref;
