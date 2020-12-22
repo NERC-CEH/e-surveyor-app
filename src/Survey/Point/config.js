@@ -107,6 +107,7 @@ const survey = {
       label: 'Survey Name',
       type: 'textarea',
       info: 'You can change your survey name here.',
+      remote: { id: 1505 },
     },
 
     seedmixgroup: {
