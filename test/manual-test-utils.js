@@ -69,12 +69,17 @@ testing.GPS = {
 
     this.mock();
 
-    const coords = track.features[0].geometry.coordinates;
-    for (let i = 0; i < coords.length; i++) {
-      const [longitude, latitude] = coords[i];
+    const onlyLines = feat => feat.geometry.type === 'LineString';
+    const lines = track.features.filter(onlyLines);
 
-      this.update({ latitude, longitude, accuracy: 1 });
-      await new Promise(r => setTimeout(r, 2000)); //eslint-disable-line
+    for (let lineId = 0; lineId < lines.length; lineId++) {
+      const coords = lines[lineId].geometry.coordinates;
+      for (let i = 0; i < coords.length; i++) {
+        const [longitude, latitude] = coords[i];
+
+        this.update({ latitude, longitude, accuracy: 1 });
+        await new Promise(r => setTimeout(r, 1000)); //eslint-disable-line
+      }
     }
 
     console.log('⌖ GPS track simulation complete');
