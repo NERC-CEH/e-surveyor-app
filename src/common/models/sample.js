@@ -1,8 +1,8 @@
 import { Sample, validateRemoteModel } from '@apps';
 import userModel from 'userModel';
 import config from 'config';
+import pointSurveyConfig from 'Survey/Point/config';
 import GPSExtension from './sampleGPSExt';
-import surveyConfig from '../../Survey/config';
 import seedmixData from '../data/seedmix';
 import plantInteractions from '../data/plant_interactions';
 import { modelStore } from './store';
@@ -81,7 +81,7 @@ class AppSample extends Sample {
   };
 
   getSurvey() {
-    const survey = surveyConfig;
+    const survey = pointSurveyConfig;
 
     if (!survey) {
       throw new Error('No survey config was found');

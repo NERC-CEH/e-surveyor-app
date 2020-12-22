@@ -1,6 +1,6 @@
 import Sample from 'sample';
 import Occurrence from 'occurrence';
-import config from 'Survey/config';
+import config from 'Survey/Point/config';
 import seedmixData from 'common/data/seedmix';
 import { getMissingSeedmixSpecies } from '..';
 
