@@ -14,16 +14,16 @@ import survey from './config';
 const baseURL = '/survey';
 
 const EditWrap = props => (
-  <Edit appModel={appModel} savedSamples={savedSamples} {...props} />
-);
-
-const ReportWrap = props => (
-  <Report
-    savedSamples={savedSamples}
+  <Edit
     appModel={appModel}
+    savedSamples={savedSamples}
     userModel={userModel}
     {...props}
   />
+);
+
+const ReportWrap = props => (
+  <Report savedSamples={savedSamples} appModel={appModel} {...props} />
 );
 
 const ModelLocationWrap = props => (

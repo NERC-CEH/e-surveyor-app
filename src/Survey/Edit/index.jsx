@@ -1,14 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header, alert, toast, device } from '@apps';
+import {
+  Page,
+  Header,
+  alert,
+  toast,
+  device,
+  showInvalidsMessage,
+  loader,
+} from '@apps';
 import Sample from 'sample';
 import Occurrence from 'occurrence';
 import { observer } from 'mobx-react';
-import { IonButton } from '@ionic/react';
+import { IonButton, NavContext } from '@ionic/react';
 import config from 'config';
 import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
+import i18n from 'i18next';
 import Main from './Main';
 
 const { warn } = toast;
@@ -17,10 +26,13 @@ const { POSSIBLE_THRESHOLD } = config;
 
 @observer
 class Controller extends React.Component {
+  static contextType = NavContext;
+
   static propTypes = {
     match: PropTypes.object,
     history: PropTypes.object,
     appModel: PropTypes.object.isRequired,
+    userModel: PropTypes.object.isRequired,
     sample: PropTypes.object.isRequired,
   };
 
@@ -101,6 +113,59 @@ class Controller extends React.Component {
     history.push(`/survey/${sample.cid}/report`);
   };
 
+  onUpload = async () => {
+    const { sample, userModel } = this.props;
+
+    const invalids = sample.validateRemote();
+
+    if (invalids) {
+      showInvalidsMessage(invalids);
+      return;
+    }
+
+    if (!device.isOnline()) {
+      warn(i18n.t('Looks like you are offline!'));
+      return;
+    }
+
+    const isLoggedIn = !!userModel.attrs.id;
+    if (!isLoggedIn) {
+      warn(i18n.t('Please log in first to upload the records.'));
+      return;
+    }
+
+    if (!userModel.attrs.verified) {
+      await loader.show({
+        message: i18n.t('Please wait...'),
+      });
+
+      try {
+        await userModel.refreshProfile();
+      } catch (e) {
+        // do nothing
+      }
+
+      loader.hide();
+
+      if (!userModel.attrs.verified) {
+        warn(
+          i18n.t("Sorry, your account hasn't been verified yet or is blocked.")
+        );
+        return;
+      }
+    }
+
+    sample.saveRemote();
+    this.context.navigate('/home/surveys', 'root');
+  };
+
+  componentDidUpdate(prevProps) {
+    const { sample, history } = this.props;
+    if (prevProps.sample.metadata.synced_on !== sample.metadata.synced_on) {
+      history.push(`/survey/${sample.cid}/report`);
+    }
+  }
+
   render() {
     const { appModel, match, sample } = this.props;
 
@@ -108,8 +173,12 @@ class Controller extends React.Component {
       return null;
     }
 
-    const uploadButton = (
+    const isDisabled = sample.isDisabled();
+
+    const uploadButton = isDisabled ? (
       <IonButton onClick={this.navToReport}>See Report</IonButton>
+    ) : (
+      <IonButton onClick={this.onUpload}>Upload</IonButton>
     );
 
     return (
@@ -126,7 +195,7 @@ class Controller extends React.Component {
           url={match.url}
           onPhotoAdd={this.onPhotoAdd}
           photoSelect={this.photoSelect}
-          isDisabled={sample.isDisabled()}
+          isDisabled={isDisabled}
         />
       </Page>
     );
