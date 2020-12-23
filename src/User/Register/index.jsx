@@ -32,11 +32,11 @@ async function onRegister(userModel, details, onSuccess) {
     userModel.save();
 
     alert({
-      header: 'Welcome aboard!',
+      header: 'Welcome aboard 🎉',
       message: (
         <>
           <T>
-            Before submitting any records please check your email and click on
+            Before starting any surveys please check your email and click on
             the verification link.
           </T>
         </>
