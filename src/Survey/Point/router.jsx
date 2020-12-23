@@ -4,14 +4,14 @@ import savedSamples from 'savedSamples';
 import appModel from 'appModel';
 import userModel from 'userModel';
 import config from 'config';
-import StartNewSurvey from './StartNewSurvey';
+import StartNewSurvey from 'Survey/Components/StartNewSurvey';
 import Edit from './Edit';
 import Report from './Report';
 import EditSpecies from './EditSpecies';
 import TaxonSearch from './TaxonSearch';
 import survey from './config';
 
-const baseURL = '/survey';
+const baseURL = '/survey/point';
 
 const EditWrap = props => (
   <Edit

@@ -80,13 +80,13 @@ class Component extends React.Component {
     <IonFooter>
       <div className="inner-wrap">
         <div onClick={this.identifyPhoto}>
-          <IonTabButton routerLink="/survey">
+          <IonTabButton>
             <IonIcon src="/images/flower.svg" />
             <IonLabel>Plant ID</IonLabel>
           </IonTabButton>
         </div>
 
-        <IonButton routerLink="/survey">
+        <IonButton routerLink="/survey/point">
           <IonIcon src="/images/route.svg" />
         </IonButton>
 

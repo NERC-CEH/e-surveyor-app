@@ -302,13 +302,13 @@ class Component extends React.Component {
   }
 
   render() {
-    const { sample, photoSelect, isDisabled } = this.props;
+    const { match, sample, photoSelect, isDisabled } = this.props;
 
     const { seedmixgroup, seedmix, name } = sample.attrs;
 
     const prettyGridRef = <GridRefValue sample={sample} />;
 
-    const baseURL = `/survey/${sample.cid}`;
+    const baseURL = match.url;
 
     return (
       <Main>

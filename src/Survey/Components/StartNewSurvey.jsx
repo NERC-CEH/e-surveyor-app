@@ -1,18 +1,14 @@
 import React, { useEffect, useContext } from 'react';
 import { NavContext } from '@ionic/react';
-import appModel from 'appModel';
 import Sample from 'sample';
 import savedSamples from 'savedSamples';
 import { withRouter } from 'react-router';
 
-async function getNewSample(survey, draftIdKey) {
+async function getNewSample(survey) {
   const sample = await survey.create(Sample);
   await sample.save();
 
   savedSamples.push(sample);
-
-  appModel.attrs[draftIdKey] = sample.cid;
-  await appModel.save();
 
   return sample;
 }
@@ -20,10 +16,8 @@ async function getNewSample(survey, draftIdKey) {
 function StartNewSurvey({ match, survey }) {
   const context = useContext(NavContext);
 
-  const draftIdKey = `draftId:${survey.name}`;
-
   const createSample = async () => {
-    const sample = await getNewSample(survey, draftIdKey);
+    const sample = await getNewSample(survey);
 
     const url = match.url.replace('/new', '');
 
