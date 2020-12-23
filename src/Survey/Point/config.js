@@ -1,6 +1,7 @@
 import { date } from '@apps';
 import * as Yup from 'yup';
 import seedmixData from 'common/data/remote/seedmix';
+import icon from 'common/images/pointIcon.svg';
 
 const getSeedMixGroups = () => {
   const addValueToObject = seedMixGroup => {
@@ -96,6 +97,7 @@ const locationAttr = {
 const survey = {
   id: 597, // -1 this is dev still
   name: 'point',
+  icon,
 
   attrs: {
     date: dateAttr,

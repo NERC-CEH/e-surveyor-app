@@ -12,7 +12,6 @@ import {
   IonIcon,
 } from '@ionic/react';
 import './styles.scss';
-import routeIcon from 'Home/route.svg';
 
 function deleteSurvey(sample) {
   alert({
@@ -56,10 +55,12 @@ const Survey = ({ sample }) => {
 
   const deleteSurveyWrap = () => deleteSurvey(sample);
 
+  const surveyIcon = survey.icon;
+
   return (
     <IonItemSliding className="survey-list-item">
       <IonItem routerLink={href} detail>
-        <IonIcon icon={routeIcon} color="primary" />
+        <IonIcon icon={surveyIcon} color="primary" />
         <IonLabel>{getSampleInfo()}</IonLabel>
       </IonItem>
 

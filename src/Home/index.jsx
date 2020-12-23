@@ -18,12 +18,12 @@ import appModel from 'appModel';
 import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
+import pointIcon from 'common/images/pointIcon.svg';
+import transectIcon from 'common/images/transectIcon.svg';
 import SpeciesProfile from './components/SpeciesProfile';
 import Main from './Main';
 import './styles.scss';
 import './flower.svg';
-import './route.svg';
-import './transect.svg';
 
 const { warn } = toast;
 
@@ -87,12 +87,12 @@ class Component extends React.Component {
         </div>
 
         <IonButton routerLink="/survey/point">
-          <IonIcon src="/images/route.svg" />
+          <IonIcon icon={pointIcon} />
         </IonButton>
 
         <div onClick={this.startTransect}>
           <IonTabButton>
-            <IonIcon src="/images/transect.svg" />
+            <IonIcon icon={transectIcon} />
             <IonLabel>Transect</IonLabel>
           </IonTabButton>
         </div>
