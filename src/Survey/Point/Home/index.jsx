@@ -86,10 +86,8 @@ class Controller extends React.Component {
     sample.save();
   };
 
-  navToReport = async () => {
-    const { sample } = this.props;
-    const { samples } = this.props.sample;
-    const { history } = this.props;
+  onUpload = async () => {
+    const { sample, userModel, history, match } = this.props;
 
     let hasValidSpecies = false;
 
@@ -100,7 +98,7 @@ class Controller extends React.Component {
       }
     };
 
-    samples.forEach(showReportIfScoreHigherThanThreshold);
+    sample.samples.forEach(showReportIfScoreHigherThanThreshold);
 
     if (!hasValidSpecies) {
       alert({
@@ -110,12 +108,6 @@ class Controller extends React.Component {
       });
       return;
     }
-
-    history.push(`/survey/${sample.cid}/report`);
-  };
-
-  onUpload = async () => {
-    const { sample, userModel, history } = this.props;
 
     const invalids = sample.validateRemote();
 
@@ -163,11 +155,11 @@ class Controller extends React.Component {
     try {
       await sample.saveRemote();
 
-      history.push(`/survey/${sample.cid}/report`);
+      history.push(`${match.url}/report`);
     } catch (e) {
       // do nothing
     }
-    // this.context.navigate('/home/surveys', 'root');
+
     loader.hide();
   };
 
@@ -181,7 +173,11 @@ class Controller extends React.Component {
     const isDisabled = sample.isUploaded();
 
     const uploadButton = isDisabled ? (
-      <IonButton onClick={this.navToReport} color="secondary" fill="solid">
+      <IonButton
+        color="secondary"
+        fill="solid"
+        routerLink={`${match.url}/report`}
+      >
         See Report
       </IonButton>
     ) : (

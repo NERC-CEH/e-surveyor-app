@@ -14,17 +14,10 @@ import survey from './config';
 const baseURL = '/survey/point';
 
 const HomeWrap = props => (
-  <Home
-    appModel={appModel}
-    savedSamples={savedSamples}
-    userModel={userModel}
-    {...props}
-  />
+  <Home appModel={appModel} userModel={userModel} {...props} />
 );
 
-const ReportWrap = props => (
-  <Report savedSamples={savedSamples} appModel={appModel} {...props} />
-);
+const ReportWrap = props => <Report appModel={appModel} {...props} />;
 
 const ModelLocationWrap = props => (
   <ModelLocation
