@@ -5,7 +5,7 @@ import appModel from 'appModel';
 import userModel from 'userModel';
 import config from 'config';
 import StartNewSurvey from 'Survey/Components/StartNewSurvey';
-import Edit from './Edit';
+import Home from './Home';
 import Report from './Report';
 import EditSpecies from './EditSpecies';
 import TaxonSearch from './TaxonSearch';
@@ -13,8 +13,8 @@ import survey from './config';
 
 const baseURL = '/survey/point';
 
-const EditWrap = props => (
-  <Edit
+const HomeWrap = props => (
+  <Home
     appModel={appModel}
     savedSamples={savedSamples}
     userModel={userModel}
@@ -38,7 +38,7 @@ const ModelLocationWrap = props => (
 
 const routes = [
   [`${baseURL}`, StartNewSurvey.with(survey), true],
-  [`${baseURL}/:smpId`, EditWrap],
+  [`${baseURL}/:smpId`, HomeWrap],
   [`${baseURL}/:smpId/:attr`, Attr],
   [`${baseURL}/:smpId/map`, ModelLocationWrap],
   [`${baseURL}/:smpId/taxon`, TaxonSearch],
