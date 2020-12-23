@@ -95,8 +95,7 @@ const locationAttr = {
 
 const survey = {
   id: 597, // -1 this is dev still
-  name: 'point', // transects will be 'trail'
-  label: 'Point',
+  name: 'point',
 
   attrs: {
     date: dateAttr,
