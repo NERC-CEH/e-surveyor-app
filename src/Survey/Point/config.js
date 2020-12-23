@@ -210,7 +210,6 @@ const survey = {
       metadata: {
         survey: survey.name,
         survey_id: survey.id,
-        saved: false,
       },
 
       attrs: {
