@@ -4,21 +4,20 @@ import PropTypes from 'prop-types';
 import { Page, Header } from '@apps';
 import Main from './Main';
 
-function EditSpecies({ subSample, match }) {
+function EditSpecies({ subSample, subSubSample, match }) {
+  const sample = subSubSample || subSample;
+  
   return (
     <Page id="species-profile">
       <Header title="Species" />
-      <Main
-        sample={subSample}
-        match={match}
-        isDisabled={subSample.isUploaded()}
-      />
+      <Main sample={sample} match={match} isDisabled={subSample.isUploaded()} />
     </Page>
   );
 }
 
 EditSpecies.propTypes = {
   subSample: PropTypes.object.isRequired,
+  subSubSample: PropTypes.object,
   match: PropTypes.object.isRequired,
 };
 

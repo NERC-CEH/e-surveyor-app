@@ -2,12 +2,18 @@ import { Sample } from '@apps';
 import userModel from 'userModel';
 import config from 'config';
 import pointSurveyConfig from 'Survey/Point/config';
+import transectSurveyConfig from 'Survey/Transect/config';
 import GPSExtension from './sampleGPSExt';
 import seedmixData from '../data/seedmix';
 import plantInteractions from '../data/plant_interactions';
 import { modelStore } from './store';
 import Occurrence from './occurrence';
 import Media from './image';
+
+const surveyConfig = {
+  point: pointSurveyConfig,
+  transect: transectSurveyConfig,
+};
 
 class AppSample extends Sample {
   static fromJSON(json) {
@@ -61,7 +67,7 @@ class AppSample extends Sample {
       Authorization: `Bearer ${await userModel.getAccessToken()}`,
     });
 
-    this.survey = pointSurveyConfig;
+    this.survey = surveyConfig[this.metadata.survey];
 
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
@@ -175,6 +181,17 @@ class AppSample extends Sample {
     const selectedSeedmixSpecies = species.filter(seedmixIncludesSpecies);
 
     return [selectedSeedmixSpecies, selectedSeedmix];
+  }
+
+  getPrettyName() {
+    if (!this.parent) {
+      return '';
+    }
+
+    const byId = ({ cid }) => cid === this.cid;
+    const index = this.parent.samples.findIndex(byId);
+
+    return `Quadrat #${index + 1}`;
   }
 }
 

@@ -1,3 +1,4 @@
 import PointRoutes from './Point/router';
+import TransectRoutes from './Transect/router';
 
-export default [...PointRoutes];
+export default [...PointRoutes, ...TransectRoutes];

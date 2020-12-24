@@ -1,0 +1,53 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Page, Header } from '@apps';
+import { IonButton, NavContext, IonIcon } from '@ionic/react';
+import { arrowForwardCircleOutline } from 'ionicons/icons';
+import { observer } from 'mobx-react';
+import Main from './Main';
+
+@observer
+class Controller extends React.Component {
+  static contextType = NavContext;
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    sample: PropTypes.object.isRequired,
+  };
+
+  onDone = () => {
+    const { match, sample } = this.props;
+
+    if (!sample.attrs.type) {
+      // TODO: show warning
+      return;
+    }
+
+    sample.metadata.completedDetails = true;
+    sample.save();
+
+    const url = match.url.replace('/details', '');
+    this.context.navigate(url, 'none', 'replace');
+  };
+
+  render() {
+    const { match, sample } = this.props;
+    const { completedDetails } = sample.metadata;
+
+    const doneButton = !completedDetails && (
+      <IonButton onClick={this.onDone} color="secondary" fill="solid">
+        Next
+        <IonIcon icon={arrowForwardCircleOutline} slot="end" />
+      </IonButton>
+    );
+
+    return (
+      <Page id="transect-details">
+        <Header title="Transect" rightSlot={doneButton} />
+        <Main match={match} sample={sample} isDisabled={sample.isUploaded()} />
+      </Page>
+    );
+  }
+}
+
+export default Controller;

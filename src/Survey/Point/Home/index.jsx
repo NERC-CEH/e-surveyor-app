@@ -12,7 +12,7 @@ import {
 import Sample from 'sample';
 import Occurrence from 'occurrence';
 import { observer } from 'mobx-react';
-import { IonButton, NavContext, IonIcon } from '@ionic/react';
+import { IonButton, IonIcon } from '@ionic/react';
 import config from 'config';
 import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
@@ -27,8 +27,6 @@ const { POSSIBLE_THRESHOLD } = config;
 
 @observer
 class Controller extends React.Component {
-  static contextType = NavContext;
-
   static propTypes = {
     match: PropTypes.object,
     history: PropTypes.object,
@@ -62,16 +60,12 @@ class Controller extends React.Component {
       return;
     }
 
-    const image = await ImageHelp.getImage();
+    const photo = await ImageHelp.getImage();
 
-    if (!image) {
+    if (!photo) {
       return;
     }
 
-    this.onPhotoAdd(image);
-  };
-
-  onPhotoAdd = async photo => {
     const { sample } = this.props;
     const dataDirPath = config.dataPath;
 
@@ -199,7 +193,6 @@ class Controller extends React.Component {
           sample={sample}
           appModel={appModel}
           url={match.url}
-          onPhotoAdd={this.onPhotoAdd}
           photoSelect={this.photoSelect}
           isDisabled={isDisabled}
         />

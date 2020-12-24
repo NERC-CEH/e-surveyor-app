@@ -35,7 +35,10 @@ function deleteSurvey(sample) {
 
 const Survey = ({ sample }) => {
   const survey = sample.getSurvey();
-  const href = `/survey/${survey.name}/${sample.cid}`;
+  let href = `/survey/${survey.name}/${sample.cid}`;
+  if (survey.name ==='transect' && !sample.metadata.completedDetails) {
+    href+= '/details'
+  }
 
   function getSampleInfo() {
     const showSpeciesLength = sample.samples.length;

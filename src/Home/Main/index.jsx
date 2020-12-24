@@ -26,7 +26,9 @@ class Component extends React.Component {
     return savedSamples.slice().sort(byDate);
   }
 
-  getList = surveys => {
+  getList = () => {
+    const surveys = this.getSamplesList();
+
     if (!surveys.length) {
       return (
         <IonList lines="none">
@@ -51,12 +53,10 @@ class Component extends React.Component {
   };
 
   render() {
-    const surveys = this.getSamplesList();
-
     return (
       <Main className="ion-padding" slot="fixed">
         <img src={logo} alt="" />
-        {this.getList(surveys)}
+        {this.getList()}
       </Main>
     );
   }

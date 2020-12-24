@@ -12,6 +12,8 @@ export { default as ModelLocation } from '@bit/flumens.apps.model-location-map';
 export { default as Gallery } from '@bit/flumens.apps.gallery';
 export { default as LongPressButton } from '@bit/flumens.apps.long-press-button';
 export { default as InputWithValidation } from '@bit/flumens.apps.input-with-validation';
+export { default as MenuNote } from '@bit/flumens.apps.menu-note-item';
+export { default as PhotoPicker } from '@bit/flumens.apps.photo-picker';
 
 export { default as device } from '@bit/flumens.apps.device';
 export { default as alert } from '@bit/flumens.apps.helpers.alert';

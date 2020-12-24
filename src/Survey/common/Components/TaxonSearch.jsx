@@ -15,6 +15,7 @@ class Controller extends React.Component {
   static propTypes = {
     sample: PropTypes.object.isRequired,
     subSample: PropTypes.object,
+    subSubSample: PropTypes.object,
   };
 
   transformUKSIToAppTaxon = taxon => {
@@ -31,24 +32,27 @@ class Controller extends React.Component {
   };
 
   onSpeciesSelected = async taxon => {
-    const { sample, subSample } = this.props;
+    const { sample, subSample, subSubSample } = this.props;
+    const survey = sample.getSurvey();
 
-    if (!subSample) {
-      const survey = sample.getSurvey();
+    const model = survey.name === 'point' ? sample : subSample;
+    const subModel = survey.name === 'point' ? subSample : subSubSample;
 
-      const newSubSample = survey.smp.create(Sample, Occurrence);
+    if (!subModel) {
+      const modelSurvey = model.getSurvey();
+      const newSubSample = modelSurvey.smp.create(Sample, Occurrence);
 
-      sample.samples.push(newSubSample);
+      model.samples.push(newSubSample);
 
       newSubSample.setSpecies(this.transformUKSIToAppTaxon(taxon));
 
-      sample.save();
+      model.save();
       this.context.goBack();
       return;
     }
 
-    subSample.setSpecies(this.transformUKSIToAppTaxon(taxon));
-    sample.save();
+    subModel.setSpecies(this.transformUKSIToAppTaxon(taxon));
+    model.save();
 
     this.context.goBack();
   };

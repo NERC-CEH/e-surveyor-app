@@ -1,0 +1,40 @@
+#transect-home ion-content {
+  ion-button {
+    margin-top: 40px;
+  }
+  .quadrats-list {
+    background: transparent;
+
+    ion-item {
+      --padding-start: 9px;
+      --padding-bottom: 5px;
+      --padding-top: 5px;
+      opacity: 0.8;
+
+      .photo {
+        position: relative;
+        margin: 0 8px 2px 0;
+        height: 60px;
+        min-width: 60px;
+        max-width: 60px;
+        background-color: #f8f2e6;
+        border-radius: 5px;
+        overflow: hidden;
+        text-align: center;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+
+        ion-icon {
+          width: 50%;
+          height: 100%;
+          margin: 0 auto;
+          color: #b38b39;
+        }
+      }
+    }
+  }
+}

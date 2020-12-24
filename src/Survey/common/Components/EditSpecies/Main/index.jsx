@@ -93,6 +93,7 @@ class MainComponent extends React.Component {
 
   showSpeciesMainPhoto = () => {
     const { sample } = this.props;
+console.log(this.props);
 
     const image = sample.occurrences[0].media[0];
 

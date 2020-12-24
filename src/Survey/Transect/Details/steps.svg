@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <rect id="rect-6" width="14" height="14" x="0" y="0"/>
+    <mask id="mask-7" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="60" height="60" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-6"/>
+    </mask>
+    <rect id="rect-8" width="14" height="14" x="28" y="0"/>
+    <mask id="mask-9" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="60" height="60" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-8"/>
+    </mask>
+    <rect id="rect-10" width="14" height="14" x="14" y="23"/>
+    <mask id="mask-11" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="60" height="60" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-10"/>
+    </mask>
+    <rect id="rect-12" width="14" height="14" x="46" y="46"/>
+    <mask id="mask-13" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="60" height="60" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-12"/>
+    </mask>
+    <rect id="rect-14" width="14" height="14" x="18" y="46"/>
+    <mask id="mask-15" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="60" height="60" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-14"/>
+    </mask>
+  </defs>
+  <g>
+    <g>
+      <path fill="rgb(0,0,0)" fill-rule="evenodd" d="M31.92016983 54C31.43231201 57.3866005 28.51903915 60 25 60c-3.85938072 0-7-3.14014053-7-7s3.14061928-7 7-7c3.51903915 0 6.43231201 2.6133995 6.92016983 6H42.5859375l-1.29296875-1.29296875 1.4140625-1.4140625 3 3C45.90233994 52.48828125 46 52.74414063 46 53c0 .25585938-.09766006.51171875-.29296875.70703125l-3 3-1.4140625-1.4140625L42.5859375 54H31.92016983zM30 53c0-2.75683975-2.24316025-5-5-5s-5 2.24316025-5 5 2.24316025 5 5 5 5-2.24316025 5-5z"/>
+      <path fill="rgb(0,0,0)" fill-rule="evenodd" d="M60 53c0 3.85985947-3.14062119 7-7 7s-7-3.14014053-7-7 3.14062119-7 7-7 7 3.14014053 7 7zm-2 0c0-2.75683975-2.24316025-5-5-5s-5 2.24316025-5 5 2.24316025 5 5 5 5-2.24316025 5-5z"/>
+      <path fill="rgb(0,0,0)" fill-rule="evenodd" d="M14.07989883 29C14.56774903 25.6133995 17.48096085 23 21 23c3.85938072 0 7 3.14014053 7 7s-3.14061928 7-7 7c-3.51903915 0-6.43225098-2.6133995-6.92010117-6H12.5C6.70995998 31 2 35.71044922 2 41.5S6.70995998 52 12.5 52h2.08594131l-1.2929716-1.29296875 1.41406154-1.4140625 2.9999981 3C17.90233993 52.48828125 18 52.74414063 18 53c0 .25585938-.09766006.51171875-.29297066.70703125l-2.99999809 3-1.41406155-1.4140625L14.58594131 54H12.5C5.60741997 54 0 48.39257812 0 41.5 0 34.60742187 5.60741997 29 12.5 29h1.57989883zM16 30c0 2.75683975 2.24316025 5 5 5s5-2.24316025 5-5-2.24316025-5-5-5-5 2.24316025-5 5z"/>
+      <path fill="rgb(0,0,0)" fill-rule="evenodd" d="M23.29297066 4.70702982l1.41405868-1.41406012 3 3.00000096C27.90233994 6.48827934 28 6.74414063 28 7c0 .25585938-.09766006.51172066-.29297066.70702934l-3 3.00000096-1.41405868-1.4140606L24.5859394 8H13.92016983C13.4323101 11.38659954 10.51904011 14 7 14c-3.85937977 0-7-3.14013958-7-7 0-3.85985994 3.14062023-7 7-7 3.5190401 0 6.4323101 2.61339998 6.92016983 6h10.66576958l-1.29296875-1.29297018zM2 7c0 2.75683975 2.24316025 5 5 5s5-2.24316025 5-5-2.24316025-5-5-5-5 2.24316025-5 5z"/>
+      <path fill="rgb(0,0,0)" fill-rule="evenodd" d="M47.5 6C54.39257813 6 60 11.60741997 60 18.5S54.39257812 31 47.5 31H31.41405869l1.29297256 1.29296875-1.4140625 1.4140625-2.9999981-3C28.09766007 30.51171875 28 30.25585937 28 30c0-.25585938.09766006-.51172066.29297066-.70702934l2.99999809-3 1.4140625 1.41405868L31.41405869 29H47.5C53.29003906 29 58 24.28955078 58 18.5 58 12.71045017 53.29003906 8 47.5 8h-5.57983017C41.43231201 11.38659954 38.51903915 14 35 14c-3.85937881 0-7-3.14013958-7-7 0-3.85985994 3.14062119-7 7-7 3.51903915 0 6.43231201 2.61339998 6.92016983 6H47.5zM30 7c0 2.75683975 2.24316025 5 5 5s5-2.24316025 5-5-2.24316025-5-5-5-5 2.24316025-5 5z"/>
+    </g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#rect-6"/>
+      <use fill-opacity="0" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="4" mask="url(#mask-7)" xlink:href="#rect-6"/>
+    </g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#rect-8"/>
+      <use fill-opacity="0" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="4" mask="url(#mask-9)" xlink:href="#rect-8"/>
+    </g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#rect-10"/>
+      <use fill-opacity="0" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="4" mask="url(#mask-11)" xlink:href="#rect-10"/>
+    </g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#rect-12"/>
+      <use fill-opacity="0" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="4" mask="url(#mask-13)" xlink:href="#rect-12"/>
+    </g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#rect-14"/>
+      <use fill-opacity="0" stroke="rgb(0,0,0)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="4" mask="url(#mask-15)" xlink:href="#rect-14"/>
+    </g>
+  </g>
+</svg>

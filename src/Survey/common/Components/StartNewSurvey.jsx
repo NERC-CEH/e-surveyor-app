@@ -19,9 +19,12 @@ function StartNewSurvey({ match, survey }) {
   const createSample = async () => {
     const sample = await getNewSample(survey);
 
-    const url = match.url.replace('/new', '');
+    let url = `${match.url}/${sample.cid}`;
+    if (survey.name === 'transect') {
+      url += '/details';
+    }
 
-    context.navigate(`${url}/${sample.cid}`, 'none', 'replace');
+    context.navigate(url, 'none', 'replace');
   };
 
   const pickDraftOrCreateSampleWrap = () => createSample(); // effects don't like async

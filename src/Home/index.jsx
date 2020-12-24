@@ -73,7 +73,7 @@ class Component extends React.Component {
   };
 
   startTransect = () => {
-    this.context.navigate('/info/mockup-survey');
+    this.context.navigate('/survey/transect');
   };
 
   getFooter = () => (

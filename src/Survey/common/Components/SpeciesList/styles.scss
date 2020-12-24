@@ -1,0 +1,56 @@
+.plant-photo-profile {
+  position: relative;
+  margin: 0 8px 2px 0;
+  height: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  background-color: #f8f2e6;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  ion-icon {
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    color: #b38b39;
+  }
+
+  
+}
+
+ion-label.identifying {
+  color: red;
+  font-style: italic;
+}
+
+ion-spinner.identifying {
+  width: 15px;
+  margin-right: -17px;
+  opacity: 0.4;
+}
+
+.species-list-item {
+  ion-item {
+    --detail-icon-opacity: 0.8;
+    --padding-start: 9px;
+  }
+
+  ion-item.id-green {
+    --detail-icon-color: green;
+  }
+
+  ion-item.id-amber {
+    --detail-icon-color: orange;
+  }
+
+  ion-item.id-red {
+    --detail-icon-color: red;
+  }
+}
