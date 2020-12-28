@@ -51,7 +51,27 @@ const exec = grunt => ({
   },
   build_ios: {
     command() {
-      return `cd ios/App && xcodebuild -workspace App.xcworkspace -scheme App archive`;
+      return `cd ios/App && 
+              rm -rf exports && 
+              xcodebuild -workspace App.xcworkspace -scheme App archive -archivePath "exports/App" &&
+              xcodebuild -exportArchive -archivePath "exports/App.xcarchive" -exportPath "./exports" -exportOptionsPlist "./export.plist" -allowProvisioningUpdates`;
+    },
+
+    stdout: false,
+    stdin: true,
+  },
+  deploy_ios: {
+    command() {
+      if (!process.env.ITUNES_USER_EMAIL) {
+        throw new Error('ITUNES_USER_EMAIL env variable is missing.');
+      }
+
+      const pass = grunt.config('itunes-app-password');
+      if (!pass) {
+        throw new Error('iTunes App password is missing.');
+      }
+
+      return `cd ios/App && xcrun altool --upload-app --type ios --file "exports/App.ipa" -u "${process.env.ITUNES_USER_EMAIL}" -p "${pass}"`;
     },
 
     stdout: false,
@@ -146,6 +166,17 @@ const prompt = {
       ],
     },
   },
+  itunes_app_pass: {
+    options: {
+      questions: [
+        {
+          name: 'itunes-app-password',
+          type: 'password',
+          message: 'Please enter iTunes App password:',
+        },
+      ],
+    },
+  },
 };
 
 function init(grunt) {
@@ -171,6 +202,8 @@ const initWrap = grunt => {
     'prompt:keystore',
     'exec:build_android',
     'exec:build_ios',
+    'prompt:itunes_app_pass',
+    'exec:deploy_ios',
 
     'checklist',
     'exec:create_commit',

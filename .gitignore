@@ -14,3 +14,4 @@ coverage
 .vercel
 .gradle
 /backend
+ios/App/exports

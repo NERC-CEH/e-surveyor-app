@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>compileBitcode</key>
+    <true/>
+
+    <key>provisioningProfiles</key>
+    <dict>
+      <key>uk.ac.ceh.esurveyor</key>
+      <string>uk.ac.ceh.esurveyor</string>
+    </dict>
+
+    <key>method</key>
+    <string>app-store</string>
+
+    <key>signingStyle</key>
+    <string>manual</string>
+
+    <key>teamID</key>
+    <string>X4GARM6E7K</string>
+  </dict>
+</plist>
