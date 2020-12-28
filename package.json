@@ -1,7 +1,6 @@
 {
   "name": "e-surveyor",
   "version": "1.0.0",
-  "build": "4",
   "scripts": {
     "start": "node server.js",
     "start:dev": "webpack-dev-server --config webpack.config.js --content-base build --port 8000",

@@ -2,6 +2,9 @@ require('dotenv').config({ silent: true }); // get local environment variables f
 const fs = require('fs');
 const pkg = require('./package.json');
 
+const VERSION = pkg.version;
+const BUILD = process.env.BUILD_NUMBER || process.env.BITRISE_BUILD_NUMBER || 1;
+
 const exec = grunt => ({
   build: {
     command: 'npm run clean && NODE_ENV=production npm run build',
@@ -111,44 +114,25 @@ const exec = grunt => ({
     stdout: false,
     stdin: true,
   },
-  create_commit: {
-    command() {
-      return `git add . &&
-              git commit -m "Release ${pkg.version}-${pkg.build}" && 
-              git tag v${pkg.version}-${pkg.build}`;
-    },
+  create_tag: {
+    command: `git tag v${VERSION}-${BUILD}`,
 
     stdout: false,
     stdin: true,
   },
 });
 
-const updateVersionAndBuild = ({ version, build = 1 }) => {
+const setVersionAndBuild = () => {
   function replaceAll(str, find, replace) {
     // node doesn't yet support replaceAll
     return str.replace(new RegExp(find, 'g'), replace);
   }
 
-  // Package
-  let file = fs.readFileSync('./package.json', 'utf8');
-  if (pkg.version !== version) {
-    file = file.replace(pkg.version, version);
-    file = file.replace(/"build": "\d+"/i, '"build": "1"');
-    pkg.version = version;
-    pkg.build = 1;
-  } else {
-    file = file.replace(/"build": "\d+"/i, `"build": "${build}"`);
-    pkg.build = build;
-  }
-  fs.writeFileSync('./package.json', file, 'utf8');
-
   // Android
-  const versionCode = replaceAll(version, /\./, '') + build;
-  file = fs.readFileSync('./android/app/build.gradle', 'utf8');
-  file = file.replace(/versionName "(\d\.)+\d"/i, `versionName "${version}"`);
+  const versionCode = replaceAll(VERSION, /\./, '') + BUILD;
+  let file = fs.readFileSync('./android/app/build.gradle', 'utf8');
+  file = file.replace(/versionName "(\d\.)+\d"/i, `versionName "${VERSION}"`);
   file = file.replace(/versionCode \d+/i, `versionCode ${versionCode}`);
-  pkg.version = version;
-  pkg.build = build;
   fs.writeFileSync('./android/app/build.gradle', file, 'utf8');
 
   // iOS
@@ -156,39 +140,17 @@ const updateVersionAndBuild = ({ version, build = 1 }) => {
   file = replaceAll(
     file,
     /MARKETING_VERSION = (\d\.)+\d;/i,
-    `MARKETING_VERSION = ${version};`
+    `MARKETING_VERSION = ${VERSION};`
   );
   file = replaceAll(
     file,
     /CURRENT_PROJECT_VERSION = \d+/i,
-    `CURRENT_PROJECT_VERSION = ${build}`
+    `CURRENT_PROJECT_VERSION = ${BUILD}`
   );
-  pkg.version = version;
-  pkg.build = build;
   fs.writeFileSync('./ios/App/App.xcodeproj/project.pbxproj', file, 'utf8');
 };
 
 const prompt = {
-  version: {
-    options: {
-      questions: [
-        {
-          config: 'version',
-          type: 'input',
-          message: 'Enter new app version?',
-          default: pkg.version,
-        },
-        {
-          config: 'build',
-          type: 'input',
-          message: 'Enter new app build version?',
-          default: pkg.build,
-          when: ({ version }) => pkg.version === version,
-        },
-      ],
-      then: updateVersionAndBuild,
-    },
-  },
   keystore: {
     options: {
       questions: [
@@ -227,21 +189,23 @@ const initWrap = grunt => {
   init(grunt);
 
   grunt.registerTask('default', [
-    'prompt:version',
     'exec:build',
 
     'exec:init',
     'exec:resources',
 
+    'set_version_and_build',
     'prompt:keystore',
     'exec:build_android',
     'exec:build_ios',
     'prompt:itunes_app_pass',
-    'exec:deploy_ios',
+    // 'exec:deploy_ios',
 
+    'exec:create_tag',
     'checklist',
-    'exec:create_commit',
   ]);
+
+  grunt.registerTask('set_version_and_build', setVersionAndBuild);
 
   const registerTaskWrap = () => {
     const Reset = '\x1b[0m';
@@ -251,7 +215,7 @@ const initWrap = grunt => {
 
     const changelog = fs.readFileSync('./CHANGELOG.md', 'utf8');
 
-    const versionExistsInChangelog = changelog.includes(pkg.version);
+    const versionExistsInChangelog = changelog.includes(VERSION);
     if (!versionExistsInChangelog) {
       console.log(FgYellow);
       console.log('WARN:');

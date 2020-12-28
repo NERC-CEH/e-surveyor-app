@@ -48,6 +48,11 @@ workflows:
         - app_password: "$ITUNES_CONNECT_APP_PASS"
         - itunescon_user: "$ITUNES_CONNECT_USER"
     - cache-push@2: {}
+    - git-tag-project-version-and-build-number@1:
+        inputs:
+        - bitrise_tag_format: v_VERSION_-_BUILD_
+        - use_lightweight_tag: 'yes'
+        - bitrise_tag_info_plist_path: ios/App/App/Info.plist
 app:
   envs:
   - opts:

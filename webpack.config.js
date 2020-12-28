@@ -146,7 +146,7 @@ const config = {
       'process.env': {
         // package.json variables
         APP_BUILD: JSON.stringify(
-          process.env.TRAVIS_BUILD_ID || pkg.build || new Date().getTime()
+          process.env.BUILD_NUMBER || process.env.BITRISE_BUILD_NUMBER || '1'
         ),
         APP_NAME: JSON.stringify(pkg.name), // no need to be an env value
         APP_VERSION: JSON.stringify(pkg.version), // no need to be an env value
