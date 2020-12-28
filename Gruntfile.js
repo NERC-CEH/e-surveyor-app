@@ -51,10 +51,43 @@ const exec = grunt => ({
   },
   build_ios: {
     command() {
+      const capacitorConf = require('./capacitor.config.json'); //eslint-disable-line
+
+      if (!process.env.ITUNES_TEAM_ID) {
+        throw new Error('ITUNES_TEAM_ID env variable is missing.');
+      }
+
+      const iosExportFlags = `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+          <dict>
+            <key>compileBitcode</key>
+            <true/>
+
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>${capacitorConf.appId}</key>
+              <string>${capacitorConf.appId}</string>
+            </dict>
+
+            <key>method</key>
+            <string>app-store</string>
+
+            <key>signingStyle</key>
+            <string>manual</string>
+
+            <key>teamID</key>
+            <string>${process.env.ITUNES_TEAM_ID}</string>
+          </dict>
+        </plist>
+        `;
+
       return `cd ios/App && 
               rm -rf exports && 
               xcodebuild -workspace App.xcworkspace -scheme App archive -archivePath "exports/App" &&
-              xcodebuild -exportArchive -archivePath "exports/App.xcarchive" -exportPath "./exports" -exportOptionsPlist "./export.plist" -allowProvisioningUpdates`;
+              echo '${iosExportFlags}' > exports/export.plist && 
+              xcodebuild -exportArchive -archivePath "exports/App.xcarchive" -exportPath "./exports" -exportOptionsPlist "./exports/export.plist" -allowProvisioningUpdates`;
     },
 
     stdout: false,
@@ -71,7 +104,8 @@ const exec = grunt => ({
         throw new Error('iTunes App password is missing.');
       }
 
-      return `cd ios/App && xcrun altool --upload-app --type ios --file "exports/App.ipa" -u "${process.env.ITUNES_USER_EMAIL}" -p "${pass}"`;
+      return `cd ios/App && 
+              xcrun altool --upload-app --type ios --file "exports/App.ipa" -u "${process.env.ITUNES_USER_EMAIL}" -p "${pass}"`;
     },
 
     stdout: false,
