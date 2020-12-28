@@ -4,12 +4,10 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: ios
 trigger_map:
 - push_branch: "*"
-  workflow: primary
+  workflow: ci
 workflows:
-  primary:
+  ci:
     steps:
-    - activate-ssh-key@4: {}
-    - git-clone@4: {}
     - cache-pull@2: {}
     - script@1:
         inputs:
@@ -40,7 +38,6 @@ workflows:
     - set-xcode-build-number@1:
         inputs:
         - plist_path: ios/App/App/Info.plist
-        - build_version: '3'
     - xcode-archive@3:
         inputs:
         - export_method: app-store
