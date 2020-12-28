@@ -5,8 +5,6 @@ project_type: ios
 trigger_map:
 - push_branch: "*"
   workflow: primary
-- pull_request_source_branch: "*"
-  workflow: primary
 workflows:
   primary:
     steps:
@@ -39,8 +37,19 @@ workflows:
     - recreate-user-schemes@1:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-    - xcode-archive@3: {}
+    - set-xcode-build-number@1:
+        inputs:
+        - plist_path: ios/App/App/Info.plist
+        - build_version: '3'
+    - xcode-archive@3:
+        inputs:
+        - export_method: app-store
     - deploy-to-bitrise-io@1: {}
+    - deploy-to-itunesconnect-application-loader@0:
+        inputs:
+        - password: "$ITUNES_CONNECT_PASS"
+        - app_password: "$ITUNES_CONNECT_APP_PASS"
+        - itunescon_user: "$ITUNES_CONNECT_USER"
     - cache-push@2: {}
 app:
   envs:
