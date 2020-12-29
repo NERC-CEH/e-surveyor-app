@@ -9,6 +9,8 @@ workflows:
   ci:
     steps:
     - cache-pull@2: {}
+
+    # Web
     - script@1:
         inputs:
         - content: |-
@@ -31,6 +33,20 @@ workflows:
             #!/usr/bin/env bash
 
             ./node_modules/.bin/grunt exec:build && ./node_modules/.bin/grunt exec:init && ./node_modules/.bin/grunt exec:resources
+    
+    # Android
+    - android-build@0:
+        inputs:
+        - module: app
+        - variant: release
+        - project_location: "$BITRISE_SOURCE_DIR/android"
+    - sign-apk@1:
+        inputs:
+        - debuggable_permitted: 'false'
+        - verbose_log: 'true'
+        - android_app: "$BITRISE_APK_PATH"
+    
+    # iOS 
     - certificate-and-profile-installer@1: {}
     - recreate-user-schemes@1:
         inputs:
