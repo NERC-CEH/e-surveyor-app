@@ -8,8 +8,6 @@ trigger_map:
 workflows:
   ci:
     steps:
-    - cache-pull@2: {}
-
     # Web
     - script@1:
         inputs:
@@ -66,7 +64,6 @@ workflows:
         - password: "$ITUNES_CONNECT_PASS"
         - app_password: "$ITUNES_CONNECT_APP_PASS"
         - itunescon_user: "$ITUNES_CONNECT_USER"
-    - cache-push@2: {}
     - git-tag-project-version-and-build-number@1:
         inputs:
         - bitrise_tag_format: v_VERSION_-_BUILD_
