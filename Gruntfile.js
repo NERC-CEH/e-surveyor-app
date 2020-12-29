@@ -129,10 +129,9 @@ const setVersionAndBuild = () => {
   }
 
   // Android
-  const versionCode = replaceAll(VERSION, /\./, '') + BUILD;
   let file = fs.readFileSync('./android/app/build.gradle', 'utf8');
   file = file.replace(/versionName "(\d\.)+\d"/i, `versionName "${VERSION}"`);
-  file = file.replace(/versionCode \d+/i, `versionCode ${versionCode}`);
+  file = file.replace(/versionCode \d+/i, `versionCode ${BUILD}`);
   fs.writeFileSync('./android/app/build.gradle', file, 'utf8');
 
   // iOS
