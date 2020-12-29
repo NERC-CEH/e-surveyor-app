@@ -11,14 +11,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - run: npm install
+      - uses: actions/setup-node@v1
+      - name: init bit.dev
+        run: |
+          echo "Adding bit.dev to npm registry"
+          npm config set @bit:registry https://node.bit.dev
+          npm config set //node.bit.dev/:_authToken ${BIT_TOKEN}
+          echo "Completed adding bit.dev to npm registry"
         env:
-          PLANT_NET_API_KEY: ${{ secrets.PLANT_NET_API_KEY }}
-          APP_SENTRY_KEY: ${{ secrets.APP_SENTRY_KEY }}
+          BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
+      - run: npm install
       - run: npm run test:acceptance
         env:
           PLANT_NET_API_KEY: ${{ secrets.PLANT_NET_API_KEY }}

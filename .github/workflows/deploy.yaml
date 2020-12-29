@@ -13,29 +13,32 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v19
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-          scope: ${{ secrets.VERCEL_TEAM_ID }}
-          vercel-args: '--prod'
-
-  acceptance-test:
-    needs: deploy
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '10.x'
-      - run: npm install
+      - uses: actions/setup-node@v1
+      - name: init bit.dev
+        run: |
+          echo "Adding bit.dev to npm registry"
+          npm config set @bit:registry https://node.bit.dev
+          npm config set //node.bit.dev/:_authToken ${BIT_TOKEN}
+          echo "Completed adding bit.dev to npm registry"
         env:
-          PLANT_NET_API_KEY: ${{ secrets.PLANT_NET_API_KEY }}
+          BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
+      - run: npm install
+      - run: npm run test
+      - run: npm run test:eslint
+        env:
           APP_SENTRY_KEY: ${{ secrets.APP_SENTRY_KEY }}
+          APP_MAPBOX_MAP_KEY: ${{ secrets.APP_MAPBOX_MAP_KEY }}
+          APP_BACKEND_CLIENT_ID: ${{ secrets.APP_BACKEND_CLIENT_ID }}
+
+      # TODO: needs fixing
+      # - uses: amondnet/vercel-action@v19
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+      #     scope: ${{ secrets.VERCEL_TEAM_ID }}
+      #     vercel-args: '--prod'
+      
       - run: npm run test:acceptance
         env:
           PLANT_NET_API_KEY: ${{ secrets.PLANT_NET_API_KEY }}
