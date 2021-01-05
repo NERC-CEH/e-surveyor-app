@@ -25,12 +25,12 @@ workflows:
         inputs:
         - cache_local_deps: 'true'
         - command: install
-    - script@1:
+    
+    # Web   
+    - npm@1:
         inputs:
-        - content: |
-            #!/usr/bin/env bash
-
-            ./node_modules/.bin/grunt exec:build && ./node_modules/.bin/grunt exec:init && ./node_modules/.bin/grunt exec:resources
+        - cache_local_deps: 'true'
+        - command: run build:production
     
     # Android
     - change-android-versioncode-and-versionname@1:
