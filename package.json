@@ -15,8 +15,7 @@
     "test:acceptance": "cd other && newman run postman_collection.json --bail --env-var plantnet_api_key=${PLANT_NET_API_KEY}",
     "fetch:data": "cd src/common/data && mkdir -p remote && node make.js",
     "fetch:species:data": "cd src/common/data/species && node make.js",
-    "fetch:species:commonNames": "cd src/common/data/commonNames && node make.js",
-    "bit:export": "eslint components --quiet --ext .jsx --ext .js && bit export flumens.apps -a -e"
+    "fetch:species:commonNames": "cd src/common/data/commonNames && node make.js"
   },
   "husky": {
     "hooks": {
@@ -93,7 +92,6 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@bit/bit.envs.internal.babel-base-compiler": "^1.0.4",
     "@babel/core": "7.11.6",
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@babel/plugin-proposal-decorators": "7.10.5",
@@ -227,7 +225,7 @@
   },
   "bit": {
     "env": {
-      "compiler": "bit.envs/compilers/react@1.0.14"
+      "compiler": "bit.envs/compilers/react@1.0.21"
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm"
