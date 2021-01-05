@@ -35,7 +35,7 @@ const config = {
 
   output: {
     path: DIST_DIR,
-    filename: '[name].js',
+    filename: '[name]-[chunkhash].js',
     publicPath: '/',
   },
   resolve: {
@@ -119,6 +119,7 @@ const config = {
   optimization: {
     runtimeChunk: false,
     splitChunks: {
+      maxSize: isProdEnv ? 1000000 : undefined,
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,

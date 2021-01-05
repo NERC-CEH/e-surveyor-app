@@ -23,6 +23,11 @@ jobs:
         env:
           BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
       - run: npm install
+      - run: npm run build
+        env:
+          APP_SENTRY_KEY: ${{ secrets.APP_SENTRY_KEY }}
+          APP_BACKEND_CLIENT_ID: ${{ secrets.APP_BACKEND_CLIENT_ID }}
+          APP_MAPBOX_MAP_KEY: ${{ secrets.APP_MAPBOX_MAP_KEY }}
       - run: npm run test
       - run: npm run test:eslint
         env:
@@ -30,14 +35,13 @@ jobs:
           APP_MAPBOX_MAP_KEY: ${{ secrets.APP_MAPBOX_MAP_KEY }}
           APP_BACKEND_CLIENT_ID: ${{ secrets.APP_BACKEND_CLIENT_ID }}
 
-      # TODO: needs fixing
-      # - uses: amondnet/vercel-action@v19
-      #   with:
-      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
-      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
-      #     scope: ${{ secrets.VERCEL_TEAM_ID }}
-      #     vercel-args: '--prod'
+      - uses: amondnet/vercel-action@v19
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          scope: ${{ secrets.VERCEL_TEAM_ID }}
+          vercel-args: '--prod'
       
       - run: npm run test:acceptance
         env:
