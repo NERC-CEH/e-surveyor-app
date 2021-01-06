@@ -27,7 +27,6 @@ workflows:
     # Web   
     - npm@1:
         inputs:
-        - cache_local_deps: 'true'
         - command: run build:production
     
     # Android
