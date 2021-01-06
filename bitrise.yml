@@ -18,10 +18,10 @@ workflows:
             npm config set @bit:registry https://node.bit.dev
             npm config set //node.bit.dev/:_authToken ${BIT_TOKEN}
             echo "Completed adding bit.dev to npm registry"
+
     - npm@1:
         timeout: 360 # has got in a loop in the past
         inputs:
-        - cache_local_deps: 'true'
         - command: install
     
     # Web   
