@@ -1,4 +1,4 @@
-import speciesNames from 'common/data/commonNames';
+import speciesNames from 'common/data/commonNames/index.json';
 
 const MAX_RESULTS = 200;
 
