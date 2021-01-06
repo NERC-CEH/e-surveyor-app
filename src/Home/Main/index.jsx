@@ -3,6 +3,7 @@ import { IonList, IonItem, IonIcon } from '@ionic/react';
 import { Main } from '@apps';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
+import pointIcon from 'common/images/pointIcon.svg';
 import Survey from './components/Survey';
 import './styles.scss';
 import './empty-samples-list-icon.svg';
@@ -38,7 +39,7 @@ class Component extends React.Component {
               <br />
               <br />
               Press
-              <IonIcon src="/images/route.svg" /> to add.
+              <IonIcon icon={pointIcon} /> to add.
             </div>
           </IonItem>
         </IonList>
