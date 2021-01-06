@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { alert } from '@apps';
+import { alert, date } from '@apps';
 import { observer } from 'mobx-react';
 import {
   IonItem,
@@ -11,6 +11,7 @@ import {
   IonLabel,
   IonIcon,
 } from '@ionic/react';
+import flowerIcon from 'common/images/flowerIcon.svg';
 import './styles.scss';
 
 function deleteSurvey(sample) {
@@ -36,22 +37,37 @@ function deleteSurvey(sample) {
 const Survey = ({ sample }) => {
   const survey = sample.getSurvey();
   let href = `/survey/${survey.name}/${sample.cid}`;
-  if (survey.name ==='transect' && !sample.metadata.completedDetails) {
-    href+= '/details'
+  if (survey.name === 'transect' && !sample.metadata.completedDetails) {
+    href += '/details';
   }
 
   function getSampleInfo() {
+    if (survey.name === 'transect') {
+      return (
+        <div className="species-info">
+          <h3>{survey.label}</h3>
+          <h4>{sample.attrs.type}</h4>
+          <h4>{date.print(sample.metadata.created_on)}</h4>
+        </div>
+      );
+    }
+
     const showSpeciesLength = sample.samples.length;
 
     return (
       <div className="species-info">
-        <h3>{sample.attrs.name}</h3>
+        <h3>
+          {survey.label}
 
-        <div>
-          <span>
-            Species: <IonBadge>{showSpeciesLength}</IonBadge>
-          </span>
-        </div>
+          {!!showSpeciesLength && (
+            <IonBadge>
+              <IonIcon icon={flowerIcon} />
+              {showSpeciesLength}
+            </IonBadge>
+          )}
+        </h3>
+
+        <h4>{sample.attrs.name}</h4>
       </div>
     );
   }

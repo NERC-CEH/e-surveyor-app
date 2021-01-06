@@ -11,6 +11,7 @@ import {
 const survey = {
   id: 597, // -1 this is dev still
   name: 'point',
+  label: 'Survey',
   icon,
 
   attrs: {

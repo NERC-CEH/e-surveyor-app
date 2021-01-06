@@ -18,12 +18,12 @@ import appModel from 'appModel';
 import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
+import flowerIcon from 'common/images/flowerIcon.svg';
 import pointIcon from 'common/images/pointIcon.svg';
 import transectIcon from 'common/images/transectIcon.svg';
 import SpeciesProfile from './components/SpeciesProfile';
 import Main from './Main';
 import './styles.scss';
-import './flower.svg';
 
 const { warn } = toast;
 
@@ -81,7 +81,7 @@ class Component extends React.Component {
       <div className="inner-wrap">
         <div onClick={this.identifyPhoto}>
           <IonTabButton>
-            <IonIcon src="/images/flower.svg" />
+            <IonIcon icon={flowerIcon} />
             <IonLabel>Plant ID</IonLabel>
           </IonTabButton>
         </div>

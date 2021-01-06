@@ -11,6 +11,7 @@ import {
 const survey = {
   id: 598, // -1 this is dev still
   name: 'transect',
+  label: 'Transect',
   icon,
 
   attrs: {
