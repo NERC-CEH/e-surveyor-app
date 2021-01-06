@@ -1,4 +1,4 @@
-import plantInteractions from './remote/plant_interactions.json';
+import plantInteractions from './cacheRemote/plant_interactions.json';
 
 const uniqArrayHashes = [];
 const getUnique = sp => {

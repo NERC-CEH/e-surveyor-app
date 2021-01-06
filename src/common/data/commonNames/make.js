@@ -1,5 +1,5 @@
 const fs = require('fs');
-const uksiPlants = require('../remote/uksi_plants.json');
+const uksiPlants = require('../cacheRemote/uksi_plants.json');
 
 const LANGUAGE_ISO_MAPPING = {
   eng: 'English',

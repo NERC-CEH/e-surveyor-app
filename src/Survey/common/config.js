@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { date } from '@apps';
-import seedmixData from 'common/data/remote/seedmix.json';
+import seedmixData from 'common/data/cacheRemote/seedmix.json';
 
 const getSeedMixGroups = () => {
   const addValueToObject = seedMixGroup => {

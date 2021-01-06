@@ -1,7 +1,7 @@
 // get local environment variables from .env
 const fs = require('fs');
-const uksiPlants = require('../remote/uksi_plants.json');
-const optimise = require('./speciesOptimise');
+const uksiPlants = require('../cacheRemote/uksi_plants.json');
+const optimise = require('./helperOptimise');
 
 // ideally the warehouse report should return only the latin names
 function sortAlphabetically(species) {

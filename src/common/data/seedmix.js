@@ -1,4 +1,4 @@
-import seedmixData from './remote/seedmix.json';
+import seedmixData from './cacheRemote/seedmix.json';
 
 const aggregateBySeedmixName = (agg, item) => {
   const { mix_name, ...species } = item; // eslint-disable-line camelcase

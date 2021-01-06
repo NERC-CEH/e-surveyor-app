@@ -8,7 +8,7 @@ const file = '01UPL42ZVRTEH6ILWMRFG3I5MIKC4YA7YW';
 
 function saveSpeciesToFile(data, sheetName) {
   const saveSpeciesToFileWrap = (resolve, reject) => {
-    const fileName = `./remote/${sheetName}.json`;
+    const fileName = `./cacheRemote/${sheetName}.json`;
     console.log(`Writing ${fileName}`);
 
     const dataOption = err => {
@@ -26,7 +26,7 @@ function saveSpeciesToFile(data, sheetName) {
 }
 
 function filterUKSIPlants() {
-  const rawData = fs.readFileSync('./remote/uksi_plants.json');
+  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json');
   const data = JSON.parse(rawData);
 
   // eslint-disable-next-line camelcase
@@ -45,7 +45,7 @@ function filterUKSIPlants() {
 }
 
 function getEnglishPlantNames() {
-  const rawData = fs.readFileSync('./remote/uksi_plants.json');
+  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json');
   const data = JSON.parse(rawData);
 
   const englishOnly = ({ language }) => language === 'English';

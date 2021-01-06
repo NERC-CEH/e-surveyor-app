@@ -1,5 +1,5 @@
 import Sample from 'sample';
-import pollination from './remote/pollination.json';
+import pollination from './cacheRemote/pollination.json';
 
 const recalculatePollinators = sp => {
   const pollinatorCount = Sample.getUniqueSupportedSpecies([[sp.latin_name]])
