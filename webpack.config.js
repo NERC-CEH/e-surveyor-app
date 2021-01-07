@@ -8,7 +8,7 @@ const appConfig = require('@flumens/webpack-config');
 const pkg = require('./package.json');
 
 checkEnv({
-  warn: ['APP_TRAINING', 'APP_HOST'],
+  warn: ['APP_BACKEND_URL'],
   required: ['APP_SENTRY_KEY', 'APP_BACKEND_CLIENT_ID', 'APP_MAPBOX_MAP_KEY'],
 });
 

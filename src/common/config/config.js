@@ -1,9 +1,7 @@
 import { Plugins, FilesystemDirectory } from '@capacitor/core';
 import { isPlatform } from '@ionic/react';
 
-const backendUrl =
-  process.env.APP_BACKEND_URL || 'https://dev-ceh-esurveyor.pantheonsite.io'; // TODO:
-const { APP_HOST: HOST = 'https://agri.app.flumens.io' } = process.env;
+const backendUrl = process.env.APP_BACKEND_URL || 'https://esurveyor.ceh.ac.uk';
 
 const indiciaUrl =
   process.env.APP_BACKEND_INDICIA_URL || 'https://warehouse1.indicia.org.uk';
@@ -15,7 +13,7 @@ const CONFIG = {
   name: process.env.APP_NAME,
 
   environment: __ENV__,
-  siteUrl: HOST,
+  siteUrl: backendUrl,
 
   POSITIVE_THRESHOLD: 0.7,
   POSSIBLE_THRESHOLD: 0.2,
@@ -31,8 +29,6 @@ const CONFIG = {
     mapboxApiKey: process.env.APP_MAPBOX_MAP_KEY,
     mapboxSatelliteId: 'cehapps/cipqvo0c0000jcknge1z28ejp',
   },
-
-  promotionalWebsiteUrl: 'https://', // TODO:
 
   backend: {
     url: backendUrl,

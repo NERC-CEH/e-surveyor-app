@@ -136,7 +136,7 @@ export default async function identify(image) {
   formData.append('organs', 'leaf');
   await appendModelToFormData(image, formData);
 
-  return fetch(`${siteUrl}/identify`, {
+  return fetch(`${siteUrl}/api/plantnet`, {
     method: 'post',
     body: formData,
   })
