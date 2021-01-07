@@ -8,6 +8,7 @@ import GridRefValue from 'Survey/common/Components/GridRefValue';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import Seeds from 'common/images/seeds.svg';
 import squareIcon from './square.svg';
+import habitatIcon from './habitats.svg';
 import stepsIcon from './steps.svg';
 
 @observer
@@ -21,11 +22,19 @@ class MainComponent extends React.Component {
   render() {
     const { match, sample, isDisabled } = this.props;
 
-    const { type, seedmixgroup, seedmix, quadratSize, steps } = sample.attrs;
+    const {
+      type,
+      seedmixgroup,
+      seedmix,
+      quadratSize,
+      steps,
+      habitat,
+    } = sample.attrs;
     const { completedDetails } = sample.metadata;
 
     const prettyGridRef = <GridRefValue sample={sample} />;
 
+    const isCommonStandards = type === 'Common Standards';
     const isCustom = type === 'Custom';
 
     return (
@@ -66,6 +75,16 @@ class MainComponent extends React.Component {
             skipValueTranslation
             disabled={isDisabled || !isCustom || completedDetails}
           />
+          {isCommonStandards && (
+            <MenuAttrItem
+              routerLink={`${match.url}/habitat`}
+              value={habitat}
+              icon={habitatIcon}
+              label="Habitat"
+              skipValueTranslation
+              disabled={isDisabled}
+            />
+          )}
 
           <IonItemDivider mode="ios">Seedmix</IonItemDivider>
           <MenuAttrItem

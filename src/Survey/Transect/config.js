@@ -21,6 +21,7 @@ const survey = {
     location: locationAttr,
 
     type: {
+      id: 1507, // -1 still in dev
       label: 'Type',
       type: 'radio',
       set: (value, { sample }) => {
@@ -38,9 +39,9 @@ const survey = {
         }
       },
       values: [
-        { value: 'Agri-environment', id: -1 },
-        { value: 'Common Standards', id: -1 },
-        { value: 'Custom', id: -1 },
+        { value: 'Agri-environment', id: 17824 }, // -1 still in dev
+        { value: 'Common Standards', id: 17825 }, // -1 still in dev
+        { value: 'Custom', id: 17826 }, // -1 still in dev
       ],
     },
 
@@ -54,6 +55,16 @@ const survey = {
       label: 'Quadrat Size',
       info: 'Please specify the quadrat size in meters.',
       type: 'slider',
+    },
+
+    habitat: {
+      id: 1506, // -1 still in dev
+      label: 'Type',
+      type: 'radio',
+      values: [
+        { value: 'Wet grasslands - MG8', id: 17822 }, // -1 still in dev
+        { value: 'Flood-plain grasslands - MG4', id: 17823 }, // -1 still in dev
+      ],
     },
 
     seedmixgroup: seedmixGroupAttr,
