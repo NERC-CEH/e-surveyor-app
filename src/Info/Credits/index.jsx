@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Page, Main, Section } from '@apps';
 import 'common/images/flumens.svg';
+import plantNetLogo from './Pl@ntNet_logo.png';
 import './styles.scss';
 
 const { P, H } = Section;
@@ -21,18 +22,28 @@ export default () => (
           <b>Richard Pywell</b> (UK Centre for Ecology & Hydrology)
         </P>
         <P skipTranslation>
-          <b>Biren Rathod</b> (UK Centre for Ecology & Hydrology)
-        </P>
-        <P skipTranslation>
           <b>Karolis Kazlauskis</b> (Flumens)
         </P>
         <P skipTranslation>
           <b>Vilius Stankaitis</b> (Flumens)
         </P>
+        <P skipTranslation>
+          <b>Biren Rathod</b> (UK Centre for Ecology & Hydrology)
+        </P>
       </Section>
 
       <Section>
-        <p className="flumens-logo">
+        <p className="logo">
+          <img src={plantNetLogo} />
+        </p>
+        <P>
+          The image-based plant species identification service used, is based on
+          the Pl@ntNet recognition api, regularly updated and accessible through
+          the <a href="https://my.plantnet.org">Pl@ntNet website</a>.
+        </P>
+      </Section>
+      <Section>
+        <p className="logo">
           <a href="https://flumens.io">
             <img src="/images/flumens.svg" alt="" />
           </a>
