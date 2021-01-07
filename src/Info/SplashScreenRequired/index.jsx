@@ -170,7 +170,7 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>🤓 Our Expertise</h2>
+                <h2>Our Expertise</h2>
                 <p>
                   Research from the UKCEH built into the app can assess the
                   quality of the habitat you have created.
