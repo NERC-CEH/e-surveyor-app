@@ -7,8 +7,15 @@ trigger_map:
   workflow: ci
 workflows:
   ci:
+    before_run:
+      - web
+      - android
+      - ios
+    after_run:
+      - deploy
+
+  web:
     steps:
-    # Web
     - script@1:
         inputs:
         - content: |-
@@ -24,12 +31,12 @@ workflows:
         inputs:
         - command: install
     
-    # Web   
     - npm@1:
         inputs:
         - command: run build:production
     
-    # Android
+  android:
+    steps:
     - change-android-versioncode-and-versionname@1:
         inputs:
         - build_gradle_path: "$BITRISE_SOURCE_DIR/android/app/build.gradle"
@@ -44,7 +51,8 @@ workflows:
         - verbose_log: 'true'
         - android_app: "$BITRISE_APK_PATH"
     
-    # iOS 
+  ios:
+    steps:
     - certificate-and-profile-installer@1: {}
     - recreate-user-schemes@1:
         inputs:
@@ -56,14 +64,15 @@ workflows:
     - xcode-archive@3:
         inputs:
         - export_method: app-store
+
+  deploy:
+    steps:
     - deploy-to-bitrise-io@1: {}
     - deploy-to-itunesconnect-application-loader@0:
         inputs:
         - password: "$ITUNES_CONNECT_PASS"
         - app_password: "$ITUNES_CONNECT_APP_PASS"
         - itunescon_user: "$ITUNES_CONNECT_USER"
-
-    # Git
     - git-tag-project-version-and-build-number@1:
         inputs:
         - bitrise_tag_format: v_VERSION_-_BUILD_
