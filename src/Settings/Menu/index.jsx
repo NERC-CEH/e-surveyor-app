@@ -19,15 +19,28 @@ const resetApp = async (saveSamples, appModel, userModel) => {
   }
 };
 
+function onToggle(appModel, setting, checked) {
+  appModel.attrs[setting] = checked; // eslint-disable-line
+  appModel.save();
+}
+
 const MenuController = props => {
   const { savedSamples, appModel, userModel } = props;
 
   const resetApplication = () => resetApp(savedSamples, appModel, userModel);
+  const { sendAnalytics, use10stepsForCommonStandard } = appModel.attrs;
 
+  const onToggleWrap = (...args) => onToggle(appModel, ...args);
+  
   return (
     <Page id="settings">
       <Header title="Settings" />
-      <Main resetApp={resetApplication} />
+      <Main
+        resetApp={resetApplication}
+        sendAnalytics={sendAnalytics}
+        use10stepsForCommonStandard={use10stepsForCommonStandard}
+        onToggle={onToggleWrap}
+      />
     </Page>
   );
 };

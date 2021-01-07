@@ -7,6 +7,7 @@ import {
   locationAttr,
   verifyLocationSchema,
 } from 'Survey/common/config';
+import appModel from 'appModel';
 
 const survey = {
   id: 598, // -1 this is dev still
@@ -29,7 +30,10 @@ const survey = {
         sample.attrs.quadratSize = 1; // eslint-disable-line
 
         if (value === 'Common Standards') {
-          sample.attrs.steps = 20; // eslint-disable-line
+          // eslint-disable-next-line
+          sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
+            ? 10
+            : 20;
           sample.attrs.quadratSize = 1; // eslint-disable-line
         }
       },
