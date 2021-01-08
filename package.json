@@ -6,7 +6,7 @@
     "build": "NODE_ENV=production webpack --display minimal",
     "build:production": "npm run clean && npm run build && npx cap sync && npm run build:resources",
     "build:resources": "mkdir -p resources && cp -R other/designs/android resources && cp -R other/designs/splash.png resources && npx sharp -i other/designs/icon.svg -o resources/icon.png resize 1024 1024 -- removeAlpha && npx cordova-res ios --skip-config --resources resources --copy && npx cordova-res android --skip-config --resources resources --copy",
-    "deploy": "vercel --prod -A other/now.json",
+    "deploy": "vercel --prod -A other/now.json -t $VERCEL_TOKEN",
     "deploy:production": "bitrise ci",
     "clean": "rm -rf build resources",
     "test": "jest --silent",

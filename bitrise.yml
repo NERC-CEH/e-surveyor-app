@@ -20,21 +20,24 @@ workflows:
         inputs:
         - content: |-
             #!/usr/bin/env bash
-
             echo "Adding bit.dev to npm registry"
             npm config set @bit:registry https://node.bit.dev
             npm config set //node.bit.dev/:_authToken ${BIT_TOKEN}
             echo "Completed adding bit.dev to npm registry"
-
     - npm@1:
         timeout: 360 # has got in a loop in the past
         inputs:
         - command: install
-    
     - npm@1:
         inputs:
-        - command: run build:production
-    
+        - command: run test
+    - npm@1:
+        inputs:
+        - command: run test:eslint
+    - npm@1:
+        inputs:
+        - command: run build:production    
+
   android:
     steps:
     - change-android-versioncode-and-versionname@1:
@@ -67,6 +70,9 @@ workflows:
 
   deploy:
     steps:
+    - npm@1:
+        inputs:
+        - command: run deploy
     - deploy-to-bitrise-io@1: {}
     - deploy-to-itunesconnect-application-loader@0:
         inputs:
