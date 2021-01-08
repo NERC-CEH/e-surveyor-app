@@ -33,6 +33,7 @@ const CONFIG = {
   backend: {
     url: backendUrl,
     clientId: process.env.APP_BACKEND_CLIENT_ID,
+    clientPass: process.env.APP_BACKEND_CLIENT_PASS,
 
     mediaUrl: `${indiciaUrl}/upload/`,
 

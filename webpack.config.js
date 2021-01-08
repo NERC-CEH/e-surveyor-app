@@ -21,6 +21,9 @@ appConfig.plugins.unshift(
       APP_VERSION: JSON.stringify(pkg.version),
       APP_BACKEND_CLIENT_ID: JSON.stringify(
         process.env.APP_BACKEND_CLIENT_ID || ''
+      ),   
+      APP_BACKEND_CLIENT_PASS: JSON.stringify(
+        process.env.APP_BACKEND_CLIENT_PASS || ''
       ),
       APP_MAPBOX_MAP_KEY: JSON.stringify(process.env.APP_MAPBOX_MAP_KEY || ''),
       APP_SENTRY_KEY: JSON.stringify(process.env.APP_SENTRY_KEY || ''),
