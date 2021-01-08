@@ -13,7 +13,6 @@ const CONFIG = {
   name: process.env.APP_NAME,
 
   environment: __ENV__,
-  siteUrl: backendUrl,
 
   POSITIVE_THRESHOLD: 0.7,
   POSSIBLE_THRESHOLD: 0.2,

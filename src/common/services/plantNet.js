@@ -4,7 +4,7 @@ import { isPlatform } from '@ionic/react';
 import UKSIPlants from '../data/uksi_plants.list.json';
 import UKPlantNames from '../data/uksi_plants.names.json';
 
-const { siteUrl } = config;
+const { backend } = config;
 
 /**
  * Converts DataURI object to a Blob.
@@ -136,7 +136,7 @@ export default async function identify(image) {
   formData.append('organs', 'leaf');
   await appendModelToFormData(image, formData);
 
-  return fetch(`${siteUrl}/api/plantnet`, {
+  return fetch(`${backend.url}/api/plantnet`, {
     method: 'post',
     body: formData,
   })

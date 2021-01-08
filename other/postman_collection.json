@@ -55,16 +55,17 @@
 					]
 				},
 				"url": {
-					"raw": "https://agri.app.flumens.io/identify",
+					"raw": "https://esurveyor.ceh.ac.uk/api/plantnet",
 					"protocol": "https",
 					"host": [
-						"agri",
-						"app",
-						"flumens",
-						"io"
+						"esurveyor",
+						"ceh",
+						"ac",
+						"uk"
 					],
 					"path": [
-						"identify"
+						"api",
+						"plantnet"
 					],
 					"query": [
 						{
