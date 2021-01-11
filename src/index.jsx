@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { setupConfig, isPlatform } from '@ionic/react';
 import appModel from 'appModel';
+import userModel from 'userModel';
 import savedSamples from 'savedSamples';
 import initAnalytics from 'helpers/analytics';
 import { Plugins, StatusBarStyle } from '@capacitor/core';
@@ -25,6 +26,7 @@ setupConfig({
 });
 
 async function init() {
+  await userModel._init;
   await appModel._init;
   await savedSamples._init;
 
