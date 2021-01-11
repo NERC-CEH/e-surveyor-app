@@ -84,8 +84,8 @@ const SplashScreen = ({ appModel }) => {
               <div className="message">
                 <h2>Welcome</h2>
                 <p>
-                  E-Surveyor helps you to assess the quality of the wildflower
-                  habitat you have created on your farm.
+                  E-Surveyor helps you to assess the quality of habitats you
+                  manage.
                 </p>
               </div>
               <div className="custom-shape-divider-bottom-1593438501">
@@ -120,9 +120,9 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>Identify Plants</h2>
+                <h2>Identify plants</h2>
                 <p>
-                  Using AI technology the app can automatically identify plant
+                  Using AI technology the app can help you to identify plant
                   species from images you take.
                 </p>
               </div>
@@ -145,10 +145,10 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>Seedmix Comparison</h2>
+                <h2>Compare what you see</h2>
                 <p>
                   Compare the species present in your habitat to those in your
-                  seedmix and see which flowers established and which didn't.
+                  seedmix or against benchmark species lists.
                 </p>
               </div>
             </div>
@@ -170,7 +170,7 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>Our Expertise</h2>
+                <h2>Our expertise</h2>
                 <p>
                   Research from the UKCEH built into the app can assess the
                   quality of the habitat you have created.
