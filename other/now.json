@@ -6,6 +6,7 @@
   ],
   "routes": [
     { "src": "^/demo.html", "dest": "other/demo.html" },
+    { "src": "^/demo_(.*)", "dest": "other/demo_$1" },
     { "src": "^/(.*)", "dest": "build/$1" }
   ]
 }
