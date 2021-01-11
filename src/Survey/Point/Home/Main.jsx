@@ -59,7 +59,7 @@ class Component extends React.Component {
 
     alert({
       skipTranslation: true,
-      header: 'Your first survey 🌱',
+      header: 'Your first survey',
       message: (
         <>
           You can add plant photos using your camera 📷 and we will try to

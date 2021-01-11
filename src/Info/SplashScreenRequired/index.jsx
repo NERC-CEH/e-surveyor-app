@@ -82,7 +82,7 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message">
-                <h2>👋 Welcome</h2>
+                <h2>Welcome</h2>
                 <p>
                   E-Surveyor helps you to assess the quality of the wildflower
                   habitat you have created on your farm.
@@ -120,7 +120,7 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>🔎 Identify Plants</h2>
+                <h2>Identify Plants</h2>
                 <p>
                   Using AI technology the app can automatically identify plant
                   species from images you take.
@@ -145,7 +145,7 @@ const SplashScreen = ({ appModel }) => {
                 </svg>
               </div>
               <div className="message two">
-                <h2>🌱 Seedmix Comparison</h2>
+                <h2>Seedmix Comparison</h2>
                 <p>
                   Compare the species present in your habitat to those in your
                   seedmix and see which flowers established and which didn't.
