@@ -61,21 +61,26 @@ $dark-brown: #4d380a;
       }
     }
   }
+  
+  ion-footer {
+    position: absolute;
+    bottom: 0;
+    ion-toolbar {
+      --background: transparent;
+      --border-color: transparent;
 
-  ion-footer ion-toolbar {
-    --ion-toolbar-background: none;
-
-    ion-button {
-      border-radius: 50%;
-      background: #ffffffcf;
-      color: #4d380a;
-      height: 60px;
-      width: 60px;
-      margin: 10px;
-      color: $dark-brown;
+      ion-button {
+        border-radius: 50%;
+        background: #ffffffcf;
+        color: #4d380a;
+        height: 60px;
+        width: 60px;
+        margin: 10px;
+        color: $dark-brown;
+      }
     }
   }
- 
+
   ion-slide {
     background: rgb(255, 240, 216);
   }
