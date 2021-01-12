@@ -16,14 +16,9 @@ workflows:
 
   web:
     steps:
-    - script@1:
+    - npm@1:
         inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            echo "Adding bit.dev to npm registry"
-            npm config set @bit:registry https://node.bit.dev
-            npm config set //node.bit.dev/:_authToken ${BIT_TOKEN}
-            echo "Completed adding bit.dev to npm registry"
+        - command: config set @bit:registry https://node.bit.dev
     - npm@1:
         timeout: 360 # has got in a loop in the past
         inputs:
