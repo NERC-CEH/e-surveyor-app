@@ -8,7 +8,7 @@ const appConfig = require('@flumens/webpack-config');
 const pkg = require('./package.json');
 
 checkEnv({
-  warn: ['APP_BACKEND_URL'],
+  warn: ['APP_BACKEND_URL', 'APP_BACKEND_INDICIA_URL'],
   required: ['APP_SENTRY_KEY', 'APP_BACKEND_CLIENT_ID', 'APP_MAPBOX_MAP_KEY'],
 });
 
@@ -21,7 +21,7 @@ appConfig.plugins.unshift(
       APP_VERSION: JSON.stringify(pkg.version),
       APP_BACKEND_CLIENT_ID: JSON.stringify(
         process.env.APP_BACKEND_CLIENT_ID || ''
-      ),   
+      ),
       APP_BACKEND_CLIENT_PASS: JSON.stringify(
         process.env.APP_BACKEND_CLIENT_PASS || ''
       ),

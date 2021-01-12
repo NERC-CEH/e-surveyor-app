@@ -38,7 +38,6 @@ const CONFIG = {
 
     indicia: {
       url: indiciaUrl,
-      websiteId: -1, // TODO:
     },
   },
 };

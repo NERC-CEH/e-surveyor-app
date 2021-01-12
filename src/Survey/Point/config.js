@@ -9,7 +9,7 @@ import {
 } from 'Survey/common/config';
 
 const survey = {
-  id: 597, // -1 this is dev still
+  id: 626,
   name: 'point',
   label: 'Survey',
   icon,
@@ -23,7 +23,7 @@ const survey = {
       label: 'Survey Name',
       type: 'textarea',
       info: 'You can change your survey name here.',
-      remote: { id: 1505 },
+      remote: { id: 1531 },
     },
 
     seedmixgroup: seedmixGroupAttr,

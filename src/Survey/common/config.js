@@ -64,7 +64,7 @@ export const seedmixGroupAttr = {
     }
   },
   options: getSeedMixGroups(),
-  remote: { id: 1503 },
+  remote: { id: 1529 },
 };
 
 export const seedmixAttr = {
@@ -72,7 +72,7 @@ export const seedmixAttr = {
   type: 'radio',
   info: 'Please indicate the seedmix you have used.',
   options: getSeedMix,
-  remote: { id: 1504 },
+  remote: { id: 1530 },
 };
 
 const fixedLocationSchema = Yup.object().shape({

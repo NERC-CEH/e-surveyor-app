@@ -10,7 +10,7 @@ import {
 import appModel from 'appModel';
 
 const survey = {
-  id: 598, // -1 this is dev still
+  id: 627,
   name: 'transect',
   label: 'Transect',
   icon,
@@ -21,7 +21,7 @@ const survey = {
     location: locationAttr,
 
     type: {
-      id: 1507, // -1 still in dev
+      id: 1533,
       label: 'Type',
       type: 'radio',
       set: (value, { sample }) => {
@@ -39,9 +39,9 @@ const survey = {
         }
       },
       values: [
-        { value: 'Agri-environment', id: 17824 }, // -1 still in dev
-        { value: 'Common Standards', id: 17825 }, // -1 still in dev
-        { value: 'Custom', id: 17826 }, // -1 still in dev
+        { value: 'Agri-environment', id: 17955 },
+        { value: 'Common Standards', id: 17956 },
+        { value: 'Custom', id: 17957 },
       ],
     },
 
@@ -58,12 +58,12 @@ const survey = {
     },
 
     habitat: {
-      id: 1506, // -1 still in dev
+      id: 1532,
       label: 'Type',
       type: 'radio',
       values: [
-        { value: 'Wet grasslands - MG8', id: 17822 }, // -1 still in dev
-        { value: 'Flood-plain grasslands - MG4', id: 17823 }, // -1 still in dev
+        { value: 'Wet grasslands - MG8', id: 17953 },
+        { value: 'Flood-plain grasslands - MG4', id: 17954 },
       ],
     },
 
