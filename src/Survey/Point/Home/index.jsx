@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Page,
   Header,
-  alert,
   toast,
   device,
   showInvalidsMessage,
@@ -22,8 +21,6 @@ import i18n from 'i18next';
 import Main from './Main';
 
 const { warn } = toast;
-
-const { POSSIBLE_THRESHOLD } = config;
 
 @observer
 class Controller extends React.Component {
@@ -82,26 +79,6 @@ class Controller extends React.Component {
 
   onUpload = async () => {
     const { sample, userModel, history, match } = this.props;
-
-    let hasValidSpecies = false;
-
-    const showReportIfScoreHigherThanThreshold = subSample => {
-      const species = subSample.getSpecies();
-      if (species && species.score > POSSIBLE_THRESHOLD) {
-        hasValidSpecies = true;
-      }
-    };
-
-    sample.samples.forEach(showReportIfScoreHigherThanThreshold);
-
-    if (!hasValidSpecies) {
-      alert({
-        skipTranslation: true,
-        message: 'Please add some species first.',
-        buttons: [{ text: 'Got it!', role: 'cancel', cssClass: 'secondary' }],
-      });
-      return;
-    }
 
     const invalids = sample.validateRemote();
 

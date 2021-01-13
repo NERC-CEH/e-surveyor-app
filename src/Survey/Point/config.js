@@ -7,6 +7,9 @@ import {
   locationAttr,
   verifyLocationSchema,
 } from 'Survey/common/config';
+import config from 'config';
+
+const { POSSIBLE_THRESHOLD } = config;
 
 const survey = {
   id: 626,
@@ -124,14 +127,30 @@ const survey = {
 
   verify(attrs, sample) {
     try {
-      const id = sample.isIdentifying();
+      const isIdentifying = sample.isIdentifying();
 
       Yup.boolean()
-        .oneOf([false], 'Is still identifying')
-        .validateSync(id, { abortEarly: false });
+        .oneOf([false], 'Some photos are still being identified.')
+        .validateSync(isIdentifying, { abortEarly: false });
+
+      let hasValidSpecies = false;
+
+      const showReportIfScoreHigherThanThreshold = subSample => {
+        const species = subSample.getSpecies();
+        if (species && species.score > POSSIBLE_THRESHOLD) {
+          hasValidSpecies = true;
+        }
+      };
+
+      sample.samples.forEach(showReportIfScoreHigherThanThreshold);
+
+      Yup.boolean()
+        .oneOf([true], 'Please add some species.')
+        .validateSync(hasValidSpecies, { abortEarly: false });
 
       const transectSchema = Yup.object().shape({
         location: verifyLocationSchema,
+        seedmix: Yup.mixed().required('Please select your seedmix.'),
       });
 
       transectSchema.validateSync(attrs, { abortEarly: false });
