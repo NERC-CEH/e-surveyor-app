@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { Page, Header, alert } from '@apps';
 import { IonButton, NavContext, IonIcon } from '@ionic/react';
 import { arrowForwardCircleOutline } from 'ionicons/icons';
-import { verifyLocationSchema } from 'Survey/common/config';
-import * as Yup from 'yup';
 import { observer } from 'mobx-react';
+import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
 @observer
@@ -20,13 +19,7 @@ class Controller extends React.Component {
   onDone = () => {
     const { match, sample } = this.props;
       try {
-        Yup.object().shape({
-          location: verifyLocationSchema,
-          seedmix: Yup.mixed().required('Please select your seedmix.'),
-          quadratSize: Yup.number().min(1).required('Please select your seedmix.'),
-          steps: Yup.number().min(1).required('Please select your seedmix.'),
-          habitat: sample.attrs.type === 'Common Standards' && Yup.mixed().required()
-        }).validateSync(sample.attrs)
+        getDetailsValidationSchema(sample).validateSync(sample.attrs)
       } catch (attrError) {
         alert({
           header: 'Missing',

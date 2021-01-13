@@ -90,7 +90,7 @@ const validateLocation = val => {
 
 export const verifyLocationSchema = Yup.mixed().test(
   'location',
-  'Please select your location.',
+  'Please select location.',
   validateLocation
 );
 

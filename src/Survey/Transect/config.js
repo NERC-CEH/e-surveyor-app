@@ -9,6 +9,17 @@ import {
 } from 'Survey/common/config';
 import appModel from 'appModel';
 
+export const getDetailsValidationSchema = sample =>
+  Yup.object().shape({
+    location: verifyLocationSchema,
+    seedmix: Yup.mixed().required('Please select your seedmix.'),
+    quadratSize: Yup.number().min(1).required('Please select your seedmix.'),
+    steps: Yup.number().min(1).required('Please select your seedmix.'),
+    habitat:
+      sample.attrs.type === 'Common Standards' &&
+      Yup.mixed().required('Please select habitat.'),
+  });
+
 const survey = {
   id: 627,
   name: 'transect',
@@ -184,6 +195,24 @@ const survey = {
 
       return submission;
     },
+
+    verify(attrs, sample) {
+      try {
+        Yup.number()
+          .min(1, 'Please add a quadrat photo.')
+          .validateSync(sample.media.length, { abortEarly: false });
+
+        const transectSchema = Yup.object().shape({
+          location: verifyLocationSchema,
+        });
+
+        transectSchema.validateSync(attrs, { abortEarly: false });
+      } catch (attrError) {
+        return attrError;
+      }
+
+      return null;
+    },
   },
 
   create(AppSample) {
@@ -211,11 +240,13 @@ const survey = {
         .oneOf([false], 'Is still identifying')
         .validateSync(id, { abortEarly: false });
 
-      const transectSchema = Yup.object().shape({
-        location: verifyLocationSchema,
-      });
+      Yup.number()
+        .oneOf([sample.attrs.steps], 'Please add more quadrats.')
+        .validateSync(sample.samples.length, { abortEarly: false });
 
-      transectSchema.validateSync(attrs, { abortEarly: false });
+      getDetailsValidationSchema(sample).validateSync(attrs, {
+        abortEarly: false,
+      });
     } catch (attrError) {
       return attrError;
     }
