@@ -1,54 +1,23 @@
-#survey-report .report-header {
-  display: flex;
-  min-height: 50px;
-  margin: 20px 0;
-
-  .seedmix,
-  .pollinators {
-    align-self: center;
-    width: 50%;
-    text-align: center;
-
-    ion-icon {
-      max-width: 20%;
-      min-width: 20px;
-
-      font-size: 54px;
-      margin: 0 10px;
+#transect-survey-report {
+  ion-grid {
+    ion-row {
+      padding: 10px;
     }
-    ion-badge {
-      min-width: 80px;
 
-      font-size: 2em;
-      --padding-bottom: 10px;
-      --padding-top: 10px;
-      --padding-end: 10px;
-      --padding-start: 10px;
+    ion-row:first-of-type {
+      text-align: center;
     }
-  }
-}
 
-.pollinator-class {
-  opacity: 1 !important;
+    ion-col:first-child {
+      font-weight: 500;
+    }
 
-  b.high {
-    color: green;
-  }
-  .high {
-    --background: green;
-  }
+    ion-col:last-child {
+      text-align: center;
+    }
 
-  b.medium {
-    color: #1979ae;
-  }
-  .medium {
-    --background: #1979ae;
-  }
-
-  b.low {
-    color: gray;
-  }
-  .low {
-    --background: gray;
+    ion-row:nth-child(even) {
+      background: #ffe0c0;
+    }
   }
 }

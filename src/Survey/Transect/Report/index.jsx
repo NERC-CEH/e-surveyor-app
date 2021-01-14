@@ -7,24 +7,20 @@ import Main from './Main';
 @observer
 class ReportController extends React.Component {
   static propTypes = {
-    appModel: PropTypes.object.isRequired,
     sample: PropTypes.object.isRequired,
   };
 
   render() {
-    const { appModel, sample } = this.props;
+    const { sample } = this.props;
 
     if (!sample) {
       return null;
     }
 
     return (
-      <Page id="survey-report">
+      <Page id="transect-survey-report">
         <Header title="Report" />
-        <Main
-          appModel={appModel}
-          sample={sample}
-        />
+        <Main sample={sample} />
       </Page>
     );
   }

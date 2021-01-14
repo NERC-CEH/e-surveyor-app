@@ -1,24 +1,95 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import PropTypes from 'prop-types';
+import exact from 'prop-types-exact';
 import { observer } from 'mobx-react';
-import { IonItem, IonList } from '@ionic/react';
+import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { Main } from '@apps';
-
 import './styles.scss';
 
+const alphabetically = ([s1], [s2]) => s1.localeCompare(s2);
 @observer
 class MainComponent extends React.Component {
-  static propTypes = {};
+  static propTypes = exact({
+    sample: PropTypes.object.isRequired,
+  });
+
+  getSteps = () => {
+    const { sample } = this.props;
+
+    const steps = [];
+
+    const addToCounterIfInHabitat = (sp, stepSpecies) => {
+      stepSpecies.push(sp);
+    };
+
+    const processStep = stepSample => {
+      const stepSpecies = [];
+      steps.push(stepSpecies);
+
+      const addToCounterIfInHabitatWrap = sp =>
+        addToCounterIfInHabitat(sp, stepSpecies);
+
+      stepSample.getUniqueSpecies().forEach(addToCounterIfInHabitatWrap);
+    };
+
+    sample.samples.forEach(processStep);
+
+    return steps;
+  };
+
+  getRowComponent = ([scientificName, { commonName, count }]) => {
+    const { sample } = this.props;
+    const stepCount = sample.samples.length;
+
+    const name = commonName || scientificName;
+
+    return (
+      <IonRow key={name}>
+        <IonCol>{name}</IonCol>
+        <IonCol>
+          <b>{count}</b>/{stepCount}
+        </IonCol>
+      </IonRow>
+    );
+  };
+
+  getSpeciesRows = () => {
+    const counter = {};
+    const addToCounter = ([scientificName, commonName]) => {
+      if (!counter[scientificName]) {
+        counter[scientificName] = { count: 1, commonName };
+        return;
+      }
+
+      counter[scientificName].count++;
+    };
+
+    const steps = this.getSteps();
+    const countStepSpecies = stepSpecies => stepSpecies.forEach(addToCounter);
+    steps.forEach(countStepSpecies);
+
+    return Object.entries(counter)
+      .sort(alphabetically)
+      .map(this.getRowComponent);
+  };
 
   render() {
     return (
       <>
         <Main>
-          <IonList lines="full">
-            <IonItem className="report-header" lines="none">
-              Sorry, this is work in progress.
-            </IonItem>
-          </IonList>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+                <h3>Species</h3>
+              </IonCol>
+              <IonCol>
+                <h3>Abundance</h3>
+              </IonCol>
+            </IonRow>
+
+            {this.getSpeciesRows()}
+          </IonGrid>
         </Main>
       </>
     );
