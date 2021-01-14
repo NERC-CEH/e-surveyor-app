@@ -130,38 +130,23 @@ class AppSample extends Sample {
   }
 
   getUniqueSpecies() {
-    const getScientificName = subSmp => {
+    const dict = {};
+
+    const addToUniqueDict = subSmp => {
       const { species } = subSmp.getSpecies() || {};
 
       if (!species) {
-        return null;
+        return;
       }
 
-      return species.scientificNameWithoutAuthor;
+      const commonNames = species.commonNames || [];
+
+      dict[species.scientificNameWithoutAuthor] = commonNames[0]; //eslint-disable-line
     };
 
-    let list = this.samples.map(getScientificName).filter(species => species);
+    this.samples.forEach(addToUniqueDict);
 
-    const uniqueSpeciesScientificNames = [...new Set(list)];
-
-    const extractUniqueScientificNames = name => {
-      const scientificName = image => getScientificName(image) === name;
-
-      const fullSpecies = this.samples.find(scientificName);
-
-      const { commonNames } = fullSpecies.getSpecies();
-      let commonName;
-
-      if (commonNames && commonNames.length) {
-        [commonName] = commonNames;
-      }
-
-      return [name, commonName];
-    };
-
-    list = uniqueSpeciesScientificNames.map(extractUniqueScientificNames);
-
-    return list;
+    return Object.entries(dict);
   }
 
   getSeedmixUse() {
