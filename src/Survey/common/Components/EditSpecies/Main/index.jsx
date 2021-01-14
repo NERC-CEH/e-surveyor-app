@@ -49,7 +49,7 @@ class MainComponent extends React.Component {
   showSelectedSpecies = () => {
     const { sample } = this.props;
     const { taxon: sp } = sample.occurrences[0].attrs;
-    const selectedSpeciesByUser = !sp.gbif.id || sp.scoreFromAPI;
+    const selectedSpeciesByUser = !sp.gbif.id || !!sp.scoreFromAPI;
 
     return (
       <SpeciesCard species={sp} selectedSpeciesByUser={selectedSpeciesByUser} />
@@ -93,11 +93,9 @@ class MainComponent extends React.Component {
 
   showSpeciesMainPhoto = () => {
     const { sample } = this.props;
-console.log(this.props);
 
-    const image = sample.occurrences[0].media[0];
-
-    if (!image) {
+    const media = sample.occurrences[0];
+    if (!media.length) {
       return (
         <div className="species-main-image-wrapper">
           <div className="species-main-image-empty" alt="species">
@@ -107,6 +105,7 @@ console.log(this.props);
       );
     }
 
+    const image = media[0];
     const showImage = image.getURL();
 
     const style = {

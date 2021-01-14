@@ -20,6 +20,17 @@ export const getDetailsValidationSchema = sample =>
       Yup.mixed().required('Please select habitat.'),
   });
 
+const habitats = [
+  { value: 'Wet grasslands - MG8', id: 17953 },
+  { value: 'Flood-plain grasslands - MG4', id: 17954 },
+];
+
+const surveyTypes = [
+  { value: 'Agri-environment', id: 17955 },
+  { value: 'Common Standards', id: 17956 },
+  { value: 'Custom', id: 17957 },
+];
+
 const survey = {
   id: 627,
   name: 'transect',
@@ -32,7 +43,6 @@ const survey = {
     location: locationAttr,
 
     type: {
-      id: 1533,
       label: 'Type',
       type: 'radio',
       set: (value, { sample }) => {
@@ -42,6 +52,7 @@ const survey = {
         sample.attrs.quadratSize = 1; // eslint-disable-line
 
         if (value === 'Common Standards') {
+          sample.attrs.habitat = null; // eslint-disable-line
           // eslint-disable-next-line
           sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
             ? 10
@@ -49,11 +60,11 @@ const survey = {
           sample.attrs.quadratSize = 1; // eslint-disable-line
         }
       },
-      values: [
-        { value: 'Agri-environment', id: 17955 },
-        { value: 'Common Standards', id: 17956 },
-        { value: 'Custom', id: 17957 },
-      ],
+      options: surveyTypes,
+      remote: {
+        id: 1533,
+        values: surveyTypes,
+      },
     },
 
     steps: {
@@ -69,13 +80,13 @@ const survey = {
     },
 
     habitat: {
-      id: 1532,
       label: 'Type',
       type: 'radio',
-      values: [
-        { value: 'Wet grasslands - MG8', id: 17953 },
-        { value: 'Flood-plain grasslands - MG4', id: 17954 },
-      ],
+      options: habitats,
+      remote: {
+        id: 1532,
+        values: habitats,
+      },
     },
 
     seedmixgroup: seedmixGroupAttr,

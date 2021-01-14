@@ -54,7 +54,6 @@ class SpeciesList extends Component {
   getProfile = subSample => {
     const { match, isDisabled } = this.props;
     const species = subSample.getSpecies();
-    const [photo] = subSample.occurrences[0].media;
 
     let commonName;
     let scientificName;
@@ -65,7 +64,9 @@ class SpeciesList extends Component {
     let speciesPhoto;
     let link;
 
-    if (photo) {
+    const { media } = subSample.occurrences[0];
+    if (media.length) {
+      const photo = media[0];
       identifying = photo.identification.identifying;
       speciesPhoto = photo.attrs ? photo.getURL() : null;
     }

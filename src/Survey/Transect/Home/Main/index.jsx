@@ -35,7 +35,7 @@ class MainComponent extends React.Component {
   }
 
   getQuadratPhoto = sample => {
-    const pic = sample.media[0] && sample.media[0].getURL();
+    const pic = sample.media.length && sample.media[0].getURL();
 
     const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
 

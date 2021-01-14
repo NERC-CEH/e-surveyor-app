@@ -33,6 +33,7 @@ const Image = {
       allowEditing: false,
       resultType: CameraResultType.Uri,
       saveToGallery: true,
+      webUseInput: true,
       correctOrientation: true,
       promptLabelHeader: 'Choose a method to upload a photo',
       promptLabelPhoto: 'Gallery',
