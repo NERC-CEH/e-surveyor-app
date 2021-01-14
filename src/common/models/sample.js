@@ -166,21 +166,21 @@ class AppSample extends Sample {
 
   getSeedmixUse() {
     const { seedmix } = this.attrs;
-    const selectedSeedmix = seedmixData[seedmix];
-    if (!selectedSeedmix) {
+    const seedmixSpecies = seedmixData[seedmix];
+    if (!seedmixSpecies) {
       return [[]];
     }
 
     const extractLatinName = ({ latin_name }) => latin_name; // eslint-disable-line camelcase
-    const selectedSeedmixLatinNames = selectedSeedmix.map(extractLatinName);
+    const selectedSeedmixLatinNames = seedmixSpecies.map(extractLatinName);
 
     const seedmixIncludesSpecies = ([scientificName]) =>
       selectedSeedmixLatinNames.includes(scientificName);
 
     const species = this.getUniqueSpecies();
-    const selectedSeedmixSpecies = species.filter(seedmixIncludesSpecies);
+    const recordedSeedmixSpecies = species.filter(seedmixIncludesSpecies);
 
-    return [selectedSeedmixSpecies, selectedSeedmix];
+    return [recordedSeedmixSpecies, seedmixSpecies];
   }
 
   getPrettyName() {
