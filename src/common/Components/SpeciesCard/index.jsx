@@ -191,7 +191,8 @@ class SpeciesCard extends React.Component {
     const { species, score, images } = fullSpecies;
 
     const onSelectWrap = () => onSelect(fullSpecies);
-
+    const commonName = !!species.commonNames.length && species.commonNames[0];
+    
     return (
       <>
         {this.getGallery()}
@@ -199,7 +200,7 @@ class SpeciesCard extends React.Component {
         <IonCard id="species-profile-card">
           <IonCardHeader>
             <div className="species-names-wrapper">
-              <IonCardTitle>{species.commonNames[0]}</IonCardTitle>
+              <IonCardTitle>{commonName}</IonCardTitle>
               <IonCardSubtitle>
                 <i>{species.scientificNameWithoutAuthor}</i>
               </IonCardSubtitle>
