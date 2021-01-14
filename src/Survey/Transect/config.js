@@ -77,6 +77,9 @@ const survey = {
       label: 'Quadrat Size',
       info: 'Please specify the quadrat size in meters.',
       type: 'slider',
+      remote: {
+        id: 1534,
+      },
     },
 
     habitat: {
@@ -251,9 +254,9 @@ const survey = {
         .oneOf([false], 'Is still identifying')
         .validateSync(id, { abortEarly: false });
 
-      Yup.number()
-        .oneOf([sample.attrs.steps], 'Please add more quadrats.')
-        .validateSync(sample.samples.length, { abortEarly: false });
+      // Yup.number()
+      //   .oneOf([sample.attrs.steps], 'Please add more quadrats.')
+      //   .validateSync(sample.samples.length, { abortEarly: false });
 
       getDetailsValidationSchema(sample).validateSync(attrs, {
         abortEarly: false,
