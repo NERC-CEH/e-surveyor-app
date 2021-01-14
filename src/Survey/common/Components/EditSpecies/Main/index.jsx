@@ -94,7 +94,7 @@ class MainComponent extends React.Component {
   showSpeciesMainPhoto = () => {
     const { sample } = this.props;
 
-    const media = sample.occurrences[0];
+    const { media } = sample.occurrences[0];
     if (!media.length) {
       return (
         <div className="species-main-image-wrapper">
