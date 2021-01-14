@@ -72,7 +72,6 @@ workflows:
       - npm@1:
           inputs:
             - command: run deploy
-      - deploy-to-bitrise-io@1: {}
       - deploy-to-itunesconnect-application-loader@0:
           inputs:
             - password: $ITUNES_CONNECT_PASS
