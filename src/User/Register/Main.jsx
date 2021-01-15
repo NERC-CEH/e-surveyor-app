@@ -38,6 +38,7 @@ class Component extends React.Component {
             placeholder="Full Name"
             icon={personOutline}
             type="text"
+            autocomplete="off"
             {...props}
           />
           <InputWithValidation
@@ -45,6 +46,7 @@ class Component extends React.Component {
             placeholder="Email"
             icon={mailOutline}
             type="email"
+            autocomplete="off"
             {...props}
           />
           <InputWithValidation
@@ -52,6 +54,7 @@ class Component extends React.Component {
             placeholder="Password"
             icon={keyOutline}
             type={showPassword ? 'text' : 'password'}
+            autocomplete="off"
             {...props}
           >
             <IonButton slot="end" onClick={this.togglePassword} fill="clear">

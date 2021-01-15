@@ -15,6 +15,7 @@ const Component = ({ onSubmit, schema }) => {
           placeholder="Email"
           icon={personOutline}
           type="email"
+          autocomplete="off"
           {...props}
         />
       </IonList>
