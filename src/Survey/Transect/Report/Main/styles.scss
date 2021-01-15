@@ -1,4 +1,8 @@
 #transect-survey-report {
+  h3 {
+    font-size: 18px;
+  }
+
   ion-grid {
     ion-row {
       padding: 10px;
@@ -8,16 +12,12 @@
       text-align: center;
     }
 
-    ion-col:first-child {
-      font-weight: 500;
-    }
-
     ion-col:last-child {
       text-align: center;
     }
 
     ion-row:nth-child(even) {
-      background: #ffe0c0;
+      background: #f9f3ec;
     }
   }
 }

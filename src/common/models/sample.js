@@ -141,7 +141,9 @@ class AppSample extends Sample {
 
       const commonNames = species.commonNames || [];
 
-      dict[species.scientificNameWithoutAuthor] = commonNames[0]; //eslint-disable-line
+      dict[species.scientificNameWithoutAuthor] = commonNames.length
+        ? commonNames[0]
+        : null;
     };
 
     this.samples.forEach(addToUniqueDict);

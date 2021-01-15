@@ -11,36 +11,12 @@ const alphabetically = ([s1], [s2]) => s1.localeCompare(s2);
 @observer
 class MainComponent extends React.Component {
   static propTypes = exact({
-    sample: PropTypes.object.isRequired,
+    stepCount: PropTypes.number.isRequired,
+    steps: PropTypes.array.isRequired,
   });
 
-  getSteps = () => {
-    const { sample } = this.props;
-
-    const steps = [];
-
-    const addToCounterIfInHabitat = (sp, stepSpecies) => {
-      stepSpecies.push(sp);
-    };
-
-    const processStep = stepSample => {
-      const stepSpecies = [];
-      steps.push(stepSpecies);
-
-      const addToCounterIfInHabitatWrap = sp =>
-        addToCounterIfInHabitat(sp, stepSpecies);
-
-      stepSample.getUniqueSpecies().forEach(addToCounterIfInHabitatWrap);
-    };
-
-    sample.samples.forEach(processStep);
-
-    return steps;
-  };
-
   getRowComponent = ([scientificName, { commonName, count }]) => {
-    const { sample } = this.props;
-    const stepCount = sample.samples.length;
+    const { stepCount } = this.props;
 
     const name = commonName || scientificName;
 
@@ -55,6 +31,8 @@ class MainComponent extends React.Component {
   };
 
   getSpeciesRows = () => {
+    const { steps } = this.props;
+
     const counter = {};
     const addToCounter = ([scientificName, commonName]) => {
       if (!counter[scientificName]) {
@@ -65,7 +43,6 @@ class MainComponent extends React.Component {
       counter[scientificName].count++;
     };
 
-    const steps = this.getSteps();
     const countStepSpecies = stepSpecies => stepSpecies.forEach(addToCounter);
     steps.forEach(countStepSpecies);
 

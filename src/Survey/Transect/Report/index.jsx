@@ -10,6 +10,30 @@ class ReportController extends React.Component {
     sample: PropTypes.object.isRequired,
   };
 
+  getSteps = () => {
+    const { sample } = this.props;
+
+    const steps = [];
+
+    const addToCounterIfInHabitat = (sp, stepSpecies) => {
+      stepSpecies.push(sp);
+    };
+
+    const processStep = stepSample => {
+      const stepSpecies = [];
+      steps.push(stepSpecies);
+
+      const addToCounterIfInHabitatWrap = sp =>
+        addToCounterIfInHabitat(sp, stepSpecies);
+
+      stepSample.getUniqueSpecies().forEach(addToCounterIfInHabitatWrap);
+    };
+
+    sample.samples.forEach(processStep);
+
+    return steps;
+  };
+
   render() {
     const { sample } = this.props;
 
@@ -17,10 +41,13 @@ class ReportController extends React.Component {
       return null;
     }
 
+    const steps = this.getSteps();
+    const stepCount = sample.samples.length;
+
     return (
       <Page id="transect-survey-report">
         <Header title="Report" />
-        <Main sample={sample} />
+        <Main stepCount={stepCount} steps={steps} />
       </Page>
     );
   }
