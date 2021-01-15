@@ -42,6 +42,13 @@ const survey = {
 
     location: locationAttr,
 
+    name: {
+      label: 'Survey Name',
+      type: 'textarea',
+      info: 'You can change your survey name here.',
+      remote: { id: 1531 },
+    },
+
     type: {
       label: 'Type',
       type: 'radio',
@@ -245,6 +252,7 @@ const survey = {
       },
 
       attrs: {
+        name: new Date().toLocaleDateString(),
         location: null,
       },
     });

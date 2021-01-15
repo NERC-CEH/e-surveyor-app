@@ -34,7 +34,6 @@ class MainComponent extends React.Component {
 
     const prettyGridRef = <GridRefValue sample={sample} />;
 
-    const isCommonStandards = type === 'Common Standards';
     const isCustom = type === 'Custom';
 
     return (
@@ -75,7 +74,7 @@ class MainComponent extends React.Component {
             skipValueTranslation
             disabled={isDisabled || !isCustom || completedDetails}
           />
-          {isCommonStandards && (
+          {!isCustom && (
             <MenuAttrItem
               routerLink={`${match.url}/habitat`}
               value={habitat}

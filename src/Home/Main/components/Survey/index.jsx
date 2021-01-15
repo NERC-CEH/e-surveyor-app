@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { alert, date } from '@apps';
+import { alert } from '@apps';
 import { observer } from 'mobx-react';
 import {
   IonItem,
@@ -47,7 +47,7 @@ const Survey = ({ sample }) => {
         <div className="species-info">
           <h3>{survey.label}</h3>
           <h4>{sample.attrs.type}</h4>
-          <h4>{date.print(sample.metadata.created_on)}</h4>
+          <h4>{sample.attrs.name}</h4>
         </div>
       );
     }

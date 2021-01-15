@@ -9,7 +9,7 @@ import {
   IonIcon,
   IonItemDivider,
 } from '@ionic/react';
-import { createOutline, leaf } from 'ionicons/icons';
+import { createOutline, leaf, bookmarkOutline } from 'ionicons/icons';
 import { Main, MenuAttrItem, MenuNote } from '@apps';
 import './styles.scss';
 
@@ -126,6 +126,14 @@ class MainComponent extends React.Component {
             icon={createOutline}
             value={sample.attrs.type}
             label="Details"
+            skipValueTranslation
+            disabled={isDisabled}
+          />
+          <MenuAttrItem
+            routerLink={`${match.url}/name`}
+            icon={bookmarkOutline}
+            value={sample.attrs.name}
+            label="Name"
             skipValueTranslation
             disabled={isDisabled}
           />

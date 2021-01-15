@@ -32,6 +32,7 @@ const ModelLocationWrap = props => (
 const routes = [
   [`${baseURL}`, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId`, HomeWrap],
+  [`${baseURL}/:smpId/:attr`, Attr],
   [`${baseURL}/:smpId/details`, Details],
   [`${baseURL}/:smpId/details/:attr`, Attr],
   [`${baseURL}/:smpId/details/map`, ModelLocationWrap],
@@ -39,7 +40,10 @@ const routes = [
   [`${baseURL}/:smpId/quadrat/:subSmpId/map`, ModelLocationWrap],
   [`${baseURL}/:smpId/quadrat/:subSmpId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/quadrat/:subSmpId/species/:subSubSmpId`, EditSpecies],
-  [`${baseURL}/:smpId/quadrat/:subSmpId/species/:subSubSmpId/taxon`, TaxonSearch],
+  [
+    `${baseURL}/:smpId/quadrat/:subSmpId/species/:subSubSmpId/taxon`,
+    TaxonSearch,
+  ],
   [`${baseURL}/:smpId/report`, Report],
 ];
 
