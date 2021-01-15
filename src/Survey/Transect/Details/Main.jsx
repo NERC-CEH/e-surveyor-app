@@ -69,7 +69,7 @@ class MainComponent extends React.Component {
 
           <MenuAttrItem
             routerLink={`${match.url}/quadratSize`}
-            value={quadratSize}
+            value={!!quadratSize && `${quadratSize}m`}
             icon={squareIcon}
             label="Quadrat size"
             skipValueTranslation
