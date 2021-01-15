@@ -32,12 +32,12 @@ async function onRegister(userModel, details, onSuccess) {
     userModel.save();
 
     alert({
-      header: 'Welcome aboard 🎉',
+      header: 'Welcome aboard',
       message: (
         <>
           <T>
-            Before starting any surveys please check your email and click on
-            the verification link.
+            Before starting any surveys please check your email and click on the
+            verification link.
           </T>
         </>
       ),
@@ -65,13 +65,10 @@ export default function RegisterContainer({ userModel }) {
   };
 
   const onRegisterWrap = details => onRegister(userModel, details, onSuccess);
-  
+
   return (
     <Page id="user-register">
-      <Main
-        schema={userModel.registerSchema}
-        onSubmit={onRegisterWrap}
-      />
+      <Main schema={userModel.registerSchema} onSubmit={onRegisterWrap} />
     </Page>
   );
 }
