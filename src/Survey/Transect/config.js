@@ -15,11 +15,12 @@ export const getDetailsValidationSchema = sample =>
     quadratSize: Yup.number().min(1).required('Please select your seedmix.'),
     steps: Yup.number().min(1).required('Please select your seedmix.'),
     habitat:
-      sample.attrs.type === 'Common Standards' &&
+      sample.attrs.type !== 'Custom' &&
       Yup.mixed().required('Please select habitat.'),
   });
 
-const habitats = [
+const agriEnvironmentHabitats = [{ value: 'Pollen & Nectar', id: -1 }];
+const commonStandardsHabitats = [
   { value: 'Wet grasslands - MG8', id: 17953 },
   { value: 'Flood-plain grasslands - MG4', id: 17954 },
 ];
@@ -58,6 +59,10 @@ const survey = {
             : 20;
           sample.attrs.quadratSize = 1; // eslint-disable-line
         }
+
+        if (value === 'Agri-environment') {
+          sample.attrs.habitat = null; // eslint-disable-line
+        }
       },
       options: surveyTypes,
       remote: {
@@ -84,10 +89,14 @@ const survey = {
     habitat: {
       label: 'Type',
       type: 'radio',
-      options: habitats,
+      options: sample => {
+        return sample.attrs.type === 'Agri-environment'
+          ? agriEnvironmentHabitats
+          : commonStandardsHabitats;
+      },
       remote: {
         id: 1532,
-        values: habitats,
+        values: [...agriEnvironmentHabitats, ...commonStandardsHabitats],
       },
     },
 
