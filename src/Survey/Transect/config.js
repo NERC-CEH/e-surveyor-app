@@ -12,7 +12,6 @@ import appModel from 'appModel';
 export const getDetailsValidationSchema = sample =>
   Yup.object().shape({
     location: verifyLocationSchema,
-    seedmix: Yup.mixed().required('Please select your seedmix.'),
     quadratSize: Yup.number().min(1).required('Please select your seedmix.'),
     steps: Yup.number().min(1).required('Please select your seedmix.'),
     habitat:

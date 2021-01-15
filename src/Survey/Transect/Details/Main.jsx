@@ -86,7 +86,11 @@ class MainComponent extends React.Component {
             />
           )}
 
-          <IonItemDivider mode="ios">Seedmix</IonItemDivider>
+          <IonItemDivider mode="ios">
+            <span>
+              Seedmix (<i>optional</i>)
+            </span>
+          </IonItemDivider>
           <MenuAttrItem
             routerLink={`${match.url}/seedmixgroup`}
             icon={Seeds}
