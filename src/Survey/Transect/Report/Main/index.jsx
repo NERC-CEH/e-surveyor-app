@@ -13,6 +13,7 @@ class MainComponent extends React.Component {
   static propTypes = exact({
     stepCount: PropTypes.number.isRequired,
     steps: PropTypes.array.isRequired,
+    habitatList: PropTypes.array,
   });
 
   getRowComponent = ([scientificName, { commonName, count }]) => {
@@ -30,7 +31,7 @@ class MainComponent extends React.Component {
     );
   };
 
-  getSpeciesRows = () => {
+  getSpeciesCount = () => {
     const { steps } = this.props;
 
     const counter = {};
@@ -45,6 +46,35 @@ class MainComponent extends React.Component {
 
     const countStepSpecies = stepSpecies => stepSpecies.forEach(addToCounter);
     steps.forEach(countStepSpecies);
+
+    return counter;
+  };
+
+  getSpeciesCountForHabitat = () => {
+    const { habitatList } = this.props;
+    const counter = this.getSpeciesCount();
+
+    const habitatCounter = {};
+
+    const addToHabitatsCounter = sp => {
+      const recordedSpecies = counter[sp] || {};
+      const count = recordedSpecies.count || 0;
+      habitatCounter[sp] = {
+        count,
+      };
+    };
+
+    habitatList.forEach(addToHabitatsCounter);
+
+    return habitatCounter;
+  };
+
+  getSpeciesRows = () => {
+    const { habitatList } = this.props;
+
+    const counter = habitatList
+      ? this.getSpeciesCountForHabitat()
+      : this.getSpeciesCount();
 
     return Object.entries(counter)
       .sort(alphabetically)

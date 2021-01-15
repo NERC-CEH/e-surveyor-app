@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Page, Header } from '@apps';
 import { observer } from 'mobx-react';
 import Main from './Main';
+import habitats from './habitats';
 
 @observer
 class ReportController extends React.Component {
@@ -43,11 +44,14 @@ class ReportController extends React.Component {
 
     const steps = this.getSteps();
     const stepCount = sample.samples.length;
+    const habitatList = sample.attrs.habitat
+      ? habitats[sample.attrs.habitat]
+      : null;
 
     return (
       <Page id="transect-survey-report">
         <Header title="Report" />
-        <Main stepCount={stepCount} steps={steps} />
+        <Main stepCount={stepCount} steps={steps} habitatList={habitatList} />
       </Page>
     );
   }
