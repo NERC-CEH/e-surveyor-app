@@ -4,9 +4,10 @@ import { setupConfig, isPlatform } from '@ionic/react';
 import appModel from 'appModel';
 import userModel from 'userModel';
 import savedSamples from 'savedSamples';
-import initAnalytics from 'helpers/analytics';
+import config from 'config';
 import { Plugins, StatusBarStyle } from '@capacitor/core';
 import i18n from 'i18next';
+import { initAnalytics } from '@apps';
 import { initReactI18next } from 'react-i18next';
 import App from './App';
 
@@ -30,7 +31,16 @@ async function init() {
   await appModel._init;
   await savedSamples._init;
 
-  initAnalytics();
+  initAnalytics({
+    dsn: config.sentryDNS,
+    environment: config.environment,
+    build: config.build,
+    release: config.version,
+    userId: userModel.attrs.id,
+    tags: {
+      'app.appSession': appModel.attrs.appSession,
+    },
+  });
 
   appModel.attrs.appSession += 1;
   appModel.save();

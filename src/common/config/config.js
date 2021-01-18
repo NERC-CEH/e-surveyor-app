@@ -21,7 +21,7 @@ const CONFIG = {
   log: !__TEST__,
 
   // error analytics
-  sentry: !__TEST__ && process.env.APP_SENTRY_KEY,
+  sentryDNS: !__TEST__ && process.env.APP_SENTRY_KEY,
 
   // mapping
   map: {
