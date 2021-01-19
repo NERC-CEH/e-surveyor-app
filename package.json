@@ -100,7 +100,7 @@
     "@capacitor/cli": "^2.4.2",
     "@flumens/eslint-config": "^0.4.0",
     "@flumens/fetch-onedrive-excel": "^0.1.0",
-    "@flumens/webpack-config": "0.2.7",
+    "@flumens/webpack-config": "0.2.8",
     "axios": "0.20.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "^26.6.3",

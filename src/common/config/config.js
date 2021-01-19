@@ -6,8 +6,10 @@ const backendUrl = process.env.APP_BACKEND_URL || 'https://esurveyor.ceh.ac.uk';
 const indiciaUrl =
   process.env.APP_BACKEND_INDICIA_URL || 'https://warehouse1.indicia.org.uk';
 
+const isTestEnv = process.env.NODE_ENV === 'test';
+
 const CONFIG = {
-  environment: __ENV__,
+  environment: process.env.NODE_ENV,
   version: process.env.APP_VERSION,
   build: process.env.APP_BUILD,
 
@@ -15,10 +17,10 @@ const CONFIG = {
   POSSIBLE_THRESHOLD: 0.2,
 
   // use prod logging if testing otherwise full log
-  log: !__TEST__,
+  log: !isTestEnv,
 
   // error analytics
-  sentryDNS: !__TEST__ && process.env.APP_SENTRY_KEY,
+  sentryDNS: !isTestEnv && process.env.APP_SENTRY_KEY,
 
   // mapping
   map: {

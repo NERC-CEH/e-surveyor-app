@@ -68,7 +68,7 @@ export default class AppMedia extends Media {
   getURL() {
     const { data: name, path } = this.attrs;
 
-    if (!isPlatform('hybrid') || __TEST__) {
+    if (!isPlatform('hybrid') || process.env.NODE_ENV === 'test') {
       return name;
     }
 
