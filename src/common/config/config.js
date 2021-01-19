@@ -7,12 +7,9 @@ const indiciaUrl =
   process.env.APP_BACKEND_INDICIA_URL || 'https://warehouse1.indicia.org.uk';
 
 const CONFIG = {
-  // variables replaced on build
+  environment: __ENV__,
   version: process.env.APP_VERSION,
   build: process.env.APP_BUILD,
-  name: process.env.APP_NAME,
-
-  environment: __ENV__,
 
   POSITIVE_THRESHOLD: 0.7,
   POSSIBLE_THRESHOLD: 0.2,

@@ -124,12 +124,7 @@ class SpeciesCard extends React.Component {
         <Gallery
           isOpen={!!showGallery}
           items={items}
-          options={{
-            index: photoIndex,
-            shareEl: false,
-            fullscreenEl: false,
-            history: false,
-          }}
+          initialSlide={photoIndex}
           onClose={this.hideGallery}
         />
       </div>
@@ -192,7 +187,7 @@ class SpeciesCard extends React.Component {
 
     const onSelectWrap = () => onSelect(fullSpecies);
     const commonName = !!species.commonNames.length && species.commonNames[0];
-    
+
     return (
       <>
         {this.getGallery()}
