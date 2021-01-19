@@ -1,6 +1,3 @@
-/** ****************************************************************************
- * A common webpack configuration.
- **************************************************************************** */
 require('dotenv').config({ silent: true });
 const webpack = require('webpack');
 const appConfig = require('@flumens/webpack-config');
