@@ -78,7 +78,7 @@ const getData = async () => {
   await fetchAndSave('seedmix');
   await fetchAndSave('pollination');
   await fetchAndSave('plant_interactions');
-  await fetchAndSave('dummy_surveys');
+  await fetchAndSave('habitats');
 
   await filterUKSIPlants();
   await getEnglishPlantNames();

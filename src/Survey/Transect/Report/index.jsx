@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Page, Header } from '@apps';
 import { observer } from 'mobx-react';
+import habitats from 'common/data/habitats';
 import Main from './Main';
-import habitats from './habitats';
 
 @observer
 class ReportController extends React.Component {

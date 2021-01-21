@@ -1,0 +1,1808 @@
+[
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Alsike Clover",
+    "scientificName": "Trifolium hybridum",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Red Clover",
+    "scientificName": "Trifolium pratense",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Crimson Clover",
+    "scientificName": "Trifolium incarnatum subsp. incarnatum",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "White Clover",
+    "scientificName": "Trifolium repens",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Sainfoin",
+    "scientificName": "Onobrychis viciifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Lucerne",
+    "scientificName": "Medicago sativa subsp. sativa",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Bird's-foot trefoil",
+    "scientificName": "Lotus corniculatus",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Black Medick",
+    "scientificName": "Medicago lupulina",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Common Vetch",
+    "scientificName": "Vicia sativa",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Yarrow",
+    "scientificName": "Achillea millefolium",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Black Knapweed",
+    "scientificName": "Centaurea nigra sens. lat. (=nigra/debauxii)",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Oxeye Daisy",
+    "scientificName": "Leucanthemum vulgare",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Musk Mallow",
+    "scientificName": "Malva moschata",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Wild Carrot",
+    "scientificName": "Daucus carota",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Field Scabious",
+    "scientificName": "Knautia arvensis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Sweet Clover",
+    "scientificName": "Melilotus officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Fenugreek",
+    "scientificName": "Trigonella foenum-graecum",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Red Campion",
+    "scientificName": "Silene dioica",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Phacelia",
+    "scientificName": "Phacelia tanacetifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Borage",
+    "scientificName": "Borago officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Common Knapweed",
+    "scientificName": "Centaurea nigra sens. lat. (=nigra/debauxii)",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "Ribwort Plantain",
+    "scientificName": "Plantago lanceolata",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "Pollen and nectar",
+    "commonName": "White Campion",
+    "scientificName": "Silene latifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Sweet-flag",
+    "scientificName": "Acorus calamus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Velvet Bent",
+    "scientificName": "Agrostis canina",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Creeping Bent",
+    "scientificName": "Agrostis stolonifera",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water-plantain",
+    "scientificName": "Alisma plantago-aquatica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog Pimpernel",
+    "scientificName": "Anagallis tenella",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog-rosemary",
+    "scientificName": "Andromeda polifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Wild Angelica",
+    "scientificName": "Angelica sylvestris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Fool's-water-cress",
+    "scientificName": "Apium nodiflorum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Sea Aster",
+    "scientificName": "Aster tripolium",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Spear-leaved Orache",
+    "scientificName": "Atriplex prostrata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Lesser Water-parsnip",
+    "scientificName": "Berula erecta",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Sea Club-rush",
+    "scientificName": "Bolboschoenus maritimus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Purple Small-reed",
+    "scientificName": "Calamagrostis canescens",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Water-starwort",
+    "scientificName": "Callitriche stagnalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Heather",
+    "scientificName": "Calluna vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh-marigold",
+    "scientificName": "Caltha palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Cuckooflower",
+    "scientificName": "Cardamine pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Fibrous Tussock-sedge",
+    "scientificName": "Carex appropinquata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water Sedge",
+    "scientificName": "Carex aquatilis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Lesser Tussock-sedge",
+    "scientificName": "Carex diandra",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Dioecious Sedge",
+    "scientificName": "Carex dioica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Star Sedge",
+    "scientificName": "Carex echinata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Tufted-sedge",
+    "scientificName": "Carex elata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Glaucous Sedge",
+    "scientificName": "Carex flacca",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Tawny Sedge",
+    "scientificName": "Carex hostiana",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Slender Sedge",
+    "scientificName": "Carex lasiocarpa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog-sedge",
+    "scientificName": "Carex limosa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Sedge",
+    "scientificName": "Carex nigra",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "False Fox-sedge",
+    "scientificName": "Carex otrubae",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Carnation Sedge",
+    "scientificName": "Carex panicea",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Greater Tussock-sedge",
+    "scientificName": "Carex paniculata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Greater Pond-sedge",
+    "scientificName": "Carex riparia",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bottle Sedge",
+    "scientificName": "Carex rostrata",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bladder-sedge",
+    "scientificName": "Carex vesicaria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Yellow Sedge",
+    "scientificName": "Carex viridula",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Long-stalked Yellow-sedge",
+    "scientificName": "Carex viridula subsp. brachyrrhyncha",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Yellow-sedge",
+    "scientificName": "Carex viridula subsp. oedocarpa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Small-fruited Yellow-sedge",
+    "scientificName": "Carex viridula subsp. viridula",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Opposite-leaved Golden-saxifrage",
+    "scientificName": "Chrysosplenium oppositifolium",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Cowbane",
+    "scientificName": "Cicuta virosa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Creeping Thistle",
+    "scientificName": "Cirsium arvense",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Thistle",
+    "scientificName": "Cirsium palustre",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Great Fen-sedge",
+    "scientificName": "Cladium mariscus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "New Zealand Pigmyweed",
+    "scientificName": "Crassula helmsii",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Tufted Hair-grass",
+    "scientificName": "Deschampsia cespitosa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Round-leaved Sundew",
+    "scientificName": "Drosera rotundifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Many-stalked Spike-rush",
+    "scientificName": "Eleocharis multicaulis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Spike-rush",
+    "scientificName": "Eleocharis palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Crowberry agg.",
+    "scientificName": "Empetrum nigrum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Chickweed Willowherb",
+    "scientificName": "Epilobium alsinifolium",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Great Willowherb",
+    "scientificName": "Epilobium hirsutum",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Willowherb",
+    "scientificName": "Epilobium palustre",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water Horsetail",
+    "scientificName": "Equisetum fluviatile",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Horsetail",
+    "scientificName": "Equisetum palustre",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Cross-leaved Heath",
+    "scientificName": "Erica tetralix",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Cottongrass",
+    "scientificName": "Eriophorum angustifolium",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Hare's-tail Cottongrass",
+    "scientificName": "Eriophorum vaginatum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Hemp-agrimony",
+    "scientificName": "Eupatorium cannabinum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Japanese Knotweed",
+    "scientificName": "Fallopia japonica",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Red Fescue",
+    "scientificName": "Festuca rubra",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Meadowsweet",
+    "scientificName": "Filipendula ulmaria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Cleavers",
+    "scientificName": "Galium aparine",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh-bedstraw",
+    "scientificName": "Galium palustre",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Heath Bedstraw",
+    "scientificName": "Galium saxatile",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water Avens",
+    "scientificName": "Geum rivale",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Floating Sweet-grass",
+    "scientificName": "Glyceria fluitans",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Reed Sweet-grass",
+    "scientificName": "Glyceria maxima",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Giant Hogweed",
+    "scientificName": "Heracleum mantegazzianum",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Yorkshire-fog",
+    "scientificName": "Holcus lanatus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Pennywort",
+    "scientificName": "Hydrocotyle vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh St John's-wort",
+    "scientificName": "Hypericum elodes",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Indian Balsam",
+    "scientificName": "Impatiens glandulifera",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Yellow Iris",
+    "scientificName": "Iris pseudacorus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Sharp-flowered Rush",
+    "scientificName": "Juncus acutiflorus",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Jointed Rush",
+    "scientificName": "Juncus articulatus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bulbous Rush",
+    "scientificName": "Juncus bulbosus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Compact Rush",
+    "scientificName": "Juncus conglomeratus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Soft-rush",
+    "scientificName": "Juncus effusus",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Hard Rush",
+    "scientificName": "Juncus inflexus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Heath Rush",
+    "scientificName": "Juncus squarrosus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Blunt-flowered Rush",
+    "scientificName": "Juncus subnodulosus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Duckweed",
+    "scientificName": "Lemna minor",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Shoreweed",
+    "scientificName": "Littorella uniflora",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water Lobelia",
+    "scientificName": "Lobelia dortmanna",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Gypsywort",
+    "scientificName": "Lycopus europaeus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Yellow Loosestrife",
+    "scientificName": "Lysimachia vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Purple-loosestrife",
+    "scientificName": "Lythrum salicaria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water Mint",
+    "scientificName": "Mentha aquatica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bogbean",
+    "scientificName": "Menyanthes trifoliata",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Monkeyflower",
+    "scientificName": "Mimulus guttatus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Hybrid Monkeyflower",
+    "scientificName": "Mimulus guttatus x luteus = M. x robertsii",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Purple Moor-grass",
+    "scientificName": "Molinia caerulea",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Blinks",
+    "scientificName": "Montia fontana",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Tufted Forget-me-not",
+    "scientificName": "Myosotis laxa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water Forget-me-not",
+    "scientificName": "Myosotis scorpioides",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog-myrtle",
+    "scientificName": "Myrica gale",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog Asphodel",
+    "scientificName": "Narthecium ossifragum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Hemlock Water-dropwort",
+    "scientificName": "Oenanthe crocata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Lousewort",
+    "scientificName": "Pedicularis palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Milk-parsley",
+    "scientificName": "Peucedanum palustre",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Reed Canary-grass",
+    "scientificName": "Phalaris arundinacea",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Reed",
+    "scientificName": "Phragmites australis",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Rough Meadow-grass",
+    "scientificName": "Poa trivialis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Broad-leaved Pondweed",
+    "scientificName": "Potamogeton natans",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog Pondweed",
+    "scientificName": "Potamogeton polygonifolius",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Silverweed",
+    "scientificName": "Potentilla anserina",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Tormentil",
+    "scientificName": "Potentilla erecta",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Cinquefoil",
+    "scientificName": "Potentilla palustris",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bracken",
+    "scientificName": "Pteridium aquilinum",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Meadow Buttercup",
+    "scientificName": "Ranunculus acris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Lesser Spearwort",
+    "scientificName": "Ranunculus flammula",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Greater Spearwort",
+    "scientificName": "Ranunculus lingua",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Round-leaved Crowfoot",
+    "scientificName": "Ranunculus omiophyllus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "White Beak-sedge",
+    "scientificName": "Rhynchospora alba",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Water-cress",
+    "scientificName": "Rorippa nasturtium-aquaticum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bramble",
+    "scientificName": "Rubus fruticosus agg.",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Sorrel",
+    "scientificName": "Rumex acetosa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Curled Dock",
+    "scientificName": "Rumex crispus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Sallow",
+    "scientificName": "Salix cinerea",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Brookweed",
+    "scientificName": "Samolus valerandi",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Yellow Saxifrage",
+    "scientificName": "Saxifraga aizoides",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Starry Saxifrage",
+    "scientificName": "Saxifraga stellaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Club-rush",
+    "scientificName": "Schoenoplectus lacustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Grey Club-rush",
+    "scientificName": "Schoenoplectus tabernaemontani",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Black Bog-rush",
+    "scientificName": "Schoenus nigricans",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Autumn Hawkbit",
+    "scientificName": "Scorzoneroides autumnalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Skullcap",
+    "scientificName": "Scutellaria galericulata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Ragged-Robin",
+    "scientificName": "Silene flos-cuculi",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Greater Water-parsnip",
+    "scientificName": "Sium latifolium",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bittersweet",
+    "scientificName": "Solanum dulcamara",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Branched Bur-reed",
+    "scientificName": "Sparganium erectum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Woundwort",
+    "scientificName": "Stachys palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bog Stitchwort",
+    "scientificName": "Stellaria alsine",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Devil's-bit Scabious",
+    "scientificName": "Succisa pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Comfrey",
+    "scientificName": "Symphytum officinale",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Meadow-rue",
+    "scientificName": "Thalictrum flavum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Deergrass",
+    "scientificName": "Trichophorum caespitosum s.lat.",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "White Clover",
+    "scientificName": "Trifolium repens",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Lesser Bulrush",
+    "scientificName": "Typha angustifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Bulrush",
+    "scientificName": "Typha latifolia",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Gorse",
+    "scientificName": "Ulex europaeus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Nettle",
+    "scientificName": "Urtica dioica",
+    "positive": "NA"
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Greater Bladderwort",
+    "scientificName": "Utricularia vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Cranberry",
+    "scientificName": "Vaccinium oxycoccos",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Common Valerian",
+    "scientificName": "Valeriana officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Speedwell",
+    "scientificName": "Veronica scutellata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Tufted Vetch",
+    "scientificName": "Vicia cracca",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland fens",
+    "commonName": "Marsh Violet",
+    "scientificName": "Viola palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Meadowsweet",
+    "scientificName": "Filipendula ulmaria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Lady's Bedstraw",
+    "scientificName": "Galium verum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Rough Hawkbit",
+    "scientificName": "Leontodon hispidus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Common Bird's-foot-trefoil",
+    "scientificName": "Lotus corniculatus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Narrow-leaved Water-dropwort",
+    "scientificName": "Oenanthe silaifolia",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Common Bistort",
+    "scientificName": "Persicaria bistorta",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Cowslip",
+    "scientificName": "Primula veris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Yellow-rattle",
+    "scientificName": "Rhinanthus minor",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Great Burnet",
+    "scientificName": "Sanguisorba officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Saw-wort",
+    "scientificName": "Serratula tinctoria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Pepper-saxifrage",
+    "scientificName": "Silaum silaus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Betony",
+    "scientificName": "Stachys officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Devil's-bit Scabious",
+    "scientificName": "Succisa pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland meadows and upland hay meadows",
+    "commonName": "Common Meadow-rue",
+    "scientificName": "Thalictrum flavum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Sneezewort",
+    "scientificName": "Achillea ptarmica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Alder",
+    "scientificName": "Alnus glutinosa",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Bog Pimpernel",
+    "scientificName": "Anagallis tenella",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Wild Angelica",
+    "scientificName": "Angelica sylvestris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Cow Parsley",
+    "scientificName": "Anthriscus sylvestris",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "False Oat-grass",
+    "scientificName": "Arrhenatherum elatius",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Heather",
+    "scientificName": "Calluna vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh-marigold",
+    "scientificName": "Caltha palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Lesser Pond-sedge",
+    "scientificName": "Carex acutiformis",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Whorled Caraway",
+    "scientificName": "Carum verticillatum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "NULL",
+    "scientificName": "Centaurea nigra sensu strictu",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Creeping Thistle",
+    "scientificName": "Cirsium arvense",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Meadow Thistle",
+    "scientificName": "Cirsium dissectum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Spear Thistle",
+    "scientificName": "Cirsium vulgare",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Hawk's-beard",
+    "scientificName": "Crepis paludosa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Cock's-foot",
+    "scientificName": "Dactylis glomerata",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Common Spotted-orchid",
+    "scientificName": "Dactylorhiza fuchsii",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Early Marsh-orchid",
+    "scientificName": "Dactylorhiza incarnata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Heath Spotted-orchid",
+    "scientificName": "Dactylorhiza maculata",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Southern Marsh-orchid",
+    "scientificName": "Dactylorhiza praetermissa",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Tufted Hair-grass",
+    "scientificName": "Deschampsia cespitosa",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Helleborine",
+    "scientificName": "Epipactis palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Cross-leaved Heath",
+    "scientificName": "Erica tetralix",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Hemp-agrimony",
+    "scientificName": "Eupatorium cannabinum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Meadowsweet",
+    "scientificName": "Filipendula ulmaria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh-bedstraw",
+    "scientificName": "Galium palustre",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Fen Bedstraw",
+    "scientificName": "Galium uliginosum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Water Avens",
+    "scientificName": "Geum rivale",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Floating Sweet-grass",
+    "scientificName": "Glyceria fluitans",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Reed Sweet-grass",
+    "scientificName": "Glyceria maxima",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Fragrant Orchid",
+    "scientificName": "Gymnadenia conopsea",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Yorkshire-fog",
+    "scientificName": "Holcus lanatus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Pennywort",
+    "scientificName": "Hydrocotyle vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Sharp-flowered Rush",
+    "scientificName": "Juncus acutiflorus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Compact Rush",
+    "scientificName": "Juncus conglomeratus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Soft-rush",
+    "scientificName": "Juncus effusus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Hard Rush",
+    "scientificName": "Juncus inflexus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Rough Hawkbit",
+    "scientificName": "Leontodon hispidus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Perennial Rye-grass",
+    "scientificName": "Lolium perenne",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Greater Bird's-foot-trefoil",
+    "scientificName": "Lotus pedunculatus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Purple-loosestrife",
+    "scientificName": "Lythrum salicaria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Water Mint",
+    "scientificName": "Mentha aquatica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Bog-myrtle",
+    "scientificName": "Myrica gale",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Bog Asphodel",
+    "scientificName": "Narthecium ossifragum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Orchid",
+    "scientificName": "Orchidaceae",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Lousewort",
+    "scientificName": "Pedicularis palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Lousewort",
+    "scientificName": "Pedicularis sylvatica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Reed Canary-grass",
+    "scientificName": "Phalaris arundinacea",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Timothy",
+    "scientificName": "Phleum pratense",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Common Reed",
+    "scientificName": "Phragmites australis",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Rough Meadow-grass",
+    "scientificName": "Poa trivialis",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Tormentil",
+    "scientificName": "Potentilla erecta",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Cinquefoil",
+    "scientificName": "Potentilla palustris",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Bracken",
+    "scientificName": "Pteridium aquilinum",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Creeping Buttercup",
+    "scientificName": "Ranunculus repens",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Bramble",
+    "scientificName": "Rubus fruticosus agg.",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Curled Dock",
+    "scientificName": "Rumex crispus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Broad-leaved Dock",
+    "scientificName": "Rumex obtusifolius",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Common Sallow",
+    "scientificName": "Salix cinerea",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Creeping Willow",
+    "scientificName": "Salix repens",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Great Burnet",
+    "scientificName": "Sanguisorba officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Saw-wort",
+    "scientificName": "Serratula tinctoria",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Ragged-Robin",
+    "scientificName": "Silene flos-cuculi",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Devil's-bit Scabious",
+    "scientificName": "Succisa pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Common Meadow-rue",
+    "scientificName": "Thalictrum flavum",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "White Clover",
+    "scientificName": "Trifolium repens",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Globeflower",
+    "scientificName": "Trollius europaeus",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Gorse",
+    "scientificName": "Ulex europaeus",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Western Gorse",
+    "scientificName": "Ulex gallii",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Common Nettle",
+    "scientificName": "Urtica dioica",
+    "positive": 0
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Valerian",
+    "scientificName": "Valeriana dioica",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Common Valerian",
+    "scientificName": "Valeriana officinalis",
+    "positive": 1
+  },
+  {
+    "scheme": "CSM",
+    "habitat": "Lowland purple moor grass and rush pasture",
+    "commonName": "Marsh Violet",
+    "scientificName": "Viola palustris",
+    "positive": 1
+  }
+]

@@ -19,10 +19,10 @@ export const getDetailsValidationSchema = sample =>
       Yup.mixed().required('Please select habitat.'),
   });
 
-const agriEnvironmentHabitats = [{ value: 'Pollen & Nectar', id: -1 }];
+const agriEnvironmentHabitats = [{ value: 'Pollen and nectar', id: 17959 }];
 const commonStandardsHabitats = [
-  { value: 'Wet grasslands - MG8', id: 17953 },
-  { value: 'Flood-plain grasslands - MG4', id: 17954 },
+  { value: 'Lowland fens', id: 17953 },
+  { value: 'Lowland purple moor grass and rush pasture', id: 17954 },
 ];
 
 const surveyTypes = [
