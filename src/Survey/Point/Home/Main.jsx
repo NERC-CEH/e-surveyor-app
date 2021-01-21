@@ -62,9 +62,9 @@ class Component extends React.Component {
       header: 'Your first survey',
       message: (
         <>
-          You can add plant photos using your camera 📷 and we will try to
-          identify them for you. Alternatively, you can long-press the button to
-          enter the species manually 🔎
+          You can add plant photos using your camera and we will try to identify
+          them for you. Alternatively, you can long-press the button to enter
+          the species manually.
         </>
       ),
       buttons: [
