@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
-import { Main } from '@apps';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { IonSpinner, IonLabel } from '@ionic/react';
@@ -10,7 +9,7 @@ import './styles.scss';
 @observer
 class Component extends React.Component {
   static propTypes = {
-    species: PropTypes.object.isRequired,
+    species: PropTypes.object,
   };
 
   getSpeciesCard = sp => (
@@ -69,19 +68,17 @@ class Component extends React.Component {
     const { species: image } = this.props;
 
     return (
-      <>
-        <Main id="species-profile" className="ion-padding">
-          <img
-            className="species-main-image"
-            src={image.getURL()}
-            alt="species"
-          />
+      <div id="species-profile">
+        <img
+          className="species-main-image"
+          src={image.getURL()}
+          alt="species"
+        />
 
-          {this.getIDLoader()}
+        {this.getIDLoader()}
 
-          {this.showPlantList()}
-        </Main>
-      </>
+        {this.showPlantList()}
+      </div>
     );
   }
 }

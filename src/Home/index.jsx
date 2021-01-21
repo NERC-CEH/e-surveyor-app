@@ -43,7 +43,7 @@ class Component extends React.Component {
   getModal = () => (
     <IonModal isOpen={!!this.state.image} backdropDismiss={false}>
       <ModalHeader title="Species" onClose={this.hideSpeciesModal} />
-      {!!this.state.image && <SpeciesProfile species={this.state.image} />}
+      <SpeciesProfile species={this.state.image} />
     </IonModal>
   );
 
