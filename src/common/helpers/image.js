@@ -43,7 +43,13 @@ const Image = {
 
     const cameraOptions = { ...{}, ...defaultCameraOptions, ...options };
 
-    const file = await Camera.getPhoto(cameraOptions);
+    let file;
+    try {
+      file = await Camera.getPhoto(cameraOptions);
+    } catch (e) {
+      return null;
+    }
+
     const name = `${Date.now()}.jpeg`;
 
     if (!isPlatform('hybrid')) {
