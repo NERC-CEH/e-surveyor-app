@@ -12,10 +12,10 @@ import {
   IonHeader,
   NavContext,
 } from '@ionic/react';
-import { ModalHeader, Page, device, toast } from '@apps';
+import { ModalHeader, Page, device, toast, ImageHelp } from '@apps';
 import savedSamples from 'savedSamples';
 import appModel from 'appModel';
-import ImageHelp from 'helpers/image';
+import config from 'config';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
 import flowerIcon from 'common/images/flowerIcon.svg';
@@ -58,7 +58,11 @@ class Component extends React.Component {
       return;
     }
 
-    const image = await ImageHelp.getImageModel(ImageModel, photo);
+    const image = await ImageHelp.getImageModel(
+      ImageModel,
+      photo,
+      config.dataPath
+    );
     this.setState({ image });
 
     image.identification.identifying = true;

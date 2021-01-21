@@ -7,13 +7,13 @@ import {
   device,
   showInvalidsMessage,
   loader,
+  ImageHelp,
 } from '@apps';
 import Sample from 'sample';
 import Occurrence from 'occurrence';
 import { observer } from 'mobx-react';
 import { IonButton, IonIcon } from '@ionic/react';
 import config from 'config';
-import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import identifyImage from 'common/services/plantNet';

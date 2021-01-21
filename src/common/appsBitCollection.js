@@ -21,6 +21,7 @@ export { default as alert } from '@bit/flumens.apps.helpers.alert';
 export { default as loader } from '@bit/flumens.apps.helpers.loader';
 export { default as toast } from '@bit/flumens.apps.helpers.toast';
 export { default as initAnalytics } from '@bit/flumens.apps.utils.analytics';
+export { default as ImageHelp } from '@bit/flumens.apps.utils.image';
 export { default as date } from '@bit/flumens.apps.date';
 export * from '@bit/flumens.apps.utils.location';
 export * from '@bit/flumens.apps.utils.validation';

@@ -5,6 +5,7 @@ import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
 import { camera, locationOutline } from 'ionicons/icons';
 import image from 'common/models/image';
 import { Main, MenuAttrItem, PhotoPicker, LongPressButton } from '@apps';
+import config from 'config';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 
@@ -66,6 +67,7 @@ class MainComponent extends React.Component {
             model={subSample}
             ImageClass={image}
             isDisabled={isDisabled}
+            dataDirPath={config.dataPath}
           />
         </IonList>
 

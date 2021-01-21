@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header, toast, device } from '@apps';
+import { Page, Header, toast, device, ImageHelp } from '@apps';
 import { observer } from 'mobx-react';
-import ImageHelp from 'helpers/image';
 import ImageModel from 'common/models/image';
 import Sample from 'sample';
 import Occurrence from 'occurrence';

@@ -66,14 +66,14 @@ class Component extends React.Component {
   };
 
   render() {
-    const { species } = this.props;
+    const { species: image } = this.props;
 
     return (
       <>
         <Main id="species-profile" className="ion-padding">
           <img
             className="species-main-image"
-            src={species.attrs.data}
+            src={image.getURL()}
             alt="species"
           />
 
