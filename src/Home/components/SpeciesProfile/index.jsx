@@ -68,7 +68,7 @@ class Component extends React.Component {
     const { species: image } = this.props;
 
     return (
-      <div id="species-profile">
+      <div id="species-profile-contents">
         <img
           className="species-main-image"
           src={image.getURL()}
