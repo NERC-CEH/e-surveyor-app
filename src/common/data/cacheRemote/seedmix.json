@@ -3193,5 +3193,2973 @@
     "common_name": "White Campion ",
     "latin_name": "Silene latifolia",
     "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Alsike Clover",
+    "latin_name": "Trifolium hybridum",
+    "pn_latin_name": "Trifolium hybridum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Birds-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Lucerne ",
+    "latin_name": "Medicago sativa",
+    "pn_latin_name": "Medicago sativa L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB1 - Nectar-Rich Gold",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Slender Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Chewing's Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Common Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Small Leaf Timothy",
+    "latin_name": "Phleum pratense",
+    "pn_latin_name": "Phleum pratense L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Birds-foot Trefoil (ag)",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Yarrow (ag)",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Selfheal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB8 - Flower-Rich Margins and Plots",
+    "common_name": "Alsike Clover",
+    "latin_name": "Trifolium hybridum",
+    "pn_latin_name": "Trifolium hybridum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB9 - Corn Bunting Mix",
+    "common_name": "Spring Barley",
+    "latin_name": "Hordeum vulgare",
+    "pn_latin_name": "Hordeum vulgare L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB9 - Corn Bunting Mix",
+    "common_name": "Spring Triticale",
+    "latin_name": "xTriticosecale",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB9 - Corn Bunting Mix",
+    "common_name": "Mustard",
+    "latin_name": "Brassica cretica",
+    "pn_latin_name": "Brassica cretica Lam."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB9 - Corn Bunting Mix",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB12 - Budget Mix",
+    "common_name": "Wheat",
+    "latin_name": "Triticum aestivum",
+    "pn_latin_name": "Triticum aestivum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB12 - Budget Mix",
+    "common_name": "Naked Oats",
+    "latin_name": "Avena sativa",
+    "pn_latin_name": "Avena sativa L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB12 - Budget Mix",
+    "common_name": "White Millet",
+    "latin_name": "Panicum miliaceum",
+    "pn_latin_name": "Panicum miliaceum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB12 - Budget Mix",
+    "common_name": "Oilseed Rape",
+    "latin_name": "Brassica napus",
+    "pn_latin_name": "Brassica napus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB12 - Budget Mix",
+    "common_name": "Canary Seed",
+    "latin_name": "Phalaris canariensis",
+    "pn_latin_name": "Phalaris canariensis L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB15 - Two-Year Sow Legume Fallow",
+    "common_name": "Intermediate Perennial Ryegrass (T)",
+    "latin_name": "Lolium perenne",
+    "pn_latin_name": "Lolium perenne L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB15 - Two-Year Sow Legume Fallow",
+    "common_name": "Cocksfoot",
+    "latin_name": "Dactylis glomerata",
+    "pn_latin_name": "Dactylis glomerata L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB15 - Two-Year Sow Legume Fallow",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB15 - Two-Year Sow Legume Fallow",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB15 - Two-Year Sow Legume Fallow",
+    "common_name": "Birds-foot Trefoil ",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB15 - Two-Year Sow Legume Fallow",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Winter Wheat",
+    "latin_name": "Triticum aestivum",
+    "pn_latin_name": "Triticum aestivum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Winter Barley",
+    "latin_name": "Hordeum vulgare",
+    "pn_latin_name": "Hordeum vulgare L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Winter Triticale",
+    "latin_name": "xTriticosecale",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Gold of Pleasure",
+    "latin_name": "Camelina sativa",
+    "pn_latin_name": "Camelina sativa (L.) Crantz"
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Fodder Radish",
+    "latin_name": "Raphanus sativus",
+    "pn_latin_name": "Raphanus sativus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Stubble Turnip",
+    "latin_name": "Brassica rapa oleifera",
+    "pn_latin_name": "Brassica rapa oleifera L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Gruner Angelita Kale",
+    "latin_name": "Brassica oleracea",
+    "pn_latin_name": "Brassica oleracea L. "
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Sweet Clover",
+    "latin_name": "Melilotus officinalis",
+    "pn_latin_name": "Melilotus officinalis (L.) Pall."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Birds-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Phacelia",
+    "latin_name": "Phacelia tanacetifolia",
+    "pn_latin_name": "Phacelia tanacetifolia Benth."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "AB16 - Autumn Sown Bumblebird Mix",
+    "common_name": "Crimson Clover",
+    "latin_name": "Trifolium incarnatum",
+    "pn_latin_name": "Trifolium incarnatum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Slender Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Chewing's Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Meadow Fescue",
+    "latin_name": "Festuca pratensis",
+    "pn_latin_name": "Festuca pratensis Huds."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Small Leaf Timothy",
+    "latin_name": "Phleum pratense",
+    "pn_latin_name": "Phleum pratense L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Cocksfoot",
+    "latin_name": "Dactylis glomerata",
+    "pn_latin_name": "Dactylis glomerata L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Teasel",
+    "latin_name": "Dipsacus fullonum",
+    "pn_latin_name": "Dipsacus fullonum L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Wild Carrot",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "Oakbank",
+    "mix_name": "GWCT - Partridge Margin Mix",
+    "common_name": "Yellow Blossom Clover ",
+    "latin_name": "Melilotus officinalis",
+    "pn_latin_name": "Melilotus officinalis (L.) Pall."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Birds-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Common Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Corn Chamomile",
+    "latin_name": "Anthemis arvensis ",
+    "pn_latin_name": "Anthemis arvensis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Corn Cockle",
+    "latin_name": "Agrostemma githago",
+    "pn_latin_name": "Agrostemma githago L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Corn Marigold",
+    "latin_name": "Glebionis segetum",
+    "pn_latin_name": "Glebionis segetum (L.) Fourr."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Cornflower",
+    "latin_name": "Cyanus segetum",
+    "pn_latin_name": "Cyanus segetum Hill"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Cowslip",
+    "latin_name": "Primula veris",
+    "pn_latin_name": "Primula veris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Field Forget-Me-Not",
+    "latin_name": "Myosotis arvensis ",
+    "pn_latin_name": "Myosotis arvensis (L.) Hill."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Field Poppy",
+    "latin_name": "Papaver rhoeas ",
+    "pn_latin_name": "Papaver rhoeas L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Foxglove",
+    "latin_name": "Digitalis purpurea ",
+    "pn_latin_name": "Digitalis purpurea L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Goatsbeard",
+    "latin_name": "Aruncus dioicus",
+    "pn_latin_name": "Aruncus dioicus (Walter) Fernald"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Greater Knapweed",
+    "latin_name": "Centaurea scabiosa",
+    "pn_latin_name": "Centaurea scabiosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Hoary Plantain",
+    "latin_name": "Plantago media",
+    "pn_latin_name": "Plantago media L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Night-Flowering Catchfly",
+    "latin_name": "Silene noctiflora ",
+    "pn_latin_name": "Silene noctiflora L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Salad Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Sorrel",
+    "latin_name": "Rumex acetosa",
+    "pn_latin_name": "Rumex acetosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Wild Carrot ",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Wild Clary",
+    "latin_name": "Salvia verbenaca",
+    "pn_latin_name": "Salvia verbenaca L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Common Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Sheep's Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Small Leaf Timothy",
+    "latin_name": "Phleum pratense",
+    "pn_latin_name": "Phleum pratense L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Standard Wildflower Mixture ",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Common Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Common Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Cowslip",
+    "latin_name": "Primula veris",
+    "pn_latin_name": "Primula veris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Creeping Buttercup",
+    "latin_name": "Ranunculus repens",
+    "pn_latin_name": "Ranunculus repens L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Devil's-bit Scabious",
+    "latin_name": "Succisa pratensis",
+    "pn_latin_name": "Succisa pratensis Moench."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Field Scabious",
+    "latin_name": "Knautia arvensis",
+    "pn_latin_name": "Knautia arvensis (L.) Coult."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Hoary Plantain",
+    "latin_name": "Plantago media",
+    "pn_latin_name": "Plantago media L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Kidney Vetch",
+    "latin_name": "Anthyllis vulneraria",
+    "pn_latin_name": "Anthyllis vulneraria L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Meadow Cranesbill",
+    "latin_name": "Geranium pratense",
+    "pn_latin_name": "Geranium pratense L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Meadowsweet",
+    "latin_name": "Filipendula ulmaria ",
+    "pn_latin_name": "Filipendula ulmaria (L.) Maxim."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Salad Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Small Scabious",
+    "latin_name": "Scabiosa columbaria",
+    "pn_latin_name": "Scabiosa columbaria L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Wild Carrot ",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Yellow Rattle",
+    "latin_name": "Rhinanthus minor",
+    "pn_latin_name": "Rhinanthus minor L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Cocksfoot",
+    "latin_name": "Dactylis glomerata",
+    "pn_latin_name": "Dactylis glomerata L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Common Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Sheep's Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Slender Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Sweet Vernal Grass",
+    "latin_name": "Anthoxanthum odoratum",
+    "pn_latin_name": "Anthoxanthum odoratum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Calcareous Soils Mixture",
+    "common_name": "Yellow Oatgrass",
+    "latin_name": "Trisetum flavescens ",
+    "pn_latin_name": "Trisetum flavescens (L.) P.Beauv."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Birds-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Bladder Campion",
+    "latin_name": "Silene vulgaris ",
+    "pn_latin_name": "Silene vulgaris (Moench) Garcke"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Bulbous Buttercup",
+    "latin_name": "Ranunculus bulbosus",
+    "pn_latin_name": "Ranunculus bulbosus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Common Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Field Scabious",
+    "latin_name": "Knautia arvensis",
+    "pn_latin_name": "Knautia arvensis (L.) Coult."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Sorrel",
+    "latin_name": "Rumex acetosa",
+    "pn_latin_name": "Rumex acetosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Common St. John's Wort",
+    "latin_name": "Hypericum perforatum",
+    "pn_latin_name": "Hypericum perforatum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Common Toadflax",
+    "latin_name": "Linaria vulgaris",
+    "pn_latin_name": "Linaria vulgaris Mill."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Cowslip",
+    "latin_name": "Primula veris",
+    "pn_latin_name": "Primula veris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Hoary Plantain",
+    "latin_name": "Plantago media",
+    "pn_latin_name": "Plantago media L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Field Forget-Me-Not",
+    "latin_name": "Myosotis arvensis ",
+    "pn_latin_name": "Myosotis arvensis (L.) Hill."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Rough Hawkbit",
+    "latin_name": "Leontodon hispidus",
+    "pn_latin_name": "Leontodon hispidus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Viper's Bugloss",
+    "latin_name": "Echium vulgare ",
+    "pn_latin_name": "Echium vulgare L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Wild Carrot",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Wild Mignonette",
+    "latin_name": "Reseda lutea",
+    "pn_latin_name": "Reseda lutea L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Yellow Rattle",
+    "latin_name": "Rhinanthus minor",
+    "pn_latin_name": "Rhinanthus minor L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Common Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Sheep's Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Small Leaf Timothy",
+    "latin_name": "Phleum pratense",
+    "pn_latin_name": "Phleum pratense L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Strong Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Yellow Oatgrass",
+    "latin_name": "Trisetum flavescens ",
+    "pn_latin_name": "Trisetum flavescens (L.) P.Beauv."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Sandy Soils",
+    "common_name": "Yorkshire Fog",
+    "latin_name": "Holcus lanatus",
+    "pn_latin_name": "Holcus lanatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Betony",
+    "latin_name": "Betonica officinalis",
+    "pn_latin_name": "Stachys officinalis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Black Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Common Cat's Ear",
+    "latin_name": "Hypochaeris radiata",
+    "pn_latin_name": "Hypochaeris radiata Falk"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Cowslip",
+    "latin_name": "Primula veris",
+    "pn_latin_name": "Primula veris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Field Scabious",
+    "latin_name": "Knautia arvensis",
+    "pn_latin_name": "Knautia arvensis (L.) Coult."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Foxglove",
+    "latin_name": "Digitalis purpurea ",
+    "pn_latin_name": "Digitalis purpurea L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Ragged Robin",
+    "latin_name": "Silene flos-cuculi - (Lychnis flos-cuculi)",
+    "pn_latin_name": "Silene flos-cuculi (L.) Greuter & Burdet"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Sheep Sorrel",
+    "latin_name": "Rumex acetosa",
+    "pn_latin_name": "Rumex acetosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Sorrel",
+    "latin_name": "Rumex acetosa",
+    "pn_latin_name": "Rumex acetosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Tufted Vetch",
+    "latin_name": "Vicia cracca",
+    "pn_latin_name": "Vicia cracca L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Yellow Rattle",
+    "latin_name": "Rhinanthus minor",
+    "pn_latin_name": "Rhinanthus minor L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Browntop Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Sheep's Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Slender Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Sweet Vernal",
+    "latin_name": "Anthoxanthum odoratum",
+    "pn_latin_name": "Anthoxanthum odoratum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Heavy Clay",
+    "common_name": "Wavy Hairgrass",
+    "latin_name": "Deschampsia flexuosa ",
+    "pn_latin_name": "Deschampsia flexuosa (L.) Trin. "
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Betony",
+    "latin_name": "Betonica officinalis",
+    "pn_latin_name": "Stachys officinalis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Common Cat's Ear",
+    "latin_name": "Hypochaeris radiata",
+    "pn_latin_name": "Hypochaeris radiata Falk"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Common Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Common St. John's Wort",
+    "latin_name": "Hypericum perforatum",
+    "pn_latin_name": "Hypericum perforatum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Cornflower",
+    "latin_name": "Cyanus segetum",
+    "pn_latin_name": "Cyanus segetum Hill"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Devil's-bit Scabious",
+    "latin_name": "Succisa pratensis",
+    "pn_latin_name": "Succisa pratensis Moench."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Foxglove",
+    "latin_name": "Digitalis purpurea ",
+    "pn_latin_name": "Digitalis purpurea L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Fragrant Agrimony",
+    "latin_name": "Agrimonia procera",
+    "pn_latin_name": "Agrimonia procera Wallr."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Greater Birdsfoot Trefoil",
+    "latin_name": "Lotus pedunculatus",
+    "pn_latin_name": "Lotus pedunculatus Cav."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Ragged Robin",
+    "latin_name": "Silene flos-cuculi - (Lychnis flos-cuculi)",
+    "pn_latin_name": "Silene flos-cuculi (L.) Greuter & Burdet"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Sheep Sorrel",
+    "latin_name": "Rumex acetosa",
+    "pn_latin_name": "Rumex acetosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Sneezewort",
+    "latin_name": "Achillea ptarmica ",
+    "pn_latin_name": "Achillea ptarmica L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Sorrel",
+    "latin_name": "Rumex acetosa",
+    "pn_latin_name": "Rumex acetosa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Tufted Vetch",
+    "latin_name": "Vicia cracca",
+    "pn_latin_name": "Vicia cracca L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Wood Sage",
+    "latin_name": "Teucrium scorodonia",
+    "pn_latin_name": "Teucrium scorodonia L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Yellow Rattle",
+    "latin_name": "Rhinanthus minor",
+    "pn_latin_name": "Rhinanthus minor L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Common Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Sheep's Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Small Leaf Timothy",
+    "latin_name": "Phleum pratense",
+    "pn_latin_name": "Phleum pratense L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Strong Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Sweet Vernal",
+    "latin_name": "Anthoxanthum odoratum",
+    "pn_latin_name": "Anthoxanthum odoratum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Wavy Hairgrass",
+    "latin_name": "Deschampsia flexuosa ",
+    "pn_latin_name": "Deschampsia flexuosa (L.) Trin. "
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Acid Soils",
+    "common_name": "Yorkshire Fog",
+    "latin_name": "Holcus lanatus",
+    "pn_latin_name": "Holcus lanatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Black Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Corn Chamomile",
+    "latin_name": "Anthemis arvensis ",
+    "pn_latin_name": "Anthemis arvensis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Corn Cockle",
+    "latin_name": "Agrostemma githago",
+    "pn_latin_name": "Agrostemma githago L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Corn Marigold",
+    "latin_name": "Glebionis segetum",
+    "pn_latin_name": "Glebionis segetum (L.) Fourr."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Cornflower",
+    "latin_name": "Cyanus segetum",
+    "pn_latin_name": "Cyanus segetum Hill"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Field Poppy",
+    "latin_name": "Papaver rhoeas ",
+    "pn_latin_name": "Papaver rhoeas L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Lucerne ",
+    "latin_name": "Medicago sativa",
+    "pn_latin_name": "Medicago sativa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Ribgrass",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Salad Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Yellow Rattle",
+    "latin_name": "Rhinanthus minor",
+    "pn_latin_name": "Rhinanthus minor L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Common Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Meadow Fescue",
+    "latin_name": "Festuca pratensis",
+    "pn_latin_name": "Festuca pratensis Huds."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Sheep's Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Economy Wildflower Mixture",
+    "common_name": "Slender Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Borage",
+    "latin_name": "Borago officinalis",
+    "pn_latin_name": "Borago officinalis L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Crimson Clover",
+    "latin_name": "Trifolium incarnatum",
+    "pn_latin_name": "Trifolium incarnatum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Lucerne ",
+    "latin_name": "Medicago sativa",
+    "pn_latin_name": "Medicago sativa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Phacelia",
+    "latin_name": "Phacelia tanacetifolia",
+    "pn_latin_name": "Phacelia tanacetifolia Benth."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "Bumble Bee Mix",
+    "common_name": "Viper's Bugloss",
+    "latin_name": "Echium vulgare ",
+    "pn_latin_name": "Echium vulgare L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "Red Millet",
+    "latin_name": "Digitaria ischaemum",
+    "pn_latin_name": "Digitaria ischaemum (Schreb.) Mhl."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "White Millet",
+    "latin_name": "Panicum miliaceum",
+    "pn_latin_name": "Panicum miliaceum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "Grain Sorghum",
+    "latin_name": "Sorghum bicolor",
+    "pn_latin_name": "Sorghum bicolor (L.) Moench"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "Spring Triticale",
+    "latin_name": "xTriticosecale",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "Linseed",
+    "latin_name": "Linum usitatissimum",
+    "pn_latin_name": "Linum usitatissimum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "Kale",
+    "latin_name": "Brassica oleracea",
+    "pn_latin_name": "Brassica oleracea L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Pheasant & Finch 2 Year Mixture",
+    "common_name": "Quinoa",
+    "latin_name": "Chenopodium quinoa",
+    "pn_latin_name": "Chenopodium quinoa Willd."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Bittern Kale",
+    "latin_name": "xBrassica oleracea",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Kale",
+    "latin_name": "Brassica oleracea",
+    "pn_latin_name": "Brassica oleracea L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Gold of Pleasure",
+    "latin_name": "Camelina sativa",
+    "pn_latin_name": "Camelina sativa (L.) Crantz"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Interval (Rape x Kale)",
+    "latin_name": "xBrassica",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Utopia",
+    "latin_name": "Brassica napus",
+    "pn_latin_name": "Brassica napus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Radical Radish",
+    "latin_name": "Raphanus sativus",
+    "pn_latin_name": "Raphanus sativus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Lightning Mustard",
+    "latin_name": "Brassica cretica",
+    "pn_latin_name": "Brassica cretica Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Phacelia",
+    "latin_name": "Phacelia tanacetifolia",
+    "pn_latin_name": "Phacelia tanacetifolia Benth."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Grass Buster 2 Year Mixture",
+    "common_name": "Linseed",
+    "latin_name": "Linum usitatissimum",
+    "pn_latin_name": "Linum usitatissimum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "Red Millet",
+    "latin_name": "Digitaria ischaemum",
+    "pn_latin_name": "Digitaria ischaemum (Schreb.) Mhl."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "White Millet",
+    "latin_name": "Panicum miliaceum",
+    "pn_latin_name": "Panicum miliaceum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "Reed Millet",
+    "latin_name": "Echinochloa crus-galli",
+    "pn_latin_name": "Echinochloa crus-galli (L.) P.Beauv."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "Sorghum",
+    "latin_name": "Sorghum bicolor",
+    "pn_latin_name": "Sorghum bicolor (L.) Moench"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "Linseed",
+    "latin_name": "Linum usitatissimum",
+    "pn_latin_name": "Linum usitatissimum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "Triticale",
+    "latin_name": "xTriticale",
+    "pn_latin_name": "x Triticosecale rimpaui Wittm."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Broad Buster 1 Year Mixture",
+    "common_name": "Wheat",
+    "latin_name": "Triticum aestivum",
+    "pn_latin_name": "Triticum aestivum L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Buckwheat",
+    "latin_name": "Fagopyrum esculentum ",
+    "pn_latin_name": "Fagopyrum esculentum Moench."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Mustard",
+    "latin_name": "Brassica cretica",
+    "pn_latin_name": "Brassica cretica Lam."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Texel Greens",
+    "latin_name": "Brassica carinata ",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Forage Rape",
+    "latin_name": "Brassica napus",
+    "pn_latin_name": "Brassica napus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Early English Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Tyfon",
+    "latin_name": "Brassica rapa oleifera",
+    "pn_latin_name": "Brassica rapa oleifera L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Interval (Rape x Kale)",
+    "latin_name": "xBrassica",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Utopia",
+    "latin_name": "Brassica napus",
+    "pn_latin_name": "Brassica napus L."
+  },
+  {
+    "mix_group": "Bright Seeds",
+    "mix_name": "AB9 - Autumn Promise 1 Year Mixture",
+    "common_name": "Radical Fodder Radish",
+    "latin_name": "Raphanus sativus",
+    "pn_latin_name": "Raphanus sativus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Black Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Common Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Corn Cockle",
+    "latin_name": "Agrostemma githago",
+    "pn_latin_name": "Agrostemma githago L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Corn Flower",
+    "latin_name": "Cyanus segetum",
+    "pn_latin_name": "Cyanus segetum Hill"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Corn Marigold",
+    "latin_name": "Glebionis segetum",
+    "pn_latin_name": "Glebionis segetum (L.) Fourr."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Corn Poppy",
+    "latin_name": "Papaver rhoeas ",
+    "pn_latin_name": "Papaver rhoeas L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Suckling Clover",
+    "latin_name": "Trifolium dubium",
+    "pn_latin_name": "Trifolium dubium Sibth. "
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Browntop Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Chewing's Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Hard Fescue",
+    "latin_name": "Festuca longifolia",
+    "pn_latin_name": "Festuca longifolia Thuill."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 10 Country Meadow (General Purpose)",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Black Knapweed",
+    "latin_name": "Centaurea nigra",
+    "pn_latin_name": "Centaurea nigra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Common Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Meadow Buttercup",
+    "latin_name": "Ranunculus acris",
+    "pn_latin_name": "Ranunculus acris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Salad Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Yarrow ",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Browntop Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Chewing's Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Hard Fescue",
+    "latin_name": "Festuca longifolia",
+    "pn_latin_name": "Festuca longifolia Thuill."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "Pro Flora 8 Legacy (General Purpose)",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Cocksfoot",
+    "latin_name": "Dactylis glomerata",
+    "pn_latin_name": "Dactylis glomerata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Festulolium",
+    "latin_name": "x Festulolium",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Timothy",
+    "latin_name": "Phleum pratense",
+    "pn_latin_name": "Phleum pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Creeping Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Tall Fescue",
+    "latin_name": "Festuca arundinacea",
+    "pn_latin_name": "Festuca arundinacea Schreb."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Tall Oat Grass",
+    "latin_name": "Arrhenatherum album",
+    "pn_latin_name": "Arrhenatherum album (Vahl) Clayton"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Alsike Clover",
+    "latin_name": "Trifolium hybridum",
+    "pn_latin_name": "Trifolium hybridum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "GS4 - Pollen and Nectar with Grass",
+    "common_name": "Sheep's Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Alsike Clover",
+    "latin_name": "Trifolium hybridum",
+    "pn_latin_name": "Trifolium hybridum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Lucerne ",
+    "latin_name": "Medicago sativa",
+    "pn_latin_name": "Medicago sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Crimson Clover",
+    "latin_name": "Trifolium incarnatum",
+    "pn_latin_name": "Trifolium incarnatum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Corn Cockle",
+    "latin_name": "Agrostemma githago",
+    "pn_latin_name": "Agrostemma githago L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Wild Carrot",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Cornflower",
+    "latin_name": "Cyanus segetum",
+    "pn_latin_name": "Cyanus segetum Hill"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Corn Marigold",
+    "latin_name": "Glebionis segetum",
+    "pn_latin_name": "Glebionis segetum (L.) Fourr."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Field Poppy",
+    "latin_name": "Papaver rhoeas ",
+    "pn_latin_name": "Papaver rhoeas L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "Salad Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "WF1 - Countryside Flora",
+    "common_name": "White Campion",
+    "latin_name": "Silene latifolia",
+    "pn_latin_name": "Silene latifolia Poir."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Slender Red Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Chewing's Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Hard Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Browntop Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Wild Carrot",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Red Campion",
+    "latin_name": "Silene dioica",
+    "pn_latin_name": "Silene dioica (L.) Clairv."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Musk Mallow",
+    "latin_name": "Malva moschata",
+    "pn_latin_name": "Malva moschata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Self Heal",
+    "latin_name": "Prunella vulgaris",
+    "pn_latin_name": "Prunella vulgaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Ladys Bedstraw",
+    "latin_name": "Galium verum",
+    "pn_latin_name": "Galium verum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - Flower-Rich Margin Mixture",
+    "common_name": "Salad Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB15 - Legume Fallow Mixture with Grass",
+    "common_name": "Late Perennial Ryegrass ",
+    "latin_name": "Lolium perenne",
+    "pn_latin_name": "Lolium perenne L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB15 - Legume Fallow Mixture with Grass",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB15 - Legume Fallow Mixture with Grass",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB15 - Legume Fallow Mixture with Grass",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB15 - Legume Fallow Mixture with Grass",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB15 - Legume Fallow Mixture with Grass",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Chewing's Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Smooth Stalked Meadow Grass",
+    "latin_name": "Poa pratensis",
+    "pn_latin_name": "Poa pratensis L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Chewings Fescue",
+    "latin_name": "Festuca rubra",
+    "pn_latin_name": "Festuca rubra L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Hard Fescue",
+    "latin_name": "Festuca ovina",
+    "pn_latin_name": "Festuca ovina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Sainfoin",
+    "latin_name": "Onobrychis viciifolia",
+    "pn_latin_name": "Onobrychis viciifolia Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Crested Dogstail",
+    "latin_name": "Cynosurus cristatus",
+    "pn_latin_name": "Cynosurus cristatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Browntop Bent",
+    "latin_name": "Agrostis capillaris",
+    "pn_latin_name": "Agrostis capillaris L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Alsike Clover",
+    "latin_name": "Trifolium hybridum",
+    "pn_latin_name": "Trifolium hybridum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Black Medick",
+    "latin_name": "Medicago lupulina",
+    "pn_latin_name": "Medicago lupulina L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Wild Carrot",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Ribwort Plantain",
+    "latin_name": "Plantago lanceolata",
+    "pn_latin_name": "Plantago lanceolata L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB8 - BGM4 with Wild Flowers and Fine Grasses",
+    "common_name": "Sheep's Burnet",
+    "latin_name": "Poterium sanguisorba",
+    "pn_latin_name": "Sanguisorba minor Scop."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 1",
+    "common_name": "Spring Triticale",
+    "latin_name": "xTriticosecale",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 1",
+    "common_name": "Spring Barley",
+    "latin_name": "Hordeum vulgare",
+    "pn_latin_name": "Hordeum vulgare L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 1",
+    "common_name": "Spring Wheat",
+    "latin_name": "Triticum aestivum",
+    "pn_latin_name": "Triticum aestivum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 1",
+    "common_name": "White Millet",
+    "latin_name": "Panicum miliaceum",
+    "pn_latin_name": "Panicum miliaceum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 1",
+    "common_name": "Fodder Radish",
+    "latin_name": "Raphanus sativus",
+    "pn_latin_name": "Raphanus sativus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 1",
+    "common_name": "Red Millet",
+    "latin_name": "Digitaria ischaemum",
+    "pn_latin_name": "Digitaria ischaemum (Schreb.) Mhl."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Spring Triticale",
+    "latin_name": "xTriticosecale",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Spring Barley",
+    "latin_name": "Hordeum vulgare",
+    "pn_latin_name": "Hordeum vulgare L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Spring Wheat",
+    "latin_name": "Triticum aestivum",
+    "pn_latin_name": "Triticum aestivum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Kale",
+    "latin_name": "Brassica oleracea",
+    "pn_latin_name": "Brassica oleracea L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Fodder Radish",
+    "latin_name": "Raphanus sativus",
+    "pn_latin_name": "Raphanus sativus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "White Millet",
+    "latin_name": "Panicum miliaceum",
+    "pn_latin_name": "Panicum miliaceum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Quinoa",
+    "latin_name": "Chenopodium quinoa",
+    "pn_latin_name": "Chenopodium quinoa Willd."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB9 - WBS 2",
+    "common_name": "Red Millet",
+    "latin_name": "Digitaria ischaemum",
+    "pn_latin_name": "Digitaria ischaemum (Schreb.) Mhl."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Winter Triticale",
+    "latin_name": "xTriticosecale",
+    "pn_latin_name": "NA"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Winter Barley",
+    "latin_name": "Hordeum vulgare",
+    "pn_latin_name": "Hordeum vulgare L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Winter Wheat",
+    "latin_name": "Triticum aestivum",
+    "pn_latin_name": "Triticum aestivum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Fodder Radish",
+    "latin_name": "Raphanus sativus",
+    "pn_latin_name": "Raphanus sativus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Winter Vetch",
+    "latin_name": "Vicia sativa",
+    "pn_latin_name": "Vicia sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Gold of Pleasure",
+    "latin_name": "Camelina sativa",
+    "pn_latin_name": "Camelina sativa (L.) Crantz"
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Bird's-foot Trefoil",
+    "latin_name": "Lotus corniculatus",
+    "pn_latin_name": "Lotus corniculatus L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Lucerne ",
+    "latin_name": "Medicago sativa",
+    "pn_latin_name": "Medicago sativa L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Crimson Clover",
+    "latin_name": "Trifolium incarnatum",
+    "pn_latin_name": "Trifolium incarnatum L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Kale",
+    "latin_name": "Brassica oleracea",
+    "pn_latin_name": "Brassica oleracea L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Red Clover",
+    "latin_name": "Trifolium pratense",
+    "pn_latin_name": "Trifolium pratense L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Phacelia ",
+    "latin_name": "Phacelia tanacetifolia",
+    "pn_latin_name": "Phacelia tanacetifolia Benth."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Oxeye Daisy",
+    "latin_name": "Leucanthemum vulgare",
+    "pn_latin_name": "Leucanthemum vulgare (Vaill.) Lam."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Wild Carrot",
+    "latin_name": "Daucus carota",
+    "pn_latin_name": "Daucus carota L."
+  },
+  {
+    "mix_group": "DLF",
+    "mix_name": "AB16 - WBA 2",
+    "common_name": "Yarrow",
+    "latin_name": "Achillea millefolium",
+    "pn_latin_name": "Achillea millefolium L."
   }
 ]
