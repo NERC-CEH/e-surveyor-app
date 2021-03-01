@@ -8,6 +8,7 @@ import {
   verifyLocationSchema,
 } from 'Survey/common/config';
 import appModel from 'appModel';
+import { schemeHabitats } from 'common/data/habitats';
 
 export const getDetailsValidationSchema = sample =>
   Yup.object().shape({
@@ -19,11 +20,9 @@ export const getDetailsValidationSchema = sample =>
       Yup.mixed().required('Please select habitat.'),
   });
 
-const agriEnvironmentHabitats = [{ value: 'Pollen and nectar', id: 17959 }];
-const commonStandardsHabitats = [
-  { value: 'Lowland fens', id: 17953 },
-  { value: 'Lowland purple moor grass and rush pasture', id: 17954 },
-];
+const getHabitats = name => ({ value: name, id: name });
+const agriEnvironmentHabitats = schemeHabitats.AES.sort().map(getHabitats);
+const commonStandardsHabitats = schemeHabitats.CSM.sort().map(getHabitats);
 
 const surveyTypes = [
   { value: 'Agri-environment', id: 17955 },
