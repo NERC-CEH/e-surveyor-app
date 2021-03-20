@@ -64,6 +64,14 @@ export default () => (
       </Section>
 
       <Section>
+        <H>Funding</H>
+        <P>
+          We are grateful to the UKRI ASSIST project, Defra and the Joint Nature
+          Conservation Committee for funding this application.
+        </P>
+      </Section>
+
+      <Section>
         <H>Graphics</H>
         <P>
           Icons made by{' '}
