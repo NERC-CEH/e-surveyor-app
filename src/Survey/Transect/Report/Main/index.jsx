@@ -86,9 +86,9 @@ class MainComponent extends React.Component {
   getSpeciesCountRowsForHabitat() {
     const counter = this.getSpeciesCountForHabitat();
 
-    const byPositive = ({ positive }) => positive === 1;
-    const byNegative = ({ positive }) => positive === 0;
-    const byNeutral = ({ positive }) => positive === 'NA';
+    const byPositive = ({ positive, count }) => count && positive === 1;
+    const byNegative = ({ positive, count }) => count && positive === 0;
+    const byNeutral = ({ positive, count }) => count && positive === 'NA';
 
     const positive = counter
       .filter(byPositive)
@@ -116,43 +116,40 @@ class MainComponent extends React.Component {
       </IonRow>
     );
 
+    const getGroup = (rows, label) => {
+      if (!rows.length) {
+        return (
+          <>
+            <IonRow className="header">
+              <IonCol>
+                <h2>{label}</h2>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>No species found</IonCol>
+            </IonRow>
+          </>
+        );
+      }
+
+      return (
+        <>
+          <IonRow className="header">
+            <IonCol>
+              <h2>{label}</h2>
+            </IonCol>
+          </IonRow>
+          {header}
+          {rows}
+        </>
+      );
+    };
+
     return (
       <>
-        {!!neutral.length && (
-          <>
-            <IonRow className="header">
-              <IonCol>
-                <h2>Neutral</h2>
-              </IonCol>
-            </IonRow>
-            {header}
-            {neutral}
-          </>
-        )}
-
-        {!!positive.length && (
-          <>
-            <IonRow className="header">
-              <IonCol>
-                <h2>Positive</h2>
-              </IonCol>
-            </IonRow>
-            {header}
-            {positive}
-          </>
-        )}
-
-        {!!negative.length && (
-          <>
-            <IonRow className="header">
-              <IonCol>
-                <h2>Negative</h2>
-              </IonCol>
-            </IonRow>
-            {header}
-            {negative}
-          </>
-        )}
+        {getGroup(neutral, 'Neutral')}
+        {getGroup(positive, 'Positive')}
+        {getGroup(negative, 'Negative')}
       </>
     );
   }
