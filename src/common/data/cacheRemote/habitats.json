@@ -1367,7 +1367,6 @@
   {
     "scheme": "CSM",
     "habitat": "Lowland purple moor grass and rush pasture",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
@@ -1857,7 +1856,6 @@
   {
     "scheme": "CSM",
     "habitat": "Canals",
-    "commonName": "NULL",
     "scientificName": "Chara",
     "positive": 1
   },
@@ -1920,7 +1918,6 @@
   {
     "scheme": "CSM",
     "habitat": "Canals",
-    "commonName": "NULL",
     "scientificName": "Nitella",
     "positive": 1
   },
@@ -1962,14 +1959,12 @@
   {
     "scheme": "CSM",
     "habitat": "Canals",
-    "commonName": "NULL",
     "scientificName": "Ranunculus penicillatus subsp. penicillatus",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Canals",
-    "commonName": "NULL",
     "scientificName": "Ranunculus penicillatus subsp. pseudofluitans",
     "positive": 1
   },
@@ -1990,7 +1985,6 @@
   {
     "scheme": "CSM",
     "habitat": "Canals",
-    "commonName": "NULL",
     "scientificName": "Tolypella",
     "positive": 1
   },
@@ -2753,56 +2747,48 @@
   {
     "scheme": "CSM",
     "habitat": "Lowland purple moor grass and rush pasture",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland purple moor grass and rush pasture",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland purple moor grass and rush pasture",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland calcareous grassland",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland meadows and upland hay meadows",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland meadows and upland hay meadows",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland calcareous grassland",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Lowland calcareous grassland",
-    "commonName": "NULL",
     "scientificName": "Centaurea nigra sensu strictu",
     "positive": 1
   },
@@ -3026,7 +3012,6 @@
   {
     "scheme": "CSM",
     "habitat": "Lowland calcareous grassland",
-    "commonName": "NULL",
     "scientificName": "Cotoneaster microphyllus agg.",
     "positive": 0
   },
@@ -3341,7 +3326,6 @@
   {
     "scheme": "CSM",
     "habitat": "Lowland meadows and upland hay meadows",
-    "commonName": "NULL",
     "scientificName": "Euphrasia officinalis subsp. monticola",
     "positive": 1
   },
@@ -4986,7 +4970,6 @@
   {
     "scheme": "CSM",
     "habitat": "Lowland calcareous grassland",
-    "commonName": "NULL",
     "scientificName": "Rosa canina agg.",
     "positive": 0
   },
@@ -12630,7 +12613,6 @@
   {
     "scheme": "CSM",
     "habitat": "Hard oligo-mesotrophic waters with Chara spp.",
-    "commonName": "NULL",
     "scientificName": "Chara hispida sensu lato",
     "positive": 1
   },
@@ -12658,7 +12640,6 @@
   {
     "scheme": "CSM",
     "habitat": "Natural eutrophic waters",
-    "commonName": "NULL",
     "scientificName": "Chara",
     "positive": 1
   },
@@ -13092,14 +13073,12 @@
   {
     "scheme": "CSM",
     "habitat": "Hard oligo-mesotrophic waters with Chara spp.",
-    "commonName": "NULL",
     "scientificName": "Nitella",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Oligotrophic to mesotrophic",
-    "commonName": "NULL",
     "scientificName": "Nitella",
     "positive": 1
   },
@@ -13750,14 +13729,12 @@
   {
     "scheme": "CSM",
     "habitat": "Tall herbs (upland)",
-    "commonName": "NULL",
     "scientificName": "Alchemilla filicaulis subsp. filicaulis",
     "positive": 1
   },
   {
     "scheme": "CSM",
     "habitat": "Tall herbs (upland)",
-    "commonName": "NULL",
     "scientificName": "Alchemilla filicaulis subsp. vestita",
     "positive": 1
   },
@@ -15752,7 +15729,6 @@
   {
     "scheme": "CSM",
     "habitat": "Tall herbs (upland)",
-    "commonName": "NULL",
     "scientificName": "Dryopteris borreri",
     "positive": 1
   },
