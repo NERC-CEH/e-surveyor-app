@@ -335,7 +335,7 @@ class MainComponent extends React.Component {
   };
 
   getModalContents = () => {
-    if (this.state.showModal === 'Seedmix') {
+    if (this.state.showModal === 'Seed mix') {
       return <Main>{this.getSpeciesSeedmixModalList()}</Main>;
     }
 
@@ -417,7 +417,7 @@ class MainComponent extends React.Component {
         <Main>
           <IonList lines="full">
             <IonItem className="report-header" lines="none">
-              <div className="seedmix" onClick={this.getShowModal('Seedmix')}>
+              <div className="seedmix" onClick={this.getShowModal('Seed mix')}>
                 {seedmix && (
                   <>
                     <IonIcon icon={Seeds} />

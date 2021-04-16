@@ -148,7 +148,7 @@ const SplashScreen = ({ appModel }) => {
                 <h2>Compare what you see</h2>
                 <p>
                   Compare the species present in your habitat to those in your
-                  seedmix or against benchmark species lists.
+                  seed mix or against benchmark species lists.
                 </p>
               </div>
             </div>

@@ -13,8 +13,8 @@ import { schemeHabitats } from 'common/data/habitats';
 export const getDetailsValidationSchema = sample =>
   Yup.object().shape({
     location: verifyLocationSchema,
-    quadratSize: Yup.number().min(1).required('Please select your seedmix.'),
-    steps: Yup.number().min(1).required('Please select your seedmix.'),
+    quadratSize: Yup.number().min(1).required('Please select your seed mix.'),
+    steps: Yup.number().min(1).required('Please select your seed mix.'),
     habitat:
       sample.attrs.type !== 'Custom' &&
       Yup.mixed().required('Please select habitat.'),

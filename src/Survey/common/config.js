@@ -54,9 +54,9 @@ const getSeedMix = modal => {
 };
 
 export const seedmixGroupAttr = {
-  label: 'Seedmix Producer',
+  label: 'Seed mix Producer',
   type: 'radio',
-  info: 'Please indicate the seedmix producer.',
+  info: 'Please indicate the seed mix producer.',
   set: (value, { sample }) => {
     if (sample.attrs.seedmixgroup !== value) {
       sample.attrs.seedmixgroup = value; // eslint-disable-line
@@ -68,9 +68,9 @@ export const seedmixGroupAttr = {
 };
 
 export const seedmixAttr = {
-  label: 'Seedmix',
+  label: 'Seed mix',
   type: 'radio',
-  info: 'Please indicate the seedmix you have used.',
+  info: 'Please indicate the seed mix you have used.',
   options: getSeedMix,
   remote: { id: 1530 },
 };

@@ -87,7 +87,7 @@ class MainComponent extends React.Component {
 
           <IonItemDivider mode="ios">
             <span>
-              Seedmix (<i>optional</i>)
+              Seed mix (<i>optional</i>)
             </span>
           </IonItemDivider>
           <MenuAttrItem

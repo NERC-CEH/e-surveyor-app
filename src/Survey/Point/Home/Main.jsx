@@ -119,7 +119,7 @@ class Component extends React.Component {
             disabled={isDisabled}
           />
 
-          <IonItemDivider mode="ios">Seedmix</IonItemDivider>
+          <IonItemDivider mode="ios">Seed mix</IonItemDivider>
           <MenuAttrItem
             routerLink={`${baseURL}/seedmixgroup`}
             icon={Seeds}
