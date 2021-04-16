@@ -54,9 +54,9 @@ const getSeedMix = modal => {
 };
 
 export const seedmixGroupAttr = {
-  label: 'Seed mix Producer',
+  label: 'Supplier',
   type: 'radio',
-  info: 'Please indicate the seed mix producer.',
+  info: 'Please indicate the supplier.',
   set: (value, { sample }) => {
     if (sample.attrs.seedmixgroup !== value) {
       sample.attrs.seedmixgroup = value; // eslint-disable-line
