@@ -22,7 +22,7 @@ import './fourth.jpg';
 import './styles.scss';
 
 const SplashScreen = ({ appModel }) => {
-  const [showSkip, setShowSkip] = useState(true);
+  const [moreSlidesExist, setMoreSlidesExist] = useState(true);
 
   function exit() {
     Log('Info:Welcome:Controller: exit.');
@@ -34,7 +34,7 @@ const SplashScreen = ({ appModel }) => {
 
   const handleSlideChangeStart = async () => {
     const isEnd = await slideRef.current.isEnd();
-    setShowSkip(!isEnd);
+    setMoreSlidesExist(!isEnd);
   };
 
   const onIonSlidesDidLoadWrap = e => {
@@ -51,7 +51,7 @@ const SplashScreen = ({ appModel }) => {
       <IonHeader className="ion-no-border">
         <IonToolbar>
           <IonButtons slot="end">
-            {showSkip && (
+            {moreSlidesExist && (
               <IonButton color="none" onClick={exit}>
                 <IonIcon icon={closeOutline} />
               </IonButton>
@@ -61,7 +61,7 @@ const SplashScreen = ({ appModel }) => {
       </IonHeader>
       <Main>
         <IonSlides
-          pager
+          pager={moreSlidesExist}
           ref={slideRef}
           onIonSlideWillChange={handleSlideChangeStart}
           onIonSlidesDidLoad={onIonSlidesDidLoadWrap}
@@ -185,17 +185,17 @@ const SplashScreen = ({ appModel }) => {
           </IonSlide>
         </IonSlides>
       </Main>
-      <IonFooter className="ion-no-border">
-        <IonToolbar>
-          <IonButtons slot="end">
-            {showSkip && (
+      {moreSlidesExist && (
+        <IonFooter className="ion-no-border">
+          <IonToolbar>
+            <IonButtons slot="end">
               <IonButton color="none" onClick={slideNext}>
                 <IonIcon icon={arrowForward} />
               </IonButton>
-            )}
-          </IonButtons>
-        </IonToolbar>
-      </IonFooter>
+            </IonButtons>
+          </IonToolbar>
+        </IonFooter>
+      )}
     </Page>
   );
 };
