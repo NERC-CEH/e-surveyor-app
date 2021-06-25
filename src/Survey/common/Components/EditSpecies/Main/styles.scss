@@ -8,8 +8,8 @@
 
     .species-main-image {
       height: 210px;
-      background-position: center;
-      background-size: cover;
+      width: 100%;
+      object-fit: cover;
       border-radius: 0 0 15px 15px;
     }
 

@@ -108,13 +108,9 @@ class MainComponent extends React.Component {
     const image = media[0];
     const showImage = image.getURL();
 
-    const style = {
-      backgroundImage: `url(${showImage})`,
-    };
-
     return (
       <div className="species-main-image-wrapper">
-        <div style={style} className="species-main-image" alt="species" />
+        <img src={showImage} className="species-main-image" />
       </div>
     );
   };
