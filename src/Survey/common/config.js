@@ -3,9 +3,7 @@ import { date } from '@apps';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 
 const getSeedMixGroups = () => {
-  const addValueToObject = seedMixGroup => {
-    return { value: seedMixGroup };
-  };
+  const addValueToObject = seedMixGroup => ({ value: seedMixGroup });
 
   const getUniqueValues = (unique, item) => {
     return unique.includes(item.mix_group)
@@ -13,9 +11,12 @@ const getSeedMixGroups = () => {
       : [...unique, item.mix_group];
   };
 
+  const alphabetically = (v1, v2) => v1.value.localeCompare(v2.value);
+
   const seedMixGroups = seedmixData
     .reduce(getUniqueValues, [])
-    .map(addValueToObject);
+    .map(addValueToObject)
+    .sort(alphabetically);
 
   const notRecorded = {
     value: null,
