@@ -10,7 +10,7 @@ import {
   IonItemDivider,
 } from '@ionic/react';
 import { createOutline, leaf, bookmarkOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem, MenuNote } from '@apps';
+import { Main, MenuAttrItem, MenuNote } from '@flumens';
 import './styles.scss';
 
 function byDate(smp1, smp2) {

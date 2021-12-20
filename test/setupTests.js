@@ -16,6 +16,13 @@ Object.defineProperty(window, 'matchMedia', {
   value: jest.fn().mockImplementation(mock),
 });
 
+Object.defineProperty(window, 'L', {
+  writable: true,
+  value: {
+    Polyline: { extend() {} },
+  },
+});
+
 const localStorageMock = (function () {
   let store = {};
   return {

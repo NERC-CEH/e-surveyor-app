@@ -3,9 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
 import { camera, locationOutline } from 'ionicons/icons';
-import image from 'common/models/image';
-import { Main, MenuAttrItem, PhotoPicker, LongPressButton } from '@apps';
-import config from 'config';
+import image from 'models/image';
+import { Main, MenuAttrItem, LongPressButton } from '@flumens';
+import config from 'common/config';
+import PhotoPicker from 'common/Components/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 

@@ -12,11 +12,12 @@ import {
   IonHeader,
   NavContext,
 } from '@ionic/react';
-import { ModalHeader, Page, device, toast, ImageHelp } from '@apps';
-import savedSamples from 'savedSamples';
-import appModel from 'appModel';
-import config from 'config';
-import ImageModel from 'common/models/image';
+import { ModalHeader, Page, device, toast } from '@flumens';
+import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
+import savedSamples from 'models/savedSamples';
+import appModel from 'models/app';
+import config from 'common/config';
+import ImageModel from 'models/image';
 import identifyImage from 'common/services/plantNet';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import pointIcon from 'common/images/pointIcon.svg';

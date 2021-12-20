@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "common/*": ["./src/common/*"],
+      "@apps": ["./src/common/appsBitCollection"],
+      "models/*": ["./src/common/models/*"],
+      "helpers/*": ["src/common/helpers/*"],
+      "Components/*": ["src/common/Components/*"]
+    }
+  },
+  "include": ["src"]
+}

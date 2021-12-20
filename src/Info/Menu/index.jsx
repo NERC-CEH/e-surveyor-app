@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Header } from '@apps';
+import { Page, Header } from '@flumens';
 import Main from './Main';
 
 const MenuController = () => {

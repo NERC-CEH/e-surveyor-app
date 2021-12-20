@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { date } from '@apps';
+import { date } from '@flumens';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 
 const getSeedMixGroups = () => {

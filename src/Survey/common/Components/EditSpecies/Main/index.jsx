@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main } from '@apps';
+import { Main } from '@flumens';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import SpeciesCard from 'common/Components/SpeciesCard';

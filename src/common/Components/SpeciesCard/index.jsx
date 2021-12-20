@@ -13,7 +13,7 @@ import {
   IonButton,
   IonIcon,
 } from '@ionic/react';
-import { Gallery, InfoBackgroundMessage } from '@apps';
+import { Gallery, InfoBackgroundMessage } from '@flumens';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import './styles.scss';

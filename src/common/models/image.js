@@ -1,10 +1,12 @@
-import { Media } from '@apps';
+import { Media } from '@flumens';
 import Log from 'helpers/log';
 import { observable } from 'mobx';
 import { isPlatform } from '@ionic/react';
-import { Capacitor, Plugins, FilesystemDirectory } from '@capacitor/core';
-
-const { Filesystem } = Plugins;
+import { Capacitor } from '@capacitor/core';
+import {
+  Filesystem,
+  Directory as FilesystemDirectory,
+} from '@capacitor/filesystem';
 
 export default class AppMedia extends Media {
   @observable identification = { identifying: false };

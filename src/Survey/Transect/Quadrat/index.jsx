@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header, toast, device, ImageHelp } from '@apps';
+import { Page, Header, toast, device } from '@flumens';
 import { observer } from 'mobx-react';
-import ImageModel from 'common/models/image';
-import Sample from 'sample';
-import Occurrence from 'occurrence';
-import config from 'config';
+import ImageModel from 'models/image';
+import Sample from 'models/sample';
+import Occurrence from 'models/occurrence';
+import config from 'common/config';
+import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
 import identifyImage from 'common/services/plantNet';
 import Main from './Main';
 

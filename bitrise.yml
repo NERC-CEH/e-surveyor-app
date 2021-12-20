@@ -26,12 +26,13 @@ workflows:
           inputs:
             - module: app
             - variant: release\ndebug
+            - build_type: aab
             - project_location: $BITRISE_SOURCE_DIR/android
       - sign-apk@1:
           inputs:
             - debuggable_permitted: 'false'
             - verbose_log: 'true'
-            - android_app: $BITRISE_APK_PATH
+            - android_app: $BITRISE_AAB_PATH
   ci:
     before_run:
       - web
@@ -55,6 +56,10 @@ workflows:
           title: Create app artifact
           inputs:
             - notify_user_groups: none
+      - google-play-deploy@3:
+          inputs:
+            - package_name: $BITRISE_PROJECT_NAME
+            - service_account_json_key_path: $BITRISEIO_GOOGLE_SERVICE_KEY_URL
       - deploy-to-itunesconnect-application-loader@0:
           inputs:
             - password: $ITUNES_CONNECT_PASS

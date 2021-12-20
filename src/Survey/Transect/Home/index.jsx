@@ -7,11 +7,11 @@ import {
   device,
   showInvalidsMessage,
   loader,
-} from '@apps';
+} from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { observer } from 'mobx-react';
-import Sample from 'sample';
+import Sample from 'models/sample';
 import Main from './Main';
 
 const { warn } = toast;

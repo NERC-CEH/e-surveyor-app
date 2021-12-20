@@ -1,6 +1,6 @@
-import { Sample } from '@apps';
-import userModel from 'userModel';
-import config from 'config';
+import { Sample } from '@flumens';
+import userModel from 'models/user';
+import config from 'common/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import GPSExtension from './sampleGPSExt';
@@ -56,8 +56,6 @@ class AppSample extends Sample {
     return uniquePollinatorsNameList.map(getPollinatorProfile);
   }
 
-  store = modelStore;
-
   constructor(...args) {
     super(...args);
 
@@ -72,6 +70,8 @@ class AppSample extends Sample {
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
   }
+
+  store = modelStore;
 
   getSpecies() {
     if (!this.parent) {

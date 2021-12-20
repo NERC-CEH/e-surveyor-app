@@ -11,7 +11,7 @@ import {
   IonItemOptions,
   IonItemOption,
 } from '@ionic/react';
-import { alert } from '@apps';
+import { alert } from '@flumens';
 import {
   checkmarkCircle,
   helpCircle,
@@ -19,7 +19,7 @@ import {
   earth,
   leaf,
 } from 'ionicons/icons';
-import config from 'config';
+import config from 'common/config';
 import './styles.scss';
 
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
@@ -134,9 +134,7 @@ class SpeciesList extends Component {
             </IonLabel>
           )}
 
-          {identifying && (
-            <IonSpinner slot="end" className="identifying" />
-          )}
+          {identifying && <IonSpinner slot="end" className="identifying" />}
         </IonItem>
         {!isDisabled && (
           <IonItemOptions side="end">

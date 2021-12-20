@@ -1,8 +1,8 @@
 import React from 'react';
-import appModel from 'appModel';
-import savedSamples from 'savedSamples';
-import config from 'config';
-import { alert } from '@apps';
+import appModel from 'models/app';
+import savedSamples from 'models/savedSamples';
+import config from 'common/config';
+import { alert } from '@flumens';
 import PropTypes from 'prop-types';
 import { withRouter, useLocation } from 'react-router';
 import Log from 'helpers/log';

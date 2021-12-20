@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import { IonItemDivider, IonIcon, IonList, NavContext } from '@ionic/react';
-import { Main, alert, MenuAttrItem, LongPressButton, MenuNote } from '@apps';
+import { Main, alert, MenuAttrItem, LongPressButton, MenuNote } from '@flumens';
 import { camera, bookmarkOutline, locationOutline } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import Seeds from 'common/images/seeds.svg';

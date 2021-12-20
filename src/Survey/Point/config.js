@@ -7,7 +7,7 @@ import {
   locationAttr,
   verifyLocationSchema,
 } from 'Survey/common/config';
-import config from 'config';
+import config from 'common/config';
 
 const { POSSIBLE_THRESHOLD } = config;
 

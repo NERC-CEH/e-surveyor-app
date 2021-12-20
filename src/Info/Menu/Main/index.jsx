@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main } from '@apps';
+import { Main } from '@flumens';
 import { IonIcon, IonList, IonItem, IonItemDivider } from '@ionic/react';
 import { settings, informationCircleOutline } from 'ionicons/icons';
 import './styles.scss';

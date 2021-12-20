@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header, alert } from '@apps';
+import { Page, Header, alert } from '@flumens';
 import { IonButton, NavContext, IonIcon } from '@ionic/react';
 import { arrowForwardCircleOutline } from 'ionicons/icons';
 import { observer } from 'mobx-react';
@@ -18,21 +18,24 @@ class Controller extends React.Component {
 
   onDone = () => {
     const { match, sample } = this.props;
-      try {
-        getDetailsValidationSchema(sample).validateSync(sample.attrs)
-      } catch (attrError) {
-        alert({
-          header: 'Missing',
-          message: 'Please fill in all the details in this page before navigating next.',
-          buttons: [{
+    try {
+      getDetailsValidationSchema(sample).validateSync(sample.attrs);
+    } catch (attrError) {
+      alert({
+        header: 'Missing',
+        message:
+          'Please fill in all the details in this page before navigating next.',
+        buttons: [
+          {
             text: 'Got it',
-            role: 'cancel'
-          }]
-        })
-        return ;
-      }
+            role: 'cancel',
+          },
+        ],
+      });
+      return;
+    }
 
-      sample.metadata.completedDetails = true;
+    sample.metadata.completedDetails = true;
     sample.save();
 
     const url = match.url.replace('/details', '');

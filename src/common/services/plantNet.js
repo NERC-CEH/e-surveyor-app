@@ -1,4 +1,4 @@
-import config from 'config';
+import config from 'common/config';
 import Log from 'helpers/log';
 import { isPlatform } from '@ionic/react';
 import UKSIPlants from '../data/uksi_plants.list.json';

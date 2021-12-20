@@ -11,10 +11,10 @@ import {
   IonModal,
   IonNote,
 } from '@ionic/react';
-import { Main, ModalHeader, InfoBackgroundMessage } from '@apps';
+import { Main, ModalHeader, InfoBackgroundMessage } from '@flumens';
 import CountUp from 'react-countup';
 import PropTypes from 'prop-types';
-import Sample from 'sample';
+import Sample from 'models/sample';
 import pollination from 'common/data/pollination';
 import Seeds from 'common/images/seeds.svg';
 import './styles.scss';

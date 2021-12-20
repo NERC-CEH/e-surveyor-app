@@ -1,5 +1,7 @@
-import { Occurrence } from '@apps';
+import { Occurrence } from '@flumens';
 import Media from './image';
+
+[].map(() => this.isUploaded());
 
 export default class AppOccurrence extends Occurrence {
   static fromJSON(json) {
@@ -19,4 +21,6 @@ export default class AppOccurrence extends Occurrence {
   validateRemote() {
     return null;
   }
+
+  isDisabled = () => this.isUploaded();
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonList, IonItem, IonIcon } from '@ionic/react';
-import { Main } from '@apps';
+import { Main } from '@flumens';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import pointIcon from 'common/images/pointIcon.svg';

@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Log from 'helpers/log';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
-import { Page, device, toast, alert, loader } from '@apps';
+import { Page, device, toast, alert, loader } from '@flumens';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
@@ -50,8 +49,8 @@ async function onRegister(userModel, details, onSuccess) {
       ],
     });
   } catch (err) {
-    Log(err, 'e');
-    error(i18n.t(err.message));
+    console.error(err, 'e');
+    error(err.message);
   }
 
   loader.hide();

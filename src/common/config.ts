@@ -1,4 +1,7 @@
-import { Plugins, FilesystemDirectory } from '@capacitor/core';
+import {
+  Filesystem,
+  Directory as FilesystemDirectory,
+} from '@capacitor/filesystem';
 import { isPlatform } from '@ionic/react';
 
 const backendUrl = process.env.APP_BACKEND_URL || 'https://esurveyor.ceh.ac.uk';
@@ -39,11 +42,13 @@ const CONFIG = {
       url: indiciaUrl,
     },
   },
+
+  dataPath: '',
 };
 
 (async function getMediaDirectory() {
   if (isPlatform('hybrid')) {
-    const { uri } = await Plugins.Filesystem.getUri({
+    const { uri } = await Filesystem.getUri({
       path: '',
       directory: FilesystemDirectory.Data,
     });

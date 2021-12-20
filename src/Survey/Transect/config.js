@@ -7,7 +7,7 @@ import {
   locationAttr,
   verifyLocationSchema,
 } from 'Survey/common/config';
-import appModel from 'appModel';
+import appModel from 'models/app';
 import { schemeHabitats } from 'common/data/habitats';
 
 export const getDetailsValidationSchema = sample =>

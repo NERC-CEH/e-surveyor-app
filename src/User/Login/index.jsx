@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavContext } from '@ionic/react';
 import Log from 'helpers/log';
-import { toast, loader, Page, Header, device } from '@apps';
+import { toast, loader, Page, Header, device } from '@flumens';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
@@ -27,7 +27,7 @@ async function onLogin(userModel, details, onSuccess) {
     onSuccess();
   } catch (err) {
     Log(err, 'e');
-    error(i18n.t(err.message));
+    error(err.message);
   }
 
   loader.hide();
@@ -44,14 +44,11 @@ function LoginContainer({ userModel, onSuccess }) {
   };
 
   const onLoginWrap = details => onLogin(userModel, details, onSuccessReturn);
-  
+
   return (
     <Page id="user-login">
       <Header className="ion-no-border" routerDirection="none" />
-      <Main
-        schema={userModel.loginSchema}
-        onSubmit={onLoginWrap}
-      />
+      <Main schema={userModel.loginSchema} onSubmit={onLoginWrap} />
     </Page>
   );
 }

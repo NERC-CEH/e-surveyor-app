@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { NavContext } from '@ionic/react';
-import Log from 'helpers/log';
 import { Trans as T } from 'react-i18next';
-import { Page, Header, device, alert, loader, toast } from '@apps';
+import { Page, Header, device, alert, loader, toast } from '@flumens';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
@@ -39,8 +38,8 @@ async function onSubmit(userModel, details, onSuccess) {
       ],
     });
   } catch (err) {
-    Log(err, 'e');
-    error(i18n.t(err.message));
+    console.error(err, 'e');
+    error(err.message);
   }
 
   loader.hide();
@@ -54,7 +53,7 @@ export default function Container({ userModel }) {
   };
 
   const onSubmitWrap = details => onSubmit(userModel, details, onSuccess);
-  
+
   return (
     <Page id="user-reset">
       <Header
@@ -62,10 +61,7 @@ export default function Container({ userModel }) {
         routerDirection="none"
         defaultHref="/user/login"
       />
-      <Main
-        schema={userModel.resetSchema}
-        onSubmit={onSubmitWrap}
-      />
+      <Main schema={userModel.resetSchema} onSubmit={onSubmitWrap} />
     </Page>
   );
 }

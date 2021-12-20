@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Page, Main, Section } from '@apps';
+import { Header, Page, Main, Section } from '@flumens';
 import 'common/images/flumens.svg';
 import plantNetLogo from './Pl@ntNet_logo.png';
 import './styles.scss';

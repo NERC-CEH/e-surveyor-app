@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import exact from 'prop-types-exact';
 import { observer } from 'mobx-react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
-import { Main } from '@apps';
+import { Main } from '@flumens';
 import './styles.scss';
 
 const alphabetically = (s1, s2) => {

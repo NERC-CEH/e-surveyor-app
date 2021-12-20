@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IonItemDivider, IonList } from '@ionic/react';
 import { locationOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem } from '@apps';
+import { Main, MenuAttrItem } from '@flumens';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import Seeds from 'common/images/seeds.svg';

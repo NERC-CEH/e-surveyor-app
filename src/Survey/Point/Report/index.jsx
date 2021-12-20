@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header } from '@apps';
+import { Page, Header } from '@flumens';
 import { observer } from 'mobx-react';
 import Main from './Main';
 

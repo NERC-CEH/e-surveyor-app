@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { NavContext } from '@ionic/react';
-import Sample from 'sample';
-import savedSamples from 'savedSamples';
+import Sample from 'models/sample';
+import savedSamples from 'models/savedSamples';
 import { withRouter } from 'react-router';
 
 async function getNewSample(survey) {

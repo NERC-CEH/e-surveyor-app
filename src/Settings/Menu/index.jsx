@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Page, Header, toast } from '@apps';
+import { Page, Header, toast } from '@flumens';
 import { observer } from 'mobx-react';
 import Log from 'helpers/log';
 import Main from './Main';
@@ -31,7 +31,7 @@ const MenuController = props => {
   const { sendAnalytics, use10stepsForCommonStandard } = appModel.attrs;
 
   const onToggleWrap = (...args) => onToggle(appModel, ...args);
-  
+
   return (
     <Page id="settings">
       <Header title="Settings" />

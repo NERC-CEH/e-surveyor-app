@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import appModel from 'appModel';
-import userModel from 'userModel';
-import savedSamples from 'savedSamples';
+import appModel from 'models/app';
+import userModel from 'models/user';
+import savedSamples from 'models/savedSamples';
 import Menu from './Menu';
 
 const MenuWrap = () => (

@@ -1,4 +1,4 @@
-import { Model } from '@apps';
+import { Model } from '@flumens';
 import { genericStore } from './store';
 
 class AppModel extends Model {}

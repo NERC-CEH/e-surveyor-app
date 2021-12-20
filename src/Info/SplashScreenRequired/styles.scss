@@ -61,7 +61,7 @@ $dark-brown: #4d380a;
       }
     }
   }
-  
+
   ion-footer {
     position: absolute;
     bottom: 0;
@@ -102,7 +102,7 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('/images/first.jpg');
+        background-image: url('./first.jpg');
         background-position: 54%;
       }
     }
@@ -111,7 +111,7 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('/images/second.jpg');
+        background-image: url('./second.jpg');
         background-position: 34%;
       }
       ion-button {
@@ -125,7 +125,7 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('/images/third.jpg');
+        background-image: url('./third.jpg');
         background-position: 34%;
       }
       ion-button {
@@ -139,7 +139,7 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('/images/fourth.jpg');
+        background-image: url('./fourth.jpg');
         background-position: 34%;
       }
       ion-button {

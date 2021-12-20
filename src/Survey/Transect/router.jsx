@@ -1,9 +1,9 @@
 import React from 'react';
-import { RouteWithModels, AttrPage as Attr, ModelLocation } from '@apps';
-import savedSamples from 'savedSamples';
-import appModel from 'appModel';
-import userModel from 'userModel';
-import config from 'config';
+import { RouteWithModels, AttrPage as Attr, ModelLocation } from '@flumens';
+import savedSamples from 'models/savedSamples';
+import appModel from 'models/app';
+import userModel from 'models/user';
+import config from 'common/config';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
 import EditSpecies from 'Survey/common/Components/EditSpecies';
