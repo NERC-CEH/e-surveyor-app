@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,10 +16,9 @@
     "resolveJsonModule": true,
     "paths": {
       "common/*": ["./src/common/*"],
-      "@apps": ["./src/common/appsBitCollection"],
+      "@flumens": ["./src/common/flumens"],
       "models/*": ["./src/common/models/*"],
-      "helpers/*": ["src/common/helpers/*"],
-      "Components/*": ["src/common/Components/*"]
+      "Components/*": ["./src/common/Components/*"]
     }
   },
   "include": ["src"]
