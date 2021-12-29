@@ -11,7 +11,7 @@ import Home from './Home';
 import Info from './Info/router';
 import User from './User/router';
 import Settings from './Settings/router';
-import SplashScreenRequired from './Info/SplashScreenRequired';
+import OnboardingScreens from './Info/OnboardingScreensRequired';
 import Survey from './Survey/router';
 
 const HomeRedirect = () => {
@@ -20,7 +20,7 @@ const HomeRedirect = () => {
 
 const App = () => (
   <IonApp>
-    <SplashScreenRequired appModel={appModel}>
+    <OnboardingScreens appModel={appModel}>
       <IonReactRouter>
         <IonRouterOutlet id="user">{User}</IonRouterOutlet>
         <RequiresLogin userModel={userModel}>
@@ -34,7 +34,7 @@ const App = () => (
           </IonRouterOutlet>
         </RequiresLogin>
       </IonReactRouter>
-    </SplashScreenRequired>
+    </OnboardingScreens>
   </IonApp>
 );
 

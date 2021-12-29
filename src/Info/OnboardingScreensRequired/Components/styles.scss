@@ -102,7 +102,6 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('./first.jpg');
         background-position: 54%;
       }
     }
@@ -111,7 +110,6 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('./second.jpg');
         background-position: 34%;
       }
       ion-button {
@@ -125,7 +123,6 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('./third.jpg');
         background-position: 34%;
       }
       ion-button {
@@ -139,7 +136,6 @@ $dark-brown: #4d380a;
       @include slide;
 
       .slide-header {
-        background-image: url('./fourth.jpg');
         background-position: 34%;
       }
       ion-button {
