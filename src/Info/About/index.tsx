@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Page, Main, Header, Section } from '@flumens';
 import './styles.scss';
 
 const { P } = Section;
 
-const Component = () => (
+const About: FC = () => (
   <Page id="about">
     <Header title="About" />
     <Main className="ion-padding">
@@ -24,6 +24,4 @@ const Component = () => (
   </Page>
 );
 
-Component.propTypes = {};
-
-export default Component;
+export default About;
