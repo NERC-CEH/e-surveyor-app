@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Header, Page, Main, Section } from '@flumens';
 import 'common/images/flumens.svg';
 import plantNetLogo from './Pl@ntNet_logo.png';
@@ -6,7 +6,7 @@ import './styles.scss';
 
 const { P, H } = Section;
 
-export default () => (
+const Credits: FC = () => (
   <Page id="credits">
     <Header title="Credits" />
     <Main class="ion-padding">
@@ -111,3 +111,5 @@ export default () => (
     </Main>
   </Page>
 );
+
+export default Credits;
