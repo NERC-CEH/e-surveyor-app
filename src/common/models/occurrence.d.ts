@@ -1,4 +1,15 @@
-declare const appModel: {
+export type Species = {
+  warehouseId: number;
+  gbif: { id: number };
+  images: string[];
+  score: number;
+  species: {
+    commonNames: string[];
+    scientificNameWithoutAuthor: string;
+  };
+};
+
+declare const Occurrence: {
   new (obj: any): MyInterface;
   cid: string;
   _init: any;
@@ -16,4 +27,4 @@ declare const appModel: {
   getTaxonName?: any;
 };
 
-export default appModel;
+export default Occurrence;

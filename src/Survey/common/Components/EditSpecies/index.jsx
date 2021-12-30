@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { Page, Header } from '@flumens';
 import Main from './Main';
 
-function EditSpecies({ subSample, subSubSample, match }) {
+function EditSpecies({ subSample, subSubSample }) {
   const sample = subSubSample || subSample;
 
   return (
     <Page id="species-profile">
       <Header title="Species" />
-      <Main sample={sample} match={match} isDisabled={subSample.isUploaded()} />
+      <Main sample={sample} isDisabled={subSample.isUploaded()} />
     </Page>
   );
 }
@@ -18,7 +18,6 @@ function EditSpecies({ subSample, subSubSample, match }) {
 EditSpecies.propTypes = {
   subSample: PropTypes.object.isRequired,
   subSubSample: PropTypes.object,
-  match: PropTypes.object.isRequired,
 };
 
 export default observer(EditSpecies);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteWithModels, AttrPage as Attr, ModelLocation } from '@flumens';
+import { RouteWithModels, AttrPage, ModelLocation } from '@flumens';
 import savedSamples from 'models/savedSamples';
 import appModel from 'models/app';
 import userModel from 'models/user';
@@ -14,6 +14,8 @@ import Report from './Report';
 import survey from './config';
 
 const baseURL = '/survey/transect';
+
+const { AttrPageFromRoute } = AttrPage;
 
 const HomeWrap = props => (
   <Home appModel={appModel} userModel={userModel} {...props} />
@@ -32,9 +34,9 @@ const ModelLocationWrap = props => (
 const routes = [
   [`${baseURL}`, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId`, HomeWrap],
-  [`${baseURL}/:smpId/:attr`, Attr],
+  [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details`, Details],
-  [`${baseURL}/:smpId/details/:attr`, Attr],
+  [`${baseURL}/:smpId/details/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details/map`, ModelLocationWrap],
   [`${baseURL}/:smpId/quadrat/:subSmpId`, Quadrat],
   [`${baseURL}/:smpId/quadrat/:subSmpId/map`, ModelLocationWrap],

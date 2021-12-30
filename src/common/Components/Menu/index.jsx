@@ -2,7 +2,7 @@ import React from 'react';
 import appModel from 'models/app';
 import savedSamples from 'models/savedSamples';
 import config from 'common/config';
-import { alert } from '@flumens';
+import { useAlert } from '@flumens';
 import PropTypes from 'prop-types';
 import { withRouter, useLocation } from 'react-router';
 import Log from 'helpers/log';
@@ -57,7 +57,7 @@ const routes = {
   ],
 };
 
-function showLogoutConfirmationDialog(callback) {
+function showLogoutConfirmationDialog(alert, callback) {
   let deleteData = true;
 
   const onCheckboxChange = e => {
@@ -122,7 +122,7 @@ function renderMenuRoutes(list, location) {
   return list.map(getMenuItem);
 }
 
-function loggingOut(userModel) {
+function loggingOut(alert, userModel) {
   Log('Home:Info: logging out.');
 
   const onLogout = reset => {
@@ -133,12 +133,12 @@ function loggingOut(userModel) {
     userModel.logOut();
   };
 
-  showLogoutConfirmationDialog(onLogout);
+  showLogoutConfirmationDialog(alert, onLogout);
 }
 
-const getLogoutButton = userModel => {
+const getLogoutButton = (alert, userModel) => {
   const userName = userModel.attrs.fullName || userModel.attrs.email;
-  const loggingOutWrap = () => loggingOut(userModel);
+  const loggingOutWrap = () => loggingOut(alert, userModel);
 
   return (
     <IonItem detail={false} routerDirection="none" onClick={loggingOutWrap}>
@@ -152,6 +152,7 @@ const getLogoutButton = userModel => {
 
 const Menu = ({ userModel }) => {
   const location = useLocation();
+  const alert = useAlert();
 
   const getRoutes = routesList => renderMenuRoutes(routesList, location);
 
@@ -169,7 +170,7 @@ const Menu = ({ userModel }) => {
           <IonListHeader>
             <T>Account</T>
           </IonListHeader>
-          {getLogoutButton(userModel)}
+          {getLogoutButton(alert, userModel)}
         </IonList>
       </IonContent>
       <IonFooter className="ion-no-border">

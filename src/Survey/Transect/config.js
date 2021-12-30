@@ -42,39 +42,40 @@ const survey = {
     location: locationAttr,
 
     name: {
-      label: 'Survey Name',
-      type: 'textarea',
-      info: 'You can change your survey name here.',
+      headerProps: { label: 'Survey Name' },
+      attrProps: {
+        input: 'textarea',
+        info: 'You can change your survey name here.',
+      },
       remote: { id: 1531 },
     },
 
     type: {
-      label: 'Type',
-      type: 'radio',
-      set: (value, { sample }) => {
-        sample.attrs.type = value; // eslint-disable-line
+      attrProps: {
+        input: 'radio',
+        info: 'You can change your survey name here.',
+        inputProps: { options: surveyTypes },
+        set: (value, { sample }) => {
+          sample.attrs.type = value; // eslint-disable-line
 
-        sample.attrs.steps = 10; // eslint-disable-line
-        sample.attrs.quadratSize = 1; // eslint-disable-line
-
-        if (value === 'Common Standards') {
-          sample.attrs.habitat = null; // eslint-disable-line
-          // eslint-disable-next-line
-          sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
-            ? 10
-            : 20;
+          sample.attrs.steps = 10; // eslint-disable-line
           sample.attrs.quadratSize = 1; // eslint-disable-line
-        }
 
-        if (value === 'Agri-environment') {
-          sample.attrs.habitat = null; // eslint-disable-line
-        }
+          if (value === 'Common Standards') {
+            sample.attrs.habitat = null; // eslint-disable-line
+            // eslint-disable-next-line
+            sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
+              ? 10
+              : 20;
+            sample.attrs.quadratSize = 1; // eslint-disable-line
+          }
+
+          if (value === 'Agri-environment') {
+            sample.attrs.habitat = null; // eslint-disable-line
+          }
+        },
       },
-      options: surveyTypes,
-      remote: {
-        id: 1533,
-        values: surveyTypes,
-      },
+      remote: { id: 1533, values: surveyTypes },
     },
 
     steps: {

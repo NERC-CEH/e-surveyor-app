@@ -1,44 +1,37 @@
+import React, { FC } from 'react';
 import { observer } from 'mobx-react';
-import React from 'react';
-import PropTypes from 'prop-types';
 import { IonItemDivider, IonList } from '@ionic/react';
 import { locationOutline } from 'ionicons/icons';
 import { Main, MenuAttrItem } from '@flumens';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import transectIcon from 'common/images/transectIconBlack.svg';
+import { useRouteMatch } from 'react-router-dom';
+import Sample from 'models/sample';
 import Seeds from 'common/images/seeds.svg';
 import squareIcon from './square.svg';
 import habitatIcon from './habitats.svg';
 import stepsIcon from './steps.svg';
 
-@observer
-class MainComponent extends React.Component {
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    sample: PropTypes.object.isRequired,
-    isDisabled: PropTypes.bool,
-  };
+type Props = {
+  sample: typeof Sample;
+  isDisabled?: boolean;
+};
 
-  render() {
-    const { match, sample, isDisabled } = this.props;
+const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
+  const match = useRouteMatch();
 
-    const {
-      type,
-      seedmixgroup,
-      seedmix,
-      quadratSize,
-      steps,
-      habitat,
-    } = sample.attrs;
-    const { completedDetails } = sample.metadata;
+  const { type, seedmixgroup, seedmix, quadratSize, steps, habitat } =
+    sample.attrs;
+  const { completedDetails } = sample.metadata;
 
-    const prettyGridRef = <GridRefValue sample={sample} />;
+  const prettyGridRef = <GridRefValue sample={sample} />;
 
-    const isCustom = type === 'Custom';
+  const isCustom = type === 'Custom';
 
-    return (
-      <Main>
-        <IonList lines="full">
+  return (
+    <Main>
+      <IonList lines="full">
+        <div className="rounded">
           <MenuAttrItem
             routerLink={`${match.url}/map`}
             value={prettyGridRef}
@@ -47,11 +40,13 @@ class MainComponent extends React.Component {
             skipValueTranslation
             disabled={isDisabled}
           />
+        </div>
 
-          <IonItemDivider mode="ios">Survey</IonItemDivider>
+        <IonItemDivider mode="ios">Survey</IonItemDivider>
+        <div className="rounded">
           <MenuAttrItem
             routerLink={`${match.url}/type`}
-            value={type}
+            value={type || ''}
             icon={transectIcon}
             label="Type"
             skipValueTranslation
@@ -59,7 +54,7 @@ class MainComponent extends React.Component {
           />
           <MenuAttrItem
             routerLink={`${match.url}/steps`}
-            value={steps}
+            value={steps || ''}
             icon={stepsIcon}
             label="Steps"
             skipValueTranslation
@@ -77,39 +72,40 @@ class MainComponent extends React.Component {
           {!isCustom && (
             <MenuAttrItem
               routerLink={`${match.url}/habitat`}
-              value={habitat}
+              value={habitat || ''}
               icon={habitatIcon}
               label="Habitat"
               skipValueTranslation
               disabled={isDisabled}
             />
           )}
+        </div>
 
-          <IonItemDivider mode="ios">
-            <span>
-              Seed mix (<i>optional</i>)
-            </span>
-          </IonItemDivider>
+        <IonItemDivider mode="ios">
+          <span>
+            Seed mix (<i>optional</i>)
+          </span>
+        </IonItemDivider>
+        <div className="rounded">
           <MenuAttrItem
             routerLink={`${match.url}/seedmixgroup`}
             icon={Seeds}
             label="Supplier"
-            value={seedmixgroup}
+            value={seedmixgroup || ''}
             disabled={isDisabled}
           />
-
           <MenuAttrItem
             routerLink={`${match.url}/seedmix`}
             icon={Seeds}
             label="Name"
-            value={seedmix}
-            styles="opacity:0.8"
+            value={seedmix || ''}
+            // styles="opacity:0.8"
             disabled={!seedmixgroup || isDisabled}
           />
-        </IonList>
-      </Main>
-    );
-  }
-}
+        </div>
+      </IonList>
+    </Main>
+  );
+};
 
-export default MainComponent;
+export default observer(MainComponent);

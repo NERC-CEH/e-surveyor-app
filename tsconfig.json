@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "react",
+    "baseUrl": ".",
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "noEmit": true,
@@ -18,7 +19,9 @@
       "common/*": ["./src/common/*"],
       "@flumens": ["./src/common/flumens"],
       "models/*": ["./src/common/models/*"],
-      "Components/*": ["./src/common/Components/*"]
+      "helpers/*": ["./src/common/helpers/*"],
+      "Components/*": ["./src/common/Components/*"],
+      "Survey/common/Components/*": ["./src/Survey/common/Components/*"]
     }
   },
   "include": ["src"]

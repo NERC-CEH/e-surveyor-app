@@ -1,6 +1,5 @@
+import React, { FC } from 'react';
 import { observer } from 'mobx-react';
-import React from 'react';
-import PropTypes from 'prop-types';
 import {
   IonList,
   IonItem,
@@ -11,41 +10,39 @@ import {
 } from '@ionic/react';
 import { createOutline, leaf, bookmarkOutline } from 'ionicons/icons';
 import { Main, MenuAttrItem, MenuNote } from '@flumens';
+import Sample from 'models/sample';
+import { useRouteMatch } from 'react-router-dom';
 import './styles.scss';
 
-function byDate(smp1, smp2) {
+function byDate(smp1: typeof Sample, smp2: typeof Sample) {
   const date1 = new Date(smp1.attrs.date);
   const date2 = new Date(smp2.attrs.date);
   return date2.getTime() - date1.getTime();
 }
 
-@observer
-class MainComponent extends React.Component {
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    sample: PropTypes.object.isRequired,
-    onAddNewQuadrat: PropTypes.func.isRequired,
-    isDisabled: PropTypes.bool,
+type Props = {
+  sample: typeof Sample;
+  onAddNewQuadrat: () => void;
+  isDisabled?: boolean;
+};
+
+const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
+  const match = useRouteMatch();
+
+  const getQuadratsList = () => {
+    return sample.samples.slice().sort(byDate);
   };
 
-  getQuadratsList() {
-    const { sample } = this.props;
-
-    return sample.samples.slice().sort(byDate);
-  }
-
-  getQuadratPhoto = sample => {
-    const pic = sample.media.length && sample.media[0].getURL();
+  const getQuadratPhoto = (smp: typeof Sample) => {
+    const pic = smp.media.length && smp.media[0].getURL();
 
     const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
 
     return <div className="photo">{photo}</div>;
   };
 
-  getList = () => {
-    const { match, sample } = this.props;
-
-    const quadrats = this.getQuadratsList();
+  const getList = () => {
+    const quadrats = getQuadratsList();
 
     if (!quadrats.length) {
       return (
@@ -57,13 +54,13 @@ class MainComponent extends React.Component {
       );
     }
 
-    const getQuadrat = quadratSample => (
+    const getQuadrat = (quadratSample: typeof Sample) => (
       <IonItem
         key={quadratSample.cid}
         routerLink={`${match.url}/quadrat/${quadratSample.cid}`}
         detail
       >
-        {this.getQuadratPhoto(quadratSample)}
+        {getQuadratPhoto(quadratSample)}
 
         <IonLabel text-wrap>
           <IonLabel>
@@ -85,9 +82,7 @@ class MainComponent extends React.Component {
     );
   };
 
-  getAddButton = () => {
-    const { sample, onAddNewQuadrat, isDisabled } = this.props;
-
+  const getAddButton = () => {
     if (isDisabled) {
       return null;
     }
@@ -100,7 +95,6 @@ class MainComponent extends React.Component {
       <IonButton
         onClick={onAddNewQuadrat}
         color="secondary"
-        onLongClick={this.navigateToSearch}
         type="submit"
         expand="block"
       >
@@ -109,42 +103,38 @@ class MainComponent extends React.Component {
     );
   };
 
-  render() {
-    const { match, isDisabled, sample } = this.props;
+  return (
+    <Main>
+      <IonList lines="full">
+        {isDisabled && (
+          <MenuNote>
+            This survey has been finished and cannot be updated.
+          </MenuNote>
+        )}
 
-    return (
-      <Main>
-        <IonList lines="full">
-          {isDisabled && (
-            <MenuNote>
-              This survey has been finished and cannot be updated.
-            </MenuNote>
-          )}
+        <MenuAttrItem
+          routerLink={`${match.url}/details`}
+          icon={createOutline}
+          value={sample.attrs.type}
+          label="Details"
+          skipValueTranslation
+          disabled={isDisabled}
+        />
+        <MenuAttrItem
+          routerLink={`${match.url}/name`}
+          icon={bookmarkOutline}
+          value={sample.attrs.name}
+          label="Name"
+          skipValueTranslation
+          disabled={isDisabled}
+        />
+      </IonList>
 
-          <MenuAttrItem
-            routerLink={`${match.url}/details`}
-            icon={createOutline}
-            value={sample.attrs.type}
-            label="Details"
-            skipValueTranslation
-            disabled={isDisabled}
-          />
-          <MenuAttrItem
-            routerLink={`${match.url}/name`}
-            icon={bookmarkOutline}
-            value={sample.attrs.name}
-            label="Name"
-            skipValueTranslation
-            disabled={isDisabled}
-          />
-        </IonList>
+      {getAddButton()}
 
-        {this.getAddButton()}
+      {getList()}
+    </Main>
+  );
+};
 
-        {this.getList()}
-      </Main>
-    );
-  }
-}
-
-export default MainComponent;
+export default observer(MainComponent);

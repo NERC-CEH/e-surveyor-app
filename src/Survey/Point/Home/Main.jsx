@@ -102,40 +102,45 @@ class Component extends React.Component {
             </MenuNote>
           )}
 
-          <MenuAttrItem
-            routerLink={`${baseURL}/name`}
-            icon={bookmarkOutline}
-            label="Name"
-            value={name}
-            disabled={isDisabled}
-          />
+          <IonItemDivider>Details</IonItemDivider>
+          <div className="rounded">
+            <MenuAttrItem
+              routerLink={`${baseURL}/name`}
+              icon={bookmarkOutline}
+              label="Name"
+              value={name}
+              disabled={isDisabled}
+            />
 
-          <MenuAttrItem
-            routerLink={`${baseURL}/map`}
-            value={prettyGridRef}
-            icon={locationOutline}
-            label="Location"
-            skipValueTranslation
-            disabled={isDisabled}
-          />
+            <MenuAttrItem
+              routerLink={`${baseURL}/map`}
+              value={prettyGridRef}
+              icon={locationOutline}
+              label="Location"
+              skipValueTranslation
+              disabled={isDisabled}
+            />
+          </div>
 
-          <IonItemDivider mode="ios">Seed mix</IonItemDivider>
-          <MenuAttrItem
-            routerLink={`${baseURL}/seedmixgroup`}
-            icon={Seeds}
-            label="Supplier"
-            value={seedmixgroup}
-            disabled={isDisabled}
-          />
+          <IonItemDivider>Seed mix</IonItemDivider>
+          <div className="rounded">
+            <MenuAttrItem
+              routerLink={`${baseURL}/seedmixgroup`}
+              icon={Seeds}
+              label="Supplier"
+              value={seedmixgroup || ''}
+              disabled={isDisabled}
+            />
 
-          <MenuAttrItem
-            routerLink={`${baseURL}/seedmix`}
-            icon={Seeds}
-            label="Name"
-            value={seedmix}
-            styles="opacity:0.8"
-            disabled={!seedmixgroup || isDisabled}
-          />
+            <MenuAttrItem
+              routerLink={`${baseURL}/seedmix`}
+              icon={Seeds}
+              label="Name"
+              value={seedmix || ''}
+              // styles="opacity:0.8"
+              disabled={!seedmixgroup || isDisabled}
+            />
+          </div>
         </IonList>
 
         {this.getNewImageButton(photoSelect)}

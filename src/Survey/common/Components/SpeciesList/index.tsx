@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import {
   IonItem,
   IonLabel,
@@ -11,7 +10,9 @@ import {
   IonItemOptions,
   IonItemOption,
 } from '@ionic/react';
-import { alert } from '@flumens';
+import { useAlert } from '@flumens';
+import Sample from 'models/sample';
+import { useRouteMatch } from 'react-router-dom';
 import {
   checkmarkCircle,
   helpCircle,
@@ -24,7 +25,7 @@ import './styles.scss';
 
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
 
-function deletePhoto(image) {
+function deletePhoto(alert: any, image: any) {
   alert({
     header: 'Delete',
     skipTranslation: true,
@@ -43,16 +44,17 @@ function deletePhoto(image) {
     ],
   });
 }
-@observer
-class SpeciesList extends Component {
-  static propTypes = {
-    sample: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired,
-    isDisabled: PropTypes.bool,
-  };
 
-  getProfile = subSample => {
-    const { match, isDisabled } = this.props;
+type Props = {
+  sample: typeof Sample;
+  isDisabled: boolean;
+};
+
+const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
+  const match = useRouteMatch();
+  const alert = useAlert();
+
+  const getProfile = (subSample: typeof Sample) => {
     const species = subSample.getSpecies();
 
     let commonName;
@@ -101,11 +103,16 @@ class SpeciesList extends Component {
         : `${match.url}/species/${subSample.cid}`;
     }
 
-    const deletePhotoWrap = () => deletePhoto(subSample);
+    const deletePhotoWrap = () => deletePhoto(alert, subSample);
 
-    const detailsIcon = detailIcon || null;
+    const detailsIcon = detailIcon || '';
 
-    const profilePhoto = this.getProfilePhoto(speciesPhoto);
+    const getProfilePhoto = (pic?: string) => {
+      const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
+
+      return <div className="plant-photo-profile">{photo}</div>;
+    };
+    const profilePhoto = getProfilePhoto(speciesPhoto);
 
     return (
       <IonItemSliding className="species-list-item" key={subSample.cid}>
@@ -147,40 +154,26 @@ class SpeciesList extends Component {
     );
   };
 
-  getProfilePhoto = speciesPhoto => {
-    const photo = speciesPhoto ? (
-      <img src={speciesPhoto} />
-    ) : (
-      <IonIcon icon={leaf} />
+  const subSamples = [...sample.samples];
+
+  if (!sample.samples.length) {
+    return (
+      <IonList>
+        <IonItem className="empty">
+          <span>Your species list is empty.</span>
+        </IonItem>
+      </IonList>
     );
-
-    return <div className="plant-photo-profile">{photo}</div>;
-  };
-
-  navigateToSearch = () => {
-    const { match } = this.props;
-
-    this.context.navigate(`${match.url}/taxon`);
-  };
-
-  render() {
-    const { sample } = this.props;
-
-    const subSamples = [...sample.samples];
-
-    if (!sample.samples.length) {
-      return (
-        <IonList>
-          <IonItem className="empty">
-            <span>Your species list is empty.</span>
-          </IonItem>
-        </IonList>
-      );
-    }
-
-    const reversedSubSampleList = subSamples.reverse();
-    return reversedSubSampleList.map(this.getProfile);
   }
-}
 
-export default SpeciesList;
+  const reversedSubSampleList = subSamples.reverse();
+  const list = reversedSubSampleList.map(getProfile);
+
+  return (
+    <IonList>
+      <div className="rounded">{list}</div>
+    </IonList>
+  );
+};
+
+export default observer(SpeciesList);

@@ -1,8 +1,8 @@
 #species-profile-contents {
+  display: flex;
+  flex-direction: column;
   padding: 0;
   overflow: scroll;
-  position: absolute;
-  margin-top: 54px;
   max-height: calc(100vh - 54px);
 
   .species-main-image {
@@ -14,7 +14,7 @@
 
   .identifying {
     text-align: center;
-
+    margin-top: 30px;
     * {
       margin-bottom: 30px;
     }

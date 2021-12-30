@@ -23,9 +23,13 @@ const survey = {
     location: locationAttr,
 
     name: {
-      label: 'Survey Name',
-      type: 'textarea',
-      info: 'You can change your survey name here.',
+      pageProps: {
+        headerProps: { label: 'Survey Name' },
+        attrProps: {
+          input: 'textarea',
+          info: 'You can change your survey name here.',
+        },
+      },
       remote: { id: 1531 },
     },
 

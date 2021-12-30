@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { alert } from '@flumens';
+import { useAlert } from '@flumens';
 import { observer } from 'mobx-react';
 import {
   IonItem,
@@ -14,7 +14,7 @@ import {
 import flowerIcon from 'common/images/flowerIcon.svg';
 import './styles.scss';
 
-function deleteSurvey(sample) {
+function deleteSurvey(alert, sample) {
   alert({
     header: 'Delete',
     skipTranslation: true,
@@ -35,6 +35,8 @@ function deleteSurvey(sample) {
 }
 
 const Survey = ({ sample }) => {
+  const alert = useAlert();
+
   const survey = sample.getSurvey();
   let href = `/survey/${survey.name}/${sample.cid}`;
   if (survey.name === 'transect' && !sample.metadata.completedDetails) {
@@ -72,7 +74,7 @@ const Survey = ({ sample }) => {
     );
   }
 
-  const deleteSurveyWrap = () => deleteSurvey(sample);
+  const deleteSurveyWrap = () => deleteSurvey(alert, sample);
 
   const surveyIcon = survey.icon;
 

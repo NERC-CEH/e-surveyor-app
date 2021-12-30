@@ -55,24 +55,32 @@ const getSeedMix = modal => {
 };
 
 export const seedmixGroupAttr = {
-  label: 'Supplier',
-  type: 'radio',
-  info: 'Please indicate the supplier.',
-  set: (value, { sample }) => {
-    if (sample.attrs.seedmixgroup !== value) {
-      sample.attrs.seedmixgroup = value; // eslint-disable-line
-      sample.attrs.seedmix = null; // eslint-disable-line
-    }
+  pageProps: {
+    headerProps: { label: 'Supplier' },
+    attrProps: {
+      input: 'radio',
+      info: 'Please indicate the supplier.',
+      inputProps: { options: getSeedMixGroups() },
+      set: (value, sample) => {
+        if (sample.attrs.seedmixgroup !== value) {
+          sample.attrs.seedmixgroup = value; // eslint-disable-line
+          sample.attrs.seedmix = null; // eslint-disable-line
+        }
+      },
+    },
   },
-  options: getSeedMixGroups(),
   remote: { id: 1529 },
 };
 
 export const seedmixAttr = {
-  label: 'Seed mix',
-  type: 'radio',
-  info: 'Please indicate the seed mix you have used.',
-  options: getSeedMix,
+  pageProps: {
+    headerProps: { label: 'Seed mix' },
+    attrProps: {
+      input: 'radio',
+      info: 'Please indicate the seed mix you have used.',
+      inputProps: smp => ({ options: getSeedMix(smp) }),
+    },
+  },
   remote: { id: 1530 },
 };
 
@@ -96,9 +104,12 @@ export const verifyLocationSchema = Yup.mixed().test(
 );
 
 export const dateAttr = {
-  type: 'date',
-  isValid: val => val && val.toString() !== 'Invalid Date',
-  max: () => new Date(),
+  pageProps: {
+    attrProps: {
+      input: 'date',
+      inputProps: { max: () => new Date() },
+    },
+  },
   remote: {
     id: 'date',
     values: d => date.print(d),

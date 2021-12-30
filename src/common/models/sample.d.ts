@@ -1,4 +1,4 @@
-declare const appModel: {
+declare const Sample: {
   new (obj: any): MyInterface;
 
   _init: any;
@@ -19,6 +19,7 @@ declare const appModel: {
     message: string;
   };
   save: () => any;
+  saveRemote: () => any;
   upload: () => any;
   cleanUp: () => any;
   validateRemote: () => any;
@@ -33,6 +34,9 @@ declare const appModel: {
   GPS: (callback?: any) => any;
   stopGPS: () => any;
   isGPSRunning: () => boolean;
+  setSpecies: (arg: any) => any;
+  getSpecies: () => any;
+  getAISuggestions: () => any;
 };
 
-export default appModel;
+export default Sample;

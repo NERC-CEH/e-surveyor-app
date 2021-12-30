@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useContext } from 'react';
 import {
   Page,
   Header,
@@ -9,30 +8,34 @@ import {
   loader,
 } from '@flumens';
 import Sample from 'models/sample';
+import appModel from 'models/app';
+import userModel from 'models/user';
 import Occurrence from 'models/occurrence';
 import { observer } from 'mobx-react';
-import { IonButton, IonIcon } from '@ionic/react';
+import { IonButton, IonIcon, NavContext } from '@ionic/react';
 import config from 'common/config';
-import ImageModel from 'models/image';
+import Media from 'models/image';
 import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import identifyImage from 'common/services/plantNet';
+import { useRouteMatch } from 'react-router-dom';
 import i18n from 'i18next';
 import Main from './Main';
 
 const { warn } = toast;
 
-@observer
-class Controller extends React.Component {
-  static propTypes = {
-    match: PropTypes.object,
-    history: PropTypes.object,
-    appModel: PropTypes.object.isRequired,
-    userModel: PropTypes.object.isRequired,
-    sample: PropTypes.object.isRequired,
-  };
+type Props = {
+  sample: typeof Sample;
+};
 
-  identifyPhoto = async (image, subSample) => {
+const HomeController: FC<Props> = ({ sample }) => {
+  const match = useRouteMatch();
+  const { navigate } = useContext(NavContext);
+
+  const identifyPhoto = async (
+    image: typeof Media,
+    subSample: typeof Sample
+  ) => {
     const speciesImg = image;
 
     speciesImg.identification.identifying = true;
@@ -51,7 +54,7 @@ class Controller extends React.Component {
     }
   };
 
-  photoSelect = async () => {
+  const photoSelect = async () => {
     if (!device.isOnline()) {
       warn('Looks like you are offline!');
       return;
@@ -63,23 +66,20 @@ class Controller extends React.Component {
       return;
     }
 
-    const { sample } = this.props;
     const dataDirPath = config.dataPath;
 
-    const image = await ImageHelp.getImageModel(ImageModel, photo, dataDirPath);
+    const image = await ImageHelp.getImageModel(Media, photo, dataDirPath);
 
     const survey = sample.getSurvey();
     const newSubSample = survey.smp.create(Sample, Occurrence, image);
 
-    this.identifyPhoto(image, newSubSample);
+    identifyPhoto(image, newSubSample);
 
     sample.samples.push(newSubSample);
     sample.save();
   };
 
-  onUpload = async () => {
-    const { sample, userModel, history, match } = this.props;
-
+  const onUpload = async () => {
     const invalids = sample.validateRemote();
 
     if (invalids) {
@@ -126,7 +126,7 @@ class Controller extends React.Component {
     try {
       await sample.saveRemote();
 
-      history.push(`${match.url}/report`);
+      navigate(`${match.url}/report`);
     } catch (e) {
       // do nothing
     }
@@ -134,48 +134,44 @@ class Controller extends React.Component {
     loader.hide();
   };
 
-  render() {
-    const { appModel, match, sample } = this.props;
-
-    if (!sample) {
-      return null;
-    }
-
-    const isDisabled = sample.isUploaded();
-
-    const uploadButton = isDisabled ? (
-      <IonButton
-        color="secondary"
-        fill="solid"
-        routerLink={`${match.url}/report`}
-      >
-        See Report
-      </IonButton>
-    ) : (
-      <IonButton onClick={this.onUpload} color="secondary" fill="solid">
-        <IonIcon icon={checkmarkCircleOutline} slot="start" />
-        Finish
-      </IonButton>
-    );
-
-    return (
-      <Page id="survey-default-edit">
-        <Header
-          title="Survey"
-          rightSlot={uploadButton}
-          defaultHref="/home/surveys"
-        />
-        <Main
-          match={match}
-          sample={sample}
-          appModel={appModel}
-          url={match.url}
-          photoSelect={this.photoSelect}
-          isDisabled={isDisabled}
-        />
-      </Page>
-    );
+  if (!sample) {
+    return null;
   }
-}
 
-export default Controller;
+  const isDisabled = sample.isUploaded();
+
+  const uploadButton = isDisabled ? (
+    <IonButton
+      color="secondary"
+      fill="solid"
+      routerLink={`${match.url}/report`}
+    >
+      See Report
+    </IonButton>
+  ) : (
+    <IonButton onClick={onUpload} color="secondary" fill="solid">
+      <IonIcon icon={checkmarkCircleOutline} slot="start" />
+      Finish
+    </IonButton>
+  );
+
+  return (
+    <Page id="survey-default-edit">
+      <Header
+        title="Survey"
+        rightSlot={uploadButton}
+        defaultHref="/home/surveys"
+      />
+      <Main
+        match={match}
+        sample={sample}
+        appModel={appModel}
+        url={match.url}
+        photoSelect={photoSelect}
+        isDisabled={isDisabled}
+      />
+    </Page>
+  );
+};
+
+export default observer(HomeController);

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useContext } from 'react';
 import {
   Page,
   Header,
@@ -10,26 +9,23 @@ import {
 } from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
+import userModel from 'models/user';
 import { observer } from 'mobx-react';
+import { useRouteMatch } from 'react-router-dom';
 import Sample from 'models/sample';
 import Main from './Main';
 
 const { warn } = toast;
 
-@observer
-class Controller extends React.Component {
-  static contextType = NavContext;
+type Props = {
+  sample: typeof Sample;
+};
 
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    sample: PropTypes.object.isRequired,
-    userModel: PropTypes.object.isRequired,
-  };
+const Controller: FC<Props> = ({ sample }) => {
+  const match = useRouteMatch();
+  const { navigate } = useContext(NavContext);
 
-  onUpload = async () => {
-    const { sample, userModel, history, match } = this.props;
-
+  const onUpload = async () => {
     const invalids = sample.validateRemote();
 
     if (invalids) {
@@ -74,7 +70,7 @@ class Controller extends React.Component {
     try {
       await sample.saveRemote();
 
-      history.push(`${match.url}/report`);
+      navigate(`${match.url}/report`);
     } catch (e) {
       // do nothing
     }
@@ -82,9 +78,7 @@ class Controller extends React.Component {
     loader.hide();
   };
 
-  onAddNewQuadrat = () => {
-    const { match, sample } = this.props;
-
+  const onAddNewQuadrat = () => {
     if (sample.samples.length > sample.attrs.steps) {
       // in case tapped button twice
       return;
@@ -95,41 +89,36 @@ class Controller extends React.Component {
     sample.samples.push(quadratSample);
     sample.save();
 
-    this.context.navigate(`${match.url}/quadrat/${quadratSample.cid}`);
+    navigate(`${match.url}/quadrat/${quadratSample.cid}`);
   };
 
-  render() {
-    const { match, sample } = this.props;
+  const isDisabled = sample.isUploaded();
 
-    const isDisabled = sample.isUploaded();
+  const uploadButton = isDisabled ? (
+    <IonButton
+      color="secondary"
+      fill="solid"
+      routerLink={`${match.url}/report`}
+    >
+      See Report
+    </IonButton>
+  ) : (
+    <IonButton onClick={onUpload} color="secondary" fill="solid">
+      <IonIcon icon={checkmarkCircleOutline} slot="start" />
+      Finish
+    </IonButton>
+  );
 
-    const uploadButton = isDisabled ? (
-      <IonButton
-        color="secondary"
-        fill="solid"
-        routerLink={`${match.url}/report`}
-      >
-        See Report
-      </IonButton>
-    ) : (
-      <IonButton onClick={this.onUpload} color="secondary" fill="solid">
-        <IonIcon icon={checkmarkCircleOutline} slot="start" />
-        Finish
-      </IonButton>
-    );
+  return (
+    <Page id="transect-home">
+      <Header title="transect" rightSlot={uploadButton} />
+      <Main
+        sample={sample}
+        onAddNewQuadrat={onAddNewQuadrat}
+        isDisabled={isDisabled}
+      />
+    </Page>
+  );
+};
 
-    return (
-      <Page id="transect-home">
-        <Header title="transect" rightSlot={uploadButton} />
-        <Main
-          match={match}
-          sample={sample}
-          onAddNewQuadrat={this.onAddNewQuadrat}
-          isDisabled={isDisabled}
-        />
-      </Page>
-    );
-  }
-}
-
-export default Controller;
+export default observer(Controller);

@@ -6,6 +6,7 @@ export { default as Page } from '@bit/flumens.apps.page';
 export { default as MenuAttrItem } from '@bit/flumens.apps.menu-attr-item';
 export { default as ModalHeader } from '@bit/flumens.apps.modal-header';
 export { default as InfoBackgroundMessage } from '@bit/flumens.apps.info-background-message';
+export { default as InfoMessage } from '@bit/flumens.apps.info-message';
 export { default as Section } from '@bit/flumens.apps.section';
 export { default as RouteWithModels } from '@bit/flumens.apps.route-with-models';
 export { default as ModelLocation } from '@bit/flumens.apps.model-location-map';
@@ -14,10 +15,9 @@ export { default as LongPressButton } from '@bit/flumens.apps.long-press-button'
 export { default as InputWithValidation } from '@bit/flumens.apps.input-with-validation';
 export { default as MenuNote } from '@bit/flumens.apps.menu-note-item';
 export { default as PhotoPicker } from '@bit/flumens.apps.photo-picker';
-export { default as Toggle } from '@bit/flumens.apps.toggle';
-
+export { default as Toggle } from '@bit/flumens.apps.menu-attr-toggle';
 export { default as device } from '@bit/flumens.apps.device';
-export { default as alert } from '@bit/flumens.apps.helpers.alert';
+export { default as useAlert, alert } from '@bit/flumens.apps.helpers.alert';
 export { default as loader } from '@bit/flumens.apps.helpers.loader';
 export { default as toast } from '@bit/flumens.apps.helpers.toast';
 export { default as initAnalytics } from '@bit/flumens.apps.utils.analytics';
