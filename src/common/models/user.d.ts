@@ -8,6 +8,8 @@ declare const appModel: {
   resetDefaults: () => void;
   resetSchema: () => void;
   reset: (email: string) => void;
+  loginSchema: () => void;
+  logIn: (email: string, password: string) => void;
 };
 
 export default appModel;

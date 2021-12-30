@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useContext } from 'react';
+import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import Log from 'helpers/log';
 import { toast, loader, Page, Header, device } from '@flumens';
@@ -9,7 +9,21 @@ import './styles.scss';
 
 const { success, warn, error } = toast;
 
-async function onLogin(userModel, details, onSuccess) {
+interface Details {
+  email: string;
+  password: string;
+}
+
+type Props = {
+  userModel: typeof userModelProps;
+  onSuccess: () => void;
+};
+
+async function onLogin(
+  userModel: typeof userModelProps,
+  details: Details,
+  onSuccess: () => void
+) {
   const { email, password } = details;
 
   if (!device.isOnline()) {
@@ -26,14 +40,16 @@ async function onLogin(userModel, details, onSuccess) {
 
     onSuccess();
   } catch (err) {
+    if (err instanceof Error) {
+      error(err.message);
+    }
     Log(err, 'e');
-    error(err.message);
   }
 
   loader.hide();
 }
 
-function LoginContainer({ userModel, onSuccess }) {
+const LoginController: FC<Props> = ({ userModel, onSuccess }) => {
   const context = useContext(NavContext);
   const onSuccessReturn = () => {
     onSuccess && onSuccess();
@@ -43,7 +59,8 @@ function LoginContainer({ userModel, onSuccess }) {
     context.navigate('/home/surveys', 'root');
   };
 
-  const onLoginWrap = details => onLogin(userModel, details, onSuccessReturn);
+  const onLoginWrap = (details: Details) =>
+    onLogin(userModel, details, onSuccessReturn);
 
   return (
     <Page id="user-login">
@@ -51,11 +68,6 @@ function LoginContainer({ userModel, onSuccess }) {
       <Main schema={userModel.loginSchema} onSubmit={onLoginWrap} />
     </Page>
   );
-}
-
-LoginContainer.propTypes = {
-  userModel: PropTypes.object.isRequired,
-  onSuccess: PropTypes.func,
 };
 
-export default LoginContainer;
+export default LoginController;
