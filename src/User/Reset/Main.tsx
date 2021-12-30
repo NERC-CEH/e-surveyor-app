@@ -1,13 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { IonButton, IonList } from '@ionic/react';
 import { Main, InputWithValidation } from '@flumens';
 import { personOutline } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Formik, Form } from 'formik';
 
-const Component = ({ onSubmit, schema }) => {
-  const resetForm = props => (
+type Props = {
+  onSubmit: any;
+  schema: () => void;
+};
+
+const ResetMain: FC<Props> = ({ onSubmit, schema }) => {
+  const resetForm = (props: any) => (
     <Form>
       <IonList lines="full">
         <InputWithValidation
@@ -39,9 +43,4 @@ const Component = ({ onSubmit, schema }) => {
   );
 };
 
-Component.propTypes = {
-  schema: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
-
-export default Component;
+export default ResetMain;

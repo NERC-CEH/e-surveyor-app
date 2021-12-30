@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useContext } from 'react';
+import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
 import { Page, Header, device, alert, loader, toast } from '@flumens';
@@ -9,7 +9,20 @@ import './styles.scss';
 
 const { warn, error } = toast;
 
-async function onSubmit(userModel, details, onSuccess) {
+interface Details {
+  email: string;
+  password: string;
+}
+
+type Props = {
+  userModel: typeof userModelProps;
+};
+
+async function onSubmit(
+  userModel: typeof userModelProps,
+  details: Details,
+  onSuccess: () => void
+) {
   const { email } = details;
   if (!device.isOnline()) {
     warn(i18n.t("Sorry, looks like you're offline."));
@@ -38,21 +51,25 @@ async function onSubmit(userModel, details, onSuccess) {
       ],
     });
   } catch (err) {
+    if (err instanceof Error) {
+      error(`${error.message}`);
+    }
+
     console.error(err, 'e');
-    error(err.message);
   }
 
   loader.hide();
 }
 
-export default function Container({ userModel }) {
+const ResetController: FC<Props> = ({ userModel }) => {
   const context = useContext(NavContext);
 
   const onSuccess = () => {
     context.navigate('/home/surveys', 'root');
   };
 
-  const onSubmitWrap = details => onSubmit(userModel, details, onSuccess);
+  const onSubmitWrap = (details: Details) =>
+    onSubmit(userModel, details, onSuccess);
 
   return (
     <Page id="user-reset">
@@ -64,8 +81,6 @@ export default function Container({ userModel }) {
       <Main schema={userModel.resetSchema} onSubmit={onSubmitWrap} />
     </Page>
   );
-}
-
-Container.propTypes = {
-  userModel: PropTypes.object.isRequired,
 };
+
+export default ResetController;
