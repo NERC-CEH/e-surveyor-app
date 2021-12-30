@@ -15,6 +15,7 @@ declare const appModel: {
   } & surveyDraftKeys;
 
   save: () => void;
+  resetDefaults: () => void;
 };
 
 export default appModel;
