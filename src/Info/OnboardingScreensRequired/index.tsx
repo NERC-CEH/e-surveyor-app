@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import appModel from 'models/app';
-import OnboardingScreens from './Components/OnBordingScreens';
+import AppModelType from 'models/app';
 import { observer } from 'mobx-react';
+import OnboardingScreens from './Components/OnBordingScreens';
 
 interface Props {
-  appModel: typeof appModel;
+  appModel: typeof AppModelType;
 }
 
 const OnboardingScreensController: FC<Props> = ({ appModel, children }) => {

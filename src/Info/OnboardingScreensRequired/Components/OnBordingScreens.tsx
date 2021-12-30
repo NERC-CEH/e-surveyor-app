@@ -1,5 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
-import appModel from 'models/app';
+import AppModelType from 'models/app';
 import { Page, Main } from '@flumens';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
@@ -37,7 +37,7 @@ const WaveShape = () => (
 );
 
 interface Props {
-  appModel: typeof appModel;
+  appModel: typeof AppModelType;
 }
 
 const OnboardingScreens: FC<Props> = ({ appModel }) => {
