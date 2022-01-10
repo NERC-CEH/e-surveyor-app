@@ -3,25 +3,20 @@ import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import Log from 'helpers/log';
 import { toast, loader, Page, Header, device } from '@flumens';
+import { detailsParams } from 'common/types';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
 
 const { success, warn, error } = toast;
 
-interface Details {
-  email: string;
-  password: string;
-}
-
 type Props = {
   userModel: typeof userModelProps;
-  onSuccess: () => void;
 };
 
 async function onLogin(
   userModel: typeof userModelProps,
-  details: Details,
+  details: detailsParams,
   onSuccess: () => void
 ) {
   const { email, password } = details;
@@ -49,17 +44,15 @@ async function onLogin(
   loader.hide();
 }
 
-const LoginController: FC<Props> = ({ userModel, onSuccess }) => {
+const LoginController: FC<Props> = ({ userModel }) => {
   const context = useContext(NavContext);
   const onSuccessReturn = () => {
-    onSuccess && onSuccess();
-
     const { email } = userModel.attrs;
     success(`Successfully logged in as: ${email}`);
     context.navigate('/home/surveys', 'root');
   };
 
-  const onLoginWrap = (details: Details) =>
+  const onLoginWrap = (details: detailsParams) =>
     onLogin(userModel, details, onSuccessReturn);
 
   return (

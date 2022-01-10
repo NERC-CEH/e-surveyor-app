@@ -3,16 +3,12 @@ import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
 import { Page, Header, device, alert, loader, toast } from '@flumens';
+import { detailsParams } from 'common/types';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
 
 const { warn, error } = toast;
-
-interface Details {
-  email: string;
-  password: string;
-}
 
 type Props = {
   userModel: typeof userModelProps;
@@ -20,7 +16,7 @@ type Props = {
 
 async function onSubmit(
   userModel: typeof userModelProps,
-  details: Details,
+  details: detailsParams,
   onSuccess: () => void
 ) {
   const { email } = details;
@@ -68,7 +64,7 @@ const ResetController: FC<Props> = ({ userModel }) => {
     context.navigate('/home/surveys', 'root');
   };
 
-  const onSubmitWrap = (details: Details) =>
+  const onSubmitWrap = (details: detailsParams) =>
     onSubmit(userModel, details, onSuccess);
 
   return (

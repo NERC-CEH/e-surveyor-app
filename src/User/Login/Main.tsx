@@ -18,9 +18,7 @@ type Props = {
 const LoginMain: FC<Props> = ({ schema, onSubmit }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const togglePassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const togglePassword = () => setShowPassword(!showPassword);
 
   const loginForm = (props: any) => (
     <Form>
