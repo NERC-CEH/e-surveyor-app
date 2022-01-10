@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import {
   Page,
   Header,
@@ -6,6 +6,7 @@ import {
   device,
   showInvalidsMessage,
   loader,
+  useAlert,
 } from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
@@ -28,9 +29,34 @@ type Props = {
   sample: typeof Sample;
 };
 
+const showFirstSurveyTip = (alert: any) => {
+  alert({
+    skipTranslation: true,
+    header: 'Your first survey',
+    message: (
+      <>
+        You can add plant photos using your camera and we will try to identify
+        them for you. Alternatively, you can long-press the button to enter the
+        species manually.
+      </>
+    ),
+    buttons: [
+      {
+        text: 'OK, got it',
+        role: 'cancel',
+        cssClass: 'primary',
+      },
+    ],
+  });
+
+  appModel.attrs.showFirstSurveyTip = false;
+  appModel.save();
+};
+
 const HomeController: FC<Props> = ({ sample }) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
+  const alert = useAlert();
 
   const identifyPhoto = async (
     image: typeof Media,
@@ -155,6 +181,8 @@ const HomeController: FC<Props> = ({ sample }) => {
     </IonButton>
   );
 
+  if (!appModel.attrs.showFirstSurveyTip) showFirstSurveyTip(alert);
+
   return (
     <Page id="survey-default-edit">
       <Header
@@ -165,8 +193,6 @@ const HomeController: FC<Props> = ({ sample }) => {
       <Main
         match={match}
         sample={sample}
-        appModel={appModel}
-        url={match.url}
         photoSelect={photoSelect}
         isDisabled={isDisabled}
       />
