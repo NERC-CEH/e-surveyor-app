@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { useAlert } from '@flumens';
+import Sample from 'models/sample';
 import { observer } from 'mobx-react';
 import {
   IonItem,
@@ -14,7 +14,7 @@ import {
 import flowerIcon from 'common/images/flowerIcon.svg';
 import './styles.scss';
 
-function deleteSurvey(alert, sample) {
+function deleteSurvey(alert: (options: any) => void, sample: typeof Sample) {
   alert({
     header: 'Delete',
     skipTranslation: true,
@@ -34,7 +34,11 @@ function deleteSurvey(alert, sample) {
   });
 }
 
-const Survey = ({ sample }) => {
+type Props = {
+  sample: typeof Sample;
+};
+
+const Survey: FC<Props> = ({ sample }) => {
   const alert = useAlert();
 
   const survey = sample.getSurvey();
@@ -92,10 +96,6 @@ const Survey = ({ sample }) => {
       </IonItemOptions>
     </IonItemSliding>
   );
-};
-
-Survey.propTypes = {
-  sample: PropTypes.object.isRequired,
 };
 
 export default observer(Survey);

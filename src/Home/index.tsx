@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useContext, useState } from 'react';
 import {
   IonTabButton,
   IonIcon,
@@ -15,7 +14,6 @@ import {
 import { ModalHeader, Page, device, toast } from '@flumens';
 import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
 import savedSamples from 'models/savedSamples';
-import appModel from 'models/app';
 import config from 'common/config';
 import ImageModel from 'models/image';
 import identifyImage from 'common/services/plantNet';
@@ -28,27 +26,18 @@ import './styles.scss';
 
 const { warn } = toast;
 
-class Component extends React.Component {
-  static contextType = NavContext;
+const HomeController: FC = () => {
+  const { navigate } = useContext(NavContext);
+  const [image, setImage] = useState<any>(null);
 
-  static propTypes = {
-    history: PropTypes.object,
-  };
-
-  constructor() {
-    super();
-    this.fabRef = React.createRef();
-    this.state = { image: null };
-  }
-
-  getModal = () => (
-    <IonModal isOpen={!!this.state.image} backdropDismiss={false}>
-      <ModalHeader title="Species" onClose={this.hideSpeciesModal} />
-      <SpeciesProfile species={this.state.image} />
+  const getModal = () => (
+    <IonModal isOpen={!!image} backdropDismiss={false}>
+      <ModalHeader title="Species" onClose={hideSpeciesModal} />
+      <SpeciesProfile species={image} />
     </IonModal>
   );
 
-  identifyPhoto = async () => {
+  const identifyPhoto = async () => {
     if (!device.isOnline()) {
       warn('Looks like you are offline!');
       return;
@@ -64,7 +53,8 @@ class Component extends React.Component {
       photo,
       config.dataPath
     );
-    this.setState({ image });
+
+    setImage(image);
 
     image.identification.identifying = true;
     try {
@@ -77,14 +67,12 @@ class Component extends React.Component {
     }
   };
 
-  startTransect = () => {
-    this.context.navigate('/survey/transect');
-  };
+  const startTransect = () => navigate('/survey/transect');
 
-  getFooter = () => (
+  const getFooter = () => (
     <IonFooter>
       <div className="inner-wrap">
-        <div onClick={this.identifyPhoto}>
+        <div onClick={identifyPhoto}>
           <IonTabButton>
             <IonIcon icon={flowerIcon} />
             <IonLabel>Plant ID</IonLabel>
@@ -95,7 +83,7 @@ class Component extends React.Component {
           <IonIcon icon={pointIcon} />
         </IonButton>
 
-        <div onClick={this.startTransect}>
+        <div onClick={startTransect}>
           <IonTabButton>
             <IonIcon icon={transectIcon} />
             <IonLabel>Transect</IonLabel>
@@ -105,27 +93,23 @@ class Component extends React.Component {
     </IonFooter>
   );
 
-  hideSpeciesModal = () => {
-    this.setState({ image: null });
-  };
+  const hideSpeciesModal = () => setImage(null);
 
-  render(props) {
-    return (
-      <Page id="home">
-        <IonHeader className="ion-no-border">
-          <IonToolbar>
-            <IonMenuButton slot="start" />
-          </IonToolbar>
-        </IonHeader>
+  return (
+    <Page id="home">
+      <IonHeader className="ion-no-border">
+        <IonToolbar>
+          <IonMenuButton slot="start" />
+        </IonToolbar>
+      </IonHeader>
 
-        <Main appModel={appModel} savedSamples={savedSamples} {...props} />
+      <Main savedSamples={savedSamples} />
 
-        {this.getFooter()}
+      {getFooter()}
 
-        {this.getModal()}
-      </Page>
-    );
-  }
-}
+      {getModal()}
+    </Page>
+  );
+};
 
-export default Component;
+export default HomeController;
