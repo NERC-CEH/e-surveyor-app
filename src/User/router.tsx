@@ -1,15 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import appModel from 'models/app';
 import userModel from 'models/user';
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
 
 const LoginWrap = () => <Login userModel={userModel} />;
-const RegistrationWrap = () => (
-  <Register userModel={userModel} appModel={appModel} />
-);
+const RegistrationWrap = () => <Register userModel={userModel} />;
 const ResetWrap = () => <Reset userModel={userModel} />;
 
 export default [

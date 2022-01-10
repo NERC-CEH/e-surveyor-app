@@ -1,19 +1,24 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { FC, useContext } from 'react';
+import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
 import { Page, device, toast, alert, loader } from '@flumens';
+import { detailsParams } from 'common/types';
 import i18n from 'i18next';
 import Main from './Main';
 import './styles.scss';
 
 const { warn, error } = toast;
 
-async function onRegister(userModel, details, onSuccess) {
+async function onRegister(
+  userModel: typeof userModelProps,
+  details: detailsParams,
+  onSuccess: any
+) {
   const email = details.email.trim();
   const { password, fullName } = details;
   const otherDetails = {
-    field_full_name: [{ value: fullName.trim() }],
+    field_full_name: [{ value: fullName?.trim() }],
   };
 
   if (!device.isOnline()) {
@@ -49,29 +54,35 @@ async function onRegister(userModel, details, onSuccess) {
       ],
     });
   } catch (err) {
+    if (err instanceof Error) {
+      error(err.message);
+    }
+
     console.error(err, 'e');
-    error(err.message);
   }
 
   loader.hide();
 }
 
-export default function RegisterContainer({ userModel }) {
+type Props = {
+  userModel: typeof userModelProps;
+};
+
+const RegisterContainer: FC<Props> = ({ userModel }) => {
   const context = useContext(NavContext);
 
   const onSuccess = () => {
     context.navigate('/home/surveys', 'root');
   };
 
-  const onRegisterWrap = details => onRegister(userModel, details, onSuccess);
+  const onRegisterWrap = (details: detailsParams) =>
+    onRegister(userModel, details, onSuccess);
 
   return (
     <Page id="user-register">
       <Main schema={userModel.registerSchema} onSubmit={onRegisterWrap} />
     </Page>
   );
-}
-
-RegisterContainer.propTypes = {
-  userModel: PropTypes.object.isRequired,
 };
+
+export default RegisterContainer;

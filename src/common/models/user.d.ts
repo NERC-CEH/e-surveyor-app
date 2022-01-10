@@ -10,6 +10,9 @@ declare const appModel: {
   reset: (email: string) => void;
   loginSchema: () => void;
   logIn: (email: string, password: string) => void;
+
+  registerSchema: () => void;
+  register: (email: string, password: string, otherDetails: any) => void;
 };
 
 export default appModel;
