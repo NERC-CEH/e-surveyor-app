@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import { Page, Header, toast, device } from '@flumens';
 import { observer } from 'mobx-react';
 import ImageModel from 'models/image';
@@ -12,14 +11,14 @@ import Main from './Main';
 
 const { warn } = toast;
 
-@observer
-class Controller extends React.Component {
-  static propTypes = {
-    subSample: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired,
-  };
+type Props = {
+  subSample: typeof Sample;
+};
 
-  photoSelect = async () => {
+const QuadratController: FC<Props> = ({ subSample }) => {
+  const isDisabled = subSample.isUploaded();
+
+  const photoSelect = async () => {
     if (!device.isOnline()) {
       warn('Looks like you are offline!');
       return;
@@ -31,7 +30,6 @@ class Controller extends React.Component {
       return;
     }
 
-    const { subSample } = this.props;
     const dataDirPath = config.dataPath;
 
     const image = await ImageHelp.getImageModel(ImageModel, photo, dataDirPath);
@@ -39,13 +37,13 @@ class Controller extends React.Component {
     const survey = subSample.getSurvey();
     const newSubSample = survey.smp.create(Sample, Occurrence, image);
 
-    this.identifyPhoto(image, newSubSample);
+    identifyPhoto(image, newSubSample);
 
     subSample.samples.push(newSubSample);
     subSample.save();
   };
 
-  identifyPhoto = async (image, subSample) => {
+  const identifyPhoto = async (image: any, subSample: typeof Sample) => {
     const speciesImg = image;
 
     speciesImg.identification.identifying = true;
@@ -64,23 +62,16 @@ class Controller extends React.Component {
     }
   };
 
-  render() {
-    const { match, subSample } = this.props;
+  return (
+    <Page id="transect-quadrat">
+      <Header title={subSample.getPrettyName()} />
+      <Main
+        subSample={subSample}
+        isDisabled={isDisabled}
+        photoSelect={photoSelect}
+      />
+    </Page>
+  );
+};
 
-    const isDisabled = subSample.isUploaded();
-
-    return (
-      <Page id="transect-quadrat">
-        <Header title={subSample.getPrettyName()} />
-        <Main
-          match={match}
-          subSample={subSample}
-          isDisabled={isDisabled}
-          photoSelect={this.photoSelect}
-        />
-      </Page>
-    );
-  }
-}
-
-export default Controller;
+export default observer(QuadratController);
