@@ -14,7 +14,7 @@ const baseURL = '/survey/point';
 
 const { AttrPageFromRoute } = AttrPage;
 
-const ModelLocationWrap = props => (
+const ModelLocationWrap = (props: any) => (
   <ModelLocation
     appModel={appModel}
     mapProviderOptions={config.map}

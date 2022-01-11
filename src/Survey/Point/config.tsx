@@ -7,11 +7,12 @@ import {
   locationAttr,
   verifyLocationSchema,
 } from 'Survey/common/config';
+import { Survey } from 'common/surveys';
 import config from 'common/config';
 
 const { POSSIBLE_THRESHOLD } = config;
 
-const survey = {
+const survey: Survey = {
   id: 626,
   name: 'point',
   label: 'Survey',
@@ -69,7 +70,7 @@ const survey = {
       attrs: {
         taxon: {
           id: 'taxa_taxon_list_id',
-          values(taxon) {
+          values(taxon: any) {
             return taxon.warehouseId;
           },
         },
@@ -91,7 +92,7 @@ const survey = {
         return occ;
       },
 
-      modifySubmission(submission) {
+      modifySubmission(submission: any) {
         // for non-UK species
         if (!submission.values.taxa_taxon_list_id) {
           return null;
@@ -101,7 +102,7 @@ const survey = {
       },
     },
 
-    modifySubmission(submission) {
+    modifySubmission(submission: any) {
       // for non-UK species
       if (!submission.occurrences.length) {
         return null;
@@ -139,7 +140,7 @@ const survey = {
 
       let hasValidSpecies = false;
 
-      const showReportIfScoreHigherThanThreshold = subSample => {
+      const showReportIfScoreHigherThanThreshold = (subSample: any) => {
         const species = subSample.getSpecies();
         if (species && species.score > POSSIBLE_THRESHOLD) {
           hasValidSpecies = true;
@@ -165,11 +166,11 @@ const survey = {
     return null;
   },
 
-  modifySubmission(submission) {
+  modifySubmission(submission: any) {
     const subSamples = submission.samples;
     submission.samples = []; // eslint-disable-line
 
-    const removeSubSamplesLayerIfNoLocation = subSample => {
+    const removeSubSamplesLayerIfNoLocation = (subSample: any) => {
       const locationIsMissing = !subSample.values.entered_sref;
       if (locationIsMissing) {
         submission.occurrences.push(subSample.occurrences[0]);

@@ -21,7 +21,8 @@
       "models/*": ["./src/common/models/*"],
       "helpers/*": ["./src/common/helpers/*"],
       "Components/*": ["./src/common/Components/*"],
-      "Survey/common/Components/*": ["./src/Survey/common/Components/*"]
+      "Survey/common/Components/*": ["./src/Survey/common/Components/*"],
+      "Survey/*": ["./src/Survey/*"]
     }
   },
   "include": ["src"]
