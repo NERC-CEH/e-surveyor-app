@@ -1,29 +1,24 @@
 /* eslint-disable camelcase */
-import React from 'react';
-import PropTypes from 'prop-types';
-import exact from 'prop-types-exact';
+import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { Main } from '@flumens';
 import './styles.scss';
 
-const alphabetically = (s1, s2) => {
+const alphabetically = (s1: any, s2: any) => {
   const speciesName1 = s1.commonName || s1.scientificName;
   const speciesName2 = s2.commonName || s2.scientificName;
   return speciesName1.localeCompare(speciesName2);
 };
 
-@observer
-class MainComponent extends React.Component {
-  static propTypes = exact({
-    stepCount: PropTypes.number.isRequired,
-    steps: PropTypes.array.isRequired,
-    habitatList: PropTypes.array,
-  });
+type Props = {
+  stepCount: any;
+  steps: any;
+  habitatList: any;
+};
 
-  getRowComponent = ({ scientificName, commonName, count }) => {
-    const { stepCount } = this.props;
-
+const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
+  const getRowComponent = ({ scientificName, commonName, count }: any) => {
     const name = commonName || scientificName;
 
     return (
@@ -36,12 +31,10 @@ class MainComponent extends React.Component {
     );
   };
 
-  getSpeciesCount = () => {
-    const { steps } = this.props;
-
-    const counter = [];
-    const addToCounter = ([scientificName, commonName]) => {
-      const byName = sp => sp.scientificName === scientificName;
+  const getSpeciesCount = () => {
+    const counter: any[] = [];
+    const addToCounter = ([scientificName, commonName]: any) => {
+      const byName = (sp: any) => sp.scientificName === scientificName;
       let species = counter.find(byName);
       if (!species) {
         species = { count: 1, commonName, scientificName };
@@ -52,21 +45,24 @@ class MainComponent extends React.Component {
       species.count++;
     };
 
-    const countStepSpecies = stepSpecies => stepSpecies.forEach(addToCounter);
+    const countStepSpecies = (stepSpecies: any) =>
+      stepSpecies.forEach(addToCounter);
     steps.forEach(countStepSpecies);
 
     return counter;
   };
 
-  getSpeciesCountForHabitat = () => {
-    const { habitatList } = this.props;
+  const getSpeciesCountForHabitat = () => {
+    const counter = getSpeciesCount();
 
-    const counter = this.getSpeciesCount();
+    const habitatCounter: any[] = [];
 
-    const habitatCounter = [];
-
-    const addToHabitatsCounter = ({ commonName, positive, scientificName }) => {
-      const byName = sp => sp.scientificName === scientificName;
+    const addToHabitatsCounter = ({
+      commonName,
+      positive,
+      scientificName,
+    }: any) => {
+      const byName = (sp: any) => sp.scientificName === scientificName;
       const recordedSpecies = counter.find(byName) || {};
       const count = recordedSpecies.count || 0;
 
@@ -83,27 +79,29 @@ class MainComponent extends React.Component {
     return habitatCounter;
   };
 
-  getSpeciesCountRowsForHabitat() {
-    const counter = this.getSpeciesCountForHabitat();
+  const getSpeciesCountRowsForHabitat = () => {
+    console.log('!');
 
-    const byPositive = ({ positive, count }) => count && positive === 1;
-    const byNegative = ({ positive, count }) => count && positive === 0;
-    const byNeutral = ({ positive, count }) => count && positive === 'NA';
+    const counter = getSpeciesCountForHabitat();
+
+    const byPositive = ({ positive, count }: any) => count && positive === 1;
+    const byNegative = ({ positive, count }: any) => count && positive === 0;
+    const byNeutral = ({ positive, count }: any) => count && positive === 'NA';
 
     const positive = counter
       .filter(byPositive)
       .sort(alphabetically)
-      .map(this.getRowComponent);
+      .map(getRowComponent);
 
     const neutral = counter
       .filter(byNeutral)
       .sort(alphabetically)
-      .map(this.getRowComponent);
+      .map(getRowComponent);
 
     const negative = counter
       .filter(byNegative)
       .sort(alphabetically)
-      .map(this.getRowComponent);
+      .map(getRowComponent);
 
     const header = (
       <IonRow className="subheader">
@@ -116,7 +114,7 @@ class MainComponent extends React.Component {
       </IonRow>
     );
 
-    const getGroup = (rows, label) => {
+    const getGroup = (rows: any, label: any) => {
       if (!rows.length) {
         return (
           <>
@@ -152,12 +150,12 @@ class MainComponent extends React.Component {
         {getGroup(negative, 'Negative')}
       </>
     );
-  }
+  };
 
-  getSpeciesCountRows() {
-    const counter = this.getSpeciesCount();
+  const getSpeciesCountRows = () => {
+    const counter = getSpeciesCount();
 
-    const positive = counter.sort(alphabetically).map(this.getRowComponent);
+    const positive = counter.sort(alphabetically).map(getRowComponent);
 
     const header = (
       <IonRow className="subheader">
@@ -176,25 +174,21 @@ class MainComponent extends React.Component {
         {positive}
       </>
     );
-  }
-
-  getSpeciesRows = () => {
-    const { habitatList } = this.props;
-
-    return habitatList
-      ? this.getSpeciesCountRowsForHabitat()
-      : this.getSpeciesCountRows();
   };
 
-  render() {
-    return (
-      <>
-        <Main>
-          <IonGrid>{this.getSpeciesRows()}</IonGrid>
-        </Main>
-      </>
-    );
-  }
-}
+  const getSpeciesRows = () => {
+    return habitatList
+      ? getSpeciesCountRowsForHabitat()
+      : getSpeciesCountRows();
+  };
 
-export default MainComponent;
+  return (
+    <>
+      <Main>
+        <IonGrid>{getSpeciesRows()}</IonGrid>
+      </Main>
+    </>
+  );
+};
+
+export default observer(ReportMain);
