@@ -20,6 +20,7 @@ const ModelLocationWrap = (props: any) => (
     mapProviderOptions={config.map}
     useGridRef
     useGridMap
+    model={props.sample}
     {...props}
   />
 );

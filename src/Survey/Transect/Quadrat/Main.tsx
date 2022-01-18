@@ -45,16 +45,21 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
   return (
     <Main>
       <IonList lines="full">
-        <MenuAttrItem
-          routerLink={`${url}/map`}
-          value={prettyGridRef}
-          icon={locationOutline}
-          label="Location"
-          skipValueTranslation
-          disabled={isDisabled}
-        />
+        <div className="rounded">
+          <MenuAttrItem
+            routerLink={`${url}/map`}
+            value={prettyGridRef}
+            icon={locationOutline}
+            label="Location"
+            skipValueTranslation
+            disabled={isDisabled}
+          />
+        </div>
+
         <IonItemDivider mode="ios">Quadrat photo</IonItemDivider>
-        <PhotoPicker model={subSample} />
+        <div className="rounded">
+          <PhotoPicker model={subSample} />
+        </div>
       </IonList>
 
       {getNewImageButton()}

@@ -42,64 +42,79 @@ const survey = {
     location: locationAttr,
 
     name: {
-      headerProps: { label: 'Survey Name' },
-      attrProps: {
-        input: 'textarea',
-        info: 'You can change your survey name here.',
+      pageProps: {
+        headerProps: { title: 'Survey Name' },
+        attrProps: {
+          input: 'textarea',
+          info: 'You can change your survey name here.',
+        },
       },
       remote: { id: 1531 },
     },
 
     type: {
-      attrProps: {
-        input: 'radio',
-        info: 'You can change your survey name here.',
-        inputProps: { options: surveyTypes },
-        set: (value, { sample }) => {
-          sample.attrs.type = value; // eslint-disable-line
+      pageProps: {
+        attrProps: {
+          input: 'radio',
+          info: 'You can change your survey name here.',
+          inputProps: { options: surveyTypes },
+          set: (value, sample) => {
+            sample.attrs.type = value; // eslint-disable-line
 
-          sample.attrs.steps = 10; // eslint-disable-line
-          sample.attrs.quadratSize = 1; // eslint-disable-line
-
-          if (value === 'Common Standards') {
-            sample.attrs.habitat = null; // eslint-disable-line
-            // eslint-disable-next-line
-            sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
-              ? 10
-              : 20;
+            sample.attrs.steps = 10; // eslint-disable-line
             sample.attrs.quadratSize = 1; // eslint-disable-line
-          }
 
-          if (value === 'Agri-environment') {
-            sample.attrs.habitat = null; // eslint-disable-line
-          }
+            if (value === 'Common Standards') {
+              sample.attrs.habitat = null; // eslint-disable-line
+              // eslint-disable-next-line
+              sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
+                ? 10
+                : 20;
+              sample.attrs.quadratSize = 1; // eslint-disable-line
+            }
+
+            if (value === 'Agri-environment') {
+              sample.attrs.habitat = null; // eslint-disable-line
+            }
+          },
         },
       },
       remote: { id: 1533, values: surveyTypes },
     },
 
     steps: {
-      label: 'Steps',
-      info: 'Please specify the number of quadrats you would like to survey.',
-      type: 'slider',
+      pageProps: {
+        attrProps: {
+          input: 'slider',
+          info: 'Please specify the number of quadrats you would like to survey.',
+        },
+      },
     },
 
     quadratSize: {
-      label: 'Quadrat Size',
-      info: 'Please specify the quadrat size in meters.',
-      type: 'slider',
+      pageProps: {
+        headerProps: { title: 'Quadrat Size' },
+        attrProps: {
+          input: 'slider',
+          info: 'Please specify the quadrat size in meters.',
+        },
+      },
       remote: {
         id: 1534,
       },
     },
 
     habitat: {
-      label: 'Type',
-      type: 'radio',
-      options: sample => {
-        return sample.attrs.type === 'Agri-environment'
-          ? agriEnvironmentHabitats
-          : commonStandardsHabitats;
+      pageProps: {
+        attrProps: {
+          input: 'radio',
+          inputProps: model => ({
+            options:
+              model.attrs.type === 'Agri-environment'
+                ? agriEnvironmentHabitats
+                : commonStandardsHabitats,
+          }),
+        },
       },
       remote: {
         id: 1532,

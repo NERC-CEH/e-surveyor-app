@@ -1,36 +1,11 @@
 import React from 'react';
 import { PhotoPicker } from '@flumens';
 import { useTranslation } from 'react-i18next';
-import { IonIcon, IonButton, IonSpinner } from '@ionic/react';
 import { observer } from 'mobx-react';
-import { warningOutline, close } from 'ionicons/icons';
 import Media from 'models/image';
 import config from 'common/config';
 import utils from './imageUtils';
 import './styles.scss';
-
-const ImageWrap = ({ media, isDisabled, onDelete, onClick }) => {
-  const showWarning = !media.doesTaxonMatchParent(); // calculate from media.parent
-
-  const showLoading = media.identification.identifying;
-
-  return (
-    <div className="img">
-      {!isDisabled && (
-        <IonButton fill="clear" class="delete" onClick={onDelete}>
-          <IonIcon icon={close} />
-        </IonButton>
-      )}
-      <img src={media.attrs.thumbnail} onClick={onClick} />
-
-      {showLoading && <IonSpinner slot="end" className="identifying" />}
-      {!showLoading && showWarning && (
-        <IonIcon className="warning-icon" icon={warningOutline} />
-      )}
-    </div>
-  );
-};
-const Image = observer(ImageWrap);
 
 const AppPhotoPicker = ({ model }) => {
   const { t } = useTranslation();
@@ -57,7 +32,7 @@ const AppPhotoPicker = ({ model }) => {
     return imageModel;
   }
 
-  return <PhotoPicker getImage={getImage} model={model} Image={Image} />;
+  return <PhotoPicker getImage={getImage} model={model} />;
 };
 
 export default observer(AppPhotoPicker);

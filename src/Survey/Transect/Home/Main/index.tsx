@@ -77,7 +77,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
           <IonLabel slot="end">{`${sample.samples.length}/${sample.attrs.steps}`}</IonLabel>
         </IonItemDivider>
 
-        {quadrats.map(getQuadrat)}
+        <div className="rounded">{quadrats.map(getQuadrat)}</div>
       </IonList>
     );
   };
@@ -106,28 +106,30 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
   return (
     <Main>
       <IonList lines="full">
-        {isDisabled && (
-          <MenuNote>
-            This survey has been finished and cannot be updated.
-          </MenuNote>
-        )}
+        <div className="rounded">
+          {isDisabled && (
+            <MenuNote>
+              This survey has been finished and cannot be updated.
+            </MenuNote>
+          )}
 
-        <MenuAttrItem
-          routerLink={`${match.url}/details`}
-          icon={createOutline}
-          value={sample.attrs.type}
-          label="Details"
-          skipValueTranslation
-          disabled={isDisabled}
-        />
-        <MenuAttrItem
-          routerLink={`${match.url}/name`}
-          icon={bookmarkOutline}
-          value={sample.attrs.name}
-          label="Name"
-          skipValueTranslation
-          disabled={isDisabled}
-        />
+          <MenuAttrItem
+            routerLink={`${match.url}/details`}
+            icon={createOutline}
+            value={sample.attrs.type}
+            label="Details"
+            skipValueTranslation
+            disabled={isDisabled}
+          />
+          <MenuAttrItem
+            routerLink={`${match.url}/name`}
+            icon={bookmarkOutline}
+            value={sample.attrs.name}
+            label="Name"
+            skipValueTranslation
+            disabled={isDisabled}
+          />
+        </div>
       </IonList>
 
       {getAddButton()}

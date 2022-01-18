@@ -25,7 +25,7 @@ const survey: Survey = {
 
     name: {
       pageProps: {
-        headerProps: { label: 'Survey Name' },
+        headerProps: { title: 'Survey Name' },
         attrProps: {
           input: 'textarea',
           info: 'You can change your survey name here.',
