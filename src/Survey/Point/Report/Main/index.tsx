@@ -80,6 +80,8 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
 
   const uniqueSpecies = sample.getUniqueSpecies();
 
+  const getShowModal = (modalType: string | boolean) => setShowModel(modalType);
+
   const getPollinators = () => {
     const getPollinatorsEntries = ([name, commonName]: [string, string]) => {
       const hasLatinName = ({ latin_name }: { latin_name: string }) =>
@@ -380,8 +382,6 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
 
     return null;
   };
-
-  const getShowModal = (modalType: string | boolean) => setShowModel(modalType);
 
   const showPollinatorsData = () => {
     return (

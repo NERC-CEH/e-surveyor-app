@@ -24,7 +24,10 @@ type Props = {
 
 const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
   const { navigate } = useContext(NavContext);
-  const getNewImageButton = (photoSelect: any) => {
+
+  const navigateToSearch = () => navigate(`${match.url}/taxon`);
+
+  const getNewImageButton = () => {
     if (isDisabled) {
       return <br />;
     }
@@ -42,8 +45,6 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
       </LongPressButton>
     );
   };
-
-  const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
   const { seedmixgroup, seedmix, name } = sample.attrs;
 
@@ -101,7 +102,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
         </div>
       </IonList>
 
-      {getNewImageButton(photoSelect)}
+      {getNewImageButton()}
 
       <SpeciesList sample={sample} isDisabled={isDisabled} />
     </Main>

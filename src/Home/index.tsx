@@ -30,6 +30,8 @@ const HomeController: FC = () => {
   const { navigate } = useContext(NavContext);
   const [image, setImage] = useState<any>(null);
 
+  const hideSpeciesModal = () => setImage(null);
+
   const getModal = () => (
     <IonModal isOpen={!!image} backdropDismiss={false}>
       <ModalHeader title="Species" onClose={hideSpeciesModal} />
@@ -48,22 +50,22 @@ const HomeController: FC = () => {
       return;
     }
 
-    const image = await ImageHelp.getImageModel(
+    const media = await ImageHelp.getImageModel(
       ImageModel,
       photo,
       config.dataPath
     );
 
-    setImage(image);
+    setImage(media);
 
-    image.identification.identifying = true;
+    media.identification.identifying = true;
     try {
-      const species = (await identifyImage(image)) || [];
+      const species = (await identifyImage(media)) || [];
 
-      image.identification.identifying = false;
-      image.attrs.species = species;
+      media.identification.identifying = false;
+      media.attrs.species = species;
     } catch (err) {
-      image.identification.identifying = false;
+      media.identification.identifying = false;
     }
   };
 
@@ -92,8 +94,6 @@ const HomeController: FC = () => {
       </div>
     </IonFooter>
   );
-
-  const hideSpeciesModal = () => setImage(null);
 
   return (
     <Page id="home">

@@ -18,6 +18,25 @@ type Props = {
 const QuadratController: FC<Props> = ({ subSample }) => {
   const isDisabled = subSample.isUploaded();
 
+  const identifyPhoto = async (image: any, model: typeof Sample) => {
+    const speciesImg = image;
+
+    speciesImg.identification.identifying = true;
+
+    try {
+      const species = await identifyImage(speciesImg);
+      speciesImg.attrs.species = species;
+
+      // eslint-disable-next-line
+      model.setSpecies(species[0]);
+
+      speciesImg.identification.identifying = false;
+      model.save();
+    } catch (e) {
+      speciesImg.identification.identifying = false;
+    }
+  };
+
   const photoSelect = async () => {
     if (!device.isOnline()) {
       warn('Looks like you are offline!');
@@ -41,25 +60,6 @@ const QuadratController: FC<Props> = ({ subSample }) => {
 
     subSample.samples.push(newSubSample);
     subSample.save();
-  };
-
-  const identifyPhoto = async (image: any, subSample: typeof Sample) => {
-    const speciesImg = image;
-
-    speciesImg.identification.identifying = true;
-
-    try {
-      const species = await identifyImage(speciesImg);
-      speciesImg.attrs.species = species;
-
-      // eslint-disable-next-line
-      subSample.setSpecies(species[0]);
-
-      speciesImg.identification.identifying = false;
-      subSample.save();
-    } catch (e) {
-      speciesImg.identification.identifying = false;
-    }
   };
 
   return (

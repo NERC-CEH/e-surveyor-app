@@ -19,6 +19,8 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
 
+  const navigateToSearch = () => navigate(`${url}/taxon`);
+
   const getNewImageButton = () => {
     if (isDisabled) {
       return <br />;
@@ -37,8 +39,6 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
       </LongPressButton>
     );
   };
-
-  const navigateToSearch = () => navigate(`${url}/taxon`);
 
   const prettyGridRef = <GridRefValue sample={subSample} />;
 
