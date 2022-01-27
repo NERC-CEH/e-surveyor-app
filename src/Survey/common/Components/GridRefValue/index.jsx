@@ -10,7 +10,15 @@ function getValue(sample) {
     return <IonSpinner />;
   }
 
-  return prettyPrintLocation(sample.attrs.location);
+  let value;
+  try {
+    value = prettyPrintLocation(sample.attrs.location);
+  } catch (error) {
+    value = `${sample.attrs.location.latitude.toFixed(
+      3
+    )} ${sample.attrs.location.longitude.toFixed(3)}`;
+  }
+  return value;
 }
 
 function GridRefValue({ sample }) {
