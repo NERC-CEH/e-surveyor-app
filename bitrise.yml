@@ -89,6 +89,13 @@ workflows:
   web:
     steps:
       - script@1:
+          title: Set up Node version
+          inputs:
+            - content: |
+                #!/usr/bin/env bash
+
+                nvm use # will use the .nvmrc local file
+      - script@1:
           title: Print system info
           inputs:
             - content: |
