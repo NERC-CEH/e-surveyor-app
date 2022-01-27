@@ -88,13 +88,7 @@ workflows:
             - export_method: app-store
   web:
     steps:
-      - script@1:
-          title: Set up Node version
-          inputs:
-            - content: |
-                #!/usr/bin/env bash
-
-                nvm use # will use the .nvmrc local file
+      - nvm@1: {}
       - script@1:
           title: Print system info
           inputs:
