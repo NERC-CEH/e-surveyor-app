@@ -98,7 +98,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           <MenuAttrItem
             routerLink={`${match.url}/seedmix`}
             icon={Seeds}
-            label="Name"
+            label="Mix"
             value={seedmix || ''}
             // styles="opacity:0.8"
             disabled={!seedmixgroup || isDisabled}

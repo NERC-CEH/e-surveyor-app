@@ -117,7 +117,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
           <MenuAttrItem
             routerLink={`${baseURL}/seedmix`}
             icon={Seeds}
-            label="Name"
+            label="Mix"
             value={seedmix || ''}
             // styles="opacity:0.8"
             disabled={!seedmixgroup || isDisabled}
