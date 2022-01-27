@@ -96,6 +96,10 @@ workflows:
 
                 echo "Node version:"
                 node --version
+                npm --version
+                xcodebuild -version
+                sw_vers
+                uname -av
       - get-npm-package-version@1: {}
       - npm@1:
           title: Config Bit.dev
