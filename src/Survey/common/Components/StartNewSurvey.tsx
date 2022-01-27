@@ -1,38 +1,105 @@
 import React, { useEffect, useContext } from 'react';
 import { NavContext } from '@ionic/react';
+import { useAlert } from '@flumens';
+import appModel from 'models/app';
+import userModel from 'models/user';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';
-import { useRouteMatch } from 'react-router';
 import { Survey } from 'common/surveys';
 
-async function getNewSample(survey: Survey) {
+async function showDraftAlert(alert: any) {
+  const showDraftDialog = (resolve: any) => {
+    alert({
+      header: 'Draft',
+      message: 'Previous survey draft exists, would you like to continue it?',
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'Discard',
+          handler: () => {
+            resolve(false);
+          },
+        },
+        {
+          text: 'Continue',
+          cssClass: 'primary',
+          handler: () => {
+            resolve(true);
+          },
+        },
+      ],
+    });
+  };
+  return new Promise(showDraftDialog);
+}
+
+async function getDraft(
+  draftIdKey: keyof typeof appModel.attrs.surveyDraftKeys,
+  alert: any
+) {
+  const draftID = appModel.attrs[draftIdKey];
+  if (draftID) {
+    const draftById = ({ cid }: typeof Sample) => cid === draftID;
+    const draftSample = savedSamples.find(draftById);
+    if (draftSample && !draftSample.isDisabled()) {
+      const continueDraftRecord = await showDraftAlert(alert);
+      if (continueDraftRecord) {
+        return draftSample;
+      }
+
+      draftSample.destroy();
+    }
+  }
+
+  return null;
+}
+
+async function getNewSample(
+  survey: Survey,
+  draftIdKey: keyof typeof appModel.attrs.surveyDraftKeys
+) {
   const sample = await survey.create(Sample);
   await sample.save();
 
   savedSamples.push(sample);
 
+  appModel.attrs[draftIdKey] = sample.cid;
+  await appModel.save();
+
   return sample;
 }
+
 type Props = {
   survey: Survey;
 };
 
-function StartNewSurvey({ survey }: Props) {
-  const { navigate } = useContext(NavContext);
-  const { url } = useRouteMatch();
+function StartNewSurvey({ survey }: Props): null {
+  const context = useContext(NavContext);
+  const alert = useAlert();
 
-  const createSample = async () => {
-    const sample = await getNewSample(survey);
+  const baseURL = `/survey/${survey.name}`;
+  const draftIdKey = `draftId:${survey.name}`;
 
-    let path = `${url}/${sample.cid}`;
-    if (survey.name === 'transect') {
-      path += '/details';
-    }
+  const pickDraftOrCreateSampleWrap = () => {
+    const pickDraftOrCreateSample = async () => {
+      if (!userModel.hasLogIn()) {
+        context.navigate(`/user/login`, 'none', 'replace');
+        return;
+      }
 
-    navigate(path, 'none', 'replace');
+      let sample = await getDraft(draftIdKey, alert);
+
+      if (!sample) {
+        sample = await getNewSample(survey, draftIdKey);
+      }
+
+      const path = sample.isDetailsComplete() ? '' : '/details';
+
+      context.navigate(`${baseURL}/${sample.cid}${path}`, 'none', 'replace');
+    };
+
+    pickDraftOrCreateSample();
   };
-
-  const pickDraftOrCreateSampleWrap: any = () => createSample(); // effects don't like async
   useEffect(pickDraftOrCreateSampleWrap, []);
 
   return null;
@@ -40,11 +107,10 @@ function StartNewSurvey({ survey }: Props) {
 
 // eslint-disable-next-line @getify/proper-arrows/name
 StartNewSurvey.with = (survey: Survey) => {
-  const StartNewSurveyWrap = (params: any) => (
+  const StartNewSurveyWithRouter = (params: any) => (
     <StartNewSurvey survey={survey} {...params} />
   );
-
-  return StartNewSurveyWrap;
+  return StartNewSurveyWithRouter;
 };
 
 export default StartNewSurvey;

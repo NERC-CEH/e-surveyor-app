@@ -1,16 +1,7 @@
 import React, { FC, useContext } from 'react';
-import {
-  Page,
-  Header,
-  toast,
-  device,
-  showInvalidsMessage,
-  loader,
-  useAlert,
-} from '@flumens';
+import { Page, Header, toast, device, useAlert } from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
-import userModel from 'models/user';
 import Occurrence from 'models/occurrence';
 import { observer } from 'mobx-react';
 import { IonButton, IonIcon, NavContext } from '@ionic/react';
@@ -18,9 +9,7 @@ import config from 'common/config';
 import Media from 'models/image';
 import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
 import { checkmarkCircleOutline } from 'ionicons/icons';
-import identifyImage from 'common/services/plantNet';
 import { useRouteMatch } from 'react-router-dom';
-import i18n from 'i18next';
 import Main from './Main';
 
 const { warn } = toast;
@@ -59,24 +48,17 @@ const HomeController: FC<Props> = ({ sample }) => {
   const alert = useAlert();
 
   const identifyPhoto = async (
-    image: typeof Media,
+    speciesPhoto: typeof Media,
     subSample: typeof Sample
   ) => {
-    const speciesImg = image;
-
-    speciesImg.identification.identifying = true;
-
     try {
-      const species = await identifyImage(speciesImg);
-      speciesImg.attrs.species = species;
+      const species = await speciesPhoto.identify();
+      if (!species) return;
 
-      // eslint-disable-next-line
       subSample.setSpecies(species[0]);
-
-      speciesImg.identification.identifying = false;
       subSample.save();
     } catch (e) {
-      speciesImg.identification.identifying = false;
+      console.error(e);
     }
   };
 
@@ -106,58 +88,14 @@ const HomeController: FC<Props> = ({ sample }) => {
   };
 
   const onUpload = async () => {
-    const invalids = sample.validateRemote();
+    const isUploading = await sample.upload(alert);
+    if (!isUploading) return;
 
-    if (invalids) {
-      showInvalidsMessage(invalids);
-      return;
-    }
+    // eslint-disable-next-line no-param-reassign
+    sample.metadata.saved = true;
+    sample.save();
 
-    if (!device.isOnline()) {
-      warn(i18n.t('Looks like you are offline!'));
-      return;
-    }
-
-    const isLoggedIn = !!userModel.attrs.id;
-    if (!isLoggedIn) {
-      warn(i18n.t('Please log in first to upload the records.'));
-      return;
-    }
-
-    if (!userModel.attrs.verified) {
-      await loader.show({
-        message: i18n.t('Please wait...'),
-      });
-
-      try {
-        await userModel.refreshProfile();
-      } catch (e) {
-        // do nothing
-      }
-
-      loader.hide();
-
-      if (!userModel.attrs.verified) {
-        warn(
-          i18n.t("Sorry, your account hasn't been verified yet or is blocked.")
-        );
-        return;
-      }
-    }
-
-    await loader.show({
-      message: i18n.t('Uploading your survey...'),
-    });
-
-    try {
-      await sample.saveRemote();
-
-      navigate(`${match.url}/report`);
-    } catch (e) {
-      // do nothing
-    }
-
-    loader.hide();
+    navigate(`${match.url}/report`);
   };
 
   if (!sample) {
@@ -166,20 +104,13 @@ const HomeController: FC<Props> = ({ sample }) => {
 
   const isDisabled = sample.isUploaded();
 
-  const uploadButton = isDisabled ? (
-    <IonButton
-      color="secondary"
-      fill="solid"
-      routerLink={`${match.url}/report`}
-    >
-      See Report
-    </IonButton>
-  ) : (
-    <IonButton onClick={onUpload} color="secondary" fill="solid">
-      <IonIcon icon={checkmarkCircleOutline} slot="start" />
-      Finish
-    </IonButton>
-  );
+  const uploadButton =
+    isDisabled || sample.remote.synchronising ? null : (
+      <IonButton onClick={onUpload} color="secondary" fill="solid">
+        <IonIcon icon={checkmarkCircleOutline} slot="start" />
+        {sample.metadata.saved ? 'Upload' : 'Finish'}
+      </IonButton>
+    );
 
   if (!appModel.attrs.showFirstSurveyTip) showFirstSurveyTip(alert);
 

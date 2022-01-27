@@ -69,7 +69,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     const { media } = subSample.occurrences[0];
     if (media.length) {
       const photo = media[0];
-      identifying = photo.identification.identifying;
+      identifying = photo.isIdentifying();
       speciesPhoto = photo.attrs ? photo.getURL() : null;
     }
 

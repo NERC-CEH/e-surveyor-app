@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
-import { Page, device, toast, alert, loader } from '@flumens';
+import { Page, Header, device, toast, useAlert, loader } from '@flumens';
 import { detailsParams } from 'common/types';
 import i18n from 'i18next';
 import Main from './Main';
@@ -11,6 +11,7 @@ import './styles.scss';
 const { warn, error } = toast;
 
 async function onRegister(
+  alert: any,
   userModel: typeof userModelProps,
   details: detailsParams,
   onSuccess: any
@@ -70,16 +71,22 @@ type Props = {
 
 const RegisterContainer: FC<Props> = ({ userModel }) => {
   const context = useContext(NavContext);
+  const alert = useAlert();
 
   const onSuccess = () => {
     context.navigate('/home/surveys', 'root');
   };
 
   const onRegisterWrap = (details: detailsParams) =>
-    onRegister(userModel, details, onSuccess);
+    onRegister(alert, userModel, details, onSuccess);
 
   return (
     <Page id="user-register">
+      <Header
+        className="ion-no-border"
+        routerDirection="none"
+        title="Register"
+      />
       <Main schema={userModel.registerSchema} onSubmit={onRegisterWrap} />
     </Page>
   );

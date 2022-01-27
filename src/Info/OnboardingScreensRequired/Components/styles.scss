@@ -81,16 +81,16 @@ $dark-brown: #4d380a;
     }
   }
 
-  ion-slide {
+  .swiper-slide {
     background: rgb(255, 240, 216);
   }
 
-  ion-slide .message {
+  .swiper-slide .message {
     position: absolute;
     top: 105%;
   }
 
-  ion-slides {
+  .swiper {
     position: fixed !important;
     top: 0;
     left: 0;
@@ -98,7 +98,7 @@ $dark-brown: #4d380a;
     height: 100vh;
     background: white;
 
-    ion-slide.first {
+    .swiper-slide.first {
       @include slide;
 
       .slide-header {
@@ -106,7 +106,7 @@ $dark-brown: #4d380a;
       }
     }
 
-    ion-slide.second {
+    .swiper-slide.second {
       @include slide;
 
       .slide-header {
@@ -119,7 +119,7 @@ $dark-brown: #4d380a;
       }
     }
 
-    ion-slide.third {
+    .swiper-slide.third {
       @include slide;
 
       .slide-header {
@@ -132,7 +132,7 @@ $dark-brown: #4d380a;
       }
     }
 
-    ion-slide.fourth {
+    .swiper-slide.fourth {
       @include slide;
 
       .slide-header {

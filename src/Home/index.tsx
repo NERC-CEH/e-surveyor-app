@@ -1,114 +1,51 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC } from 'react';
 import {
   IonTabButton,
   IonIcon,
-  IonLabel,
-  IonFooter,
-  IonButton,
-  IonModal,
-  IonMenuButton,
-  IonToolbar,
-  IonHeader,
-  NavContext,
+  IonTabBar,
+  IonRouterOutlet,
+  IonTabs,
 } from '@ionic/react';
-import { ModalHeader, Page, device, toast } from '@flumens';
-import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
+import { Redirect, Route } from 'react-router';
+import { homeOutline, menuOutline, personOutline } from 'ionicons/icons';
 import savedSamples from 'models/savedSamples';
-import config from 'common/config';
-import ImageModel from 'models/image';
-import identifyImage from 'common/services/plantNet';
-import flowerIcon from 'common/images/flowerIcon.svg';
-import pointIcon from 'common/images/pointIcon.svg';
-import transectIcon from 'common/images/transectIcon.svg';
-import SpeciesProfile from './components/SpeciesProfile';
-import Main from './Main';
+import PendingSurveysBadge from 'Components/PendingSurveysBadge';
+import UserSurveys from './UserSurveys';
+import LandingPage from './LandingPage';
+import Menu from './Menu';
 import './styles.scss';
 
-const { warn } = toast;
-
 const HomeController: FC = () => {
-  const { navigate } = useContext(NavContext);
-  const [image, setImage] = useState<any>(null);
-
-  const hideSpeciesModal = () => setImage(null);
-
-  const getModal = () => (
-    <IonModal isOpen={!!image} backdropDismiss={false}>
-      <ModalHeader title="Species" onClose={hideSpeciesModal} />
-      <SpeciesProfile species={image} />
-    </IonModal>
-  );
-
-  const identifyPhoto = async () => {
-    if (!device.isOnline()) {
-      warn('Looks like you are offline!');
-      return;
-    }
-
-    const photo = await ImageHelp.getImage();
-    if (!photo) {
-      return;
-    }
-
-    const media = await ImageHelp.getImageModel(
-      ImageModel,
-      photo,
-      config.dataPath
-    );
-
-    setImage(media);
-
-    media.identification.identifying = true;
-    try {
-      const species = (await identifyImage(media)) || [];
-
-      media.identification.identifying = false;
-      media.attrs.species = species;
-    } catch (err) {
-      media.identification.identifying = false;
-    }
-  };
-
-  const startTransect = () => navigate('/survey/transect');
-
-  const getFooter = () => (
-    <IonFooter>
-      <div className="inner-wrap">
-        <div onClick={identifyPhoto}>
-          <IonTabButton>
-            <IonIcon icon={flowerIcon} />
-            <IonLabel>Plant ID</IonLabel>
-          </IonTabButton>
-        </div>
-
-        <IonButton routerLink="/survey/point">
-          <IonIcon icon={pointIcon} />
-        </IonButton>
-
-        <div onClick={startTransect}>
-          <IonTabButton>
-            <IonIcon icon={transectIcon} />
-            <IonLabel>Transect</IonLabel>
-          </IonTabButton>
-        </div>
-      </div>
-    </IonFooter>
-  );
-
   return (
-    <Page id="home">
-      <IonHeader className="ion-no-border">
-        <IonToolbar>
-          <IonMenuButton slot="start" />
-        </IonToolbar>
-      </IonHeader>
+    <IonTabs>
+      <IonRouterOutlet>
+        <Redirect path="/home" to="/home/landing" exact />
+        <Route path="/home/landing" component={LandingPage} exact />
+        <Route path="/home/surveys" component={UserSurveys} exact />
+        <Route path="/home/menu" component={Menu} exact />
+      </IonRouterOutlet>
 
-      <Main savedSamples={savedSamples} />
+      <IonTabBar slot="bottom">
+        <IonTabButton tab="home/landing" href="/home/landing">
+          <div className="tab-highlight">
+            <IonIcon icon={homeOutline} />
+          </div>
+        </IonTabButton>
 
-      {getFooter()}
+        <IonTabButton tab="home/surveys" href="/home/surveys">
+          <div className="tab-highlight">
+            <IonIcon icon={personOutline} />
+          </div>
+          <PendingSurveysBadge savedSamples={savedSamples} />
+        </IonTabButton>
 
-      {getModal()}
-    </Page>
+        <IonTabButton tab="home/menu" href="/home/menu">
+          <div className="tab-highlight">
+            <IonIcon icon={menuOutline} />
+          </div>
+        </IonTabButton>
+      </IonTabBar>
+    </IonTabs>
   );
 };
 

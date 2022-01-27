@@ -82,6 +82,9 @@ const Credits: FC = () => (
           <a href="https://www.flaticon.com/" title="Flaticon">
             www.flaticon.com
           </a>
+          <a href="https://www.freepik.com/vectors/flower">
+            Flower vector created by rawpixel.com - www.freepik.com
+          </a>
         </P>
 
         <H>Photos</H>

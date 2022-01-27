@@ -1,10 +1,12 @@
+@import './roundedTheme.scss';
+
 :root {
-  --ion-color-primary: #ab5700;
+  --ion-color-primary: #66a347;
   --ion-color-primary-rgb: 145, 167, 28;
   --ion-color-primary-contrast: #fff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #884906;
-  --ion-color-primary-tint: #c07a30;
+  --ion-color-primary-shade: #35681c;
+  --ion-color-primary-tint: #97d17b;
 
   --ion-color-secondary: #ffa514;
   --ion-color-secondary-rgb: 0, 142, 236;
@@ -41,7 +43,7 @@
   --ion-color-danger-shade: #d33939;
   --ion-color-danger-tint: #f25454;
 
-  --ion-color-dark: #222428;
+  --ion-color-dark: #091b00;
   --ion-color-dark-rgb: 34, 34, 34;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
@@ -55,7 +57,7 @@
   --ion-color-medium-shade: #86888f;
   --ion-color-medium-tint: #a2a4ab;
 
-  --ion-color-light: #f4f5f8;
+  --ion-color-light: #ffffff;
   --ion-color-light-rgb: 244, 244, 244;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
@@ -67,12 +69,89 @@
   --custom-color-complex-survey-tint: #b98b14;
 
   --ion-page-background: #f4f5f8;
-}
+  --ion-item-background: white;
 
-:root {
+  ion-toolbar {
+    --ion-toolbar-background: linear-gradient(
+      90deg,
+      rgba(102, 163, 71, 1) 0%,
+      rgba(131, 163, 71, 1) 100%
+    );
+  }
+
   --ion-headings-font-weight: 300;
   // --ion-item-border-color: red;
   --ion-item-border-color: rgb(0, 0, 0, 0.2);
+}
+
+@font-face {
+  font-family: 'Museo300';
+  src: url('./fonts/Museo300-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Museo500';
+  src: url('./fonts/Museo500-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Museo700';
+  src: url('./fonts/Museo700-Regular.ttf');
+}
+
+h1 {
+  font-family: 'Museo500';
+}
+
+h2,
+h3 {
+  font-family: 'Museo300';
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ion-color-primary);
+}
+
+.app-name {
+  font-family: 'Museo300';
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+  color: black;
+
+  &.md {
+    padding: 0;
+  }
+
+  b {
+    font-family: 'Museo700';
+    color: var(--ion-color-primary);
+  }
+}
+
+.apps-section .apps-section-h {
+  font-family: 'Museo300';
+  margin: 20px auto 10px;
+  color: var(--ion-color-primary);
+}
+
+ion-title,
+.gallery-modal .title {
+  font-family: 'Museo500';
+}
+
+ion-item-divider {
+  font-family: 'Museo300';
+  font-weight: normal;
+}
+
+ion-footer {
+  ion-tab-button {
+    font-family: 'Museo300';
+    font-weight: normal;
+  }
 }
 
 .ios,
@@ -236,140 +315,6 @@ ion-item.empty {
   }
 }
 
-/* ROUND-THEME START */
-body {
-  background-color: var(--ion-page-background);
-}
-
-ion-content {
-  --background: var(--ion-page-background);
-}
-
-ion-content > ion-list > ion-item-divider:first-of-type,
-ion-content > ion-list > .rounded:first-of-type:first-child {
-  margin-top: 10px;
-}
-
-*:not(.rounded) > .info-message {
-  border-radius: 10px;
-  margin: 10px;
-  --border-color: transparent;
-}
-
-ion-item-divider {
-  border: 0;
-  font-weight: normal;
-}
-
-ion-input,
-ion-textarea {
-  margin: 10px auto !important;
-  max-width: 95%;
-  border-radius: 10px;
-}
-
-.item-datetime,
-.checkbox-input-attr ion-item,
-ion-radio-group ion-item {
-  --border-style: none;
-  border-radius: 10px;
-  margin: 10px;
-}
-
-.info-background-message {
-  border-radius: 10px;
-
-  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.05),
-    0 2px 9px 0 rgba(62, 57, 107, 0.05);
-}
-
-div.rounded {
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 20px;
-
-  > ion-item-sliding:last-child {
-    ion-item {
-      --border-style: none;
-    }
-  }
-
-  > :last-child {
-    --border-style: none;
-  }
-
-  div:last-child {
-    ion-item {
-      --border-style: none;
-    }
-  }
-}
-
-ion-list {
-  padding: 0 10px !important;
-}
-
-ion-list,
-ion-item-divider {
-  background: transparent !important;
-}
-
-.attr-page {
-  ion-input,
-  ion-textarea {
-    background: var(--ion-color-light) !important;
-    padding: 0 10px;
-  }
-}
-
-.apps-section * {
-  --background: transparent;
-}
-
-ion-radio-group {
-  .item-radio-checked:not(.radio-input-default-option) {
-    --background: var(--ion-color-primary-tint);
-    color: var(--ion-color-light);
-    --color-activated: var(--ion-color-light);
-  }
-
-  ion-label {
-    font-weight: 500;
-  }
-}
-
-.slider-input-attr {
-  margin: 0 10px;
-  border-radius: 10px;
-  --border-color: transparent;
-}
-
-.error-container .error-message {
-  background: white;
-}
-
-.apps-section * {
-  --background: transparent;
-}
-
-.info-background-message {
-  ion-button {
-    margin-left: 10px;
-
-    color: var(--ion-color-medium);
-    --border-color: var(--ion-color-medium);
-  }
-  span {
-    text-align: left;
-  }
-}
-
-.input-with-validation input {
-  background: transparent;
-}
-
-/* ROUND-THEME END */
-
 .radio-input-attr ion-item ion-label {
   font-weight: 500;
 }
@@ -400,7 +345,7 @@ html.plt-tablet {
     border-right: none;
 
     ion-button {
-      background: #745a8f4f;
+      background: #5d8f5a4f;
       margin: 5px;
       height: calc(80px - 10px);
       width: calc(80px - 10px);
@@ -413,12 +358,4 @@ html.plt-tablet {
 .alert-message {
   text-align: left !important;
   font-size: 1em !important;
-}
-
-div.rounded .attr {
-  ion-item {
-    margin: 0 !important;
-    --border-radius: none;
-    border-radius: 0;
-  }
 }

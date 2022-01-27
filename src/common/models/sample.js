@@ -1,4 +1,4 @@
-import { Sample } from '@flumens';
+import { Sample, toast, device, getDeepErrorMessage } from '@flumens';
 import userModel from 'models/user';
 import config from 'common/config';
 import pointSurveyConfig from 'Survey/Point/config';
@@ -9,6 +9,8 @@ import plantInteractions from '../data/plant_interactions';
 import { modelStore } from './store';
 import Occurrence from './occurrence';
 import Media from './image';
+
+const { warn, error } = toast;
 
 const surveyConfig = {
   point: pointSurveyConfig,
@@ -179,6 +181,57 @@ class AppSample extends Sample {
     const index = this.parent.samples.findIndex(byId);
 
     return `Quadrat #${index + 1}`;
+  }
+
+  isDetailsComplete() {
+    const requiresDetails = this.metadata.survey === 'transect';
+    return requiresDetails ? this.metadata.completedDetails : true;
+  }
+
+  cleanUp = () => {
+    this.stopGPS();
+    const stopGPS = smp => smp.stopGPS();
+    this.samples.forEach(stopGPS);
+  };
+
+  async upload(alert) {
+    if (this.remote.synchronising) {
+      return true;
+    }
+
+    const invalids = this.validateRemote();
+    if (invalids) {
+      alert({
+        header: 'Survey incomplete',
+        message: getDeepErrorMessage(invalids),
+        buttons: [
+          {
+            text: 'Got it',
+            role: 'cancel',
+          },
+        ],
+      });
+      return false;
+    }
+
+    if (!device.isOnline()) {
+      warn('Looks like you are offline!');
+      return false;
+    }
+
+    const isActivated = await userModel.checkActivation();
+    if (!isActivated) {
+      return false;
+    }
+
+    this.cleanUp();
+    const showError = e => {
+      error(e);
+      throw e;
+    };
+    this.saveRemote().catch(showError);
+
+    return true;
   }
 }
 

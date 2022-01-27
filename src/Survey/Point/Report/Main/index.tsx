@@ -9,9 +9,14 @@ import {
   IonBadge,
   IonItemDivider,
   IonModal,
-  IonNote,
 } from '@ionic/react';
-import { Main, ModalHeader, InfoBackgroundMessage } from '@flumens';
+import {
+  Main,
+  ModalHeader,
+  InfoBackgroundMessage,
+  InfoMessage,
+} from '@flumens';
+import { informationCircleOutline } from 'ionicons/icons';
 import CountUp from 'react-countup';
 import Sample from 'models/sample';
 import pollination from 'common/data/pollination';
@@ -141,7 +146,7 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
 
     return (
       <>
-        <IonItem>
+        <IonItemDivider>
           <IonLabel slot="start">
             <b>
               <small>Species</small>
@@ -152,7 +157,7 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
               <small>Counts</small>
             </b>
           </IonLabel>
-        </IonItem>
+        </IonItemDivider>
 
         {listGroupCounts(species)}
       </>
@@ -191,7 +196,9 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
           </IonItemDivider>
         </IonList>
 
-        <IonList>{species}</IonList>
+        <IonList>
+          <div className="rounded">{species}</div>
+        </IonList>
       </>
     );
   };
@@ -238,14 +245,10 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
 
     return (
       <>
-        <IonItem className="pollinator-class">
-          <IonLabel className="ion-text-wrap">
-            <IonNote color="primary">
-              This is <b className={pollinatorClass}>{pollinatorClass}</b> class
-              flower that supports <b>{pollinatorCount}</b> species
-            </IonNote>
-          </IonLabel>
-        </IonItem>
+        <InfoMessage icon={informationCircleOutline}>
+          This is <b className={pollinatorClass}>{pollinatorClass}</b> class
+          flower that supports <b>{pollinatorCount}</b> species
+        </InfoMessage>
 
         <IonList>
           <IonItemDivider>
@@ -253,7 +256,9 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
           </IonItemDivider>
         </IonList>
 
-        <IonList>{species}</IonList>
+        <IonList>
+          <div className="rounded">{species}</div>
+        </IonList>
       </>
     );
   };
@@ -294,7 +299,9 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
           </IonItemDivider>
         </IonList>
 
-        <IonList>{species}</IonList>
+        <IonList>
+          <div className="rounded">{species}</div>
+        </IonList>
       </>
     );
   };
@@ -348,7 +355,10 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
         <IonItemDivider>
           <IonLabel>Found species</IonLabel>
         </IonItemDivider>
-        {selectedSeedmixSpecies.sort(byName).map(selectedSeedmixEntries)}
+
+        <div className="rounded">
+          {selectedSeedmixSpecies.sort(byName).map(selectedSeedmixEntries)}
+        </div>
       </IonList>
     );
   };
@@ -386,31 +396,25 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
   const showPollinatorsData = () => {
     return (
       <>
-        <IonItemDivider mode="ios">
-          <IonLabel className="home-report-label">Pollinators count</IonLabel>
-        </IonItemDivider>
+        <h3>Pollinators count</h3>
+        <div className="rounded">
+          <IonItemDivider>
+            <IonLabel slot="start">
+              <b>
+                <small>Species</small>
+              </b>
+            </IonLabel>
+            <IonLabel className="ion-text-right" slot="end">
+              <b>
+                <small>Counts</small>
+              </b>
+            </IonLabel>
+          </IonItemDivider>
+          {getPollinators()}
+        </div>
 
-        <IonItem>
-          <IonLabel slot="start">
-            <b>
-              <small>Species</small>
-            </b>
-          </IonLabel>
-          <IonLabel className="ion-text-right" slot="end">
-            <b>
-              <small>Counts</small>
-            </b>
-          </IonLabel>
-        </IonItem>
-
-        {getPollinators()}
-
-        <IonItemDivider mode="ios">
-          <IonLabel className="home-report-label">
-            Supported species groups
-          </IonLabel>
-        </IonItemDivider>
-        {getSupportedSpecies()}
+        <h3>Supported species groups</h3>
+        <div className="rounded">{getSupportedSpecies()}</div>
       </>
     );
   };

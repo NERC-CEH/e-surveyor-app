@@ -8,8 +8,13 @@ import {
   IonIcon,
   IonItemDivider,
 } from '@ionic/react';
-import { createOutline, leaf, bookmarkOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem, MenuNote } from '@flumens';
+import {
+  createOutline,
+  leaf,
+  bookmarkOutline,
+  informationCircleOutline,
+} from 'ionicons/icons';
+import { Main, MenuAttrItem, InfoMessage } from '@flumens';
 import Sample from 'models/sample';
 import { useRouteMatch } from 'react-router-dom';
 import './styles.scss';
@@ -103,16 +108,31 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
     );
   };
 
+  const isComplete = sample.metadata.saved || sample.isDisabled(); // disabled for backwards compatibility
+
   return (
     <Main>
-      <IonList lines="full">
-        <div className="rounded">
-          {isDisabled && (
-            <MenuNote>
-              This survey has been finished and cannot be updated.
-            </MenuNote>
-          )}
+      <br />
 
+      <IonList lines="full">
+        {isDisabled && (
+          <InfoMessage icon={informationCircleOutline}>
+            This survey has been finished and cannot be updated.
+          </InfoMessage>
+        )}
+
+        {isComplete && (
+          <IonButton
+            color="secondary"
+            type="submit"
+            expand="block"
+            routerLink={`${match.url}/report`}
+          >
+            See Report
+          </IonButton>
+        )}
+
+        <div className="rounded">
           <MenuAttrItem
             routerLink={`${match.url}/details`}
             icon={createOutline}

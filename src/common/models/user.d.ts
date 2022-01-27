@@ -3,7 +3,7 @@ declare const appModel: {
   attrs: any;
   save: () => void;
   getPrettyName: () => void;
-  hasLogIn: () => void;
+  hasLogIn: () => boolean;
   refreshProfile: () => void;
   resetDefaults: () => void;
   resetSchema: () => void;

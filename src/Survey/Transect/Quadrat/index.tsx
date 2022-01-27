@@ -6,7 +6,6 @@ import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
 import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
-import identifyImage from 'common/services/plantNet';
 import Main from './Main';
 
 const { warn } = toast;
@@ -18,22 +17,15 @@ type Props = {
 const QuadratController: FC<Props> = ({ subSample }) => {
   const isDisabled = subSample.isUploaded();
 
-  const identifyPhoto = async (image: any, model: typeof Sample) => {
-    const speciesImg = image;
-
-    speciesImg.identification.identifying = true;
-
+  const identifyPhoto = async (speciesPhoto: any, model: typeof Sample) => {
     try {
-      const species = await identifyImage(speciesImg);
-      speciesImg.attrs.species = species;
+      const species = await speciesPhoto.identify();
+      if (!species) return;
 
-      // eslint-disable-next-line
       model.setSpecies(species[0]);
-
-      speciesImg.identification.identifying = false;
       model.save();
     } catch (e) {
-      speciesImg.identification.identifying = false;
+      console.error(e);
     }
   };
 

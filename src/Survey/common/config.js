@@ -110,10 +110,7 @@ export const dateAttr = {
       inputProps: { max: () => new Date() },
     },
   },
-  remote: {
-    id: 'date',
-    values: d => date.print(d),
-  },
+  remote: { values: d => date.print(d, false) },
 };
 
 export const locationAttr = {

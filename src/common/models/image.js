@@ -7,6 +7,7 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
+import identifyImage from 'common/services/plantNet';
 
 export default class AppMedia extends Media {
   @observable identification = { identifying: false };
@@ -75,6 +76,16 @@ export default class AppMedia extends Media {
     }
 
     return Capacitor.convertFileSrc(`${path}/${name}`);
+  }
+
+  async identify() {
+    this.identification.identifying = true;
+
+    const species = await identifyImage(this);
+    this.attrs.species = species;
+    this.identification.identifying = false;
+
+    return species;
   }
 
   isIdentifying() {

@@ -1,9 +1,20 @@
 import React, { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import Sample from 'models/sample';
-import { IonItemDivider, IonIcon, IonList, NavContext } from '@ionic/react';
-import { Main, MenuAttrItem, LongPressButton, MenuNote } from '@flumens';
-import { camera, bookmarkOutline, locationOutline } from 'ionicons/icons';
+import {
+  IonItemDivider,
+  IonIcon,
+  IonList,
+  NavContext,
+  IonButton,
+} from '@ionic/react';
+import { Main, MenuAttrItem, LongPressButton, InfoMessage } from '@flumens';
+import {
+  camera,
+  bookmarkOutline,
+  locationOutline,
+  informationCircleOutline,
+} from 'ionicons/icons';
 import Seeds from 'common/images/seeds.svg';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
@@ -47,6 +58,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
   };
 
   const { seedmixgroup, seedmix, name } = sample.attrs;
+  const isComplete = sample.metadata.saved || sample.isDisabled(); // disabled for backwards compatibility
 
   const prettyGridRef = <GridRefValue sample={sample} />;
 
@@ -56,9 +68,20 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
     <Main>
       <IonList lines="full">
         {isDisabled && (
-          <MenuNote>
+          <InfoMessage icon={informationCircleOutline}>
             This survey has been finished and cannot be updated.
-          </MenuNote>
+          </InfoMessage>
+        )}
+
+        {isComplete && (
+          <IonButton
+            color="secondary"
+            type="submit"
+            expand="block"
+            routerLink={`${match.url}/report`}
+          >
+            See Report
+          </IonButton>
         )}
 
         <IonItemDivider>Details</IonItemDivider>

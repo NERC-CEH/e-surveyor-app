@@ -45,6 +45,7 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
   return (
     <Main>
       <IonList lines="full">
+        <br />
         <div className="rounded">
           <MenuAttrItem
             routerLink={`${url}/map`}

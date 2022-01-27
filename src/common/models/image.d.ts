@@ -15,6 +15,7 @@ export declare const imageModel: {
     identifying: boolean;
   };
   isIdentifying: () => any;
+  identify: () => any;
   getURL: () => string;
 };
 

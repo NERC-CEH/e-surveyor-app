@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
-import { Page, Header, device, alert, loader, toast } from '@flumens';
+import { Page, Header, device, useAlert, loader, toast } from '@flumens';
 import { detailsParams } from 'common/types';
 import i18n from 'i18next';
 import Main from './Main';
@@ -15,6 +15,7 @@ type Props = {
 };
 
 async function onSubmit(
+  alert: any,
   userModel: typeof userModelProps,
   details: detailsParams,
   onSuccess: () => void
@@ -59,13 +60,14 @@ async function onSubmit(
 
 const ResetController: FC<Props> = ({ userModel }) => {
   const context = useContext(NavContext);
+  const alert = useAlert();
 
   const onSuccess = () => {
     context.navigate('/home/surveys', 'root');
   };
 
   const onSubmitWrap = (details: detailsParams) =>
-    onSubmit(userModel, details, onSuccess);
+    onSubmit(alert, userModel, details, onSuccess);
 
   return (
     <Page id="user-reset">

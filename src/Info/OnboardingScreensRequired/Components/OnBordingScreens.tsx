@@ -1,11 +1,9 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import AppModelType from 'models/app';
 import { Page, Main } from '@flumens';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
 import {
-  IonSlides,
-  IonSlide,
   IonButton,
   IonHeader,
   IonToolbar,
@@ -14,6 +12,11 @@ import {
   IonLabel,
   IonFooter,
 } from '@ionic/react';
+import SwiperCore, { Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import '@ionic/react/css/ionic-swiper.css';
 import firstImage from './images/first.jpg';
 import secondImage from './images/second.jpg';
 import thirdImage from './images/third.jpg';
@@ -42,20 +45,20 @@ interface Props {
 
 const OnboardingScreens: FC<Props> = ({ appModel }) => {
   const [moreSlidesExist, setMoreSlidesExist] = useState(true);
+  const [controlledSwiper, setControlledSwiper] = useState<SwiperCore>();
 
   function exit() {
     // eslint-disable-next-line no-param-reassign
     appModel.attrs.showedWelcome = true;
     appModel.save();
   }
-  const slideRef = useRef<any>(null);
 
   const handleSlideChangeStart = async () => {
-    const isEnd = await slideRef.current.isEnd();
+    const isEnd = controlledSwiper && controlledSwiper.isEnd;
     setMoreSlidesExist(!isEnd);
   };
 
-  const slideNext = () => slideRef.current.swiper.slideNext();
+  const slideNext = () => controlledSwiper && controlledSwiper.slideNext();
 
   return (
     <Page id="welcome-page">
@@ -71,12 +74,13 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
         </IonToolbar>
       </IonHeader>
       <Main>
-        <IonSlides
-          ref={slideRef}
-          pager={moreSlidesExist}
-          onIonSlideDidChange={handleSlideChangeStart}
+        <Swiper
+          onSwiper={setControlledSwiper}
+          modules={[Pagination]}
+          pagination={moreSlidesExist}
+          onSlideChange={handleSlideChangeStart}
         >
-          <IonSlide className="first">
+          <SwiperSlide className="first">
             <div
               className="slide-header"
               style={{ backgroundImage: `url(${firstImage})` }}
@@ -90,9 +94,9 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                 </p>
               </div>
             </div>
-          </IonSlide>
+          </SwiperSlide>
 
-          <IonSlide className="second">
+          <SwiperSlide className="second">
             <div
               className="slide-header"
               style={{ backgroundImage: `url(${secondImage})` }}
@@ -106,9 +110,9 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                 </p>
               </div>
             </div>
-          </IonSlide>
+          </SwiperSlide>
 
-          <IonSlide className="third">
+          <SwiperSlide className="third">
             <div
               className="slide-header"
               style={{ backgroundImage: `url(${thirdImage})` }}
@@ -122,9 +126,9 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                 </p>
               </div>
             </div>
-          </IonSlide>
+          </SwiperSlide>
 
-          <IonSlide className="fourth">
+          <SwiperSlide className="fourth">
             <div
               className="slide-header"
               style={{ backgroundImage: `url(${fourthImage})` }}
@@ -143,8 +147,8 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                 </IonButton>
               </div>
             </div>
-          </IonSlide>
-        </IonSlides>
+          </SwiperSlide>
+        </Swiper>
       </Main>
 
       {moreSlidesExist && (

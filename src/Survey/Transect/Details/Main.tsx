@@ -30,6 +30,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
 
   return (
     <Main>
+      <br />
       <IonList lines="full">
         <div className="rounded">
           <MenuAttrItem

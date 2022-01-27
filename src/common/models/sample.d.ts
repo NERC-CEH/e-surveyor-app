@@ -20,11 +20,12 @@ declare const Sample: {
   };
   save: () => any;
   saveRemote: () => any;
-  upload: () => any;
+  upload: (alert: any) => any;
   cleanUp: () => any;
   validateRemote: () => any;
   isUploaded: () => boolean;
   isDisabled: () => boolean;
+  isDetailsComplete: () => boolean;
   getSurvey: () => any;
   destroy: () => any;
   getPrettyName: () => string;
