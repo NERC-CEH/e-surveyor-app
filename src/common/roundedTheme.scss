@@ -89,4 +89,13 @@ ion-radio-group {
 .info-message {
   --border-color: transparent;
 }
+
+.input-with-validation {
+  input {
+    background: transparent;
+  }
+  & + .error-container .error-message {
+    color: red;
+  }
+}
 /* ROUND-THEME END */
