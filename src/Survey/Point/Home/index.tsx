@@ -1,5 +1,12 @@
 import React, { FC, useContext } from 'react';
-import { Page, Header, toast, device, useAlert } from '@flumens';
+import {
+  Page,
+  Header,
+  toast,
+  device,
+  useAlert,
+  getDeepErrorMessage,
+} from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
@@ -91,6 +98,25 @@ const HomeController: FC<Props> = ({ sample }) => {
     const isUploading = await sample.upload(alert);
     if (!isUploading) return;
 
+    navigate(`/home/surveys`, 'root');
+  };
+
+  const onFinish = async () => {
+    const invalids = sample.validateRemote();
+    if (invalids) {
+      alert({
+        header: 'Survey incomplete',
+        message: getDeepErrorMessage(invalids),
+        buttons: [
+          {
+            text: 'Got it',
+            role: 'cancel',
+          },
+        ],
+      });
+      return;
+    }
+
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
     sample.save();
@@ -106,7 +132,11 @@ const HomeController: FC<Props> = ({ sample }) => {
 
   const uploadButton =
     isDisabled || sample.remote.synchronising ? null : (
-      <IonButton onClick={onUpload} color="secondary" fill="solid">
+      <IonButton
+        onClick={sample.metadata.saved ? onUpload : onFinish}
+        color="secondary"
+        fill="solid"
+      >
         <IonIcon icon={checkmarkCircleOutline} slot="start" />
         {sample.metadata.saved ? 'Upload' : 'Finish'}
       </IonButton>

@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import { Page, Header, useAlert } from '@flumens';
+import { Header, Page, getDeepErrorMessage, useAlert } from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { observer } from 'mobx-react';
@@ -19,6 +19,25 @@ const Controller: FC<Props> = ({ sample }) => {
   const onUpload = async () => {
     const isUploading = await sample.upload(alert);
     if (!isUploading) return;
+
+    navigate(`/home/surveys`, 'root');
+  };
+
+  const onFinish = async () => {
+    const invalids = sample.validateRemote();
+    if (invalids) {
+      alert({
+        header: 'Survey incomplete',
+        message: getDeepErrorMessage(invalids),
+        buttons: [
+          {
+            text: 'Got it',
+            role: 'cancel',
+          },
+        ],
+      });
+      return;
+    }
 
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
@@ -45,7 +64,11 @@ const Controller: FC<Props> = ({ sample }) => {
 
   const uploadButton =
     isDisabled || sample.remote.synchronising ? null : (
-      <IonButton onClick={onUpload} color="secondary" fill="solid">
+      <IonButton
+        onClick={sample.metadata.saved ? onUpload : onFinish}
+        color="secondary"
+        fill="solid"
+      >
         <IonIcon icon={checkmarkCircleOutline} slot="start" />
         {sample.metadata.saved ? 'Upload' : 'Finish'}
       </IonButton>
