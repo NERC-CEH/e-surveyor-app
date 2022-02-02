@@ -81,7 +81,13 @@ const LandingPage: FC<Props> = () => {
         <img src={logo} className="logo" />
 
         <div className="surveys-container">
-          <Swiper className="surveys" spaceBetween={20} slidesPerView={1.3}>
+          <Swiper
+            centeredSlides
+            centeredSlidesBounds
+            className="surveys"
+            spaceBetween={5}
+            slidesPerView={1.3}
+          >
             <SwiperSlide className="survey">
               <IonCard routerLink="/survey/point">
                 <div className="card-wrapper">
