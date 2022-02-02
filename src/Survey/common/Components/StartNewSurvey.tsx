@@ -83,7 +83,7 @@ function StartNewSurvey({ survey }: Props): null {
   const pickDraftOrCreateSampleWrap = () => {
     const pickDraftOrCreateSample = async () => {
       if (!userModel.hasLogIn()) {
-        context.navigate(`/user/login`, 'none', 'replace');
+        context.navigate(`/user/register`, 'none', 'replace');
         return;
       }
 
