@@ -194,6 +194,11 @@ class AppSample extends Sample {
     this.samples.forEach(stopGPS);
   };
 
+  destroy = () => {
+    this.cleanUp();
+    super.destroy();
+  };
+
   async upload(alert) {
     if (this.remote.synchronising) {
       return true;
