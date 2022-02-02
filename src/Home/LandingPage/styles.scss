@@ -1,3 +1,14 @@
+.plt-tablet #home-landing {
+  .surveys {
+    .survey {
+      height: calc((100% - 30px) / 2) !important;
+    }
+    .card-wrapper {
+      height: 40vw !important;
+    }
+  }
+}
+
 #home-landing {
   ion-content {
     --background: #fff url(./background.jpg) no-repeat center center / cover;

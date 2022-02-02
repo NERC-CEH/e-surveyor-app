@@ -8,9 +8,12 @@ import {
   IonCardSubtitle,
   IonCardHeader,
   IonIcon,
+  isPlatform,
 } from '@ionic/react';
+import { Grid } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/grid';
 import '@ionic/react/css/ionic-swiper.css';
 import { Page, Main, ModalHeader, device, toast } from '@flumens';
 import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
@@ -23,12 +26,7 @@ import survey2 from './ricardo-gomez.jpg';
 import survey3 from './andrew-neel.jpg';
 import SpeciesProfile from './Components/SpeciesProfile';
 import logo from './logo.svg';
-// import homePageBackground from './background.jpg';
 import './styles.scss';
-
-// const style = {
-//   backgroundImage: `url(${homePageBackground})`,
-// };
 
 const { warn } = toast;
 interface Props {}
@@ -75,6 +73,17 @@ const LandingPage: FC<Props> = () => {
     }
   };
 
+  const tabletLayout = isPlatform('tablet')
+    ? {
+        modules: [Grid],
+        // slidesPerView: 2.3, // uncomment when more than 4 surveys
+        slidesPerView: 2,
+        centeredSlides: false,
+        centeredSlidesBounds: false,
+        grid: { rows: 2 },
+      }
+    : {};
+
   return (
     <Page id="home-landing">
       <Main>
@@ -87,6 +96,7 @@ const LandingPage: FC<Props> = () => {
             className="surveys"
             spaceBetween={5}
             slidesPerView={1.3}
+            {...tabletLayout}
           >
             <SwiperSlide className="survey">
               <IonCard routerLink="/survey/point">
