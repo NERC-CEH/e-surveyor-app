@@ -75,13 +75,14 @@ const Image = {
 
     let files;
     try {
-      files = await Camera.pickImages(cameraOptions);
+      const { photos } = await Camera.pickImages(cameraOptions);
+      files = photos;
     } catch (e) {
       return null;
     }
 
     if (!isPlatform('hybrid')) {
-      return files.photos.map(({ webPath }) => webPath);
+      return files.map(({ webPath }) => webPath);
     }
 
     const uris = [];
