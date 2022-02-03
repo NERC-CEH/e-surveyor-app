@@ -31,10 +31,14 @@ function filterUKSIPlants() {
 
   const extractTaxon = (
     agg,
-    { preferred_taxon, preferred_taxa_taxon_list_id: id } // eslint-disable-line camelcase
+    { taxon, id, language, preferred } // eslint-disable-line camelcase
   ) => {
+    if (language !== 'Latin') return agg;
+
+    if (agg[taxon] && !preferred) return agg; // don't overwrite preferred ones
+
     // eslint-disable-next-line no-param-reassign
-    agg[preferred_taxon] = id;
+    agg[taxon] = id;
     return agg;
   };
 
