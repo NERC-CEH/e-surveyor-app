@@ -35,23 +35,31 @@ const QuadratController: FC<Props> = ({ subSample }) => {
       return;
     }
 
-    const photo = await ImageHelp.getImage();
+    const photos = await ImageHelp.getImages();
 
-    if (!photo) {
+    if (!photos || !photos.length) {
       return;
     }
 
-    const dataDirPath = config.dataPath;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const photo of photos) {
+      const dataDirPath = config.dataPath;
 
-    const image = await ImageHelp.getImageModel(ImageModel, photo, dataDirPath);
+      // eslint-disable-next-line no-await-in-loop
+      const image = await ImageHelp.getImageModel(
+        ImageModel,
+        photo,
+        dataDirPath
+      );
 
-    const survey = subSample.getSurvey();
-    const newSubSample = survey.smp.create(Sample, Occurrence, image);
+      const survey = subSample.getSurvey();
+      const newSubSample = survey.smp.create(Sample, Occurrence, image);
 
-    identifyPhoto(image, newSubSample);
+      identifyPhoto(image, newSubSample);
 
-    subSample.samples.push(newSubSample);
-    subSample.save();
+      subSample.samples.push(newSubSample);
+      subSample.save();
+    }
   };
 
   return (

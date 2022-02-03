@@ -61,6 +61,52 @@ const Image = {
     return uri;
   },
 
+  async getImages(options = {}) {
+    const defaultCameraOptions = {
+      quality: 40,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      saveToGallery: true,
+      webUseInput: true,
+      correctOrientation: true,
+    };
+
+    const cameraOptions = { ...defaultCameraOptions, ...options };
+
+    let files;
+    try {
+      files = await Camera.pickImages(cameraOptions);
+    } catch (e) {
+      return null;
+    }
+
+    if (!isPlatform('hybrid')) {
+      return files.photos.map(({ webPath }) => webPath);
+    }
+
+    const uris = [];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const file of files) {
+      const name = `${Date.now()}.jpeg`;
+      // eslint-disable-next-line no-await-in-loop
+      await Filesystem.copy({
+        from: file.path,
+        to: name,
+        toDirectory: Directory.Data,
+      });
+
+      // eslint-disable-next-line no-await-in-loop
+      const { uri } = await Filesystem.stat({
+        path: name,
+        directory: Directory.Data,
+      });
+
+      uris.push(uri);
+    }
+
+    return uris;
+  },
+
   /**
    * Create new record with a photo
    */
