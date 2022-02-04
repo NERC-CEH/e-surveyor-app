@@ -106,7 +106,7 @@
     "@capacitor/cli": "^3.3.3",
     "@flumens/eslint-config": "^2.0.0",
     "@flumens/fetch-onedrive-excel": "^0.2.1",
-    "@flumens/webpack-config": "^3.0.1",
+    "@flumens/webpack-config": "^4.0.0",
     "@types/jest": "^27.0.3",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
