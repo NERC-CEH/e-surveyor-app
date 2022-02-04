@@ -1,4 +1,4 @@
-import Sample from 'sample';
+import Sample from 'models/sample';
 import pollination from './cacheRemote/pollination.json';
 
 const recalculatePollinators = sp => {

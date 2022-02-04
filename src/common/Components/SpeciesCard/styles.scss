@@ -1,5 +1,6 @@
 #species-profile-card {
   border-radius: 10px;
+  flex: none;
 
   ion-card-header {
     display: flex;
@@ -63,7 +64,6 @@
   .info-background-message {
     --background: var(--ion-color-warning);
     color: #fff;
-    margin-bottom: 10px;
     display: inherit;
 
     span {

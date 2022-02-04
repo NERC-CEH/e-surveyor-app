@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { setupConfig, isPlatform } from '@ionic/react';
-import appModel from 'appModel';
-import userModel from 'userModel';
-import savedSamples from 'savedSamples';
-import config from 'config';
-import { Plugins, StatusBarStyle } from '@capacitor/core';
+import { setupIonicReact, isPlatform } from '@ionic/react';
+import appModel from 'models/app';
+import userModel from 'models/user';
+import savedSamples from 'models/savedSamples';
+import config from 'common/config';
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { App as AppPlugin } from '@capacitor/app';
 import i18n from 'i18next';
-import { initAnalytics } from '@apps';
+import { initAnalytics } from '@flumens';
 import { initReactI18next } from 'react-i18next';
 import App from './App';
 
@@ -15,13 +17,11 @@ import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import 'common/theme.scss';
 
-const { App: AppPlugin, StatusBar, SplashScreen } = Plugins;
-
 i18n.use(initReactI18next).init({
   lng: 'en',
 });
 
-setupConfig({
+setupIonicReact({
   hardwareBackButton: false, // android back button
   swipeBackEnabled: false,
 });

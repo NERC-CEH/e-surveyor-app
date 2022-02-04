@@ -1,7 +1,7 @@
-import Sample from 'sample';
-import Occurrence from 'occurrence';
 import config from 'Survey/Point/config';
 import seedmixData from 'common/data/seedmix';
+import Sample from '../../../../common/models/sample';
+import Occurrence from '../../../../common/models/occurrence';
 import { getMissingSeedmixSpecies } from '..';
 
 describe('Settings Menu', () => {

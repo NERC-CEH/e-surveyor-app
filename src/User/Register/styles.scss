@@ -1,24 +1,4 @@
 #user-register {
-  ion-toolbar {
-    position: fixed;
-    --ion-toolbar-background: transparent;
-
-    ion-back-button {
-      color: var(--ion-color-light-contrast);
-    }
-  }
-
-  ion-content {
-    --background: linear-gradient(
-      to top,
-      rgb(253 211 144) 0%,
-      rgb(247 212 154) 17%,
-      rgb(255 216 154) 43%,
-      rgb(255, 249, 235) 100%
-    );
-    --padding-top: 40px; // header
-  }
-
   ion-list,
   ion-item {
     --background: transparent;
@@ -26,6 +6,8 @@
   }
 
   ion-content {
+    --padding-top: 30px;
+
     ion-icon {
       color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 1);
     }

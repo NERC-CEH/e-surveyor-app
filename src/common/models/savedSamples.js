@@ -1,6 +1,6 @@
 import Log from 'helpers/log';
-import Sample from 'sample';
-import { initStoredSamples } from '@apps';
+import Sample from 'models/sample';
+import { initStoredSamples } from '@flumens';
 import { modelStore } from './store';
 
 Log('SavedSamples: initializing');

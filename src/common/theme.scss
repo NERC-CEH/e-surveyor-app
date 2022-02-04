@@ -1,10 +1,12 @@
+@import './roundedTheme.scss';
+
 :root {
-  --ion-color-primary: #ab5700;
+  --ion-color-primary: #66a347;
   --ion-color-primary-rgb: 145, 167, 28;
   --ion-color-primary-contrast: #fff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #884906;
-  --ion-color-primary-tint: #c07a30;
+  --ion-color-primary-shade: #35681c;
+  --ion-color-primary-tint: #97d17b;
 
   --ion-color-secondary: #ffa514;
   --ion-color-secondary-rgb: 0, 142, 236;
@@ -41,7 +43,7 @@
   --ion-color-danger-shade: #d33939;
   --ion-color-danger-tint: #f25454;
 
-  --ion-color-dark: #222428;
+  --ion-color-dark: #091b00;
   --ion-color-dark-rgb: 34, 34, 34;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
@@ -55,7 +57,7 @@
   --ion-color-medium-shade: #86888f;
   --ion-color-medium-tint: #a2a4ab;
 
-  --ion-color-light: #f4f5f8;
+  --ion-color-light: #ffffff;
   --ion-color-light-rgb: 244, 244, 244;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
@@ -65,12 +67,91 @@
   --custom-color-complex-survey: #a77d11;
   --custom-color-complex-survey-shade: #6d520c;
   --custom-color-complex-survey-tint: #b98b14;
-}
 
-:root {
+  --ion-page-background: #f4f5f8;
+  --ion-item-background: white;
+
+  ion-toolbar {
+    --ion-toolbar-background: linear-gradient(
+      90deg,
+      rgba(102, 163, 71, 1) 0%,
+      rgba(131, 163, 71, 1) 100%
+    );
+  }
+
   --ion-headings-font-weight: 300;
   // --ion-item-border-color: red;
   --ion-item-border-color: rgb(0, 0, 0, 0.2);
+}
+
+@font-face {
+  font-family: 'Museo300';
+  src: url('./fonts/Museo300-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Museo500';
+  src: url('./fonts/Museo500-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Museo700';
+  src: url('./fonts/Museo700-Regular.ttf');
+}
+
+h1 {
+  font-family: 'Museo500';
+}
+
+h2,
+h3 {
+  font-family: 'Museo300';
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ion-color-primary);
+}
+
+.app-name {
+  font-family: 'Museo300';
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+  color: black;
+
+  &.md {
+    padding: 0;
+  }
+
+  b {
+    font-family: 'Museo700';
+    color: var(--ion-color-primary);
+  }
+}
+
+.apps-section .apps-section-h {
+  font-family: 'Museo300';
+  margin: 20px auto 10px;
+  color: var(--ion-color-primary);
+}
+
+ion-title,
+.gallery-modal .title {
+  font-family: 'Museo500';
+}
+
+ion-item-divider {
+  font-family: 'Museo300';
+  font-weight: normal;
+}
+
+ion-footer {
+  ion-tab-button {
+    font-family: 'Museo300';
+    font-weight: normal;
+  }
 }
 
 .ios,
@@ -232,4 +313,49 @@ ion-item.empty {
     margin: 0 5px 0 8px;
     margin-bottom: -7px;
   }
+}
+
+.radio-input-attr ion-item ion-label {
+  font-weight: 500;
+}
+
+/* Tablet-friendly */
+html.plt-tablet {
+  .info-message,
+  .item-datetime,
+  ion-list,
+  ion-textarea {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.photo-picker {
+  --inner-padding-end: 0;
+
+  #img-picker-array .img {
+    margin-right: 5px;
+    .delete {
+      background-color: #80808085;
+    }
+  }
+
+  #img-picker-array .img-picker {
+    border-right: none;
+
+    ion-button {
+      background: #5d8f5a4f;
+      margin: 5px;
+      height: calc(80px - 10px);
+      width: calc(80px - 10px);
+      border-radius: 15px;
+      transform: none;
+    }
+  }
+}
+
+.alert-message {
+  text-align: left !important;
+  font-size: 1em !important;
 }

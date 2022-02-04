@@ -1,4 +1,4 @@
-import Sample from 'sample';
+import Sample from 'models/sample';
 import surveysData from './cacheRemote/dummy_surveys.json';
 import surveysNamesData from './dummy_surveys_names.json';
 import species from './cacheRemote/species.json';

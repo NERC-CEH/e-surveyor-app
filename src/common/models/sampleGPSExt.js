@@ -1,6 +1,6 @@
 import GPS from 'helpers/GPS';
 import { observable } from 'mobx';
-import { updateModelLocation } from '@apps';
+import { updateModelLocation } from '@flumens';
 
 const DEFAULT_ACCURACY_LIMIT = 50; // meters
 
@@ -29,7 +29,7 @@ const extension = {
     this.gps = observable({ locating: null });
   },
 
-  startGPS(accuracyLimit = DEFAULT_ACCURACY_LIMIT) {
+  async startGPS(accuracyLimit = DEFAULT_ACCURACY_LIMIT) {
     const that = this;
     const options = {
       accuracyLimit,
@@ -50,7 +50,7 @@ const extension = {
       },
     };
 
-    this.gps.locating = GPS.start(options);
+    this.gps.locating = await GPS.start(options);
   },
 
   stopGPS() {

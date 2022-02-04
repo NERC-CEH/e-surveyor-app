@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import TaxonSearch from 'common/Components/TaxonSearch';
 import { NavContext } from '@ionic/react';
-import Occurrence from 'occurrence';
-import Sample from 'sample';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 
-import { Page, Main, Header } from '@apps';
+import { Page, Main, Header } from '@flumens';
 
 @observer
 class Controller extends React.Component {
