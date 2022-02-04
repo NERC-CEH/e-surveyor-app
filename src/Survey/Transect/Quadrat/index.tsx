@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Page, Header, toast, device } from '@flumens';
+import { useIonActionSheet } from '@ionic/react';
 import { observer } from 'mobx-react';
 import ImageModel from 'models/image';
 import Sample from 'models/sample';
@@ -16,6 +17,7 @@ type Props = {
 
 const QuadratController: FC<Props> = ({ subSample }) => {
   const isDisabled = subSample.isUploaded();
+  const [presentActionSheet] = useIonActionSheet();
 
   const identifyPhoto = async (speciesPhoto: any, model: typeof Sample) => {
     try {
@@ -35,8 +37,7 @@ const QuadratController: FC<Props> = ({ subSample }) => {
       return;
     }
 
-    const photos = await ImageHelp.getImages();
-
+    const photos = await ImageHelp.getImages(undefined, presentActionSheet);
     if (!photos || !photos.length) {
       return;
     }

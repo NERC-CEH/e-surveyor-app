@@ -1,5 +1,5 @@
 import { isPlatform } from '@ionic/react';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 
 async function getImageMeta(url) {
@@ -61,7 +61,7 @@ const Image = {
     return uri;
   },
 
-  async getImages(options = {}) {
+  async getImages(options = {}, presentActionSheet) {
     const defaultCameraOptions = {
       quality: 40,
       allowEditing: false,
@@ -75,8 +75,34 @@ const Image = {
 
     let files;
     try {
-      const { photos } = await Camera.pickImages(cameraOptions);
-      files = photos;
+      const shouldUseGallery = await new Promise((resolve, reject) => {
+        presentActionSheet({
+          buttons: [
+            { text: 'From Photos', handler: () => resolve(true) },
+            { text: 'Take Picture', handler: () => resolve(false) },
+            { text: 'Cancel', role: 'cancel', handler: () => reject() },
+          ],
+          header: 'Select image source',
+        });
+      });
+
+      if (shouldUseGallery) {
+        // gallery
+        const { photos } = await Camera.pickImages(cameraOptions);
+        files = photos;
+      } else {
+        // camera
+        const photo = await Camera.getPhoto({
+          quality: 40,
+          allowEditing: false,
+          resultType: CameraResultType.Uri,
+          saveToGallery: true,
+          webUseInput: true,
+          correctOrientation: true,
+          source: CameraSource.Camera,
+        });
+        files = [photo];
+      }
     } catch (e) {
       return null;
     }

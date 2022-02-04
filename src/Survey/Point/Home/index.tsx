@@ -11,7 +11,12 @@ import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import { observer } from 'mobx-react';
-import { IonButton, IonIcon, NavContext } from '@ionic/react';
+import {
+  IonButton,
+  IonIcon,
+  NavContext,
+  useIonActionSheet,
+} from '@ionic/react';
 import config from 'common/config';
 import Media from 'models/image';
 import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
@@ -53,6 +58,7 @@ const HomeController: FC<Props> = ({ sample }) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
+  const [presentActionSheet] = useIonActionSheet();
 
   const identifyPhoto = async (
     speciesPhoto: typeof Media,
@@ -75,8 +81,7 @@ const HomeController: FC<Props> = ({ sample }) => {
       return;
     }
 
-    const photos = await ImageHelp.getImages();
-
+    const photos = await ImageHelp.getImages(undefined, presentActionSheet);
     if (!photos || !photos.length) {
       return;
     }
