@@ -21,8 +21,6 @@
     margin: 0 auto;
     color: #b38b39;
   }
-
-  
 }
 
 ion-label.identifying {
@@ -37,9 +35,13 @@ ion-spinner.identifying {
 }
 
 .species-list-item {
+  &:not(:last-of-type) {
+    border-bottom: 1px #e3e3e3 solid;
+  }
+
   ion-item {
+    --padding-start: 0px;
     --detail-icon-opacity: 0.8;
-    --padding-start: 9px;
   }
 
   ion-item.id-green {
@@ -52,5 +54,11 @@ ion-spinner.identifying {
 
   ion-item.id-red {
     --detail-icon-color: red;
+  }
+
+  ion-button.occurrence-identify {
+    margin-right: -21px;
+    --padding-end: 15px;
+    --padding-start: 15px;
   }
 }

@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import { Page, Header, toast, device } from '@flumens';
+import { Page, Header, device } from '@flumens';
 import { useIonActionSheet } from '@ionic/react';
 import { observer } from 'mobx-react';
 import ImageModel from 'models/image';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
-import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
+import {
+  getImages,
+  getImageModel,
+} from 'common/Components/PhotoPicker/imageUtils';
 import Main from './Main';
-
-const { warn } = toast;
 
 type Props = {
   subSample: typeof Sample;
@@ -19,25 +20,8 @@ const QuadratController: FC<Props> = ({ subSample }) => {
   const isDisabled = subSample.isUploaded();
   const [presentActionSheet] = useIonActionSheet();
 
-  const identifyPhoto = async (speciesPhoto: any, model: typeof Sample) => {
-    try {
-      const species = await speciesPhoto.identify();
-      if (!species) return;
-
-      model.setSpecies(species[0]);
-      model.save();
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const photoSelect = async () => {
-    if (!device.isOnline()) {
-      warn('Looks like you are offline!');
-      return;
-    }
-
-    const photos = await ImageHelp.getImages(undefined, presentActionSheet);
+    const photos = await getImages(undefined, presentActionSheet);
     if (!photos || !photos.length) {
       return;
     }
@@ -47,16 +31,12 @@ const QuadratController: FC<Props> = ({ subSample }) => {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const image = await ImageHelp.getImageModel(
-        ImageModel,
-        photo,
-        dataDirPath
-      );
+      const image = await getImageModel(ImageModel, photo, dataDirPath);
 
       const survey = subSample.getSurvey();
       const newSubSample = survey.smp.create(Sample, Occurrence, image);
 
-      identifyPhoto(image, newSubSample);
+      device.isOnline() && newSubSample.occurrences[0].identify();
 
       subSample.samples.push(newSubSample);
       subSample.save();

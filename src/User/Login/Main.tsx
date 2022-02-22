@@ -54,6 +54,8 @@ const LoginMain: FC<Props> = ({ schema, onSubmit }) => {
         </IonRouterLink>
       </IonList>
 
+      {/** https://github.com/formium/formik/issues/1418 */}
+      <input type="submit" style={{ display: 'none' }} />
       <IonButton color="primary" type="submit" expand="block">
         <T>Sign In</T>
       </IonButton>

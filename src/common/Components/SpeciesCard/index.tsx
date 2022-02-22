@@ -13,7 +13,7 @@ import {
   IonButton,
   IonIcon,
 } from '@ionic/react';
-import { Gallery, InfoBackgroundMessage } from '@flumens';
+import { Gallery, InfoBackgroundMessage, device } from '@flumens';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
 import './styles.scss';
@@ -172,6 +172,7 @@ const SpeciesCard: FC<Props> = ({
   const fullSpecies = species;
 
   const { species: sp, score, images } = fullSpecies;
+  const isOnline = device.isOnline();
 
   const onSelectWrap = () => onSelect(fullSpecies);
   const commonName = !!sp.commonNames.length && sp.commonNames[0];
@@ -201,7 +202,7 @@ const SpeciesCard: FC<Props> = ({
           {selectedSpeciesByUser && <IonIcon icon={checkmark} size="large" />}
         </IonCardHeader>
 
-        {!!images.length && (
+        {!!images.length && isOnline && (
           <IonGrid>
             <IonRow>{getImages()}</IonRow>
           </IonGrid>

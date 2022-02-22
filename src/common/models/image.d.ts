@@ -17,6 +17,7 @@ export declare const imageModel: {
   isIdentifying: () => any;
   identify: () => any;
   getURL: () => string;
+  save: () => any;
 };
 
 export default imageModel;

@@ -21,8 +21,10 @@ declare const Occurrence: {
   destroy: () => any;
   getSurvey: any;
   attrs: any;
-  isDisabled: bool;
+  isDisabled: () => bool;
+  isIdentifying: () => bool;
   isDisabled: () => any;
+  identify: () => any;
 
   getTaxonName?: any;
 };

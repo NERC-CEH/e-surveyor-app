@@ -1,4 +1,4 @@
-import { Sample, toast, device, getDeepErrorMessage } from '@flumens';
+import { Sample, device, getDeepErrorMessage } from '@flumens';
 import userModel from 'models/user';
 import config from 'common/config';
 import pointSurveyConfig from 'Survey/Point/config';
@@ -9,8 +9,6 @@ import plantInteractions from '../data/plant_interactions';
 import { modelStore } from './store';
 import Occurrence from './occurrence';
 import Media from './image';
-
-const { warn, error } = toast;
 
 const surveyConfig = {
   point: pointSurveyConfig,
@@ -104,18 +102,7 @@ class AppSample extends Sample {
       throw new Error('Parent does not exist');
     }
 
-    const defaultSpecies = {
-      warehouseId: 0,
-      gbif: { id: 0 },
-      images: [],
-      score: 0,
-      species: {
-        commonNames: [],
-        scientificNameWithoutAuthor: '',
-      },
-    };
-
-    this.occurrences[0].attrs.taxon = { ...defaultSpecies, ...species };
+    return this.occurrences[0].setSpecies(species);
   }
 
   getAISuggestions() {
@@ -199,7 +186,7 @@ class AppSample extends Sample {
     super.destroy();
   };
 
-  async upload(alert) {
+  async upload(alert, toast) {
     if (this.remote.synchronising) {
       return true;
     }
@@ -220,18 +207,18 @@ class AppSample extends Sample {
     }
 
     if (!device.isOnline()) {
-      warn('Looks like you are offline!');
+      toast.warn('Looks like you are offline!');
       return false;
     }
 
-    const isActivated = await userModel.checkActivation();
+    const isActivated = await userModel.checkActivation(toast);
     if (!isActivated) {
       return false;
     }
 
     this.cleanUp();
     const showError = e => {
-      error(e);
+      toast.error(e);
       throw e;
     };
     this.saveRemote().catch(showError);

@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import Log from 'helpers/log';
 import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
-import { Page, useAlert } from '@flumens';
+import { Page, useAlert, useToast } from '@flumens';
 import { Trans as T } from 'react-i18next';
 import appModel from 'models/app';
 import userModel from 'models/user';
@@ -49,6 +49,7 @@ function showLogoutConfirmationDialog(alert, callback) {
 
 const Controller = () => {
   const alert = useAlert();
+  const toast = useToast();
 
   function logOut() {
     Log('Info:Menu: logging out.');
@@ -68,8 +69,9 @@ const Controller = () => {
 
   const isLoggedIn = userModel.hasLogIn();
 
-  const checkActivation = () => userModel.checkActivation();
-  const resendVerificationEmail = () => userModel.resendVerificationEmail();
+  const checkActivation = () => userModel.checkActivation(toast);
+  const resendVerificationEmail = () =>
+    userModel.resendVerificationEmail(toast);
 
   return (
     <Page id="info-menu">

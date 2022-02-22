@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react';
 import Media from 'models/image';
 import config from 'common/config';
-import utils from './imageUtils';
+import { getImage, getImageModel } from './imageUtils';
 import './styles.scss';
 
-const AppPhotoPicker = ({ model }) => {
+const AppPhotoPicker = ({ model, ...restProps }) => {
   const { t } = useTranslation();
 
   const promptOptions = {
@@ -17,14 +17,14 @@ const AppPhotoPicker = ({ model }) => {
     promptLabelCancel: t('Cancel'),
   };
 
-  async function getImage() {
-    const image = await utils.getImage(promptOptions);
+  async function getImageWrap() {
+    const image = await getImage(promptOptions);
 
     if (!image) {
       return null;
     }
 
-    const imageModel = await utils.getImageModel(Media, image, config.dataPath);
+    const imageModel = await getImageModel(Media, image, config.dataPath);
 
     const isMothSurvey = model?.parent.metadata.survey === 'moth';
     if (isMothSurvey) imageModel.identify();
@@ -32,7 +32,7 @@ const AppPhotoPicker = ({ model }) => {
     return imageModel;
   }
 
-  return <PhotoPicker getImage={getImage} model={model} />;
+  return <PhotoPicker getImage={getImageWrap} model={model} {...restProps} />;
 };
 
 export default observer(AppPhotoPicker);

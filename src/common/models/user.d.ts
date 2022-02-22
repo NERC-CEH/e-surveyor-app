@@ -9,6 +9,8 @@ declare const appModel: {
   resetSchema: () => void;
   reset: (email: string) => void;
   loginSchema: () => void;
+  checkActivation: (toast: any, loader: any) => Promise<boolean>;
+  resendVerificationEmail: (toast: any, loader: any) => Promise<boolean>;
   logIn: (email: string, password: string) => void;
 
   registerSchema: () => void;

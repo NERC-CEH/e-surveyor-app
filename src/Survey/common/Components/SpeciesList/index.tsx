@@ -9,8 +9,9 @@ import {
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
+  IonButton,
 } from '@ionic/react';
-import { useAlert } from '@flumens';
+import { useAlert, useToast, device } from '@flumens';
 import Sample from 'models/sample';
 import { useRouteMatch } from 'react-router-dom';
 import {
@@ -53,23 +54,23 @@ type Props = {
 const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const match = useRouteMatch();
   const alert = useAlert();
+  const toast = useToast();
 
   const getProfile = (subSample: typeof Sample) => {
     const species = subSample.getSpecies();
+    const [occ] = subSample.occurrences;
 
-    let commonName;
-    let scientificName;
+    let commonName: string;
+    let scientificName: string;
     let idClass;
     let detailIcon;
     let notFoundInUK;
-    let identifying;
+    const identifying = occ.isIdentifying();
     let speciesPhoto;
-    let link;
 
-    const { media } = subSample.occurrences[0];
+    const { media } = occ;
     if (media.length) {
       const photo = media[0];
-      identifying = photo.isIdentifying();
       speciesPhoto = photo.attrs ? photo.getURL() : null;
     }
 
@@ -79,7 +80,6 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
       notFoundInUK = !species.warehouseId;
 
       const earthIcon = notFoundInUK ? earth : checkmarkCircle;
-      const speciesDoesNotExist = species.score === 0;
 
       if (species.score > POSITIVE_THRESHOLD) {
         idClass = 'id-green';
@@ -92,15 +92,13 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
         detailIcon = closeCircle;
       }
 
+      const speciesDoesNotExist = species.score === 0;
+
       if (speciesDoesNotExist && !identifying) {
         scientificName = 'Not found';
         idClass = 'id-red';
         detailIcon = closeCircle;
       }
-
-      link = speciesDoesNotExist
-        ? undefined
-        : `${match.url}/species/${subSample.cid}`;
     }
 
     const deletePhotoWrap = () => deletePhoto(alert, subSample);
@@ -114,26 +112,53 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     };
     const profilePhoto = getProfilePhoto(speciesPhoto);
 
-    return (
-      <IonItemSliding className="species-list-item" key={subSample.cid}>
-        <IonItem
-          detail
-          detailIcon={detailsIcon}
-          className={idClass}
-          routerLink={link}
-        >
-          {profilePhoto}
+    const link = `${match.url}/species/${subSample.cid}`;
 
+    const getSpeciesName = () => {
+      if (identifying) return null;
+
+      if (!species)
+        return (
           <IonLabel text-wrap>
-            {commonName && (
-              <IonLabel className="long" slot="end">
-                <b>{commonName}</b>
-              </IonLabel>
-            )}
-            <IonLabel className="long" slot="end">
-              <i>{scientificName}</i>
+            <IonLabel className="long" slot="start" color="warning">
+              <b>Unkown species</b>
             </IonLabel>
           </IonLabel>
+        );
+
+      return (
+        <IonLabel text-wrap>
+          {commonName && (
+            <IonLabel className="long" slot="start">
+              <b>{commonName}</b>
+            </IonLabel>
+          )}
+          <IonLabel className="long" slot="start">
+            <i>{scientificName}</i>
+          </IonLabel>
+        </IonLabel>
+      );
+    };
+
+    const onIdentify = (e: any) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!device.isOnline()) {
+        toast.warn("Sorry, looks like you're offline.");
+        return;
+      }
+
+      occ.identify();
+    };
+
+    const canBeIdentified = !identifying && occ.canReIdentify() && !species;
+    return (
+      <IonItemSliding className="species-list-item" key={subSample.cid}>
+        <IonItem detailIcon={detailsIcon} className={idClass} routerLink={link}>
+          {profilePhoto}
+
+          {getSpeciesName()}
 
           {identifying && (
             <IonLabel className="long identifying" slot="end">
@@ -141,8 +166,21 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
             </IonLabel>
           )}
 
+          {canBeIdentified && (
+            <IonButton
+              slot="end"
+              class="occurrence-identify"
+              color="secondary"
+              onClick={onIdentify}
+              // fill={uploadIsPrimary ? undefined : 'outline'}
+            >
+              Identify
+            </IonButton>
+          )}
+
           {identifying && <IonSpinner slot="end" className="identifying" />}
         </IonItem>
+
         {!isDisabled && (
           <IonItemOptions side="end">
             <IonItemOption color="danger" onClick={deletePhotoWrap}>
@@ -170,7 +208,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const list = reversedSubSampleList.map(getProfile);
 
   return (
-    <IonList>
+    <IonList lines="full">
       <div className="rounded">{list}</div>
     </IonList>
   );

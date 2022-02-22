@@ -3,12 +3,9 @@
  **************************************************************************** */
 import Log from 'helpers/log';
 import CONFIG from 'common/config';
-import { DrupalUserModel, toast, loader } from '@flumens';
+import { DrupalUserModel } from '@flumens';
 import * as Yup from 'yup';
-import i18n from 'i18next';
 import { genericStore } from './store';
-
-const { warn, error, success } = toast;
 
 export class UserModel extends DrupalUserModel {
   registerSchema = Yup.object().shape({
@@ -21,17 +18,15 @@ export class UserModel extends DrupalUserModel {
     return !!this.attrs.email;
   }
 
-  async checkActivation() {
+  async checkActivation(toast, loader) {
     const isLoggedIn = !!this.attrs.id;
     if (!isLoggedIn) {
-      warn(i18n.t('Please log in first.'));
+      toast.warn('Please log in first.');
       return false;
     }
 
     if (!this.attrs.verified) {
-      await loader.show({
-        message: i18n.t('Please wait...'),
-      });
+      await loader.show('Please wait...');
 
       try {
         await this.refreshProfile();
@@ -42,7 +37,7 @@ export class UserModel extends DrupalUserModel {
       loader.hide();
 
       if (!this.attrs.verified) {
-        warn(i18n.t('The user has not been activated or is blocked.'));
+        toast.warn('The user has not been activated or is blocked.');
         return false;
       }
     }
@@ -50,32 +45,28 @@ export class UserModel extends DrupalUserModel {
     return true;
   }
 
-  async resendVerificationEmail() {
+  async resendVerificationEmail(toast, loader) {
     const isLoggedIn = !!this.attrs.id;
     if (!isLoggedIn) {
-      warn(i18n.t('Please log in first.'));
+      toast.warn('Please log in first.');
       return false;
     }
 
     if (this.attrs.verified) {
-      warn(i18n.t('You are already verified.'));
+      toast.warn('You are already verified.');
       return false;
     }
 
-    await loader.show({
-      message: i18n.t('Please wait...'),
-    });
+    await loader.show('Please wait...');
 
     try {
       await super.resendVerificationEmail();
-      success(
-        i18n.t(
-          'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.'
-        ),
+      toast.success(
+        'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.',
         5000
       );
     } catch (e) {
-      error(e);
+      toast.error(e);
     }
 
     loader.hide();

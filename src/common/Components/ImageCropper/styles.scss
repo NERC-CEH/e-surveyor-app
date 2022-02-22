@@ -1,0 +1,11 @@
+.image-cropper {
+  ion-footer {
+    position: absolute; // since it is outside ion-content
+    bottom: 0;
+
+    ion-toolbar {
+      --background: transparent;
+      background: black;
+    }
+  }
+}

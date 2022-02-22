@@ -1,8 +1,10 @@
 import config from 'common/config';
-import Log from 'helpers/log';
 import { isPlatform } from '@ionic/react';
 import UKSIPlants from '../data/uksi_plants.list.json';
 import UKPlantNames from '../data/uksi_plants.names.json';
+import PlantNetResponse, { Result } from './plantNetResponse.d';
+
+type ResultWithWarehouseID = Result & { warehouseId: number };
 
 const { backend } = config;
 
@@ -13,7 +15,7 @@ const { backend } = config;
  * @param {type} fileType
  * @returns {undefined}
  */
-export function dataURItoBlob(dataURI, fileType) {
+export function dataURItoBlob(dataURI: any, fileType: any) {
   const binary = atob(dataURI.split(',')[1]);
   const array = [];
   for (let i = 0; i < binary.length; i++) {
@@ -24,8 +26,8 @@ export function dataURItoBlob(dataURI, fileType) {
   });
 }
 
-export function URLtoBlob(url) {
-  const cb = resolve => {
+export function URLtoBlob(url: any) {
+  const cb = (resolve: any) => {
     const xhr = new XMLHttpRequest();
 
     xhr.onload = function onLoad() {
@@ -40,7 +42,7 @@ export function URLtoBlob(url) {
   return new Promise(cb);
 }
 
-export function getBlobFromURL(uri, mediaType) {
+export function getBlobFromURL(uri: any, mediaType: any) {
   if (!isPlatform('hybrid')) {
     const blob = dataURItoBlob(uri, mediaType);
     return Promise.resolve(blob);
@@ -49,7 +51,7 @@ export function getBlobFromURL(uri, mediaType) {
   return URLtoBlob(uri);
 }
 
-async function appendModelToFormData(mediaModel, formData) {
+async function appendModelToFormData(mediaModel: any, formData: any) {
   // can provide both image/jpeg and jpeg
   const { type } = mediaModel.attrs;
   let extension = type;
@@ -69,68 +71,68 @@ async function appendModelToFormData(mediaModel, formData) {
   formData.append('images', blob, `${name}.${extension}`);
 }
 
-const addWarehouseId = sp => {
+const addWarehouseId = (sp: Result): ResultWithWarehouseID => {
   return {
     ...sp,
-    warehouseId: UKSIPlants[sp.species.scientificNameWithoutAuthor],
+    warehouseId: (UKSIPlants as any)[sp.species.scientificNameWithoutAuthor],
   };
 };
 
-const addUKSIId = species => species.map(addWarehouseId);
+const addUKSIId = (results: Result[]) => results.map(addWarehouseId);
 
-function filterUKSpeciesWrap(species) {
+function filterUKSpeciesWrap(results: ResultWithWarehouseID[]) {
   let removedSpeciesScores = 0;
 
-  const filterByUKSpecies = sp => {
-    if (sp.warehouseId) {
-      return true;
-    }
+  const filterByUKSpecies = (result: ResultWithWarehouseID) => {
+    if (result.warehouseId || result.score >= 0.9) return true;
 
-    if (sp.score >= 0.9) {
-      return true;
-    }
-
-    removedSpeciesScores += sp.score;
+    removedSpeciesScores += result.score;
 
     return false;
   };
 
-  const changeScoreValue = sp => {
+  const changeScoreValue = (sp: ResultWithWarehouseID) => {
     const newScore = sp.score / (1 - removedSpeciesScores);
 
     return { ...sp, score: newScore };
   };
 
-  const filteredSpecies = species
+  const filteredSpecies = results
     .filter(filterByUKSpecies)
     .map(changeScoreValue);
 
   return filteredSpecies;
 }
 
-function changeUKCommonNamesWrap(species) {
-  const changeUKCommonNames = ({ species: s }) => {
-    const { scientificNameWithoutAuthor } = s;
-    const speciesUKName = UKPlantNames[scientificNameWithoutAuthor];
-    s.commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
+function changeUKCommonNamesWrap(results: ResultWithWarehouseID[]) {
+  const changeUKCommonNames = ({ species }: ResultWithWarehouseID) => {
+    const { scientificNameWithoutAuthor } = species;
+    const speciesUKName = (UKPlantNames as any)[scientificNameWithoutAuthor];
+    species.commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
   };
 
-  species.forEach(changeUKCommonNames);
+  results.forEach(changeUKCommonNames);
 
-  return species;
+  return results;
 }
 
-const response = res => res.json();
+const response = (res: any) => res.json();
 
-const result = ({ results }) => results;
+const checkValidResponse = (res: any) => {
+  if (res.error) throw new Error(res.error);
 
-const err = error => {
-  Log('error', error);
+  return res;
+};
+
+const getResults = ({ results }: PlantNetResponse) => results;
+
+const err = (error: any) => {
+  console.error(error);
   return []; // always empty list
 };
 
 // TODO: use axios
-export default async function identify(image) {
+export default async function identify(image: any) {
   const formData = new FormData();
 
   formData.append('organs', 'leaf');
@@ -141,7 +143,8 @@ export default async function identify(image) {
     body: formData,
   })
     .then(response)
-    .then(result)
+    .then(checkValidResponse)
+    .then(getResults)
     .then(addUKSIId)
     .then(filterUKSpeciesWrap)
     .then(changeUKCommonNamesWrap)

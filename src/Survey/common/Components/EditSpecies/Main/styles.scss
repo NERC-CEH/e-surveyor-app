@@ -2,26 +2,38 @@
   --background: #f4f4f4;
 
   .species-main-image-wrapper {
-    height: 215px;
-    width: 100%;
-    background: #f4f4f4;
+    max-width: 600px;
+    margin: 0 auto;
 
-    .species-main-image {
-      height: 210px;
-      width: 100%;
-      object-fit: cover;
-      border-radius: 0 0 15px 15px;
+    .rounded {
+      margin-bottom: 3px;
     }
 
-    .species-main-image-empty {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #676666;
-      font-weight: 400;
-      height: 210px;
-      border-radius: 0 0 15px 15px;
-      background-color: #eaeaea;
+    #img-picker-array {
+      height: 200px;
+      padding: 5px 0;
+
+      #img-array {
+        .img {
+          border-radius: 10px;
+          overflow: hidden;
+
+          .crop-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 50px;
+            width: 50px;
+            margin: -1px;
+            --background: #ffffff4a;
+            --background-activated: #00000078;
+
+            ion-icon {
+              font-size: 2em;
+            }
+          }
+        }
+      }
     }
   }
 

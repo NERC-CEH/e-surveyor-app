@@ -335,7 +335,6 @@ html.plt-tablet {
   --inner-padding-end: 0;
 
   #img-picker-array .img {
-    margin-right: 5px;
     .delete {
       background-color: #80808085;
     }
@@ -346,11 +345,7 @@ html.plt-tablet {
 
     ion-button {
       background: #5d8f5a4f;
-      margin: 5px;
-      height: calc(80px - 10px);
-      width: calc(80px - 10px);
       border-radius: 15px;
-      transform: none;
     }
   }
 }

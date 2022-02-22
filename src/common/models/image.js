@@ -82,10 +82,13 @@ export default class AppMedia extends Media {
     this.identification.identifying = true;
 
     const species = await identifyImage(this);
+    const byScore = (sp1, sp2) => sp2.score - sp1.score;
+    species.sort(byScore);
+
     this.attrs.species = species;
     this.identification.identifying = false;
 
-    return species;
+    return species[0];
   }
 
   isIdentifying() {
@@ -95,5 +98,15 @@ export default class AppMedia extends Media {
   // eslint-disable-next-line class-methods-use-this
   validateRemote() {
     return null;
+  }
+
+  async save() {
+    if (!this.parent) {
+      return Promise.reject(
+        new Error('Trying to save locally without a parent')
+      );
+    }
+
+    return this.parent.save();
   }
 }

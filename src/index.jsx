@@ -5,6 +5,7 @@ import appModel from 'models/app';
 import userModel from 'models/user';
 import savedSamples from 'models/savedSamples';
 import config from 'common/config';
+import { configure as mobxConfig } from 'mobx';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { App as AppPlugin } from '@capacitor/app';
@@ -25,6 +26,8 @@ setupIonicReact({
   hardwareBackButton: false, // android back button
   swipeBackEnabled: false,
 });
+
+mobxConfig({ enforceActions: 'never' });
 
 async function init() {
   await userModel._init;

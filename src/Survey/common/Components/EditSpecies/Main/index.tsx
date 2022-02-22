@@ -1,13 +1,23 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Main } from '@flumens';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import SpeciesCard from 'common/Components/SpeciesCard';
-import { IonButton, IonList, IonIcon, NavContext } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
+import {
+  IonButton,
+  IonList,
+  IonIcon,
+  NavContext,
+  isPlatform,
+} from '@ionic/react';
+import { searchOutline, close, cropOutline } from 'ionicons/icons';
+import PhotoPicker from 'common/Components/PhotoPicker';
 import Sample from 'models/sample';
-// eslint-disable-next-line import/named
-import { Species } from 'models/occurrence';
+import Image from 'models/image';
+import { Species } from 'models/occurrence.d';
+import config from 'common/config';
+import ImageCropper from 'common/Components/ImageCropper';
+import { getImageModel, URL } from 'common/Components/PhotoPicker/imageUtils';
 import './styles.scss';
 
 type Props = {
@@ -18,17 +28,58 @@ type Props = {
 const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
+  const [editImage, setEditImage] = useState<typeof Image>();
 
-  const showSelectedSpecies = () => {
-    const { taxon: sp } = sample.occurrences[0].attrs;
-    const selectedSpeciesByUser = !sp.gbif.id || !!sp.scoreFromAPI;
+  const [occ] = sample.occurrences;
+
+  const onDoneEdit = async (image: URL) => {
+    if (!editImage) return;
+
+    const newImageModel = await getImageModel(Image, image, config.dataPath);
+    Object.assign(editImage?.attrs, newImageModel.attrs);
+    editImage.save();
+    setEditImage(undefined);
+  };
+
+  const onCancelEdit = () => setEditImage(undefined);
+
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const ImageMemoized = ({ media, onDelete, onClick }: any) => {
+    const cropImage = () => {
+      setEditImage(media);
+    };
+
+    return (
+      <div className="img">
+        {!isDisabled && (
+          <IonButton fill="clear" class="delete" onClick={onDelete}>
+            <IonIcon icon={close} />
+          </IonButton>
+        )}
+        <img
+          src={media.getURL()}
+          alt=""
+          onClick={onClick} // TODO: fix
+        />
+        <IonButton className="crop-button" onClick={cropImage}>
+          <IonIcon icon={cropOutline} />
+        </IonButton>
+      </div>
+    );
+  };
+
+  const getSelectedSpecies = () => {
+    const { taxon: sp } = occ.attrs;
+    if (!sp) return null;
+
+    const selectedSpeciesByUser = !sp.gbif?.id || !!sp.scoreFromAPI;
 
     return (
       <SpeciesCard species={sp} selectedSpeciesByUser={selectedSpeciesByUser} />
     );
   };
 
-  const showAIResults = () => {
+  const getAIResults = () => {
     const getTaxon = (sp: Species) => {
       const taxon = JSON.parse(JSON.stringify(sp));
       taxon.scoreFromAPI = sp.score;
@@ -47,7 +98,7 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
 
       return (
         <SpeciesCard
-          key={sp.score}
+          key={sp.warehouseId}
           species={sp}
           onSelect={!isDisabled ? onSelectWrap : null}
         />
@@ -55,15 +106,15 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
     };
 
     const species = sample.getAISuggestions() || [];
-    const { taxon } = sample.occurrences[0].attrs;
+    const { taxon } = occ.attrs;
 
     const nonSelectedSpecies = (sp: Species) =>
-      sp.species.commonNames[0] !== taxon.species.commonNames[0];
+      taxon && sp.species.commonNames[0] !== taxon.species.commonNames[0];
 
     return species.filter(nonSelectedSpecies).map(getSpeciesCard);
   };
 
-  const speciesAddButton = () => {
+  const getSpeciesAddButton = () => {
     if (isDisabled) {
       return null;
     }
@@ -85,38 +136,37 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
     );
   };
 
-  const showSpeciesMainPhoto = () => {
-    const { media } = sample.occurrences[0];
-    if (!media.length) {
-      return (
-        <div className="species-main-image-wrapper">
-          <div className="species-main-image-empty">Image does not exist</div>
-        </div>
-      );
-    }
-
-    const image = media[0];
-    const showImage = image.getURL();
-
-    return (
-      <div className="species-main-image-wrapper">
-        <img src={showImage} className="species-main-image" />
+  const showSpeciesMainPhoto = () => (
+    <div className="species-main-image-wrapper">
+      <div className="rounded">
+        <PhotoPicker
+          model={occ}
+          Image={ImageMemoized}
+          placeholderCount={isPlatform('mobile') ? 1 : 5}
+        />
       </div>
-    );
-  };
+    </div>
+  );
 
   return (
-    <Main id="edit-species">
-      {showSpeciesMainPhoto()}
+    <>
+      <Main id="edit-species">
+        {showSpeciesMainPhoto()}
 
-      <div className="species-wrapper">
-        {showSelectedSpecies()}
+        <IonList className="species-wrapper">
+          {getSelectedSpecies()}
 
-        {showAIResults()}
+          {getAIResults()}
 
-        {speciesAddButton()}
-      </div>
-    </Main>
+          {getSpeciesAddButton()}
+        </IonList>
+      </Main>
+      <ImageCropper
+        image={editImage?.getURL()}
+        onDone={onDoneEdit}
+        onCancel={onCancelEdit}
+      />
+    </>
   );
 };
 

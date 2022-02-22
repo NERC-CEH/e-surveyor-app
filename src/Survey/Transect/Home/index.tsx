@@ -1,5 +1,11 @@
 import React, { FC, useContext } from 'react';
-import { Header, Page, getDeepErrorMessage, useAlert } from '@flumens';
+import {
+  Header,
+  Page,
+  getDeepErrorMessage,
+  useAlert,
+  useToast,
+} from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { observer } from 'mobx-react';
@@ -15,9 +21,10 @@ const Controller: FC<Props> = ({ sample }) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
+  const toast = useToast();
 
   const onUpload = async () => {
-    const isUploading = await sample.upload(alert);
+    const isUploading = await sample.upload(alert, toast);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');

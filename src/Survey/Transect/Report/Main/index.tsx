@@ -80,8 +80,6 @@ const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
   };
 
   const getSpeciesCountRowsForHabitat = () => {
-    console.log('!');
-
     const counter = getSpeciesCountForHabitat();
 
     const byPositive = ({ positive, count }: any) => count && positive === 1;

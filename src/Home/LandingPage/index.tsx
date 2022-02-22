@@ -15,8 +15,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/grid';
 import '@ionic/react/css/ionic-swiper.css';
-import { Page, Main, ModalHeader, device, toast } from '@flumens';
-import ImageHelp from 'common/Components/PhotoPicker/imageUtils';
+import { Page, Main, ModalHeader, device, useToast } from '@flumens';
+import {
+  getImageModel,
+  getImage,
+} from 'common/Components/PhotoPicker/imageUtils';
 import ImageModel from 'common/models/image';
 import identifyImage from 'common/services/plantNet';
 import config from 'common/config';
@@ -28,11 +31,11 @@ import SpeciesProfile from './Components/SpeciesProfile';
 import logo from './logo.svg';
 import './styles.scss';
 
-const { warn } = toast;
 interface Props {}
 
 const LandingPage: FC<Props> = () => {
   const [image, setImage] = useState<any>(null);
+  const toast = useToast();
 
   const hideSpeciesModal = () => setImage(null);
 
@@ -45,20 +48,16 @@ const LandingPage: FC<Props> = () => {
 
   const identifyPhoto = async () => {
     if (!device.isOnline()) {
-      warn('Looks like you are offline!');
+      toast.warn('Looks like you are offline!');
       return;
     }
 
-    const photo = await ImageHelp.getImage();
+    const photo = await getImage();
     if (!photo) {
       return;
     }
 
-    const media = await ImageHelp.getImageModel(
-      ImageModel,
-      photo,
-      config.dataPath
-    );
+    const media = await getImageModel(ImageModel, photo, config.dataPath);
 
     setImage(media);
 

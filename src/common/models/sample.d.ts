@@ -20,7 +20,7 @@ declare const Sample: {
   };
   save: () => any;
   saveRemote: () => any;
-  upload: (alert: any) => any;
+  upload: (alert: any, toast: any) => any;
   cleanUp: () => any;
   validateRemote: () => any;
   isUploaded: () => boolean;
