@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import Log from 'helpers/log';
 import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
-import { Page, useAlert, useToast } from '@flumens';
+import { Page, useAlert, useToast, useLoader } from '@flumens';
 import { Trans as T } from 'react-i18next';
 import appModel from 'models/app';
 import userModel from 'models/user';
@@ -10,10 +10,10 @@ import savedSamples from 'models/savedSamples';
 import Main from './Main';
 import './styles.scss';
 
-function showLogoutConfirmationDialog(alert, callback) {
+function showLogoutConfirmationDialog(alert: any, callback: any) {
   let deleteData = false;
 
-  const onCheckboxChange = e => {
+  const onCheckboxChange = (e: any) => {
     deleteData = e.detail.checked;
   };
 
@@ -50,28 +50,29 @@ function showLogoutConfirmationDialog(alert, callback) {
 const Controller = () => {
   const alert = useAlert();
   const toast = useToast();
+  const loader = useLoader();
 
   function logOut() {
     Log('Info:Menu: logging out.');
-    const resetWrap = async reset => {
+    const resetWrap = async (reset: boolean) => {
       if (reset) {
-        appModel.attrs['draftId:point'] = null;
-        appModel.attrs['draftId:transect'] = null;
+        appModel.attrs['draftId:point'] = '';
+        appModel.attrs['draftId:transect'] = '';
         await savedSamples.resetDefaults();
       }
 
       appModel.attrs.transects = [];
-      appModel.save();
       userModel.logOut();
     };
     showLogoutConfirmationDialog(alert, resetWrap);
   }
 
-  const isLoggedIn = userModel.hasLogIn();
+  const isLoggedIn = userModel.isLoggedIn();
 
-  const checkActivation = () => userModel.checkActivation(toast);
+  const checkActivation = () => userModel.checkActivation(toast, loader);
+
   const resendVerificationEmail = () =>
-    userModel.resendVerificationEmail(toast);
+    userModel.resendVerificationEmail(toast, loader);
 
   return (
     <Page id="info-menu">

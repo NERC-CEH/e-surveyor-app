@@ -38,7 +38,6 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
       await userModel.register(email, password, otherDetails);
 
       userModel.attrs.fullName = fullName; // eslint-disable-line
-      userModel.save();
 
       alert({
         header: 'Welcome aboard',

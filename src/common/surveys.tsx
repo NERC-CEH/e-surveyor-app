@@ -11,7 +11,7 @@ interface Attrs {}
 
 export interface Survey {
   id: number;
-  name: string;
+  name: 'transect' | 'point';
   label: string;
   icon: string;
 

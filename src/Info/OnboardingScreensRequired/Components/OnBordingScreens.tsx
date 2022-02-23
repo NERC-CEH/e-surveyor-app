@@ -50,7 +50,6 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
   function exit() {
     // eslint-disable-next-line no-param-reassign
     appModel.attrs.showedWelcome = true;
-    appModel.save();
   }
 
   const handleSlideChangeStart = async () => {

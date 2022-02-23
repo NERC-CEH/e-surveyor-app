@@ -26,11 +26,17 @@ export { default as date } from '@bit/flumens.apps.date';
 export * from '@bit/flumens.apps.utils.location';
 export * from '@bit/flumens.apps.utils.validation';
 
-export { default as Model } from '@bit/flumens.apps.models.model';
+export {
+  default as Model,
+  Attrs as ModelAttrs,
+} from '@bit/flumens.apps.models.model';
 export { default as Sample } from '@bit/flumens.apps.models.sample';
 export { default as Media } from '@bit/flumens.apps.models.media';
 export { default as Occurrence } from '@bit/flumens.apps.models.occurrence';
-export { default as DrupalUserModel } from '@bit/flumens.apps.models.drupal-user-model';
+export {
+  default as DrupalUserModel,
+  Attrs as DrupalUserModelAttrs,
+} from '@bit/flumens.apps.models.drupal-user-model';
 
 export { default as Store } from '@bit/flumens.apps.models.store';
 export { default as initStoredSamples } from '@bit/flumens.apps.models.init-stored-samples';

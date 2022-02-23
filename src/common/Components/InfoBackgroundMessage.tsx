@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { InfoBackgroundMessage } from '@flumens';
-import appModel from 'models/app';
+import appModel, { Attrs } from 'models/app';
 
 interface Props {
-  name?: string;
+  name?: keyof Attrs;
   children: any;
 }
 
@@ -14,12 +14,13 @@ const Message: FC<Props> = ({ name, children, ...props }) => {
   }
 
   const hideMessage = () => {
-    appModel.attrs[name as any] = false; // eslint-disable-line
-    appModel.save();
+    // don't know why 'as any' was needed but it works :|
+    (appModel.attrs as any)[name as keyof Attrs] = false;
     return {};
   };
 
   const onHide = name ? hideMessage : undefined;
+
   return (
     <InfoBackgroundMessage onHide={onHide} {...props}>
       {children}

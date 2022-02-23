@@ -3,11 +3,12 @@ import { IonButton, IonList } from '@ionic/react';
 import { Main, InputWithValidation } from '@flumens';
 import { personOutline } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
+import { AnySchema } from 'yup';
 import { Formik, Form } from 'formik';
 
 type Props = {
   onSubmit: any;
-  schema: () => void;
+  schema: AnySchema;
 };
 
 const ResetMain: FC<Props> = ({ onSubmit, schema }) => {

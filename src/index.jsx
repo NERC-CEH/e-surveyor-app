@@ -47,7 +47,6 @@ async function init() {
     });
 
   appModel.attrs.appSession += 1;
-  appModel.save();
 
   ReactDOM.render(<App />, document.getElementById('root'));
 

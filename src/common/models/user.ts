@@ -1,25 +1,27 @@
-/** ****************************************************************************
- * User model describing the user model on backend. Persistent.
- **************************************************************************** */
-import Log from 'helpers/log';
 import CONFIG from 'common/config';
-import { DrupalUserModel } from '@flumens';
+import { DrupalUserModel, DrupalUserModelAttrs } from '@flumens';
 import * as Yup from 'yup';
 import { genericStore } from './store';
 
-export class UserModel extends DrupalUserModel {
+export interface Attrs extends DrupalUserModelAttrs {
+  fullName?: string;
+}
+
+const defaults: Attrs = {
+  fullName: '',
+};
+
+class UserModel extends DrupalUserModel {
+  attrs: Attrs = DrupalUserModel.extendAttrs(this.attrs, defaults);
+
   registerSchema = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().required(),
     fullName: Yup.string().required(),
   });
 
-  hasLogIn() {
-    return !!this.attrs.email;
-  }
-
-  async checkActivation(toast, loader) {
-    const isLoggedIn = !!this.attrs.id;
+  async checkActivation(toast: any, loader: any) {
+    const isLoggedIn = !!this.id;
     if (!isLoggedIn) {
       toast.warn('Please log in first.');
       return false;
@@ -45,8 +47,8 @@ export class UserModel extends DrupalUserModel {
     return true;
   }
 
-  async resendVerificationEmail(toast, loader) {
-    const isLoggedIn = !!this.attrs.id;
+  async resendVerificationEmail(toast: any, loader: any) {
+    const isLoggedIn = !!this.id;
     if (!isLoggedIn) {
       toast.warn('Please log in first.');
       return false;
@@ -60,7 +62,7 @@ export class UserModel extends DrupalUserModel {
     await loader.show('Please wait...');
 
     try {
-      await super.resendVerificationEmail();
+      await this._sendVerificationEmail();
       toast.success(
         'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.',
         5000
@@ -75,11 +77,10 @@ export class UserModel extends DrupalUserModel {
   }
 }
 
-const defaults = {
-  fullName: '',
-};
-
-Log('UserModel: initializing');
-const userModel = new UserModel(genericStore, 'user', defaults, CONFIG.backend);
+const userModel = new UserModel({
+  cid: 'user',
+  store: genericStore,
+  config: CONFIG.backend,
+});
 
 export default userModel;

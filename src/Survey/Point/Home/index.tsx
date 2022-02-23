@@ -58,7 +58,6 @@ const showFirstSurveyTip = (alert: any) => {
   });
 
   appModel.attrs.showFirstSurveyTip = false;
-  appModel.save();
 };
 
 const HomeController: FC<Props> = ({ sample }) => {

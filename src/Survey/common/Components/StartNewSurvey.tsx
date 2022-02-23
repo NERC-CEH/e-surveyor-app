@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { NavContext } from '@ionic/react';
 import { useAlert } from '@flumens';
-import appModel from 'models/app';
+import appModel, { SurveyDraftKeys } from 'models/app';
 import userModel from 'models/user';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';
@@ -33,10 +33,7 @@ async function showDraftAlert(alert: any) {
   return new Promise(showDraftDialog);
 }
 
-async function getDraft(
-  draftIdKey: keyof typeof appModel.attrs.surveyDraftKeys,
-  alert: any
-) {
+async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
   const draftID = appModel.attrs[draftIdKey];
   if (draftID) {
     const draftById = ({ cid }: typeof Sample) => cid === draftID;
@@ -54,17 +51,13 @@ async function getDraft(
   return null;
 }
 
-async function getNewSample(
-  survey: Survey,
-  draftIdKey: keyof typeof appModel.attrs.surveyDraftKeys
-) {
+async function getNewSample(survey: Survey, draftIdKey: keyof SurveyDraftKeys) {
   const sample = await survey.create(Sample);
   await sample.save();
 
   savedSamples.push(sample);
 
   appModel.attrs[draftIdKey] = sample.cid;
-  await appModel.save();
 
   return sample;
 }
@@ -78,11 +71,11 @@ function StartNewSurvey({ survey }: Props): null {
   const alert = useAlert();
 
   const baseURL = `/survey/${survey.name}`;
-  const draftIdKey = `draftId:${survey.name}`;
+  const draftIdKey: keyof SurveyDraftKeys = `draftId:${survey.name}`;
 
   const pickDraftOrCreateSampleWrap = () => {
     const pickDraftOrCreateSample = async () => {
-      if (!userModel.hasLogIn()) {
+      if (!userModel.isLoggedIn()) {
         context.navigate(`/user/register`, 'none', 'replace');
         return;
       }
