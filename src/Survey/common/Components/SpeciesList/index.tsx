@@ -9,7 +9,7 @@ import {
   NavContext,
 } from '@ionic/react';
 import { useRouteMatch } from 'react-router';
-import { useToast, device, useAlert } from '@flumens';
+import { InfoMessage, useToast, device, useAlert } from '@flumens';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import clsx from 'clsx';
@@ -167,6 +167,12 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
                 </IonButton>
               )}
             </IonItemDivider>
+
+            {!device.isOnline() && (
+              <InfoMessage color="dark" className="offline-warning-note">
+                Auto-identification will not work while the device is offline.
+              </InfoMessage>
+            )}
 
             {speciesEntries}
           </div>
