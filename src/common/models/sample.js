@@ -80,7 +80,7 @@ class AppSample extends Sample {
 
     const [occ] = this.occurrences;
 
-    return occ.attrs.taxon;
+    return occ.getSpecies();
   }
 
   isIdentifying() {

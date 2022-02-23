@@ -1,36 +1,50 @@
 import { observer } from 'mobx-react';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import {
   IonItem,
   IonLabel,
-  IonIcon,
   IonList,
-  IonSpinner,
-  IonItemSliding,
-  IonItemOptions,
-  IonItemOption,
   IonButton,
+  IonItemDivider,
+  NavContext,
 } from '@ionic/react';
-import { useAlert, useToast, device } from '@flumens';
+import { useRouteMatch } from 'react-router';
+import { useToast, device, useAlert } from '@flumens';
 import Sample from 'models/sample';
-import { useRouteMatch } from 'react-router-dom';
-import {
-  checkmarkCircle,
-  helpCircle,
-  closeCircle,
-  earth,
-  leaf,
-} from 'ionicons/icons';
-import config from 'common/config';
+import Occurrence from 'models/occurrence';
+import clsx from 'clsx';
+import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
+import Species from './Components/Species';
 import './styles.scss';
 
-const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
+type Props = {
+  sample: typeof Sample;
+  isDisabled: boolean;
+};
 
-function deletePhoto(alert: any, image: any) {
+const isUnkown = (value: boolean) => (smp: typeof Sample) =>
+  !!smp.getSpecies() === value;
+
+function byCreateTime(occ1: typeof Occurrence, occ2: typeof Occurrence) {
+  const date1 = new Date(occ1.metadata.created_on);
+  const date2 = new Date(occ2.metadata.created_on);
+  return date2.getTime() - date1.getTime();
+}
+
+const hasOver5UnidentifiedSpecies = (sample: typeof Sample) => {
+  const unIdentifiedSpecies = (smp: typeof Sample) => {
+    const [occ] = smp.occurrences;
+    return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying();
+  };
+
+  return sample.samples.filter(unIdentifiedSpecies).length >= 5;
+};
+
+function deleteSample(sample: typeof Sample, alert: any) {
   alert({
     header: 'Delete',
     skipTranslation: true,
-    message: 'Are you sure you want to remove the photo from your survey?',
+    message: 'Are you sure you want to remove this entry from your survey?',
     buttons: [
       {
         text: 'Cancel',
@@ -40,159 +54,17 @@ function deletePhoto(alert: any, image: any) {
       {
         text: 'Delete',
         cssClass: 'danger',
-        handler: () => image.destroy(),
+        handler: () => sample.destroy(),
       },
     ],
   });
 }
 
-type Props = {
-  sample: typeof Sample;
-  isDisabled: boolean;
-};
-
 const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
-  const match = useRouteMatch();
-  const alert = useAlert();
+  const { navigate } = useContext(NavContext);
+  const { url } = useRouteMatch();
   const toast = useToast();
-
-  const getProfile = (subSample: typeof Sample) => {
-    const species = subSample.getSpecies();
-    const [occ] = subSample.occurrences;
-
-    let commonName: string;
-    let scientificName: string;
-    let idClass;
-    let detailIcon;
-    let notFoundInUK;
-    const identifying = occ.isIdentifying();
-    let speciesPhoto;
-
-    const { media } = occ;
-    if (media.length) {
-      const photo = media[0];
-      speciesPhoto = photo.attrs ? photo.getURL() : null;
-    }
-
-    if (species) {
-      scientificName = species.species.scientificNameWithoutAuthor;
-      [commonName] = species.species.commonNames;
-      notFoundInUK = !species.warehouseId;
-
-      const earthIcon = notFoundInUK ? earth : checkmarkCircle;
-
-      if (species.score > POSITIVE_THRESHOLD) {
-        idClass = 'id-green';
-        detailIcon = earthIcon;
-      } else if (species.score > POSSIBLE_THRESHOLD) {
-        idClass = 'id-amber';
-        detailIcon = helpCircle;
-      } else {
-        idClass = 'id-red';
-        detailIcon = closeCircle;
-      }
-
-      const speciesDoesNotExist = species.score === 0;
-
-      if (speciesDoesNotExist && !identifying) {
-        scientificName = 'Not found';
-        idClass = 'id-red';
-        detailIcon = closeCircle;
-      }
-    }
-
-    const deletePhotoWrap = () => deletePhoto(alert, subSample);
-
-    const detailsIcon = detailIcon || '';
-
-    const getProfilePhoto = (pic?: string) => {
-      const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
-
-      return <div className="plant-photo-profile">{photo}</div>;
-    };
-    const profilePhoto = getProfilePhoto(speciesPhoto);
-
-    const link = `${match.url}/species/${subSample.cid}`;
-
-    const getSpeciesName = () => {
-      if (identifying) return null;
-
-      if (!species)
-        return (
-          <IonLabel text-wrap>
-            <IonLabel className="long" slot="start" color="warning">
-              <b>Unkown species</b>
-            </IonLabel>
-          </IonLabel>
-        );
-
-      return (
-        <IonLabel text-wrap>
-          {commonName && (
-            <IonLabel className="long" slot="start">
-              <b>{commonName}</b>
-            </IonLabel>
-          )}
-          <IonLabel className="long" slot="start">
-            <i>{scientificName}</i>
-          </IonLabel>
-        </IonLabel>
-      );
-    };
-
-    const onIdentify = (e: any) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (!device.isOnline()) {
-        toast.warn("Sorry, looks like you're offline.");
-        return;
-      }
-
-      occ.identify();
-    };
-
-    const canBeIdentified = !identifying && occ.canReIdentify() && !species;
-    return (
-      <IonItemSliding className="species-list-item" key={subSample.cid}>
-        <IonItem detailIcon={detailsIcon} className={idClass} routerLink={link}>
-          {profilePhoto}
-
-          {getSpeciesName()}
-
-          {identifying && (
-            <IonLabel className="long identifying" slot="end">
-              Identifying
-            </IonLabel>
-          )}
-
-          {canBeIdentified && (
-            <IonButton
-              slot="end"
-              class="occurrence-identify"
-              color="secondary"
-              onClick={onIdentify}
-              // fill={uploadIsPrimary ? undefined : 'outline'}
-            >
-              Identify
-            </IonButton>
-          )}
-
-          {identifying && <IonSpinner slot="end" className="identifying" />}
-        </IonItem>
-
-        {!isDisabled && (
-          <IonItemOptions side="end">
-            <IonItemOption color="danger" onClick={deletePhotoWrap}>
-              Delete
-            </IonItemOption>
-          </IonItemOptions>
-        )}
-      </IonItemSliding>
-    );
-  };
-
-  const subSamples = [...sample.samples];
+  const alert = useAlert();
 
   if (!sample.samples.length) {
     return (
@@ -204,13 +76,111 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     );
   }
 
-  const reversedSubSampleList = subSamples.reverse();
-  const list = reversedSubSampleList.map(getProfile);
+  const list = [...sample.samples].sort(byCreateTime);
+
+  const onIdentifyAll = () => {
+    if (!device.isOnline()) {
+      toast.warn("Sorry, looks like you're offline.");
+      return;
+    }
+
+    const identify = (smp: typeof Sample) => smp.occurrences[0].identify();
+    sample.samples.map(identify);
+  };
+
+  const onIdentify = (smp: typeof Sample) => {
+    if (!device.isOnline()) {
+      toast.warn("Sorry, looks like you're offline.");
+      return;
+    }
+
+    smp.occurrences[0].identify();
+  };
+
+  const onDelete = (smp: typeof Sample) => {
+    deleteSample(smp, alert);
+  };
+  const navigateToSpeciesSample = (smp: typeof Sample) =>
+    navigate(`${url}/species/${smp.cid}`);
+
+  const getSpeciesList = () => {
+    const getSpecies = (smp: typeof Sample) => (
+      <Species
+        key={smp.cid}
+        sample={smp}
+        isDisabled={isDisabled}
+        onDelete={onDelete}
+        onClick={navigateToSpeciesSample}
+      />
+    );
+
+    const speciesEntries = list.filter(isUnkown(true)).map(getSpecies);
+
+    return (
+      <IonList lines="full">
+        <div className="rounded">{speciesEntries}</div>
+      </IonList>
+    );
+  };
+
+  const getUndentifiedSpeciesList = () => {
+    const showIdentifyAllBtn = hasOver5UnidentifiedSpecies(sample);
+
+    const getSpecies = (smp: typeof Sample) => (
+      <UnidentifiedSpecies
+        key={smp.cid}
+        sample={smp}
+        isDisabled={isDisabled}
+        onIdentify={onIdentify}
+        deEmphasisedIdentifyBtn={showIdentifyAllBtn}
+        onDelete={onDelete}
+        onClick={navigateToSpeciesSample}
+      />
+    );
+
+    const speciesEntries = list.filter(isUnkown(false)).map(getSpecies);
+
+    const count = speciesEntries.length > 1 ? speciesEntries.length : null;
+
+    if (speciesEntries.length < 1) return null;
+
+    return (
+      <>
+        <IonList id="list" lines="full">
+          <div className="rounded">
+            <IonItemDivider className="species-list-header unknown">
+              <IonLabel className={clsx(!showIdentifyAllBtn && 'full-width')}>
+                Unknown species
+              </IonLabel>
+
+              {!showIdentifyAllBtn && (
+                <IonLabel className="count">{count}</IonLabel>
+              )}
+
+              {showIdentifyAllBtn && (
+                <IonButton
+                  size="small"
+                  onClick={onIdentifyAll}
+                  color="secondary"
+                >
+                  Identify All
+                </IonButton>
+              )}
+            </IonItemDivider>
+
+            {speciesEntries}
+          </div>
+        </IonList>
+      </>
+    );
+  };
 
   return (
-    <IonList lines="full">
-      <div className="rounded">{list}</div>
-    </IonList>
+    <>
+      {getUndentifiedSpeciesList()}
+
+      {getSpeciesList()}
+    </>
   );
 };
 

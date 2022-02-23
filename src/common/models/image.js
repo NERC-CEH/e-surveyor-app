@@ -80,13 +80,14 @@ export default class AppMedia extends Media {
 
   async identify() {
     this.identification.identifying = true;
-
     const species = await identifyImage(this);
+    this.identification.identifying = false;
+
     const byScore = (sp1, sp2) => sp2.score - sp1.score;
     species.sort(byScore);
 
     this.attrs.species = species;
-    this.identification.identifying = false;
+    this.save();
 
     return species[0];
   }

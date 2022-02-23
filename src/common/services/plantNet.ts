@@ -127,7 +127,8 @@ const checkValidResponse = (res: any) => {
 const getResults = ({ results }: PlantNetResponse) => results;
 
 const err = (error: any) => {
-  console.error(error);
+  if (error.message !== 'Not Found') console.error(error);
+
   return []; // always empty list
 };
 

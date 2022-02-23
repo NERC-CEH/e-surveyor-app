@@ -26,7 +26,7 @@ declare const Occurrence: {
   isDisabled: () => any;
   identify: () => any;
 
-  getTaxonName?: any;
+  getSpecies?: any;
 };
 
 export default Occurrence;
