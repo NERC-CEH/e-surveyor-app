@@ -120,7 +120,7 @@ const survey: Survey = {
       },
 
       attrs: {
-        name: new Date().toLocaleDateString(),
+        name: new Date().toLocaleDateString('en-UK'),
         location: null,
       },
     });
