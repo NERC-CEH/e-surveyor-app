@@ -31,22 +31,18 @@ export default class AppOccurrence extends Occurrence {
   }
 
   async identify() {
-    try {
-      const identifyAllImages = media => media.identify();
+    const identifyAllImages = media => media.identify();
 
-      // [sp1, null, sp3, sp1 ]
-      const species = await Promise.all(this.media.map(identifyAllImages));
+    // [sp1, null, sp3, sp1 ]
+    const species = await Promise.all(this.media.map(identifyAllImages));
 
-      const byScore = (sp1, sp2) => sp2.score - sp1.score;
-      species.sort(byScore);
+    const byScore = (sp1, sp2) => sp2.score - sp1.score;
+    species.sort(byScore);
 
-      if (!species[0]) return;
+    if (!species[0]) return;
 
-      this.setSpecies(species[0]);
-      this.save();
-    } catch (e) {
-      console.error(e);
-    }
+    this.setSpecies(species[0]);
+    this.save();
   }
 
   canReIdentify() {

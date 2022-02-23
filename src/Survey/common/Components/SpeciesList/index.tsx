@@ -78,23 +78,31 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
 
   const list = [...sample.samples].sort(byCreateTime);
 
-  const onIdentifyAll = () => {
+  const onIdentifyAll = async () => {
     if (!device.isOnline()) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }
 
     const identify = (smp: typeof Sample) => smp.occurrences[0].identify();
-    sample.samples.map(identify);
+    try {
+      await Promise.all(sample.samples.map(identify));
+    } catch (e: any) {
+      toast.error(e.message, { position: 'bottom' });
+    }
   };
 
-  const onIdentify = (smp: typeof Sample) => {
+  const onIdentify = async (smp: typeof Sample) => {
     if (!device.isOnline()) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }
 
-    smp.occurrences[0].identify();
+    try {
+      await smp.occurrences[0].identify();
+    } catch (e: any) {
+      toast.error(e.message, { position: 'bottom' });
+    }
   };
 
   const onDelete = (smp: typeof Sample) => {

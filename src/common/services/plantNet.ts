@@ -127,9 +127,15 @@ const checkValidResponse = (res: any) => {
 const getResults = ({ results }: PlantNetResponse) => results;
 
 const err = (error: any) => {
-  if (error.message !== 'Not Found') console.error(error);
+  if (error.message === 'Not Found') {
+    return []; // always empty list
+  }
 
-  return []; // always empty list
+  console.error(error);
+
+  throw new Error(
+    'For some reason we could not identify the species at the moment. Please try again later.'
+  );
 };
 
 // TODO: use axios

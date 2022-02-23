@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { IonButton } from '@ionic/react';
 import { Page, Header, useLoader, useToast, device } from '@flumens';
@@ -16,17 +16,17 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
   const sample = subSubSample || subSample;
   const [occ] = sample.occurrences;
 
-  // for some reason identifying is fired 2-3s late so we force it
-  const [refreshLoader, forceRefreshLoader] = useState(0);
-
-  const identifySpecies = () => {
+  const identifySpecies = async () => {
     if (!device.isOnline()) {
       toast.warn("Sorry, looks like you're offline.", { position: 'bottom' });
       return;
     }
 
-    occ.identify();
-    forceRefreshLoader(Math.random());
+    try {
+      await occ.identify();
+    } catch (e: any) {
+      toast.error(e.message, { position: 'bottom' });
+    }
   };
 
   // TODO: check if deleted
@@ -48,7 +48,7 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
     }
 
     loader.hide();
-  }, [loader, refreshLoader, isIdentifying]);
+  }, [loader, isIdentifying]);
 
   return (
     <Page id="species-profile">

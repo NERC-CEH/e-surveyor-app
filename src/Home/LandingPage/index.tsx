@@ -21,7 +21,6 @@ import {
   getImage,
 } from 'common/Components/PhotoPicker/imageUtils';
 import ImageModel from 'common/models/image';
-import identifyImage from 'common/services/plantNet';
 import config from 'common/config';
 import { cameraOutline } from 'ionicons/icons';
 import survey1 from './viateur-hwang.jpg';
@@ -61,14 +60,10 @@ const LandingPage: FC<Props> = () => {
 
     setImage(media);
 
-    media.identification.identifying = true;
     try {
-      const species = (await identifyImage(media)) || [];
-
-      media.identification.identifying = false;
-      media.attrs.species = species;
-    } catch (err) {
-      media.identification.identifying = false;
+      await media.identify();
+    } catch (e: any) {
+      toast.error(e.message, { position: 'bottom' });
     }
   };
 

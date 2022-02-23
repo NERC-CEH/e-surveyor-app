@@ -10,7 +10,7 @@ import {
 import identifyImage from 'common/services/plantNet';
 
 export default class AppMedia extends Media {
-  @observable identification = { identifying: false };
+  identification = observable({ identifying: false });
 
   constructor(...args) {
     super(...args);
@@ -79,27 +79,29 @@ export default class AppMedia extends Media {
   }
 
   async identify() {
-    this.identification.identifying = true;
-    const species = await identifyImage(this);
-    this.identification.identifying = false;
+    try {
+      this.identification.identifying = true;
 
-    const byScore = (sp1, sp2) => sp2.score - sp1.score;
-    species.sort(byScore);
+      const species = await identifyImage(this);
 
-    this.attrs.species = species;
-    this.save();
+      const byScore = (sp1, sp2) => sp2.score - sp1.score;
+      species.sort(byScore);
 
-    return species[0];
+      this.attrs.species = species;
+      this.save();
+      this.identification.identifying = false;
+    } catch (error) {
+      this.identification.identifying = false;
+      throw error;
+    }
+
+    return this.attrs.species?.[0];
   }
 
-  isIdentifying() {
-    return this.identification.identifying;
-  }
+  isIdentifying = () => this.identification.identifying;
 
   // eslint-disable-next-line class-methods-use-this
-  validateRemote() {
-    return null;
-  }
+  validateRemote = () => null;
 
   async save() {
     if (!this.parent) {
