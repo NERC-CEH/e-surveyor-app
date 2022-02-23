@@ -26,9 +26,6 @@ const AppPhotoPicker = ({ model, ...restProps }) => {
 
     const imageModel = await getImageModel(Media, image, config.dataPath);
 
-    const isMothSurvey = model?.parent.metadata.survey === 'moth';
-    if (isMothSurvey) imageModel.identify();
-
     return imageModel;
   }
 
