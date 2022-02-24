@@ -3,7 +3,6 @@ import { Page, Header, useToast } from '@flumens';
 import appModelProps from 'models/app';
 import userModelProps from 'models/user';
 import { observer } from 'mobx-react';
-import Log from 'helpers/log';
 import Main from './Main';
 
 function onToggle(appModel: any, setting: string, checked: boolean) {
@@ -27,7 +26,7 @@ const MenuController: FC<Props> = ({ userModel, appModel, savedSamples }) => {
   } = appModel.attrs;
 
   const resetApp = async () => {
-    Log('Settings:Menu:Controller: resetting the application!', 'w');
+    console.log('Settings:Menu:Controller: resetting the application!', 'w');
 
     try {
       await savedSamples.resetDefaults();

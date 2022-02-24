@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import Log from 'helpers/log';
 import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
 import { Page, useAlert, useToast, useLoader } from '@flumens';
 import { Trans as T } from 'react-i18next';
@@ -53,7 +52,7 @@ const Controller = () => {
   const loader = useLoader();
 
   function logOut() {
-    Log('Info:Menu: logging out.');
+    console.log('Info:Menu: logging out.');
     const resetWrap = async (reset: boolean) => {
       if (reset) {
         appModel.attrs['draftId:point'] = '';

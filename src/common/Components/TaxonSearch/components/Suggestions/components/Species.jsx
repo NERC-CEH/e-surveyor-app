@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IonItem } from '@ionic/react';
-import Log from 'helpers/log';
 import './styles.scss';
 
 const onClick = (e, species, onSelect) => {
-  Log('taxon: selected.', 'd');
   const edit = e.target.tagName === 'BUTTON';
 
   onSelect(species, edit);

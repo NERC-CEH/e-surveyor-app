@@ -1,5 +1,4 @@
 import { Media } from '@flumens';
-import Log from 'helpers/log';
 import { observable } from 'mobx';
 import { isPlatform } from '@ionic/react';
 import { Capacitor } from '@capacitor/core';
@@ -22,7 +21,7 @@ export default class AppMedia extends Media {
   }
 
   async destroy(silent) {
-    Log('MediaModel: destroying.');
+    console.log('MediaModel: destroying.');
 
     // remove from internal storage
     if (!isPlatform('hybrid') || window.testing) {
@@ -62,7 +61,7 @@ export default class AppMedia extends Media {
 
       return this.parent.save();
     } catch (err) {
-      Log(err, 'e');
+      console.error(err);
     }
 
     return null;
