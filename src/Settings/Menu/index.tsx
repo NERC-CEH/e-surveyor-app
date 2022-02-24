@@ -20,7 +20,11 @@ type Props = {
 const MenuController: FC<Props> = ({ userModel, appModel, savedSamples }) => {
   const toast = useToast();
 
-  const { sendAnalytics, use10stepsForCommonStandard } = appModel.attrs;
+  const {
+    sendAnalytics,
+    use10stepsForCommonStandard,
+    useAutoIDWhenBackOnline,
+  } = appModel.attrs;
 
   const resetApp = async () => {
     Log('Settings:Menu:Controller: resetting the application!', 'w');
@@ -49,6 +53,7 @@ const MenuController: FC<Props> = ({ userModel, appModel, savedSamples }) => {
         sendAnalytics={sendAnalytics}
         use10stepsForCommonStandard={use10stepsForCommonStandard}
         onToggle={onToggleWrap}
+        useAutoIDWhenBackOnline={useAutoIDWhenBackOnline}
       />
     </Page>
   );

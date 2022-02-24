@@ -1,8 +1,11 @@
 import { Sample, device, getDeepErrorMessage } from '@flumens';
+import { reaction } from 'mobx';
 import userModel from 'models/user';
+import appModel from 'models/app';
 import config from 'common/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
+import network from 'helpers/network';
 import GPSExtension from './sampleGPSExt';
 import seedmixData from '../data/seedmix';
 import plantInteractions from '../data/plant_interactions';
@@ -69,6 +72,22 @@ class AppSample extends Sample {
 
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
+
+    // listen for network update
+    const autoIdentifyIfCameOnline = isOnline => {
+      if (!this.occurrences[0]) return;
+      if (
+        !isOnline ||
+        this.isIdentifying() ||
+        !appModel.attrs.useAutoIDWhenBackOnline
+      )
+        return;
+
+      this.occurrences[0].identify();
+    };
+
+    const listenToOnlineChange = () => network.isOnline;
+    reaction(listenToOnlineChange, autoIdentifyIfCameOnline);
   }
 
   store = modelStore;

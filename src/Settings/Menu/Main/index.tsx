@@ -34,6 +34,7 @@ type Props = {
   onToggle: (prop: string, checked: boolean) => void;
   sendAnalytics: any;
   use10stepsForCommonStandard: any;
+  useAutoIDWhenBackOnline: any;
 };
 
 const Menu: FC<Props> = ({
@@ -41,6 +42,7 @@ const Menu: FC<Props> = ({
   onToggle,
   sendAnalytics,
   use10stepsForCommonStandard,
+  useAutoIDWhenBackOnline,
 }) => {
   const alert = useAlert();
 
@@ -50,6 +52,8 @@ const Menu: FC<Props> = ({
     onToggle('sendAnalytics', checked);
   const onCommonStandardToggle = (checked: boolean) =>
     onToggle('use10stepsForCommonStandard', checked);
+  const onAutoIDWhenBackOnline = (checked: boolean) =>
+    onToggle('useAutoIDWhenBackOnline', checked);
 
   return (
     <Main className="app-settings">
@@ -64,6 +68,17 @@ const Menu: FC<Props> = ({
           />
           <InfoMessage color="medium">
             Use 10 steps when doing Common Standards survey.
+          </InfoMessage>
+          <Toggle
+            label="ID Species When Online"
+            icon={transectIcon}
+            onChange={onAutoIDWhenBackOnline}
+            value={useAutoIDWhenBackOnline}
+          />
+          <InfoMessage color="medium">
+            When working offline the app will not be able to automatically ID
+            the spcecies. Once reconnected to the Internet we can identify the
+            species in the background.
           </InfoMessage>
         </div>
 
