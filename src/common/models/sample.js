@@ -5,7 +5,6 @@ import appModel from 'models/app';
 import config from 'common/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
-import network from 'helpers/network';
 import GPSExtension from './sampleGPSExt';
 import seedmixData from '../data/seedmix';
 import plantInteractions from '../data/plant_interactions';
@@ -76,17 +75,14 @@ class AppSample extends Sample {
     // listen for network update
     const autoIdentifyIfCameOnline = isOnline => {
       if (!this.occurrences[0]) return;
-      if (
-        !isOnline ||
-        this.isIdentifying() ||
-        !appModel.attrs.useAutoIDWhenBackOnline
-      )
-        return;
+
+      const {useAutoIDWhenBackOnline} = appModel.attrs;
+      if (!isOnline || this.isIdentifying() || !useAutoIDWhenBackOnline) return;
 
       this.occurrences[0].identify();
     };
 
-    const listenToOnlineChange = () => network.isOnline;
+    const listenToOnlineChange = () => device.isOnline;
     reaction(listenToOnlineChange, autoIdentifyIfCameOnline);
   }
 
@@ -225,7 +221,7 @@ class AppSample extends Sample {
       return false;
     }
 
-    if (!device.isOnline()) {
+    if (!device.isOnline) {
       toast.warn('Looks like you are offline!');
       return false;
     }

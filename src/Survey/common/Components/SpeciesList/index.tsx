@@ -9,8 +9,7 @@ import {
   NavContext,
 } from '@ionic/react';
 import { useRouteMatch } from 'react-router';
-import { InfoMessage, useToast, useAlert } from '@flumens';
-import network from 'helpers/network';
+import { InfoMessage, useToast, useAlert, device } from '@flumens';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import clsx from 'clsx';
@@ -80,7 +79,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const list = [...sample.samples].sort(byCreateTime);
 
   const onIdentifyAll = async () => {
-    if (!network.isOnline) {
+    if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }
@@ -94,7 +93,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   };
 
   const onIdentify = async (smp: typeof Sample) => {
-    if (!network.isOnline) {
+    if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }
@@ -177,7 +176,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
               )}
             </IonItemDivider>
 
-            {!network.isOnline && (
+            {!device.isOnline && (
               <InfoMessage color="dark" className="offline-warning-note">
                 Auto-identification will not work while the device is offline.
               </InfoMessage>

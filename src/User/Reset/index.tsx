@@ -23,7 +23,7 @@ const ResetController: FC<Props> = ({ userModel }) => {
 
   async function onSubmit(details: detailsParams) {
     const { email } = details;
-    if (!device.isOnline()) {
+    if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }

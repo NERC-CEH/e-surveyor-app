@@ -28,7 +28,7 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
       field_full_name: [{ value: fullName?.trim() }],
     };
 
-    if (!device.isOnline()) {
+    if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }

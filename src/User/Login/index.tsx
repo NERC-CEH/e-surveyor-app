@@ -24,7 +24,7 @@ const LoginController: FC<Props> = ({ userModel }) => {
   async function onLogin(details: detailsParams) {
     const { email, password } = details;
 
-    if (!device.isOnline()) {
+    if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }

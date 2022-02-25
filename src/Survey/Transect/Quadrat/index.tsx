@@ -36,7 +36,7 @@ const QuadratController: FC<Props> = ({ subSample }) => {
       const survey = subSample.getSurvey();
       const newSubSample = survey.smp.create(Sample, Occurrence, image);
 
-      device.isOnline() && newSubSample.occurrences[0].identify();
+      device.isOnline && newSubSample.occurrences[0].identify();
 
       subSample.samples.push(newSubSample);
       subSample.save();

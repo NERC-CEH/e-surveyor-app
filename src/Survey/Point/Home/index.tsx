@@ -80,7 +80,7 @@ const HomeController: FC<Props> = ({ sample }) => {
       const survey = sample.getSurvey();
       const newSubSample = survey.smp.create(Sample, Occurrence, image);
 
-      device.isOnline() && newSubSample.occurrences[0].identify();
+      device.isOnline && newSubSample.occurrences[0].identify();
 
       sample.samples.push(newSubSample);
       sample.save();

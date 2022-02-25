@@ -172,7 +172,7 @@ const SpeciesCard: FC<Props> = ({
   const fullSpecies = species;
 
   const { species: sp, score, images } = fullSpecies;
-  const isOnline = device.isOnline();
+  const { isOnline } = device;
 
   const onSelectWrap = () => onSelect(fullSpecies);
   const commonName = !!sp.commonNames.length && sp.commonNames[0];

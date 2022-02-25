@@ -46,7 +46,7 @@ const LandingPage: FC<Props> = () => {
   );
 
   const identifyPhoto = async () => {
-    if (!device.isOnline()) {
+    if (!device.isOnline) {
       toast.warn('Looks like you are offline!');
       return;
     }

@@ -17,7 +17,7 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
   const [occ] = sample.occurrences;
 
   const identifySpecies = async () => {
-    if (!device.isOnline()) {
+    if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.", { position: 'bottom' });
       return;
     }
