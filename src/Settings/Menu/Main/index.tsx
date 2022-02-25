@@ -70,7 +70,7 @@ const Menu: FC<Props> = ({
             Use 10 steps when doing Common Standards survey.
           </InfoMessage>
           <Toggle
-            label="ID Species When Online"
+            label="Automatically ID pending images when re-connecting to the internet"
             icon={transectIcon}
             onChange={onAutoIDWhenBackOnline}
             value={useAutoIDWhenBackOnline}
