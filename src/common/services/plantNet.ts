@@ -134,7 +134,7 @@ const err = (error: any) => {
   console.error(error);
 
   throw new Error(
-    'For some reason we could not identify the species at the moment. Please try again later.'
+    'Sorry we are experiencing some technical issues, we cannot identify your image right now, please try again later.'
   );
 };
 
