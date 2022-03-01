@@ -62,7 +62,7 @@ const ResetController: FC<Props> = ({ userModel }) => {
     <Page id="user-reset">
       <Header
         className="ion-no-border"
-        routerDirection="none"
+        title="Reset"
         defaultHref="/user/login"
       />
       <Main schema={userModel.resetSchema} onSubmit={onSubmit} />
