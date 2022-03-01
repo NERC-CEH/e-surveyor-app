@@ -76,7 +76,7 @@ class AppSample extends Sample {
     const autoIdentifyIfCameOnline = isOnline => {
       if (!this.occurrences[0]) return;
 
-      const {useAutoIDWhenBackOnline} = appModel.attrs;
+      const { useAutoIDWhenBackOnline } = appModel.attrs;
       if (!isOnline || this.isIdentifying() || !useAutoIDWhenBackOnline) return;
 
       this.occurrences[0].identify();
