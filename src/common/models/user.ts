@@ -22,7 +22,7 @@ class UserModel extends DrupalUserModel {
   });
 
   async checkActivation(toast: any, loader: any) {
-    const isLoggedIn = !!this.id;
+    const isLoggedIn = !!this.attrs.email;
     if (!isLoggedIn) {
       toast.warn('Please log in first.');
       return false;
@@ -49,7 +49,7 @@ class UserModel extends DrupalUserModel {
   }
 
   async resendVerificationEmail(toast: any, loader: any) {
-    const isLoggedIn = !!this.id;
+    const isLoggedIn = !!this.attrs.email;
     if (!isLoggedIn) {
       toast.warn('Please log in first.');
       return false;
