@@ -16,7 +16,8 @@
     "test:acceptance": "cd other && newman run postman_collection.json --bail --env-var plantnet_api_key=${PLANT_NET_API_KEY}",
     "fetch:data": "cd src/common/data && mkdir -p remote && node make.js",
     "fetch:species:data": "cd src/common/data/species && node make.js",
-    "fetch:species:commonNames": "cd src/common/data/commonNames && node make.js"
+    "fetch:species:commonNames": "cd src/common/data/commonNames && node make.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@bit/flumens.apps.attr-page": "^3.0.14",
