@@ -102,7 +102,7 @@ const Species: FC<Props> = ({ sample, isDisabled, onDelete, onClick }) => {
     <IonItemSliding className="species-list-item" key={sample.cid}>
       <IonItem
         detail
-        detailIcon={closeCircle}
+        detailIcon={detailsIcon}
         className={idClass}
         onClick={onClickWrap}
       >
