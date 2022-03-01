@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import Sample from 'models/sample';
-import { Page, Header } from '@flumens';
+import { Page, Header, useAlert, useToast } from '@flumens';
+import { IonButton, NavContext } from '@ionic/react';
 import { observer } from 'mobx-react';
 import Main from './Main';
 
@@ -21,13 +22,37 @@ type Props = {
 };
 
 const ReportController: FC<Props> = ({ sample }) => {
+  const { navigate } = useContext(NavContext);
+  const alert = useAlert();
+  const toast = useToast();
+
   const getMissingSeedmixSpeciesWrap = () => getMissingSeedmixSpecies(sample);
 
   if (!sample) return null;
 
+  const onUpload = async () => {
+    const isUploading = await sample.upload(alert, toast);
+    if (!isUploading) return;
+
+    navigate(`/home/surveys`, 'root');
+  };
+
+  const isDisabled = sample.isUploaded();
+
+  const uploadButton =
+    isDisabled || sample.remote.synchronising ? null : (
+      <IonButton onClick={onUpload} color="secondary" fill="solid">
+        Upload
+      </IonButton>
+    );
+
   return (
     <Page id="survey-report">
-      <Header title="Report" />
+      <Header
+        title="Report"
+        rightSlot={uploadButton}
+        defaultHref="/home/surveys"
+      />
       <Main
         sample={sample}
         getMissingSeedmixSpecies={getMissingSeedmixSpeciesWrap}

@@ -1,19 +1,11 @@
 import React, { FC, useContext, useState } from 'react';
-import {
-  Page,
-  Header,
-  useToast,
-  device,
-  useAlert,
-  getDeepErrorMessage,
-} from '@flumens';
+import { Page, Header, device, useAlert, getDeepErrorMessage } from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import { observer } from 'mobx-react';
 import {
   IonButton,
-  IonIcon,
   NavContext,
   useIonActionSheet,
   isPlatform,
@@ -26,7 +18,6 @@ import {
   getImageModel,
 } from 'common/Components/PhotoPicker/imageUtils';
 import ImageCropper from 'common/Components/ImageCropper';
-import { checkmarkCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import Main from './Main';
 import './styles.scss';
@@ -65,7 +56,6 @@ const HomeController: FC<Props> = ({ sample }) => {
   const { navigate } = useContext(NavContext);
   const [presentActionSheet] = useIonActionSheet();
   const alert = useAlert();
-  const toast = useToast();
 
   const [editImage, setEditImage] = useState<URL>();
 
@@ -108,11 +98,8 @@ const HomeController: FC<Props> = ({ sample }) => {
     attachImages(photoURLs);
   };
 
-  const onUpload = async () => {
-    const isUploading = await sample.upload(alert, toast);
-    if (!isUploading) return;
-
-    navigate(`/home/surveys`, 'root');
+  const navToReport = async () => {
+    navigate(`${match.url}/report`);
   };
 
   const onDoneEdit = (image: URL) => {
@@ -142,8 +129,7 @@ const HomeController: FC<Props> = ({ sample }) => {
     sample.save();
 
     appModel.attrs['draftId:point'] = '';
-
-    navigate(`${match.url}/report`);
+    navToReport();
   };
 
   if (!sample) {
@@ -152,15 +138,14 @@ const HomeController: FC<Props> = ({ sample }) => {
 
   const isDisabled = sample.isUploaded();
 
-  const uploadButton =
+  const finishButton =
     isDisabled || sample.remote.synchronising ? null : (
       <IonButton
-        onClick={sample.metadata.saved ? onUpload : onFinish}
+        onClick={sample.metadata.saved ? navToReport : onFinish}
         color="secondary"
         fill="solid"
       >
-        <IonIcon icon={checkmarkCircleOutline} slot="start" />
-        {sample.metadata.saved ? 'Upload' : 'Finish'}
+        {sample.metadata.saved ? 'See Report' : 'Finish'}
       </IonButton>
     );
 
@@ -170,7 +155,7 @@ const HomeController: FC<Props> = ({ sample }) => {
     <Page id="survey-default-edit">
       <Header
         title="Survey"
-        rightSlot={uploadButton}
+        rightSlot={finishButton}
         defaultHref="/home/surveys"
       />
       <Main
