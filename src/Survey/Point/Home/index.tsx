@@ -141,6 +141,8 @@ const HomeController: FC<Props> = ({ sample }) => {
     sample.metadata.saved = true;
     sample.save();
 
+    appModel.attrs['draftId:point'] = '';
+
     navigate(`${match.url}/report`);
   };
 

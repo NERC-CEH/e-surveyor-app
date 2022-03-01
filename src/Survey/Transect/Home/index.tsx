@@ -10,6 +10,7 @@ import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
+import appModel from 'models/app';
 import Sample from 'models/sample';
 import Main from './Main';
 
@@ -49,6 +50,8 @@ const Controller: FC<Props> = ({ sample }) => {
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
     sample.save();
+
+    appModel.attrs['draftId:transect'] = '';
 
     navigate(`${match.url}/report`);
   };
