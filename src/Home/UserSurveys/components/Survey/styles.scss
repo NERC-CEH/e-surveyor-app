@@ -9,41 +9,41 @@
 
       ion-item {
         --border-width: 0;
-      }
 
-      .species-info {
-        margin: 10px 10px;
+        .species-info {
+          margin: 10px 10px;
 
-        span {
-          margin-right: 10px;
+          span {
+            margin-right: 10px;
+          }
+          ion-badge {
+            --background: var(--ion-color-secondary);
+            margin-bottom: -4px;
+          }
         }
-        ion-badge {
-          --background: var(--ion-color-secondary);
-          margin-bottom: -4px;
-        }
-      }
-
-      ion-icon {
-        font-size: 2.5em;
-      }
-
-      ion-badge {
-        margin-left: 5px;
-        font-size: 0.6em;
 
         ion-icon {
-          font-size: 0.8em;
-          margin-right: 5px;
+          font-size: 2.5em;
         }
-      }
 
-      ion-label {
-        margin-left: 20px;
-      }
+        ion-badge {
+          margin-left: 5px;
+          font-size: 0.6em;
 
-      h3 {
-        font-size: 1.1em;
-        font-weight: 500;
+          ion-icon {
+            font-size: 0.8em;
+            margin-right: 5px;
+          }
+        }
+
+        > ion-label {
+          margin-left: 20px;
+        }
+
+        h3 {
+          font-size: 1.1em;
+          font-weight: 500;
+        }
       }
     }
   }

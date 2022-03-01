@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useAlert } from '@flumens';
+import { useAlert, useToast } from '@flumens';
 import Sample from 'models/sample';
 import { observer } from 'mobx-react';
 import {
@@ -12,6 +12,7 @@ import {
   IonIcon,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
+import OnlineStatus from './components/OnlineStatus';
 import './styles.scss';
 
 function deleteSurvey(alert: (options: any) => void, sample: typeof Sample) {
@@ -36,15 +37,21 @@ function deleteSurvey(alert: (options: any) => void, sample: typeof Sample) {
 
 type Props = {
   sample: typeof Sample;
+  uploadIsPrimary?: boolean;
 };
 
-const Survey: FC<Props> = ({ sample }) => {
+const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
   const alert = useAlert();
+  const toast = useToast();
 
   const survey = sample.getSurvey();
-  let href = `/survey/${survey.name}/${sample.cid}`;
-  if (survey.name === 'transect' && !sample.metadata.completedDetails) {
-    href += '/details';
+
+  let href;
+  if (!sample.remote.synchronising) {
+    href = `/survey/${survey.name}/${sample.cid}`;
+    if (survey.name === 'transect' && !sample.metadata.completedDetails) {
+      href += '/details';
+    }
   }
 
   function getSampleInfo() {
@@ -78,15 +85,20 @@ const Survey: FC<Props> = ({ sample }) => {
     );
   }
 
-  const deleteSurveyWrap = () => deleteSurvey(alert, sample);
+  const onUpload = () => sample.upload(alert, toast);
 
-  const surveyIcon = survey.icon;
+  const deleteSurveyWrap = () => deleteSurvey(alert, sample);
 
   return (
     <IonItemSliding className="survey-list-item">
       <IonItem routerLink={href} detail>
-        <IonIcon icon={surveyIcon} color="primary" />
+        <IonIcon icon={survey.icon} color="primary" />
         <IonLabel>{getSampleInfo()}</IonLabel>
+        <OnlineStatus
+          sample={sample}
+          onUpload={onUpload}
+          uploadIsPrimary={!!uploadIsPrimary}
+        />
       </IonItem>
 
       <IonItemOptions side="end">
