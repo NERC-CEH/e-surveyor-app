@@ -139,10 +139,10 @@ const survey: Survey = {
         .validateSync(isIdentifying, { abortEarly: false });
 
       let hasValidSpecies = false;
-
       const showReportIfScoreHigherThanThreshold = (subSample: any) => {
-        const { species } = subSample.getSpecies();
-        if (species && species.score > POSSIBLE_THRESHOLD) {
+        const { score } = subSample.getSpecies();
+
+        if (score > POSSIBLE_THRESHOLD) {
           hasValidSpecies = true;
         }
       };
