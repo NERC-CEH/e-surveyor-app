@@ -18,7 +18,7 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
   const loader = useLoader();
 
   const onSuccess = () => {
-    context.navigate('/home/surveys', 'root');
+    context.navigate('/home/landing', 'root');
   };
 
   async function onRegister(details: detailsParams) {

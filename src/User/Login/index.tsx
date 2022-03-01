@@ -18,7 +18,7 @@ const LoginController: FC<Props> = ({ userModel }) => {
   const onSuccessReturn = () => {
     const { email } = userModel.attrs;
     toast.success(`Successfully logged in as: ${email}`);
-    context.navigate('/home/surveys', 'root');
+    context.navigate('/home/landing', 'root');
   };
 
   async function onLogin(details: detailsParams) {
