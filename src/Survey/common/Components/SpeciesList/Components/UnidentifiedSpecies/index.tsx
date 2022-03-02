@@ -73,7 +73,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
               slot="start"
               color="warning"
             >
-              <b>Unkown species</b>
+              <b>Unknown species</b>
             </IonLabel>
 
             {!hasSpeciesPhoto && (
