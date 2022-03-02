@@ -44,7 +44,7 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
   const onCancelEdit = () => setEditImage(undefined);
 
   // eslint-disable-next-line react/no-unstable-nested-components
-  const ImageMemoized = ({ media, onDelete, onClick }: any) => {
+  const ImageWithCropping = ({ media, onDelete, onClick }: any) => {
     const cropImage = () => {
       setEditImage(media);
     };
@@ -61,9 +61,11 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
           alt=""
           onClick={onClick} // TODO: fix
         />
-        <IonButton className="crop-button" onClick={cropImage}>
-          <IonIcon icon={cropOutline} />
-        </IonButton>
+        {!isDisabled && (
+          <IonButton className="crop-button" onClick={cropImage}>
+            <IonIcon icon={cropOutline} />
+          </IonButton>
+        )}
       </div>
     );
   };
@@ -141,8 +143,9 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
       <div className="rounded">
         <PhotoPicker
           model={occ}
-          Image={ImageMemoized}
+          Image={ImageWithCropping}
           placeholderCount={isPlatform('mobile') ? 1 : 5}
+          isDisabled={isDisabled}
         />
       </div>
     </div>
