@@ -80,9 +80,7 @@ const HomeController: FC<Props> = ({ sample }) => {
   const photoSelect = async () => {
     const photoURLs = await getImages(undefined, presentActionSheet);
 
-    if (!photoURLs || !photoURLs.length) {
-      return;
-    }
+    if (!photoURLs || !photoURLs.length) return;
 
     const canEdit = photoURLs.length === 1;
     if (canEdit) {
