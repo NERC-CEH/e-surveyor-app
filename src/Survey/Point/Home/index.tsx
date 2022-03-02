@@ -136,16 +136,15 @@ const HomeController: FC<Props> = ({ sample }) => {
 
   const isDisabled = sample.isUploaded();
 
-  const finishButton =
-    isDisabled || sample.remote.synchronising ? null : (
-      <IonButton
-        onClick={sample.metadata.saved ? navToReport : onFinish}
-        color="secondary"
-        fill="solid"
-      >
-        {sample.metadata.saved ? 'See Report' : 'Finish'}
-      </IonButton>
-    );
+  const finishButton = sample.remote.synchronising ? null : (
+    <IonButton
+      onClick={sample.metadata.saved ? navToReport : onFinish}
+      color="secondary"
+      fill="solid"
+    >
+      {sample.metadata.saved ? 'See Report' : 'Finish'}
+    </IonButton>
+  );
 
   if (appModel.attrs.showFirstSurveyTip) showFirstSurveyTip(alert);
 
