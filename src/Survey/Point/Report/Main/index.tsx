@@ -333,7 +333,7 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
         <IonItemDivider>
           <IonLabel>Missing species</IonLabel>
         </IonItemDivider>
-        {list}
+        <div className="rounded">{list}</div>
       </IonList>
     );
   };
