@@ -4,6 +4,7 @@ import { Main, useAlert, Toggle, InfoMessage } from '@flumens';
 import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';
 import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
 import transectIcon from 'common/images/transectIconBlack.svg';
+import flowerIcon from 'common/images/flowerIcon.svg';
 import './styles.scss';
 
 function resetDialog(alert: any, resetApp: any) {
@@ -71,7 +72,7 @@ const Menu: FC<Props> = ({
           </InfoMessage>
           <Toggle
             label="Identify when reconnected"
-            icon={transectIcon}
+            icon={flowerIcon}
             onChange={onAutoIDWhenBackOnline}
             value={useAutoIDWhenBackOnline}
           />
