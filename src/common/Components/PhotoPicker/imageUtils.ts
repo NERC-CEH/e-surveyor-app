@@ -118,18 +118,17 @@ async function getPhotoFromPreview(): Promise<GalleryPhoto | null> {
  */
 export async function getImage(options: ImageOptions = {}): Promise<URL> {
   try {
-    const cameraOptions = {
-      quality: 40,
-      allowEditing: false,
-      saveToGallery: true,
-      webUseInput: true,
-      correctOrientation: true,
-      resultType: CameraResultType.Uri,
-      ...options,
-    };
-
     let file: Photo;
     try {
+      const cameraOptions = {
+        quality: 40,
+        allowEditing: false,
+        saveToGallery: true,
+        webUseInput: true,
+        correctOrientation: true,
+        resultType: CameraResultType.Uri,
+        ...options,
+      };
       file = await Camera.getPhoto(cameraOptions);
     } catch (_) {
       // user canceled the action or permissions issue
@@ -171,16 +170,6 @@ export async function getImages(
   options: ImageOptions = {},
   presentActionSheet: any
 ): Promise<URL[]> {
-  const cameraOptions = {
-    quality: 40,
-    allowEditing: false,
-    saveToGallery: true,
-    webUseInput: true,
-    correctOrientation: true,
-    resultType: CameraResultType.Uri,
-    ...options,
-  };
-
   let files: GalleryPhoto[];
   try {
     const shouldUseGallery = await new Promise((resolve, reject) => {
@@ -195,8 +184,16 @@ export async function getImages(
     });
 
     if (shouldUseGallery) {
-      // gallery
-      const { photos } = await Camera.pickImages(cameraOptions);
+      const galleryOptions = {
+        quality: 40,
+        allowEditing: false,
+        saveToGallery: true,
+        webUseInput: true,
+        correctOrientation: true,
+        resultType: CameraResultType.Uri,
+        ...options,
+      };
+      const { photos } = await Camera.pickImages(galleryOptions);
       files = photos;
     } else {
       // camera
