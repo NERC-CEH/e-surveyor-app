@@ -24,7 +24,7 @@ type Props = {
   onCancel: any;
 };
 
-const CropImage: FC<Props> = ({ image, onDone, onCancel }) => {
+const ImageCropper: FC<Props> = ({ image, onDone, onCancel }) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
@@ -108,4 +108,4 @@ const CropImage: FC<Props> = ({ image, onDone, onCancel }) => {
   );
 };
 
-export default CropImage;
+export default ImageCropper;
