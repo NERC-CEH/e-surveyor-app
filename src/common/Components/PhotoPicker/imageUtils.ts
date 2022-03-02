@@ -263,7 +263,10 @@ export async function getImageModel(
 
     data = imageURL.split('/').pop();
   } else {
-    [data, , width, height] = await ImageModel.getDataURI(imageURL);
+    [data, , width, height] = await ImageModel.getDataURI(imageURL, {
+      width: 1000,
+      height: 1000,
+    });
   }
 
   const imageModel: Model = new ImageModel({
