@@ -52,7 +52,7 @@ async function init() {
 
   if (isPlatform('hybrid')) {
     StatusBar.setStyle({
-      style: StatusBarStyle.Dark,
+      style: StatusBarStyle.Light,
     });
 
     SplashScreen.hide();
