@@ -16,7 +16,9 @@ export const getDetailsValidationSchema = sample =>
     quadratSize: Yup.number()
       .min(1)
       .required('Please select your quadrat size.'),
-    steps: Yup.number().min(1).required('Please select the number of survey steps.'),
+    steps: Yup.number()
+      .min(1)
+      .required('Please select the number of survey steps.'),
     habitat:
       sample.attrs.type !== 'Custom' &&
       Yup.mixed().required('Please select habitat.'),
@@ -89,6 +91,7 @@ const survey = {
         attrProps: {
           input: 'slider',
           info: 'Please specify the number of quadrats you would like to survey.',
+          inputProps: { min: 1 },
         },
       },
     },
@@ -99,6 +102,7 @@ const survey = {
         attrProps: {
           input: 'slider',
           info: 'Please specify the quadrat size in meters.',
+          inputProps: { min: 1 },
         },
       },
       remote: {
