@@ -6,6 +6,7 @@ import {
   dateAttr,
   locationAttr,
   verifyLocationSchema,
+  nameAttr,
 } from 'Survey/common/config';
 import appModel from 'models/app';
 import { schemeHabitats } from 'common/data/habitats';
@@ -45,16 +46,7 @@ const survey = {
 
     location: locationAttr,
 
-    name: {
-      pageProps: {
-        headerProps: { title: 'Survey Name' },
-        attrProps: {
-          input: 'textarea',
-          info: 'You can change your survey name here.',
-        },
-      },
-      remote: { id: 1531 },
-    },
+    name: nameAttr,
 
     type: {
       pageProps: {

@@ -123,3 +123,14 @@ export const locationAttr = {
     },
   },
 };
+
+export const nameAttr = {
+  pageProps: {
+    headerProps: { title: 'Survey Name' },
+    attrProps: {
+      input: 'textarea',
+      info: 'You can change your survey name here.',
+    },
+  },
+  remote: { id: 1531 },
+};

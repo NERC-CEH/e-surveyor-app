@@ -6,6 +6,7 @@ import {
   dateAttr,
   locationAttr,
   verifyLocationSchema,
+  nameAttr,
 } from 'Survey/common/config';
 import { Survey } from 'common/surveys';
 import config from 'common/config';
@@ -23,16 +24,7 @@ const survey: Survey = {
 
     location: locationAttr,
 
-    name: {
-      pageProps: {
-        headerProps: { title: 'Survey Name' },
-        attrProps: {
-          input: 'textarea',
-          info: 'You can change your survey name here.',
-        },
-      },
-      remote: { id: 1531 },
-    },
+    name: nameAttr,
 
     seedmixgroup: seedmixGroupAttr,
 
