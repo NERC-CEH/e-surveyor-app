@@ -62,12 +62,22 @@ async function getPhotoFromPreview(): Promise<GalleryPhoto | null> {
     container.setAttribute('id', 'camera-container');
     document.body.appendChild(container);
 
+    const root = document.getElementById('root');
+    root?.setAttribute('style', 'display:none');
+
+    const cameraFocusFrame = document.createElement('div');
+    cameraFocusFrame.setAttribute('id', 'camera-focus-frame');
+    container.appendChild(cameraFocusFrame);
+
     const cameraButton = document.createElement('button');
     cameraButton.classList.add('camera-button');
 
     async function cleanUp() {
       await CameraPreview.stop();
       document.body.removeChild(container);
+
+      root?.removeAttribute('style');
+
       // cameraButton.removeEventListener('click', takePhoto);
       // cancelButton.removeEventListener('click', cleanUp);
     }
@@ -102,13 +112,20 @@ async function getPhotoFromPreview(): Promise<GalleryPhoto | null> {
     cancelButton.addEventListener('click', cancelCamera);
     container.appendChild(cancelButton);
 
-    const cameraPreviewOptions = {
-      position: 'rear',
-      paddingBottom: 80,
-      parent: 'camera-container',
-      storeToFile: true,
-    };
-    CameraPreview.start(cameraPreviewOptions);
+    (async () => {
+      const cameraPreviewOptions = {
+        position: 'rear',
+        paddingBottom: 80,
+        parent: 'camera-container',
+        storeToFile: true,
+        toBack: true,
+        disableAudio: true,
+        rotateWhenOrientationChanged: false,
+      };
+      await CameraPreview.start(cameraPreviewOptions);
+      if (isPlatform('hybrid'))
+        container?.setAttribute('style', 'background:none'); // make the camera visible
+    })();
   });
 }
 
