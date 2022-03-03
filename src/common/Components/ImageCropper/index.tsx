@@ -74,6 +74,7 @@ const ImageCropper: FC<Props> = ({ image, onDone, onCancel }) => {
         <InfoBackgroundMessage>
           Place your plant at the center of the frame.
         </InfoBackgroundMessage>
+
         {image && (
           <Cropper
             image={image}
@@ -90,6 +91,7 @@ const ImageCropper: FC<Props> = ({ image, onDone, onCancel }) => {
           />
         )}
       </div>
+
       <IonFooter>
         <IonToolbar>
           <IonButtons slot="primary">
