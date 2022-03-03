@@ -1,15 +1,13 @@
 #survey-report {
   .report-header {
-    --background: transparent;
-
     display: flex;
     min-height: 50px;
     margin: 20px 0;
+    justify-content: space-evenly;
 
     .seedmix,
     .pollinators {
       align-self: center;
-      width: 50%;
       text-align: center;
 
       ion-icon {

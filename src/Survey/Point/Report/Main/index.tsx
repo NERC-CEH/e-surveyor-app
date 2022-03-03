@@ -432,33 +432,33 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
   return (
     <>
       <Main>
-        <IonList lines="full">
-          <IonItem className="report-header" lines="none">
+        <div className="report-header">
+          {seedmix && (
             <div className="seedmix" onClick={() => getShowModal('Seed mix')}>
-              {seedmix && (
-                <>
-                  <IonIcon icon={Seeds} />
-                  <IonBadge color="secondary">
-                    <CountUp
-                      end={selectedSeedmixSpecies.length}
-                      duration={2.75}
-                    />
-                    /{totalSeedmixSpecies.length}
-                  </IonBadge>
-                </>
-              )}
+              <>
+                <IonIcon icon={Seeds} />
+                <IonBadge color="secondary">
+                  <CountUp
+                    end={selectedSeedmixSpecies.length}
+                    duration={2.75}
+                  />
+                  /{totalSeedmixSpecies.length}
+                </IonBadge>
+              </>
             </div>
-            <div
-              className="pollinators"
-              onClick={() => getShowModal('Pollinators')}
-            >
-              <IonIcon icon={beeIcon} />
-              <IonBadge color="secondary">
-                <CountUp end={numberOfSpecies} duration={2.75} />
-              </IonBadge>
-            </div>
-          </IonItem>
+          )}
+          <div
+            className="pollinators"
+            onClick={() => getShowModal('Pollinators')}
+          >
+            <IonIcon icon={beeIcon} />
+            <IonBadge color="secondary">
+              <CountUp end={numberOfSpecies} duration={2.75} />
+            </IonBadge>
+          </div>
+        </div>
 
+        <IonList lines="full">
           {!!numberOfSpecies && showPollinatorsData()}
 
           {!numberOfSpecies && (

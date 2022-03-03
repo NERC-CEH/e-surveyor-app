@@ -155,7 +155,6 @@ const survey: Survey = {
 
       const transectSchema = Yup.object().shape({
         location: verifyLocationSchema,
-        seedmix: Yup.mixed().required('Please select your seed mix.'),
       });
 
       transectSchema.validateSync(attrs, { abortEarly: false });
