@@ -5,7 +5,7 @@ import appModel from 'models/app';
 import config from 'common/config';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
-import EditSpecies from 'Survey/common/Components/EditSpecies';
+import EditSpecies from 'Components/Species';
 import Home from './Home';
 import Report from './Report';
 import survey from './config';
