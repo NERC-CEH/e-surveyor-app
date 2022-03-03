@@ -21,6 +21,7 @@ import {
   getImage,
 } from 'common/Components/PhotoPicker/imageUtils';
 import ImageModel from 'common/models/image';
+import Occurrence from 'common/models/occurrence';
 import config from 'common/config';
 import { cameraOutline } from 'ionicons/icons';
 import survey1 from './viateur-hwang.jpg';
@@ -33,15 +34,15 @@ import './styles.scss';
 interface Props {}
 
 const LandingPage: FC<Props> = () => {
-  const [image, setImage] = useState<any>(null);
+  const [species, setSpecies] = useState<typeof Occurrence>();
   const toast = useToast();
 
-  const hideSpeciesModal = () => setImage(null);
+  const hideSpeciesModal = () => setSpecies(undefined);
 
   const getModal = () => (
-    <IonModal isOpen={!!image} backdropDismiss={false}>
+    <IonModal isOpen={!!species} backdropDismiss={false}>
       <ModalHeader title="Species" onClose={hideSpeciesModal} />
-      <SpeciesProfile species={image} />
+      <SpeciesProfile occurrence={species} />
     </IonModal>
   );
 
@@ -56,12 +57,13 @@ const LandingPage: FC<Props> = () => {
       return;
     }
 
+    const occurrence = new Occurrence({});
     const media = await getImageModel(ImageModel, photo, config.dataPath);
-
-    setImage(media);
+    occurrence.media.push(media);
+    setSpecies(occurrence);
 
     try {
-      await media.identify();
+      await occurrence.identify();
     } catch (e: any) {
       toast.error(e.message, { position: 'bottom' });
     }

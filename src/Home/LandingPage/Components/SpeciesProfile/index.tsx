@@ -2,34 +2,39 @@ import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonSpinner, IonLabel } from '@ionic/react';
 import SpeciesCard from 'Components/SpeciesCard';
-import Image from 'models/image';
+import Occurrence from 'models/occurrence';
 import { Species } from 'models/image.d';
 import './styles.scss';
 
 interface Props {
-  species?: typeof Image;
+  occurrence?: typeof Occurrence;
 }
 
-const SpeciesProfile: FC<Props> = ({ species: image }) => {
-  if (!image) return null;
+const SpeciesProfile: FC<Props> = ({ occurrence }) => {
+  if (!occurrence) return null;
 
   const getPlantList = () => {
     const getSpeciesCard = (sp: Species) => (
       <SpeciesCard key={sp.gbif?.id} species={sp} />
     );
 
-    if (!image.attrs.species || !image.attrs.species.length) {
+    if (
+      !occurrence.media[0].attrs.species ||
+      !occurrence.media[0].attrs.species.length
+    ) {
       return null;
     }
 
-    return image.attrs.species.map(getSpeciesCard);
+    return occurrence.media[0].attrs.species.map(getSpeciesCard);
   };
 
   const getIDLoader = () => {
-    const { identifying } = image.identification;
+    const identifying = occurrence.isIdentifying();
 
     if (!identifying) {
-      const hasNoSpecies = !image.attrs.species || !image.attrs.species.length;
+      const hasNoSpecies =
+        !occurrence.media[0].attrs.species ||
+        !occurrence.media[0].attrs.species.length;
       if (hasNoSpecies) {
         return (
           <div className="identifying">
@@ -59,7 +64,11 @@ const SpeciesProfile: FC<Props> = ({ species: image }) => {
 
   return (
     <div id="species-profile-contents">
-      <img className="species-main-image" src={image.getURL()} alt="species" />
+      <img
+        className="species-main-image"
+        src={occurrence.media[0].getURL()}
+        alt="species"
+      />
 
       {getIDLoader()}
 

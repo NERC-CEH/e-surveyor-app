@@ -42,7 +42,8 @@ export default class AppOccurrence extends Occurrence {
     if (!species[0]) return;
 
     this.setSpecies(species[0]);
-    this.save();
+    const isPartOfSurvey = this.parent;
+    if (isPartOfSurvey) this.save();
   }
 
   canReIdentify() {

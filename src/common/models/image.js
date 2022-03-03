@@ -88,9 +88,6 @@ export default class AppMedia extends Media {
 
       this.attrs.species = species;
 
-      const isPartOfSurvey = this.parent;
-      if (isPartOfSurvey) this.save();
-
       this.identification.identifying = false;
     } catch (error) {
       this.identification.identifying = false;
