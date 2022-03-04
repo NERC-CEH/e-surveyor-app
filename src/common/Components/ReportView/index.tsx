@@ -19,6 +19,8 @@ import {
 import { informationCircleOutline } from 'ionicons/icons';
 import CountUp from 'react-countup';
 import Sample from 'models/sample';
+import Occurrence from 'models/occurrence';
+import { getUniqueSpecies, getSeedmixUse } from 'Components/ReportView/helpers';
 import pollination from 'common/data/pollination';
 import Seeds from 'common/images/seeds.svg';
 import beeIcon from 'common/images/bee.svg';
@@ -75,15 +77,32 @@ const byName3 = (
   return selectedName.localeCompare(selectedName2);
 };
 
+export function getMissingSeedmixSpecies(
+  occurrences: typeof Occurrence[],
+  seedmix?: string
+) {
+  const [selectedSeedmixSpecies, totalSeedmixSpecies = []] = getSeedmixUse(
+    occurrences,
+    seedmix
+  );
+
+  const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }: any) => {
+    const hasLatinName = ([latin]: any) => latin === latinName;
+    return !selectedSeedmixSpecies.find(hasLatinName);
+  };
+
+  return totalSeedmixSpecies.filter(getMissingSelectedSeedmixSpecies);
+}
+
 type Props = {
-  sample: typeof Sample;
-  getMissingSeedmixSpecies: () => [];
+  occurrences: typeof Occurrence[];
+  seedmix?: string;
 };
 
-const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
+const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   const [showModal, setShowModel] = useState<any>(false);
 
-  const uniqueSpecies = sample.getUniqueSpecies();
+  const uniqueSpecies = getUniqueSpecies(occurrences);
 
   const getShowModal = (modalType: string | boolean) => setShowModel(modalType);
 
@@ -307,7 +326,10 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
   };
 
   const getMissingSeedmixSpeciesList = () => {
-    const missingSeedmixSpecies = getMissingSeedmixSpecies();
+    const missingSeedmixSpecies = getMissingSeedmixSpecies(
+      occurrences,
+      seedmix
+    );
 
     if (!missingSeedmixSpecies.length) {
       return null;
@@ -339,7 +361,7 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
   };
 
   const getSelectedSeedmixSpeciesList = () => {
-    const [selectedSeedmixSpecies] = sample.getSeedmixUse();
+    const [selectedSeedmixSpecies] = getSeedmixUse(occurrences, seedmix);
 
     if (!selectedSeedmixSpecies.length) {
       return null;
@@ -419,9 +441,10 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
     );
   };
 
-  const [selectedSeedmixSpecies, totalSeedmixSpecies] = sample.getSeedmixUse();
-
-  const { seedmix } = sample.attrs;
+  const [selectedSeedmixSpecies, totalSeedmixSpecies] = getSeedmixUse(
+    occurrences,
+    seedmix
+  );
 
   const uniqueSupportedSpecies = getUniqueSupportedSpecies(uniqueSpecies);
 
@@ -431,7 +454,7 @@ const ReportMain: FC<Props> = ({ sample, getMissingSeedmixSpecies }) => {
 
   return (
     <>
-      <Main>
+      <Main className="survey-report">
         <div className="report-header">
           {seedmix && (
             <div className="seedmix" onClick={() => getShowModal('Seed mix')}>

@@ -38,8 +38,6 @@ declare const Sample: {
   setSpecies: (arg: any) => any;
   getSpecies: () => any;
   getAISuggestions: () => any;
-  getSeedmixUse: () => any;
-  getUniqueSpecies: () => any;
   getSupportedSpeciesList: (species: any) => any;
   getUniqueSupportedSpecies: (species: any) => any;
 };

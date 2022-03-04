@@ -1,10 +1,10 @@
 import config from 'Survey/Point/config';
 import seedmixData from 'common/data/seedmix';
-import Sample from '../../../../common/models/sample';
-import Occurrence from '../../../../common/models/occurrence';
+import Sample from '../../../models/sample';
+import Occurrence from '../../../models/occurrence';
 import { getMissingSeedmixSpecies } from '..';
 
-describe('Settings Menu', () => {
+describe('ReportView', () => {
   describe('getMissingSeedmixSpecies', () => {
     it('should return missing species list', () => {
       // Given
@@ -31,8 +31,13 @@ describe('Settings Menu', () => {
 
       sample.samples.push(subSmp);
 
+      const occurrences = sample.samples.map(smp => smp.occurrences[0]);
+
       // When
-      const missingSeedmixSpecies = getMissingSeedmixSpecies(sample);
+      const missingSeedmixSpecies = getMissingSeedmixSpecies(
+        occurrences,
+        sample.attrs.seedmix
+      );
 
       // Then
       expect(missingSeedmixSpecies.length).toEqual(seedmix.length - 1);

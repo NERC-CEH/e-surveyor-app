@@ -3,19 +3,7 @@ import Sample from 'models/sample';
 import { Page, Header, useAlert, useToast } from '@flumens';
 import { IonButton, NavContext } from '@ionic/react';
 import { observer } from 'mobx-react';
-import Main from './Main';
-
-export function getMissingSeedmixSpecies(sample: typeof Sample) {
-  const [selectedSeedmixSpecies, totalSeedmixSpecies = []] =
-    sample.getSeedmixUse();
-
-  const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }: any) => {
-    const hasLatinName = ([latin]: any) => latin === latinName;
-    return !selectedSeedmixSpecies.find(hasLatinName);
-  };
-
-  return totalSeedmixSpecies.filter(getMissingSelectedSeedmixSpecies);
-}
+import Main from 'Components/ReportView';
 
 type Props = {
   sample: typeof Sample;
@@ -25,8 +13,6 @@ const ReportController: FC<Props> = ({ sample }) => {
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
   const toast = useToast();
-
-  const getMissingSeedmixSpeciesWrap = () => getMissingSeedmixSpecies(sample);
 
   if (!sample) return null;
 
@@ -46,6 +32,8 @@ const ReportController: FC<Props> = ({ sample }) => {
       </IonButton>
     );
 
+  const occurrences = sample.samples.map(smp => smp.occurrences[0]);
+
   return (
     <Page id="survey-report">
       <Header
@@ -53,10 +41,7 @@ const ReportController: FC<Props> = ({ sample }) => {
         rightSlot={uploadButton}
         defaultHref="/home/surveys"
       />
-      <Main
-        sample={sample}
-        getMissingSeedmixSpecies={getMissingSeedmixSpeciesWrap}
-      />
+      <Main occurrences={occurrences} seedmix={sample.attrs.seedmix} />
     </Page>
   );
 };

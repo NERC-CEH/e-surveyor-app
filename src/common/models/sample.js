@@ -6,7 +6,6 @@ import config from 'common/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import GPSExtension from './sampleGPSExt';
-import seedmixData from '../data/seedmix';
 import plantInteractions from '../data/plant_interactions';
 import { modelStore } from './store';
 import Occurrence from './occurrence';
@@ -131,47 +130,6 @@ class AppSample extends Sample {
     }
 
     return images[0].attrs.species;
-  }
-
-  getUniqueSpecies() {
-    const dict = {};
-
-    const addToUniqueDict = subSmp => {
-      const { species } = subSmp.getSpecies() || {};
-
-      if (!species) {
-        return;
-      }
-
-      const commonNames = species.commonNames || [];
-
-      dict[species.scientificNameWithoutAuthor] = commonNames.length
-        ? commonNames[0]
-        : null;
-    };
-
-    this.samples.forEach(addToUniqueDict);
-
-    return Object.entries(dict);
-  }
-
-  getSeedmixUse() {
-    const { seedmix } = this.attrs;
-    const seedmixSpecies = seedmixData[seedmix];
-    if (!seedmixSpecies) {
-      return [[]];
-    }
-
-    const extractLatinName = ({ latin_name }) => latin_name; // eslint-disable-line camelcase
-    const selectedSeedmixLatinNames = seedmixSpecies.map(extractLatinName);
-
-    const seedmixIncludesSpecies = ([scientificName]) =>
-      selectedSeedmixLatinNames.includes(scientificName);
-
-    const species = this.getUniqueSpecies();
-    const recordedSeedmixSpecies = species.filter(seedmixIncludesSpecies);
-
-    return [recordedSeedmixSpecies, seedmixSpecies];
   }
 
   getPrettyName() {

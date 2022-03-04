@@ -1,6 +1,5 @@
 import React, { useState, FC } from 'react';
 import {
-  IonModal,
   IonLabel,
   IonButton,
   IonCard,
@@ -15,7 +14,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/grid';
 import '@ionic/react/css/ionic-swiper.css';
-import { Page, Main, ModalHeader, device, useToast } from '@flumens';
+import { Page, Main, device, useToast } from '@flumens';
 import {
   getImageModel,
   getImage,
@@ -27,7 +26,7 @@ import { cameraOutline } from 'ionicons/icons';
 import survey1 from './viateur-hwang.jpg';
 import survey2 from './ricardo-gomez.jpg';
 import survey3 from './andrew-neel.jpg';
-import SpeciesProfile from './Components/SpeciesProfile';
+import SpeciesProfile from './Components/Species';
 import logo from './logo.svg';
 import './styles.scss';
 
@@ -38,13 +37,6 @@ const LandingPage: FC<Props> = () => {
   const toast = useToast();
 
   const hideSpeciesModal = () => setSpecies(undefined);
-
-  const getModal = () => (
-    <IonModal isOpen={!!species} backdropDismiss={false}>
-      <ModalHeader title="Species" onClose={hideSpeciesModal} />
-      <SpeciesProfile occurrence={species} />
-    </IonModal>
-  );
 
   const identifyPhoto = async () => {
     if (!device.isOnline) {
@@ -144,7 +136,7 @@ const LandingPage: FC<Props> = () => {
         </div>
       </Main>
 
-      {getModal()}
+      <SpeciesProfile occurrence={species} onClose={hideSpeciesModal} />
     </Page>
   );
 };

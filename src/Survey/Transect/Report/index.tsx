@@ -3,6 +3,7 @@ import Sample from 'models/sample';
 import { Page, Header } from '@flumens';
 import { observer } from 'mobx-react';
 import habitats from 'common/data/habitats';
+import { getUniqueSpecies } from 'Components/ReportView/helpers';
 import Main from './Main';
 
 type Props = {
@@ -25,7 +26,9 @@ const ReportController: FC<Props> = ({ sample }) => {
       const addToCounterIfInHabitatWrap = (sp: any) =>
         addToCounterIfInHabitat(sp, stepSpecies);
 
-      stepSample.getUniqueSpecies().forEach(addToCounterIfInHabitatWrap);
+      getUniqueSpecies(
+        stepSample.samples.map((smp: typeof Sample) => smp.occurrences[0])
+      ).forEach(addToCounterIfInHabitatWrap);
     };
 
     sample.samples.forEach(processStep);
