@@ -20,7 +20,11 @@ import { informationCircleOutline } from 'ionicons/icons';
 import CountUp from 'react-countup';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
-import { getUniqueSpecies, getSeedmixUse } from 'Components/ReportView/helpers';
+import {
+  getUniqueSpecies,
+  getSeedmixUse,
+  SpeciesNames,
+} from 'Components/ReportView/helpers';
 import pollination from 'common/data/pollination';
 import Seeds from 'common/images/seeds.svg';
 import beeIcon from 'common/images/bee.svg';
@@ -42,10 +46,7 @@ interface Species {
   pollinator_common_name: string;
 }
 
-const byName = (
-  [taxon, name]: [string, string],
-  [taxon2, name2]: [string, string]
-) => {
+const byName = ([taxon, name]: SpeciesNames, [taxon2, name2]: SpeciesNames) => {
   const selectedName = name || taxon;
   const selectedName2 = name2 || taxon2;
   return selectedName.localeCompare(selectedName2);
@@ -79,7 +80,7 @@ const byName3 = (
 
 export function getMissingSeedmixSpecies(
   occurrences: typeof Occurrence[],
-  seedmix?: string
+  seedmix: string
 ) {
   const [selectedSeedmixSpecies, totalSeedmixSpecies = []] = getSeedmixUse(
     occurrences,
@@ -107,7 +108,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   const getShowModal = (modalType: string | boolean) => setShowModel(modalType);
 
   const getPollinators = () => {
-    const getPollinatorsEntries = ([name, commonName]: [string, string]) => {
+    const getPollinatorsEntries = ([name, commonName]: SpeciesNames) => {
       const hasLatinName = ({ latin_name }: { latin_name: string }) =>
         latin_name === name;
 
@@ -326,6 +327,8 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   };
 
   const getMissingSeedmixSpeciesList = () => {
+    if (!seedmix) return null;
+
     const missingSeedmixSpecies = getMissingSeedmixSpecies(
       occurrences,
       seedmix
@@ -361,6 +364,8 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   };
 
   const getSelectedSeedmixSpeciesList = () => {
+    if (!seedmix) return null;
+
     const [selectedSeedmixSpecies] = getSeedmixUse(occurrences, seedmix);
 
     if (!selectedSeedmixSpecies.length) {
@@ -441,10 +446,26 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
     );
   };
 
-  const [selectedSeedmixSpecies, totalSeedmixSpecies] = getSeedmixUse(
-    occurrences,
-    seedmix
-  );
+  const getSeedmixComponent = () => {
+    if (!seedmix) return null;
+
+    const [selectedSeedmixSpecies, totalSeedmixSpecies] = getSeedmixUse(
+      occurrences,
+      seedmix
+    );
+
+    return (
+      <div className="seedmix" onClick={() => getShowModal('Seed mix')}>
+        <>
+          <IonIcon icon={Seeds} />
+          <IonBadge color="secondary">
+            <CountUp end={selectedSeedmixSpecies.length} duration={2.75} />/
+            {totalSeedmixSpecies.length}
+          </IonBadge>
+        </>
+      </div>
+    );
+  };
 
   const uniqueSupportedSpecies = getUniqueSupportedSpecies(uniqueSpecies);
 
@@ -452,33 +473,21 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
 
   const numberOfSpecies = uniqueSupportedSpecies.length;
 
+  const getPollinatorsComponent = () => (
+    <div className="pollinators" onClick={() => getShowModal('Pollinators')}>
+      <IonIcon icon={beeIcon} />
+      <IonBadge color="secondary">
+        <CountUp end={numberOfSpecies} duration={2.75} />
+      </IonBadge>
+    </div>
+  );
+
   return (
     <>
       <Main className="survey-report">
         <div className="report-header">
-          {seedmix && (
-            <div className="seedmix" onClick={() => getShowModal('Seed mix')}>
-              <>
-                <IonIcon icon={Seeds} />
-                <IonBadge color="secondary">
-                  <CountUp
-                    end={selectedSeedmixSpecies.length}
-                    duration={2.75}
-                  />
-                  /{totalSeedmixSpecies.length}
-                </IonBadge>
-              </>
-            </div>
-          )}
-          <div
-            className="pollinators"
-            onClick={() => getShowModal('Pollinators')}
-          >
-            <IonIcon icon={beeIcon} />
-            <IonBadge color="secondary">
-              <CountUp end={numberOfSpecies} duration={2.75} />
-            </IonBadge>
-          </div>
+          {getSeedmixComponent()}
+          {getPollinatorsComponent()}
         </div>
 
         <IonList lines="full">
