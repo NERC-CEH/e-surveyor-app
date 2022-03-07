@@ -1,17 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import exact from 'prop-types-exact';
+import React, { FC } from 'react';
 import { IonBadge } from '@ionic/react';
 import { observer } from 'mobx-react';
+import Sample from 'models/sample';
 import './styles.scss';
 
-function getPendingCount(savedSamples) {
-  const byUploadStatus = sample => !sample.metadata.synced_on;
+type SavedSamples = any;
+
+function getPendingCount(savedSamples: SavedSamples) {
+  const byUploadStatus = (sample: typeof Sample) => !sample.metadata.synced_on;
 
   return savedSamples.filter(byUploadStatus).length;
 }
 
-function PendingSurveysBadge({ savedSamples }) {
+type Props = {
+  savedSamples: SavedSamples;
+};
+
+const PendingSurveysBadge: FC<Props> = ({ savedSamples }) => {
   const count = getPendingCount(savedSamples);
 
   if (count <= 0) {
@@ -23,10 +28,6 @@ function PendingSurveysBadge({ savedSamples }) {
       {count}
     </IonBadge>
   );
-}
-
-PendingSurveysBadge.propTypes = exact({
-  savedSamples: PropTypes.array.isRequired,
-});
+};
 
 export default observer(PendingSurveysBadge);
