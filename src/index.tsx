@@ -30,8 +30,8 @@ setupIonicReact({
 mobxConfig({ enforceActions: 'never' });
 
 async function init() {
-  await userModel._init;
-  await appModel._init;
+  await userModel.ready;
+  await appModel.ready;
   await savedSamples._init;
 
   appModel.attrs.sendAnalytics &&
@@ -40,7 +40,7 @@ async function init() {
       environment: config.environment,
       build: config.build,
       release: config.version,
-      userId: userModel.attrs.id,
+      userId: userModel.id,
       tags: {
         'app.appSession': appModel.attrs.appSession,
       },
