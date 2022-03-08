@@ -27,6 +27,7 @@
     "@bit/flumens.apps.gallery": "^2.0.2",
     "@bit/flumens.apps.header": "^0.7.0",
     "@bit/flumens.apps.helpers.alert": "2.0.0",
+    "@bit/flumens.apps.helpers.image": "0.0.2",
     "@bit/flumens.apps.helpers.loader": "^1.0.0",
     "@bit/flumens.apps.helpers.toast": "^1.0.0",
     "@bit/flumens.apps.info-background-message": "1.0.1",
@@ -273,7 +274,7 @@
   },
   "bit": {
     "env": {
-      "compiler": "bit.envs/compilers/typescript@3.1.53"
+      "compiler": "bit.envs/compilers/react-typescript@4.0.0"
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm"

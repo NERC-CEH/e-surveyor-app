@@ -1,5 +1,5 @@
 import React, { FC, useContext, useState } from 'react';
-import { Main } from '@flumens';
+import { Main, URL } from '@flumens';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import SpeciesCard from 'common/Components/SpeciesCard';
@@ -17,7 +17,6 @@ import Image from 'models/image';
 import { Species } from 'models/occurrence.d';
 import config from 'common/config';
 import ImageCropper from 'common/Components/ImageCropper';
-import { URL } from 'helpers/image';
 import './styles.scss';
 
 type Props = {

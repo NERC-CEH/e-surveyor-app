@@ -1,4 +1,5 @@
 import Media, { Attrs as MediaAttrs } from '@bit/flumens.apps.models.media';
+import { createImage } from '@bit/flumens.apps.helpers.image';
 import { observable } from 'mobx';
 import { isPlatform } from '@ionic/react';
 import { Capacitor } from '@capacitor/core';
@@ -7,7 +8,6 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { createImage } from 'helpers/image';
 import identifyImage, { ResultWithWarehouseID } from 'common/services/plantNet';
 
 export type Species = ResultWithWarehouseID;

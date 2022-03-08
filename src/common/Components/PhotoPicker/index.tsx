@@ -1,5 +1,5 @@
 import React, { FC, ComponentProps } from 'react';
-import { PhotoPicker } from '@flumens';
+import { PhotoPicker, captureImage } from '@flumens';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react';
 import { useIonActionSheet } from '@ionic/react';
@@ -7,7 +7,6 @@ import Media from 'models/image';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
-import captureImage from 'helpers/image';
 import './styles.scss';
 
 export function usePromptImageSource() {
@@ -39,7 +38,9 @@ const AppPhotoPicker: FC<Props> = ({ model, ...restProps }) => {
     const cancelled = shouldUseCamera === null;
     if (cancelled) return null;
 
-    const [image] = await captureImage({ camera: shouldUseCamera });
+    const [image] = await captureImage({
+      camera: shouldUseCamera,
+    });
     if (!image) {
       return null;
     }

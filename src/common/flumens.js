@@ -24,6 +24,7 @@ export { default as useToast } from '@bit/flumens.apps.helpers.toast';
 export { default as initAnalytics } from '@bit/flumens.apps.utils.analytics';
 export { default as date } from '@bit/flumens.apps.date';
 export * from '@bit/flumens.apps.utils.location';
+export * from '@bit/flumens.apps.helpers.image';
 export * from '@bit/flumens.apps.utils.validation';
 
 export {

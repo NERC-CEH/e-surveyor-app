@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import { Page, Header, device } from '@flumens';
+import { Page, Header, device, captureImage } from '@flumens';
 import { observer } from 'mobx-react';
 import ImageModel from 'models/image';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
-import captureImage from 'helpers/image';
 import { usePromptImageSource } from 'Components/PhotoPicker';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import Main from './Main';

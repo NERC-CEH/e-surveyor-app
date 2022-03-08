@@ -1,5 +1,12 @@
 import React, { FC, useContext, useState } from 'react';
-import { Page, Header, device, useAlert, getDeepErrorMessage } from '@flumens';
+import {
+  Page,
+  Header,
+  device,
+  useAlert,
+  getDeepErrorMessage,
+  captureImage,
+} from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
@@ -8,7 +15,6 @@ import { IonButton, NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
 import { Capacitor } from '@capacitor/core';
 import Media from 'models/image';
-import captureImage from 'helpers/image';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
 import { usePromptImageSource } from 'Components/PhotoPicker';
