@@ -458,7 +458,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
       <div className="seedmix" onClick={() => getShowModal('Seed mix')}>
         <>
           <IonIcon icon={Seeds} />
-          <IonBadge color="secondary">
+          <IonBadge color="dark">
             <CountUp end={selectedSeedmixSpecies.length} duration={2.75} />/
             {totalSeedmixSpecies.length}
           </IonBadge>
@@ -476,7 +476,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   const getPollinatorsComponent = () => (
     <div className="pollinators" onClick={() => getShowModal('Pollinators')}>
       <IonIcon icon={beeIcon} />
-      <IonBadge color="secondary">
+      <IonBadge color="dark">
         <CountUp end={numberOfSpecies} duration={2.75} />
       </IonBadge>
     </div>

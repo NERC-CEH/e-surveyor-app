@@ -40,6 +40,7 @@ const OnlineStatus: FC<Props> = ({ sample, onUpload, uploadIsPrimary }) => {
   return (
     <IonButton
       class="survey-status-upload"
+      color="secondary"
       onClick={onUploadWrap}
       fill={uploadIsPrimary ? undefined : 'outline'}
     >

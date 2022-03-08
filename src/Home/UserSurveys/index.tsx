@@ -168,6 +168,7 @@ const UserSurveys: FC<Props> = () => {
             expand="block"
             size="small"
             className="upload-all-button"
+            color="secondary"
             onClick={onUploadAll}
           >
             Upload All
