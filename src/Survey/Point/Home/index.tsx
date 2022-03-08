@@ -4,20 +4,14 @@ import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import { observer } from 'mobx-react';
-import {
-  IonButton,
-  NavContext,
-  useIonActionSheet,
-  isPlatform,
-} from '@ionic/react';
+import { IonButton, NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
 import { Capacitor } from '@capacitor/core';
 import Media from 'models/image';
-import {
-  getImages,
-  getImageModel,
-} from 'common/Components/PhotoPicker/imageUtils';
-import ImageCropper from 'common/Components/ImageCropper';
+import captureImage from 'helpers/image';
+import getPhotoFromCustomCamera from 'helpers/CustomCamera';
+import ImageCropper from 'Components/ImageCropper';
+import { usePromptImageSource } from 'Components/PhotoPicker';
 import { useRouteMatch } from 'react-router-dom';
 import Main from './Main';
 import './styles.scss';
@@ -54,8 +48,8 @@ const showFirstSurveyTip = (alert: any) => {
 const HomeController: FC<Props> = ({ sample }) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
-  const [presentActionSheet] = useIonActionSheet();
   const alert = useAlert();
+  const promptImageSource = usePromptImageSource();
 
   const [editImage, setEditImage] = useState<URL>();
 
@@ -65,7 +59,7 @@ const HomeController: FC<Props> = ({ sample }) => {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const image = await getImageModel(Media, photoURL, dataDirPath);
+      const image = await Media.getImageModel(photoURL, dataDirPath);
 
       const survey = sample.getSurvey();
       const newSubSample = survey.smp.create(Sample, Occurrence, image);
@@ -78,7 +72,15 @@ const HomeController: FC<Props> = ({ sample }) => {
   };
 
   const photoSelect = async () => {
-    const photoURLs = await getImages(undefined, presentActionSheet);
+    const shouldUseCamera = await promptImageSource();
+    const cancelled = shouldUseCamera === null;
+    if (cancelled) return;
+
+    const photoURLs = await captureImage(
+      shouldUseCamera
+        ? { getPhoto: getPhotoFromCustomCamera }
+        : { multiple: true }
+    );
 
     if (!photoURLs || !photoURLs.length) return;
 

@@ -9,11 +9,7 @@ import {
   IonButtons,
   isPlatform,
 } from '@ionic/react';
-import {
-  getObjectURL,
-  getCroppedImg,
-  URL,
-} from 'common/Components/PhotoPicker/imageUtils';
+import { getObjectURL, cropImage, URL } from 'helpers/image';
 import { InfoBackgroundMessage } from '@flumens';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import './styles.scss';
@@ -41,7 +37,7 @@ const ImageCropper: FC<Props> = ({ image, onDone, onCancel }) => {
   const onDoneEditing = async () => {
     if (!croppedArea || !image) return;
 
-    const imageDataURL: URL = await getCroppedImg(image, croppedArea);
+    const imageDataURL: URL = await cropImage(image, croppedArea);
     if (!isPlatform('hybrid')) {
       onDone(getObjectURL(imageDataURL));
       return;

@@ -4,7 +4,7 @@ import UKSIPlants from '../data/uksi_plants.list.json';
 import UKPlantNames from '../data/uksi_plants.names.json';
 import PlantNetResponse, { Result } from './plantNetResponse.d';
 
-type ResultWithWarehouseID = Result & { warehouseId: number };
+export type ResultWithWarehouseID = Result & { warehouseId: number };
 
 const { backend } = config;
 
@@ -139,7 +139,9 @@ const err = (error: any) => {
 };
 
 // TODO: use axios
-export default async function identify(image: any) {
+export default async function identify(
+  image: any
+): Promise<ResultWithWarehouseID[]> {
   const formData = new FormData();
 
   formData.append('organs', 'leaf');

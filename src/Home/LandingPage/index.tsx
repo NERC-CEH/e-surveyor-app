@@ -15,12 +15,10 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import '@ionic/react/css/ionic-swiper.css';
 import { Page, Main, device, useToast } from '@flumens';
-import {
-  getImageModel,
-  getImage,
-} from 'common/Components/PhotoPicker/imageUtils';
+import captureImage from 'helpers/image';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
+import { usePromptImageSource } from 'Components/PhotoPicker';
 import config from 'common/config';
 import { cameraOutline } from 'ionicons/icons';
 import survey1 from './viateur-hwang.jpg';
@@ -35,6 +33,7 @@ interface Props {}
 const LandingPage: FC<Props> = () => {
   const [species, setSpecies] = useState<typeof Occurrence>();
   const toast = useToast();
+  const promptImageSource = usePromptImageSource();
 
   const hideSpeciesModal = () => setSpecies(undefined);
 
@@ -44,13 +43,17 @@ const LandingPage: FC<Props> = () => {
       return;
     }
 
-    const photo = await getImage();
-    if (!photo) {
+    const shouldUseCamera = await promptImageSource();
+    const cancelled = shouldUseCamera === null;
+    if (cancelled) return;
+
+    const [image] = await captureImage({ camera: shouldUseCamera });
+    if (!image) {
       return;
     }
 
     const occurrence = new Occurrence({});
-    const media = await getImageModel(ImageModel, photo, config.dataPath);
+    const media = await ImageModel.getImageModel(image, config.dataPath);
     occurrence.media.push(media);
     setSpecies(occurrence);
 

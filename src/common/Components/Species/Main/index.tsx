@@ -17,7 +17,7 @@ import Image from 'models/image';
 import { Species } from 'models/occurrence.d';
 import config from 'common/config';
 import ImageCropper from 'common/Components/ImageCropper';
-import { getImageModel, URL } from 'common/Components/PhotoPicker/imageUtils';
+import { URL } from 'helpers/image';
 import './styles.scss';
 
 type Props = {
@@ -28,14 +28,14 @@ type Props = {
 const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
-  const [editImage, setEditImage] = useState<typeof Image>();
+  const [editImage, setEditImage] = useState<Image>();
 
   const [occ] = sample.occurrences;
 
   const onDoneEdit = async (image: URL) => {
     if (!editImage) return;
 
-    const newImageModel = await getImageModel(Image, image, config.dataPath);
+    const newImageModel = await Image.getImageModel(image, config.dataPath);
     Object.assign(editImage?.attrs, newImageModel.attrs);
     editImage.save();
     setEditImage(undefined);

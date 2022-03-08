@@ -1,15 +1,13 @@
 import React, { FC } from 'react';
 import { Page, Header, device } from '@flumens';
-import { useIonActionSheet } from '@ionic/react';
 import { observer } from 'mobx-react';
 import ImageModel from 'models/image';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
-import {
-  getImages,
-  getImageModel,
-} from 'common/Components/PhotoPicker/imageUtils';
+import captureImage from 'helpers/image';
+import { usePromptImageSource } from 'Components/PhotoPicker';
+import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import Main from './Main';
 
 type Props = {
@@ -18,10 +16,19 @@ type Props = {
 
 const QuadratController: FC<Props> = ({ subSample }) => {
   const isDisabled = subSample.isUploaded();
-  const [presentActionSheet] = useIonActionSheet();
+  const promptImageSource = usePromptImageSource();
 
   const photoSelect = async () => {
-    const photos = await getImages(undefined, presentActionSheet);
+    const shouldUseCamera = await promptImageSource();
+    const cancelled = shouldUseCamera === null;
+    if (cancelled) return;
+
+    const photos = await captureImage(
+      shouldUseCamera
+        ? { getPhoto: getPhotoFromCustomCamera }
+        : { multiple: true }
+    );
+
     if (!photos || !photos.length) {
       return;
     }
@@ -31,7 +38,7 @@ const QuadratController: FC<Props> = ({ subSample }) => {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const image = await getImageModel(ImageModel, photo, dataDirPath);
+      const image = await ImageModel.getImageModel(photo, dataDirPath);
 
       const survey = subSample.getSurvey();
       const newSubSample = survey.smp.create(Sample, Occurrence, image);

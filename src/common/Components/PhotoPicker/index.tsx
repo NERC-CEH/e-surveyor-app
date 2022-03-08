@@ -2,35 +2,49 @@ import React, { FC, ComponentProps } from 'react';
 import { PhotoPicker } from '@flumens';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react';
+import { useIonActionSheet } from '@ionic/react';
 import Media from 'models/image';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
-import { getImage, getImageModel } from './imageUtils';
+import captureImage from 'helpers/image';
 import './styles.scss';
+
+export function usePromptImageSource() {
+  const { t } = useTranslation();
+  const [presentActionSheet] = useIonActionSheet();
+
+  return () =>
+    new Promise<boolean | null>(resolve => {
+      presentActionSheet({
+        buttons: [
+          { text: t('Gallery'), handler: () => resolve(false) },
+          { text: t('Camera'), handler: () => resolve(true) },
+          { text: t('Cancel'), role: 'cancel', handler: () => resolve(null) },
+        ],
+        header: 'Choose a method to upload a photo',
+      });
+    });
+}
 
 interface Props extends Omit<ComponentProps<typeof PhotoPicker>, 'getImage'> {
   model: typeof Sample | typeof Occurrence;
 }
 
 const AppPhotoPicker: FC<Props> = ({ model, ...restProps }) => {
-  const { t } = useTranslation();
-
-  const promptOptions = {
-    promptLabelHeader: t('Choose a method to upload a photo'),
-    promptLabelPhoto: t('Gallery'),
-    promptLabelPicture: t('Camera'),
-    promptLabelCancel: t('Cancel'),
-  };
+  const promptImageSource = usePromptImageSource();
 
   async function getImageWrap() {
-    const image = await getImage(promptOptions);
+    const shouldUseCamera = await promptImageSource();
+    const cancelled = shouldUseCamera === null;
+    if (cancelled) return null;
 
+    const [image] = await captureImage({ camera: shouldUseCamera });
     if (!image) {
       return null;
     }
 
-    const imageModel = await getImageModel(Media, image, config.dataPath);
+    const imageModel = await Media.getImageModel(image, config.dataPath);
 
     return imageModel;
   }
