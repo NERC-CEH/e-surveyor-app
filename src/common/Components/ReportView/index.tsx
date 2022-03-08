@@ -421,24 +421,30 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   };
 
   const showPollinatorsData = () => {
+    const showPollinators = uniqueSpecies.length > 1; // no need if just a single species
+
     return (
       <>
-        <h3>Pollinators count</h3>
-        <div className="rounded">
-          <IonItemDivider>
-            <IonLabel slot="start">
-              <b>
-                <small>Species</small>
-              </b>
-            </IonLabel>
-            <IonLabel className="ion-text-right" slot="end">
-              <b>
-                <small>Counts</small>
-              </b>
-            </IonLabel>
-          </IonItemDivider>
-          {getPollinators()}
-        </div>
+        {showPollinators && (
+          <>
+            <h3>Pollinators count</h3>
+            <div className="rounded">
+              <IonItemDivider>
+                <IonLabel slot="start">
+                  <b>
+                    <small>Species</small>
+                  </b>
+                </IonLabel>
+                <IonLabel className="ion-text-right" slot="end">
+                  <b>
+                    <small>Counts</small>
+                  </b>
+                </IonLabel>
+              </IonItemDivider>
+              {getPollinators()}
+            </div>
+          </>
+        )}
 
         <h3>Supported species groups</h3>
         <div className="rounded">{getSupportedSpecies()}</div>
