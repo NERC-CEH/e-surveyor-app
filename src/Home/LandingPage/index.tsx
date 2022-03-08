@@ -30,7 +30,7 @@ import './styles.scss';
 interface Props {}
 
 const LandingPage: FC<Props> = () => {
-  const [species, setSpecies] = useState<typeof Occurrence>();
+  const [species, setSpecies] = useState<Occurrence>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
 

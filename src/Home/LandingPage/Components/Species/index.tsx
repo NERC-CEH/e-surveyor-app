@@ -7,7 +7,7 @@ import Profile from './Components/Profile';
 import './styles.scss';
 
 interface Props {
-  occurrence?: typeof Occurrence;
+  occurrence?: Occurrence;
   onClose: any;
 }
 const SpeciesProfile: FC<Props> = ({ occurrence, onClose }) => {

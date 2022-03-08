@@ -3,12 +3,11 @@ import { observer } from 'mobx-react';
 import { IonSpinner, IonLabel } from '@ionic/react';
 import { Main } from '@flumens';
 import SpeciesCard from 'Components/SpeciesCard';
-import Occurrence from 'models/occurrence';
-import { Species } from 'models/image';
+import Occurrence, { Species } from 'models/occurrence';
 import './styles.scss';
 
 interface Props {
-  occurrence?: typeof Occurrence;
+  occurrence?: Occurrence;
 }
 
 const SpeciesProfile: FC<Props> = ({ occurrence }) => {

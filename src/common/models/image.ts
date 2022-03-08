@@ -8,9 +8,8 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import identifyImage, { ResultWithWarehouseID } from 'common/services/plantNet';
-
-export type Species = ResultWithWarehouseID;
+import identifyImage from 'common/services/plantNet';
+import { Species } from './occurrence';
 
 export type URL = string;
 
@@ -130,16 +129,13 @@ export default class AppMedia extends Media {
     return Capacitor.convertFileSrc(`${config.dataPath}/${name}`);
   }
 
-  async identify() {
+  async identify(): Promise<Species> {
     try {
       this.identification.identifying = true;
 
       const species = await identifyImage(this);
 
-      const byScore = (
-        sp1: ResultWithWarehouseID,
-        sp2: ResultWithWarehouseID
-      ) => sp2.score - sp1.score;
+      const byScore = (sp1: Species, sp2: Species) => sp2.score - sp1.score;
       species.sort(byScore);
 
       this.attrs.species = species;

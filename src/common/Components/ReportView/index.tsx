@@ -79,7 +79,7 @@ const byName3 = (
 };
 
 export function getMissingSeedmixSpecies(
-  occurrences: typeof Occurrence[],
+  occurrences: Occurrence[],
   seedmix: string
 ) {
   const [selectedSeedmixSpecies, totalSeedmixSpecies = []] = getSeedmixUse(
@@ -96,7 +96,7 @@ export function getMissingSeedmixSpecies(
 }
 
 type Props = {
-  occurrences: typeof Occurrence[];
+  occurrences: Occurrence[];
   seedmix?: string;
 };
 

@@ -13,8 +13,8 @@ import {
 import { searchOutline, close, cropOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
 import Sample from 'models/sample';
+import { Species } from 'models/occurrence';
 import Image from 'models/image';
-import { Species } from 'models/occurrence.d';
 import config from 'common/config';
 import ImageCropper from 'common/Components/ImageCropper';
 import './styles.scss';

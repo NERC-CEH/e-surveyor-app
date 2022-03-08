@@ -25,7 +25,7 @@ type Props = {
 const isUnkown = (value: boolean) => (smp: typeof Sample) =>
   !!smp.getSpecies() === value;
 
-function byCreateTime(occ1: typeof Occurrence, occ2: typeof Occurrence) {
+function byCreateTime(occ1: Occurrence, occ2: Occurrence) {
   const date1 = new Date(occ1.metadata.created_on);
   const date2 = new Date(occ2.metadata.created_on);
   return date2.getTime() - date1.getTime();

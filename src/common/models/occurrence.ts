@@ -1,10 +1,19 @@
-import { Occurrence } from '@flumens';
+import Occurrence, {
+  Attrs as OccurrenceAttrs,
+} from '@bit/flumens.apps.models.occurrence';
+import { ResultWithWarehouseID } from 'common/services/plantNet';
 import Media from './image';
 
+export type Species = ResultWithWarehouseID;
+
+type Attrs = OccurrenceAttrs & { taxon?: Species };
+
 export default class AppOccurrence extends Occurrence {
-  static fromJSON(json) {
+  static fromJSON(json: any) {
     return super.fromJSON(json, Media);
   }
+
+  attrs: Attrs = this.attrs;
 
   getSpecies = () => this.attrs.taxon;
 
@@ -15,10 +24,10 @@ export default class AppOccurrence extends Occurrence {
 
   isDisabled = () => this.isUploaded();
 
-  setSpecies(species) {
+  setSpecies(species: Species) {
     const defaultSpecies = {
       warehouseId: 0,
-      gbif: { id: 0 },
+      gbif: { id: '' },
       images: [],
       score: 0,
       species: {
@@ -31,12 +40,12 @@ export default class AppOccurrence extends Occurrence {
   }
 
   async identify() {
-    const identifyAllImages = media => media.identify();
+    const identifyAllImages = (media: Media) => media.identify();
 
     // [sp1, null, sp3, sp1 ]
     const species = await Promise.all(this.media.map(identifyAllImages));
 
-    const byScore = (sp1, sp2) => sp2.score - sp1.score;
+    const byScore = (sp1: Species, sp2: Species) => sp2.score - sp1.score;
     species.sort(byScore);
 
     if (!species[0]) return;
@@ -49,7 +58,7 @@ export default class AppOccurrence extends Occurrence {
   canReIdentify() {
     if (!this.media.length) return false;
 
-    const wasNotIdentified = media => !media.attrs.species;
+    const wasNotIdentified = (media: Media) => !media.attrs.species;
     return this.media.some(wasNotIdentified);
   }
 

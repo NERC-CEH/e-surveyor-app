@@ -3,12 +3,10 @@ import Occurrence from 'models/occurrence';
 
 export type SpeciesNames = [string, string];
 
-export function getUniqueSpecies(
-  occurrences: typeof Occurrence[]
-): SpeciesNames[] {
+export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
   const dict: any = {};
 
-  const addToUniqueDict = (occ: typeof Occurrence) => {
+  const addToUniqueDict = (occ: Occurrence) => {
     const { species } = occ.getSpecies() || {};
     if (!species) return;
 
@@ -22,10 +20,7 @@ export function getUniqueSpecies(
   return Object.entries(dict);
 }
 
-export function getSeedmixUse(
-  occurrences: typeof Occurrence[],
-  seedmix: string
-) {
+export function getSeedmixUse(occurrences: Occurrence[], seedmix: string) {
   const seedmixSpecies = seedmixData[seedmix];
   if (!seedmixSpecies) {
     return [[]];

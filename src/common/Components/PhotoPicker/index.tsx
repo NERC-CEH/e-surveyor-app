@@ -27,7 +27,7 @@ export function usePromptImageSource() {
 }
 
 interface Props extends Omit<ComponentProps<typeof PhotoPicker>, 'getImage'> {
-  model: typeof Sample | typeof Occurrence;
+  model: typeof Sample | Occurrence;
 }
 
 const AppPhotoPicker: FC<Props> = ({ model, ...restProps }) => {
