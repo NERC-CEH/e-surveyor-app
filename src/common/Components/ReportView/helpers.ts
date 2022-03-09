@@ -1,4 +1,4 @@
-import seedmixData from 'common/data/seedmix';
+import seedmixData, { Seedmix } from 'common/data/seedmix';
 import Occurrence from 'models/occurrence';
 
 export type SpeciesNames = [string, string];
@@ -20,13 +20,16 @@ export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
   return Object.entries(dict);
 }
 
-export function getSeedmixUse(occurrences: Occurrence[], seedmix: string) {
+export function getSeedmixUse(
+  occurrences: Occurrence[],
+  seedmix: string
+): [SpeciesNames[], Seedmix[]] {
   const seedmixSpecies = seedmixData[seedmix];
   if (!seedmixSpecies) {
-    return [[]];
+    return [[], []];
   }
 
-  const extractLatinName = ({ latin_name }: any) => latin_name; // eslint-disable-line camelcase
+  const extractLatinName = ({ latin_name }: Seedmix) => latin_name; // eslint-disable-line camelcase
   const selectedSeedmixLatinNames = seedmixSpecies.map(extractLatinName);
 
   const seedmixIncludesSpecies = ([scientificName]: SpeciesNames) =>

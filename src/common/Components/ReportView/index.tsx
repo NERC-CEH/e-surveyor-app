@@ -374,7 +374,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
       return null;
     }
 
-    const selectedSeedmixEntries = ([latinName, commonName]: string) => {
+    const selectedSeedmixEntries = ([latinName, commonName]: SpeciesNames) => {
       const taxonName = commonName || latinName;
       return <IonItem key={taxonName}>{taxonName}</IonItem>;
     };
