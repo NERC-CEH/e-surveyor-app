@@ -258,10 +258,12 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
       latin_name === speciesName;
     const pollinator = pollination.find(hasLatinName);
 
-    const {
-      pollinator_count: pollinatorCount,
-      pollinator_class: pollinatorClass,
-    } = pollinator;
+    let pollinatorCount;
+    let pollinatorClass;
+    if (pollinator) {
+      pollinatorCount = pollinator.pollinator_count;
+      pollinatorClass = pollinator.pollinator_class;
+    }
 
     return (
       <>
