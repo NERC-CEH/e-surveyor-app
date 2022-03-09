@@ -7,7 +7,7 @@ import './styles.scss';
 type SavedSamples = any;
 
 function getPendingCount(savedSamples: SavedSamples) {
-  const byUploadStatus = (sample: typeof Sample) => !sample.metadata.synced_on;
+  const byUploadStatus = (sample: Sample) => !sample.metadata.synced_on;
 
   return savedSamples.filter(byUploadStatus).length;
 }

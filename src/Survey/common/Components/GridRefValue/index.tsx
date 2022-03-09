@@ -5,7 +5,7 @@ import Sample from 'models/sample';
 import { prettyPrintLocation } from '@flumens';
 import './styles.scss';
 
-function getValue(sample: typeof Sample) {
+function getValue(sample: Sample) {
   if (sample.isGPSRunning()) {
     return <IonSpinner />;
   }
@@ -14,7 +14,7 @@ function getValue(sample: typeof Sample) {
 }
 
 interface Props {
-  sample: typeof Sample;
+  sample: Sample;
 }
 
 const GridRefValue: FC<Props> = ({ sample }) => {

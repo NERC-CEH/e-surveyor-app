@@ -7,7 +7,7 @@ import { getUniqueSpecies } from 'Components/ReportView/helpers';
 import Main from './Main';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
 };
 
 const ReportController: FC<Props> = ({ sample }) => {
@@ -27,7 +27,7 @@ const ReportController: FC<Props> = ({ sample }) => {
         addToCounterIfInHabitat(sp, stepSpecies);
 
       getUniqueSpecies(
-        stepSample.samples.map((smp: typeof Sample) => smp.occurrences[0])
+        stepSample.samples.map((smp: Sample) => smp.occurrences[0])
       ).forEach(addToCounterIfInHabitatWrap);
     };
 

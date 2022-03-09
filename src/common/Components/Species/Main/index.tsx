@@ -20,7 +20,7 @@ import ImageCropper from 'common/Components/ImageCropper';
 import './styles.scss';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   isDisabled: boolean;
 };
 

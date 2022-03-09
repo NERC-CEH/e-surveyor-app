@@ -18,18 +18,18 @@ import Survey from './components/Survey';
 import './images/empty-samples-list-icon.svg';
 import './styles.scss';
 
-function byCreateTime(smp1: typeof Sample, smp2: typeof Sample) {
+function byCreateTime(smp1: Sample, smp2: Sample) {
   const date1 = new Date(smp1.metadata.created_on);
   const date2 = new Date(smp2.metadata.created_on);
   return date2.getTime() - date1.getTime();
 }
 
-function hasManyPending(pendingSurveys: typeof Sample[]) {
+function hasManyPending(pendingSurveys: Sample[]) {
   return pendingSurveys.length > 2;
 }
 
 function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
-  const byFinishedSurvey = (sample: typeof Sample) => sample.metadata.saved;
+  const byFinishedSurvey = (sample: Sample) => sample.metadata.saved;
   const finishedSurvey = surveys.find(byFinishedSurvey);
 
   if (!surveys.length) {
@@ -42,7 +42,7 @@ function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
     );
   }
 
-  const getSurveyEntry = (sample: typeof Sample) => (
+  const getSurveyEntry = (sample: Sample) => (
     <Survey
       key={sample.cid}
       sample={sample}
@@ -83,7 +83,7 @@ function getUploadedSurveys(surveys: any[]) {
     );
   }
 
-  const getUploadedSurveyEntry = (sample: typeof Sample) => (
+  const getUploadedSurveyEntry = (sample: Sample) => (
     <Survey key={sample.cid} sample={sample} />
   );
   const surveysList = surveys.map(getUploadedSurveyEntry);
@@ -101,7 +101,7 @@ const UserSurveys: FC<Props> = () => {
   const onSegmentClick = (e: any) => setSegment(e.detail.value);
 
   const getSamplesList = (uploaded?: boolean) => {
-    const uploadedSamples = (sample: typeof Sample) =>
+    const uploadedSamples = (sample: Sample) =>
       uploaded ? sample.metadata.synced_on : !sample.metadata.synced_on;
     return savedSamples.filter(uploadedSamples).sort(byCreateTime);
   };

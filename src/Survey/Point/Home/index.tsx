@@ -25,7 +25,7 @@ import './styles.scss';
 type URL = string;
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
 };
 
 const showFirstSurveyTip = (alert: any) => {

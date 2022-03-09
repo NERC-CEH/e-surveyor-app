@@ -9,7 +9,7 @@ import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
 };
 
 const Controller: FC<Props> = ({ sample }) => {

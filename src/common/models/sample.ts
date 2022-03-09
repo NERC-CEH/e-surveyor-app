@@ -1,14 +1,19 @@
-import { Sample, device, getDeepErrorMessage } from '@flumens';
+import { device, getDeepErrorMessage } from '@flumens';
+import Sample, {
+  Attrs as SampleAttrs,
+  Options as SampleOptions,
+} from '@bit/flumens.apps.models.sample';
 import { reaction } from 'mobx';
 import userModel from 'models/user';
 import appModel from 'models/app';
 import config from 'common/config';
+import { SpeciesNames } from 'Components/ReportView/helpers';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import GPSExtension from './sampleGPSExt';
-import plantInteractions from '../data/plant_interactions';
+import plantInteractions, { Interacion } from '../data/plant_interactions';
 import { modelStore } from './store';
-import Occurrence from './occurrence';
+import Occurrence, { Species } from './occurrence';
 import Media from './image';
 
 const surveyConfig = {
@@ -16,16 +21,28 @@ const surveyConfig = {
   transect: transectSurveyConfig,
 };
 
+type Attrs = SampleAttrs & {
+  habitat?: any;
+  name?: any;
+  type?: any;
+  steps?: any;
+  date?: any;
+  seedmix?: any;
+  quadratSize?: any;
+  seedmixgroup?: any;
+  location?: any;
+};
+
 class AppSample extends Sample {
-  static fromJSON(json) {
+  static fromJSON(json: any) {
     return super.fromJSON(json, Occurrence, AppSample, Media);
   }
 
-  static getSupportedSpeciesList(plants) {
-    const pollinators = [];
+  static getSupportedSpeciesList(plants: SpeciesNames[]) {
+    const pollinators: Interacion[] = [];
 
-    const getList = ([name]) => {
-      const byPlantName = ({ plant }) => plant === name;
+    const getList = ([name]: SpeciesNames) => {
+      const byPlantName = ({ plant }: Interacion) => plant === name;
       const sp = plantInteractions.filter(byPlantName);
       if (!sp.length) {
         return;
@@ -39,26 +56,33 @@ class AppSample extends Sample {
     return pollinators;
   }
 
-  static getUniqueSupportedSpecies(plants) {
+  static getUniqueSupportedSpecies(plants: SpeciesNames[]): Interacion[] {
     const pollinators = AppSample.getSupportedSpeciesList(plants);
 
-    const getPollinatorName = ({ pollinator }) => pollinator;
+    const getPollinatorName = ({ pollinator }: Interacion) => pollinator;
 
-    const getPollinatorProfile = pollinatorName => {
-      const matchingPollinatorName = ({ pollinator }) =>
+    const getPollinatorProfile = (pollinatorName: string) => {
+      const matchingPollinatorName = ({ pollinator }: Interacion) =>
         pollinator === pollinatorName;
 
       return pollinators.find(matchingPollinatorName);
     };
 
     const pollinatorsNameList = pollinators.map(getPollinatorName);
-    const uniquePollinatorsNameList = [...new Set(pollinatorsNameList)];
+    const uniquePollinatorsNameList = [
+      ...new Set(pollinatorsNameList),
+    ] as string[];
 
-    return uniquePollinatorsNameList.map(getPollinatorProfile);
+    const nonEmpty = (interaction: Interacion | undefined) => !!interaction;
+    return uniquePollinatorsNameList
+      .map(getPollinatorProfile)
+      .filter(nonEmpty) as Interacion[];
   }
 
-  constructor(...args) {
-    super(...args);
+  attrs: Attrs = this.attrs;
+
+  constructor(options: SampleOptions) {
+    super(options);
 
     this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
     // eslint-disable-next-line
@@ -66,13 +90,13 @@ class AppSample extends Sample {
       Authorization: `Bearer ${await userModel.getAccessToken()}`,
     });
 
-    this.survey = surveyConfig[this.metadata.survey];
+    this.survey = (surveyConfig as any)[this.metadata.survey];
 
     Object.assign(this, GPSExtension);
     this.gpsExtensionInit();
 
     // listen for network update
-    const autoIdentifyIfCameOnline = isOnline => {
+    const autoIdentifyIfCameOnline = (isOnline?: boolean) => {
       if (!this.occurrences[0]) return;
 
       const { useAutoIDWhenBackOnline } = appModel.attrs;
@@ -97,9 +121,9 @@ class AppSample extends Sample {
     return occ.getSpecies();
   }
 
-  isIdentifying() {
+  isIdentifying(): boolean {
     if (!this.parent) {
-      const identifying = s => s.isIdentifying();
+      const identifying = (s: AppSample) => s.isIdentifying();
       return this.samples.some(identifying);
     }
 
@@ -111,7 +135,7 @@ class AppSample extends Sample {
     return occ.media[0].isIdentifying();
   }
 
-  setSpecies(species) {
+  setSpecies(species: Species) {
     if (!this.parent) {
       throw new Error('Parent does not exist');
     }
@@ -137,7 +161,7 @@ class AppSample extends Sample {
       return '';
     }
 
-    const byId = ({ cid }) => cid === this.cid;
+    const byId = ({ cid }: AppSample) => cid === this.cid;
     const index = this.parent.samples.findIndex(byId);
 
     return `Quadrat #${index + 1}`;
@@ -150,16 +174,16 @@ class AppSample extends Sample {
 
   cleanUp = () => {
     this.stopGPS();
-    const stopGPS = smp => smp.stopGPS();
+    const stopGPS = (smp: AppSample) => smp.stopGPS();
     this.samples.forEach(stopGPS);
   };
 
   destroy = () => {
     this.cleanUp();
-    super.destroy();
+    return super.destroy();
   };
 
-  async upload(alert, toast) {
+  async upload(alert: any, toast: any, loader: any) {
     if (this.remote.synchronising) {
       return true;
     }
@@ -184,13 +208,13 @@ class AppSample extends Sample {
       return false;
     }
 
-    const isActivated = await userModel.checkActivation(toast);
+    const isActivated = await userModel.checkActivation(toast, loader);
     if (!isActivated) {
       return false;
     }
 
     this.cleanUp();
-    const showError = e => {
+    const showError = (e: any) => {
       toast.error(e);
       throw e;
     };
@@ -198,6 +222,14 @@ class AppSample extends Sample {
 
     return true;
   }
+
+  startGPS: any;
+
+  stopGPS: any;
+
+  isGPSRunning: any;
+
+  gpsExtensionInit: any;
 }
 
 export default AppSample;

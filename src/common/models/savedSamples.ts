@@ -20,7 +20,7 @@ savedSamples.uploadAll = async (toast: any, loader: any) => {
     return false;
   }
 
-  const getUploadPromise = (sample: typeof Sample) => {
+  const getUploadPromise = (sample: Sample) => {
     if (
       sample.remote.synchronising ||
       sample.isUploaded() ||

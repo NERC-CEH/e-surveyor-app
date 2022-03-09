@@ -19,14 +19,14 @@ import Sample from 'models/sample';
 import { useRouteMatch } from 'react-router-dom';
 import './styles.scss';
 
-function byDate(smp1: typeof Sample, smp2: typeof Sample) {
+function byDate(smp1: Sample, smp2: Sample) {
   const date1 = new Date(smp1.attrs.date);
   const date2 = new Date(smp2.attrs.date);
   return date2.getTime() - date1.getTime();
 }
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   onAddNewQuadrat: () => void;
   isDisabled?: boolean;
 };
@@ -38,7 +38,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
     return sample.samples.slice().sort(byDate);
   };
 
-  const getQuadratPhoto = (smp: typeof Sample) => {
+  const getQuadratPhoto = (smp: Sample) => {
     const pic = smp.media.length && smp.media[0].getURL();
 
     const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
@@ -59,7 +59,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
       );
     }
 
-    const getQuadrat = (quadratSample: typeof Sample) => (
+    const getQuadrat = (quadratSample: Sample) => (
       <IonItem
         key={quadratSample.cid}
         routerLink={`${match.url}/quadrat/${quadratSample.cid}`}

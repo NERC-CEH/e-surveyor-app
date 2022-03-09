@@ -10,7 +10,7 @@ import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 
 type Props = {
-  subSample: typeof Sample;
+  subSample: Sample;
   photoSelect: () => void;
   isDisabled: boolean;
 };

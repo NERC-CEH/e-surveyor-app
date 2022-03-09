@@ -19,10 +19,10 @@ import {
 } from 'ionicons/icons';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   isDisabled: boolean;
-  onDelete: (smp: typeof Sample) => void;
-  onClick: (smp: typeof Sample) => void;
+  onDelete: (smp: Sample) => void;
+  onClick: (smp: Sample) => void;
 };
 
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;

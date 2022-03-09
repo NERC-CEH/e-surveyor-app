@@ -16,12 +16,12 @@ import flowerIcon from 'common/images/flowerIcon.svg';
 import './styles.scss';
 
 interface Props {
-  sample: typeof Sample;
+  sample: Sample;
   isDisabled: boolean;
   deEmphasisedIdentifyBtn: boolean;
-  onIdentify: (smp: typeof Sample) => void;
-  onDelete: (smp: typeof Sample) => void;
-  onClick: (smp: typeof Sample) => void;
+  onIdentify: (smp: Sample) => void;
+  onDelete: (smp: Sample) => void;
+  onClick: (smp: Sample) => void;
 }
 
 const UnidentifiedSpeciesEntry: FC<Props> = ({

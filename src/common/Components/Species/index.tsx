@@ -6,8 +6,8 @@ import Sample from 'models/sample';
 import Main from './Main';
 
 type Props = {
-  subSample: typeof Sample;
-  subSubSample: typeof Sample;
+  subSample: Sample;
+  subSubSample: Sample;
 };
 
 const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {

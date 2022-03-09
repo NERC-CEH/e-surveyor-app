@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useAlert, useToast } from '@flumens';
+import { useAlert, useToast, useLoader } from '@flumens';
 import Sample from 'models/sample';
 import { observer } from 'mobx-react';
 import {
@@ -15,7 +15,7 @@ import flowerIcon from 'common/images/flowerIcon.svg';
 import OnlineStatus from './components/OnlineStatus';
 import './styles.scss';
 
-function deleteSurvey(alert: (options: any) => void, sample: typeof Sample) {
+function deleteSurvey(alert: (options: any) => void, sample: Sample) {
   alert({
     header: 'Delete',
     skipTranslation: true,
@@ -36,13 +36,14 @@ function deleteSurvey(alert: (options: any) => void, sample: typeof Sample) {
 }
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   uploadIsPrimary?: boolean;
 };
 
 const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
   const alert = useAlert();
   const toast = useToast();
+  const loader = useLoader();
 
   const survey = sample.getSurvey();
 
@@ -85,7 +86,7 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
     );
   }
 
-  const onUpload = () => sample.upload(alert, toast);
+  const onUpload = () => sample.upload(alert, toast, loader);
 
   const deleteSurveyWrap = () => deleteSurvey(alert, sample);
 

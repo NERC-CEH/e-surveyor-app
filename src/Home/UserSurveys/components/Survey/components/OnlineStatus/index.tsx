@@ -5,7 +5,7 @@ import Sample from 'models/sample';
 import './styles.scss';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   onUpload: any;
   uploadIsPrimary: boolean;
 };

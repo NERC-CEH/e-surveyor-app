@@ -13,7 +13,7 @@ import habitatIcon from './habitats.svg';
 import stepsIcon from './steps.svg';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   isDisabled?: boolean;
 };
 

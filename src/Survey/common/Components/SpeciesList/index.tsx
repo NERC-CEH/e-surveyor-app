@@ -18,11 +18,11 @@ import Species from './Components/Species';
 import './styles.scss';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   isDisabled: boolean;
 };
 
-const isUnkown = (value: boolean) => (smp: typeof Sample) =>
+const isUnkown = (value: boolean) => (smp: Sample) =>
   !!smp.getSpecies() === value;
 
 function byCreateTime(occ1: Occurrence, occ2: Occurrence) {
@@ -31,8 +31,8 @@ function byCreateTime(occ1: Occurrence, occ2: Occurrence) {
   return date2.getTime() - date1.getTime();
 }
 
-const hasOver5UnidentifiedSpecies = (sample: typeof Sample) => {
-  const unIdentifiedSpecies = (smp: typeof Sample) => {
+const hasOver5UnidentifiedSpecies = (sample: Sample) => {
+  const unIdentifiedSpecies = (smp: Sample) => {
     const [occ] = smp.occurrences;
     return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying();
   };
@@ -40,7 +40,7 @@ const hasOver5UnidentifiedSpecies = (sample: typeof Sample) => {
   return sample.samples.filter(unIdentifiedSpecies).length >= 5;
 };
 
-function deleteSample(sample: typeof Sample, alert: any) {
+function deleteSample(sample: Sample, alert: any) {
   alert({
     header: 'Delete',
     skipTranslation: true,
@@ -84,7 +84,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
       return;
     }
 
-    const identify = (smp: typeof Sample) => smp.occurrences[0].identify();
+    const identify = (smp: Sample) => smp.occurrences[0].identify();
     try {
       await Promise.all(sample.samples.map(identify));
     } catch (e: any) {
@@ -92,7 +92,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     }
   };
 
-  const onIdentify = async (smp: typeof Sample) => {
+  const onIdentify = async (smp: Sample) => {
     if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
@@ -105,14 +105,14 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     }
   };
 
-  const onDelete = (smp: typeof Sample) => {
+  const onDelete = (smp: Sample) => {
     deleteSample(smp, alert);
   };
-  const navigateToSpeciesSample = (smp: typeof Sample) =>
+  const navigateToSpeciesSample = (smp: Sample) =>
     navigate(`${url}/species/${smp.cid}`);
 
   const getSpeciesList = () => {
-    const getSpecies = (smp: typeof Sample) => (
+    const getSpecies = (smp: Sample) => (
       <Species
         key={smp.cid}
         sample={smp}
@@ -134,7 +134,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const getUndentifiedSpeciesList = () => {
     const showIdentifyAllBtn = hasOver5UnidentifiedSpecies(sample);
 
-    const getSpecies = (smp: typeof Sample) => (
+    const getSpecies = (smp: Sample) => (
       <UnidentifiedSpecies
         key={smp.cid}
         sample={smp}

@@ -10,7 +10,7 @@ import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import Main from './Main';
 
 type Props = {
-  subSample: typeof Sample;
+  subSample: Sample;
 };
 
 const QuadratController: FC<Props> = ({ subSample }) => {

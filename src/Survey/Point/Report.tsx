@@ -1,23 +1,24 @@
 import React, { FC, useContext } from 'react';
 import Sample from 'models/sample';
-import { Page, Header, useAlert, useToast } from '@flumens';
+import { Page, Header, useAlert, useToast, useLoader } from '@flumens';
 import { IonButton, NavContext } from '@ionic/react';
 import { observer } from 'mobx-react';
 import Main from 'Components/ReportView';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
 };
 
 const ReportController: FC<Props> = ({ sample }) => {
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
   const toast = useToast();
+  const loader = useLoader();
 
   if (!sample) return null;
 
   const onUpload = async () => {
-    const isUploading = await sample.upload(alert, toast);
+    const isUploading = await sample.upload(alert, toast, loader);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');

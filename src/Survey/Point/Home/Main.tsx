@@ -21,7 +21,7 @@ interface MatchParams {
 }
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
   photoSelect: () => void;
   match: MatchParams;
   isDisabled: boolean;

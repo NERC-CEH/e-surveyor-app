@@ -36,7 +36,7 @@ async function showDraftAlert(alert: any) {
 async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
   const draftID = appModel.attrs[draftIdKey];
   if (draftID) {
-    const draftById = ({ cid }: typeof Sample) => cid === draftID;
+    const draftById = ({ cid }: Sample) => cid === draftID;
     const draftSample = savedSamples.find(draftById);
     if (draftSample && !draftSample.isDisabled()) {
       const continueDraftRecord = await showDraftAlert(alert);

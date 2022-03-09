@@ -5,6 +5,7 @@ import {
   getDeepErrorMessage,
   useAlert,
   useToast,
+  useLoader,
 } from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
@@ -15,7 +16,7 @@ import Sample from 'models/sample';
 import Main from './Main';
 
 type Props = {
-  sample: typeof Sample;
+  sample: Sample;
 };
 
 const Controller: FC<Props> = ({ sample }) => {
@@ -23,9 +24,10 @@ const Controller: FC<Props> = ({ sample }) => {
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
   const toast = useToast();
+  const loader = useLoader();
 
   const onUpload = async () => {
-    const isUploading = await sample.upload(alert, toast);
+    const isUploading = await sample.upload(alert, toast, loader);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');
