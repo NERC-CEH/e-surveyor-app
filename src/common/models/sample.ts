@@ -92,8 +92,7 @@ class AppSample extends Sample {
 
     this.survey = (surveyConfig as any)[this.metadata.survey];
 
-    Object.assign(this, GPSExtension);
-    this.gpsExtensionInit();
+    Object.assign(this, GPSExtension());
 
     // listen for network update
     const autoIdentifyIfCameOnline = (isOnline?: boolean) => {

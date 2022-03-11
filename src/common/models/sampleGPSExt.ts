@@ -4,8 +4,29 @@ import { updateModelLocation } from '@flumens';
 
 const DEFAULT_ACCURACY_LIMIT = 50; // meters
 
-const extension = {
-  setLocation([longitude, latitude], source = 'map', accuracy) {
+export type LatLng = [number, number];
+
+export type Location = {
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+};
+
+type Extension = {
+  gps: { locating: null | string };
+  setLocation: any;
+  toggleGPStracking: any;
+  startGPS: any;
+  stopGPS: any;
+  isGPSRunning: any;
+  attrs?: any;
+  save?: any;
+};
+
+const extension = (): Extension => ({
+  gps: observable({ locating: null }),
+
+  setLocation([longitude, latitude]: LatLng, source = 'map', accuracy: number) {
     this.attrs.location = {
       latitude,
       longitude,
@@ -16,17 +37,13 @@ const extension = {
     return this.save();
   },
 
-  toggleGPStracking(state) {
+  toggleGPStracking(state?: boolean) {
     if (this.isGPSRunning() || state === false) {
       this.stopGPS();
       return;
     }
 
     this.startGPS();
-  },
-
-  gpsExtensionInit() {
-    this.gps = observable({ locating: null });
   },
 
   async startGPS(accuracyLimit = DEFAULT_ACCURACY_LIMIT) {
@@ -36,7 +53,7 @@ const extension = {
 
       onUpdate() {},
 
-      callback(error, location) {
+      callback(error: Error, location: Location) {
         if (error) {
           that.stopGPS();
           return;
@@ -63,8 +80,8 @@ const extension = {
   },
 
   isGPSRunning() {
-    return !!(this.gps.locating || this.gps.locating === 0);
+    return !!this.gps.locating;
   },
-};
+});
 
 export { extension as default };

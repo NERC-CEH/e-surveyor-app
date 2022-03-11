@@ -1,14 +1,17 @@
-import { Geolocation } from '@capacitor/geolocation';
+import { Geolocation, Position } from '@capacitor/geolocation';
+
+type Options = {
+  callback: any;
+  onUpdate?: any;
+  accuracyLimit?: any;
+};
+
+const GPS_ACCURACY_LIMIT = 100; // meters
 
 const API = {
-  GPS_ACCURACY_LIMIT: 100, // meters
-
   running: false,
 
-  start(options = {}) {
-    const { callback, onUpdate } = options;
-    const accuracyLimit = options.accuracyLimit || API.GPS_ACCURACY_LIMIT;
-
+  start({ callback, onUpdate, accuracyLimit = GPS_ACCURACY_LIMIT }: Options) {
     // geolocation config
     const GPSoptions = {
       enableHighAccuracy: true,
@@ -16,18 +19,20 @@ const API = {
       timeout: 60000,
     };
 
-    const onPosition = (position, err) => {
+    const onPosition = (position: Position | null, err: Error) => {
       if (err) {
         callback && callback(new Error(err.message));
         return;
       }
 
+      if (!position) return;
+
       const location = {
         latitude: position.coords.latitude.toFixed(8),
         longitude: position.coords.longitude.toFixed(8),
-        accuracy: parseInt(position.coords.accuracy, 10),
-        altitude: parseInt(position.coords.altitude, 10),
-        altitudeAccuracy: parseInt(position.coords.altitudeAccuracy, 10),
+        accuracy: position.coords.accuracy,
+        altitude: position.coords.altitude,
+        altitudeAccuracy: position.coords.altitudeAccuracy,
       };
 
       if (location.accuracy <= accuracyLimit) {
@@ -40,9 +45,9 @@ const API = {
     return Geolocation.watchPosition(GPSoptions, onPosition);
   },
 
-  stop(id) {
+  stop(id: string) {
     Geolocation.clearWatch({ id });
   },
 };
 
-export { API as default };
+export default API;
