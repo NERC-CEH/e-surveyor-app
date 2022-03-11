@@ -3,9 +3,13 @@ import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
 import { Page, Header, device, useAlert, useLoader, useToast } from '@flumens';
-import { detailsParams } from 'common/types';
 import Main from './Main';
 import './styles.scss';
+
+export type Details = {
+  password: string;
+  email: string;
+};
 
 type Props = {
   userModel: typeof userModelProps;
@@ -21,7 +25,7 @@ const ResetController: FC<Props> = ({ userModel }) => {
     context.navigate('/home/landing', 'root');
   };
 
-  async function onSubmit(details: detailsParams) {
+  async function onSubmit(details: Details) {
     const { email } = details;
     if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");

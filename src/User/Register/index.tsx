@@ -3,9 +3,14 @@ import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
 import { Page, Header, device, useToast, useAlert, useLoader } from '@flumens';
-import { detailsParams } from 'common/types';
 import Main from './Main';
 import './styles.scss';
+
+export type Details = {
+  password: string;
+  email: string;
+  fullName?: string | undefined;
+};
 
 type Props = {
   userModel: typeof userModelProps;
@@ -21,7 +26,7 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
     context.navigate('/home/landing', 'root');
   };
 
-  async function onRegister(details: detailsParams) {
+  async function onRegister(details: Details) {
     const email = details.email.trim();
     const { password, fullName } = details;
     const otherDetails = {

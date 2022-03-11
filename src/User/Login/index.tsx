@@ -2,9 +2,13 @@ import React, { FC, useContext } from 'react';
 import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { useToast, useLoader, Page, Header, device } from '@flumens';
-import { detailsParams } from 'common/types';
 import Main from './Main';
 import './styles.scss';
+
+export type Details = {
+  password: string;
+  email: string;
+};
 
 type Props = {
   userModel: typeof userModelProps;
@@ -21,7 +25,7 @@ const LoginController: FC<Props> = ({ userModel }) => {
     context.navigate('/home/landing', 'root');
   };
 
-  async function onLogin(details: detailsParams) {
+  async function onLogin(details: Details) {
     const { email, password } = details;
 
     if (!device.isOnline) {
