@@ -1,10 +1,17 @@
 import Occurrence, {
   Attrs as OccurrenceAttrs,
 } from '@bit/flumens.apps.models.occurrence';
-import { ResultWithWarehouseID } from 'common/services/plantNet';
 import Media from './image';
 
-export type Species = ResultWithWarehouseID;
+export type Species = {
+  warehouseId: number;
+  gbif?: { id: string };
+  score: number;
+  species: {
+    commonNames: string[];
+    scientificNameWithoutAuthor: string;
+  };
+};
 
 type Attrs = OccurrenceAttrs & { taxon?: Species };
 
@@ -24,7 +31,7 @@ export default class AppOccurrence extends Occurrence {
 
   isDisabled = () => this.isUploaded();
 
-  setSpecies(species: Species) {
+  setSpecies(species: Partial<Species>) {
     const defaultSpecies = {
       warehouseId: 0,
       gbif: { id: '' },

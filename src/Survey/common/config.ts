@@ -1,17 +1,18 @@
 import * as Yup from 'yup';
 import { date } from '@flumens';
+import Sample from 'models/sample';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 
 const getSeedMixGroups = () => {
-  const addValueToObject = seedMixGroup => ({ value: seedMixGroup });
+  const addValueToObject = (seedMixGroup: any) => ({ value: seedMixGroup });
 
-  const getUniqueValues = (unique, item) => {
+  const getUniqueValues = (unique: any, item: any) => {
     return unique.includes(item.mix_group)
       ? unique
       : [...unique, item.mix_group];
   };
 
-  const alphabetically = (v1, v2) => v1.value.localeCompare(v2.value);
+  const alphabetically = (v1: any, v2: any) => v1.value.localeCompare(v2.value);
 
   const seedMixGroups = seedmixData
     .reduce(getUniqueValues, [])
@@ -27,16 +28,16 @@ const getSeedMixGroups = () => {
   return [notRecorded, ...seedMixGroups];
 };
 
-const getSeedMix = modal => {
-  const { seedmixgroup } = modal.attrs;
+const getSeedMix = (model: Sample) => {
+  const { seedmixgroup } = model.attrs;
 
-  const addValueToObject = seedMix => {
+  const addValueToObject = (seedMix: any) => {
     return { value: seedMix };
   };
 
-  const bySeedmixGroups = data => data.mix_group === seedmixgroup;
+  const bySeedmixGroups = (data: any) => data.mix_group === seedmixgroup;
 
-  const getUniqueValues = (unique, item) => {
+  const getUniqueValues = (unique: any, item: any) => {
     return unique.includes(item.mix_name) ? unique : [...unique, item.mix_name];
   };
 
@@ -61,7 +62,7 @@ export const seedmixGroupAttr = {
       input: 'radio',
       info: 'Please indicate the supplier.',
       inputProps: { options: getSeedMixGroups() },
-      set: (value, sample) => {
+      set: (value: any, sample: Sample) => {
         if (sample.attrs.seedmixgroup !== value) {
           sample.attrs.seedmixgroup = value; // eslint-disable-line
           sample.attrs.seedmix = null; // eslint-disable-line
@@ -78,7 +79,7 @@ export const seedmixAttr = {
     attrProps: {
       input: 'radio',
       info: 'Please indicate the seed mix you have used.',
-      inputProps: smp => ({ options: getSeedMix(smp) }),
+      inputProps: (smp: Sample) => ({ options: getSeedMix(smp) }),
     },
   },
   remote: { id: 1530 },
@@ -89,7 +90,7 @@ const fixedLocationSchema = Yup.object().shape({
   longitude: Yup.number().required(),
 });
 
-const validateLocation = val => {
+const validateLocation = (val: any) => {
   if (!val) {
     return false;
   }
@@ -110,13 +111,13 @@ export const dateAttr = {
       inputProps: { max: () => new Date() },
     },
   },
-  remote: { values: d => date.print(d, false) },
+  remote: { values: (d: any) => date.print(d, false) },
 };
 
 export const locationAttr = {
   remote: {
     id: 'entered_sref',
-    values(location) {
+    values(location: any) {
       return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
         location.longitude
       ).toFixed(7)}`;
