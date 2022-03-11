@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { observer } from 'mobx-react';
-import PropTypes from 'prop-types';
 import {
   IonIcon,
   IonList,
@@ -20,12 +19,22 @@ import {
   openOutline,
   helpBuoyOutline,
 } from 'ionicons/icons';
+import AppModelType from 'models/app';
 import { Trans as T } from 'react-i18next';
 import { Main, InfoMessage } from '@flumens';
 import config from 'common/config';
 import './styles.scss';
 
-const Component = ({
+type Props = {
+  logOut: any;
+  refreshAccount: any;
+  resendVerificationEmail: any;
+  isLoggedIn: any;
+  user: any;
+  appModel: typeof AppModelType;
+};
+
+const MenuMain: FC<Props> = ({
   isLoggedIn,
   user,
   logOut,
@@ -140,12 +149,4 @@ const Component = ({
   );
 };
 
-Component.propTypes = {
-  logOut: PropTypes.func,
-  refreshAccount: PropTypes.func,
-  resendVerificationEmail: PropTypes.func,
-  isLoggedIn: PropTypes.bool.isRequired,
-  user: PropTypes.object,
-};
-
-export default observer(Component);
+export default observer(MenuMain);

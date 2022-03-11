@@ -8,6 +8,7 @@ export type SurveyDraftKeys = {
 };
 
 export interface Attrs extends ModelAttrs, SurveyDraftKeys {
+  language: string;
   appSession: number;
   showedWelcome: boolean;
   showFirstSurveyTip: boolean;
@@ -20,6 +21,7 @@ export interface Attrs extends ModelAttrs, SurveyDraftKeys {
 }
 
 const defaults: Attrs = {
+  language: '',
   appSession: 0,
   showedWelcome: false,
   showFirstSurveyTip: true,
