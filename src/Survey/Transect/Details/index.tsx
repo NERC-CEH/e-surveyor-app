@@ -19,7 +19,7 @@ const Controller: FC<Props> = ({ sample }) => {
 
   const onDone = () => {
     try {
-      getDetailsValidationSchema(sample).validateSync(sample.attrs);
+      getDetailsValidationSchema().validateSync(sample.attrs);
     } catch (attrError) {
       alert({
         header: 'Missing',

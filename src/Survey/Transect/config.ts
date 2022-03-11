@@ -9,9 +9,11 @@ import {
   nameAttr,
 } from 'Survey/common/config';
 import appModel from 'models/app';
+import Sample from 'models/sample';
+import Occurrence from 'models/occurrence';
 import { schemeHabitats } from 'common/data/habitats';
 
-export const getDetailsValidationSchema = sample =>
+export const getDetailsValidationSchema = () =>
   Yup.object().shape({
     location: verifyLocationSchema,
     quadratSize: Yup.number()
@@ -20,12 +22,15 @@ export const getDetailsValidationSchema = sample =>
     steps: Yup.number()
       .min(1)
       .required('Please select the number of survey steps.'),
-    habitat:
-      sample.attrs.type !== 'Custom' &&
-      Yup.mixed().required('Please select habitat.'),
+
+    habitat: Yup.mixed().when('type', {
+      is: 'Custom',
+      // then: do nothing
+      otherwise: schema => schema.required('Please select habitat.'),
+    }),
   });
 
-const getHabitats = name => ({ value: name, id: name });
+const getHabitats = (name: any) => ({ value: name, id: name });
 const agriEnvironmentHabitats = schemeHabitats.AES.sort().map(getHabitats);
 const commonStandardsHabitats = schemeHabitats.CSM.sort().map(getHabitats);
 
@@ -54,7 +59,7 @@ const survey = {
           input: 'radio',
           info: 'You can change your survey name here.',
           inputProps: { options: surveyTypes },
-          set: (value, sample) => {
+          set: (value: any, sample: Sample) => {
             sample.attrs.type = value; // eslint-disable-line
 
             sample.attrs.steps = 10; // eslint-disable-line
@@ -106,7 +111,7 @@ const survey = {
       pageProps: {
         attrProps: {
           input: 'radio',
-          inputProps: model => ({
+          inputProps: (model: Sample) => ({
             options:
               model.attrs.type === 'Agri-environment'
                 ? agriEnvironmentHabitats
@@ -139,7 +144,11 @@ const survey = {
         location: locationAttr,
       },
 
-      create(AppSample, AppOccurrence, photo) {
+      create(
+        AppSample: typeof Sample,
+        AppOccurrence: typeof Occurrence,
+        photo: any
+      ) {
         const sample = new AppSample({
           metadata: {
             survey: survey.name,
@@ -159,7 +168,7 @@ const survey = {
         return sample;
       },
 
-      modifySubmission(submission) {
+      modifySubmission(submission: any) {
         // for non-UK species
         if (!submission.occurrences.length) {
           return null;
@@ -172,13 +181,13 @@ const survey = {
         attrs: {
           taxon: {
             id: 'taxa_taxon_list_id',
-            values(taxon) {
+            values(taxon: any) {
               return taxon.warehouseId;
             },
           },
         },
 
-        create(AppOccurrence, photo) {
+        create(AppOccurrence: typeof Occurrence, photo: any) {
           const occ = new AppOccurrence({
             attrs: {
               taxon: null,
@@ -192,7 +201,7 @@ const survey = {
           return occ;
         },
 
-        modifySubmission(submission) {
+        modifySubmission(submission: any) {
           // for non-UK species
           if (!submission.values.taxa_taxon_list_id) {
             return null;
@@ -203,7 +212,7 @@ const survey = {
       },
     },
 
-    create(AppSample) {
+    create(AppSample: typeof Sample) {
       const sample = new AppSample({
         metadata: {
           survey: survey.name,
@@ -220,11 +229,11 @@ const survey = {
       return sample;
     },
 
-    modifySubmission(submission) {
+    modifySubmission(submission: any) {
       const subSamples = submission.samples;
       submission.samples = []; // eslint-disable-line
 
-      const removeSubSamplesLayerIfNoLocation = subSample => {
+      const removeSubSamplesLayerIfNoLocation = (subSample: any) => {
         const locationIsMissing = !subSample.values.entered_sref;
         if (locationIsMissing) {
           submission.occurrences.push(subSample.occurrences[0]);
@@ -238,7 +247,7 @@ const survey = {
       return submission;
     },
 
-    verify(attrs, sample) {
+    verify(attrs: any, sample: Sample) {
       try {
         Yup.number()
           .min(1, 'Please add a quadrat photo.')
@@ -257,7 +266,7 @@ const survey = {
     },
   },
 
-  create(AppSample) {
+  create(AppSample: typeof Sample) {
     const sample = new AppSample({
       metadata: {
         survey: survey.name,
@@ -275,7 +284,7 @@ const survey = {
     return sample;
   },
 
-  verify(attrs, sample) {
+  verify(attrs: any, sample: Sample) {
     try {
       const id = sample.isIdentifying();
 
@@ -287,7 +296,7 @@ const survey = {
         .oneOf([sample.attrs.steps], 'Please add more quadrats.')
         .validateSync(sample.samples.length, { abortEarly: false });
 
-      getDetailsValidationSchema(sample).validateSync(attrs, {
+      getDetailsValidationSchema().validateSync(attrs, {
         abortEarly: false,
       });
     } catch (attrError) {
