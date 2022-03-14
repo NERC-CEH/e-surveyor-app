@@ -1,5 +1,8 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import config from 'common/config';
 import { isPlatform } from '@ionic/react';
+import Image from 'models/image';
 import UKSIPlants from '../data/uksi_plants.list.json';
 import UKPlantNames from '../data/uksi_plants.names.json';
 import PlantNetResponse, { Result } from './plantNetResponse.d';
@@ -68,7 +71,7 @@ async function appendModelToFormData(mediaModel: any, formData: any) {
 
   const name = mediaModel.cid;
 
-  formData.append('images', blob, `${name}.${extension}`);
+  formData.append(`images`, blob, `${name}.${extension}`);
 }
 
 const addWarehouseId = (sp: Result): ResultWithWarehouseID => {
@@ -140,12 +143,15 @@ const err = (error: any) => {
 
 // TODO: use axios
 export default async function identify(
-  image: any
+  images: Image[]
 ): Promise<ResultWithWarehouseID[]> {
   const formData = new FormData();
 
-  formData.append('organs', 'leaf');
-  await appendModelToFormData(image, formData);
+  formData.append('organs', 'auto');
+  for (const image of images) {
+    // eslint-disable-next-line no-await-in-loop
+    await appendModelToFormData(image, formData);
+  }
 
   return fetch(`${backend.url}/api/plantnet`, {
     method: 'post',

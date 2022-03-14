@@ -8,7 +8,6 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import identifyImage from 'common/services/plantNet';
 import { Species } from './occurrence';
 
 export type URL = string;
@@ -64,8 +63,6 @@ export default class AppMedia extends Media {
 
     return imageModel;
   }
-
-  identification = observable({ identifying: false });
 
   attrs: Attrs = observable({
     species: null,
@@ -128,28 +125,6 @@ export default class AppMedia extends Media {
 
     return Capacitor.convertFileSrc(`${config.dataPath}/${name}`);
   }
-
-  async identify(): Promise<Species> {
-    try {
-      this.identification.identifying = true;
-
-      const species = await identifyImage(this);
-
-      const byScore = (sp1: Species, sp2: Species) => sp2.score - sp1.score;
-      species.sort(byScore);
-
-      this.attrs.species = species;
-
-      this.identification.identifying = false;
-    } catch (error) {
-      this.identification.identifying = false;
-      throw error;
-    }
-
-    return this.attrs.species?.[0];
-  }
-
-  isIdentifying = () => this.identification.identifying;
 
   // eslint-disable-next-line class-methods-use-this
   validateRemote = () => null;

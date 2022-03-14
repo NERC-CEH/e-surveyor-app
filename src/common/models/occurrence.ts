@@ -1,6 +1,8 @@
 import Occurrence, {
   Attrs as OccurrenceAttrs,
 } from '@bit/flumens.apps.models.occurrence';
+import { observable } from 'mobx';
+import identifyImage from 'common/services/plantNet';
 import Media from './image';
 
 export type Species = {
@@ -19,6 +21,8 @@ export default class AppOccurrence extends Occurrence {
   static fromJSON(json: any) {
     return super.fromJSON(json, Media);
   }
+
+  identification = observable({ identifying: false });
 
   attrs: Attrs = this.attrs;
 
@@ -47,19 +51,33 @@ export default class AppOccurrence extends Occurrence {
   }
 
   async identify() {
-    const identifyAllImages = (media: Media) => media.identify();
+    try {
+      this.identification.identifying = true;
 
-    // [sp1, null, sp3, sp1 ]
-    const species = await Promise.all(this.media.map(identifyAllImages));
+      const species = await identifyImage(this.media);
 
-    const byScore = (sp1: Species, sp2: Species) => sp2.score - sp1.score;
-    species.sort(byScore);
+      const byScore = (sp1: Species, sp2: Species) => sp2.score - sp1.score;
+      species.sort(byScore);
 
-    if (!species[0]) return;
+      this.media.forEach((media: Media) => {
+        // eslint-disable-next-line no-param-reassign
+        media.attrs.species = species;
+      });
 
-    this.setSpecies(species[0]);
+      if (!species[0]) return;
+
+      this.setSpecies(species[0]);
+
+      this.identification.identifying = false;
+    } catch (error) {
+      this.identification.identifying = false;
+      throw error;
+    }
+
     const isPartOfSurvey = this.parent;
-    if (isPartOfSurvey) this.save();
+    if (!isPartOfSurvey) return;
+
+    this.save();
   }
 
   canReIdentify() {
@@ -70,6 +88,5 @@ export default class AppOccurrence extends Occurrence {
   }
 
   // 'filter' instead of 'some' to trigger mobx listeners to all media objects
-  isIdentifying = () =>
-    !!this.media.filter(media => media.isIdentifying()).length;
+  isIdentifying = () => this.identification.identifying;
 }
