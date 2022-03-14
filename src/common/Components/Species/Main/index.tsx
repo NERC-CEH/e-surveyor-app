@@ -97,6 +97,8 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
     const getSpeciesCard = (sp: Species) => {
       const onSelectWrap = () => setSpeciesAsMain(sp);
 
+      if (sp.score <= 0.01) return null; // 1%
+
       return (
         <SpeciesCard
           key={sp.warehouseId}
