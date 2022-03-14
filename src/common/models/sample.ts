@@ -156,7 +156,7 @@ class AppSample extends Sample {
   }
 
   getPrettyName() {
-    if (!this.parent) {
+    if (!this.parent || this.metadata.survey === 'point') {
       return '';
     }
 

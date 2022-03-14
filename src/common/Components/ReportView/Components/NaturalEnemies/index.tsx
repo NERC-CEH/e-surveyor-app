@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import naturalEnemies, {
   Interaction as EnemyInteraction,
 } from 'common/data/naturalEnemies';
-import { ModalHeader } from '@flumens';
+import { ModalHeader, InfoBackgroundMessage } from '@flumens';
 import { IonItem, IonLabel, IonItemDivider, IonModal } from '@ionic/react';
 import Crops from './Components/Crops';
 import { SpeciesNames } from '../../helpers';
@@ -45,6 +45,12 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     count2 - count1;
 
   const groupItems = Object.entries(groups).sort(bySize).map(getGroupItem);
+  if (!groupItems.length)
+    return (
+      <InfoBackgroundMessage>
+        This report does not have any natural enemies species interactions data.
+      </InfoBackgroundMessage>
+    );
 
   return (
     <>

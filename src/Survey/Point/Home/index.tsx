@@ -117,6 +117,27 @@ const HomeController: FC<Props> = ({ sample }) => {
   const onFinish = async () => {
     const invalids = sample.validateRemote();
     if (invalids) {
+      const hasUnidentifiedOcc = (occ: any) => !occ.attributes.value.taxon;
+      const hasUnidentifiedSample = (smp: any) =>
+        Object.values(smp.occurrences).some(hasUnidentifiedOcc);
+      const hasUnidentified = Object.values(invalids.samples).some(
+        hasUnidentifiedSample
+      );
+
+      if (hasUnidentified) {
+        alert({
+          header: "Some of photos you have taken haven't been identified",
+          message: `You can identify them yourself by tapping the species photo and searching for the known species, or wait until you have phone signal, when the AI will identify them for you.`,
+          buttons: [
+            {
+              text: 'Got it',
+              role: 'cancel',
+            },
+          ],
+        });
+        return;
+      }
+
       alert({
         header: 'Survey incomplete',
         message: getDeepErrorMessage(invalids),

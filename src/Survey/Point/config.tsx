@@ -68,7 +68,21 @@ const survey: Survey = {
         },
       },
 
-      verify() {},
+      verify(attrs) {
+        try {
+          Yup.object()
+            .shape({
+              taxon: Yup.object()
+                .nullable()
+                .required('Plant has not been identified'),
+            })
+            .validateSync(attrs, { abortEarly: false });
+        } catch (attrError) {
+          return attrError;
+        }
+
+        return null;
+      },
 
       create(AppOccurrence, photo) {
         const occ = new AppOccurrence({
@@ -129,6 +143,12 @@ const survey: Survey = {
       Yup.boolean()
         .oneOf([false], 'Some photos are still being identified.')
         .validateSync(isIdentifying, { abortEarly: false });
+
+      // const hasUnknownSpecies = sample.samples.some((subSample) => subSample.occure);
+
+      // Yup.boolean()
+      //   .oneOf([false], 'Some photos are still being identified.')
+      //   .validateSync(isIdentifying, { abortEarly: false });
 
       let hasValidSpecies = false;
       const showReportIfScoreHigherThanThreshold = (subSample: any) => {

@@ -1,6 +1,7 @@
 import Occurrence, {
   Attrs as OccurrenceAttrs,
 } from '@bit/flumens.apps.models.occurrence';
+import { validateRemoteModel } from '@bit/flumens.apps.utils.validation';
 import { observable } from 'mobx';
 import identifyImage from 'common/services/plantNet';
 import Media from './image';
@@ -28,10 +29,7 @@ export default class AppOccurrence extends Occurrence {
 
   getSpecies = () => this.attrs.taxon;
 
-  // eslint-disable-next-line class-methods-use-this
-  validateRemote() {
-    return null;
-  }
+  validateRemote = validateRemoteModel;
 
   isDisabled = () => this.isUploaded();
 
