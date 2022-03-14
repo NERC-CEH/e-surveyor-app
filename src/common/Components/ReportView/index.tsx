@@ -26,11 +26,9 @@ import {
   SpeciesNames,
 } from 'Components/ReportView/helpers';
 import pollination from 'common/data/pollination';
-import naturalEnemies, {
-  Interaction as EnemyInteraction,
-} from 'common/data/naturalEnemies';
 import Seeds from 'common/images/seeds.svg';
 import beeIcon from 'common/images/bee.svg';
+import NaturalEnemies from './Components/NaturalEnemies';
 import './styles.scss';
 
 const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
@@ -493,63 +491,6 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
     </div>
   );
 
-  const getNaturalEnemiesComponent = () => {
-    const uniqueSpeciesFlat = uniqueSpecies.flat();
-    const matchesPlant = (interaction: EnemyInteraction) =>
-      uniqueSpeciesFlat.includes(interaction.plant_latin_name);
-    const crops = naturalEnemies.filter(matchesPlant);
-    const countItems = (agg: any, item: string) => {
-      if (!Number.isFinite(agg[item])) {
-        // eslint-disable-next-line no-param-reassign
-        agg[item] = 0;
-        return agg;
-      }
-      // eslint-disable-next-line no-param-reassign
-      agg[item]++;
-      return agg;
-    };
-
-    const groups: { [key: string]: number } = crops
-      .map((crop: EnemyInteraction) => crop.crop_group)
-      .reduce(countItems, {});
-
-    const getGroupItem = ([groupName, count]: [string, number]) => (
-      <IonItem key={groupName} onClick={() => getShowModal(groupName)}>
-        <IonLabel slot="start">{groupName}</IonLabel>
-        <IonLabel slot="end">{count}</IonLabel>
-      </IonItem>
-    );
-
-    const bySize = (
-      [, count1]: [string, number],
-      [, count2]: [string, number]
-    ) => count2 - count1;
-
-    const groupItems = Object.entries(groups).sort(bySize).map(getGroupItem);
-
-    return (
-      <>
-        <h3>Supported Crops</h3>
-        <div className="rounded">
-          <IonItemDivider>
-            <IonLabel slot="start">
-              <b>
-                <small>Species</small>
-              </b>
-            </IonLabel>
-            <IonLabel className="ion-text-right" slot="end">
-              <b>
-                <small>Counts</small>
-              </b>
-            </IonLabel>
-          </IonItemDivider>
-
-          {groupItems}
-        </div>
-      </>
-    );
-  };
-
   return (
     <>
       <Main className="survey-report">
@@ -567,7 +508,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
             </InfoBackgroundMessage>
           )}
 
-          {getNaturalEnemiesComponent()}
+          <NaturalEnemies uniqueSpecies={uniqueSpecies} />
         </IonList>
       </Main>
 
