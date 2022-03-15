@@ -1,9 +1,14 @@
 import React, { FC, useState } from 'react';
 import { IonContent, IonPopover, IonIcon, IonButton } from '@ionic/react';
+import { JSX } from '@ionic/core';
 import { informationCircleOutline } from 'ionicons/icons';
 import './styles.scss';
 
-const InfoButton: FC = ({ children }) => {
+type Props = {
+  buttonProps?: JSX.IonButton;
+};
+
+const InfoButton: FC<Props> = ({ children, buttonProps }) => {
   const [infoState, setShowInfo] = useState<any>({
     showInfo: false,
     event: undefined,
@@ -23,6 +28,7 @@ const InfoButton: FC = ({ children }) => {
       shape="round"
       fill="clear"
       onClick={showInfo}
+      {...buttonProps}
     >
       <IonIcon src={informationCircleOutline} />
       <IonPopover

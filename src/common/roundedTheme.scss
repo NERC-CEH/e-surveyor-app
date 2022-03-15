@@ -90,4 +90,10 @@ ion-radio-group {
     color: red;
   }
 }
+
+ion-item-divider div {
+  // helps info button alignment
+  display: flex;
+  align-items: center;
+}
 /* ROUND-THEME END */

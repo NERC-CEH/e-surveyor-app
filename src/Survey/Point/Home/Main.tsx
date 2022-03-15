@@ -1,7 +1,13 @@
 import React, { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import Sample from 'models/sample';
-import { IonItemDivider, IonIcon, IonList, NavContext } from '@ionic/react';
+import {
+  IonItemDivider,
+  IonIcon,
+  IonList,
+  NavContext,
+  IonNote,
+} from '@ionic/react';
 import { Main, MenuAttrItem, LongPressButton, InfoMessage } from '@flumens';
 import {
   camera,
@@ -10,6 +16,7 @@ import {
   informationCircleOutline,
 } from 'ionicons/icons';
 import Seeds from 'common/images/seeds.svg';
+import InfoButton from 'Components/InfoButton';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import 'ionicons/dist/svg/checkmark-circle-outline.svg';
@@ -86,7 +93,19 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
           />
         </div>
 
-        <IonItemDivider>Seed mix</IonItemDivider>
+        <IonItemDivider>
+          <div>
+            Seed mix
+            <InfoButton buttonProps={{ color: 'medium' }}>
+              <IonNote>
+                Choose your seed supplier from the drop down menu, and then
+                choose the name of your seed mix. This will allow the app to
+                compare the plant species you sowed to the plants you see in the
+                survey.
+              </IonNote>
+            </InfoButton>
+          </div>
+        </IonItemDivider>
         <div className="rounded">
           <MenuAttrItem
             routerLink={`${baseURL}/seedmixgroup`}
