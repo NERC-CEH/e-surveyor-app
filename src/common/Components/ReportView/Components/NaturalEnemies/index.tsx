@@ -12,7 +12,7 @@ type Props = {
 };
 
 const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
-  const [showModal, setShowModel] = useState('');
+  const [showModal, setShowModal] = useState('');
 
   const uniqueSpeciesFlat = uniqueSpecies.flat();
   const matchesPlant = (interaction: EnemyInteraction) =>
@@ -35,7 +35,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     .reduce(countItems, {});
 
   const getGroupItem = ([groupName, count]: [string, number]) => (
-    <IonItem key={groupName} onClick={() => setShowModel(groupName)}>
+    <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
       <IonLabel slot="start">{groupName}</IonLabel>
       <IonLabel slot="end">{count}</IonLabel>
     </IonItem>
@@ -73,7 +73,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
       </div>
 
       <IonModal mode="md" isOpen={!!showModal}>
-        <ModalHeader title={showModal} onClose={() => setShowModel('')} />
+        <ModalHeader title={showModal} onClose={() => setShowModal('')} />
         <Crops species={crops} group={showModal} />
       </IonModal>
     </>

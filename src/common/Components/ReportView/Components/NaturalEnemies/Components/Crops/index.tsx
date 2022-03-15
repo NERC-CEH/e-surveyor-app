@@ -16,7 +16,7 @@ type Props = {
 };
 
 const NaturalEnemies: FC<Props> = ({ species, group }) => {
-  const [showModal, setShowModel] = useState('');
+  const [showModal, setShowModal] = useState('');
 
   const countItems = (agg: any, item: string) => {
     if (!Number.isFinite(agg[item])) {
@@ -36,7 +36,7 @@ const NaturalEnemies: FC<Props> = ({ species, group }) => {
     .reduce(countItems, {});
 
   const getGroupItem = ([groupName, count]: [string, number]) => (
-    <IonItem key={groupName} onClick={() => setShowModel(groupName)}>
+    <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
       <IonLabel slot="start">{groupName}</IonLabel>
       <IonLabel slot="end">{count}</IonLabel>
     </IonItem>
@@ -70,7 +70,7 @@ const NaturalEnemies: FC<Props> = ({ species, group }) => {
       </IonList>
 
       <IonModal mode="md" isOpen={!!showModal}>
-        <ModalHeader title={showModal} onClose={() => setShowModel('')} />
+        <ModalHeader title={showModal} onClose={() => setShowModal('')} />
         <Enemies species={species} group={group} crop={showModal} />
       </IonModal>
     </Main>

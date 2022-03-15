@@ -1,6 +1,6 @@
 import plantInteractions from './cacheRemote/plant_interactions.json';
 
-export type Interacion = {
+export type Interaction = {
   pollinator: string;
   plant: string;
   group: string;
@@ -8,7 +8,7 @@ export type Interacion = {
 };
 
 const uniqArrayHashes: any = [];
-const getUnique = (sp: Interacion) => {
+const getUnique = (sp: Interaction) => {
   const spHash = JSON.stringify(sp);
   if (uniqArrayHashes.includes(spHash)) {
     return false;

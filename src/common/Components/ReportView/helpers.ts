@@ -40,3 +40,20 @@ export function getSeedmixUse(
 
   return [recordedSeedmixSpecies, seedmixSpecies];
 }
+
+export function getMissingSeedmixSpecies(
+  occurrences: Occurrence[],
+  seedmix: string
+) {
+  const [selectedSeedmixSpecies, totalSeedmixSpecies = []] = getSeedmixUse(
+    occurrences,
+    seedmix
+  );
+
+  const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }: any) => {
+    const hasLatinName = ([latin]: any) => latin === latinName;
+    return !selectedSeedmixSpecies.find(hasLatinName);
+  };
+
+  return totalSeedmixSpecies.filter(getMissingSelectedSeedmixSpecies);
+}

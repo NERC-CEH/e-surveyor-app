@@ -11,7 +11,7 @@ import { SpeciesNames } from 'Components/ReportView/helpers';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import GPSExtension from './sampleGPSExt';
-import plantInteractions, { Interacion } from '../data/plant_interactions';
+import plantInteractions, { Interaction } from '../data/plant_interactions';
 import { modelStore } from './store';
 import Occurrence, { Species } from './occurrence';
 import Media from './image';
@@ -39,10 +39,10 @@ class AppSample extends Sample {
   }
 
   static getSupportedSpeciesList(plants: SpeciesNames[]) {
-    const pollinators: Interacion[] = [];
+    const pollinators: Interaction[] = [];
 
     const getList = ([name]: SpeciesNames) => {
-      const byPlantName = ({ plant }: Interacion) => plant === name;
+      const byPlantName = ({ plant }: Interaction) => plant === name;
       const sp = plantInteractions.filter(byPlantName);
       if (!sp.length) {
         return;
@@ -56,13 +56,13 @@ class AppSample extends Sample {
     return pollinators;
   }
 
-  static getUniqueSupportedSpecies(plants: SpeciesNames[]): Interacion[] {
+  static getUniqueSupportedSpecies(plants: SpeciesNames[]): Interaction[] {
     const pollinators = AppSample.getSupportedSpeciesList(plants);
 
-    const getPollinatorName = ({ pollinator }: Interacion) => pollinator;
+    const getPollinatorName = ({ pollinator }: Interaction) => pollinator;
 
     const getPollinatorProfile = (pollinatorName: string) => {
-      const matchingPollinatorName = ({ pollinator }: Interacion) =>
+      const matchingPollinatorName = ({ pollinator }: Interaction) =>
         pollinator === pollinatorName;
 
       return pollinators.find(matchingPollinatorName);
@@ -73,10 +73,10 @@ class AppSample extends Sample {
       ...new Set(pollinatorsNameList),
     ] as string[];
 
-    const nonEmpty = (interaction: Interacion | undefined) => !!interaction;
+    const nonEmpty = (interaction: Interaction | undefined) => !!interaction;
     return uniquePollinatorsNameList
       .map(getPollinatorProfile)
-      .filter(nonEmpty) as Interacion[];
+      .filter(nonEmpty) as Interaction[];
   }
 
   attrs: Attrs = this.attrs;

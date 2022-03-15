@@ -2,7 +2,7 @@ import config from 'Survey/Point/config';
 import seedmixData from 'common/data/seedmix';
 import Sample from '../../../models/sample';
 import Occurrence from '../../../models/occurrence';
-import { getMissingSeedmixSpecies } from '..';
+import { getMissingSeedmixSpecies } from '../helpers';
 
 describe('ReportView', () => {
   describe('getMissingSeedmixSpecies', () => {
