@@ -78,7 +78,7 @@ const Menu: FC<Props> = ({
           />
           <InfoMessage color="medium">
             When working offline the app will not be able to automatically ID
-            the spcecies. Once reconnected to the Internet we can identify the
+            the species. Once reconnected to the Internet we can identify the
             species in the background.
           </InfoMessage>
         </div>

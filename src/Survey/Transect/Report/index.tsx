@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ReportController: FC<Props> = ({ sample }) => {
-  // TODO: Refacotor when attr is renew
+  // TODO: Refactor when attr is renew
   const habitatsData: any = habitats;
   const getSteps = () => {
     const steps: any[] = [];

@@ -22,7 +22,7 @@ type Props = {
   isDisabled: boolean;
 };
 
-const isUnkown = (value: boolean) => (smp: Sample) =>
+const isUnknown = (value: boolean) => (smp: Sample) =>
   !!smp.getSpecies() === value;
 
 function byCreateTime(occ1: Occurrence, occ2: Occurrence) {
@@ -122,7 +122,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
       />
     );
 
-    const speciesEntries = list.filter(isUnkown(true)).map(getSpecies);
+    const speciesEntries = list.filter(isUnknown(true)).map(getSpecies);
 
     return (
       <IonList lines="full">
@@ -131,7 +131,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     );
   };
 
-  const getUndentifiedSpeciesList = () => {
+  const getUnidentifiedSpeciesList = () => {
     const showIdentifyAllBtn = hasOver5UnidentifiedSpecies(sample);
 
     const getSpecies = (smp: Sample) => (
@@ -146,7 +146,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
       />
     );
 
-    const speciesEntries = list.filter(isUnkown(false)).map(getSpecies);
+    const speciesEntries = list.filter(isUnknown(false)).map(getSpecies);
 
     const count = speciesEntries.length > 1 ? speciesEntries.length : null;
 
@@ -191,7 +191,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
 
   return (
     <>
-      {getUndentifiedSpeciesList()}
+      {getUnidentifiedSpeciesList()}
 
       {getSpeciesList()}
     </>
