@@ -29,6 +29,17 @@
     }
   }
 
+  h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 0 10px 7px;
+
+    ion-button.md {
+      margin-right: 10px;
+    }
+  }
+
   ion-item-divider {
     background: #e6e6e6 !important;
     padding: 0 10px;

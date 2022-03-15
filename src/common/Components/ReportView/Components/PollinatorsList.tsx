@@ -12,9 +12,11 @@ import {
   IonModal,
   IonBadge,
   IonList,
+  IonNote,
 } from '@ionic/react';
 import Sample from 'models/sample';
 import pollination from 'common/data/pollination';
+import InfoButton from 'Components/InfoButton';
 import { informationCircleOutline } from 'ionicons/icons';
 import { SpeciesNames } from '../helpers';
 
@@ -265,7 +267,16 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     <>
       {showPollinators && (
         <>
-          <h3>Pollinators count</h3>
+          <h3>
+            <span>Pollinators count</span>
+            <InfoButton>
+              <IonNote>
+                This section shows you how many pollinating species are
+                supported by each of the plants in your habitat. Tap the green
+                button to find out which species each plant supports.
+              </IonNote>
+            </InfoButton>
+          </h3>
           <div className="rounded">
             <IonItemDivider>
               <IonLabel slot="start">
@@ -285,7 +296,16 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
         </>
       )}
 
-      <h3>Supported species groups</h3>
+      <h3>
+        <span>Supported species groups</span>
+        <InfoButton>
+          <IonNote>
+            In this section, you can see the number of species within each group
+            that you are supporting. Tap the group name to find out about their
+            benefits, and to see a full list of your supported species.
+          </IonNote>
+        </InfoButton>
+      </h3>
       <div className="rounded">{getSupportedSpecies()}</div>
 
       <IonModal mode="md" isOpen={!!showModal}>
