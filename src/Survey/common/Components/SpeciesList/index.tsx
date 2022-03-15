@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import React, { FC, useContext } from 'react';
 import {
-  IonItem,
   IonLabel,
   IonList,
   IonButton,
@@ -9,7 +8,13 @@ import {
   NavContext,
 } from '@ionic/react';
 import { useRouteMatch } from 'react-router';
-import { InfoMessage, useToast, useAlert, device } from '@flumens';
+import {
+  InfoMessage,
+  useToast,
+  useAlert,
+  device,
+  InfoBackgroundMessage,
+} from '@flumens';
 import Sample from 'models/sample';
 import Occurrence from 'models/occurrence';
 import clsx from 'clsx';
@@ -69,9 +74,10 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   if (!sample.samples.length) {
     return (
       <IonList>
-        <IonItem className="empty">
-          <span>Your species list is empty.</span>
-        </IonItem>
+        <InfoBackgroundMessage>
+          Your species list is empty. <br /> Hold down the camera button to list
+          plant species yourself, or tap to take a photo for the AI to identify.
+        </InfoBackgroundMessage>
       </IonList>
     );
   }

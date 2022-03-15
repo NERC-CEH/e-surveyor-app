@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonItemDivider, IonList } from '@ionic/react';
 import { locationOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem } from '@flumens';
+import { Main, MenuAttrItem, InfoMessage } from '@flumens';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import { useRouteMatch } from 'react-router-dom';
@@ -61,6 +61,13 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
             skipValueTranslation
             disabled={isDisabled || !isCustom || completedDetails}
           />
+          {isDisabled ||
+            (!isCustom && !!steps && (
+              <InfoMessage color="medium">
+                This is the number of times that you will stop and search for
+                plants on your transect.
+              </InfoMessage>
+            ))}
 
           <MenuAttrItem
             routerLink={`${match.url}/quadratSize`}
@@ -70,6 +77,13 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
             skipValueTranslation
             disabled={isDisabled || !isCustom || completedDetails}
           />
+          {isDisabled ||
+            (!isCustom && !!quadratSize && (
+              <InfoMessage color="medium">
+                This is the size of the area that you will search for plants in
+                each step.
+              </InfoMessage>
+            ))}
           {!isCustom && (
             <MenuAttrItem
               routerLink={`${match.url}/habitat`}

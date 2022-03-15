@@ -87,7 +87,7 @@ const survey = {
       pageProps: {
         attrProps: {
           input: 'slider',
-          info: 'Please specify the number of quadrats you would like to survey.',
+          info: ' This is the number of times that you will stop and search for plants on your transect. Please specify the number of quadrats you would like to survey.',
           inputProps: { min: 1 },
         },
       },
@@ -98,7 +98,7 @@ const survey = {
         headerProps: { title: 'Quadrat Size' },
         attrProps: {
           input: 'slider',
-          info: 'Please specify the quadrat size in meters.',
+          info: 'This is the size of the area that you will search for plants in each step. Please specify the quadrat size in meters.',
           inputProps: { min: 1 },
         },
       },
