@@ -20,7 +20,12 @@ import { SpeciesNames } from '../helpers';
 
 const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
 
-export const SPECIES_GROUPS = ['Bee', 'Butterfly', 'Hoverfly'];
+export const SPECIES_GROUPS = {
+  Bee: 'Bees are fantastic pollinators.',
+  Butterfly:
+    'Hoverflies are great pollinators, and are useful in pest control.',
+  Hoverfly: 'Butterflies are great pollinators.',
+};
 
 interface Pollinator {
   pollinator: string;
@@ -101,7 +106,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
   };
 
   const listGroupCounts = (species: Species[]) => {
-    const getGroupEntries = (groupName: string) => {
+    const getGroupEntries = ([groupName, groupLabel]: string[]) => {
       const byGroupName = ({ group }: { group: string }) => group === groupName;
 
       const count = species.filter(byGroupName).length;
@@ -111,14 +116,17 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
       }
 
       return (
-        <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
-          <IonLabel slot="start">{groupName}</IonLabel>
-          <IonLabel slot="end">{count}</IonLabel>
-        </IonItem>
+        <>
+          <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
+            <IonLabel slot="start">{groupName}</IonLabel>
+            <IonLabel slot="end">{count}</IonLabel>
+          </IonItem>
+          <InfoMessage color="medium">{groupLabel}</InfoMessage>
+        </>
       );
     };
 
-    return SPECIES_GROUPS.map(getGroupEntries);
+    return Object.entries(SPECIES_GROUPS).map(getGroupEntries);
   };
 
   const getSupportedSpecies = () => {
@@ -251,6 +259,8 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
   const showPollinators = uniqueSpecies.length > 1; // no need if just a single species
 
+  const isSpeciesGroupModal = Object.keys(SPECIES_GROUPS).includes(showModal);
+
   return (
     <>
       {showPollinators && (
@@ -281,9 +291,10 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
       <IonModal mode="md" isOpen={!!showModal}>
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />
 
-        {SPECIES_GROUPS.includes(showModal) ? (
+        {isSpeciesGroupModal && (
           <Main>{getSpeciesGroupModalList(showModal)}</Main>
-        ) : (
+        )}
+        {!isSpeciesGroupModal && (
           <Main>{getSingleSpeciesPollinatorsModalList(showModal)}</Main>
         )}
       </IonModal>
