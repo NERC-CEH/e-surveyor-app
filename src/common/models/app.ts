@@ -14,6 +14,7 @@ export interface Attrs extends ModelAttrs, SurveyDraftKeys {
   showFirstSurveyTip: boolean;
   showSurveyUploadTip: boolean;
   showSurveysDeleteTip: boolean;
+  showFirstPhotoTip: boolean;
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;
   sendAnalytics: boolean;
@@ -27,6 +28,7 @@ const defaults: Attrs = {
   showFirstSurveyTip: true,
   showSurveyUploadTip: true,
   showSurveysDeleteTip: true,
+  showFirstPhotoTip: true,
   useAutoIDWhenBackOnline: true,
   use10stepsForCommonStandard: false,
   sendAnalytics: true,
