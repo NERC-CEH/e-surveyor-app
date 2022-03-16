@@ -1,24 +1,16 @@
 .pollinator-class {
   opacity: 1 !important;
 
-  b.high {
-    color: green;
-  }
   .high {
-    --background: green;
+    --background: #006600;
   }
 
-  b.medium {
-    color: #1979ae;
-  }
   .medium {
-    --background: #1979ae;
+    --background: #77a528;
   }
 
-  b.low {
-    color: gray;
-  }
   .low {
-    --background: gray;
+    --background: #c6da91;
+    color: #0b340b;
   }
 }
