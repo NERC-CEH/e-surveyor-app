@@ -18,7 +18,8 @@ import Sample from 'models/sample';
 import pollination from 'common/data/pollination';
 import InfoButton from 'Components/InfoButton';
 import { informationCircleOutline } from 'ionicons/icons';
-import { SpeciesNames } from '../helpers';
+import { SpeciesNames } from '../../helpers';
+import './styles.scss';
 
 const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
 
@@ -94,7 +95,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
       return (
         <IonItem onClick={() => setShowModal(name)} key={selectedName}>
-          <IonLabel slot="start">{selectedName}</IonLabel>
+          <IonLabel>{selectedName}</IonLabel>
           <IonLabel slot="end" className="pollinator-class">
             <IonBadge className={`${pollinatorClass}`}>
               {pollinatorCount}
@@ -120,7 +121,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
       return (
         <>
           <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
-            <IonLabel slot="start">{groupName}</IonLabel>
+            <IonLabel>{groupName}</IonLabel>
             <IonLabel slot="end">{count}</IonLabel>
           </IonItem>
           <InfoMessage color="medium">{groupLabel}</InfoMessage>

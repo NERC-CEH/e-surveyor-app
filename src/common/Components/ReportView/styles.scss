@@ -46,28 +46,3 @@
     color: black;
   }
 }
-
-.pollinator-class {
-  opacity: 1 !important;
-
-  b.high {
-    color: green;
-  }
-  .high {
-    --background: green;
-  }
-
-  b.medium {
-    color: #1979ae;
-  }
-  .medium {
-    --background: #1979ae;
-  }
-
-  b.low {
-    color: gray;
-  }
-  .low {
-    --background: gray;
-  }
-}

@@ -36,7 +36,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
   const getGroupItem = ([groupName, count]: [string, number]) => (
     <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
-      <IonLabel slot="start">{groupName}</IonLabel>
+      <IonLabel>{groupName}</IonLabel>
       <IonLabel slot="end">{count}</IonLabel>
     </IonItem>
   );
