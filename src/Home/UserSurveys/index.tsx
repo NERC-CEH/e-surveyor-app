@@ -9,7 +9,7 @@ import {
   IonSegment,
   IonButton,
 } from '@ionic/react';
-import { Page, Main, useAlert, useToast } from '@flumens';
+import { Page, Main, device, useToast } from '@flumens';
 import { observer } from 'mobx-react';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';
@@ -95,7 +95,6 @@ interface Props {}
 
 const UserSurveys: FC<Props> = () => {
   const [segment, setSegment] = useState('pending');
-  const alert = useAlert();
   const toast = useToast();
 
   const onSegmentClick = (e: any) => setSegment(e.detail.value);
@@ -106,7 +105,14 @@ const UserSurveys: FC<Props> = () => {
     return savedSamples.filter(uploadedSamples).sort(byCreateTime);
   };
 
-  const onUploadAll = () => savedSamples.uploadAll(alert, toast);
+  const onUploadAll = () => {
+    if (!device.isOnline) {
+      toast.warn('Looks like you are offline!');
+      return;
+    }
+
+    savedSamples.uploadAll();
+  };
 
   const showingPending = segment === 'pending';
   const showingUploaded = segment === 'uploaded';

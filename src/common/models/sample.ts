@@ -182,7 +182,7 @@ class AppSample extends Sample {
     return super.destroy();
   };
 
-  async upload(alert: any, toast: any, loader: any) {
+  async upload(alert: any, toast: any) {
     if (this.remote.synchronising) {
       return true;
     }
@@ -207,7 +207,7 @@ class AppSample extends Sample {
       return false;
     }
 
-    const isActivated = await userModel.checkActivation(toast, loader);
+    const isActivated = await userModel.checkActivation();
     if (!isActivated) {
       return false;
     }

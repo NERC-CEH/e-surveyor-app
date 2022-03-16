@@ -68,7 +68,20 @@ const Controller = () => {
 
   const isLoggedIn = userModel.isLoggedIn();
 
-  const checkActivation = () => userModel.checkActivation(toast, loader);
+  const checkActivation = async () => {
+    if (!isLoggedIn) {
+      toast.warn('Please log in first.');
+      return;
+    }
+
+    await loader.show('Please wait...');
+    const isVerified = await userModel.checkActivation();
+    loader.hide();
+
+    if (!isVerified) {
+      toast.warn('The user has not been activated or is blocked.');
+    }
+  };
 
   const resendVerificationEmail = () =>
     userModel.resendVerificationEmail(toast, loader);

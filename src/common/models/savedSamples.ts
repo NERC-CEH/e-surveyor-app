@@ -7,15 +7,14 @@ console.log('SavedSamples: initializing');
 const savedSamples = initStoredSamples(modelStore, Sample);
 
 // eslint-disable-next-line
-savedSamples.uploadAll = async (toast: any, loader: any) => {
+savedSamples.uploadAll = async () => {
   console.log('SavedSamples: uploading all.');
 
   if (!device.isOnline) {
-    toast.warn('Looks like you are offline!');
     return false;
   }
 
-  const isActivated = await userModel.checkActivation(toast, loader);
+  const isActivated = await userModel.checkActivation();
   if (!isActivated) {
     return false;
   }

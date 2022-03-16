@@ -21,28 +21,18 @@ class UserModel extends DrupalUserModel {
     fullName: Yup.string().required(),
   });
 
-  async checkActivation(toast: any, loader: any) {
+  async checkActivation() {
     const isLoggedIn = !!this.attrs.email;
-    if (!isLoggedIn) {
-      toast.warn('Please log in first.');
-      return false;
-    }
+    if (!isLoggedIn) return false;
 
     if (!this.attrs.verified) {
-      await loader.show('Please wait...');
-
       try {
         await this.refreshProfile();
       } catch (e) {
         // do nothing
       }
 
-      loader.hide();
-
-      if (!this.attrs.verified) {
-        toast.warn('The user has not been activated or is blocked.');
-        return false;
-      }
+      if (!this.attrs.verified) return false;
     }
 
     return true;
