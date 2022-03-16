@@ -2,8 +2,9 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonList } from '@ionic/react';
-import { Main } from '@flumens';
+import { Main, InfoButton, InfoMessage } from '@flumens';
 import Occurrence from 'models/occurrence';
+import { informationCircleOutline } from 'ionicons/icons';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';
 import SeedmixBadge from './Components/SeedmixBadge';
 import PollinatorsBadge from './Components/PollinatorsBadge';
@@ -22,6 +23,23 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
   return (
     <>
       <Main className="survey-report">
+        <InfoMessage icon={informationCircleOutline}>
+          What does this report mean?
+          <InfoButton label="READ MORE" header="Tips">
+            <div>
+              <p>
+                <b>Seed Mix</b> tells you how many of the plant species you
+                sowed (through your seed mix) that appeared in your survey. Tap
+                to find out which species are missing.
+              </p>
+              <p>
+                <b>Insect</b> tells you how many insect species you are
+                supporting. Tap for the full list of species.
+              </p>
+            </div>
+          </InfoButton>
+        </InfoMessage>
+
         <div className="report-header">
           <SeedmixBadge occurrences={occurrences} seedmix={seedmix} />
           <PollinatorsBadge uniqueSpecies={uniqueSpecies} />

@@ -1,5 +1,5 @@
+import React, { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import React, { FC, useContext } from 'react';
 import {
   IonLabel,
   IonList,
@@ -16,11 +16,15 @@ import {
   InfoBackgroundMessage,
 } from '@flumens';
 import Sample from 'models/sample';
+import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import clsx from 'clsx';
+import config from 'common/config';
 import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
 import Species from './Components/Species';
 import './styles.scss';
+
+const { POSITIVE_THRESHOLD } = config;
 
 type Props = {
   sample: Sample;
@@ -71,6 +75,27 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const toast = useToast();
   const alert = useAlert();
 
+  const list = [...sample.samples].sort(byCreateTime);
+
+  useEffect(() => {
+    const hasSpeciesWithLowScore = (smp: Sample) => {
+      const score = smp.occurrences[0].attrs.taxon?.score;
+      if (
+        score &&
+        score < POSITIVE_THRESHOLD &&
+        appModel.attrs.showFirstLowScorePhotoTip
+      ) {
+        alert({
+          message:
+            "The AI isn't sure about your photo, tap to check other possible species.",
+          buttons: [{ text: 'OK' }],
+        });
+        appModel.attrs.showFirstLowScorePhotoTip = false;
+      }
+    };
+    list.some(hasSpeciesWithLowScore);
+  }, [list]);
+
   if (!sample.samples.length) {
     return (
       <IonList>
@@ -81,8 +106,6 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
       </IonList>
     );
   }
-
-  const list = [...sample.samples].sort(byCreateTime);
 
   const onIdentifyAll = async () => {
     if (!device.isOnline) {

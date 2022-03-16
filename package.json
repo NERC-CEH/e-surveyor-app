@@ -31,6 +31,7 @@
     "@bit/flumens.apps.helpers.loader": "^1.0.0",
     "@bit/flumens.apps.helpers.toast": "^1.0.0",
     "@bit/flumens.apps.info-background-message": "1.0.1",
+    "@bit/flumens.apps.info-button": "^0.2.1",
     "@bit/flumens.apps.info-message": "^1.2.1",
     "@bit/flumens.apps.input-with-validation": "0.4.1",
     "@bit/flumens.apps.long-press-button": "1.0.0",

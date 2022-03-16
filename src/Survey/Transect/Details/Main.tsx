@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonItemDivider, IonList } from '@ionic/react';
-import { locationOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem, InfoMessage } from '@flumens';
+import { locationOutline, informationCircleOutline } from 'ionicons/icons';
+import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import { useRouteMatch } from 'react-router-dom';
@@ -30,7 +30,48 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
 
   return (
     <Main>
-      <br />
+      <InfoMessage icon={informationCircleOutline}>
+        How to set up a transect?
+        <InfoButton label="READ MORE" header="Tips">
+          <div>
+            <p>
+              Start by telling the app where you are doing the survey (your
+              location). The app can pick up on your current location using your
+              phone's GPS, but if you want to survey somewhere else, you can do
+              this by clicking on the right arrow and using the map to choose
+              your location.
+            </p>
+            <p>Then, select which type of survey you plan to do. </p>
+            <p>
+              This could be a survey with preexisting protocols, or a "custom"
+              survey that allows you to choose how often you will stop (how many
+              steps you will have), and what size your quadrat will be (the size
+              of the area you will search for plants).
+            </p>
+            <p>
+              If you are doing a pre-existing survey type, choose the habitat
+              type that best reflects the area you will be surveying - this
+              contains information on habitat quality for your transect results
+              to be compared to.
+            </p>
+            <p>
+              If you have sown a seed mix in the area, you can include that here
+              too.
+            </p>
+            <p>
+              Taking into account the number of steps you need to do (the number
+              of times you will stop and identify plants), plan a route that
+              covers all of the different features in your habitat.
+            </p>
+            <p>
+              Pick up your quadrat (or something that you can use to measure out
+              the area you will search for plants in) and click next to carry
+              out your transect!
+            </p>
+          </div>
+        </InfoButton>
+      </InfoMessage>
+
       <IonList lines="full">
         <div className="rounded">
           <MenuAttrItem

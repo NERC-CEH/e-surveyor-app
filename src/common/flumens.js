@@ -8,6 +8,7 @@ export { default as ModalHeader } from '@bit/flumens.apps.modal-header';
 export { default as InfoBackgroundMessage } from '@bit/flumens.apps.info-background-message';
 export { default as InfoMessage } from '@bit/flumens.apps.info-message';
 export { default as Section } from '@bit/flumens.apps.section';
+export { default as InfoButton } from '@bit/flumens.apps.info-button';
 export { default as RouteWithModels } from '@bit/flumens.apps.route-with-models';
 export { default as ModelLocation } from '@bit/flumens.apps.model-location-map';
 export { default as Gallery } from '@bit/flumens.apps.gallery';

@@ -2,7 +2,8 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
-import { Main } from '@flumens';
+import { Main, InfoButton, InfoMessage } from '@flumens';
+import { informationCircleOutline } from 'ionicons/icons';
 import './styles.scss';
 
 const alphabetically = (s1: any, s2: any) => {
@@ -183,6 +184,42 @@ const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
   return (
     <>
       <Main>
+        <InfoMessage icon={informationCircleOutline}>
+          What does my transect report mean?
+          <InfoButton label="READ MORE" header="Tips">
+            <div>
+              <p>
+                The transect report compares your survey to a list of plant
+                species that indicate good and bad quality habitat.
+              </p>
+              <p>
+                Any species listed under "Positive" suggest that your habitat is
+                good quality, and you are managing the land well.
+              </p>
+              <p>
+                Species listed under "Negative" indicate a poorer quality
+                habitat, which could mean that a land management change is
+                needed.
+              </p>
+              <p>
+                Each species has a fraction listed next to it, which tells you
+                the proportion of quadrats that the species was found in. For
+                example, 3/20 would mean that you did 20 quadrats, but only saw
+                this species in 3 of them.
+              </p>
+              <p>
+                As a guide, you can tell how common the species was by comparing
+                to the following percentages, although this may change depending
+                on the plant species or habitat type:
+              </p>
+              <p> 20% of quadrats or fewer = A rare species</p>
+              <p> 21% to 40% of quadrats = An occasional species </p>
+              <p> 41% to 60% of quadrats = A frequent species</p>
+              <p> 60% of quadrats or more = a very frequent species</p>
+            </div>
+          </InfoButton>
+        </InfoMessage>
+
         <IonGrid>{getSpeciesRows()}</IonGrid>
       </Main>
     </>

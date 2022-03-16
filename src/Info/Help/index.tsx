@@ -161,13 +161,13 @@ export default () => (
           <Collapse title="What do the symbols in the survey report mean?">
             <div>
               <p>
-                [Seed Mix] tells you how many of the plant species you sowed
-                (through your seed mix) that appeared in your survey. Tap to
-                find out which species are missing.
+                <b>Seed Mix</b> tells you how many of the plant species you
+                sowed (through your seed mix) that appeared in your survey. Tap
+                to find out which species are missing.
               </p>
               <p>
-                [Insect] tells you how many insect species you are supporting.
-                Tap for the full list of species.
+                <b>Insect</b> tells you how many insect species you are
+                supporting. Tap for the full list of species.
               </p>
             </div>
           </Collapse>

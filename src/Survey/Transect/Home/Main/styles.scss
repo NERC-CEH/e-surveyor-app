@@ -1,7 +1,8 @@
 #transect-home ion-content {
-  ion-button {
+  ion-list + ion-button {
     margin-top: 40px;
   }
+
   .quadrats-list {
     background: transparent;
 
