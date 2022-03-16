@@ -105,7 +105,7 @@ export default () => (
                 compare the plant species you sowed to the plants you see in the
                 survey.
               </p>
-              <p> You can now begin to add plants to your survey. </p>
+              <p>You can now begin to add plants to your survey.</p>
               <p>
                 If you have identified the plants yourself, hold down the camera
                 button and write the name of your plant species into the text
@@ -121,7 +121,7 @@ export default () => (
                 different possible plant species, and choose which you think is
                 correct by clicking "This is my plant".
               </p>
-              <p> Click here to find out how to take an AI-friendly image. </p>
+              <p>Click here to find out how to take an AI-friendly image.</p>
               <p>
                 Keep going until you have a list of all of your plants, and then
                 click the finish button in the top right corner to view your
@@ -140,7 +140,9 @@ export default () => (
                 <b>Insect</b> tells you how many insect species you are
                 supporting. Tap for the full list of species.
               </p>
-              <p> Subtitle: Pollinators count </p>
+              <p>
+                <b>Pollinators count</b>
+              </p>
               <p>
                 This section shows you how many pollinating species are
                 supported by each of the plants in your habitat. More species is
@@ -150,7 +152,9 @@ export default () => (
                 many species are supported by a particular plant - tap the
                 number to find out more.
               </p>
-              <p> Subtitle: Supported species groups </p>
+              <p>
+                <b>Supported species groups</b>
+              </p>
               <p>
                 Insects provide a lot of services within your habitat, such as
                 pollination. It is good to support multiple species groups, as
@@ -264,7 +268,7 @@ export default () => (
                 Place your quadrat down in the first spot (or measure out the
                 area you will survey), and tap on the "Add quadrat" button.
               </p>
-              <p> Take a photo of the entire quadrat.</p>
+              <p>Take a photo of the entire quadrat.</p>
               <p>
                 Then, hold down the orange camera button to start listing plants
                 within the quadrat, or tap to take a photo for the AI to
@@ -315,10 +319,10 @@ export default () => (
                 to the following percentages, although this may change depending
                 on the plant species or habitat type:
               </p>
-              <p> 20% of quadrats or fewer = A rare species</p>
-              <p> 21% to 40% of quadrats = An occasional species </p>
-              <p> 41% to 60% of quadrats = A frequent species</p>
-              <p> 60% of quadrats or more = a very frequent species</p>
+              <p>20% of quadrats or fewer = A rare species</p>
+              <p>21% to 40% of quadrats = An occasional species </p>
+              <p>41% to 60% of quadrats = A frequent species</p>
+              <p>60% of quadrats or more = a very frequent species</p>
             </div>
           </Collapse>
         </div>
@@ -372,9 +376,9 @@ export default () => (
                 as an insect or your finger.
               </li>
               <li>
-                If the AI uis uncertain about hte species you can add more
-                photos from different angles or of different parts of your
-                species to help improve identification.
+                If the AI is uncertain about the species you can add more photos
+                from different angles or of different parts of your species to
+                help improve identification.
               </li>
             </ol>
           </Collapse>
