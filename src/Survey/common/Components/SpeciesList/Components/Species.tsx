@@ -52,13 +52,13 @@ const Species: FC<Props> = ({ sample, isDisabled, onDelete, onClick }) => {
     const earthIcon = notFoundInUK ? earth : checkmarkCircle;
 
     if (species.score > POSITIVE_THRESHOLD) {
-      idClass = 'id-green';
+      idClass = 'id-icon-positive';
       detailIcon = earthIcon;
     } else if (species.score > POSSIBLE_THRESHOLD) {
-      idClass = 'id-amber';
+      idClass = 'id-icon-possible';
       detailIcon = helpCircle;
     } else {
-      idClass = 'id-red';
+      idClass = 'id-icon-rejected';
       detailIcon = closeCircle;
     }
 

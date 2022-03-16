@@ -107,18 +107,18 @@ ion-spinner.identifying {
 
   ion-item {
     --padding-start: 0px;
-    --detail-icon-opacity: 0.8;
-  }
+    --detail-icon-opacity: 1;
 
-  ion-item.id-green {
-    --detail-icon-color: green;
-  }
+    &.id-icon-positive {
+      --detail-icon-color: var(--id-positive-color);
+    }
 
-  ion-item.id-amber {
-    --detail-icon-color: orange;
-  }
+    &.id-icon-possible {
+      --detail-icon-color: var(--id-possible-color);
+    }
 
-  ion-item.id-red {
-    --detail-icon-color: red;
+    &.id-icon-rejected {
+      --detail-icon-color: var(--id-rejected-color);
+    }
   }
 }

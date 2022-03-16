@@ -6,6 +6,8 @@ import {
   settingsOutline,
   arrowUndoOutline,
   personOutline,
+  helpCircle,
+  closeCircle,
 } from 'ionicons/icons';
 import './styles.scss';
 
@@ -113,10 +115,11 @@ export default () => (
                 If you would like the AI to identify your plants, tap on the
                 camera button and take a photo of the plant you would like to
                 identify. If the AI isn't sure what your plant is, it will put
-                an [orange question mark] or [red cross] next to the photo and
-                species name. You can tap to see images of different possible
-                plant species, and choose which you think is correct by clicking
-                "This is my plant".
+                an <IonIcon src={helpCircle} className="id-possible" /> or{' '}
+                <IonIcon src={closeCircle} className="id-rejected" /> next to
+                the photo and species name. You can tap to see images of
+                different possible plant species, and choose which you think is
+                correct by clicking "This is my plant".
               </p>
               <p> Click here to find out how to take an AI-friendly image. </p>
               <p>
@@ -129,13 +132,13 @@ export default () => (
           <Collapse title="What does my survey report mean?">
             <div>
               <p>
-                [Seed Mix] tells you how many of the plant species that you
+                <b>Seed Mix</b> tells you how many of the plant species that you
                 sowed (through your seed mix) appeared in your survey. Tap to
                 find out which species are missing.
               </p>
               <p>
-                [Insect] tells you how many insect species you are supporting.
-                Tap for the full list of species.
+                <b>Insect</b> tells you how many insect species you are
+                supporting. Tap for the full list of species.
               </p>
               <p> Subtitle: Pollinators count </p>
               <p>
