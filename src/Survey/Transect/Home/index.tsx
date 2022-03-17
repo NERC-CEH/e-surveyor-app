@@ -1,18 +1,12 @@
 import React, { FC, useContext } from 'react';
-import {
-  Header,
-  Page,
-  getDeepErrorMessage,
-  useAlert,
-  useToast,
-  useLoader,
-} from '@flumens';
+import { Header, Page, useToast } from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import appModel from 'models/app';
-import Sample from 'models/sample';
+import { useUserStatusCheck } from 'models/user';
+import Sample, { useValidateCheck } from 'models/sample';
 import Main from './Main';
 
 type Props = {
@@ -22,32 +16,23 @@ type Props = {
 const Controller: FC<Props> = ({ sample }) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
-  const alert = useAlert();
   const toast = useToast();
-  const loader = useLoader();
+  const checkUserStatus = useUserStatusCheck();
+  const checkSampleStatus = useValidateCheck(sample);
 
   const onUpload = async () => {
-    const isUploading = await sample.upload(alert, toast, loader);
+    const isUserOK = await checkUserStatus();
+    if (!isUserOK) return;
+
+    const isUploading = await sample.upload().catch(toast.error);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');
   };
 
   const onFinish = async () => {
-    const invalids = sample.validateRemote();
-    if (invalids) {
-      alert({
-        header: 'Survey incomplete',
-        message: getDeepErrorMessage(invalids),
-        buttons: [
-          {
-            text: 'Got it',
-            role: 'cancel',
-          },
-        ],
-      });
-      return;
-    }
+    const isValid = checkSampleStatus();
+    if (!isValid) return;
 
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;

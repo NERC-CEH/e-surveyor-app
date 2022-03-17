@@ -1,5 +1,11 @@
 import CONFIG from 'common/config';
-import { DrupalUserModel, DrupalUserModelAttrs } from '@flumens';
+import {
+  DrupalUserModel,
+  DrupalUserModelAttrs,
+  useToast,
+  useLoader,
+  device,
+} from '@flumens';
 import * as Yup from 'yup';
 import { set } from 'mobx';
 import { genericStore } from './store';
@@ -38,31 +44,11 @@ class UserModel extends DrupalUserModel {
     return true;
   }
 
-  async resendVerificationEmail(toast: any, loader: any) {
+  async resendVerificationEmail() {
     const isLoggedIn = !!this.attrs.email;
-    if (!isLoggedIn) {
-      toast.warn('Please log in first.');
-      return false;
-    }
+    if (!isLoggedIn || this.attrs.verified) return false;
 
-    if (this.attrs.verified) {
-      toast.warn('You are already verified.');
-      return false;
-    }
-
-    await loader.show('Please wait...');
-
-    try {
-      await this._sendVerificationEmail();
-      toast.success(
-        'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.',
-        5000
-      );
-    } catch (e) {
-      toast.error(e);
-    }
-
-    loader.hide();
+    await this._sendVerificationEmail();
 
     return true;
   }
@@ -79,5 +65,35 @@ const userModel = new UserModel({
   store: genericStore,
   config: CONFIG.backend,
 });
+
+export const useUserStatusCheck = () => {
+  const toast = useToast();
+  const loader = useLoader();
+
+  return async () => {
+    if (!device.isOnline) {
+      toast.warn('Looks like you are offline!');
+      return false;
+    }
+
+    if (!userModel.isLoggedIn()) {
+      toast.warn('Please log in first.');
+      return false;
+    }
+
+    if (!userModel.attrs.verified) {
+      await loader.show('Please wait...');
+      const isVerified = await userModel.checkActivation();
+      loader.hide();
+
+      if (!isVerified) {
+        toast.warn('The user has not been activated or is blocked.');
+        return false;
+      }
+    }
+
+    return true;
+  };
+};
 
 export default userModel;

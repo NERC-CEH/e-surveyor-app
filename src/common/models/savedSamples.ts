@@ -1,6 +1,5 @@
 import Sample from 'models/sample';
-import { initStoredSamples, device } from '@flumens';
-import userModel from 'models/user';
+import { initStoredSamples } from '@flumens';
 import { modelStore } from './store';
 
 console.log('SavedSamples: initializing');
@@ -10,26 +9,7 @@ const savedSamples = initStoredSamples(modelStore, Sample);
 savedSamples.uploadAll = async () => {
   console.log('SavedSamples: uploading all.');
 
-  if (!device.isOnline) {
-    return false;
-  }
-
-  const isActivated = await userModel.checkActivation();
-  if (!isActivated) {
-    return false;
-  }
-
-  const getUploadPromise = (sample: Sample) => {
-    if (
-      sample.remote.synchronising ||
-      sample.isUploaded() ||
-      sample.validateRemote()
-    ) {
-      return null;
-    }
-
-    return sample.saveRemote();
-  };
+  const getUploadPromise = (sample: Sample) => sample.upload();
   await Promise.all(savedSamples.map(getUploadPromise));
 
   console.log('SavedSamples: all records were uploaded!');

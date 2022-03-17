@@ -7,28 +7,31 @@ import transectIcon from 'common/images/transectIconBlack.svg';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import './styles.scss';
 
-function resetDialog(alert: any, resetApp: any) {
-  alert({
-    header: 'Reset',
-    skipTranslation: true,
-    message: (
-      <>
-        Are you sure you want to reset the application to its initial state?
-        <p>
-          <b>This will wipe all the locally stored app data!</b>
-        </p>
-      </>
-    ),
-    buttons: [
-      { text: 'Cancel', role: 'cancel', cssClass: 'secondary' },
-      {
-        text: 'Reset',
-        cssClass: 'secondary',
-        handler: resetApp,
-      },
-    ],
-  });
-}
+const useResetDialog = (resetApp: any) => {
+  const alert = useAlert();
+
+  return () =>
+    alert({
+      header: 'Reset',
+      skipTranslation: true,
+      message: (
+        <>
+          Are you sure you want to reset the application to its initial state?
+          <p>
+            <b>This will wipe all the locally stored app data!</b>
+          </p>
+        </>
+      ),
+      buttons: [
+        { text: 'Cancel', role: 'cancel', cssClass: 'secondary' },
+        {
+          text: 'Reset',
+          cssClass: 'secondary',
+          handler: resetApp,
+        },
+      ],
+    });
+};
 
 type Props = {
   resetApp: any;
@@ -45,9 +48,7 @@ const Menu: FC<Props> = ({
   use10stepsForCommonStandard,
   useAutoIDWhenBackOnline,
 }) => {
-  const alert = useAlert();
-
-  const showAlertDialog = () => resetDialog(alert, resetApp);
+  const showAlertDialog = useResetDialog(resetApp);
 
   const onSendAnalyticsToggle = (checked: boolean) =>
     onToggle('sendAnalytics', checked);

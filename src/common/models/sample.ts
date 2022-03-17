@@ -1,4 +1,4 @@
-import { device, getDeepErrorMessage } from '@flumens';
+import { device, getDeepErrorMessage, useAlert } from '@flumens';
 import Sample, {
   Attrs as SampleAttrs,
   Options as SampleOptions,
@@ -182,12 +182,38 @@ class AppSample extends Sample {
     return super.destroy();
   };
 
-  async upload(alert: any, toast: any) {
-    if (this.remote.synchronising) {
-      return true;
-    }
+  async upload() {
+    if (this.remote.synchronising || this.isUploaded()) return true;
 
     const invalids = this.validateRemote();
+    if (invalids) return false;
+
+    if (!device.isOnline) return false;
+
+    const isActivated = await userModel.checkActivation();
+    if (!isActivated) return false;
+
+    this.cleanUp();
+
+    this.saveRemote();
+
+    return true;
+  }
+
+  startGPS: any;
+
+  stopGPS: any;
+
+  isGPSRunning: any;
+
+  gpsExtensionInit: any;
+}
+
+export const useValidateCheck = (sample: AppSample) => {
+  const alert = useAlert();
+
+  return () => {
+    const invalids = sample.validateRemote();
     if (invalids) {
       alert({
         header: 'Survey incomplete',
@@ -201,34 +227,8 @@ class AppSample extends Sample {
       });
       return false;
     }
-
-    if (!device.isOnline) {
-      toast.warn('Looks like you are offline!');
-      return false;
-    }
-
-    const isActivated = await userModel.checkActivation();
-    if (!isActivated) {
-      return false;
-    }
-
-    this.cleanUp();
-    const showError = (e: any) => {
-      toast.error(e);
-      throw e;
-    };
-    this.saveRemote().catch(showError);
-
     return true;
-  }
-
-  startGPS: any;
-
-  stopGPS: any;
-
-  isGPSRunning: any;
-
-  gpsExtensionInit: any;
-}
+  };
+};
 
 export default AppSample;

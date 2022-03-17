@@ -1,7 +1,8 @@
 import React, { FC, useContext } from 'react';
-import Sample from 'models/sample';
-import { Page, Header, useAlert, useToast, useLoader } from '@flumens';
+import Sample, { useValidateCheck } from 'models/sample';
+import { Page, Header, useToast } from '@flumens';
 import { IonButton, NavContext } from '@ionic/react';
+import { useUserStatusCheck } from 'models/user';
 import { observer } from 'mobx-react';
 import Main from 'Components/ReportView';
 
@@ -11,14 +12,20 @@ type Props = {
 
 const ReportController: FC<Props> = ({ sample }) => {
   const { navigate } = useContext(NavContext);
-  const alert = useAlert();
   const toast = useToast();
-  const loader = useLoader();
+  const checkUserStatus = useUserStatusCheck();
+  const checkSampleStatus = useValidateCheck(sample);
 
   if (!sample) return null;
 
   const onUpload = async () => {
-    const isUploading = await sample.upload(alert, toast, loader);
+    const isUserOK = await checkUserStatus();
+    if (!isUserOK) return;
+
+    const isValid = checkSampleStatus();
+    if (!isValid) return;
+
+    const isUploading = await sample.upload().catch(toast.error);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');

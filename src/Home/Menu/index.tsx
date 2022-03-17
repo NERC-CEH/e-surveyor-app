@@ -4,52 +4,57 @@ import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
 import { Page, useAlert, useToast, useLoader } from '@flumens';
 import { Trans as T } from 'react-i18next';
 import appModel from 'models/app';
-import userModel from 'models/user';
+import userModel, { useUserStatusCheck } from 'models/user';
 import savedSamples from 'models/savedSamples';
 import Main from './Main';
 import './styles.scss';
 
-function showLogoutConfirmationDialog(alert: any, callback: any) {
-  let deleteData = false;
+const useConfirmationDialog = () => {
+  const alert = useAlert();
 
-  const onCheckboxChange = (e: any) => {
-    deleteData = e.detail.checked;
+  return (callback: any) => {
+    let deleteData = false;
+
+    const onCheckboxChange = (e: any) => {
+      deleteData = e.detail.checked;
+    };
+
+    alert({
+      header: 'Logout',
+      message: (
+        <>
+          <T>Are you sure you want to logout?</T>
+          <br />
+          <br />
+          <IonItem lines="none" className="log-out-checkbox">
+            <IonLabel>
+              <T>Discard local data</T>
+            </IonLabel>
+            <IonCheckbox onIonChange={onCheckboxChange} />
+          </IonItem>
+        </>
+      ),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+        {
+          text: 'Logout',
+          cssClass: 'primary',
+          handler: () => callback(deleteData),
+        },
+      ],
+    });
   };
-
-  alert({
-    header: 'Logout',
-    message: (
-      <>
-        <T>Are you sure you want to logout?</T>
-        <br />
-        <br />
-        <IonItem lines="none" className="log-out-checkbox">
-          <IonLabel>
-            <T>Discard local data</T>
-          </IonLabel>
-          <IonCheckbox onIonChange={onCheckboxChange} />
-        </IonItem>
-      </>
-    ),
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary',
-      },
-      {
-        text: 'Logout',
-        cssClass: 'primary',
-        handler: () => callback(deleteData),
-      },
-    ],
-  });
-}
+};
 
 const Controller = () => {
-  const alert = useAlert();
+  const showLogoutConfirmationDialog = useConfirmationDialog();
   const toast = useToast();
   const loader = useLoader();
+  const checkUserStatus = useUserStatusCheck();
 
   function logOut() {
     console.log('Info:Menu: logging out.');
@@ -63,28 +68,31 @@ const Controller = () => {
       appModel.attrs.transects = [];
       userModel.logOut();
     };
-    showLogoutConfirmationDialog(alert, resetWrap);
+    showLogoutConfirmationDialog(resetWrap);
   }
 
   const isLoggedIn = userModel.isLoggedIn();
 
-  const checkActivation = async () => {
+  const resendVerificationEmail = async () => {
     if (!isLoggedIn) {
       toast.warn('Please log in first.');
       return;
     }
 
     await loader.show('Please wait...');
-    const isVerified = await userModel.checkActivation();
-    loader.hide();
 
-    if (!isVerified) {
-      toast.warn('The user has not been activated or is blocked.');
+    try {
+      await userModel.resendVerificationEmail();
+      toast.success(
+        'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.',
+        { duration: 5000 }
+      );
+    } catch (e: any) {
+      toast.error(e.message);
     }
-  };
 
-  const resendVerificationEmail = () =>
-    userModel.resendVerificationEmail(toast, loader);
+    loader.hide();
+  };
 
   return (
     <Page id="info-menu">
@@ -93,7 +101,7 @@ const Controller = () => {
         appModel={appModel}
         isLoggedIn={isLoggedIn}
         logOut={logOut}
-        refreshAccount={checkActivation}
+        refreshAccount={checkUserStatus}
         resendVerificationEmail={resendVerificationEmail}
       />
     </Page>

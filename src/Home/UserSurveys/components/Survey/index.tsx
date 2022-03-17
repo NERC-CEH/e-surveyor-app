@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { useAlert, useToast, useLoader } from '@flumens';
-import Sample from 'models/sample';
+import { useAlert, useToast } from '@flumens';
+import Sample, { useValidateCheck } from 'models/sample';
+import { useUserStatusCheck } from 'models/user';
 import { observer } from 'mobx-react';
 import {
   IonItem,
@@ -15,25 +16,29 @@ import flowerIcon from 'common/images/flowerIcon.svg';
 import OnlineStatus from './components/OnlineStatus';
 import './styles.scss';
 
-function deleteSurvey(alert: (options: any) => void, sample: Sample) {
-  alert({
-    header: 'Delete',
-    skipTranslation: true,
-    message: 'Are you sure you want to remove it from your device?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'primary',
-      },
-      {
-        text: 'Delete',
-        cssClass: 'danger',
-        handler: () => sample.destroy(),
-      },
-    ],
-  });
-}
+const useDeleteAlert = (sample: Sample) => {
+  const alert = useAlert();
+
+  return () => {
+    alert({
+      header: 'Delete',
+      skipTranslation: true,
+      message: 'Are you sure you want to remove it from your device?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'primary',
+        },
+        {
+          text: 'Delete',
+          cssClass: 'danger',
+          handler: () => sample.destroy(),
+        },
+      ],
+    });
+  };
+};
 
 type Props = {
   sample: Sample;
@@ -41,9 +46,10 @@ type Props = {
 };
 
 const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
-  const alert = useAlert();
+  const deleteSurvey = useDeleteAlert(sample);
   const toast = useToast();
-  const loader = useLoader();
+  const checkUserStatus = useUserStatusCheck();
+  const checkSampleStatus = useValidateCheck(sample);
 
   const survey = sample.getSurvey();
 
@@ -86,9 +92,15 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
     );
   }
 
-  const onUpload = () => sample.upload(alert, toast, loader);
+  const onUpload = async () => {
+    const isUserOK = await checkUserStatus();
+    if (!isUserOK) return;
 
-  const deleteSurveyWrap = () => deleteSurvey(alert, sample);
+    const isValid = checkSampleStatus();
+    if (!isValid) return;
+
+    sample.upload().catch(toast.error);
+  };
 
   return (
     <IonItemSliding className="survey-list-item">
@@ -103,7 +115,7 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
       </IonItem>
 
       <IonItemOptions side="end">
-        <IonItemOption color="danger" onClick={deleteSurveyWrap}>
+        <IonItemOption color="danger" onClick={deleteSurvey}>
           Delete
         </IonItemOption>
       </IonItemOptions>
