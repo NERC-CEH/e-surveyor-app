@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonButton } from '@ionic/react';
-import { Page, Header, useLoader, useToast, device } from '@flumens';
+import { Page, Header, useToast, device } from '@flumens';
 import Sample from 'models/sample';
 import Main from './Main';
 
@@ -11,7 +11,6 @@ type Props = {
 };
 
 const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
-  const loader = useLoader();
   const toast = useToast();
   const sample = subSubSample || subSample;
   const [occ] = sample.occurrences;
@@ -36,19 +35,6 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
       Identify
     </IonButton>
   );
-
-  const isIdentifying = occ.isIdentifying();
-
-  useEffect(() => {
-    if (!loader) return;
-
-    if (occ.isIdentifying()) {
-      loader.show('Please wait...');
-      return;
-    }
-
-    loader.hide();
-  }, [loader, isIdentifying]);
 
   return (
     <Page id="species-profile">

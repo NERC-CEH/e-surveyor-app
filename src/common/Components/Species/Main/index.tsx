@@ -1,5 +1,5 @@
-import React, { FC, useContext, useState } from 'react';
-import { Main, URL } from '@flumens';
+import React, { FC, useContext, useState, useEffect } from 'react';
+import { Main, URL, useLoader } from '@flumens';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import SpeciesCard from 'common/Components/SpeciesCard';
@@ -26,7 +26,22 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
   const [editImage, setEditImage] = useState<Image>();
+  const loader = useLoader();
+
   const isDisabled = occurrence.isDisabled();
+
+  const isIdentifying = occurrence.isIdentifying();
+
+  useEffect(() => {
+    if (!loader) return;
+
+    if (occurrence.isIdentifying()) {
+      loader.show('Please wait...');
+      return;
+    }
+
+    loader.hide();
+  }, [loader, isIdentifying]);
 
   const onDoneEdit = async (image: URL) => {
     if (!editImage) return;
