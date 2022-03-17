@@ -13,7 +13,7 @@ import transectSurveyConfig from 'Survey/Transect/config';
 import GPSExtension from './sampleGPSExt';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
 import { modelStore } from './store';
-import Occurrence, { Species } from './occurrence';
+import Occurrence from './occurrence';
 import Media from './image';
 
 const surveyConfig = {
@@ -81,6 +81,12 @@ class AppSample extends Sample {
 
   attrs: Attrs = this.attrs;
 
+  occurrences: Occurrence[] = this.occurrences;
+
+  samples: AppSample[] = this.samples;
+
+  media: Media[] = this.media;
+
   constructor(options: SampleOptions) {
     super(options);
 
@@ -127,19 +133,9 @@ class AppSample extends Sample {
     }
 
     const [occ] = this.occurrences;
-    if (!occ || !occ.media[0]) {
-      return false;
-    }
+    if (!occ || !occ.media[0]) return false;
 
-    return occ.media[0].isIdentifying();
-  }
-
-  setSpecies(species: Species) {
-    if (!this.parent) {
-      throw new Error('Parent does not exist');
-    }
-
-    return this.occurrences[0].setSpecies(species);
+    return occ.isIdentifying();
   }
 
   getAISuggestions() {
@@ -147,12 +143,10 @@ class AppSample extends Sample {
       throw new Error('Parent does not exist');
     }
 
-    const images = this.occurrences[0].media;
-    if (!images.length) {
-      return false;
-    }
+    const image = this.occurrences[0].media[0];
+    if (!image || !image.attrs.species?.length) return [];
 
-    return images[0].attrs.species;
+    return image.attrs.species;
   }
 
   getPrettyName() {

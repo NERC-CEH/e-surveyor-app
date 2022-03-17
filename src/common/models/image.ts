@@ -8,11 +8,11 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { Species } from './occurrence';
+import { ResultWithWarehouseID } from 'common/services/plantNet';
 
 export type URL = string;
 
-type Attrs = MediaAttrs & { species?: Species[] | null };
+type Attrs = MediaAttrs & { species?: ResultWithWarehouseID[] | null };
 
 export default class AppMedia extends Media {
   /**

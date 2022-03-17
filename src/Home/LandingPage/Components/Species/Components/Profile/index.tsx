@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { IonSpinner, IonLabel } from '@ionic/react';
 import { Main } from '@flumens';
 import SpeciesCard from 'Components/SpeciesCard';
-import Occurrence, { Species } from 'models/occurrence';
+import Occurrence, { Taxon } from 'models/occurrence';
 import './styles.scss';
 
 interface Props {
@@ -14,7 +14,7 @@ const SpeciesProfile: FC<Props> = ({ occurrence }) => {
   if (!occurrence) return null;
 
   const getPlantList = () => {
-    const getSpeciesCard = (sp: Species) => (
+    const getSpeciesCard = (sp: Taxon) => (
       <SpeciesCard key={sp.gbif?.id} species={sp} />
     );
 

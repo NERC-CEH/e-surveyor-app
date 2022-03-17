@@ -24,12 +24,12 @@ export interface Survey {
       AppSample: typeof Sample,
       AppOccurrence: typeof Occurrence,
       photo?: any
-    ) => any;
+    ) => Sample;
 
     occ: {
       attrs: Attrs | any;
       verify?: (attrs: any) => any;
-      create: (AppOccurrence: typeof Occurrence, photo: any) => any;
+      create: (AppOccurrence: typeof Occurrence, photo: any) => Occurrence;
       modifySubmission: (submission: any) => any;
     };
 
@@ -38,7 +38,7 @@ export interface Survey {
 
   verify?: (attrs: any, sample: any) => any;
 
-  create: (sample: typeof Sample) => any;
+  create: (sample: typeof Sample) => Sample;
 
   modifySubmission: (submission: any) => any;
 }

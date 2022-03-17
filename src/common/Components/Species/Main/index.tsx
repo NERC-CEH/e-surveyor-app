@@ -13,7 +13,7 @@ import {
 import { searchOutline, close, cropOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
 import Sample from 'models/sample';
-import { Species } from 'models/occurrence';
+import { Taxon } from 'models/occurrence';
 import Image from 'models/image';
 import config from 'common/config';
 import ImageCropper from 'common/Components/ImageCropper';
@@ -81,7 +81,7 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
   };
 
   const getAIResults = () => {
-    const getTaxon = (sp: Species) => {
+    const getTaxon = (sp: Taxon) => {
       const taxon = JSON.parse(JSON.stringify(sp));
       taxon.scoreFromAPI = sp.score;
       taxon.score = 1;
@@ -89,12 +89,13 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
       return taxon;
     };
 
-    const setSpeciesAsMain = (sp: Species) => {
-      sample.setSpecies(getTaxon(sp));
+    const setSpeciesAsMain = (sp: Taxon) => {
+      // eslint-disable-next-line no-param-reassign
+      sample.occurrences[0].attrs.taxon = getTaxon(sp);
       sample.save();
     };
 
-    const getSpeciesCard = (sp: Species) => {
+    const getSpeciesCard = (sp: Taxon) => {
       const onSelectWrap = () => setSpeciesAsMain(sp);
 
       if (sp.score <= 0.01) return null; // 1%
@@ -111,7 +112,7 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
     const species = sample.getAISuggestions() || [];
     const { taxon } = occ.attrs;
 
-    const nonSelectedSpecies = (sp: Species) =>
+    const nonSelectedSpecies = (sp: Taxon) =>
       taxon && sp.species.commonNames[0] !== taxon.species.commonNames[0];
 
     return species.filter(nonSelectedSpecies).map(getSpeciesCard);

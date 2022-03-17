@@ -13,6 +13,7 @@ import {
   IonButton,
   IonIcon,
 } from '@ionic/react';
+import { Taxon } from 'models/occurrence';
 import { Gallery, InfoBackgroundMessage, device } from '@flumens';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
@@ -84,7 +85,7 @@ const getDoughnutData = (score: number) => {
 };
 
 interface Props {
-  species: any;
+  species: Taxon;
   onSelect?: any;
   selectedSpeciesByUser?: any;
 }
@@ -111,7 +112,7 @@ const SpeciesCard: FC<Props> = ({
         author: img.author || '',
       };
     };
-    const items = species.images.map(showSpImages);
+    const items = species.images?.map(showSpImages) || [];
 
     return (
       <div className="species-profile-photo">
@@ -155,9 +156,7 @@ const SpeciesCard: FC<Props> = ({
   };
 
   const getImages = () => {
-    const fullSpecies = species;
-
-    const firstFourImages = fullSpecies.images.slice(0, 4);
+    const firstFourImages = species.images?.slice(0, 4) || [];
 
     const showImage = [
       ...firstFourImages,
@@ -169,12 +168,11 @@ const SpeciesCard: FC<Props> = ({
     return images;
   };
 
-  const fullSpecies = species;
-
-  const { species: sp, score, images } = fullSpecies;
+  const { species: sp, score } = species;
+  const images = species.images || [];
   const { isOnline } = device;
 
-  const onSelectWrap = () => onSelect(fullSpecies);
+  const onSelectWrap = () => onSelect(species);
   const commonName = !!sp.commonNames.length && sp.commonNames[0];
 
   return (
@@ -221,7 +219,7 @@ const SpeciesCard: FC<Props> = ({
           </IonList>
         )}
 
-        {!fullSpecies.warehouseId && (
+        {!species.warehouseId && (
           <InfoBackgroundMessage>
             This plant is not a UK native
             <IonIcon icon={earthOutline} />

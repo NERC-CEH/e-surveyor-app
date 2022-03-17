@@ -22,18 +22,14 @@ type Taxon = {
 const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
   const context = useContext(NavContext);
 
-  const transformUKSIToAppTaxon = (taxon: Taxon) => {
-    const newDataFormat = {
-      species: {
-        commonNames: taxon.common_name ? [taxon.common_name] : [],
-        scientificNameWithoutAuthor: taxon.scientific_name,
-      },
-      warehouseId: taxon.warehouse_id,
-      score: 1,
-    };
-
-    return newDataFormat;
-  };
+  const transformUKSIToAppTaxon = (taxon: Taxon) => ({
+    species: {
+      commonNames: taxon.common_name ? [taxon.common_name] : [],
+      scientificNameWithoutAuthor: taxon.scientific_name,
+    },
+    warehouseId: taxon.warehouse_id,
+    score: 1,
+  });
 
   const onSpeciesSelected = async (taxon: Taxon) => {
     const survey = sample.getSurvey();
@@ -44,18 +40,18 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
 
     if (!subModel) {
       const modelSurvey = model.getSurvey();
-      const newSubSample = modelSurvey.smp.create(Sample, Occurrence);
+      const newSubSample: Sample = modelSurvey.smp.create(Sample, Occurrence);
 
       model.samples.push(newSubSample);
 
-      newSubSample.setSpecies(transformUKSIToAppTaxon(taxon));
+      newSubSample.occurrences[0].attrs.taxon = transformUKSIToAppTaxon(taxon);
 
       model.save();
       context.goBack();
       return;
     }
 
-    subModel.setSpecies(transformUKSIToAppTaxon(taxon));
+    subModel.occurrences[0].attrs.taxon = transformUKSIToAppTaxon(taxon);
     model.save();
 
     context.goBack();

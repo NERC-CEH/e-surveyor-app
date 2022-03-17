@@ -17,7 +17,6 @@ import {
 } from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
-import Occurrence from 'models/occurrence';
 import clsx from 'clsx';
 import config from 'common/config';
 import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
@@ -34,9 +33,9 @@ type Props = {
 const isUnknown = (value: boolean) => (smp: Sample) =>
   !!smp.getSpecies() === value;
 
-function byCreateTime(occ1: Occurrence, occ2: Occurrence) {
-  const date1 = new Date(occ1.metadata.created_on);
-  const date2 = new Date(occ2.metadata.created_on);
+function byCreateTime(smp1: Sample, smp2: Sample) {
+  const date1 = new Date(smp1.metadata.created_on);
+  const date2 = new Date(smp2.metadata.created_on);
   return date2.getTime() - date1.getTime();
 }
 
