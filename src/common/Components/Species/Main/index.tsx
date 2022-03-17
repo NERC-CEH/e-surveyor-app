@@ -12,24 +12,21 @@ import {
 } from '@ionic/react';
 import { searchOutline, close, cropOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
-import Sample from 'models/sample';
-import { Taxon } from 'models/occurrence';
+import Occurrence, { Taxon } from 'models/occurrence';
 import Image from 'models/image';
 import config from 'common/config';
 import ImageCropper from 'common/Components/ImageCropper';
 import './styles.scss';
 
 type Props = {
-  sample: Sample;
+  occurrence: Occurrence;
   isDisabled: boolean;
 };
 
-const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
+const EditSpeciesMain: FC<Props> = ({ occurrence, isDisabled }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
   const [editImage, setEditImage] = useState<Image>();
-
-  const [occ] = sample.occurrences;
 
   const onDoneEdit = async (image: URL) => {
     if (!editImage) return;
@@ -70,7 +67,7 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
   };
 
   const getSelectedSpecies = () => {
-    const { taxon: sp } = occ.attrs;
+    const { taxon: sp } = occurrence.attrs;
     if (!sp) return null;
 
     const selectedSpeciesByUser = !sp.gbif?.id || !!sp.scoreFromAPI;
@@ -91,8 +88,8 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
 
     const setSpeciesAsMain = (sp: Taxon) => {
       // eslint-disable-next-line no-param-reassign
-      sample.occurrences[0].attrs.taxon = getTaxon(sp);
-      sample.save();
+      occurrence.attrs.taxon = getTaxon(sp);
+      occurrence.save();
     };
 
     const getSpeciesCard = (sp: Taxon) => {
@@ -109,8 +106,11 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
       );
     };
 
-    const species = sample.getAISuggestions() || [];
-    const { taxon } = occ.attrs;
+    const image = occurrence.media[0];
+    if (!image || !image.attrs.species?.length) return [];
+
+    const species = image.attrs.species || [];
+    const { taxon } = occurrence.attrs;
 
     const nonSelectedSpecies = (sp: Taxon) =>
       taxon && sp.species.commonNames[0] !== taxon.species.commonNames[0];
@@ -144,7 +144,7 @@ const EditSpeciesMain: FC<Props> = ({ sample, isDisabled }) => {
     <div className="species-main-image-wrapper">
       <div className="rounded">
         <PhotoPicker
-          model={occ}
+          model={occurrence}
           Image={ImageWithCropping}
           placeholderCount={isPlatform('mobile') ? 1 : 5}
           isDisabled={isDisabled}

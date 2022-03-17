@@ -53,7 +53,7 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
   return (
     <Page id="species-profile">
       <Header title="Species" rightSlot={identifyButton} />
-      <Main sample={sample} isDisabled={subSample.isUploaded()} />
+      <Main occurrence={occ} isDisabled={subSample.isUploaded()} />
     </Page>
   );
 };

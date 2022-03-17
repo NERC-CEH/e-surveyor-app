@@ -138,17 +138,6 @@ class AppSample extends Sample {
     return occ.isIdentifying();
   }
 
-  getAISuggestions() {
-    if (!this.parent) {
-      throw new Error('Parent does not exist');
-    }
-
-    const image = this.occurrences[0].media[0];
-    if (!image || !image.attrs.species?.length) return [];
-
-    return image.attrs.species;
-  }
-
   getPrettyName() {
     if (!this.parent || this.metadata.survey === 'point') {
       return '';
