@@ -20,13 +20,13 @@ import './styles.scss';
 
 type Props = {
   occurrence: Occurrence;
-  isDisabled: boolean;
 };
 
-const EditSpeciesMain: FC<Props> = ({ occurrence, isDisabled }) => {
+const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
   const [editImage, setEditImage] = useState<Image>();
+  const isDisabled = occurrence.isDisabled();
 
   const onDoneEdit = async (image: URL) => {
     if (!editImage) return;
