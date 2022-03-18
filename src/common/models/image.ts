@@ -69,9 +69,7 @@ export default class AppMedia extends Media {
     ...this.attrs,
   });
 
-  async destroy(...args: any) {
-    const silent = args[0];
-
+  async destroy() {
     console.log('MediaModel: destroying.');
 
     // remove from internal storage
@@ -82,9 +80,7 @@ export default class AppMedia extends Media {
 
       this.parent.media.remove(this);
 
-      if (silent) {
-        return null;
-      }
+      if (!this.isPersistent()) return null;
 
       return this.parent.save();
     }
@@ -98,15 +94,11 @@ export default class AppMedia extends Media {
         });
       }
 
-      if (!this.parent) {
-        return null;
-      }
+      if (!this.parent) return null;
 
       this.parent.media.remove(this);
 
-      if (silent) {
-        return null;
-      }
+      if (!this.isPersistent()) return null;
 
       return this.parent.save();
     } catch (err) {
@@ -128,6 +120,10 @@ export default class AppMedia extends Media {
 
   // eslint-disable-next-line class-methods-use-this
   validateRemote = () => null;
+
+  isPersistent() {
+    return this.parent && this.parent?.isPersistent();
+  }
 
   async save() {
     if (!this.parent) {

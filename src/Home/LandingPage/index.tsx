@@ -34,7 +34,10 @@ const LandingPage: FC<Props> = () => {
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
 
-  const hideSpeciesModal = () => setSpecies(undefined);
+  const hideSpeciesModal = () => {
+    species?.media.forEach(media => media.destroy());
+    setSpecies(undefined);
+  };
 
   const identifyPhoto = async () => {
     if (!device.isOnline) {

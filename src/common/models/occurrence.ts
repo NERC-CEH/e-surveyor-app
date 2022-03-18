@@ -64,10 +64,13 @@ export default class AppOccurrence extends Occurrence {
       throw error;
     }
 
-    const isPartOfSurvey = this.parent;
-    if (!isPartOfSurvey) return;
+    if (!this.isPersistent()) return;
 
     this.save();
+  }
+
+  isPersistent() {
+    return !!this.parent;
   }
 
   canReIdentify() {

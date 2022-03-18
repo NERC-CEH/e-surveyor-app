@@ -2,5 +2,17 @@
   ion-segment {
     margin: 10px auto;
     width: 90%;
+
+    ion-segment-button[aria-selected='false'].md {
+      color: #ffffffab;
+    }
+    ion-segment-button[aria-selected='true'].md {
+      border-bottom: white 1px solid;
+      color: white;
+    }
+
+    ion-segment-button[aria-selected='true'].ios {
+      color: black;
+    }
   }
 }

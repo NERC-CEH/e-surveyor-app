@@ -32,14 +32,12 @@
         .species-images {
           border-radius: 15px;
           overflow: hidden;
-          width: 12vh;
-          height: 12vh;
         }
 
         .species-placeholder-images {
           border-radius: 15px;
-          height: 12vh;
-          width: 12vh;
+          width: 100%;
+          padding: 50% 0; // instead of 100% height
           background: #f1f1f1;
         }
       }

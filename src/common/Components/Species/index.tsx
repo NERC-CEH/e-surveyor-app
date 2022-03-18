@@ -28,11 +28,10 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
     }
   };
 
-  // TODO: check if deleted
-
-  const identifyButton = occ.canReIdentify() && (
+  const isIdentifying = occ.isIdentifying();
+  const identifyButton = !isIdentifying && occ.canReIdentify() && (
     <IonButton onClick={identifySpecies} color="secondary" fill="solid">
-      Identify
+      Reidentify
     </IonButton>
   );
 

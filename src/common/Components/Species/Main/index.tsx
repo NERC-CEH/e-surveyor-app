@@ -9,6 +9,7 @@ import {
   IonIcon,
   NavContext,
   isPlatform,
+  IonLabel,
 } from '@ionic/react';
 import { searchOutline, close, cropOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
@@ -28,7 +29,8 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   const [editImage, setEditImage] = useState<Image>();
   const loader = useLoader();
 
-  const isDisabled = occurrence.isDisabled();
+  const isPartOfSurvey = occurrence.parent;
+  const isDisabled = isPartOfSurvey && occurrence.isDisabled();
 
   const isIdentifying = occurrence.isIdentifying();
 
@@ -48,14 +50,22 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
 
     const newImageModel = await Image.getImageModel(image, config.dataPath);
     Object.assign(editImage?.attrs, newImageModel.attrs);
-    editImage.save();
+    if (editImage.isPersistent()) editImage.save();
     setEditImage(undefined);
   };
 
   const onCancelEdit = () => setEditImage(undefined);
 
   // eslint-disable-next-line react/no-unstable-nested-components
-  const ImageWithCropping = ({ media, onDelete, onClick }: any) => {
+  const ImageWithCropping = ({
+    media,
+    onDelete,
+    onClick,
+  }: {
+    media: Image;
+    onDelete: any;
+    onClick: any;
+  }) => {
     const cropImage = () => {
       setEditImage(media);
     };
@@ -69,7 +79,6 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
         )}
         <img
           src={media.getURL()}
-          alt=""
           onClick={onClick} // TODO: fix
         />
         {!isDisabled && (
@@ -116,7 +125,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
         <SpeciesCard
           key={sp.warehouseId}
           species={sp}
-          onSelect={!isDisabled ? onSelectWrap : null}
+          onSelect={!isDisabled && isPartOfSurvey ? onSelectWrap : null}
         />
       );
     };
@@ -168,17 +177,40 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
     </div>
   );
 
+  const getUnknownSpeciesMessage = () => {
+    const identifying = occurrence.isIdentifying();
+
+    if (!identifying) {
+      const hasNoSpecies = !occurrence.attrs.taxon;
+      if (hasNoSpecies) {
+        return (
+          <div className="identifying">
+            <IonLabel>
+              <h2>
+                <b>Sorry, we couldn't find any species 😕</b>
+              </h2>
+            </IonLabel>
+          </div>
+        );
+      }
+    }
+
+    return null;
+  };
+
   return (
     <>
       <Main id="edit-species">
         {showSpeciesMainPhoto()}
 
         <IonList className="species-wrapper">
+          {getUnknownSpeciesMessage()}
+
           {getSelectedSpecies()}
 
           {getAIResults()}
 
-          {getSpeciesAddButton()}
+          {isPartOfSurvey && getSpeciesAddButton()}
         </IonList>
       </Main>
       <ImageCropper
