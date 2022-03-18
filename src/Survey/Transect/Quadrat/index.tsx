@@ -1,21 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Page, Header, device, captureImage, useAlert } from '@flumens';
 import { observer } from 'mobx-react';
-import ImageModel from 'models/image';
+import Media from 'models/image';
+import { isPlatform } from '@ionic/react';
 import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
+import { Capacitor } from '@capacitor/core';
 import { usePromptImageSource } from 'Components/PhotoPicker';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
+import ImageCropper from 'Components/ImageCropper';
 import Main from './Main';
+
+type URL = string;
 
 type Props = {
   subSample: Sample;
 };
 
 const showFirstPhotoTip = (alert: any) => {
-  // if (!appModel.attrs.showFirstPhotoTip) return null;
+  if (!appModel.attrs.showFirstPhotoTip) return null;
 
   appModel.attrs.showFirstPhotoTip = false;
 
@@ -61,35 +66,18 @@ const showFirstPhotoTip = (alert: any) => {
 
 const QuadratController: FC<Props> = ({ subSample }) => {
   const alert = useAlert();
+  const [editImage, setEditImage] = useState<URL>();
 
   const isDisabled = subSample.isUploaded();
   const promptImageSource = usePromptImageSource();
 
-  const photoSelect = async () => {
-    const shouldUseCamera = await promptImageSource();
-    const cancelled = shouldUseCamera === null;
-    if (cancelled) return;
-
-    if (shouldUseCamera) {
-      await showFirstPhotoTip(alert);
-    }
-
-    const photos = await captureImage(
-      shouldUseCamera
-        ? { getPhoto: getPhotoFromCustomCamera }
-        : { multiple: true }
-    );
-
-    if (!photos || !photos.length) {
-      return;
-    }
-
+  const attachImages = async (photoURLs: URL[]) => {
     // eslint-disable-next-line no-restricted-syntax
-    for (const photo of photos) {
+    for (const photoURL of photoURLs) {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const image = await ImageModel.getImageModel(photo, dataDirPath);
+      const image = await Media.getImageModel(photoURL, dataDirPath);
 
       const survey = subSample.getSurvey();
       const newSubSample = survey.smp.create(Sample, Occurrence, image);
@@ -101,6 +89,43 @@ const QuadratController: FC<Props> = ({ subSample }) => {
     }
   };
 
+  const photoSelect = async () => {
+    const shouldUseCamera = await promptImageSource();
+    const cancelled = shouldUseCamera === null;
+    if (cancelled) return;
+
+    if (shouldUseCamera) {
+      await showFirstPhotoTip(alert);
+    }
+
+    const photoURLs = await captureImage(
+      shouldUseCamera
+        ? { getPhoto: getPhotoFromCustomCamera }
+        : { multiple: true }
+    );
+
+    if (!photoURLs || !photoURLs.length) return;
+
+    const canEdit = photoURLs.length === 1;
+    if (canEdit) {
+      let imageToEdit = photoURLs[0];
+      if (isPlatform('hybrid')) {
+        imageToEdit = Capacitor.convertFileSrc(imageToEdit);
+      }
+
+      setEditImage(imageToEdit);
+      return;
+    }
+
+    attachImages(photoURLs);
+  };
+
+  const onDoneEdit = (image: URL) => {
+    attachImages([image]);
+    setEditImage(undefined);
+  };
+  const onCancelEdit = () => setEditImage(undefined);
+
   return (
     <Page id="transect-quadrat">
       <Header title={subSample.getPrettyName()} />
@@ -108,6 +133,11 @@ const QuadratController: FC<Props> = ({ subSample }) => {
         subSample={subSample}
         isDisabled={isDisabled}
         photoSelect={photoSelect}
+      />
+      <ImageCropper
+        image={editImage}
+        onDone={onDoneEdit}
+        onCancel={onCancelEdit}
       />
     </Page>
   );
