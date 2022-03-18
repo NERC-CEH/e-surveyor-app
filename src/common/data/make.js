@@ -78,6 +78,7 @@ const fetchAndSave = async sheet => {
 
 const getData = async () => {
   await fetchAndSave('uksi_plants');
+  await fetchAndSave('uksi_plants_blacklist');
   await fetchAndSave('species');
   await fetchAndSave('seedmix');
   await fetchAndSave('pollination');

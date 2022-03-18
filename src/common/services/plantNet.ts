@@ -5,7 +5,10 @@ import { isPlatform } from '@ionic/react';
 import Image from 'models/image';
 import UKSIPlants from '../data/uksi_plants.list.json';
 import UKPlantNames from '../data/uksi_plants.names.json';
+import blackListedData from '../data/cacheRemote/uksi_plants_blacklist.json';
 import PlantNetResponse, { Result } from './plantNetResponse.d';
+
+const blacklisted = blackListedData.map(sp => sp.taxon);
 
 export type ResultWithWarehouseID = Result & { warehouseId: number };
 
@@ -94,6 +97,9 @@ function filterUKSpeciesWrap(results: ResultWithWarehouseID[]) {
     return false;
   };
 
+  const blacklistedUKSpecies = (result: ResultWithWarehouseID) =>
+    !blacklisted.includes(result.species.scientificNameWithoutAuthor);
+
   const changeScoreValue = (sp: ResultWithWarehouseID) => {
     const newScore = sp.score / (1 - removedSpeciesScores);
 
@@ -102,6 +108,7 @@ function filterUKSpeciesWrap(results: ResultWithWarehouseID[]) {
 
   const filteredSpecies = results
     .filter(filterByUKSpecies)
+    .filter(blacklistedUKSpecies)
     .map(changeScoreValue);
 
   return filteredSpecies;
