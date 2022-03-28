@@ -9,6 +9,17 @@ import {
   helpCircle,
   closeCircle,
 } from 'ionicons/icons';
+import beeIcon from 'common/images/bee.svg';
+import seedsIcon from 'common/images/seeds.svg';
+import pollinatorsTable from './pollinators.png';
+import supportedGroupsTable from './supportedGroups.png';
+import cameraButton from './cameraButton.png';
+import mapPicker from './mapPicker.png';
+import twoPeopleRecording from './twoPeopleRecording.jpg';
+import personTakingPhoto from './personTakingPhoto.jpg';
+import transectWShape from './transectWShape.png';
+import flowers from './flowers.jpg';
+import insects from './insects.jpg';
 import './styles.scss';
 
 export default () => (
@@ -99,6 +110,7 @@ export default () => (
                 you can do this by clicking on the right arrow and using the map
                 to choose your location.
               </p>
+              <img src={mapPicker} />
               <p>
                 Choose your seed supplier from the drop down menu, and then
                 choose the name of your seed mix. This will allow the app to
@@ -106,6 +118,7 @@ export default () => (
                 survey.
               </p>
               <p>You can now begin to add plants to your survey.</p>
+              <img src={cameraButton} />
               <p>
                 If you have identified the plants yourself, hold down the camera
                 button and write the name of your plant species into the text
@@ -121,7 +134,10 @@ export default () => (
                 different possible plant species, and choose which you think is
                 correct by clicking "This is my plant".
               </p>
-              <p>Click here to find out how to take an AI-friendly image.</p>
+              <p>
+                <a href="https://plantnet.org/en/how-why">Click here</a> to find
+                out how to take an AI-friendly image.
+              </p>
               <p>
                 Keep going until you have a list of all of your plants, and then
                 click the finish button in the top right corner to view your
@@ -132,17 +148,20 @@ export default () => (
           <Collapse title="What does my survey report mean?">
             <div>
               <p>
-                <b>Seed Mix</b> tells you how many of the plant species that you
-                sowed (through your seed mix) appeared in your survey. Tap to
-                find out which species are missing.
+                <IonIcon src={seedsIcon} /> <b>Seed Mix</b> tells you how many
+                of the plant species that you sowed (through your seed mix)
+                appeared in your survey. Tap to find out which species are
+                missing.
               </p>
               <p>
-                <b>Insect</b> tells you how many insect species you are
-                supporting. Tap for the full list of species.
+                <IonIcon src={beeIcon} /> <b>Insect</b> tells you how many
+                insect species you are supporting. Tap for the full list of
+                species.
               </p>
               <p>
                 <b>Pollinators count</b>
               </p>
+              <img src={pollinatorsTable} />
               <p>
                 This section shows you how many pollinating species are
                 supported by each of the plants in your habitat. More species is
@@ -152,9 +171,12 @@ export default () => (
                 many species are supported by a particular plant - tap the
                 number to find out more.
               </p>
+              <img src={insects} />
+
               <p>
                 <b>Supported species groups</b>
               </p>
+              <img src={supportedGroupsTable} />
               <p>
                 Insects provide a lot of services within your habitat, such as
                 pollination. It is good to support multiple species groups, as
@@ -168,18 +190,21 @@ export default () => (
           <Collapse title="What do the symbols in the survey report mean?">
             <div>
               <p>
-                <b>Seed Mix</b> tells you how many of the plant species you
-                sowed (through your seed mix) that appeared in your survey. Tap
-                to find out which species are missing.
+                <IonIcon src={seedsIcon} /> <b>Seed Mix</b> tells you how many
+                of the plant species you sowed (through your seed mix) that
+                appeared in your survey. Tap to find out which species are
+                missing.
               </p>
               <p>
-                <b>Insect</b> tells you how many insect species you are
-                supporting. Tap for the full list of species.
+                <IonIcon src={beeIcon} /> <b>Insect</b> tells you how many
+                insect species you are supporting. Tap for the full list of
+                species.
               </p>
             </div>
           </Collapse>
           <Collapse title="How do I improve my score in the survey?">
             <div>
+              <img src={flowers} />
               <p>
                 The survey results are based on the plants that insects are
                 attracted to. To improve your score, use pollinator friendly
@@ -251,6 +276,7 @@ export default () => (
                 number of times you will stop and identify plants), plan a route
                 that covers all of the different features in your habitat.
               </p>
+              <img src={transectWShape} />
               <p>
                 Pick up your quadrat (or something that you can use to measure
                 out the area you will search for plants in) and click next to
@@ -260,6 +286,7 @@ export default () => (
           </Collapse>
           <Collapse title="How to complete a transect">
             <div>
+              <img src={personTakingPhoto} />
               <p>
                 Give your survey a name (such as the name of the place you are
                 surveying).
@@ -285,16 +312,20 @@ export default () => (
             </div>
           </Collapse>
           <Collapse title="What distance should I walk between quadrats in a transect?">
-            <p>
-              The distance you walk between each quadrat depends on the area of
-              habitat you are surveying. You should try to walk an even distance
-              between each quadrat, and plan your route so that you are stopping
-              in areas with different features (such as a ridge, or a tree
-              creating shade).
-            </p>
+            <div>
+              <img src={transectWShape} />
+              <p>
+                The distance you walk between each quadrat depends on the area
+                of habitat you are surveying. You should try to walk an even
+                distance between each quadrat, and plan your route so that you
+                are stopping in areas with different features (such as a ridge,
+                or a tree creating shade).
+              </p>
+            </div>
           </Collapse>
           <Collapse title="What does my transect report mean?">
             <div>
+              <img src={twoPeopleRecording} />
               <p>
                 The transect report compares your survey to a list of plant
                 species that indicate good and bad quality habitat.
