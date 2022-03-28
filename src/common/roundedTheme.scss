@@ -48,11 +48,13 @@ div.rounded {
   }
 }
 
-ion-list {
+// :not([slot='content']) = accordion
+ion-list:not([slot='content']) {
   padding: 0 10px !important;
 }
 
-ion-list,
+// :not([slot='content']) = accordion
+ion-list:not([slot='content']),
 ion-item-divider {
   background: transparent !important;
 }

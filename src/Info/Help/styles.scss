@@ -1,10 +1,10 @@
 #help.ion-page ion-content {
-  * {
-    --background: transparent;
-  }
-
   .rounded {
     background: white;
+
+    ion-list[slot='content'] ion-item {
+      --background: #f4f5f861;
+    }
   }
 
   ion-label {

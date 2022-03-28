@@ -15,7 +15,7 @@ export default () => (
   <Page id="help">
     <Header title="Help" />
     <Main class="ion-padding">
-      <IonList lines="none">
+      <IonList>
         <IonItemDivider>
           <T>User</T>
         </IonItemDivider>
