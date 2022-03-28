@@ -25,7 +25,7 @@ const ResetMain: FC<Props> = ({ onSubmit, schema }) => {
         />
       </IonList>
 
-      <IonButton color="primary" type="submit" expand="block">
+      <IonButton color="secondary" type="submit" expand="block">
         <T>Reset</T>
       </IonButton>
     </Form>

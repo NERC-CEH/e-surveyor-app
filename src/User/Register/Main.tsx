@@ -72,7 +72,7 @@ const RegisterMain: FC<Props> = ({ onSubmit, schema }) => {
         </div>
       </IonList>
 
-      <IonButton color="primary" type="submit" expand="block">
+      <IonButton color="secondary" type="submit" expand="block">
         <T>Sign Up</T>
       </IonButton>
 

@@ -57,7 +57,7 @@ const LoginMain: FC<Props> = ({ schema, onSubmit }) => {
 
       {/** https://github.com/formium/formik/issues/1418 */}
       <input type="submit" style={{ display: 'none' }} />
-      <IonButton color="primary" type="submit" expand="block">
+      <IonButton color="secondary" type="submit" expand="block">
         <T>Sign In</T>
       </IonButton>
     </Form>
