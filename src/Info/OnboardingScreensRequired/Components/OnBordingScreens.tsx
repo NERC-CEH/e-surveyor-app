@@ -17,10 +17,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import '@ionic/react/css/ionic-swiper.css';
-import firstImage from './images/first.jpg';
-import secondImage from './images/second.jpg';
-import thirdImage from './images/third.jpg';
-import fourthImage from './images/fourth.jpg';
+import meadowImage from './images/first.jpg';
+import flowersImage from './images/second.jpg';
+import seedsImage from './images/third.jpg';
+import denseMeadowImage from './images/fourth.jpg';
+import insectImage from './images/insectImage.jpg';
+import personImage from './images/personImage.jpg';
 import './styles.scss';
 
 const WaveShape = () => (
@@ -82,7 +84,7 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
           <SwiperSlide className="first">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${firstImage})` }}
+              style={{ backgroundImage: `url(${meadowImage})` }}
             >
               <WaveShape />
               <div className="message">
@@ -98,7 +100,38 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
           <SwiperSlide className="second">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${secondImage})` }}
+              style={{ backgroundImage: `url(${insectImage})` }}
+            >
+              <WaveShape />
+              <div className="message two">
+                <p>
+                  Create a survey to identify and record all of the plants in
+                  your area, and find out which beneficial insects you are
+                  supporting.
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide className="second">
+            <div
+              className="slide-header"
+              style={{ backgroundImage: `url(${personImage})` }}
+            >
+              <WaveShape />
+              <div className="message two">
+                <p>
+                  Use the transect (structured recording) method to find out how
+                  your habitat performs against industry standard criteria.
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide className="third">
+            <div
+              className="slide-header"
+              style={{ backgroundImage: `url(${flowersImage})` }}
             >
               <WaveShape />
               <div className="message two">
@@ -111,10 +144,10 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
             </div>
           </SwiperSlide>
 
-          <SwiperSlide className="third">
+          <SwiperSlide className="fourth">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${thirdImage})` }}
+              style={{ backgroundImage: `url(${seedsImage})` }}
             >
               <WaveShape />
               <div className="message two">
@@ -127,10 +160,10 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
             </div>
           </SwiperSlide>
 
-          <SwiperSlide className="fourth">
+          <SwiperSlide className="fifth">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${fourthImage})` }}
+              style={{ backgroundImage: `url(${denseMeadowImage})` }}
             >
               <WaveShape />
               <div className="message two">
@@ -140,7 +173,7 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                   quality of the habitat you have created.
                 </p>
 
-                <IonButton fill="clear" onClick={exit}>
+                <IonButton color="secondary" onClick={exit}>
                   <IonLabel>Let's start!</IonLabel>
                   <IonIcon slot="end" icon={arrowForward} />
                 </IonButton>
@@ -154,7 +187,7 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
         <IonFooter className="ion-no-border">
           <IonToolbar>
             <IonButtons slot="end">
-              <IonButton color="none" onClick={slideNext}>
+              <IonButton onClick={slideNext}>
                 <IonIcon icon={arrowForward} />
               </IonButton>
             </IonButtons>

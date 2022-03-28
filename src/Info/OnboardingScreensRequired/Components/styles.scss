@@ -1,4 +1,4 @@
-$dark-brown: #4d380a;
+$text-color: #132f00;
 
 @mixin wave {
   // https://www.shapedivider.app/
@@ -20,7 +20,7 @@ $dark-brown: #4d380a;
   }
 
   .custom-shape-divider-bottom-1593438501 .shape-fill {
-    fill: rgb(255, 240, 216);
+    fill: #f9fff5;
   }
 
   /** For mobile devices **/
@@ -57,7 +57,7 @@ $dark-brown: #4d380a;
         width: 40px;
         margin: 10px;
         background: #ffffffcf;
-        color: $dark-brown !important;
+        color: $text-color !important;
       }
     }
   }
@@ -71,18 +71,18 @@ $dark-brown: #4d380a;
 
       ion-button {
         border-radius: 50%;
-        background: #ffffffcf;
+        background: var(--ion-color-secondary);
         color: #4d380a;
         height: 60px;
         width: 60px;
         margin: 10px;
-        color: $dark-brown;
+        color: $text-color;
       }
     }
   }
 
   .swiper-slide {
-    background: rgb(255, 240, 216);
+    background: #f9fff5;
   }
 
   .swiper-slide .message {
@@ -115,7 +115,7 @@ $dark-brown: #4d380a;
       ion-button {
         font-size: 1.1rem;
         font-weight: 500;
-        color: $dark-brown;
+        color: $text-color;
       }
     }
 
@@ -128,7 +128,7 @@ $dark-brown: #4d380a;
       ion-button {
         font-size: 1.1rem;
         font-weight: 500;
-        color: $dark-brown;
+        color: $text-color;
       }
     }
 
@@ -141,7 +141,20 @@ $dark-brown: #4d380a;
       ion-button {
         font-size: 1.1rem;
         font-weight: 500;
-        color: $dark-brown;
+        color: $text-color;
+      }
+    }
+
+    .swiper-slide.fifth {
+      @include slide;
+
+      .slide-header {
+        background-position: 34%;
+      }
+      ion-button {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: $text-color;
       }
     }
 
@@ -156,7 +169,7 @@ $dark-brown: #4d380a;
       font-size: 1.9rem;
       margin: 10px 4px 0 2px;
       text-align: center;
-      color: $dark-brown;
+      color: $text-color;
       padding: 0 20px;
     }
 
@@ -166,7 +179,7 @@ $dark-brown: #4d380a;
       text-align: left;
       color: #4d380a;
       line-height: 1.5em;
-      color: $dark-brown;
+      color: $text-color;
       padding: 10px 30px;
     }
 
@@ -179,7 +192,7 @@ $dark-brown: #4d380a;
 
       .swiper-pagination-bullet-active {
         opacity: 0.8;
-        background-color: $dark-brown;
+        background-color: $text-color;
       }
     }
   }
