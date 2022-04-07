@@ -161,6 +161,188 @@
     "positive": 1
   },
   {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Autumn Hawkbit",
+    "scientificName": "Scorzoneroides autumnalis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Black Medick",
+    "scientificName": "Medicago lupulina",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Cuckooflower",
+    "scientificName": "Cardamine pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Bulbous Buttercup",
+    "scientificName": "Ranunculus bulbosus",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Cat's-ear",
+    "scientificName": "Hypochaeris radicata",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Common Sorrel",
+    "scientificName": "Rumex acetosa",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Field Wood-rush",
+    "scientificName": "Luzula campestris",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Germander Speedwell",
+    "scientificName": "Veronica chamaedrys",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Lesser Trefoil",
+    "scientificName": "Trifolium dubium",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Ribwort Plantain",
+    "scientificName": "Plantago lanceolata",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Meadow Buttercup",
+    "scientificName": "Ranunculus acris",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Red Clover",
+    "scientificName": "Trifolium pratense",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Selfheal",
+    "scientificName": "Prunella vulgaris",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Yarrow",
+    "scientificName": "Achillea millefolium",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Cock's-foot",
+    "scientificName": "Dactylis glomerata",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Common Bent",
+    "scientificName": "Agrostis capillaris",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Crested Dog's-tail",
+    "scientificName": "Cynosurus cristatus",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Creeping Bent",
+    "scientificName": "Agrostis stolonifera",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "False Oat-grass",
+    "scientificName": "Arrhenatherum elatius",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Meadow Fescue",
+    "scientificName": "Festuca pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Meadow foxtail",
+    "scientificName": "Alopecurus pratensis",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Red Fescue",
+    "scientificName": "Festuca rubra",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Sweet Vernal-grass",
+    "scientificName": "Anthoxanthum odoratum",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Timothy",
+    "scientificName": "Phleum pratense",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Tufted Hair-grass",
+    "scientificName": "Deschampsia cespitosa",
+    "positive": 1
+  },
+  {
+    "scheme": "AES",
+    "habitat": "FEP Semi-improved grassland",
+    "commonName": "Yorkshire-fog",
+    "scientificName": "Holcus lanatus",
+    "positive": 1
+  },
+  {
     "scheme": "CSM",
     "habitat": "Lowland fens",
     "commonName": "Sweet-flag",
