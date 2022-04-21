@@ -9,7 +9,7 @@ import {
   IonList,
 } from '@ionic/react';
 import Occurrence from 'models/occurrence';
-import { Seedmix } from 'common/data/seedmix';
+import { SeedmixSpecies } from 'common/data/seedmix';
 import { ModalHeader, Main } from '@flumens';
 import CountUp from 'react-countup';
 import Seeds from 'common/images/seeds.svg';
@@ -29,8 +29,8 @@ const bySpeciesName = (
 };
 
 const bySeedmixName = (
-  { latin_name: taxon, common_name: name }: Seedmix,
-  { latin_name: taxon2, common_name: name2 }: Seedmix
+  { latin_name: taxon, common_name: name }: SeedmixSpecies,
+  { latin_name: taxon2, common_name: name2 }: SeedmixSpecies
 ) => (name || taxon).localeCompare(name2 || taxon2);
 
 type Props = {
@@ -91,7 +91,7 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmix }) => {
       common_name,
       latin_name,
     }: {
-      common_name: string;
+      common_name?: string;
       latin_name: string;
     }) => {
       const taxonName = common_name || latin_name;

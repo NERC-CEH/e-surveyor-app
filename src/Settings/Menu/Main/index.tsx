@@ -5,6 +5,7 @@ import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';
 import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import flowerIcon from 'common/images/flowerIcon.svg';
+import seedMixIcon from 'common/images/seeds.svg';
 import './styles.scss';
 
 const useResetDialog = (resetApp: any) => {
@@ -82,6 +83,11 @@ const Menu: FC<Props> = ({
             the species. Once reconnected to the Internet we can identify the
             species in the background.
           </InfoMessage>
+
+          <IonItem routerLink="/settings/seedmixes">
+            <IonIcon icon={seedMixIcon} size="small" slot="start" />
+            My seed mixes
+          </IonItem>
         </div>
 
         <IonItemDivider>Application</IonItemDivider>
