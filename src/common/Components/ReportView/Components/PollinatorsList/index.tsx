@@ -25,9 +25,8 @@ const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
 
 export const SPECIES_GROUPS = {
   Bee: 'Bees are fantastic pollinators.',
-  Butterfly:
-    'Hoverflies are great pollinators, and are useful in pest control.',
-  Hoverfly: 'Butterflies are great pollinators.',
+  Butterfly: 'Butterflies are great pollinators.',
+  Hoverfly: 'Hoverflies are great pollinators, and are useful in pest control.',
 };
 
 interface Pollinator {
