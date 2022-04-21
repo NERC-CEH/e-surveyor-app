@@ -28,12 +28,19 @@ export function usePromptImageSource() {
 
 interface Props extends Omit<ComponentProps<typeof PhotoPicker>, 'getImage'> {
   model: Sample | Occurrence;
+  maxImages?: number;
 }
 
-const AppPhotoPicker: FC<Props> = ({ model, ...restProps }) => {
+const AppPhotoPicker: FC<Props> = ({ model, maxImages, ...restProps }) => {
   const promptImageSource = usePromptImageSource();
 
   async function getImageWrap() {
+    if (
+      Number.isFinite(maxImages) &&
+      model.media.length >= (maxImages as number)
+    )
+      return null;
+
     const shouldUseCamera = await promptImageSource();
     const cancelled = shouldUseCamera === null;
     if (cancelled) return null;
@@ -50,7 +57,14 @@ const AppPhotoPicker: FC<Props> = ({ model, ...restProps }) => {
     return imageModel;
   }
 
-  return <PhotoPicker getImage={getImageWrap} model={model} {...restProps} />;
+  return (
+    <PhotoPicker
+      getImage={getImageWrap}
+      model={model}
+      placeholderCount={1}
+      {...restProps}
+    />
+  );
 };
 
 export default observer(AppPhotoPicker);

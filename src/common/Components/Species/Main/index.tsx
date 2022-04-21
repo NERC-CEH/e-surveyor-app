@@ -8,7 +8,6 @@ import {
   IonList,
   IonIcon,
   NavContext,
-  isPlatform,
   IonLabel,
 } from '@ionic/react';
 import { searchOutline, close, cropOutline } from 'ionicons/icons';
@@ -170,7 +169,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
         <PhotoPicker
           model={occurrence}
           Image={ImageWithCropping}
-          placeholderCount={isPlatform('mobile') ? 1 : 5}
+          placeholderCount={1}
           isDisabled={isDisabled}
         />
       </div>
