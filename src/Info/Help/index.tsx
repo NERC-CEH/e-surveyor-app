@@ -17,7 +17,7 @@ import cameraButton from './cameraButton.png';
 import mapPicker from './mapPicker.png';
 import twoPeopleRecording from './twoPeopleRecording.jpg';
 import personTakingPhoto from './personTakingPhoto.jpg';
-import transectWShape from './transectWShape.png';
+import transectWShape from './transectWShape.jpg';
 import flowers from './flowers.jpg';
 import insects from './insects.jpg';
 import './styles.scss';
