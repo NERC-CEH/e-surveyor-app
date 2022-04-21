@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { Main, InfoButton, InfoMessage } from '@flumens';
 import { informationCircleOutline } from 'ionicons/icons';
+import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
 import './styles.scss';
 
 const alphabetically = (s1: any, s2: any) => {
@@ -188,6 +189,7 @@ const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
           What does my transect report mean?
           <InfoButton label="READ MORE" header="Tips">
             <div>
+              <img src={twoPeopleRecording} />
               <p>
                 The transect report compares your survey to a list of plant
                 species that indicate good and bad quality habitat.

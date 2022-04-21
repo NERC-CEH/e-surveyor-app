@@ -11,13 +11,13 @@ import {
 } from 'ionicons/icons';
 import beeIcon from 'common/images/bee.svg';
 import seedsIcon from 'common/images/seeds.svg';
+import transectWShape from 'common/images/transectWShape.jpg';
+import cameraButton from 'common/images/cameraButton.png';
+import mapPicker from 'common/images/mapPicker.png';
+import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
+import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
 import pollinatorsTable from './pollinators.png';
 import supportedGroupsTable from './supportedGroups.png';
-import cameraButton from './cameraButton.png';
-import mapPicker from './mapPicker.png';
-import twoPeopleRecording from './twoPeopleRecording.jpg';
-import personTakingPhoto from './personTakingPhoto.jpg';
-import transectWShape from './transectWShape.jpg';
 import flowers from './flowers.jpg';
 import insects from './insects.jpg';
 import './styles.scss';

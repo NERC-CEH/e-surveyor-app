@@ -22,6 +22,8 @@ import {
   informationCircleOutline,
 } from 'ionicons/icons';
 import Seeds from 'common/images/seeds.svg';
+import cameraButton from 'common/images/cameraButton.png';
+import mapPicker from 'common/images/mapPicker.png';
 import InfoButtonPopover from 'Components/InfoButton';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
@@ -83,12 +85,14 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
               can do this by clicking on the right arrow and using the map to
               choose your location.
             </p>
+            <img src={mapPicker} />
             <p>
               Choose your seed supplier from the drop down menu, and then choose
               the name of your seed mix. This will allow the app to compare the
               plant species you sowed to the plants you see in the survey.
             </p>
             <p>You can now begin to add plants to your survey. </p>
+            <img src={cameraButton} />
             <p>
               If you have identified the plants yourself, hold down the camera
               button and write the name of your plant species into the text box.

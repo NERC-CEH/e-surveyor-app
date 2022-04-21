@@ -17,6 +17,7 @@ import {
 import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
 import Sample from 'models/sample';
 import { useRouteMatch } from 'react-router-dom';
+import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
 import './styles.scss';
 
 function byDate(smp1: Sample, smp2: Sample) {
@@ -116,6 +117,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
         How to complete a transect?
         <InfoButton label="READ MORE" header="Tips">
           <div>
+            <img src={personTakingPhoto} />
             <p>
               Give your survey a name (such as the name of the place you are
               surveying).

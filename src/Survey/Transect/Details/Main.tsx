@@ -8,6 +8,7 @@ import transectIcon from 'common/images/transectIconBlack.svg';
 import { useRouteMatch } from 'react-router-dom';
 import Sample from 'models/sample';
 import Seeds from 'common/images/seeds.svg';
+import transectWShape from 'common/images/transectWShape.jpg';
 import squareIcon from './square.svg';
 import habitatIcon from './habitats.svg';
 import stepsIcon from './steps.svg';
@@ -63,6 +64,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
               of times you will stop and identify plants), plan a route that
               covers all of the different features in your habitat.
             </p>
+            <img src={transectWShape} />
             <p>
               Pick up your quadrat (or something that you can use to measure out
               the area you will search for plants in) and click next to carry

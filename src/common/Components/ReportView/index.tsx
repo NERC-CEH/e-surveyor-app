@@ -1,11 +1,13 @@
 /* eslint-disable camelcase */
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
-import { IonList } from '@ionic/react';
+import { IonList, IonIcon } from '@ionic/react';
 import { Main, InfoButton, InfoMessage } from '@flumens';
 import Occurrence from 'models/occurrence';
 import { informationCircleOutline } from 'ionicons/icons';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';
+import beeIcon from 'common/images/bee.svg';
+import seedsIcon from 'common/images/seeds.svg';
 import SeedmixBadge from './Components/SeedmixBadge';
 import PollinatorsBadge from './Components/PollinatorsBadge';
 import NaturalEnemies from './Components/NaturalEnemies';
@@ -28,13 +30,15 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
           <InfoButton label="READ MORE" header="Tips">
             <div>
               <p>
-                <b>Seed Mix</b> tells you how many of the plant species you
-                sowed (through your seed mix) that appeared in your survey. Tap
-                to find out which species are missing.
+                <IonIcon src={seedsIcon} /> <b>Seed Mix</b> tells you how many
+                of the plant species you sowed (through your seed mix) that
+                appeared in your survey. Tap to find out which species are
+                missing.
               </p>
               <p>
-                <b>Insect</b> tells you how many insect species you are
-                supporting. Tap for the full list of species.
+                <IonIcon src={beeIcon} /> <b>Insect</b> tells you how many
+                insect species you are supporting. Tap for the full list of
+                species.
               </p>
             </div>
           </InfoButton>
