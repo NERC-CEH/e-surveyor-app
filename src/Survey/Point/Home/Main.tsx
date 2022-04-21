@@ -125,7 +125,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
             routerLink={`${baseURL}/name`}
             icon={bookmarkOutline}
             label="Name"
-            value={name}
+            value={name || ''}
             disabled={isDisabled}
           />
 
