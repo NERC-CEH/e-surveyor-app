@@ -1,5 +1,5 @@
-import React, { FC, useContext, useState, useEffect } from 'react';
-import { Main, URL, useLoader } from '@flumens';
+import React, { FC, useContext, useEffect } from 'react';
+import { Main, useLoader } from '@flumens';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import SpeciesCard from 'common/Components/SpeciesCard';
@@ -10,12 +10,9 @@ import {
   NavContext,
   IonLabel,
 } from '@ionic/react';
-import { searchOutline, close, cropOutline } from 'ionicons/icons';
+import { searchOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
 import Occurrence, { Taxon } from 'models/occurrence';
-import Image from 'models/image';
-import config from 'common/config';
-import ImageCropper from 'common/Components/ImageCropper';
 import './styles.scss';
 
 type Props = {
@@ -25,7 +22,6 @@ type Props = {
 const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
-  const [editImage, setEditImage] = useState<Image>();
   const loader = useLoader();
 
   const isPartOfSurvey = occurrence.parent;
@@ -43,51 +39,6 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
 
     loader.hide();
   }, [loader, isIdentifying]);
-
-  const onDoneEdit = async (image: URL) => {
-    if (!editImage) return;
-
-    const newImageModel = await Image.getImageModel(image, config.dataPath);
-    Object.assign(editImage?.attrs, newImageModel.attrs);
-    if (editImage.isPersistent()) editImage.save();
-    setEditImage(undefined);
-  };
-
-  const onCancelEdit = () => setEditImage(undefined);
-
-  // eslint-disable-next-line react/no-unstable-nested-components
-  const ImageWithCropping = ({
-    media,
-    onDelete,
-    onClick,
-  }: {
-    media: Image;
-    onDelete: any;
-    onClick: any;
-  }) => {
-    const cropImage = () => {
-      setEditImage(media);
-    };
-
-    return (
-      <div className="img">
-        {!isDisabled && (
-          <IonButton fill="clear" class="delete" onClick={onDelete}>
-            <IonIcon icon={close} />
-          </IonButton>
-        )}
-        <img
-          src={media.getURL()}
-          onClick={onClick} // TODO: fix
-        />
-        {!isDisabled && (
-          <IonButton className="crop-button" onClick={cropImage}>
-            <IonIcon icon={cropOutline} />
-          </IonButton>
-        )}
-      </div>
-    );
-  };
 
   const getSelectedSpecies = () => {
     const { taxon: sp } = occurrence.attrs;
@@ -168,9 +119,9 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
       <div className="rounded">
         <PhotoPicker
           model={occurrence}
-          Image={ImageWithCropping}
           placeholderCount={1}
           isDisabled={isDisabled}
+          allowToCrop
         />
       </div>
     </div>
@@ -212,11 +163,6 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
           {isPartOfSurvey && getSpeciesAddButton()}
         </IonList>
       </Main>
-      <ImageCropper
-        image={editImage?.getURL()}
-        onDone={onDoneEdit}
-        onCancel={onCancelEdit}
-      />
     </>
   );
 };

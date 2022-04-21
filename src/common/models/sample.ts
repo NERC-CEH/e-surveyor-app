@@ -184,6 +184,10 @@ class AppSample extends Sample {
     return true;
   }
 
+  isPersistent() {
+    return true;
+  }
+
   startGPS: any;
 
   stopGPS: any;

@@ -9,6 +9,8 @@ import PhotoPicker from 'common/Components/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 
+import './styles.scss';
+
 type Props = {
   subSample: Sample;
   photoSelect: () => void;
@@ -43,30 +45,32 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
   const prettyGridRef = <GridRefValue sample={subSample} />;
 
   return (
-    <Main>
-      <IonList lines="full">
-        <br />
-        <div className="rounded">
-          <MenuAttrItem
-            routerLink={`${url}/map`}
-            value={prettyGridRef}
-            icon={locationOutline}
-            label="Location"
-            skipValueTranslation
-            disabled={isDisabled}
-          />
-        </div>
+    <>
+      <Main>
+        <IonList lines="full">
+          <br />
+          <div className="rounded">
+            <MenuAttrItem
+              routerLink={`${url}/map`}
+              value={prettyGridRef}
+              icon={locationOutline}
+              label="Location"
+              skipValueTranslation
+              disabled={isDisabled}
+            />
+          </div>
 
-        <IonItemDivider mode="ios">Quadrat photo</IonItemDivider>
-        <div className="rounded">
-          <PhotoPicker model={subSample} maxImages={1} />
-        </div>
-      </IonList>
+          <IonItemDivider mode="ios">Quadrat photo</IonItemDivider>
+          <div className="rounded">
+            <PhotoPicker model={subSample} maxImages={1} allowToCrop />
+          </div>
+        </IonList>
 
-      {getNewImageButton()}
+        {getNewImageButton()}
 
-      <SpeciesList sample={subSample} isDisabled={isDisabled} />
-    </Main>
+        <SpeciesList sample={subSample} isDisabled={isDisabled} />
+      </Main>
+    </>
   );
 };
 
