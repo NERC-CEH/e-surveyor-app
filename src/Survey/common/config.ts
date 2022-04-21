@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 import { date } from '@flumens';
 import Sample from 'models/sample';
+import appModel, { SeedMix } from 'models/app';
+// import { SeedmixSpecies } from 'common/data/seedmix';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 
 const getSeedMixGroups = () => {
@@ -25,7 +27,12 @@ const getSeedMixGroups = () => {
     label: 'Not recorded',
   };
 
-  return [notRecorded, ...seedMixGroups];
+  const userCustom = {
+    value: 'Custom',
+    label: 'My Custom Seedmix',
+  };
+
+  return [notRecorded, userCustom, ...seedMixGroups];
 };
 
 const getSeedMix = (model: Sample) => {
@@ -35,7 +42,7 @@ const getSeedMix = (model: Sample) => {
     return { value: seedMix };
   };
 
-  const bySeedmixGroups = (data: any) => data.mix_group === seedmixgroup;
+  const bySeedmixGroups = (seedmix: any) => seedmix.mix_group === seedmixgroup;
 
   const getUniqueValues = (unique: any, item: any) => {
     return unique.includes(item.mix_name) ? unique : [...unique, item.mix_name];
@@ -52,7 +59,17 @@ const getSeedMix = (model: Sample) => {
     label: 'Not recorded',
   };
 
-  return [notRecorded, ...seedMixes];
+  let userCustom: any = [];
+  if (seedmixgroup === 'Custom') {
+    const getSeedmixEntry = (seedmix: SeedMix) => ({
+      value: seedmix.id,
+      label: seedmix.name,
+    });
+
+    userCustom = appModel.attrs.seedmixes.map(getSeedmixEntry);
+  }
+
+  return [notRecorded, ...userCustom, ...seedMixes];
 };
 
 export const seedmixGroupAttr = {
@@ -80,6 +97,17 @@ export const seedmixAttr = {
       input: 'radio',
       info: 'Please indicate the seed mix you have used.',
       inputProps: (smp: Sample) => ({ options: getSeedMix(smp) }),
+      set: (value: any, sample: Sample) => {
+        if (sample.attrs.seedmix !== value) {
+          const byId = (seedmix: SeedMix) => seedmix.id === value;
+          const selectedSeedmix = appModel.attrs.seedmixes.find(byId);
+          sample.attrs.seedmix = selectedSeedmix?.name; // eslint-disable-line
+          // const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouse_id;
+          // eslint-disable-next-line no-param-reassign
+          // sample.attrs.seedmixSpecies =
+          //   selectedSeedmix?.species.map(getWarehouseId); // eslint-disable-line
+        }
+      },
     },
   },
   remote: { id: 1530 },
