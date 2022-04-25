@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import AppModelType from 'models/app';
-import { Page, Main } from '@flumens';
+import { Page } from '@flumens';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
 import {
@@ -24,6 +24,9 @@ import denseMeadowImage from './images/fourth.jpg';
 import insectImage from './images/insectImage.jpg';
 import personImage from './images/personImage.jpg';
 import './styles.scss';
+
+// Fixes iOS 12 scrolling issue.
+const Main: FC = ({ children }) => <div>{children}</div>;
 
 const WaveShape = () => (
   <div className="custom-shape-divider-bottom-1593438501">
