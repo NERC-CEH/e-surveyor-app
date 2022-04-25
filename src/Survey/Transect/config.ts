@@ -3,6 +3,7 @@ import icon from 'common/images/transectIcon.svg';
 import {
   seedmixGroupAttr,
   seedmixAttr,
+  customSeedmixAttr,
   dateAttr,
   locationAttr,
   verifyLocationSchema,
@@ -128,6 +129,8 @@ const survey = {
     seedmixgroup: seedmixGroupAttr,
 
     seedmix: seedmixAttr,
+
+    customSeedmix: customSeedmixAttr,
   },
 
   smp: {

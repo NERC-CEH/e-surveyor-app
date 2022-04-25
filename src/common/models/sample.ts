@@ -30,7 +30,7 @@ type Attrs = SampleAttrs & {
   seedmix?: any;
   quadratSize?: any;
   seedmixgroup?: any;
-  seedmixSpecies?: any;
+  customSeedmix?: any;
   location?: any;
 };
 

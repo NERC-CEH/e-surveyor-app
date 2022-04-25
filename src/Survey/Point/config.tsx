@@ -3,6 +3,7 @@ import icon from 'common/images/pointIcon.svg';
 import {
   seedmixGroupAttr,
   seedmixAttr,
+  customSeedmixAttr,
   dateAttr,
   locationAttr,
   verifyLocationSchema,
@@ -29,6 +30,8 @@ const survey: Survey = {
     seedmixgroup: seedmixGroupAttr,
 
     seedmix: seedmixAttr,
+
+    customSeedmix: customSeedmixAttr,
   },
 
   smp: {

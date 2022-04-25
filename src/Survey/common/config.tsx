@@ -1,9 +1,11 @@
+import React from 'react';
 import * as Yup from 'yup';
 import { date } from '@flumens';
 import Sample from 'models/sample';
 import appModel, { SeedMix } from 'models/app';
-// import { SeedmixSpecies } from 'common/data/seedmix';
+import { SeedmixSpecies } from 'common/data/seedmix';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
+import { Link } from 'react-router-dom';
 
 const getSeedMixGroups = () => {
   const addValueToObject = (seedMixGroup: any) => ({ value: seedMixGroup });
@@ -35,6 +37,8 @@ const getSeedMixGroups = () => {
   return [notRecorded, userCustom, ...seedMixGroups];
 };
 
+const CUSTOM_SEEDMIX_NAME = 'Custom';
+
 const getSeedMix = (model: Sample) => {
   const { seedmixgroup } = model.attrs;
 
@@ -60,7 +64,7 @@ const getSeedMix = (model: Sample) => {
   };
 
   let userCustom: any = [];
-  if (seedmixgroup === 'Custom') {
+  if (seedmixgroup === CUSTOM_SEEDMIX_NAME) {
     const getSeedmixEntry = (seedmix: SeedMix) => ({
       value: seedmix.id,
       label: seedmix.name,
@@ -95,23 +99,39 @@ export const seedmixAttr = {
     headerProps: { label: 'Seed mix' },
     attrProps: {
       input: 'radio',
-      info: 'Please indicate the seed mix you have used.',
+      info: (smp: Sample) => {
+        if (smp.attrs.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+          return (
+            <div>
+              Please indicate the seed mix you have used.
+              <p>
+                You can define your own seedmixes{' '}
+                <Link to="/settings/seedmixes">here</Link>.
+              </p>
+            </div>
+          );
+        }
+        return <div>Please indicate the seed mix you have used.</div>;
+      },
       inputProps: (smp: Sample) => ({ options: getSeedMix(smp) }),
       set: (value: any, sample: Sample) => {
         if (sample.attrs.seedmix !== value) {
           const byId = (seedmix: SeedMix) => seedmix.id === value;
           const selectedSeedmix = appModel.attrs.seedmixes.find(byId);
           sample.attrs.seedmix = selectedSeedmix?.name; // eslint-disable-line
-          // const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouse_id;
+          const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouse_id;
           // eslint-disable-next-line no-param-reassign
-          // sample.attrs.seedmixSpecies =
-          //   selectedSeedmix?.species.map(getWarehouseId); // eslint-disable-line
+          sample.attrs.customSeedmix = selectedSeedmix?.species
+            .map(getWarehouseId)
+            .join(','); // eslint-disable-line
         }
       },
     },
   },
   remote: { id: 1530 },
 };
+
+export const customSeedmixAttr = { remote: { id: 1647 } };
 
 const fixedLocationSchema = Yup.object().shape({
   latitude: Yup.number().required(),
