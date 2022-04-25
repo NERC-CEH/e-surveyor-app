@@ -1,10 +1,46 @@
+// eslint-disable-next-line max-classes-per-file
 import config from 'Survey/Point/config';
 import seedmixData from 'common/data/seedmix';
 import Sample from '../../../models/sample';
 import Occurrence from '../../../models/occurrence';
-import { getMissingSeedmixSpecies } from '../helpers';
+import { getMissingSeedmixSpecies, getSeedmixUse } from '../helpers';
+
+class SampleWithNoGPS extends Sample {
+  startGPS = () => {};
+}
 
 describe('ReportView', () => {
+  describe('getSeedmixUse', () => {
+    it('should return seedmix species in use', () => {
+      // Given
+      const seedmixName = Object.keys(seedmixData)[0];
+      const seedmix = seedmixData[seedmixName];
+      const species = seedmix[0].latin_name;
+
+      const sample = new SampleWithNoGPS({ attrs: { seedmix: seedmixName } });
+
+      const subSmp = config.smp.create(SampleWithNoGPS, Occurrence, {});
+
+      subSmp.occurrences[0].attrs.taxon = {
+        species: { scientificNameWithoutAuthor: species },
+      };
+
+      sample.samples.push(subSmp);
+
+      const occurrences = sample.samples.map(smp => smp.occurrences[0]);
+
+      // When
+      const [recordedSeedmixSpecies, seedmixSpecies] = getSeedmixUse(
+        occurrences,
+        sample.attrs.seedmix
+      );
+
+      // Then
+      expect(recordedSeedmixSpecies.length).toEqual(1);
+      expect(seedmixSpecies.length).toEqual(seedmix.length);
+    });
+  });
+
   describe('getMissingSeedmixSpecies', () => {
     it('should return missing species list', () => {
       // Given
@@ -12,9 +48,6 @@ describe('ReportView', () => {
       const seedmix = seedmixData[seedmixName];
       const species = seedmix[0].latin_name;
 
-      class SampleWithNoGPS extends Sample {
-        startGPS = () => {};
-      }
       const sample = new SampleWithNoGPS({
         attrs: {
           seedmix: seedmixName,
