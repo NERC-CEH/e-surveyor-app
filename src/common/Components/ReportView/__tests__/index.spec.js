@@ -30,14 +30,10 @@ describe('ReportView', () => {
       const occurrences = sample.samples.map(smp => smp.occurrences[0]);
 
       // When
-      const [recordedSeedmixSpecies, seedmixSpecies] = getSeedmixUse(
-        occurrences,
-        sample.attrs.seedmix
-      );
+      const recordedSeedmixSpecies = getSeedmixUse(occurrences, seedmix);
 
       // Then
       expect(recordedSeedmixSpecies.length).toEqual(1);
-      expect(seedmixSpecies.length).toEqual(seedmix.length);
     });
   });
 
@@ -69,7 +65,7 @@ describe('ReportView', () => {
       // When
       const missingSeedmixSpecies = getMissingSeedmixSpecies(
         occurrences,
-        sample.attrs.seedmix
+        seedmix
       );
 
       // Then

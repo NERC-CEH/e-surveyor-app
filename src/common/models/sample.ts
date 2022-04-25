@@ -10,6 +10,7 @@ import config from 'common/config';
 import { SpeciesNames } from 'Components/ReportView/helpers';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
+import { SeedmixSpecies } from 'common/data/seedmix';
 import GPSExtension from './sampleGPSExt';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
 import { modelStore } from './store';
@@ -30,7 +31,7 @@ type Attrs = SampleAttrs & {
   seedmix?: any;
   quadratSize?: any;
   seedmixgroup?: any;
-  customSeedmix?: any;
+  customSeedmix?: SeedmixSpecies[];
   location?: any;
 };
 

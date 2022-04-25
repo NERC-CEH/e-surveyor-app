@@ -35,21 +35,18 @@ const bySeedmixName = (
 
 type Props = {
   occurrences: Occurrence[];
-  seedmix?: string;
+  seedmixSpecies?: SeedmixSpecies[];
 };
 
-const SeedmixBadge: FC<Props> = ({ occurrences, seedmix }) => {
+const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
   const [showModal, setShowModal] = useState(false);
 
-  if (!seedmix) return null;
+  if (!seedmixSpecies?.length) return null;
 
-  const [selectedSeedmixSpecies, totalSeedmixSpecies] = getSeedmixUse(
-    occurrences,
-    seedmix
-  );
+  const selectedSeedmixSpecies = getSeedmixUse(occurrences, seedmixSpecies);
 
   const getSelectedSeedmixSpeciesList = () => {
-    if (!seedmix) return null;
+    if (!seedmixSpecies) return null;
 
     if (!selectedSeedmixSpecies.length) {
       return null;
@@ -76,11 +73,11 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmix }) => {
   };
 
   const getMissingSeedmixSpeciesList = () => {
-    if (!seedmix) return null;
+    if (!seedmixSpecies) return null;
 
     const missingSeedmixSpecies = getMissingSeedmixSpecies(
       occurrences,
-      seedmix
+      seedmixSpecies
     );
 
     if (!missingSeedmixSpecies.length) {
@@ -127,7 +124,7 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmix }) => {
         <IonIcon icon={Seeds} />
         <IonBadge color="dark">
           <CountUp end={selectedSeedmixSpecies.length} duration={2.75} />/
-          {totalSeedmixSpecies.length}
+          {seedmixSpecies.length}
         </IonBadge>
       </div>
 

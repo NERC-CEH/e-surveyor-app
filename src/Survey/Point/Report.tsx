@@ -5,6 +5,8 @@ import { IonButton, NavContext } from '@ionic/react';
 import { useUserStatusCheck } from 'models/user';
 import { observer } from 'mobx-react';
 import Main from 'Components/ReportView';
+import seedmixData from 'common/data/seedmix';
+import { CUSTOM_SEEDMIX_NAME } from 'Survey/common/config';
 
 type Props = {
   sample: Sample;
@@ -42,6 +44,13 @@ const ReportController: FC<Props> = ({ sample }) => {
 
   const occurrences = sample.samples.map(smp => smp.occurrences[0]);
 
+  let seedmixSpecies = [];
+  if (sample.attrs.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+    seedmixSpecies = sample.attrs.customSeedmix || [];
+  } else {
+    seedmixSpecies = seedmixData[sample.attrs.seedmix] || [];
+  }
+
   return (
     <Page id="survey-report">
       <Header
@@ -49,7 +58,7 @@ const ReportController: FC<Props> = ({ sample }) => {
         rightSlot={uploadButton}
         defaultHref="/home/surveys"
       />
-      <Main occurrences={occurrences} seedmix={sample.attrs.seedmix} />
+      <Main occurrences={occurrences} seedmixSpecies={seedmixSpecies} />
     </Page>
   );
 };

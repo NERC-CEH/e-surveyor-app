@@ -37,7 +37,7 @@ const getSeedMixGroups = () => {
   return [notRecorded, userCustom, ...seedMixGroups];
 };
 
-const CUSTOM_SEEDMIX_NAME = 'Custom';
+export const CUSTOM_SEEDMIX_NAME = 'Custom';
 
 const getSeedMix = (model: Sample) => {
   const { seedmixgroup } = model.attrs;
@@ -116,14 +116,16 @@ export const seedmixAttr = {
       inputProps: (smp: Sample) => ({ options: getSeedMix(smp) }),
       set: (value: any, sample: Sample) => {
         if (sample.attrs.seedmix !== value) {
-          const byId = (seedmix: SeedMix) => seedmix.id === value;
-          const selectedSeedmix = appModel.attrs.seedmixes.find(byId);
-          sample.attrs.seedmix = selectedSeedmix?.name; // eslint-disable-line
-          const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouse_id;
+          if (sample.attrs.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+            const byId = (seedmix: SeedMix) => seedmix.id === value;
+            const selectedSeedmix = appModel.attrs.seedmixes.find(byId);
+            sample.attrs.seedmix = selectedSeedmix?.name; // eslint-disable-line
+            sample.attrs.customSeedmix = selectedSeedmix?.species || []; // eslint-disable-line
+            return;
+          }
+
           // eslint-disable-next-line no-param-reassign
-          sample.attrs.customSeedmix = selectedSeedmix?.species
-            .map(getWarehouseId)
-            .join(','); // eslint-disable-line
+          sample.attrs.seedmix = value;
         }
       },
     },
@@ -131,7 +133,16 @@ export const seedmixAttr = {
   remote: { id: 1530 },
 };
 
-export const customSeedmixAttr = { remote: { id: 1647 } };
+export const customSeedmixAttr = {
+  remote: {
+    id: 1647,
+    values: (values: SeedmixSpecies[]) => {
+      const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouse_id;
+
+      return values.map(getWarehouseId).join(','); // eslint-disable-line
+    },
+  },
+};
 
 const fixedLocationSchema = Yup.object().shape({
   latitude: Yup.number().required(),

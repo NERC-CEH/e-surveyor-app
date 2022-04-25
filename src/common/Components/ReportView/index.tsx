@@ -6,6 +6,7 @@ import { Main, InfoButton, InfoMessage } from '@flumens';
 import Occurrence from 'models/occurrence';
 import { informationCircleOutline } from 'ionicons/icons';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';
+import { SeedmixSpecies } from 'common/data/seedmix';
 import beeIcon from 'common/images/bee.svg';
 import seedsIcon from 'common/images/seeds.svg';
 import SeedmixBadge from './Components/SeedmixBadge';
@@ -16,10 +17,10 @@ import './styles.scss';
 
 type Props = {
   occurrences: Occurrence[];
-  seedmix?: string;
+  seedmixSpecies?: SeedmixSpecies[];
 };
 
-const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
+const ReportMain: FC<Props> = ({ occurrences, seedmixSpecies }) => {
   const uniqueSpecies = getUniqueSpecies(occurrences);
 
   return (
@@ -45,7 +46,10 @@ const ReportMain: FC<Props> = ({ occurrences, seedmix }) => {
         </InfoMessage>
 
         <div className="report-header">
-          <SeedmixBadge occurrences={occurrences} seedmix={seedmix} />
+          <SeedmixBadge
+            occurrences={occurrences}
+            seedmixSpecies={seedmixSpecies}
+          />
           <PollinatorsBadge uniqueSpecies={uniqueSpecies} />
         </div>
 
