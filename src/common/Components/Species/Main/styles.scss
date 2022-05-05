@@ -1,6 +1,13 @@
 #edit-species {
   --overflow: hidden;
 
+  .identifying ion-label {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 30px 0;
+  }
+
   .species-main-image-wrapper {
     max-width: 600px;
     margin: 0 auto;
