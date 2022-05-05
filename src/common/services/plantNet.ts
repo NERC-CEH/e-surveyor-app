@@ -3,10 +3,13 @@
 import config from 'common/config';
 import { isPlatform } from '@ionic/react';
 import Image from 'models/image';
-import UKSIPlants from '../data/uksi_plants.list.json';
-import UKPlantNames from '../data/uksi_plants.names.json';
+import UKSIPlantsData from '../data/uksi_plants.list.json';
+import UKPlantNamesData from '../data/uksi_plants.names.json';
 import blackListedData from '../data/cacheRemote/uksi_plants_blacklist.json';
 import PlantNetResponse, { Result } from './plantNetResponse.d';
+
+const UKSIPlants: { [key: string]: number } = UKSIPlantsData;
+const UKPlantNames: { [key: string]: string } = UKPlantNamesData;
 
 const blacklisted = blackListedData.map(sp => sp.taxon);
 
@@ -77,75 +80,60 @@ async function appendModelToFormData(mediaModel: any, formData: any) {
   formData.append(`images`, blob, `${name}.${extension}`);
 }
 
-const addWarehouseId = (sp: Result): ResultWithWarehouseID => {
-  return {
+export const processResponse = async (
+  res: Pick<PlantNetResponse, 'results'>
+) => {
+  const addWarehouseId = (sp: Result): ResultWithWarehouseID => ({
     ...sp,
-    warehouseId: (UKSIPlants as any)[sp.species.scientificNameWithoutAuthor],
-  };
-};
+    warehouseId: UKSIPlants[sp.species.scientificNameWithoutAuthor],
+  });
 
-const addUKSIId = (results: Result[]) => results.map(addWarehouseId);
+  function filterUKSpecies(results: ResultWithWarehouseID[]) {
+    let removedSpeciesScores = 0;
 
-function filterUKSpeciesWrap(results: ResultWithWarehouseID[]) {
-  let removedSpeciesScores = 0;
+    const isUKSpeciesOrHighScore = (result: ResultWithWarehouseID) => {
+      const highScore = result.score >= 0.9;
+      const ukSpecies = result.warehouseId;
+      if (ukSpecies || highScore) return true;
 
-  const filterByUKSpecies = (result: ResultWithWarehouseID) => {
-    if (result.warehouseId || result.score >= 0.9) return true;
+      removedSpeciesScores += result.score;
 
-    removedSpeciesScores += result.score;
+      return false;
+    };
 
-    return false;
-  };
+    const blacklistedUKSpecies = (result: ResultWithWarehouseID) =>
+      !blacklisted.includes(result.species.scientificNameWithoutAuthor);
 
-  const blacklistedUKSpecies = (result: ResultWithWarehouseID) =>
-    !blacklisted.includes(result.species.scientificNameWithoutAuthor);
+    const changeScoreValue = (sp: ResultWithWarehouseID) => {
+      const newScore = sp.score / (1 - removedSpeciesScores);
 
-  const changeScoreValue = (sp: ResultWithWarehouseID) => {
-    const newScore = sp.score / (1 - removedSpeciesScores);
+      return { ...sp, score: newScore };
+    };
 
-    return { ...sp, score: newScore };
-  };
-
-  const filteredSpecies = results
-    .filter(filterByUKSpecies)
-    .filter(blacklistedUKSpecies)
-    .map(changeScoreValue);
-
-  return filteredSpecies;
-}
-
-function changeUKCommonNamesWrap(results: ResultWithWarehouseID[]) {
-  const changeUKCommonNames = ({ species }: ResultWithWarehouseID) => {
-    const { scientificNameWithoutAuthor } = species;
-    const speciesUKName = (UKPlantNames as any)[scientificNameWithoutAuthor];
-    species.commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
-  };
-
-  results.forEach(changeUKCommonNames);
-
-  return results;
-}
-
-const response = (res: any) => res.json();
-
-const checkValidResponse = (res: any) => {
-  if (res.error) throw new Error(res.error);
-
-  return res;
-};
-
-const getResults = ({ results }: PlantNetResponse) => results;
-
-const err = (error: any) => {
-  if (error.message === 'Not Found') {
-    return []; // always empty list
+    return results
+      .filter(isUKSpeciesOrHighScore)
+      .filter(blacklistedUKSpecies)
+      .map(changeScoreValue);
   }
 
-  console.error(error);
+  const changeUKCommonNames = (result: ResultWithWarehouseID) => {
+    const { scientificNameWithoutAuthor } = result.species;
+    const speciesUKName = UKPlantNames[scientificNameWithoutAuthor];
+    const commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
 
-  throw new Error(
-    'Sorry we are experiencing some technical issues, we cannot identify your image right now, please try again later.'
-  );
+    return {
+      ...result,
+      species: { ...result.species, commonNames },
+    };
+  };
+
+  const allProcessedSpecies = res.results
+    .map(addWarehouseId)
+    .map(changeUKCommonNames);
+
+  const UKProcessedSpecies = filterUKSpecies(allProcessedSpecies);
+
+  return UKProcessedSpecies;
 };
 
 // TODO: use axios
@@ -160,15 +148,32 @@ export default async function identify(
     await appendModelToFormData(image, formData);
   }
 
+  const response = (res: any) => res.json();
+
+  const checkValidResponse = (res: any) => {
+    if (res.error) throw new Error(res.error);
+
+    return res;
+  };
+
+  const err = (error: any) => {
+    if (error.message === 'Not Found') {
+      return []; // always empty list
+    }
+
+    console.error(error);
+
+    throw new Error(
+      'Sorry we are experiencing some technical issues, we cannot identify your image right now, please try again later.'
+    );
+  };
+
   return fetch(`${backend.url}/api/plantnet`, {
     method: 'post',
     body: formData,
   })
     .then(response)
     .then(checkValidResponse)
-    .then(getResults)
-    .then(addUKSIId)
-    .then(filterUKSpeciesWrap)
-    .then(changeUKCommonNamesWrap)
+    .then(processResponse)
     .catch(err);
 }
