@@ -23,36 +23,38 @@ const fumariaSpecies = {
 
 describe('plantNet service', () => {
   describe('processResponse', () => {
-    it('should return with warehouse IDs', async () => {
+    it('should return with warehouse IDs', () => {
       // Given
       const plantNetResponse = {
         results: [fumariaSpecies],
+        version: '',
       };
 
       // When
-      const updated = await processResponse(plantNetResponse);
+      const { results } = processResponse(plantNetResponse);
 
       // Then
-      expect(updated[0].warehouseId).toBe(17200);
+      expect(results[0].warehouseId).toBe(17200);
     });
 
-    it('should filter out non-UK species', async () => {
+    it('should filter out non-UK species', () => {
       // Given
       const nonUKSpecies = JSON.parse(JSON.stringify(fumariaSpecies));
       nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
       const plantNetResponse = {
         results: [fumariaSpecies, nonUKSpecies],
+        version: '',
       };
 
       // When
-      const updated = await processResponse(plantNetResponse);
+      const { results } = processResponse(plantNetResponse);
 
       // Then
-      expect(updated[0].warehouseId).toBe(17200);
-      expect(updated.length).toBe(1);
+      expect(results[0].warehouseId).toBe(17200);
+      expect(results.length).toBe(1);
     });
 
-    it('should not filter non-UK species with high scores', async () => {
+    it('should not filter non-UK species with high scores', () => {
       // Given
       const nonUKSpecies = JSON.parse(JSON.stringify(fumariaSpecies));
       nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
@@ -60,26 +62,28 @@ describe('plantNet service', () => {
 
       const plantNetResponse = {
         results: [fumariaSpecies, nonUKSpecies],
+        version: '',
       };
 
       // When
-      const updated = await processResponse(plantNetResponse);
+      const { results } = processResponse(plantNetResponse);
 
       // Then
-      expect(updated.length).toBe(2);
+      expect(results.length).toBe(2);
     });
 
-    it('should return updated UK names', async () => {
+    it('should return results UK names', () => {
       // Given
       const plantNetResponse = {
         results: [fumariaSpecies],
+        version: '',
       };
 
       // When
-      const updated = await processResponse(plantNetResponse);
+      const { results } = processResponse(plantNetResponse);
 
       // Then
-      expect(updated[0].species.commonNames[0]).toBe('Fumitory');
+      expect(results[0].species.commonNames[0]).toBe('Fumitory');
     });
   });
 });

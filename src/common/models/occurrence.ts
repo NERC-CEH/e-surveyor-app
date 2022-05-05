@@ -3,7 +3,7 @@ import Occurrence, {
 } from '@bit/flumens.apps.models.occurrence';
 import { validateRemoteModel } from '@bit/flumens.apps.utils.validation';
 import { observable } from 'mobx';
-import { Species } from 'common/services/plantNetResponse.d';
+import { Species, Result } from 'common/services/plantNetResponse.d';
 import identifyImage, { ResultWithWarehouseID } from 'common/services/plantNet';
 import Media from './image';
 
@@ -11,11 +11,14 @@ export type Taxon = Optional<
   Omit<ResultWithWarehouseID, 'species'>,
   'images'
 > & {
-  scoreFromAPI?: number; // if user overwrites the main score
+  isUserSet?: boolean;
   species: OptionalExcept<
     Species,
     'commonNames' | 'scientificNameWithoutAuthor'
   >;
+  suggestions?: ResultWithWarehouseID[];
+  rawSuggestions?: Result[];
+  version?: string;
 };
 
 type Attrs = OccurrenceAttrs & { taxon?: Taxon };
@@ -41,22 +44,32 @@ export default class AppOccurrence extends Occurrence {
     try {
       this.identification.identifying = true;
 
-      const species = await identifyImage(this.media);
+      const {
+        version,
+        results: suggestions,
+        rawResults: rawSuggestions,
+      } = await identifyImage(this.media);
 
       const byScore = (
         sp1: ResultWithWarehouseID,
         sp2: ResultWithWarehouseID
       ) => sp2.score - sp1.score;
-      species.sort(byScore);
+      suggestions.sort(byScore);
 
-      this.media.forEach((media: Media) => {
-        // eslint-disable-next-line no-param-reassign
-        media.attrs.species = species;
-      });
+      const attachSpecies = (media: Media) => {
+        media.attrs.species = suggestions; // eslint-disable-line no-param-reassign
+      };
+      this.media.forEach(attachSpecies);
 
-      if (!species[0]) return;
+      const topSuggestion = suggestions[0];
+      if (!topSuggestion) return;
 
-      [this.attrs.taxon] = species;
+      this.attrs.taxon = {
+        ...topSuggestion,
+        version,
+        suggestions,
+        rawSuggestions,
+      };
 
       this.identification.identifying = false;
     } catch (error) {

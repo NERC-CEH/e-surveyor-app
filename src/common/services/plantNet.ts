@@ -8,6 +8,8 @@ import UKPlantNamesData from '../data/uksi_plants.names.json';
 import blackListedData from '../data/cacheRemote/uksi_plants_blacklist.json';
 import PlantNetResponse, { Result } from './plantNetResponse.d';
 
+const { backend } = config;
+
 const UKSIPlants: { [key: string]: number } = UKSIPlantsData;
 const UKPlantNames: { [key: string]: string } = UKPlantNamesData;
 
@@ -15,7 +17,11 @@ const blacklisted = blackListedData.map(sp => sp.taxon);
 
 export type ResultWithWarehouseID = Result & { warehouseId: number };
 
-const { backend } = config;
+type Response = {
+  version: string;
+  results: ResultWithWarehouseID[];
+  rawResults: Result[];
+};
 
 /**
  * Converts DataURI object to a Blob.
@@ -80,13 +86,24 @@ async function appendModelToFormData(mediaModel: any, formData: any) {
   formData.append(`images`, blob, `${name}.${extension}`);
 }
 
-export const processResponse = async (
-  res: Pick<PlantNetResponse, 'results'>
-) => {
+export const processResponse = (
+  res: Pick<PlantNetResponse, 'results' | 'version'>
+): Response => {
   const addWarehouseId = (sp: Result): ResultWithWarehouseID => ({
     ...sp,
     warehouseId: UKSIPlants[sp.species.scientificNameWithoutAuthor],
   });
+
+  const changeUKCommonNames = (result: ResultWithWarehouseID) => {
+    const { scientificNameWithoutAuthor } = result.species;
+    const speciesUKName = UKPlantNames[scientificNameWithoutAuthor];
+    const commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
+
+    return {
+      ...result,
+      species: { ...result.species, commonNames },
+    };
+  };
 
   function filterUKSpecies(results: ResultWithWarehouseID[]) {
     let removedSpeciesScores = 0;
@@ -116,30 +133,21 @@ export const processResponse = async (
       .map(changeScoreValue);
   }
 
-  const changeUKCommonNames = (result: ResultWithWarehouseID) => {
-    const { scientificNameWithoutAuthor } = result.species;
-    const speciesUKName = UKPlantNames[scientificNameWithoutAuthor];
-    const commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
-
-    return {
-      ...result,
-      species: { ...result.species, commonNames },
-    };
-  };
-
   const allProcessedSpecies = res.results
     .map(addWarehouseId)
     .map(changeUKCommonNames);
 
   const UKProcessedSpecies = filterUKSpecies(allProcessedSpecies);
 
-  return UKProcessedSpecies;
+  return {
+    version: res.version,
+    results: UKProcessedSpecies,
+    rawResults: res.results,
+  };
 };
 
 // TODO: use axios
-export default async function identify(
-  images: Image[]
-): Promise<ResultWithWarehouseID[]> {
+export default async function identify(images: Image[]): Promise<Response> {
   const formData = new FormData();
 
   formData.append('organs', 'auto');
@@ -158,7 +166,7 @@ export default async function identify(
 
   const err = (error: any) => {
     if (error.message === 'Not Found') {
-      return []; // always empty list
+      return { results: [], rawResults: [], version: '' }; // always empty list
     }
 
     console.error(error);

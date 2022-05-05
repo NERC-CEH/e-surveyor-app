@@ -44,7 +44,8 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
     const { taxon: sp } = occurrence.attrs;
     if (!sp) return null;
 
-    const selectedSpeciesByUser = !sp.gbif?.id || !!sp.scoreFromAPI;
+    const selectedSpeciesByUser =
+      !sp.gbif?.id || sp.isUserSet || !!(sp as any).scoreFromAPI; // scoreFromAPI - backwards compatible
 
     return (
       <SpeciesCard species={sp} selectedSpeciesByUser={selectedSpeciesByUser} />
@@ -54,7 +55,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   const getAIResults = () => {
     const getTaxon = (sp: Taxon) => {
       const taxon = JSON.parse(JSON.stringify(sp));
-      taxon.scoreFromAPI = sp.score;
+      taxon.isUserSet = true;
       taxon.score = 1;
 
       return taxon;
@@ -62,7 +63,10 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
 
     const setSpeciesAsMain = (sp: Taxon) => {
       // eslint-disable-next-line no-param-reassign
-      occurrence.attrs.taxon = getTaxon(sp);
+      occurrence.attrs.taxon = {
+        ...occurrence.attrs.taxon,
+        ...getTaxon(sp),
+      };
       occurrence.save();
     };
 

@@ -10,9 +10,50 @@ import {
   nameAttr,
 } from 'Survey/common/config';
 import { Survey } from 'common/surveys';
+import Occurrence from 'models/occurrence';
 import config from 'common/config';
+import { Result } from 'common/services/plantNetResponse.d';
 
 const { POSSIBLE_THRESHOLD } = config;
+
+function attachClassifierResults(submission: any, occ: Occurrence) {
+  const classifierID = 20099;
+  const classifierVersion = occ.attrs.taxon?.version || '';
+
+  const getMediaPath = (media: any) => media.values.queued;
+  const mediaPaths = submission.media.map(getMediaPath);
+
+  const getSuggestion = ({ score, species }: Result) => ({
+    values: {
+      taxon_name_given: species.scientificNameWithoutAuthor,
+      probability: score,
+    },
+  });
+  const classifierSuggestions =
+    occ.attrs.taxon?.rawSuggestions?.map(getSuggestion) || [];
+
+  if (!classifierSuggestions.length) return submission;
+
+  return {
+    ...submission,
+
+    values: { ...submission.values, machine_involvement: 3 },
+
+    classification_event: {
+      values: { created_by_id: null },
+      classification_results: [
+        {
+          values: {
+            classifier_id: classifierID,
+            classifier_version: classifierVersion,
+          },
+          classification_suggestions: classifierSuggestions,
+          metaFields: { mediaPaths },
+        },
+      ],
+    },
+  };
+}
 
 const survey: Survey = {
   id: 626,
@@ -101,13 +142,13 @@ const survey: Survey = {
         return occ;
       },
 
-      modifySubmission(submission: any) {
+      modifySubmission(submission: any, occ: Occurrence) {
         // for non-UK species
         if (!submission.values.taxa_taxon_list_id) {
           return null;
         }
 
-        return submission;
+        return attachClassifierResults(submission, occ);
       },
     },
 

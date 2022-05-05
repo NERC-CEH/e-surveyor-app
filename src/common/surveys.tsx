@@ -30,7 +30,7 @@ export interface Survey {
       attrs: Attrs | any;
       verify?: (attrs: any) => any;
       create: (AppOccurrence: typeof Occurrence, photo: any) => Occurrence;
-      modifySubmission: (submission: any) => any;
+      modifySubmission: (submission: any, occ: Occurrence) => any;
     };
 
     modifySubmission: (submission: any) => any;
