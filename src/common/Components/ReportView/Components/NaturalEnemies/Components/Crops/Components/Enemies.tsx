@@ -25,7 +25,7 @@ const NaturalEnemies: FC<Props> = ({ species, group, crop }) => {
       const plantName = plantCommonNames[interacion.plant_latin_name]
         ? plantCommonNames[interacion.plant_latin_name]
         : interacion.plant_latin_name;
-      const pest = interacion.pest_common_name || interacion.pest_latin_name;
+      const pest = interacion.pest_common_name; // || interacion.pest_latin_name;
       return `${plantName} - ${pest}`;
     })
     .sort();
