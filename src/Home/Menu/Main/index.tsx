@@ -48,7 +48,7 @@ const MenuMain: FC<Props> = ({
   const userEmail = user.email;
 
   return (
-    <Main class="app-menu">
+    <Main className="app-menu">
       <h1>Menu</h1>
 
       <IonList lines="full">

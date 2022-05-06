@@ -25,7 +25,7 @@ import './styles.scss';
 export default () => (
   <Page id="help">
     <Header title="Help" />
-    <Main class="ion-padding">
+    <Main className="ion-padding">
       <IonList>
         <IonItemDivider>
           <T>User</T>

@@ -22,7 +22,6 @@ export { default as device } from '@bit/flumens.apps.device';
 export { default as useAlert } from '@bit/flumens.apps.helpers.alert';
 export { default as useLoader } from '@bit/flumens.apps.helpers.loader';
 export { default as useToast } from '@bit/flumens.apps.helpers.toast';
-export { default as initAnalytics } from '@bit/flumens.apps.utils.analytics';
 export { default as date } from '@bit/flumens.apps.date';
 export * from '@bit/flumens.apps.utils.location';
 export * from '@bit/flumens.apps.helpers.image';

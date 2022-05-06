@@ -168,7 +168,7 @@ const UserSurveys: FC<Props> = () => {
         </IonToolbar>
       </IonHeader>
 
-      <Main class="ion-padding">
+      <Main className="ion-padding">
         {showingPending && showUploadAll && (
           <IonButton
             expand="block"

@@ -10,7 +10,7 @@ import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { App as AppPlugin } from '@capacitor/app';
 import i18n from 'i18next';
-import { initAnalytics } from '@flumens';
+import initAnalytics from 'helpers/analytics';
 import { initReactI18next } from 'react-i18next';
 import App from './App';
 
@@ -40,7 +40,7 @@ async function init() {
       environment: config.environment,
       build: config.build,
       release: config.version,
-      userId: userModel.id,
+      userId: userModel.id ? Number.parseInt(userModel.id, 10) : undefined,
       tags: {
         'app.appSession': appModel.attrs.appSession,
       },

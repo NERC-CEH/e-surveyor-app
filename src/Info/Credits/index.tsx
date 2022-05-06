@@ -9,7 +9,7 @@ const { P, H } = Section;
 const Credits: FC = () => (
   <Page id="credits">
     <Header title="Credits" />
-    <Main class="ion-padding">
+    <Main className="ion-padding">
       <Section>
         <P>
           We are very grateful for all the people that helped to create this
