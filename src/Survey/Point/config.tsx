@@ -12,25 +12,29 @@ import {
 import { Survey } from 'common/surveys';
 import Occurrence from 'models/occurrence';
 import config from 'common/config';
-import { Result } from 'common/services/plantNetResponse.d';
+import { ResultWithWarehouseID } from 'common/services/plantNet';
 
 const { POSSIBLE_THRESHOLD } = config;
 
 function attachClassifierResults(submission: any, occ: Occurrence) {
-  const classifierID = 20099;
   const classifierVersion = occ.attrs.taxon?.version || '';
 
   const getMediaPath = (media: any) => media.values.queued;
   const mediaPaths = submission.media.map(getMediaPath);
 
-  const getSuggestion = ({ score, species }: Result) => ({
+  const getSuggestion = ({
+    score,
+    species,
+    warehouseId,
+  }: ResultWithWarehouseID) => ({
     values: {
       taxon_name_given: species.scientificNameWithoutAuthor,
       probability_given: score,
+      taxa_taxon_list_id: warehouseId,
     },
   });
   const classifierSuggestions =
-    occ.attrs.taxon?.rawSuggestions?.map(getSuggestion) || [];
+    occ.attrs.taxon?.suggestions?.map(getSuggestion) || [];
 
   if (!classifierSuggestions.length) return submission;
 
@@ -44,7 +48,7 @@ function attachClassifierResults(submission: any, occ: Occurrence) {
       classification_results: [
         {
           values: {
-            classifier_id: classifierID,
+            classifier_id: config.classifierID,
             classifier_version: classifierVersion,
           },
           classification_suggestions: classifierSuggestions,

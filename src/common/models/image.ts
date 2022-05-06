@@ -8,11 +8,10 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { ResultWithWarehouseID } from 'common/services/plantNet';
 
 export type URL = string;
 
-type Attrs = MediaAttrs & { species?: ResultWithWarehouseID[] | null };
+type Attrs = MediaAttrs & { identified?: boolean };
 
 export default class AppMedia extends Media {
   /**
@@ -65,7 +64,7 @@ export default class AppMedia extends Media {
   }
 
   attrs: Attrs = observable({
-    species: null,
+    identified: false,
     ...this.attrs,
   });
 

@@ -3,8 +3,11 @@ import Occurrence, {
 } from '@bit/flumens.apps.models.occurrence';
 import { validateRemoteModel } from '@bit/flumens.apps.utils.validation';
 import { observable } from 'mobx';
-import { Species, Result } from 'common/services/plantNetResponse.d';
-import identifyImage, { ResultWithWarehouseID } from 'common/services/plantNet';
+import { Species } from 'common/services/plantNetResponse.d';
+import identifyImage, {
+  ResultWithWarehouseID,
+  filterUKSpecies,
+} from 'common/services/plantNet';
 import Media from './image';
 
 export type Taxon = Optional<
@@ -17,7 +20,6 @@ export type Taxon = Optional<
     'commonNames' | 'scientificNameWithoutAuthor'
   >;
   suggestions?: ResultWithWarehouseID[];
-  rawSuggestions?: Result[];
   version?: string;
 };
 
@@ -44,11 +46,9 @@ export default class AppOccurrence extends Occurrence {
     try {
       this.identification.identifying = true;
 
-      const {
-        version,
-        results: suggestions,
-        rawResults: rawSuggestions,
-      } = await identifyImage(this.media);
+      const { version, results: suggestions } = await identifyImage(this.media);
+
+      this.identification.identifying = false;
 
       const byScore = (
         sp1: ResultWithWarehouseID,
@@ -56,22 +56,21 @@ export default class AppOccurrence extends Occurrence {
       ) => sp2.score - sp1.score;
       suggestions.sort(byScore);
 
+      const UKSuggestions = filterUKSpecies(suggestions);
+
       const attachSpecies = (media: Media) => {
-        media.attrs.species = suggestions; // eslint-disable-line no-param-reassign
+        media.attrs.identified = true; // eslint-disable-line no-param-reassign
       };
       this.media.forEach(attachSpecies);
 
-      const topSuggestion = suggestions[0];
+      const topSuggestion = UKSuggestions[0];
       if (!topSuggestion) return;
 
       this.attrs.taxon = {
         ...topSuggestion,
         version,
         suggestions,
-        rawSuggestions,
       };
-
-      this.identification.identifying = false;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
@@ -89,7 +88,7 @@ export default class AppOccurrence extends Occurrence {
   canReIdentify() {
     if (!this.media.length) return false;
 
-    const wasNotIdentified = (media: Media) => !media.attrs.species;
+    const wasNotIdentified = (media: Media) => !media.attrs.identified;
     return this.media.some(wasNotIdentified);
   }
 

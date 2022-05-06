@@ -20,7 +20,6 @@ export type ResultWithWarehouseID = Result & { warehouseId: number };
 type Response = {
   version: string;
   results: ResultWithWarehouseID[];
-  rawResults: Result[];
 };
 
 /**
@@ -86,6 +85,34 @@ async function appendModelToFormData(mediaModel: any, formData: any) {
   formData.append(`images`, blob, `${name}.${extension}`);
 }
 
+export function filterUKSpecies(results: ResultWithWarehouseID[]) {
+  let removedSpeciesScores = 0;
+
+  const isUKSpeciesOrHighScore = (result: ResultWithWarehouseID) => {
+    const highScore = result.score >= 0.9;
+    const ukSpecies = result.warehouseId;
+    if (ukSpecies || highScore) return true;
+
+    removedSpeciesScores += result.score;
+
+    return false;
+  };
+
+  const blacklistedUKSpecies = (result: ResultWithWarehouseID) =>
+    !blacklisted.includes(result.species.scientificNameWithoutAuthor);
+
+  const changeScoreValue = (sp: ResultWithWarehouseID) => {
+    const newScore = sp.score / (1 - removedSpeciesScores);
+
+    return { ...sp, score: newScore };
+  };
+
+  return results
+    .filter(isUKSpeciesOrHighScore)
+    .filter(blacklistedUKSpecies)
+    .map(changeScoreValue);
+}
+
 export const processResponse = (
   res: Pick<PlantNetResponse, 'results' | 'version'>
 ): Response => {
@@ -105,44 +132,13 @@ export const processResponse = (
     };
   };
 
-  function filterUKSpecies(results: ResultWithWarehouseID[]) {
-    let removedSpeciesScores = 0;
-
-    const isUKSpeciesOrHighScore = (result: ResultWithWarehouseID) => {
-      const highScore = result.score >= 0.9;
-      const ukSpecies = result.warehouseId;
-      if (ukSpecies || highScore) return true;
-
-      removedSpeciesScores += result.score;
-
-      return false;
-    };
-
-    const blacklistedUKSpecies = (result: ResultWithWarehouseID) =>
-      !blacklisted.includes(result.species.scientificNameWithoutAuthor);
-
-    const changeScoreValue = (sp: ResultWithWarehouseID) => {
-      const newScore = sp.score / (1 - removedSpeciesScores);
-
-      return { ...sp, score: newScore };
-    };
-
-    return results
-      .filter(isUKSpeciesOrHighScore)
-      .filter(blacklistedUKSpecies)
-      .map(changeScoreValue);
-  }
-
   const allProcessedSpecies = res.results
     .map(addWarehouseId)
     .map(changeUKCommonNames);
 
-  const UKProcessedSpecies = filterUKSpecies(allProcessedSpecies);
-
   return {
     version: res.version,
-    results: UKProcessedSpecies,
-    rawResults: res.results,
+    results: allProcessedSpecies,
   };
 };
 
@@ -166,7 +162,7 @@ export default async function identify(images: Image[]): Promise<Response> {
 
   const err = (error: any) => {
     if (error.message === 'Not Found') {
-      return { results: [], rawResults: [], version: '' }; // always empty list
+      return { results: [], version: '' }; // always empty list
     }
 
     console.error(error);

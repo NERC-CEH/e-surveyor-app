@@ -13,6 +13,7 @@ import {
 import { searchOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
 import Occurrence, { Taxon } from 'models/occurrence';
+import { filterUKSpecies } from 'common/services/plantNet';
 import './styles.scss';
 
 type Props = {
@@ -84,16 +85,16 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
       );
     };
 
-    const image = occurrence.media[0];
-    if (!image || !image.attrs.species?.length) return [];
-
-    const species = image.attrs.species || [];
     const { taxon } = occurrence.attrs;
+    const suggestions = taxon?.suggestions;
+    if (!suggestions?.length) return [];
+
+    const UKSuggestions = filterUKSpecies(suggestions);
 
     const nonSelectedSpecies = (sp: Taxon) =>
       taxon && sp.species.commonNames[0] !== taxon.species.commonNames[0];
 
-    return species.filter(nonSelectedSpecies).map(getSpeciesCard);
+    return UKSuggestions.filter(nonSelectedSpecies).map(getSpeciesCard);
   };
 
   const getSpeciesAddButton = () => {

@@ -16,6 +16,8 @@ const CONFIG = {
   version: process.env.APP_VERSION,
   build: process.env.APP_BUILD,
 
+  // AI classifier
+  classifierID: 20099,
   POSITIVE_THRESHOLD: 0.7,
   POSSIBLE_THRESHOLD: 0.2,
 
