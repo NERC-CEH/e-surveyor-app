@@ -26,7 +26,7 @@ function attachClassifierResults(submission: any, occ: Occurrence) {
   const getSuggestion = ({ score, species }: Result) => ({
     values: {
       taxon_name_given: species.scientificNameWithoutAuthor,
-      probability: score,
+      probability_given: score,
     },
   });
   const classifierSuggestions =
