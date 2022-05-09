@@ -22,17 +22,28 @@ function attachClassifierResults(submission: any, occ: Occurrence) {
   const getMediaPath = (media: any) => media.values.queued;
   const mediaPaths = submission.media.map(getMediaPath);
 
-  const getSuggestion = ({
-    score,
-    species,
-    warehouseId,
-  }: ResultWithWarehouseID) => ({
-    values: {
-      taxon_name_given: species.scientificNameWithoutAuthor,
-      probability_given: score,
-      taxa_taxon_list_id: warehouseId,
-    },
-  });
+  const getSuggestion = (
+    { score, species, warehouseId }: ResultWithWarehouseID,
+    index: number
+  ) => {
+    const topSpecies = index === 0;
+    const classifierChosen =
+      topSpecies && score >= POSSIBLE_THRESHOLD ? 't' : 'f';
+
+    const humanChosen =
+      warehouseId === occ.attrs.taxon?.warehouseId ? 't' : 'f';
+
+    return {
+      values: {
+        taxon_name_given: species.scientificNameWithoutAuthor,
+        probability_given: score,
+        taxa_taxon_list_id: warehouseId,
+        classifier_chosen: classifierChosen,
+        human_chosen: humanChosen,
+      },
+    };
+  };
+
   const classifierSuggestions =
     occ.attrs.taxon?.suggestions?.map(getSuggestion) || [];
 
