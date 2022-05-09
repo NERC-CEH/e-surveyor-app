@@ -6,6 +6,11 @@ import appModel, { SeedMix } from 'models/app';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 import { Link } from 'react-router-dom';
+import Occurrence from 'models/occurrence';
+import { ResultWithWarehouseID } from 'common/services/plantNet';
+import config from 'common/config';
+
+const { POSSIBLE_THRESHOLD } = config;
 
 const getSeedMixGroups = () => {
   const addValueToObject = (seedMixGroup: any) => ({ value: seedMixGroup });
@@ -194,3 +199,92 @@ export const nameAttr = {
   },
   remote: { id: 1531 },
 };
+
+export enum MachineInvolvement {
+  /**
+   * No involvement.
+   */
+  NONE = 0,
+  /**
+   * Human determined, machine suggestions were ignored.
+   */
+  HUMAN = 1,
+  /**
+   * Human chose a machine suggestion given a very low probability.
+   */
+  HUMAN_ACCEPTED_LESS_PREFERRED_LOW = 2,
+  /**
+   * Human chose a machine suggestion that was less-preferred.
+   */
+  HUMAN_ACCEPTED_LESS_PREFERRED = 3,
+  /**
+   * Human chose a machine suggestion that was the preferred choice.
+   */
+  HUMAN_ACCEPTED_PREFERRED = 4,
+  /**
+   * Machine determined with no human involvement.
+   */
+  MACHINE = 5,
+}
+
+export function attachClassifierResults(submission: any, occ: Occurrence) {
+  const { taxon } = occ.attrs;
+  const classifierVersion = taxon?.version || '';
+
+  const getMediaPath = (media: any) => media.values.queued;
+  const mediaPaths = submission.media.map(getMediaPath);
+
+  const getSuggestion = (
+    { score, species, warehouseId }: ResultWithWarehouseID,
+    index: number
+  ) => {
+    const topSpecies = index === 0;
+    const classifierChosen =
+      topSpecies && score >= POSSIBLE_THRESHOLD ? 't' : 'f';
+
+    const humanChosen = warehouseId === taxon?.warehouseId ? 't' : 'f';
+
+    return {
+      values: {
+        taxon_name_given: species.scientificNameWithoutAuthor,
+        probability_given: score,
+        taxa_taxon_list_id: warehouseId,
+        classifier_chosen: classifierChosen,
+        human_chosen: humanChosen,
+      },
+    };
+  };
+
+  const classifierSuggestions =
+    occ.attrs.taxon?.suggestions?.map(getSuggestion) || [];
+
+  const hasSuggestions = classifierSuggestions.length;
+  if (!hasSuggestions) {
+    // eslint-disable-next-line no-param-reassign
+    submission.values.machine_involvement = MachineInvolvement.NONE;
+    return submission;
+  }
+
+  if (Number.isFinite(taxon?.machineInvolvement)) {
+    // eslint-disable-next-line no-param-reassign
+    submission.values.machine_involvement = taxon?.machineInvolvement;
+  }
+
+  return {
+    ...submission,
+
+    classification_event: {
+      values: { created_by_id: null },
+      classification_results: [
+        {
+          values: {
+            classifier_id: config.classifierID,
+            classifier_version: classifierVersion,
+          },
+          classification_suggestions: classifierSuggestions,
+          metaFields: { mediaPaths },
+        },
+      ],
+    },
+  };
+}

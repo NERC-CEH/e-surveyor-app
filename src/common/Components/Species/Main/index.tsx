@@ -12,8 +12,9 @@ import {
 } from '@ionic/react';
 import { searchOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
-import Occurrence, { Taxon, MachineInvolvement } from 'models/occurrence';
+import Occurrence, { Taxon } from 'models/occurrence';
 import { filterUKSpecies } from 'common/services/plantNet';
+import { MachineInvolvement } from 'Survey/common/config';
 import './styles.scss';
 
 type Props = {

@@ -2,8 +2,9 @@ import React, { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import TaxonSearch from 'common/Components/TaxonSearch';
 import { NavContext } from '@ionic/react';
-import Occurrence, { MachineInvolvement } from 'models/occurrence';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
+import { MachineInvolvement } from 'Survey/common/config';
 
 import { Page, Main, Header } from '@flumens';
 
