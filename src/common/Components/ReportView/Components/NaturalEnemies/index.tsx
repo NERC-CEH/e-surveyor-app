@@ -19,20 +19,29 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     uniqueSpeciesFlat.includes(interaction.plant_latin_name);
   const crops = naturalEnemies.filter(matchesPlant);
 
-  const countItems = (agg: any, item: string) => {
-    if (!Number.isFinite(agg[item])) {
+  const groupItems = (agg: any, item: EnemyInteraction) => {
+    if (!agg[item.crop_group]) {
       // eslint-disable-next-line no-param-reassign
-      agg[item] = 1;
+      agg[item.crop_group] = [item.beneficial_insect_common_name];
       return agg;
     }
+
     // eslint-disable-next-line no-param-reassign
-    agg[item]++;
+    agg[item.crop_group].push(item.beneficial_insect_common_name);
     return agg;
   };
 
-  const groups: { [key: string]: number } = crops
-    .map((crop: EnemyInteraction) => crop.crop_group)
-    .reduce(countItems, {});
+  const groups: { [key: string]: string[] } = crops.reduce(groupItems, {});
+
+  const groupsWithUniqueSpeciesCount: [string, number][] = Object.entries(
+    groups
+  ).map(([groupName, species]: [string, string[]]) => [
+    groupName,
+    [...new Set(species)].length,
+  ]);
+
+  const bySize = ([, count1]: [string, number], [, count2]: [string, number]) =>
+    count2 - count1;
 
   const getGroupItem = ([groupName, count]: [string, number]) => (
     <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
@@ -41,11 +50,11 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     </IonItem>
   );
 
-  const bySize = ([, count1]: [string, number], [, count2]: [string, number]) =>
-    count2 - count1;
+  const beneficialSpeciesGroups = groupsWithUniqueSpeciesCount
+    .sort(bySize)
+    .map(getGroupItem);
 
-  const groupItems = Object.entries(groups).sort(bySize).map(getGroupItem);
-  if (!groupItems.length)
+  if (!beneficialSpeciesGroups.length)
     return (
       <InfoBackgroundMessage>
         This report does not have any natural enemies species interactions data.
@@ -59,22 +68,22 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
         <IonItemDivider>
           <IonLabel slot="start">
             <b>
-              <small>Species</small>
+              <small>Plant</small>
             </b>
           </IonLabel>
           <IonLabel className="ion-text-right" slot="end">
             <b>
-              <small>Interactions</small>
+              <small>Beneficial species</small>
             </b>
           </IonLabel>
         </IonItemDivider>
 
-        {groupItems}
+        {beneficialSpeciesGroups}
       </div>
 
       <IonModal mode="md" isOpen={!!showModal}>
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />
-        <Crops species={crops} group={showModal} />
+        <Crops crops={crops} group={showModal} />
       </IonModal>
     </>
   );
