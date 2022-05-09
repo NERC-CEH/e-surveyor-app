@@ -98,7 +98,13 @@ const Seedmixes: FC = () => {
     const addNewSeedmix = () => setNewSeedmix('new');
 
     return (
-      <IonButton color="secondary" fill="solid" onClick={addNewSeedmix}>
+      <IonButton
+        color="secondary"
+        fill="solid"
+        expand="full"
+        type="submit"
+        onClick={addNewSeedmix}
+      >
         Add new
       </IonButton>
     );
@@ -111,9 +117,13 @@ const Seedmixes: FC = () => {
 
   return (
     <Page id="seedmixes">
-      <Header title="My seedmixes" rightSlot={getNewSeedMixButton()} />
+      <Header title="My seedmixes" />
 
-      <Main>{getSeedmixes()}</Main>
+      <Main>
+        {getNewSeedMixButton()}
+
+        {getSeedmixes()}
+      </Main>
 
       <EditSeedmix
         seedMixId={newSeedmix}
