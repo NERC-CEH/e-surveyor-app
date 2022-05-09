@@ -10,14 +10,15 @@ import {
   nameAttr,
 } from 'Survey/common/config';
 import { Survey } from 'common/surveys';
-import Occurrence from 'models/occurrence';
+import Occurrence, { MachineInvolvement } from 'models/occurrence';
 import config from 'common/config';
 import { ResultWithWarehouseID } from 'common/services/plantNet';
 
 const { POSSIBLE_THRESHOLD } = config;
 
 function attachClassifierResults(submission: any, occ: Occurrence) {
-  const classifierVersion = occ.attrs.taxon?.version || '';
+  const { taxon } = occ.attrs;
+  const classifierVersion = taxon?.version || '';
 
   const getMediaPath = (media: any) => media.values.queued;
   const mediaPaths = submission.media.map(getMediaPath);
@@ -30,8 +31,7 @@ function attachClassifierResults(submission: any, occ: Occurrence) {
     const classifierChosen =
       topSpecies && score >= POSSIBLE_THRESHOLD ? 't' : 'f';
 
-    const humanChosen =
-      warehouseId === occ.attrs.taxon?.warehouseId ? 't' : 'f';
+    const humanChosen = warehouseId === taxon?.warehouseId ? 't' : 'f';
 
     return {
       values: {
@@ -47,12 +47,20 @@ function attachClassifierResults(submission: any, occ: Occurrence) {
   const classifierSuggestions =
     occ.attrs.taxon?.suggestions?.map(getSuggestion) || [];
 
-  if (!classifierSuggestions.length) return submission;
+  const hasSuggestions = classifierSuggestions.length;
+  if (!hasSuggestions) {
+    // eslint-disable-next-line no-param-reassign
+    submission.values.machine_involvement = MachineInvolvement.NONE;
+    return submission;
+  }
+
+  if (Number.isFinite(taxon?.machineInvolvement)) {
+    // eslint-disable-next-line no-param-reassign
+    submission.values.machine_involvement = taxon?.machineInvolvement;
+  }
 
   return {
     ...submission,
-
-    values: { ...submission.values, machine_involvement: 3 },
 
     classification_event: {
       values: { created_by_id: null },
@@ -120,9 +128,11 @@ const survey: Survey = {
     occ: {
       attrs: {
         taxon: {
-          id: 'taxa_taxon_list_id',
-          values(taxon: any) {
-            return taxon.warehouseId;
+          remote: {
+            id: 'taxa_taxon_list_id',
+            values(taxon: any) {
+              return taxon.warehouseId;
+            },
           },
         },
       },

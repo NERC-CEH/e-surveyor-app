@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import TaxonSearch from 'common/Components/TaxonSearch';
 import { NavContext } from '@ionic/react';
-import Occurrence from 'models/occurrence';
+import Occurrence, { MachineInvolvement } from 'models/occurrence';
 import Sample from 'models/sample';
 
 import { Page, Main, Header } from '@flumens';
@@ -28,6 +28,8 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
       scientificNameWithoutAuthor: taxon.scientific_name,
     },
     warehouseId: taxon.warehouse_id,
+    machineInvolvement: MachineInvolvement.HUMAN,
+    images: [],
     score: 1,
   });
 
@@ -51,7 +53,12 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
       return;
     }
 
-    subModel.occurrences[0].attrs.taxon = transformUKSIToAppTaxon(taxon);
+    const [occ] = subModel.occurrences;
+    occ.attrs.taxon = {
+      ...occ.attrs.taxon,
+      ...transformUKSIToAppTaxon(taxon),
+    };
+
     model.save();
 
     context.goBack();

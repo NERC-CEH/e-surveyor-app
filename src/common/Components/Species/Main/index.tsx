@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 import { searchOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
-import Occurrence, { Taxon } from 'models/occurrence';
+import Occurrence, { Taxon, MachineInvolvement } from 'models/occurrence';
 import { filterUKSpecies } from 'common/services/plantNet';
 import './styles.scss';
 
@@ -45,8 +45,9 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
     const { taxon: sp } = occurrence.attrs;
     if (!sp) return null;
 
-    const selectedSpeciesByUser =
-      !sp.gbif?.id || sp.isUserSet || !!(sp as any).scoreFromAPI; // scoreFromAPI - backwards compatible
+    const setByUser = sp.machineInvolvement === MachineInvolvement.HUMAN;
+    const isLegacy = !!(sp as any).scoreFromAPI; // scoreFromAPI - backwards compatible
+    const selectedSpeciesByUser = !sp.gbif?.id || setByUser || isLegacy;
 
     return (
       <SpeciesCard species={sp} selectedSpeciesByUser={selectedSpeciesByUser} />
@@ -54,27 +55,32 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   };
 
   const getAIResults = () => {
-    const getTaxon = (sp: Taxon) => {
-      const taxon = JSON.parse(JSON.stringify(sp));
-      taxon.isUserSet = true;
-      taxon.score = 1;
-
-      return taxon;
-    };
-
     const setSpeciesAsMain = (sp: Taxon) => {
+      const taxon = JSON.parse(JSON.stringify(sp));
+
+      const topSuggestion = occurrence.attrs.taxon?.suggestions?.[0];
+      const isTopSuggestion =
+        topSuggestion?.species.scientificName === sp.species.scientificName;
+
+      const machineInvolvement = isTopSuggestion
+        ? MachineInvolvement.HUMAN_ACCEPTED_PREFERRED
+        : MachineInvolvement.HUMAN_ACCEPTED_LESS_PREFERRED;
+
       // eslint-disable-next-line no-param-reassign
       occurrence.attrs.taxon = {
         ...occurrence.attrs.taxon,
-        ...getTaxon(sp),
+        ...taxon,
+        machineInvolvement,
+        score: 1,
       };
       occurrence.save();
     };
 
     const getSpeciesCard = (sp: Taxon) => {
-      const onSelectWrap = () => setSpeciesAsMain(sp);
+      const lowScore = sp.score <= 0.01; // 1%
+      if (lowScore) return null;
 
-      if (sp.score <= 0.01) return null; // 1%
+      const onSelectWrap = () => setSpeciesAsMain(sp);
 
       return (
         <SpeciesCard

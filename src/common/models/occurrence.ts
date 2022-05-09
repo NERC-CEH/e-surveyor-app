@@ -10,11 +10,38 @@ import identifyImage, {
 } from 'common/services/plantNet';
 import Media from './image';
 
+export enum MachineInvolvement {
+  /**
+   * No involvement.
+   */
+  NONE = 0,
+  /**
+   * Human determined, machine suggestions were ignored.
+   */
+  HUMAN = 1,
+  /**
+   * Human chose a machine suggestion given a very low probability.
+   */
+  HUMAN_ACCEPTED_LESS_PREFERRED_LOW = 2,
+  /**
+   * Human chose a machine suggestion that was less-preferred.
+   */
+  HUMAN_ACCEPTED_LESS_PREFERRED = 3,
+  /**
+   * Human chose a machine suggestion that was the preferred choice.
+   */
+  HUMAN_ACCEPTED_PREFERRED = 4,
+  /**
+   * Machine determined with no human involvement.
+   */
+  MACHINE = 5,
+}
+
 export type Taxon = Optional<
   Omit<ResultWithWarehouseID, 'species'>,
   'images'
 > & {
-  isUserSet?: boolean;
+  machineInvolvement?: MachineInvolvement;
   species: OptionalExcept<
     Species,
     'commonNames' | 'scientificNameWithoutAuthor'
@@ -68,6 +95,7 @@ export default class AppOccurrence extends Occurrence {
 
       this.attrs.taxon = {
         ...topSuggestion,
+        machineInvolvement: MachineInvolvement.MACHINE,
         version,
         suggestions,
       };

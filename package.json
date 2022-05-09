@@ -112,7 +112,7 @@
     "@babel/preset-react": "^7.16.5",
     "@babel/preset-typescript": "^7.16.5",
     "@capacitor/cli": "^3.5.1",
-    "@flumens/eslint-config": "^2.0.0",
+    "@flumens/eslint-config": "^2.0.1",
     "@flumens/fetch-onedrive-excel": "^0.3.0",
     "@flumens/webpack-config": "^4.1.2",
     "@types/jest": "^27.5.0",
