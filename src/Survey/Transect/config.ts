@@ -8,6 +8,7 @@ import {
   locationAttr,
   verifyLocationSchema,
   nameAttr,
+  attachClassifierResults,
 } from 'Survey/common/config';
 import appModel from 'models/app';
 import Sample from 'models/sample';
@@ -204,13 +205,13 @@ const survey = {
           return occ;
         },
 
-        modifySubmission(submission: any) {
+        modifySubmission(submission: any, occ: Occurrence) {
           // for non-UK species
           if (!submission.values.taxa_taxon_list_id) {
             return null;
           }
 
-          return submission;
+          return attachClassifierResults(submission, occ);
         },
       },
     },
