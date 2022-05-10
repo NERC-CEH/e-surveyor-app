@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonList, IonIcon } from '@ionic/react';
-import { Main, InfoButton, InfoMessage } from '@flumens';
+import { Main, InfoButton, InfoMessage } from '@oldBit';
 import Occurrence from 'models/occurrence';
 import { informationCircleOutline } from 'ionicons/icons';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';

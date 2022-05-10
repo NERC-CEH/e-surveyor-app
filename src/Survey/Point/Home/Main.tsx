@@ -14,7 +14,7 @@ import {
   LongPressButton,
   InfoMessage,
   InfoButton,
-} from '@flumens';
+} from '@oldBit';
 import {
   camera,
   bookmarkOutline,

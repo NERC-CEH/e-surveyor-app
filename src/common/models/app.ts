@@ -1,5 +1,5 @@
 import { set } from 'mobx';
-import { Model, ModelAttrs } from '@flumens';
+import { Model, ModelAttrs } from '@oldBit';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import { genericStore } from './store';
 

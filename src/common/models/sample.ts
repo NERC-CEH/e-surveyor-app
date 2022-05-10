@@ -1,4 +1,4 @@
-import { device, getDeepErrorMessage, useAlert } from '@flumens';
+import { device, getDeepErrorMessage, useAlert } from '@oldBit';
 import Sample, {
   Attrs as SampleAttrs,
   Options as SampleOptions,

@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 import Sample, { useValidateCheck } from 'models/sample';
-import { Page, Header, useToast } from '@flumens';
+import { Page, Header, useToast } from '@oldBit';
 import { IonButton, NavContext } from '@ionic/react';
 import { useUserStatusCheck } from 'models/user';
 import { observer } from 'mobx-react';

@@ -10,7 +10,7 @@ import {
 } from '@ionic/react';
 import Occurrence from 'models/occurrence';
 import { SeedmixSpecies } from 'common/data/seedmix';
-import { ModalHeader, Main } from '@flumens';
+import { ModalHeader, Main } from '@oldBit';
 import CountUp from 'react-countup';
 import Seeds from 'common/images/seeds.svg';
 import {

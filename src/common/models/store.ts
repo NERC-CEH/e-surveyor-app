@@ -1,4 +1,4 @@
-import { Store } from '@flumens';
+import { Store } from '@oldBit';
 
 export const genericStore = new Store({
   storeName: 'generic',

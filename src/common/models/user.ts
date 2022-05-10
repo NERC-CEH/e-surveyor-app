@@ -5,7 +5,7 @@ import {
   useToast,
   useLoader,
   device,
-} from '@flumens';
+} from '@oldBit';
 import * as Yup from 'yup';
 import { set } from 'mobx';
 import { genericStore } from './store';

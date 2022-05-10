@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { NavContext } from '@ionic/react';
-import { useAlert } from '@flumens';
+import { useAlert } from '@oldBit';
 import appModel, { SurveyDraftKeys } from 'models/app';
 import userModel from 'models/user';
 import Sample from 'models/sample';

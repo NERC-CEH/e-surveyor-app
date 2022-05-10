@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteWithModels, AttrPage, ModelLocation } from '@flumens';
+import { RouteWithModels, AttrPage, ModelLocation } from '@oldBit';
 import savedSamples from 'models/savedSamples';
 import appModel from 'models/app';
 import userModel from 'models/user';

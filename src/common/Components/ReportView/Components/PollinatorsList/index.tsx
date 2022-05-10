@@ -1,10 +1,5 @@
 import React, { FC, useState } from 'react';
-import {
-  ModalHeader,
-  InfoBackgroundMessage,
-  Main,
-  InfoMessage,
-} from '@flumens';
+import { ModalHeader, InfoBackgroundMessage, Main, InfoMessage } from '@oldBit';
 import {
   IonItem,
   IonLabel,

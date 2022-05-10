@@ -2,7 +2,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
-import { Main, InfoButton, InfoMessage } from '@flumens';
+import { Main, InfoButton, InfoMessage } from '@oldBit';
 import { informationCircleOutline } from 'ionicons/icons';
 import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
 import './styles.scss';

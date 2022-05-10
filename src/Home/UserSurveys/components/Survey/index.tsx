@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useAlert, useToast } from '@flumens';
+import { useAlert, useToast } from '@oldBit';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import { observer } from 'mobx-react';

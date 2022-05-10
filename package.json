@@ -206,7 +206,7 @@
             "./src"
           ],
           "alias": {
-            "@flumens": "./src/common/flumens",
+            "@oldBit": "./src/common/bit",
             "common": "./src/common",
             "helpers": "./src/common/helpers",
             "models": "./src/common/models",

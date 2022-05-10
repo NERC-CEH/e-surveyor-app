@@ -1,7 +1,7 @@
 import { GalleryPhoto } from '@capacitor/camera';
 import { isPlatform } from '@ionic/react';
 import { CameraPreview } from '@capacitor-community/camera-preview';
-import { getObjectURL } from '@flumens';
+import { getObjectURL } from '@oldBit';
 
 /**
  * Uses Camera Preview plugin to pick an image using the camera.

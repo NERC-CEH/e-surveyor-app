@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
 import { Trans as T } from 'react-i18next';
-import { Page, Header, device, useToast, useAlert, useLoader } from '@flumens';
+import { Page, Header, device, useToast, useAlert, useLoader } from '@oldBit';
 import Main from './Main';
 import './styles.scss';
 

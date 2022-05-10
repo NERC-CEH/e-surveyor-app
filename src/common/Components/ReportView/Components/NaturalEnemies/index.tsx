@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import naturalEnemies, {
   Interaction as EnemyInteraction,
 } from 'common/data/naturalEnemies';
-import { ModalHeader, InfoBackgroundMessage } from '@flumens';
+import { ModalHeader, InfoBackgroundMessage } from '@oldBit';
 import { IonItem, IonLabel, IonItemDivider, IonModal } from '@ionic/react';
 import Crops from './Components/Crops';
 import { SpeciesNames } from '../../helpers';

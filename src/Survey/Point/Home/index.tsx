@@ -6,7 +6,7 @@ import {
   useAlert,
   getDeepErrorMessage,
   captureImage,
-} from '@flumens';
+} from '@oldBit';
 import Sample from 'models/sample';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';

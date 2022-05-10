@@ -1,5 +1,5 @@
 import Sample from 'models/sample';
-import { initStoredSamples } from '@flumens';
+import { initStoredSamples } from '@oldBit';
 import { modelStore } from './store';
 
 console.log('SavedSamples: initializing');

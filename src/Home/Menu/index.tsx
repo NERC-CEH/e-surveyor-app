@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
-import { Page, useAlert, useToast, useLoader } from '@flumens';
+import { Page, useAlert, useToast, useLoader } from '@oldBit';
 import { Trans as T } from 'react-i18next';
 import appModel from 'models/app';
 import userModel, { useUserStatusCheck } from 'models/user';

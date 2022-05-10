@@ -17,7 +17,7 @@
     "resolveJsonModule": true,
     "paths": {
       "common/*": ["./src/common/*"],
-      "@flumens": ["./src/common/flumens"],
+      "@oldBit": ["./src/common/bit"],
       "models/*": ["./src/common/models/*"],
       "helpers/*": ["./src/common/helpers/*"],
       "Components/*": ["./src/common/Components/*"],

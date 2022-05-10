@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Sample from 'models/sample';
-import { Page, Header } from '@flumens';
+import { Page, Header } from '@oldBit';
 import { observer } from 'mobx-react';
 import habitats from 'common/data/habitats';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';

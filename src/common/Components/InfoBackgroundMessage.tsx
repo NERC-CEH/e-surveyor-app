@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
-import { InfoBackgroundMessage } from '@flumens';
+import { InfoBackgroundMessage } from '@oldBit';
 import appModel, { Attrs } from 'models/app';
 
 interface Props {

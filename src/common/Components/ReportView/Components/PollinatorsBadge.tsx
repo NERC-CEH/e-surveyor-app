@@ -9,7 +9,7 @@ import {
   IonItem,
   IonList,
 } from '@ionic/react';
-import { ModalHeader, Main } from '@flumens';
+import { ModalHeader, Main } from '@oldBit';
 import CountUp from 'react-countup';
 import beeIcon from 'common/images/bee.svg';
 import { SpeciesNames } from '../helpers';

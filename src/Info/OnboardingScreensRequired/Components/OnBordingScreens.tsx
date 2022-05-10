@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import AppModelType from 'models/app';
-import { Page } from '@flumens';
+import { Page } from '@oldBit';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
 import {
