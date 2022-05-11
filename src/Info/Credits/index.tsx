@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Header, Page, Main, Section } from '@oldBit';
 import 'common/images/flumens.svg';
 import plantNetLogo from './Pl@ntNet_logo.png';

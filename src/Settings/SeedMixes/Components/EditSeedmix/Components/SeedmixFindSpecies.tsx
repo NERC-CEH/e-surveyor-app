@@ -1,4 +1,4 @@
-import React, { FC, createRef, useEffect } from 'react';
+import { FC, createRef, useEffect } from 'react';
 import {
   IonButton,
   IonContent,

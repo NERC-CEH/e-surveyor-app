@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IonButton, IonList } from '@ionic/react';
 import { Main, InputWithValidation } from '@oldBit';
 import { personOutline } from 'ionicons/icons';

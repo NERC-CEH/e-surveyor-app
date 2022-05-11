@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { Main, useLoader } from '@oldBit';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';

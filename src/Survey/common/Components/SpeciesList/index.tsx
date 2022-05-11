@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import {
   IonLabel,

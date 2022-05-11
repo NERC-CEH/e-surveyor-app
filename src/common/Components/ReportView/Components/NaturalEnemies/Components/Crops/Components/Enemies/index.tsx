@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
 import { Main } from '@oldBit';

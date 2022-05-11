@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import { FC, useContext } from 'react';
 import Sample, { useValidateCheck } from 'models/sample';
 import { Page, Header, useToast } from '@oldBit';
 import { IonButton, NavContext } from '@ionic/react';

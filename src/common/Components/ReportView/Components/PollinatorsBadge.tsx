@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import Sample from 'models/sample';
 import {
   IonBadge,

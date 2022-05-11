@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Page, Header, useAlert } from '@oldBit';
 import { IonButton, NavContext, IonIcon } from '@ionic/react';
 import { arrowForwardCircleOutline } from 'ionicons/icons';

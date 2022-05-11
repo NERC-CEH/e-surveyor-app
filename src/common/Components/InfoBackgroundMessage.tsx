@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { InfoBackgroundMessage } from '@oldBit';
 import appModel, { Attrs } from 'models/app';

@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import { FC, useState, useCallback, useEffect } from 'react';
 import Cropper from 'react-easy-crop';
 import { Point, Area } from 'react-easy-crop/types'; // eslint-disable-line import/no-unresolved
 import {

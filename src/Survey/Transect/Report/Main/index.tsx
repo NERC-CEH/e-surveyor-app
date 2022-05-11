@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import { Main, InfoButton, InfoMessage } from '@oldBit';

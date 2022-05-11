@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonItemDivider, IonList } from '@ionic/react';
 import { locationOutline, informationCircleOutline } from 'ionicons/icons';

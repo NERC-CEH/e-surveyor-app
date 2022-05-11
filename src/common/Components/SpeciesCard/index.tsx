@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState, FC } from 'react';
+import { useState, FC } from 'react';
 import { observer } from 'mobx-react';
 import {
   IonCardHeader,

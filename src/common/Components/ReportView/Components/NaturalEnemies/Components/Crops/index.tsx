@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import { ModalHeader, Main } from '@oldBit';
 import {

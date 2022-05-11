@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Page, Header, useToast } from '@oldBit';
 import appModelProps from 'models/app';
 import userModelProps from 'models/user';

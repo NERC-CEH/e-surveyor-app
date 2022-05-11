@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import AppModelType from 'models/app';
 import { observer } from 'mobx-react';
 import OnboardingScreens from './Components/OnBordingScreens';

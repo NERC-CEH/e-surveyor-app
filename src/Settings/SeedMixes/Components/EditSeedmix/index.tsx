@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { IonModal } from '@ionic/react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 import appModel, { SeedMix as SeedMixFromRemote } from 'models/app';

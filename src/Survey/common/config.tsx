@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Yup from 'yup';
 import { date } from '@oldBit';
 import Sample from 'models/sample';

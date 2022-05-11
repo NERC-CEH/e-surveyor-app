@@ -1,4 +1,3 @@
-import React from 'react';
 import { observer } from 'mobx-react';
 import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
 import { Page, useAlert, useToast, useLoader } from '@oldBit';

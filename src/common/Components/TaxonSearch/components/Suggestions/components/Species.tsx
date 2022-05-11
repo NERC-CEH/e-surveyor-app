@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IonItem } from '@ionic/react';
 import './styles.scss';
 import { Species } from '../../../index';

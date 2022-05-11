@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { IonButton } from '@ionic/react';
 import { Page, Header, useToast, device } from '@oldBit';

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Page, Main, Header, Section } from '@oldBit';
 import './styles.scss';
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { NavContext } from '@ionic/react';
 import { useAlert } from '@oldBit';
 import appModel, { SurveyDraftKeys } from 'models/app';

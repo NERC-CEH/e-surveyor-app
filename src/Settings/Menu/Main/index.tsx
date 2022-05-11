@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { Main, useAlert, Toggle, InfoMessage } from '@oldBit';
 import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';

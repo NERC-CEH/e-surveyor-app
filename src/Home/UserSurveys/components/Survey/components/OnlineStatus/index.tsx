@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IonSpinner, IonLabel, IonChip, IonButton } from '@ionic/react';
 import { observer } from 'mobx-react';
 import Sample from 'models/sample';

@@ -245,7 +245,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "@flumens"
+      "@flumens",
+      "plugin:react/jsx-runtime"
     ],
     "rules": {
       "react/function-component-definition": 0,

@@ -1,4 +1,4 @@
-import React, { FC, ComponentProps, useState } from 'react';
+import { FC, ComponentProps, useState } from 'react';
 import { PhotoPicker, captureImage, URL } from '@oldBit';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react';
