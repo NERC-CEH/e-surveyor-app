@@ -12,9 +12,9 @@ const indiciaUrl =
 const isTestEnv = process.env.NODE_ENV === 'test';
 
 const CONFIG = {
-  environment: process.env.NODE_ENV,
-  version: process.env.APP_VERSION,
-  build: process.env.APP_BUILD,
+  environment: process.env.NODE_ENV as string,
+  version: process.env.APP_VERSION as string,
+  build: process.env.APP_BUILD as string,
 
   // AI classifier
   classifierID: 20099,
@@ -25,7 +25,7 @@ const CONFIG = {
   log: !isTestEnv,
 
   // error analytics
-  sentryDNS: !isTestEnv && process.env.APP_SENTRY_KEY,
+  sentryDNS: (!isTestEnv && process.env.APP_SENTRY_KEY) as string,
 
   // mapping
   map: {
