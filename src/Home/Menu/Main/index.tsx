@@ -21,7 +21,7 @@ import {
 } from 'ionicons/icons';
 import AppModelType from 'models/app';
 import { Trans as T } from 'react-i18next';
-import { Main, InfoMessage } from '@oldBit';
+import { Main, InfoMessage } from '@flumens';
 import config from 'common/config';
 import './styles.scss';
 

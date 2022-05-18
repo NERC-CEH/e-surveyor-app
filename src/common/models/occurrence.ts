@@ -1,4 +1,4 @@
-import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@oldBit';
+import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@flumens';
 import { observable } from 'mobx';
 import { Species } from 'common/services/plantNetResponse.d';
 import identifyImage, {

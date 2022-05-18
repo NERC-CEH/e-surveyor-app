@@ -5,7 +5,7 @@ import {
   Sample,
   SampleAttrs,
   SampleOptions,
-} from '@oldBit';
+} from '@flumens';
 import { reaction } from 'mobx';
 import userModel from 'models/user';
 import appModel from 'models/app';

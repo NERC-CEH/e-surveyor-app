@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router';
 import Sample from 'models/sample';
 import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
 import { camera, locationOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem, LongPressButton } from '@oldBit';
+import { Main, MenuAttrItem, LongPressButton } from '@flumens';
 import PhotoPicker from 'common/Components/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';

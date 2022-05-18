@@ -14,7 +14,7 @@ import {
   useAlert,
   device,
   InfoBackgroundMessage,
-} from '@oldBit';
+} from '@flumens';
 import Sample from 'models/sample';
 import appModel from 'models/app';
 import clsx from 'clsx';

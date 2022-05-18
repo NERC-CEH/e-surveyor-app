@@ -9,7 +9,7 @@ import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { App as AppPlugin } from '@capacitor/app';
 import i18n from 'i18next';
-import { initAnalytics } from '@oldBit';
+import { initAnalytics } from '@flumens';
 import { initReactI18next } from 'react-i18next';
 import App from './App';
 

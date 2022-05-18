@@ -9,7 +9,7 @@ import {
   IonItemSliding,
   IonItemDivider,
 } from '@ionic/react';
-import { Page, Main, Header, InfoBackgroundMessage, useAlert } from '@oldBit';
+import { Page, Main, Header, InfoBackgroundMessage, useAlert } from '@flumens';
 import appModel, { SeedMix } from 'models/app';
 import { observer } from 'mobx-react';
 import EditSeedmix from './Components/EditSeedmix';

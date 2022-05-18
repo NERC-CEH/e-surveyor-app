@@ -1,4 +1,4 @@
-import { Media, MediaAttrs, createImage } from '@oldBit';
+import { Media, MediaAttrs, createImage } from '@flumens';
 import { observable } from 'mobx';
 import { isPlatform } from '@ionic/react';
 import { Capacitor } from '@capacitor/core';

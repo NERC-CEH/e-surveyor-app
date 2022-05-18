@@ -14,7 +14,7 @@ import {
   IonIcon,
 } from '@ionic/react';
 import { Taxon } from 'models/occurrence';
-import { Gallery, InfoBackgroundMessage, device } from '@oldBit';
+import { Gallery, InfoBackgroundMessage, device } from '@flumens';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
 import './styles.scss';

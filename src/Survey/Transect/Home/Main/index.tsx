@@ -14,7 +14,7 @@ import {
   bookmarkOutline,
   informationCircleOutline,
 } from 'ionicons/icons';
-import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@oldBit';
+import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
 import Sample from 'models/sample';
 import { useRouteMatch } from 'react-router-dom';
 import personTakingPhoto from 'common/images/personTakingPhoto.jpg';

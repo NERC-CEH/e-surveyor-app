@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import userModelProps from 'models/user';
 import { NavContext } from '@ionic/react';
-import { useToast, useLoader, Page, Header, device } from '@oldBit';
+import { useToast, useLoader, Page, Header, device } from '@flumens';
 import Main from './Main';
 import './styles.scss';
 

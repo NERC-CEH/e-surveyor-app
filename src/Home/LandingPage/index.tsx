@@ -14,7 +14,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/grid';
 import '@ionic/react/css/ionic-swiper.css';
-import { Page, Main, device, useToast, captureImage } from '@oldBit';
+import { Page, Main, device, useToast, captureImage } from '@flumens';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import { usePromptImageSource } from 'Components/PhotoPicker';

@@ -9,7 +9,7 @@ import {
   IonSegment,
   IonButton,
 } from '@ionic/react';
-import { Page, Main, device, useToast } from '@oldBit';
+import { Page, Main, device, useToast } from '@flumens';
 import { observer } from 'mobx-react';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';

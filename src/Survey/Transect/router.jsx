@@ -1,4 +1,4 @@
-import { RouteWithModels, AttrPage, ModelLocationMap } from '@oldBit';
+import { RouteWithModels, AttrPage, ModelLocationMap } from '@flumens';
 import savedSamples from 'models/savedSamples';
 import appModel from 'models/app';
 import userModel from 'models/user';

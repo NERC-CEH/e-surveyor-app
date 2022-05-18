@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Page, Main, Header, Section } from '@oldBit';
+import { Page, Main, Header, Section } from '@flumens';
 import './styles.scss';
 
 const { P } = Section;

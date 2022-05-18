@@ -6,7 +6,7 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import { MachineInvolvement } from 'Survey/common/config';
 
-import { Page, Main, Header } from '@oldBit';
+import { Page, Main, Header } from '@flumens';
 
 type Props = {
   sample: Sample;

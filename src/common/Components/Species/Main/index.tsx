@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect } from 'react';
-import { Main, useLoader } from '@oldBit';
+import { Main, useLoader } from '@flumens';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import SpeciesCard from 'common/Components/SpeciesCard';

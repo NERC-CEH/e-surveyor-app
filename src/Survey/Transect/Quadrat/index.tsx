@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Page, Header, device, captureImage, useAlert } from '@oldBit';
+import { Page, Header, device, captureImage, useAlert } from '@flumens';
 import { observer } from 'mobx-react';
 import Media from 'models/image';
 import { isPlatform } from '@ionic/react';

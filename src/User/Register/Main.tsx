@@ -10,7 +10,7 @@ import {
 import { Trans as T } from 'react-i18next';
 import { AnySchema } from 'yup';
 import { Formik, Form } from 'formik';
-import { Main, InputWithValidation } from '@oldBit';
+import { Main, InputWithValidation } from '@flumens';
 import config from 'common/config';
 
 type Props = {

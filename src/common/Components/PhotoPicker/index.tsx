@@ -1,5 +1,5 @@
 import { FC, ComponentProps, useState } from 'react';
-import { PhotoPicker, captureImage, URL } from '@oldBit';
+import { PhotoPicker, captureImage, URL } from '@flumens';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react';
 import { useIonActionSheet, IonButton, IonIcon } from '@ionic/react';

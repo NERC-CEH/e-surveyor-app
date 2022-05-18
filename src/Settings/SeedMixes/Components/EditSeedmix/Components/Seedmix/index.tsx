@@ -15,7 +15,7 @@ import {
   IonInput,
   IonItemDivider,
 } from '@ionic/react';
-import { InfoBackgroundMessage, useAlert } from '@oldBit';
+import { InfoBackgroundMessage, useAlert } from '@flumens';
 import { useHistory } from 'react-router-dom';
 import { SeedmixSpecies, SeedMix } from '../../index';
 import './styles.scss';

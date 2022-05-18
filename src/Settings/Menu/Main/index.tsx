@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { Main, useAlert, MenuAttrToggle, InfoMessage } from '@oldBit';
+import { Main, useAlert, MenuAttrToggle, InfoMessage } from '@flumens';
 import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';
 import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
 import transectIcon from 'common/images/transectIconBlack.svg';

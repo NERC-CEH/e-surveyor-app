@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
-import { Main } from '@oldBit';
+import { Main } from '@flumens';
 import { IonItem, IonLabel, IonItemDivider, IonList } from '@ionic/react';
 import './styles.scss';
 

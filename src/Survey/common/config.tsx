@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { date } from '@oldBit';
+import { date } from '@flumens';
 import Sample from 'models/sample';
 import appModel, { SeedMix } from 'models/app';
 import { SeedmixSpecies } from 'common/data/seedmix';

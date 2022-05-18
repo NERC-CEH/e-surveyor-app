@@ -9,7 +9,7 @@ import {
   IonButtons,
   isPlatform,
 } from '@ionic/react';
-import { InfoBackgroundMessage, getObjectURL, cropImage, URL } from '@oldBit';
+import { InfoBackgroundMessage, getObjectURL, cropImage, URL } from '@flumens';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import './styles.scss';
 

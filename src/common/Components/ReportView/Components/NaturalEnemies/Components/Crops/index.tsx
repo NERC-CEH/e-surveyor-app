@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
-import { ModalHeader, Main } from '@oldBit';
+import { ModalHeader, Main } from '@flumens';
 import {
   IonItem,
   IonLabel,

@@ -1,5 +1,5 @@
 import { IonList, IonItemDivider, IonIcon } from '@ionic/react';
-import { Page, Main, Header, Collapse } from '@oldBit';
+import { Page, Main, Header, Collapse } from '@flumens';
 import { Trans as T } from 'react-i18next';
 import {
   settingsOutline,
