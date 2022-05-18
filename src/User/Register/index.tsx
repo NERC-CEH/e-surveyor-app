@@ -74,11 +74,7 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
 
   return (
     <Page id="user-register">
-      <Header
-        className="ion-no-border"
-        routerDirection="none"
-        title="Register"
-      />
+      <Header className="ion-no-border" title="Register" />
       <Main schema={userModel.registerSchema} onSubmit={onRegister} />
     </Page>
   );

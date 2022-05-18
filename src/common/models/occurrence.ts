@@ -1,7 +1,4 @@
-import Occurrence, {
-  Attrs as OccurrenceAttrs,
-} from '@bit/flumens.apps.models.occurrence';
-import { validateRemoteModel } from '@bit/flumens.apps.utils.validation';
+import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@oldBit';
 import { observable } from 'mobx';
 import { Species } from 'common/services/plantNetResponse.d';
 import identifyImage, {

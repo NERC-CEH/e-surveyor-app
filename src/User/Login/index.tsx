@@ -51,7 +51,7 @@ const LoginController: FC<Props> = ({ userModel }) => {
 
   return (
     <Page id="user-login">
-      <Header className="ion-no-border" routerDirection="none" title="Login" />
+      <Header className="ion-no-border" title="Login" />
       <Main schema={userModel.loginSchema} onSubmit={onLogin} />
     </Page>
   );

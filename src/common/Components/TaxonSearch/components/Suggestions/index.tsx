@@ -1,5 +1,5 @@
+import { FC } from 'react';
 import { IonList, IonItem } from '@ionic/react';
-import PropTypes from 'prop-types';
 import Species from './components/Species';
 
 /**
@@ -7,11 +7,11 @@ import Species from './components/Species';
  * a latin name next to it.
  * @param suggestions
  */
-function deDuplicateSuggestions(suggestions) {
-  let previous = {};
-  const results = [];
+function deDuplicateSuggestions(suggestions: any) {
+  let previous: any = {};
+  const results: any = [];
 
-  const taxonWrap = taxon => {
+  const taxonWrap = (taxon: any) => {
     const name = taxon[taxon.found_in_name] || '';
     const nameNormalized = name.toLocaleLowerCase();
 
@@ -55,7 +55,16 @@ const getSearchInfo = () => (
   </IonItem>
 );
 
-const Suggestions = ({ searchResults, searchPhrase, onSpeciesSelected }) => {
+type Props = {
+  searchResults?: any[];
+  searchPhrase: string;
+  onSpeciesSelected: any;
+};
+const Suggestions: FC<Props> = ({
+  searchResults,
+  searchPhrase,
+  onSpeciesSelected,
+}) => {
   if (!searchResults) {
     return (
       <IonList id="suggestions" lines="none">
@@ -74,7 +83,7 @@ const Suggestions = ({ searchResults, searchPhrase, onSpeciesSelected }) => {
   } else {
     const deDuped = deDuplicateSuggestions(searchResults);
 
-    const speciesWrap = species => {
+    const speciesWrap = (species: any) => {
       const key = `${species.warehouse_id}-${species.found_in_name}-${species.isFavourite}`;
 
       return (
@@ -95,12 +104,6 @@ const Suggestions = ({ searchResults, searchPhrase, onSpeciesSelected }) => {
       {suggestionsList}
     </IonList>
   );
-};
-
-Suggestions.propTypes = {
-  searchResults: PropTypes.array,
-  searchPhrase: PropTypes.string.isRequired,
-  onSpeciesSelected: PropTypes.func.isRequired,
 };
 
 export default Suggestions;

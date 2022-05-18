@@ -1,8 +1,11 @@
-import { device, getDeepErrorMessage, useAlert } from '@oldBit';
-import Sample, {
-  Attrs as SampleAttrs,
-  Options as SampleOptions,
-} from '@bit/flumens.apps.models.sample';
+import {
+  device,
+  getDeepErrorMessage,
+  useAlert,
+  Sample,
+  SampleAttrs,
+  SampleOptions,
+} from '@oldBit';
 import { reaction } from 'mobx';
 import userModel from 'models/user';
 import appModel from 'models/app';

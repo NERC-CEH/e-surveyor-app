@@ -9,7 +9,7 @@ import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { App as AppPlugin } from '@capacitor/app';
 import i18n from 'i18next';
-import initAnalytics from 'helpers/analytics';
+import { initAnalytics } from '@oldBit';
 import { initReactI18next } from 'react-i18next';
 import App from './App';
 
@@ -17,9 +17,7 @@ import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
 import 'common/theme.scss';
 
-i18n.use(initReactI18next).init({
-  lng: 'en',
-});
+i18n.use(initReactI18next).init({ lng: 'en' });
 
 setupIonicReact({
   hardwareBackButton: false, // android back button
@@ -39,7 +37,7 @@ async function init() {
       environment: config.environment,
       build: config.build,
       release: config.version,
-      userId: userModel.id ? Number.parseInt(userModel.id, 10) : undefined,
+      userId: userModel.id,
       tags: {
         'app.appSession': appModel.attrs.appSession,
       },

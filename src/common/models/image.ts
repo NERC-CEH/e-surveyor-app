@@ -1,5 +1,4 @@
-import Media, { Attrs as MediaAttrs } from '@bit/flumens.apps.models.media';
-import { createImage } from '@bit/flumens.apps.helpers.image';
+import { Media, MediaAttrs, createImage } from '@oldBit';
 import { observable } from 'mobx';
 import { isPlatform } from '@ionic/react';
 import { Capacitor } from '@capacitor/core';

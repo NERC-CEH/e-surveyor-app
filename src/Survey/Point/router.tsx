@@ -1,4 +1,4 @@
-import { RouteWithModels, AttrPage, ModelLocation } from '@oldBit';
+import { RouteWithModels, AttrPage, ModelLocationMap } from '@oldBit';
 import savedSamples from 'models/savedSamples';
 import appModel from 'models/app';
 import config from 'common/config';
@@ -14,7 +14,7 @@ const baseURL = '/survey/point';
 const { AttrPageFromRoute } = AttrPage;
 
 const ModelLocationWrap = (props: any) => (
-  <ModelLocation
+  <ModelLocationMap
     appModel={appModel}
     mapProviderOptions={config.map}
     useGridRef

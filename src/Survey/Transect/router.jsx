@@ -1,4 +1,4 @@
-import { RouteWithModels, AttrPage, ModelLocation } from '@oldBit';
+import { RouteWithModels, AttrPage, ModelLocationMap } from '@oldBit';
 import savedSamples from 'models/savedSamples';
 import appModel from 'models/app';
 import userModel from 'models/user';
@@ -21,7 +21,7 @@ const HomeWrap = props => (
 );
 
 const ModelLocationWrap = props => (
-  <ModelLocation
+  <ModelLocationMap
     appModel={appModel}
     mapProviderOptions={config.map}
     useGridRef

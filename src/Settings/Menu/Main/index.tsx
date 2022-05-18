@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { Main, useAlert, Toggle, InfoMessage } from '@oldBit';
+import { Main, useAlert, MenuAttrToggle, InfoMessage } from '@oldBit';
 import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';
 import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
 import transectIcon from 'common/images/transectIconBlack.svg';
@@ -63,16 +63,16 @@ const Menu: FC<Props> = ({
       <IonList lines="full">
         <IonItemDivider>Surveying</IonItemDivider>
         <div className="rounded">
-          <Toggle
-            label="Shorter Common Standards"
+          <MenuAttrToggle
             icon={transectIcon}
-            onChange={onCommonStandardToggle}
+            label="Shorter Common Standards"
             value={use10stepsForCommonStandard}
+            onChange={onCommonStandardToggle}
           />
           <InfoMessage color="medium">
             Use 10 steps when doing Common Standards survey.
           </InfoMessage>
-          <Toggle
+          <MenuAttrToggle
             label="Identify when reconnected"
             icon={flowerIcon}
             onChange={onAutoIDWhenBackOnline}
@@ -92,7 +92,7 @@ const Menu: FC<Props> = ({
 
         <IonItemDivider>Application</IonItemDivider>
         <div className="rounded">
-          <Toggle
+          <MenuAttrToggle
             label="Share App Analytics"
             icon={shareSocialOutline}
             onChange={onSendAnalyticsToggle}
