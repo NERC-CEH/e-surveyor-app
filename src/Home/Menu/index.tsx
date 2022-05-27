@@ -3,7 +3,7 @@ import { IonItem, IonLabel, IonCheckbox } from '@ionic/react';
 import { Page, useAlert, useToast, useLoader } from '@flumens';
 import { Trans as T } from 'react-i18next';
 import appModel from 'models/app';
-import userModel, { useUserStatusCheck } from 'models/user';
+import userModel from 'models/user';
 import savedSamples from 'models/savedSamples';
 import Main from './Main';
 import './styles.scss';
@@ -53,7 +53,6 @@ const Controller = () => {
   const showLogoutConfirmationDialog = useConfirmationDialog();
   const toast = useToast();
   const loader = useLoader();
-  const checkUserStatus = useUserStatusCheck();
 
   function logOut() {
     console.log('Info:Menu: logging out.');
@@ -72,24 +71,29 @@ const Controller = () => {
 
   const isLoggedIn = userModel.isLoggedIn();
 
-  const resendVerificationEmail = async () => {
-    if (!isLoggedIn) {
-      toast.warn('Please log in first.');
-      return;
-    }
-
+  const checkActivation = async () => {
     await loader.show('Please wait...');
+    try {
+      await userModel.checkActivation();
+      if (!userModel.attrs.verified) {
+        toast.warn('The user has not been activated or is blocked.');
+      }
+    } catch (err: any) {
+      toast.error(err);
+    }
+    loader.hide();
+  };
 
+  const resendVerificationEmail = async () => {
+    await loader.show('Please wait...');
     try {
       await userModel.resendVerificationEmail();
       toast.success(
-        'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.',
-        { duration: 5000 }
+        'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.'
       );
-    } catch (e: any) {
-      toast.error(e.message);
+    } catch (err: any) {
+      toast.error(err);
     }
-
     loader.hide();
   };
 
@@ -100,7 +104,7 @@ const Controller = () => {
         appModel={appModel}
         isLoggedIn={isLoggedIn}
         logOut={logOut}
-        refreshAccount={checkUserStatus}
+        refreshAccount={checkActivation}
         resendVerificationEmail={resendVerificationEmail}
       />
     </Page>
