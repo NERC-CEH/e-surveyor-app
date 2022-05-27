@@ -38,7 +38,7 @@ type Attrs = SampleAttrs & {
   location?: any;
 };
 
-class AppSample extends Sample {
+export default class AppSample extends Sample {
   static fromJSON(json: any) {
     return super.fromJSON(json, Occurrence, AppSample, Media);
   }
@@ -222,5 +222,3 @@ export const useValidateCheck = (sample: AppSample) => {
     return true;
   };
 };
-
-export default AppSample;
