@@ -27,6 +27,18 @@ class UserModel extends DrupalUserModel {
     fullName: Yup.string().required(),
   });
 
+  constructor(options: any) {
+    super(options);
+
+    const checkForValidation = () => {
+      if (this.isLoggedIn() && !this.attrs.verified) {
+        console.log('User: refreshing profile for validation');
+        this.refreshProfile();
+      }
+    };
+    this.ready?.then(checkForValidation);
+  }
+
   async checkActivation() {
     const isLoggedIn = !!this.attrs.email;
     if (!isLoggedIn) return false;
