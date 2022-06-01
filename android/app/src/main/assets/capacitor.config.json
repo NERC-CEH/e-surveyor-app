@@ -1,6 +1,6 @@
 {
 	"appId": "uk.ac.ceh.esurveyor",
-	"appName": "E-surveyor",
+	"appName": "E-Surveyor",
 	"bundledWebRuntime": false,
 	"npmClient": "npm",
 	"webDir": "build",
