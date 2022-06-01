@@ -62,7 +62,12 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
 
           <IonItemDivider mode="ios">Quadrat photo</IonItemDivider>
           <div className="rounded">
-            <PhotoPicker model={subSample} maxImages={1} allowToCrop />
+            <PhotoPicker
+              model={subSample}
+              maxImages={1}
+              allowToCrop
+              placeholderCount={0}
+            />
           </div>
         </IonList>
 
