@@ -96,9 +96,9 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
               <p>You can now begin to add plants to your survey. </p>
               <img src={cameraButton} />
               <p>
-                If you have identified the plants yourself, hold down the camera
-                button and write the name of your plant species into the text
-                box.
+                If you have identified the plants yourself, hold down the orange
+                species button and write the name of your plant species into the
+                text box.
               </p>
               <p>
                 If you would like the AI to identify your plants, tap on the

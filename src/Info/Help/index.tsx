@@ -119,9 +119,9 @@ export default () => (
               <p>You can now begin to add plants to your survey.</p>
               <img src={cameraButton} />
               <p>
-                If you have identified the plants yourself, hold down the camera
-                button and write the name of your plant species into the text
-                box.
+                If you have identified the plants yourself, hold down the orange
+                species button and write the name of your plant species into the
+                text box.
               </p>
               <p>
                 If you would like the AI to identify your plants, tap on the
@@ -222,7 +222,7 @@ export default () => (
                 You can complete a survey without phone signal, however the
                 plant identification feature will not work until you are back
                 within range. If you know the plant species in your survey area,
-                hold down the camera button to type the names in. If you would
+                hold down the orange species button to type the names in. If you would
                 like to use the AI plant identifier, you can still carry out the
                 survey, but do not click "Finish" until you have phone signal
                 and your plants have been identified.

@@ -99,8 +99,9 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     return (
       <IonList>
         <InfoBackgroundMessage>
-          Your species list is empty. <br /> Hold down the camera button to list
-          plant species yourself, or tap to take a photo for the AI to identify.
+          Your species list is empty. <br /> Hold down the orange species button
+          to list plant species yourself, or tap to take a photo for the AI to
+          identify.
         </InfoBackgroundMessage>
       </IonList>
     );
