@@ -241,7 +241,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
     return (
       <>
-        <InfoMessage icon={informationCircleOutline}>
+        <InfoMessage icon={informationCircleOutline} className="blue">
           This is <b className={pollinatorClass}>{pollinatorClass}</b> class
           flower that supports <b>{pollinatorCount}</b> species
         </InfoMessage>

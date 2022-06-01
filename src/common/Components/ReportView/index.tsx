@@ -26,7 +26,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmixSpecies }) => {
   return (
     <>
       <Main className="survey-report">
-        <InfoMessage icon={informationCircleOutline}>
+        <InfoMessage icon={informationCircleOutline} className="blue">
           What does this report mean?
           <InfoButton label="READ MORE" header="Tips">
             <div>

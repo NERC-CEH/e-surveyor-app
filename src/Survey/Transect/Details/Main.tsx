@@ -31,7 +31,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
 
   return (
     <Main>
-      <InfoMessage icon={informationCircleOutline}>
+      <InfoMessage icon={informationCircleOutline} className="blue">
         How to set up a transect?
         <InfoButton label="READ MORE" header="Tips">
           <div>

@@ -26,37 +26,39 @@ const RegisterMain: FC<Props> = ({ onSubmit, schema }) => {
   const registrationForm = (props: any) => (
     <Form>
       <IonList lines="full">
-        <InputWithValidation
-          name="fullName"
-          placeholder="Full Name"
-          icon={personOutline}
-          type="text"
-          autocomplete="off"
-          {...props}
-        />
-        <InputWithValidation
-          name="email"
-          placeholder="Email"
-          icon={mailOutline}
-          type="email"
-          autocomplete="off"
-          {...props}
-        />
-        <InputWithValidation
-          name="password"
-          placeholder="Password"
-          icon={keyOutline}
-          type={showPassword ? 'text' : 'password'}
-          autocomplete="off"
-          {...props}
-        >
-          <IonButton slot="end" onClick={togglePassword} fill="clear">
-            <IonIcon
-              icon={showPassword ? eyeOutline : eyeOffOutline}
-              size="small"
-            />
-          </IonButton>
-        </InputWithValidation>
+        <div className="rounded">
+          <InputWithValidation
+            name="fullName"
+            placeholder="Full Name"
+            icon={personOutline}
+            type="text"
+            autocomplete="off"
+            {...props}
+          />
+          <InputWithValidation
+            name="email"
+            placeholder="Email"
+            icon={mailOutline}
+            type="email"
+            autocomplete="off"
+            {...props}
+          />
+          <InputWithValidation
+            name="password"
+            placeholder="Password"
+            icon={keyOutline}
+            type={showPassword ? 'text' : 'password'}
+            autocomplete="off"
+            {...props}
+          >
+            <IonButton slot="end" onClick={togglePassword} fill="clear">
+              <IonIcon
+                icon={showPassword ? eyeOutline : eyeOffOutline}
+                size="small"
+              />
+            </IonButton>
+          </InputWithValidation>
+        </div>
 
         <div className="terms-info-text">
           <T>

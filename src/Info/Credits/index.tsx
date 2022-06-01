@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Header, Page, Main, Section } from '@flumens';
-import 'common/images/flumens.svg';
+import flumensLogo from 'common/images/flumens.svg';
 import plantNetLogo from './Pl@ntNet_logo.png';
 import './styles.scss';
 
@@ -45,7 +45,7 @@ const Credits: FC = () => (
       <Section>
         <p className="logo">
           <a href="https://flumens.io">
-            <img src="/images/flumens.svg" alt="" />
+            <img src={flumensLogo} alt="" />
           </a>
         </p>
         <P>
@@ -86,7 +86,9 @@ const Credits: FC = () => (
             Flower vector created by rawpixel.com - www.freepik.com
           </a>
         </P>
+      </Section>
 
+      <Section>
         <H>Photos</H>
         <P>
           Thanks to{' '}

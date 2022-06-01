@@ -24,29 +24,32 @@ const LoginMain: FC<Props> = ({ schema, onSubmit }) => {
   const loginForm = (props: any) => (
     <Form>
       <IonList lines="full">
-        <InputWithValidation
-          name="email"
-          placeholder="Email"
-          icon={personOutline}
-          type="email"
-          autocomplete="off"
-          {...props}
-        />
-        <InputWithValidation
-          name="password"
-          placeholder="Password"
-          icon={keyOutline}
-          type={showPassword ? 'text' : 'password'}
-          autocomplete="off"
-          {...props}
-        >
-          <IonButton slot="end" onClick={togglePassword} fill="clear">
-            <IonIcon
-              icon={showPassword ? eyeOutline : eyeOffOutline}
-              size="small"
-            />
-          </IonButton>
-        </InputWithValidation>
+        <div className="rounded">
+          <InputWithValidation
+            name="email"
+            placeholder="Email"
+            icon={personOutline}
+            type="email"
+            autocomplete="off"
+            {...props}
+          />
+          <InputWithValidation
+            name="password"
+            placeholder="Password"
+            icon={keyOutline}
+            type={showPassword ? 'text' : 'password'}
+            autocomplete="off"
+            {...props}
+          >
+            <IonButton slot="end" onClick={togglePassword} fill="clear">
+              <IonIcon
+                icon={showPassword ? eyeOutline : eyeOffOutline}
+                size="small"
+              />
+            </IonButton>
+          </InputWithValidation>
+        </div>
+
         <IonRouterLink
           routerLink="/user/reset"
           className="password-forgot-button"

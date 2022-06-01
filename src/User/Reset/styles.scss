@@ -3,17 +3,7 @@
     --padding-top: 20px; // header
   }
 
-  ion-list,
-  ion-item {
-    --background: transparent;
-    background: transparent;
-  }
-
   ion-content {
-    ion-icon {
-      color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 1);
-    }
-
     h2 {
       text-align: center;
       font-size: 1em;

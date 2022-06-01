@@ -1,16 +1,6 @@
 #user-register {
-  ion-list,
-  ion-item {
-    --background: transparent;
-    background: transparent;
-  }
-
   ion-content {
     --padding-top: 30px;
-
-    ion-icon {
-      color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 1);
-    }
 
     h1 {
       text-align: center;

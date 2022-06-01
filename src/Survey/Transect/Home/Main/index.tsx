@@ -14,7 +14,13 @@ import {
   bookmarkOutline,
   informationCircleOutline,
 } from 'ionicons/icons';
-import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
+import {
+  Main,
+  MenuAttrItem,
+  InfoMessage,
+  InfoButton,
+  InfoBackgroundMessage,
+} from '@flumens';
 import Sample from 'models/sample';
 import { useRouteMatch } from 'react-router-dom';
 import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
@@ -52,11 +58,9 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
 
     if (!quadrats.length) {
       return (
-        <IonList lines="none">
-          <IonItem className="empty">
-            <div>You have not added any quadrats yet.</div>
-          </IonItem>
-        </IonList>
+        <InfoBackgroundMessage>
+          You have not added any quadrats yet.
+        </InfoBackgroundMessage>
       );
     }
 
@@ -113,7 +117,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
 
   return (
     <Main>
-      <InfoMessage icon={informationCircleOutline}>
+      <InfoMessage icon={informationCircleOutline} className="blue">
         How to complete a transect?
         <InfoButton label="READ MORE" header="Tips">
           <div>
@@ -145,7 +149,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
 
       <IonList lines="full">
         {isDisabled && (
-          <InfoMessage icon={informationCircleOutline}>
+          <InfoMessage icon={informationCircleOutline} className="blue">
             This survey has been finished and cannot be updated.
           </InfoMessage>
         )}

@@ -74,7 +74,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
 
   return (
     <Main>
-      <InfoMessage icon={informationCircleOutline}>
+      <InfoMessage icon={informationCircleOutline} className="blue">
         How to complete a survey?
         <InfoButton label="READ MORE" header="Tips">
           <div>
@@ -118,7 +118,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
 
       <IonList lines="full">
         {isDisabled && (
-          <InfoMessage icon={informationCircleOutline}>
+          <InfoMessage icon={informationCircleOutline} className="blue">
             This survey has been finished and cannot be updated.
           </InfoMessage>
         )}

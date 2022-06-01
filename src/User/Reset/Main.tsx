@@ -15,14 +15,16 @@ const ResetMain: FC<Props> = ({ onSubmit, schema }) => {
   const resetForm = (props: any) => (
     <Form>
       <IonList lines="full">
-        <InputWithValidation
-          name="email"
-          placeholder="Email"
-          icon={personOutline}
-          type="email"
-          autocomplete="off"
-          {...props}
-        />
+        <div className="rounded">
+          <InputWithValidation
+            name="email"
+            placeholder="Email"
+            icon={personOutline}
+            type="email"
+            autocomplete="off"
+            {...props}
+          />
+        </div>
       </IonList>
 
       <IonButton color="secondary" type="submit" expand="block">

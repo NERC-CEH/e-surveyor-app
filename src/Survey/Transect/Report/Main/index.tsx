@@ -185,7 +185,7 @@ const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
   return (
     <>
       <Main>
-        <InfoMessage icon={informationCircleOutline}>
+        <InfoMessage icon={informationCircleOutline} className="blue">
           What does my transect report mean?
           <InfoButton label="READ MORE" header="Tips">
             <div>
