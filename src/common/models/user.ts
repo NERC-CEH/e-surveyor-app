@@ -39,8 +39,7 @@ class UserModel extends DrupalUserModel {
   }
 
   async checkActivation() {
-    const isLoggedIn = !!this.attrs.email;
-    if (!isLoggedIn) return false;
+    if (!this.isLoggedIn()) return false;
 
     if (!this.attrs.verified) {
       try {
@@ -56,8 +55,7 @@ class UserModel extends DrupalUserModel {
   }
 
   async resendVerificationEmail() {
-    const isLoggedIn = !!this.attrs.email;
-    if (!isLoggedIn || this.attrs.verified) return false;
+    if (!this.isLoggedIn() || this.attrs.verified) return false;
 
     await this._sendVerificationEmail();
 
