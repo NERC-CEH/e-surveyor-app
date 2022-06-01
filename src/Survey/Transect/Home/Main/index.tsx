@@ -117,43 +117,46 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
 
   return (
     <Main>
-      <InfoMessage icon={informationCircleOutline} className="blue">
-        How to complete a transect?
-        <InfoButton label="READ MORE" header="Tips">
-          <div>
-            <img src={personTakingPhoto} />
-            <p>
-              Give your survey a name (such as the name of the place you are
-              surveying).
-            </p>
-            <p>
-              Place your quadrat down in the first spot (or measure out the area
-              you will survey), and tap on the "Add quadrat" button.
-            </p>
-            <p> Take a photo of the entire quadrat.</p>
-            <p>
-              Then, hold down the orange camera button to start listing plants
-              within the quadrat, or tap to take a photo for the AI to identify.
-            </p>
-            <p>
-              Keep adding plants until you have listed all of the plants within
-              the quadrat, then move on to your next location.
-            </p>
-            <p>
-              Once you have completed all of your quadrats, tap finish to see
-              your report.
-            </p>
-          </div>
-        </InfoButton>
-      </InfoMessage>
+      {!isDisabled && (
+        <InfoMessage icon={informationCircleOutline} className="blue">
+          How to complete a transect?
+          <InfoButton label="READ MORE" header="Tips">
+            <div>
+              <img src={personTakingPhoto} />
+              <p>
+                Give your survey a name (such as the name of the place you are
+                surveying).
+              </p>
+              <p>
+                Place your quadrat down in the first spot (or measure out the
+                area you will survey), and tap on the "Add quadrat" button.
+              </p>
+              <p> Take a photo of the entire quadrat.</p>
+              <p>
+                Then, hold down the orange camera button to start listing plants
+                within the quadrat, or tap to take a photo for the AI to
+                identify.
+              </p>
+              <p>
+                Keep adding plants until you have listed all of the plants
+                within the quadrat, then move on to your next location.
+              </p>
+              <p>
+                Once you have completed all of your quadrats, tap finish to see
+                your report.
+              </p>
+            </div>
+          </InfoButton>
+        </InfoMessage>
+      )}
+
+      {isDisabled && (
+        <InfoMessage icon={informationCircleOutline} className="blue">
+          This survey has been finished and cannot be updated.
+        </InfoMessage>
+      )}
 
       <IonList lines="full">
-        {isDisabled && (
-          <InfoMessage icon={informationCircleOutline} className="blue">
-            This survey has been finished and cannot be updated.
-          </InfoMessage>
-        )}
-
         {isComplete && (
           <IonButton
             color="secondary"
