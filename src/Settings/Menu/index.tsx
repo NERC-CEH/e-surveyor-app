@@ -11,7 +11,7 @@ function onToggle(appModel: any, setting: string, checked: boolean) {
   appModel.attrs[setting] = checked; // eslint-disable-line
   appModel.save();
 
-  isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Medium });
+  isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
 }
 
 type Props = {
