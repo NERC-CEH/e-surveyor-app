@@ -84,6 +84,7 @@ const AppPhotoPicker: FC<Props> = ({
   const onCancelEdit = () => setEditImage(undefined);
 
   const isDisabled = model.parent && model.isDisabled();
+  const maxPicsReached = !!maxImages && model.media.length >= maxImages;
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const ImageWithCropping = ({
@@ -126,6 +127,7 @@ const AppPhotoPicker: FC<Props> = ({
         model={model}
         placeholderCount={1}
         Image={allowToCrop ? ImageWithCropping : undefined}
+        isDisabled={isDisabled || maxPicsReached}
         {...restProps}
       />
       {allowToCrop && (
