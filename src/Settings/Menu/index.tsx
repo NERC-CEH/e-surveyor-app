@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { isPlatform } from '@ionic/react';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Page, Header, useToast } from '@flumens';
 import appModelProps from 'models/app';
 import userModelProps from 'models/user';
@@ -8,6 +10,8 @@ import Main from './Main';
 function onToggle(appModel: any, setting: string, checked: boolean) {
   appModel.attrs[setting] = checked; // eslint-disable-line
   appModel.save();
+
+  isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Medium });
 }
 
 type Props = {
