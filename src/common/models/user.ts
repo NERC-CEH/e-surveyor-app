@@ -7,7 +7,6 @@ import {
   device,
 } from '@flumens';
 import * as Yup from 'yup';
-import { set } from 'mobx';
 import { genericStore } from './store';
 
 export interface Attrs extends DrupalUserModelAttrs {
@@ -66,9 +65,7 @@ class UserModel extends DrupalUserModel {
   }
 
   resetDefaults() {
-    super.resetDefaults();
-    set(this.attrs, JSON.parse(JSON.stringify(defaults)));
-    return this.save();
+    return super.resetDefaults(defaults);
   }
 }
 

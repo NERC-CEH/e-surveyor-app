@@ -1,4 +1,3 @@
-import { set } from 'mobx';
 import { Model, ModelAttrs } from '@flumens';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import { genericStore } from './store';
@@ -48,12 +47,6 @@ const defaults: Attrs = {
 class AppModel extends Model {
   attrs: Attrs = Model.extendAttrs(this.attrs, defaults);
 
-  resetDefaults() {
-    set(this.attrs, {});
-    delete this.id;
-    return this.save();
-  }
-
   deleteSeedmix(seedmixId: string) {
     const byId = (seedmix: SeedMix) => seedmix.id === seedmixId;
     const index = this.attrs.seedmixes.findIndex(byId);
@@ -71,6 +64,10 @@ class AppModel extends Model {
     }
 
     this.attrs.seedmixes.push(seedmixToSave);
+  }
+
+  resetDefaults() {
+    return super.resetDefaults(defaults);
   }
 }
 
