@@ -259,8 +259,8 @@ export function attachClassifierResults(submission: any, occ: Occurrence) {
 
   const hasSuggestions = classifierSuggestions.length;
   if (!hasSuggestions) {
-    // eslint-disable-next-line no-param-reassign
-    submission.values.machine_involvement = MachineInvolvement.NONE;
+    // don't set anything yet because this requires below structure to be valid
+    // submission.values.machine_involvement = MachineInvolvement.NONE;
     return submission;
   }
 
