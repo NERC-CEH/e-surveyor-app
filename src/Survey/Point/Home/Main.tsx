@@ -16,7 +16,7 @@ import {
   InfoButton,
 } from '@flumens';
 import {
-  camera,
+  addCircleOutline,
   bookmarkOutline,
   locationOutline,
   informationCircleOutline,
@@ -60,8 +60,8 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
         expand="block"
         onClick={photoSelect}
       >
-        <IonIcon slot="start" icon={camera} size="large" />
-        Plant
+        <IonIcon slot="start" icon={addCircleOutline} size="large" />
+        Species
       </LongPressButton>
     );
   };

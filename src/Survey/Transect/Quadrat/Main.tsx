@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
 import Sample from 'models/sample';
 import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
-import { camera, locationOutline } from 'ionicons/icons';
+import { addCircleOutline, locationOutline } from 'ionicons/icons';
 import { Main, MenuAttrItem, LongPressButton } from '@flumens';
 import PhotoPicker from 'common/Components/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -36,8 +36,8 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
         expand="block"
         onClick={photoSelect}
       >
-        <IonIcon slot="start" icon={camera} size="large" />
-        Plant
+        <IonIcon slot="start" icon={addCircleOutline} size="large" />
+        Species
       </LongPressButton>
     );
   };
