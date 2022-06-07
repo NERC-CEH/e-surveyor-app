@@ -119,6 +119,11 @@ ion-footer ion-tab-button {
 }
 // FONTS END
 
+// the background camera must see through it all
+body {
+  background-color: transparent;
+}
+
 h1,
 h2,
 h3 {
