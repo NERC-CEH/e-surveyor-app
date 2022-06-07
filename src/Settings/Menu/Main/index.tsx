@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { Main, useAlert, MenuAttrToggle, InfoMessage } from '@flumens';
 import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';
+import config from 'common/config';
 import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import flowerIcon from 'common/images/flowerIcon.svg';
@@ -108,6 +109,8 @@ const Menu: FC<Props> = ({
           </IonItem>
         </div>
       </IonList>
+
+      <p className="app-version">{`v${config.version} (${config.build})`}</p>
     </Main>
   );
 };
