@@ -22,7 +22,6 @@ import config from 'common/config';
 import { cameraOutline } from 'ionicons/icons';
 import survey1 from './viateur-hwang.jpg';
 import survey2 from './ricardo-gomez.jpg';
-import survey3 from './andrew-neel.jpg';
 import SpeciesProfile from './Components/Species';
 import logo from './logo.svg';
 import './styles.scss';
@@ -73,7 +72,7 @@ const LandingPage: FC<Props> = () => {
         slidesPerView: 2,
         centeredSlides: false,
         centeredSlidesBounds: false,
-        grid: { rows: 2 },
+        // grid: { rows: 2 }, // uncomment when more than 2 surveys
       }
     : {};
 
@@ -110,20 +109,6 @@ const LandingPage: FC<Props> = () => {
                   <IonCardHeader>
                     <IonCardTitle>Structured recording</IonCardTitle>
                     <IonCardSubtitle>Survey</IonCardSubtitle>
-                  </IonCardHeader>
-                </div>
-              </IonCard>
-            </SwiperSlide>
-
-            <SwiperSlide className="survey">
-              <IonCard>
-                <div className="card-wrapper">
-                  <img src={survey3} alt="" />
-                  <IonCardHeader>
-                    <IonCardTitle>Tree survey</IonCardTitle>
-                    <IonCardSubtitle>
-                      <i>(Coming soon)</i>
-                    </IonCardSubtitle>
                   </IonCardHeader>
                 </div>
               </IonCard>
