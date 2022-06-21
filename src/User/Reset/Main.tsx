@@ -39,7 +39,11 @@ const ResetMain: FC<Props> = ({ onSubmit, schema }) => {
         <T>Enter your email address to request a password reset.</T>
       </h2>
 
-      <Formik validationSchema={schema} onSubmit={onSubmit} initialValues={{}}>
+      <Formik
+        validationSchema={schema}
+        onSubmit={onSubmit}
+        initialValues={{ email: '' }}
+      >
         {resetForm}
       </Formik>
     </Main>

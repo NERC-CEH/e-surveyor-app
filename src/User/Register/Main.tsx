@@ -93,7 +93,11 @@ const RegisterMain: FC<Props> = ({ onSubmit, schema }) => {
         <T>Create a free account</T>
       </h1>
 
-      <Formik validationSchema={schema} onSubmit={onSubmit} initialValues={{}}>
+      <Formik
+        validationSchema={schema}
+        onSubmit={onSubmit}
+        initialValues={{ fullName: '', email: '', password: '' }}
+      >
         {registrationForm}
       </Formik>
     </Main>

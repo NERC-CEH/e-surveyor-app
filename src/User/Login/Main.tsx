@@ -75,7 +75,11 @@ const LoginMain: FC<Props> = ({ schema, onSubmit }) => {
         <T>Sign in to your account to start</T>
       </h2>
 
-      <Formik validationSchema={schema} onSubmit={onSubmit} initialValues={{}}>
+      <Formik
+        validationSchema={schema}
+        onSubmit={onSubmit}
+        initialValues={{ email: '', password: '' }}
+      >
         {loginForm}
       </Formik>
     </Main>
