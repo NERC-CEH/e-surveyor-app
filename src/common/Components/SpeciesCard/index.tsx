@@ -16,43 +16,17 @@ import {
 import { Taxon } from 'models/occurrence';
 import { Gallery, InfoBackgroundMessage, device } from '@flumens';
 import { earthOutline, checkmark } from 'ionicons/icons';
+import 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import './styles.scss';
 
-// START Charts doughnut inside text START
-const { Chart } = require('react-chartjs-2');
-
-const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
-Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
-  draw() {
-    originalDoughnutDraw.apply(this);
-
-    const { chart } = this.chart;
-    const { ctx, width, height } = chart;
-
-    const fontSize = (height / 60).toFixed(2);
-    ctx.font = `${fontSize}em Arial`;
-
-    ctx.textBaseline = 'middle';
-
-    const { text } = chart.config.data;
-    const textX = Math.round((width - ctx.measureText(text).width) / 2);
-    const textY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
-
-    ctx.fillText(text, textX, textY);
-  },
-});
-// END Charts doughnut inside text
-
 const options = {
-  cutoutPercentage: 80,
-  tooltips: {
-    // Disable the on-canvas tooltip
-    enabled: false,
+  cutout: '80%',
+  layout: {
+    padding: { top: -9 }, // for some reason the chart is moved down
   },
-  animation: {
-    animateRotate: false,
-  },
+  tooltip: { enabled: false }, // Disable the on-canvas tooltip
+  animation: { animation: false, animateRotate: false },
 };
 
 const getDoughnutData = (score: number) => {
@@ -181,23 +155,27 @@ const SpeciesCard: FC<Props> = ({
 
       <IonCard id="species-profile-card">
         <IonCardHeader>
-          <div className="species-names-wrapper">
-            <IonCardTitle>{commonName}</IonCardTitle>
-            <IonCardSubtitle>
-              <i>{sp.scientificNameWithoutAuthor}</i>
-            </IonCardSubtitle>
+          <div className="wrapper">
+            <div className="species-names-wrapper">
+              <IonCardTitle>{commonName}</IonCardTitle>
+              <IonCardSubtitle>
+                <i>{sp.scientificNameWithoutAuthor}</i>
+              </IonCardSubtitle>
+            </div>
+
+            {!selectedSpeciesByUser && (
+              <div id="doughnut">
+                <Doughnut
+                  data={getDoughnutData(score)}
+                  options={options}
+                  redraw
+                />
+                <div className="label">{getDoughnutData(score).text}</div>
+              </div>
+            )}
+
+            {selectedSpeciesByUser && <IonIcon icon={checkmark} size="large" />}
           </div>
-
-          {!selectedSpeciesByUser && (
-            <Doughnut
-              id="doughnut"
-              data={getDoughnutData(score)}
-              options={options}
-              redraw
-            />
-          )}
-
-          {selectedSpeciesByUser && <IonIcon icon={checkmark} size="large" />}
         </IonCardHeader>
 
         {!!images.length && isOnline && (

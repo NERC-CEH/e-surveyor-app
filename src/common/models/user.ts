@@ -20,7 +20,11 @@ const defaults: Attrs = {
 class UserModel extends DrupalUserModel {
   attrs: Attrs = DrupalUserModel.extendAttrs(this.attrs, defaults);
 
-  registerSchema = Yup.object().shape({
+  resetSchema: any = this.resetSchema;
+
+  loginSchema: any = this.loginSchema;
+
+  registerSchema: any = Yup.object().shape({
     email: Yup.string().email().required(),
     password: Yup.string().required(),
     fullName: Yup.string().required(),
