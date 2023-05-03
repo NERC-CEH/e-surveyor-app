@@ -1,5 +1,4 @@
 /* eslint-disable max-classes-per-file */
-
 import Sample from '../sample';
 
 describe('Sample', () => {

@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
-import ReportView from 'Components/ReportView';
 import { observer } from 'mobx-react';
+import { close } from 'ionicons/icons';
+import { device, useToast } from '@flumens';
 import {
   IonLabel,
   IonSegment,
@@ -12,9 +13,8 @@ import {
   IonHeader,
   IonToolbar,
 } from '@ionic/react';
-import { device, useToast } from '@flumens';
 import Occurrence from 'models/occurrence';
-import { close } from 'ionicons/icons';
+import ReportView from 'Components/ReportView';
 import Profile from 'Components/Species/Main';
 import './styles.scss';
 

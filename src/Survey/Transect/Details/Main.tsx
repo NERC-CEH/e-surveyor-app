@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { IonItemDivider, IonList } from '@ionic/react';
 import { locationOutline, informationCircleOutline } from 'ionicons/icons';
-import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
-import GridRefValue from 'Survey/common/Components/GridRefValue';
-import transectIcon from 'common/images/transectIconBlack.svg';
 import { useRouteMatch } from 'react-router-dom';
-import Sample from 'models/sample';
+import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
+import { IonItemDivider, IonList } from '@ionic/react';
 import Seeds from 'common/images/seeds.svg';
+import transectIcon from 'common/images/transectIconBlack.svg';
 import transectWShape from 'common/images/transectWShape.jpg';
-import squareIcon from './square.svg';
+import Sample from 'models/sample';
+import GridRefValue from 'Survey/common/Components/GridRefValue';
 import habitatIcon from './habitats.svg';
+import squareIcon from './square.svg';
 import stepsIcon from './steps.svg';
 
 type Props = {

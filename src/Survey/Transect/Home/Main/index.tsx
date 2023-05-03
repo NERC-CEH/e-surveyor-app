@@ -1,19 +1,12 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
 import {
-  IonList,
-  IonItem,
-  IonLabel,
-  IonButton,
-  IonIcon,
-  IonItemDivider,
-} from '@ionic/react';
-import {
   createOutline,
   leaf,
   bookmarkOutline,
   informationCircleOutline,
 } from 'ionicons/icons';
+import { useRouteMatch } from 'react-router-dom';
 import {
   Main,
   MenuAttrItem,
@@ -21,9 +14,16 @@ import {
   InfoButton,
   InfoBackgroundMessage,
 } from '@flumens';
-import Sample from 'models/sample';
-import { useRouteMatch } from 'react-router-dom';
+import {
+  IonList,
+  IonItem,
+  IonLabel,
+  IonButton,
+  IonIcon,
+  IonItemDivider,
+} from '@ionic/react';
 import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
+import Sample from 'models/sample';
 import './styles.scss';
 
 function byDate(smp1: Sample, smp2: Sample) {

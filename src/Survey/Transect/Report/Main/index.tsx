@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { IonGrid, IonRow, IonCol } from '@ionic/react';
-import { Main, InfoButton, InfoMessage } from '@flumens';
 import { informationCircleOutline } from 'ionicons/icons';
+import { Main, InfoButton, InfoMessage } from '@flumens';
+import { IonGrid, IonRow, IonCol } from '@ionic/react';
 import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
 import './styles.scss';
 

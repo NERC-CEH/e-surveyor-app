@@ -1,6 +1,10 @@
 import { FC, useState, useCallback, useEffect } from 'react';
 import Cropper from 'react-easy-crop';
-import { Point, Area } from 'react-easy-crop/types'; // eslint-disable-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved
+import { Point, Area } from 'react-easy-crop/types';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+import { InfoBackgroundMessage, getObjectURL, cropImage, URL } from '@flumens';
+// eslint-disable-line import/no-unresolved
 import {
   IonButton,
   IonModal,
@@ -9,8 +13,6 @@ import {
   IonButtons,
   isPlatform,
 } from '@ionic/react';
-import { InfoBackgroundMessage, getObjectURL, cropImage, URL } from '@flumens';
-import { Filesystem, Directory } from '@capacitor/filesystem';
 import './styles.scss';
 
 type Props = {

@@ -1,8 +1,11 @@
 import { FC, useState } from 'react';
-import AppModelType from 'models/app';
-import { Page } from '@flumens';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
+import SwiperCore, { Pagination } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Page } from '@flumens';
 import {
   IonButton,
   IonHeader,
@@ -12,17 +15,14 @@ import {
   IonLabel,
   IonFooter,
 } from '@ionic/react';
-import SwiperCore, { Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
 import '@ionic/react/css/ionic-swiper.css';
+import AppModelType from 'models/app';
 import meadowImage from './images/first.jpg';
-import flowersImage from './images/second.jpg';
-import seedsImage from './images/third.jpg';
 import denseMeadowImage from './images/fourth.jpg';
 import insectImage from './images/insectImage.jpg';
 import personImage from './images/personImage.jpg';
+import flowersImage from './images/second.jpg';
+import seedsImage from './images/third.jpg';
 import './styles.scss';
 
 // Fixes iOS 12 scrolling issue.

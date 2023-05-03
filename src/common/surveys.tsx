@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import pointSurvey from 'Survey/Point/config';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
+import pointSurvey from 'Survey/Point/config';
 
 export default {
   [pointSurvey.name]: pointSurvey,

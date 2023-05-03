@@ -1,13 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
 import {
-  IonIcon,
-  IonList,
-  IonItem,
-  IonItemDivider,
-  IonButton,
-} from '@ionic/react';
-import {
   settingsOutline,
   exitOutline,
   personOutline,
@@ -19,10 +12,17 @@ import {
   openOutline,
   helpBuoyOutline,
 } from 'ionicons/icons';
-import AppModelType from 'models/app';
 import { Trans as T } from 'react-i18next';
 import { Main, InfoMessage } from '@flumens';
+import {
+  IonIcon,
+  IonList,
+  IonItem,
+  IonItemDivider,
+  IonButton,
+} from '@ionic/react';
 import config from 'common/config';
+import AppModelType from 'models/app';
 import './styles.scss';
 
 type Props = {

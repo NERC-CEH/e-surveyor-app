@@ -1,10 +1,10 @@
 import { RouteWithModels, AttrPage, ModelLocationMap } from '@flumens';
-import savedSamples from 'models/savedSamples';
-import appModel from 'models/app';
 import config from 'common/config';
+import appModel from 'models/app';
+import savedSamples from 'models/savedSamples';
+import EditSpecies from 'Components/Species';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
-import EditSpecies from 'Components/Species';
 import Home from './Home';
 import Report from './Report';
 import survey from './config';

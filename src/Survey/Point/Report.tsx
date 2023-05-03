@@ -1,11 +1,11 @@
 import { FC, useContext } from 'react';
-import Sample, { useValidateCheck } from 'models/sample';
+import { observer } from 'mobx-react';
 import { Page, Header, useToast } from '@flumens';
 import { IonButton, NavContext } from '@ionic/react';
-import { useUserStatusCheck } from 'models/user';
-import { observer } from 'mobx-react';
-import Main from 'Components/ReportView';
 import seedmixData from 'common/data/seedmix';
+import Sample, { useValidateCheck } from 'models/sample';
+import { useUserStatusCheck } from 'models/user';
+import Main from 'Components/ReportView';
 import { CUSTOM_SEEDMIX_NAME } from 'Survey/common/config';
 
 type Props = {

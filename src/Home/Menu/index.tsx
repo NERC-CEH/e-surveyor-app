@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
-import { Page, useAlert, useToast, useLoader } from '@flumens';
 import { Trans as T } from 'react-i18next';
+import { Page, useAlert, useToast, useLoader } from '@flumens';
 import appModel from 'models/app';
 import userModel from 'models/user';
 import Main from './Main';

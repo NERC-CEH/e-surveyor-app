@@ -1,8 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
-import config from 'Survey/Point/config';
 import seedmixData from 'common/data/seedmix';
-import Sample from '../../../models/sample';
+import config from 'Survey/Point/config';
 import Occurrence from '../../../models/occurrence';
+import Sample from '../../../models/sample';
 import { getMissingSeedmixSpecies, getSeedmixUse } from '../helpers';
 
 class SampleWithNoGPS extends Sample {

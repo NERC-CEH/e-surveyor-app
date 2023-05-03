@@ -1,12 +1,6 @@
 import { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import {
-  IonLabel,
-  IonList,
-  IonButton,
-  IonItemDivider,
-  NavContext,
-} from '@ionic/react';
+import clsx from 'clsx';
 import { useRouteMatch } from 'react-router';
 import {
   InfoMessage,
@@ -15,12 +9,18 @@ import {
   device,
   InfoBackgroundMessage,
 } from '@flumens';
-import Sample from 'models/sample';
-import appModel from 'models/app';
-import clsx from 'clsx';
+import {
+  IonLabel,
+  IonList,
+  IonButton,
+  IonItemDivider,
+  NavContext,
+} from '@ionic/react';
 import config from 'common/config';
-import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
+import appModel from 'models/app';
+import Sample from 'models/sample';
 import Species from './Components/Species';
+import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
 import './styles.scss';
 
 const { POSITIVE_THRESHOLD } = config;

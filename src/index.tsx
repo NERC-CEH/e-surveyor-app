@@ -1,21 +1,20 @@
-import ReactDOM from 'react-dom';
-import { setupIonicReact, isPlatform } from '@ionic/react';
-import appModel from 'models/app';
-import userModel from 'models/user';
-import savedSamples from 'models/savedSamples';
-import config from 'common/config';
 import { configure as mobxConfig } from 'mobx';
-import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
-import { SplashScreen } from '@capacitor/splash-screen';
-import { App as AppPlugin } from '@capacitor/app';
 import i18n from 'i18next';
-import { initAnalytics } from '@flumens';
+import ReactDOM from 'react-dom';
 import { initReactI18next } from 'react-i18next';
-import App from './App';
-
+import { App as AppPlugin } from '@capacitor/app';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
+import { initAnalytics } from '@flumens';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
+import { setupIonicReact, isPlatform } from '@ionic/react';
+import config from 'common/config';
 import 'common/theme.scss';
+import appModel from 'models/app';
+import savedSamples from 'models/savedSamples';
+import userModel from 'models/user';
+import App from './App';
 
 i18n.use(initReactI18next).init({ lng: 'en' });
 

@@ -1,12 +1,11 @@
 import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
-import TaxonSearch from 'common/Components/TaxonSearch';
+import { Page, Main, Header } from '@flumens';
 import { NavContext } from '@ionic/react';
+import TaxonSearch from 'common/Components/TaxonSearch';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import { MachineInvolvement } from 'Survey/common/config';
-
-import { Page, Main, Header } from '@flumens';
 
 type Props = {
   sample: Sample;

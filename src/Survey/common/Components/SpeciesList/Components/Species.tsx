@@ -1,4 +1,12 @@
 import { FC } from 'react';
+import { observer } from 'mobx-react';
+import {
+  checkmarkCircle,
+  helpCircle,
+  closeCircle,
+  earth,
+  leaf,
+} from 'ionicons/icons';
 import {
   IonItemSliding,
   IonItem,
@@ -7,16 +15,8 @@ import {
   IonItemOption,
   IonIcon,
 } from '@ionic/react';
-import { observer } from 'mobx-react';
 import config from 'common/config';
 import Sample from 'models/sample';
-import {
-  checkmarkCircle,
-  helpCircle,
-  closeCircle,
-  earth,
-  leaf,
-} from 'ionicons/icons';
 
 type Props = {
   sample: Sample;

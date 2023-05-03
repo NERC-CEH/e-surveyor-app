@@ -1,4 +1,6 @@
 import { FC, useState } from 'react';
+import { observer } from 'mobx-react';
+import { Page, Main, Header, InfoBackgroundMessage, useAlert } from '@flumens';
 import {
   IonItem,
   IonList,
@@ -9,9 +11,7 @@ import {
   IonItemSliding,
   IonItemDivider,
 } from '@ionic/react';
-import { Page, Main, Header, InfoBackgroundMessage, useAlert } from '@flumens';
 import appModel, { SeedMix } from 'models/app';
-import { observer } from 'mobx-react';
 import EditSeedmix from './Components/EditSeedmix';
 import './styles.scss';
 

@@ -1,10 +1,10 @@
-import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@flumens';
 import { observable } from 'mobx';
-import { Species } from 'common/services/plantNetResponse.d';
+import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@flumens';
 import identifyImage, {
   ResultWithWarehouseID,
   filterUKSpecies,
 } from 'common/services/plantNet';
+import { Species } from 'common/services/plantNetResponse.d';
 import { MachineInvolvement } from 'Survey/common/config';
 import Media from './image';
 

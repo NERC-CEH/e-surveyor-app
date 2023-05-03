@@ -1,3 +1,4 @@
+import { reaction } from 'mobx';
 import {
   device,
   getDeepErrorMessage,
@@ -6,19 +7,18 @@ import {
   SampleAttrs,
   SampleOptions,
 } from '@flumens';
-import { reaction } from 'mobx';
-import userModel from 'models/user';
-import appModel from 'models/app';
 import config from 'common/config';
+import { SeedmixSpecies } from 'common/data/seedmix';
+import appModel from 'models/app';
+import userModel from 'models/user';
 import { SpeciesNames } from 'Components/ReportView/helpers';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
-import { SeedmixSpecies } from 'common/data/seedmix';
-import GPSExtension from './sampleGPSExt';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
-import { modelStore } from './store';
-import Occurrence from './occurrence';
 import Media from './image';
+import Occurrence from './occurrence';
+import GPSExtension from './sampleGPSExt';
+import { modelStore } from './store';
 
 const surveyConfig = {
   point: pointSurveyConfig,

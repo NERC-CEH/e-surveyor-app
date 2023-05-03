@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Sample from 'models/sample';
+import { observer } from 'mobx-react';
 import {
   IonItemSliding,
   IonItem,
@@ -10,9 +10,8 @@ import {
   IonIcon,
   IonButton,
 } from '@ionic/react';
-import { observer } from 'mobx-react';
 import flowerIcon from 'common/images/flowerIcon.svg';
-
+import Sample from 'models/sample';
 import './styles.scss';
 
 interface Props {

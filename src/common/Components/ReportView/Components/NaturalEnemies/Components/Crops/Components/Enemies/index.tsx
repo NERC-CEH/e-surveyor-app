@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
-import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
 import { Main } from '@flumens';
 import { IonItem, IonLabel, IonItemDivider, IonList } from '@ionic/react';
+import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
+import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
 import './styles.scss';
 
 const plantCommonNames = plantCommonNamesDataset as any;

@@ -1,11 +1,11 @@
 import { useEffect, useContext } from 'react';
-import { NavContext } from '@ionic/react';
 import { useAlert } from '@flumens';
+import { NavContext } from '@ionic/react';
+import { Survey } from 'common/surveys';
 import appModel, { SurveyDraftKeys } from 'models/app';
-import userModel from 'models/user';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';
-import { Survey } from 'common/surveys';
+import userModel from 'models/user';
 
 async function showDraftAlert(alert: any) {
   const showDraftDialog = (resolve: any) => {

@@ -1,4 +1,6 @@
 import { FC, useState } from 'react';
+import CountUp from 'react-countup';
+import { ModalHeader, Main } from '@flumens';
 import {
   IonBadge,
   IonIcon,
@@ -8,11 +10,9 @@ import {
   IonItem,
   IonList,
 } from '@ionic/react';
-import Occurrence from 'models/occurrence';
 import { SeedmixSpecies } from 'common/data/seedmix';
-import { ModalHeader, Main } from '@flumens';
-import CountUp from 'react-countup';
 import Seeds from 'common/images/seeds.svg';
+import Occurrence from 'models/occurrence';
 import {
   SpeciesNames,
   getSeedmixUse,

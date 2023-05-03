@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
-import Sample from 'models/sample';
+import CountUp from 'react-countup';
+import { ModalHeader, Main } from '@flumens';
 import {
   IonBadge,
   IonIcon,
@@ -9,9 +10,8 @@ import {
   IonItem,
   IonList,
 } from '@ionic/react';
-import { ModalHeader, Main } from '@flumens';
-import CountUp from 'react-countup';
 import beeIcon from 'common/images/bee.svg';
+import Sample from 'models/sample';
 import { SpeciesNames } from '../helpers';
 
 const { getUniqueSupportedSpecies } = Sample;

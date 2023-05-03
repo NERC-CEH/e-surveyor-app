@@ -1,10 +1,10 @@
 import { FC, useState, useEffect } from 'react';
-import { IonModal } from '@ionic/react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import appModel, { SeedMix as SeedMixFromRemote } from 'models/app';
+import { IonModal } from '@ionic/react';
 import { SeedmixSpecies as SeedmixSpeciesFromRemote } from 'common/data/seedmix';
-import SeedmixFindSpecies from './Components/SeedmixFindSpecies';
+import appModel, { SeedMix as SeedMixFromRemote } from 'models/app';
 import Seedmix from './Components/Seedmix';
+import SeedmixFindSpecies from './Components/SeedmixFindSpecies';
 
 export type SeedmixSpecies = SeedmixSpeciesFromRemote & {
   /** The warehouse id will always exist from search. */

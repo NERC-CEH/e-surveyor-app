@@ -1,6 +1,3 @@
-import { IonList, IonItemDivider, IonIcon } from '@ionic/react';
-import { Page, Main, Header, Collapse } from '@flumens';
-import { Trans as T } from 'react-i18next';
 import {
   settingsOutline,
   arrowUndoOutline,
@@ -8,18 +5,21 @@ import {
   helpCircle,
   closeCircle,
 } from 'ionicons/icons';
+import { Trans as T } from 'react-i18next';
+import { Page, Main, Header, Collapse } from '@flumens';
+import { IonList, IonItemDivider, IonIcon } from '@ionic/react';
 import beeIcon from 'common/images/bee.svg';
-import seedsIcon from 'common/images/seeds.svg';
-import transectWShape from 'common/images/transectWShape.jpg';
 import cameraButton from 'common/images/cameraButton.png';
 import mapPicker from 'common/images/mapPicker.png';
-import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
 import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
-import pollinatorsTable from './pollinators.png';
-import supportedGroupsTable from './supportedGroups.png';
+import seedsIcon from 'common/images/seeds.svg';
+import transectWShape from 'common/images/transectWShape.jpg';
+import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
 import flowers from './flowers.jpg';
 import insects from './insects.jpg';
+import pollinatorsTable from './pollinators.png';
 import './styles.scss';
+import supportedGroupsTable from './supportedGroups.png';
 
 export default () => (
   <Page id="help">
@@ -222,10 +222,10 @@ export default () => (
                 You can complete a survey without phone signal, however the
                 plant identification feature will not work until you are back
                 within range. If you know the plant species in your survey area,
-                hold down the orange species button to type the names in. If you would
-                like to use the AI plant identifier, you can still carry out the
-                survey, but do not click "Finish" until you have phone signal
-                and your plants have been identified.
+                hold down the orange species button to type the names in. If you
+                would like to use the AI plant identifier, you can still carry
+                out the survey, but do not click "Finish" until you have phone
+                signal and your plants have been identified.
               </p>
             </div>
           </Collapse>

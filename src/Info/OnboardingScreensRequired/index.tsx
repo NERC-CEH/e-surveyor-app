@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import AppModelType from 'models/app';
 import { observer } from 'mobx-react';
+import AppModelType from 'models/app';
 import OnboardingScreens from './Components/OnBordingScreens';
 
 interface Props {

@@ -1,18 +1,18 @@
 /* eslint-disable camelcase */
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { IonList, IonIcon } from '@ionic/react';
-import { Main, InfoButton, InfoMessage } from '@flumens';
-import Occurrence from 'models/occurrence';
 import { informationCircleOutline } from 'ionicons/icons';
-import { getUniqueSpecies } from 'Components/ReportView/helpers';
+import { Main, InfoButton, InfoMessage } from '@flumens';
+import { IonList, IonIcon } from '@ionic/react';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import beeIcon from 'common/images/bee.svg';
 import seedsIcon from 'common/images/seeds.svg';
-import SeedmixBadge from './Components/SeedmixBadge';
-import PollinatorsBadge from './Components/PollinatorsBadge';
+import Occurrence from 'models/occurrence';
+import { getUniqueSpecies } from 'Components/ReportView/helpers';
 import NaturalEnemies from './Components/NaturalEnemies';
+import PollinatorsBadge from './Components/PollinatorsBadge';
 import PollinatorsList from './Components/PollinatorsList';
+import SeedmixBadge from './Components/SeedmixBadge';
 import './styles.scss';
 
 type Props = {

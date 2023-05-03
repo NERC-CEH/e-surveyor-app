@@ -1,5 +1,8 @@
 import * as Yup from 'yup';
+import config from 'common/config';
 import icon from 'common/images/pointIcon.svg';
+import { Survey } from 'common/surveys';
+import Occurrence from 'models/occurrence';
 import {
   seedmixGroupAttr,
   seedmixAttr,
@@ -10,9 +13,6 @@ import {
   nameAttr,
   attachClassifierResults,
 } from 'Survey/common/config';
-import { Survey } from 'common/surveys';
-import Occurrence from 'models/occurrence';
-import config from 'common/config';
 
 const { POSSIBLE_THRESHOLD } = config;
 

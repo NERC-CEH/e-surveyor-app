@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { IonSpinner, IonLabel, IonChip, IonButton } from '@ionic/react';
 import { observer } from 'mobx-react';
+import { IonSpinner, IonLabel, IonChip, IonButton } from '@ionic/react';
 import Sample from 'models/sample';
 import './styles.scss';
 

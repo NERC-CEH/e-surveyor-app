@@ -1,5 +1,9 @@
 import * as Yup from 'yup';
+import { schemeHabitats } from 'common/data/habitats';
 import icon from 'common/images/transectIcon.svg';
+import appModel from 'models/app';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import {
   seedmixGroupAttr,
   seedmixAttr,
@@ -10,10 +14,6 @@ import {
   nameAttr,
   attachClassifierResults,
 } from 'Survey/common/config';
-import appModel from 'models/app';
-import Sample from 'models/sample';
-import Occurrence from 'models/occurrence';
-import { schemeHabitats } from 'common/data/habitats';
 
 export const getDetailsValidationSchema = () =>
   Yup.object().shape({

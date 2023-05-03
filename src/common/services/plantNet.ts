@@ -1,11 +1,12 @@
 /* eslint-disable no-restricted-syntax */
+
 /* eslint-disable guard-for-in */
-import config from 'common/config';
 import { isPlatform } from '@ionic/react';
+import config from 'common/config';
 import Image from 'models/image';
+import blackListedData from '../data/cacheRemote/uksi_plants_blacklist.json';
 import UKSIPlantsData from '../data/uksi_plants.list.json';
 import UKPlantNamesData from '../data/uksi_plants.names.json';
-import blackListedData from '../data/cacheRemote/uksi_plants_blacklist.json';
 import PlantNetResponse, { Result } from './plantNetResponse.d';
 
 const { backend } = config;

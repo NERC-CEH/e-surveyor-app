@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import Sample from 'models/sample';
-import { Page, Header } from '@flumens';
 import { observer } from 'mobx-react';
+import { Page, Header } from '@flumens';
 import habitats from 'common/data/habitats';
+import Sample from 'models/sample';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';
 import Main from './Main';
 

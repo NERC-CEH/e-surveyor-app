@@ -1,4 +1,10 @@
 import { useState, FC } from 'react';
+import { cameraOutline } from 'ionicons/icons';
+import { Grid } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/grid';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Page, Main, device, useToast, captureImage } from '@flumens';
 import {
   IonLabel,
   IonButton,
@@ -9,22 +15,16 @@ import {
   IonIcon,
   isPlatform,
 } from '@ionic/react';
-import { Grid } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/grid';
 import '@ionic/react/css/ionic-swiper.css';
-import { Page, Main, device, useToast, captureImage } from '@flumens';
+import config from 'common/config';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import { usePromptImageSource } from 'Components/PhotoPicker';
-import config from 'common/config';
-import { cameraOutline } from 'ionicons/icons';
-import survey1 from './viateur-hwang.jpg';
-import survey2 from './ricardo-gomez.jpg';
 import SpeciesProfile from './Components/Species';
 import logo from './logo.svg';
+import survey2 from './ricardo-gomez.jpg';
 import './styles.scss';
+import survey1 from './viateur-hwang.jpg';
 
 interface Props {}
 

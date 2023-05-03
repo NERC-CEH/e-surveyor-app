@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { IonBadge } from '@ionic/react';
 import { observer } from 'mobx-react';
+import { IonBadge } from '@ionic/react';
 import Sample from 'models/sample';
 import './styles.scss';
 

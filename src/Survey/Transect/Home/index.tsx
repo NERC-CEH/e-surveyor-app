@@ -1,12 +1,12 @@
 import { FC, useContext } from 'react';
+import { observer } from 'mobx-react';
+import { checkmarkCircleOutline } from 'ionicons/icons';
+import { useRouteMatch } from 'react-router-dom';
 import { Header, Page, useToast } from '@flumens';
 import { NavContext, IonButton, IonIcon } from '@ionic/react';
-import { checkmarkCircleOutline } from 'ionicons/icons';
-import { observer } from 'mobx-react';
-import { useRouteMatch } from 'react-router-dom';
 import appModel from 'models/app';
-import { useUserStatusCheck } from 'models/user';
 import Sample, { useValidateCheck } from 'models/sample';
+import { useUserStatusCheck } from 'models/user';
 import Main from './Main';
 
 type Props = {

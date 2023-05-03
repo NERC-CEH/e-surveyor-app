@@ -1,8 +1,8 @@
 import { FC, useContext, useEffect } from 'react';
-import { Main, useLoader } from '@flumens';
 import { observer } from 'mobx-react';
+import { searchOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import SpeciesCard from 'common/Components/SpeciesCard';
+import { Main, useLoader } from '@flumens';
 import {
   IonButton,
   IonList,
@@ -10,10 +10,10 @@ import {
   NavContext,
   IonLabel,
 } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
 import PhotoPicker from 'common/Components/PhotoPicker';
-import Occurrence, { Taxon } from 'models/occurrence';
+import SpeciesCard from 'common/Components/SpeciesCard';
 import { filterUKSpecies } from 'common/services/plantNet';
+import Occurrence, { Taxon } from 'models/occurrence';
 import { MachineInvolvement } from 'Survey/common/config';
 import './styles.scss';
 

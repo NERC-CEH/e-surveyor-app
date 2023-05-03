@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { isPlatform } from '@ionic/react';
+import { observer } from 'mobx-react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Page, Header, useToast } from '@flumens';
+import { isPlatform } from '@ionic/react';
 import appModelProps from 'models/app';
 import userModelProps from 'models/user';
-import { observer } from 'mobx-react';
 import Main from './Main';
 
 function onToggle(appModel: any, setting: string, checked: boolean) {

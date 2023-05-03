@@ -1,16 +1,16 @@
 import { FC, useState } from 'react';
-import { Page, Header, device, captureImage, useAlert } from '@flumens';
 import { observer } from 'mobx-react';
-import Media from 'models/image';
-import { isPlatform } from '@ionic/react';
-import Sample from 'models/sample';
-import appModel from 'models/app';
-import Occurrence from 'models/occurrence';
-import config from 'common/config';
 import { Capacitor } from '@capacitor/core';
-import { usePromptImageSource } from 'Components/PhotoPicker';
+import { Page, Header, device, captureImage, useAlert } from '@flumens';
+import { isPlatform } from '@ionic/react';
+import config from 'common/config';
+import appModel from 'models/app';
+import Media from 'models/image';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
+import { usePromptImageSource } from 'Components/PhotoPicker';
 import Main from './Main';
 
 type URL = string;

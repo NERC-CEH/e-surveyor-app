@@ -7,9 +7,9 @@ import {
   RefObject,
 } from 'react';
 import { IonSearchbar, useIonViewDidEnter } from '@ionic/react';
-import SpeciesSearchEngine from './utils/taxon_search_engine';
 import Suggestions from './components/Suggestions';
 import './styles.scss';
+import SpeciesSearchEngine from './utils/taxon_search_engine';
 
 export type Species = {
   /**

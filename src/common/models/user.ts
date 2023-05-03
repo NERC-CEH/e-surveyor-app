@@ -1,4 +1,4 @@
-import CONFIG from 'common/config';
+import * as Yup from 'yup';
 import {
   DrupalUserModel,
   DrupalUserModelAttrs,
@@ -6,7 +6,7 @@ import {
   useLoader,
   device,
 } from '@flumens';
-import * as Yup from 'yup';
+import CONFIG from 'common/config';
 import { genericStore } from './store';
 
 export interface Attrs extends DrupalUserModelAttrs {

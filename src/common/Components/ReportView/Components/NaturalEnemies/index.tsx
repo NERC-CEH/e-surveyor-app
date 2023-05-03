@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
+import { ModalHeader, InfoBackgroundMessage } from '@flumens';
+import { IonItem, IonLabel, IonItemDivider, IonModal } from '@ionic/react';
 import naturalEnemies, {
   Interaction as EnemyInteraction,
 } from 'common/data/naturalEnemies';
-import { ModalHeader, InfoBackgroundMessage } from '@flumens';
-import { IonItem, IonLabel, IonItemDivider, IonModal } from '@ionic/react';
-import Crops from './Components/Crops';
 import { SpeciesNames } from '../../helpers';
+import Crops from './Components/Crops';
 
 type Props = {
   uniqueSpecies: SpeciesNames[];

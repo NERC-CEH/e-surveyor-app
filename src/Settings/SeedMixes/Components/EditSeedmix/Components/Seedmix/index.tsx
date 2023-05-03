@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import { InfoBackgroundMessage, useAlert } from '@flumens';
 import {
   IonItem,
   IonList,
@@ -15,8 +17,6 @@ import {
   IonInput,
   IonItemDivider,
 } from '@ionic/react';
-import { InfoBackgroundMessage, useAlert } from '@flumens';
-import { useHistory } from 'react-router-dom';
 import { SeedmixSpecies, SeedMix } from '../../index';
 import './styles.scss';
 

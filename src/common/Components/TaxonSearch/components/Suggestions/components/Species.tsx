@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IonItem } from '@ionic/react';
-import './styles.scss';
 import { Species } from '../../../index';
+import './styles.scss';
 
 const onClick = (e: any, species: Species, onSelect: any) => {
   const edit = e.target.tagName === 'BUTTON';

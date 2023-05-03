@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { informationCircleOutline } from 'ionicons/icons';
 import {
   ModalHeader,
   InfoBackgroundMessage,
@@ -14,10 +15,9 @@ import {
   IonList,
   IonNote,
 } from '@ionic/react';
-import Sample from 'models/sample';
 import pollination from 'common/data/pollination';
+import Sample from 'models/sample';
 import InfoButton from 'Components/InfoButton';
-import { informationCircleOutline } from 'ionicons/icons';
 import { SpeciesNames } from '../../helpers';
 import './styles.scss';
 

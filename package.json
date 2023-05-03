@@ -87,6 +87,7 @@
     "@capacitor/cli": "^4.8.0",
     "@flumens/eslint-config": "^2.0.1",
     "@flumens/fetch-onedrive-excel": "^0.3.0",
+    "@flumens/prettier-config": "^0.2.2",
     "@flumens/webpack-config": "^5.0.0",
     "@types/jest": "^29.5.1",
     "@types/react": "^17.0.37",
@@ -246,20 +247,7 @@
       "@getify/proper-arrows/name": 0
     }
   },
-  "prettier": {
-    "printWidth": 80,
-    "singleQuote": true,
-    "jsxBracketSameLine": false,
-    "trailingComma": "es5",
-    "arrowParens": "avoid"
-  },
-  "bit": {
-    "env": {
-      "compiler": "bit.envs/compilers/react-typescript@4.0.0"
-    },
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
-  },
+  "prettier": "@flumens/prettier-config",
   "jest": {
     "testEnvironment": "jsdom",
     "transform": {

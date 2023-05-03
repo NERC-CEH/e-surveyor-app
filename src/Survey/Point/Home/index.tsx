@@ -1,4 +1,7 @@
 import { FC, useContext, useState } from 'react';
+import { observer } from 'mobx-react';
+import { useRouteMatch } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
 import {
   Page,
   Header,
@@ -7,18 +10,15 @@ import {
   getDeepErrorMessage,
   captureImage,
 } from '@flumens';
-import Sample from 'models/sample';
-import appModel from 'models/app';
-import Occurrence from 'models/occurrence';
-import { observer } from 'mobx-react';
 import { IonButton, NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
-import { Capacitor } from '@capacitor/core';
+import appModel from 'models/app';
 import Media from 'models/image';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
 import { usePromptImageSource } from 'Components/PhotoPicker';
-import { useRouteMatch } from 'react-router-dom';
 import Main from './Main';
 import './styles.scss';
 

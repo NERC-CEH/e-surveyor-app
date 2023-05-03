@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import { ModalHeader, Main } from '@flumens';
 import {
   IonItem,
@@ -8,6 +7,7 @@ import {
   IonModal,
   IonList,
 } from '@ionic/react';
+import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import Enemies from './Components/Enemies';
 import './styles.scss';
 

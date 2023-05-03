@@ -1,6 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useState, FC } from 'react';
 import { observer } from 'mobx-react';
+import 'chart.js/auto';
+import { earthOutline, checkmark } from 'ionicons/icons';
+import { Doughnut } from 'react-chartjs-2';
+import { Gallery, InfoBackgroundMessage, device } from '@flumens';
 import {
   IonCardHeader,
   IonCardSubtitle,
@@ -14,10 +18,6 @@ import {
   IonIcon,
 } from '@ionic/react';
 import { Taxon } from 'models/occurrence';
-import { Gallery, InfoBackgroundMessage, device } from '@flumens';
-import { earthOutline, checkmark } from 'ionicons/icons';
-import 'chart.js/auto';
-import { Doughnut } from 'react-chartjs-2';
 import './styles.scss';
 
 const options = {

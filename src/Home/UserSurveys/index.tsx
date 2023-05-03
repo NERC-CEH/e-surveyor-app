@@ -1,4 +1,6 @@
 import { FC, useState } from 'react';
+import { observer } from 'mobx-react';
+import { Page, Main, device, useToast } from '@flumens';
 import {
   IonList,
   IonToolbar,
@@ -9,11 +11,9 @@ import {
   IonSegment,
   IonButton,
 } from '@ionic/react';
-import { Page, Main, device, useToast } from '@flumens';
-import { observer } from 'mobx-react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';
-import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Survey from './components/Survey';
 import './images/empty-samples-list-icon.svg';
 import './styles.scss';

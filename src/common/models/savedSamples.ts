@@ -1,5 +1,5 @@
-import Sample from 'models/sample';
 import { initStoredSamples } from '@flumens';
+import Sample from 'models/sample';
 import { modelStore } from './store';
 
 console.log('SavedSamples: initializing');

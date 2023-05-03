@@ -1,13 +1,14 @@
 import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
-import Sample from 'models/sample';
+import 'ionicons/dist/svg/checkmark-circle-outline.svg';
+import 'ionicons/dist/svg/close-circle-outline.svg';
+import 'ionicons/dist/svg/help-circle-outline.svg';
 import {
-  IonItemDivider,
-  IonIcon,
-  IonList,
-  NavContext,
-  IonNote,
-} from '@ionic/react';
+  addCircleOutline,
+  bookmarkOutline,
+  locationOutline,
+  informationCircleOutline,
+} from 'ionicons/icons';
 import {
   Main,
   MenuAttrItem,
@@ -16,20 +17,19 @@ import {
   InfoButton,
 } from '@flumens';
 import {
-  addCircleOutline,
-  bookmarkOutline,
-  locationOutline,
-  informationCircleOutline,
-} from 'ionicons/icons';
-import Seeds from 'common/images/seeds.svg';
+  IonItemDivider,
+  IonIcon,
+  IonList,
+  NavContext,
+  IonNote,
+} from '@ionic/react';
 import cameraButton from 'common/images/cameraButton.png';
 import mapPicker from 'common/images/mapPicker.png';
+import Seeds from 'common/images/seeds.svg';
+import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
-import 'ionicons/dist/svg/checkmark-circle-outline.svg';
-import 'ionicons/dist/svg/help-circle-outline.svg';
-import 'ionicons/dist/svg/close-circle-outline.svg';
 
 interface MatchParams {
   url: string;

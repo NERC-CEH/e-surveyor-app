@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { homeOutline, menuOutline, personOutline } from 'ionicons/icons';
+import { Redirect, Route } from 'react-router';
 import {
   IonTabButton,
   IonIcon,
@@ -6,13 +8,11 @@ import {
   IonRouterOutlet,
   IonTabs,
 } from '@ionic/react';
-import { Redirect, Route } from 'react-router';
-import { homeOutline, menuOutline, personOutline } from 'ionicons/icons';
 import savedSamples from 'models/savedSamples';
 import PendingSurveysBadge from 'Components/PendingSurveysBadge';
-import UserSurveys from './UserSurveys';
 import LandingPage from './LandingPage';
 import Menu from './Menu';
+import UserSurveys from './UserSurveys';
 import './styles.scss';
 
 const HomeController: FC = () => {

@@ -1,14 +1,13 @@
 import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
-import { useRouteMatch } from 'react-router';
-import Sample from 'models/sample';
-import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
 import { addCircleOutline, locationOutline } from 'ionicons/icons';
+import { useRouteMatch } from 'react-router';
 import { Main, MenuAttrItem, LongPressButton } from '@flumens';
+import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
 import PhotoPicker from 'common/Components/PhotoPicker';
+import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
-
 import './styles.scss';
 
 type Props = {
