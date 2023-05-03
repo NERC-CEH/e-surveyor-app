@@ -1,3 +1,7 @@
+### 1.1.0
+
+Bug fixes.
+
 ### 1.0.3
 
 Improved user account page forms.
