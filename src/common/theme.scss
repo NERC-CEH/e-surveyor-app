@@ -1,21 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import '@flumens/ionic/dist/themes/rounded.css';
 
 :root {
-  --ion-color-primary: #66a347;
+  --ion-color-primary: var(--color-primary);
   --ion-color-primary-rgb: 102, 163, 71;
-  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast: var(--color-primary-50);
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #35681c;
-  --ion-color-primary-tint: #97d17b;
-  --ion-color-primary-dark: #081a00;
+  --ion-color-primary-shade: var(--color-primary-700);
+  --ion-color-primary-tint: var(--color-primary-500);
+  --ion-color-primary-dark: var(--color-primary-900);
 
-  --ion-color-secondary: #ffa514;
+  --ion-color-secondary: var(--color-secondary);
   --ion-color-secondary-rgb: 255, 165, 20;
-  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast: var(--color-secondary-50);
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #d48c16;
-  --ion-color-secondary-tint: #ffc364;
-  --ion-color-secondary-dark: #2c1b00;
+  --ion-color-secondary-shade: var(--color-secondary-700);
+  --ion-color-secondary-tint: var(--color-secondary-500);
+  --ion-color-secondary-dark: var(--color-secondary-900);
 
   --ion-color-tertiary: #008eec;
   --ion-color-tertiary-rgb: 0, 142, 236;
@@ -25,28 +29,28 @@
   --ion-color-tertiary-tint: #1a99ee;
   --ion-color-tertiary-dark: #001a2c;
 
-  --ion-color-success: #00bd1a;
+  --ion-color-success: var(--color-success);
   --ion-color-success-rgb: 0, 189, 26;
-  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast: var(--color-success-50);
   --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: #00a617;
-  --ion-color-success-tint: #1ac431;
-  --ion-color-success-dark: #002205;
+  --ion-color-success-shade: var(--color-success-700);
+  --ion-color-success-tint: var(--color-success-500);
+  --ion-color-success-dark: var(--color-success-900);
 
-  --ion-color-warning: #e0b500;
+  --ion-color-warning: var(--color-warning);
   --ion-color-warning-rgb: 224, 181, 0;
-  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast: var(--color-warning-50);
   --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: #c7a100;
-  --ion-color-warning-tint: #ffd31a;
+  --ion-color-warning-shade: var(--color-warning-700);
+  --ion-color-warning-tint: var(--color-warning-500);
 
-  --ion-color-danger: #f04141;
+  --ion-color-danger: var(--color-danger);
   --ion-color-danger-rgb: 240, 65, 65;
-  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast: var(--color-danger-50);
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #d33939;
-  --ion-color-danger-tint: #f25454;
-  --ion-color-danger-dark: #300000;
+  --ion-color-danger-shade: var(--color-danger-700);
+  --ion-color-danger-tint: var(--color-danger-500);
+  --ion-color-danger-dark: var(--color-danger-900);
 
   --ion-color-dark: #091b00;
   --ion-color-dark-rgb: 9, 27, 0;
@@ -68,10 +72,6 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
-
-  --custom-color-complex-survey: #a77d11;
-  --custom-color-complex-survey-shade: #6d520c;
-  --custom-color-complex-survey-tint: #b98b14;
 
   --ion-page-background: #f4f5f8;
   --ion-item-background: white;
