@@ -12,6 +12,7 @@ import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel from 'models/app';
 import userModel from 'models/user';
 import { SpeciesNames } from 'Components/ReportView/helpers';
+import beetleSurveyConfig from 'Survey/Beetle/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
@@ -20,9 +21,10 @@ import Occurrence from './occurrence';
 import GPSExtension from './sampleGPSExt';
 import { modelStore } from './store';
 
-const surveyConfig = {
+const surveyConfig: any = {
   point: pointSurveyConfig,
   transect: transectSurveyConfig,
+  beetle: beetleSurveyConfig,
 };
 
 type Attrs = SampleAttrs & {
@@ -36,6 +38,10 @@ type Attrs = SampleAttrs & {
   seedmixgroup?: any;
   customSeedmix?: SeedmixSpecies[];
   location?: any;
+
+  // beetle survey
+  farm?: string;
+  trapDays?: number;
 };
 
 export default class AppSample extends Sample {
@@ -148,6 +154,13 @@ export default class AppSample extends Sample {
       return '';
     }
 
+    if (this.metadata.survey === 'beetle') {
+      const byId = ({ cid }: AppSample) => cid === this.cid;
+      const index = this.parent.samples.findIndex(byId);
+
+      return `Trap #${index + 1}`;
+    }
+
     const byId = ({ cid }: AppSample) => cid === this.cid;
     const index = this.parent.samples.findIndex(byId);
 
@@ -155,7 +168,8 @@ export default class AppSample extends Sample {
   }
 
   isDetailsComplete() {
-    const requiresDetails = this.metadata.survey === 'transect';
+    const requiresDetails =
+      this.metadata.survey === 'transect' || this.metadata.survey === 'beetle';
     return requiresDetails ? this.metadata.completedDetails : true;
   }
 

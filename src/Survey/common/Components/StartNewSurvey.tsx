@@ -76,7 +76,7 @@ function StartNewSurvey({ survey }: Props): null {
   const pickDraftOrCreateSampleWrap = () => {
     const pickDraftOrCreateSample = async () => {
       if (!userModel.isLoggedIn()) {
-        context.navigate(`/user/register`, 'none', 'replace');
+        context.navigate(`/user/register`, 'forward', 'replace');
         return;
       }
 
@@ -88,7 +88,7 @@ function StartNewSurvey({ survey }: Props): null {
 
       const path = sample.isDetailsComplete() ? '' : '/details';
 
-      context.navigate(`${baseURL}/${sample.cid}${path}`, 'none', 'replace');
+      context.navigate(`${baseURL}/${sample.cid}${path}`, 'forward', 'replace');
     };
 
     pickDraftOrCreateSample();

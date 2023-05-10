@@ -188,12 +188,9 @@ $text-color: #132f00;
       bottom: 3%;
 
       .swiper-pagination-bullet {
+        --bullet-background: #cccccc;
+        --bullet-background-active: var(--ion-color-primary-dark);
         opacity: 1;
-      }
-
-      .swiper-pagination-bullet-active {
-        opacity: 0.8;
-        background-color: $text-color;
       }
     }
   }

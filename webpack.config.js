@@ -19,4 +19,11 @@ appConfig.plugins.unshift(
   new webpack.EnvironmentPlugin(development)
 );
 
+// Support OpenCV https://github.com/TechStark/opencv-js#webpack-configuration-for-browser-usage
+appConfig.resolve.fallback = {
+  fs: false,
+  path: false,
+  crypto: false,
+};
+
 module.exports = appConfig;

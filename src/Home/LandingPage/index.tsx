@@ -21,6 +21,7 @@ import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import { usePromptImageSource } from 'Components/PhotoPicker';
 import SpeciesProfile from './Components/Species';
+import survey3 from './beetleSurvey.png';
 import logo from './logo.svg';
 import survey2 from './ricardo-gomez.jpg';
 import './styles.scss';
@@ -113,6 +114,20 @@ const LandingPage: FC<Props> = () => {
                 </div>
               </IonCard>
             </SwiperSlide>
+
+            {!isPlatform('hybrid') && (
+              <SwiperSlide className="survey">
+                <IonCard routerLink="/survey/beetle">
+                  <div className="card-wrapper">
+                    <img src={survey3} alt="" />
+                    <IonCardHeader>
+                      <IonCardTitle>Farmland Carabids</IonCardTitle>
+                      <IonCardSubtitle>Survey</IonCardSubtitle>
+                    </IonCardHeader>
+                  </div>
+                </IonCard>
+              </SwiperSlide>
+            )}
           </Swiper>
 
           <IonButton

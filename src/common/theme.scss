@@ -1,8 +1,18 @@
+@import '@ionic/core/css/core.css';
+@import '@ionic/core/css/ionic.bundle.css';
+
+@import '@flumens/ionic/dist/themes/rounded.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import '@flumens/ionic/dist/themes/rounded.css';
+@layer base {
+  h1 {
+    // tailwind is loaded later than ionic so resets some of the ionic's base styles
+    @apply mt-5 text-2xl;
+  }
+}
 
 :root {
   --ion-color-primary: var(--color-primary);

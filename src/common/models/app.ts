@@ -5,6 +5,7 @@ import { genericStore } from './store';
 export type SurveyDraftKeys = {
   'draftId:point'?: string;
   'draftId:transect'?: string;
+  'draftId:beetle'?: string;
 };
 
 export type SeedMix = {

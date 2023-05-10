@@ -56,7 +56,7 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
   let href;
   if (!sample.remote.synchronising) {
     href = `/survey/${survey.name}/${sample.cid}`;
-    if (survey.name === 'transect' && !sample.metadata.completedDetails) {
+    if (!sample.isDetailsComplete()) {
       href += '/details';
     }
   }

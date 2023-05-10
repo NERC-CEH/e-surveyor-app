@@ -73,7 +73,11 @@ const Controller: FC<Props> = ({ sample }) => {
 
   return (
     <Page id="transect-home">
-      <Header title="Transect" rightSlot={uploadButton} />
+      <Header
+        backButtonLabel="Home"
+        title="Transect"
+        rightSlot={uploadButton}
+      />
       <Main
         sample={sample}
         onAddNewQuadrat={onAddNewQuadrat}

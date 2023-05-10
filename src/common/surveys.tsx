@@ -11,7 +11,7 @@ interface Attrs {}
 
 export interface Survey {
   id: number;
-  name: 'transect' | 'point';
+  name: 'transect' | 'point' | 'beetle';
   label: string;
   icon: string;
 
@@ -22,7 +22,7 @@ export interface Survey {
 
     create: (
       AppSample: typeof Sample,
-      AppOccurrence: typeof Occurrence,
+      AppOccurrence?: typeof Occurrence,
       photo?: any
     ) => Sample;
 
@@ -30,15 +30,15 @@ export interface Survey {
       attrs: Attrs | any;
       verify?: (attrs: any) => any;
       create: (AppOccurrence: typeof Occurrence, photo: any) => Occurrence;
-      modifySubmission: (submission: any, occ: Occurrence) => any;
+      modifySubmission?: (submission: any, occ: Occurrence) => any;
     };
 
-    modifySubmission: (submission: any) => any;
+    modifySubmission?: (submission: any) => any;
   };
 
   verify?: (attrs: any, sample: any) => any;
 
   create: (sample: typeof Sample) => Sample;
 
-  modifySubmission: (submission: any) => any;
+  modifySubmission?: (submission: any) => any;
 }

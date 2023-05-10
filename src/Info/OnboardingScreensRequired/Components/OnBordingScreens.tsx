@@ -77,6 +77,7 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
+
       <Main>
         <Swiper
           onSwiper={setControlledSwiper}

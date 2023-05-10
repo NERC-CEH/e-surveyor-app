@@ -6,8 +6,6 @@ import { App as AppPlugin } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { initAnalytics } from '@flumens';
-import '@ionic/core/css/core.css';
-import '@ionic/core/css/ionic.bundle.css';
 import { setupIonicReact, isPlatform } from '@ionic/react';
 import config from 'common/config';
 import 'common/theme.scss';

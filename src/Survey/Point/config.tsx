@@ -57,7 +57,7 @@ const survey: Survey = {
 
       sample.startGPS();
 
-      const occurrence = survey.smp.occ.create(AppOccurrence, photo);
+      const occurrence = survey.smp.occ.create(AppOccurrence!, photo);
       sample.occurrences.push(occurrence);
 
       return sample;

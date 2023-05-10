@@ -15,12 +15,13 @@ type Props = {
 
 const Controller: FC<Props> = ({ sample }) => {
   const match = useRouteMatch();
-  const alert = useAlert();
   const router = useRouter();
+
+  const alert = useAlert();
 
   const onDone = () => {
     try {
-      getDetailsValidationSchema().validateSync(sample.attrs);
+      getDetailsValidationSchema.validateSync(sample.attrs);
     } catch (attrError) {
       alert({
         header: 'Missing',
@@ -49,10 +50,15 @@ const Controller: FC<Props> = ({ sample }) => {
     </IonButton>
   );
 
+  const onChangeTrapOutside = (value: number) => {
+    // eslint-disable-next-line no-param-reassign
+    sample.attrs.trapDays = value;
+  };
+
   return (
-    <Page id="transect-details">
-      <Header backButtonLabel="Home" title="Transect" rightSlot={doneButton} />
-      <Main sample={sample} isDisabled={sample.isUploaded()} />
+    <Page id="beetle-details">
+      <Header title="Survey details" rightSlot={doneButton} />
+      <Main sample={sample} onChangeTrapOutside={onChangeTrapOutside} />
     </Page>
   );
 };
