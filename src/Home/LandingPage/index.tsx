@@ -115,19 +115,17 @@ const LandingPage: FC<Props> = () => {
               </IonCard>
             </SwiperSlide>
 
-            {!isPlatform('hybrid') && (
-              <SwiperSlide className="survey">
-                <IonCard routerLink="/survey/beetle">
-                  <div className="card-wrapper">
-                    <img src={survey3} alt="" />
-                    <IonCardHeader>
-                      <IonCardTitle>Farmland Carabids</IonCardTitle>
-                      <IonCardSubtitle>Beetle trap survey</IonCardSubtitle>
-                    </IonCardHeader>
-                  </div>
-                </IonCard>
-              </SwiperSlide>
-            )}
+            <SwiperSlide className="survey">
+              <IonCard routerLink="/survey/beetle">
+                <div className="card-wrapper">
+                  <img src={survey3} alt="" />
+                  <IonCardHeader>
+                    <IonCardTitle>Farmland Carabids</IonCardTitle>
+                    <IonCardSubtitle>Beetle trap survey</IonCardSubtitle>
+                  </IonCardHeader>
+                </div>
+              </IonCard>
+            </SwiperSlide>
           </Swiper>
 
           <IonButton
