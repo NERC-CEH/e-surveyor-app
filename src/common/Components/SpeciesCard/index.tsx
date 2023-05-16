@@ -142,12 +142,11 @@ const SpeciesCard: FC<Props> = ({
     return images;
   };
 
-  const { species: sp, score } = species;
+  const { commonName, scientificName, score } = species;
   const images = species.images || [];
   const { isOnline } = device;
 
   const onSelectWrap = () => onSelect(species);
-  const commonName = !!sp.commonNames.length && sp.commonNames[0];
 
   return (
     <>
@@ -159,7 +158,7 @@ const SpeciesCard: FC<Props> = ({
             <div className="species-names-wrapper">
               <IonCardTitle>{commonName}</IonCardTitle>
               <IonCardSubtitle>
-                <i>{sp.scientificNameWithoutAuthor}</i>
+                <i>{scientificName}</i>
               </IonCardSubtitle>
             </div>
 

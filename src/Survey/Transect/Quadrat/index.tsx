@@ -10,7 +10,7 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
-import { usePromptImageSource } from 'Components/PhotoPicker';
+import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import Main from './Main';
 
 type URL = string;

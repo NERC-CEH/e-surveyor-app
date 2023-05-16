@@ -1,0 +1,38 @@
+.single-photo-picker {
+  &:not(.empty) {
+    --inner-padding-end: 7px;
+
+    ion-label[slot='end'] {
+      margin: 4px 0;
+    }
+  }
+
+  .img {
+    display: flex;
+    position: relative;
+    height: 100%;
+    max-width: 90%; // leave visible indication for second image if first one is in landscape
+    border-radius: 10px;
+    overflow: hidden;
+    width: fit-content;
+    min-width: fit-content;
+
+    img {
+      max-height: 90px;
+      object-fit: contain;
+    }
+
+    .delete {
+      position: absolute;
+      height: 20px;
+      width: 100%;
+
+      ion-icon {
+        color: white;
+      }
+
+      background-color: #8080807d;
+      margin: 0;
+    }
+  }
+}

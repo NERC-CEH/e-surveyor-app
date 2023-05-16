@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { locationOutline, timeOutline } from 'ionicons/icons';
+import { clipboardOutline, locationOutline, timeOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import {
   CounterInput,
   Main,
   MenuAttrItem,
   MenuAttrItemFromModel,
+  MenuAttrToggle,
 } from '@flumens';
 import { IonItemDivider, IonList } from '@ionic/react';
 import Sample from 'models/sample';
@@ -23,12 +24,15 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
   const { trapDays } = sample.attrs;
   const isDisabled = sample.isUploaded();
 
-  const prettyGridRef = <GridRefValue sample={sample} />;
+  const prettyGridRef = sample.attrs.location && (
+    <GridRefValue sample={sample} />
+  );
 
   return (
     <Main>
       <IonList lines="full">
         <div className="rounded">
+          <MenuAttrItemFromModel attr="date" model={sample} />
           <MenuAttrItem
             routerLink={`${match.url}/map`}
             value={prettyGridRef}
@@ -36,6 +40,7 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
             label="Location"
             skipValueTranslation
             disabled={isDisabled}
+            required
           />
           <MenuAttrItemFromModel attr="farm" model={sample} />
           <CounterInput
@@ -45,20 +50,47 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
             icon={timeOutline}
             min={1}
             isDisabled={isDisabled}
+            valueLabel={
+              <span className="opacity-70">
+                {`${trapDays}` === '1' ? 'day' : 'days'}
+              </span>
+            }
           />
         </div>
 
         <IonItemDivider mode="ios">Field</IonItemDivider>
         <div className="rounded">
-          <div className="rounded-md bg-white p-2 text-sm">WIP</div>
-          {/* <MenuAttrItem
-            routerLink={`${match.url}/type`}
-            value={type || ''}
-            icon={transectIcon}
-            label="Type"
-            skipValueTranslation
-            disabled={isDisabled || completedDetails}
-          /> */}
+          <MenuAttrItemFromModel attr="fieldName" model={sample} />
+          <MenuAttrItemFromModel attr="fieldCrop" model={sample} />
+          <MenuAttrItemFromModel attr="fieldMargins" model={sample} />
+          <MenuAttrItemFromModel attr="fieldTillage" model={sample} />
+          <MenuAttrToggle
+            icon={clipboardOutline}
+            label="Insecticides use"
+            value={sample.attrs?.fieldInsecticides}
+            onChange={(val: boolean) => {
+              sample.attrs.fieldInsecticides = val; // eslint-disable-line
+              sample.save();
+            }}
+          />
+          <MenuAttrToggle
+            icon={clipboardOutline}
+            label="Herbicides use"
+            value={sample.attrs?.fieldHerbicides}
+            onChange={(val: boolean) => {
+              sample.attrs.fieldHerbicides = val; // eslint-disable-line
+              sample.save();
+            }}
+          />
+          <MenuAttrToggle
+            icon={clipboardOutline}
+            label="Undersowing"
+            value={sample.attrs?.fieldUndersowing}
+            onChange={(val: boolean) => {
+              sample.attrs.fieldUndersowing = val; // eslint-disable-line
+              sample.save();
+            }}
+          />
         </div>
       </IonList>
     </Main>

@@ -10,7 +10,7 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
-import { usePromptImageSource } from 'Components/PhotoPicker';
+import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import Main from './Main';
 
 type URL = string;
@@ -77,19 +77,19 @@ const TrapController: FC<Props> = ({ subSample }) => {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const image = await Media.getImageModel(photoURL, dataDirPath);
+      const mediaModel = await Media.getImageModel(photoURL, dataDirPath);
 
-      const survey = subSample.getSurvey();
-      const newSubSample = survey.smp.create(Sample, Occurrence, image);
+      const survey = subSample.parent.getSurvey();
+      const newOccurrence = survey.smp.occ.create(Occurrence, mediaModel);
 
-      device.isOnline && newSubSample.occurrences[0].identify();
-
-      subSample.samples.push(newSubSample);
+      subSample.occurrences.push(newOccurrence);
       subSample.save();
+
+      device.isOnline && newOccurrence.identify();
     }
   };
 
-  const photoSelect = async () => {
+  const onAddNewSpecies = async () => {
     const shouldUseCamera = await promptImageSource();
     const cancelled = shouldUseCamera === null;
     if (cancelled) return;
@@ -132,7 +132,7 @@ const TrapController: FC<Props> = ({ subSample }) => {
       <Main
         subSample={subSample}
         isDisabled={isDisabled}
-        photoSelect={photoSelect}
+        onAddNewSpecies={onAddNewSpecies}
       />
       <ImageCropper
         image={editImage}

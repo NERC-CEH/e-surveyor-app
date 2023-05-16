@@ -22,7 +22,7 @@ describe('ReportView', () => {
       const subSmp = config.smp.create(SampleWithNoGPS, Occurrence, {});
 
       subSmp.occurrences[0].attrs.taxon = {
-        species: { scientificNameWithoutAuthor: species },
+        scientificName: species,
       };
 
       sample.samples.push(subSmp);
@@ -53,9 +53,7 @@ describe('ReportView', () => {
       const subSmp = config.smp.create(SampleWithNoGPS, Occurrence, {});
 
       subSmp.occurrences[0].attrs.taxon = {
-        species: {
-          scientificNameWithoutAuthor: species,
-        },
+        scientificName: species,
       };
 
       sample.samples.push(subSmp);

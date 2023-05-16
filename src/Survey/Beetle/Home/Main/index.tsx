@@ -35,7 +35,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
   const isDisabled = sample.isUploaded();
 
   const getTrapPhoto = (smp: Sample) => {
-    const pic = smp.media?.[0].getURL();
+    const pic = smp.media[0]?.getURL();
 
     const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
 

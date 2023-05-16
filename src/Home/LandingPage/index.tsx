@@ -19,9 +19,9 @@ import '@ionic/react/css/ionic-swiper.css';
 import config from 'common/config';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
-import { usePromptImageSource } from 'Components/PhotoPicker';
+import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import SpeciesProfile from './Components/Species';
-import survey3 from './beetleSurvey.png';
+import survey3 from './beetleSurvey.jpg';
 import logo from './logo.svg';
 import survey2 from './ricardo-gomez.jpg';
 import './styles.scss';
@@ -109,7 +109,7 @@ const LandingPage: FC<Props> = () => {
                   <img src={survey2} alt="" />
                   <IonCardHeader>
                     <IonCardTitle>Structured recording</IonCardTitle>
-                    <IonCardSubtitle>Survey</IonCardSubtitle>
+                    <IonCardSubtitle>Transect survey</IonCardSubtitle>
                   </IonCardHeader>
                 </div>
               </IonCard>
@@ -122,7 +122,7 @@ const LandingPage: FC<Props> = () => {
                     <img src={survey3} alt="" />
                     <IonCardHeader>
                       <IonCardTitle>Farmland Carabids</IonCardTitle>
-                      <IonCardSubtitle>Survey</IonCardSubtitle>
+                      <IonCardSubtitle>Beetle trap survey</IonCardSubtitle>
                     </IonCardHeader>
                   </div>
                 </IonCard>

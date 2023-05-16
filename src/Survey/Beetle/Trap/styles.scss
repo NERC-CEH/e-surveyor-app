@@ -1,20 +1,24 @@
 #transect-trap {
-  .img {
-    border-radius: 10px;
-    overflow: hidden;
+  .single-photo-picker {
+    border-radius: 0 0 var(--theme-border-radius) var(--theme-border-radius);
 
-    .crop-button {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: 50px;
-      width: 50px;
-      margin: -1px;
-      --background: #ffffff4a;
-      --background-activated: #00000078;
+    .img {
+      border-radius: 10px;
+      overflow: hidden;
 
-      ion-icon {
-        font-size: 2em;
+      .crop-button {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 50px;
+        width: 50px;
+        margin: -1px;
+        --background: #ffffff4a;
+        --background-activated: #00000078;
+
+        ion-icon {
+          font-size: 2em;
+        }
       }
     }
   }

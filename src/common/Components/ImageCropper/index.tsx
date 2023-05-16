@@ -19,9 +19,15 @@ type Props = {
   image?: URL;
   onDone: (newImage: URL) => any;
   onCancel: any;
+  message?: string;
 };
 
-const ImageCropper: FC<Props> = ({ image, onDone, onCancel }) => {
+const ImageCropper: FC<Props> = ({
+  image,
+  onDone,
+  onCancel,
+  message = 'Place your plant at the center of the frame.',
+}) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
@@ -68,9 +74,7 @@ const ImageCropper: FC<Props> = ({ image, onDone, onCancel }) => {
       className="image-cropper"
     >
       <div>
-        <InfoBackgroundMessage>
-          Place your plant at the center of the frame.
-        </InfoBackgroundMessage>
+        <InfoBackgroundMessage>{message}</InfoBackgroundMessage>
 
         {image && (
           <Cropper

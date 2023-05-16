@@ -21,7 +21,7 @@ const ModelLocationWrap = (props: any) => (
     backButtonProps={{ text: 'Back' }}
     useGridRef
     useGridMap
-    model={props.sample}
+    model={props.subSample || props.sample}
     {...props}
   />
 );
@@ -34,6 +34,7 @@ const routes = [
   [`${baseURL}/:smpId/details/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details/map`, ModelLocationWrap],
   [`${baseURL}/:smpId/trap/:subSmpId`, Trap],
+  [`${baseURL}/:smpId/trap/:subSmpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationWrap],
   [`${baseURL}/:smpId/trap/:subSmpId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/trap/:subSmpId/species/:occId`, EditSpecies],

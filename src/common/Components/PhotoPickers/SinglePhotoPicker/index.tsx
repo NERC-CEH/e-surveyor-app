@@ -1,0 +1,135 @@
+import { FC, ComponentProps, useState } from 'react';
+import { observer } from 'mobx-react';
+import { close, cropOutline } from 'ionicons/icons';
+import { useTranslation } from 'react-i18next';
+import { captureImage, URL } from '@flumens';
+import { useIonActionSheet, IonButton, IonIcon } from '@ionic/react';
+import ImageCropper from 'common/Components/ImageCropper';
+import config from 'common/config';
+import Media from 'models/image';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
+import SinglePhotoPicker from './SinglePhotoPicker';
+
+export function usePromptImageSource() {
+  const { t } = useTranslation();
+  const [presentActionSheet] = useIonActionSheet();
+
+  return () =>
+    new Promise<boolean | null>(resolve => {
+      presentActionSheet({
+        buttons: [
+          { text: t('Gallery'), handler: () => resolve(false) },
+          { text: t('Camera'), handler: () => resolve(true) },
+          { text: t('Cancel'), role: 'cancel', handler: () => resolve(null) },
+        ],
+        header: 'Choose a method to upload a photo',
+      });
+    });
+}
+
+interface Props
+  extends Omit<ComponentProps<typeof SinglePhotoPicker>, 'getImage'> {
+  model: Sample | Occurrence;
+  maxImages?: number;
+  allowToCrop?: boolean;
+}
+
+const AppPhotoPicker: FC<Props> = ({
+  model,
+  allowToCrop,
+  maxImages,
+  ...restProps
+}) => {
+  async function onAddNew(shouldUseCamera: boolean) {
+    const [image] = await captureImage({
+      camera: shouldUseCamera,
+    });
+
+    if (!image) return;
+
+    const imageModel = await Media.getImageModel(image, config.dataPath);
+
+    const imageArray = Array.isArray(imageModel) ? imageModel : [imageModel];
+    model.media.push(...imageArray);
+
+    model.save();
+  }
+
+  const [editImage, setEditImage] = useState<Media>();
+
+  const onDoneEdit = async (image: URL) => {
+    if (!editImage) return;
+
+    const newImageModel = await Media.getImageModel(image, config.dataPath);
+    Object.assign(editImage?.attrs, newImageModel.attrs);
+    if (editImage.isPersistent) {
+      if (editImage.isPersistent()) editImage.save();
+    } else {
+      editImage.save();
+    }
+
+    setEditImage(undefined);
+  };
+
+  const onCancelEdit = () => setEditImage(undefined);
+
+  const isDisabled = model.parent && model.isDisabled();
+  const maxPicsReached = !!maxImages && model.media.length >= maxImages;
+
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const ImageWithCropping = ({
+    media,
+    onDelete,
+    onClick,
+  }: {
+    media: Media;
+    onDelete: any;
+    onClick: any;
+  }) => {
+    const cropImage = () => {
+      setEditImage(media);
+    };
+
+    return (
+      <div className="img">
+        {!isDisabled && (
+          <IonButton fill="clear" class="delete" onClick={onDelete}>
+            <IonIcon icon={close} />
+          </IonButton>
+        )}
+        <img
+          src={media.getURL()}
+          onClick={onClick} // TODO: fix
+        />
+        {!isDisabled && allowToCrop && (
+          <IonButton className="crop-button" onClick={cropImage}>
+            <IonIcon icon={cropOutline} />
+          </IonButton>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <SinglePhotoPicker
+        onAddNew={onAddNew}
+        model={model}
+        Image={ImageWithCropping}
+        isDisabled={isDisabled || maxPicsReached}
+        {...restProps}
+      />
+      {allowToCrop && (
+        <ImageCropper
+          image={editImage?.getURL()}
+          onDone={onDoneEdit}
+          onCancel={onCancelEdit}
+          message="Place your tray at the center of the frame."
+        />
+      )}
+    </>
+  );
+};
+
+export default observer(AppPhotoPicker);

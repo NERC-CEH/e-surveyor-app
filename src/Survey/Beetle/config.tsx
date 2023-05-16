@@ -14,6 +14,41 @@ export const getDetailsValidationSchema = Yup.object().shape({
   location: verifyLocationSchema,
 });
 
+const tillageTypes = [
+  { value: null, isDefault: true, label: 'Not Recorded' },
+  { value: 'Zero tillage', id: -1 },
+  { value: 'Shallow tillage', id: -1 },
+  { value: 'Mouldboard plough', id: -1 },
+];
+
+const cropTypes = [
+  { value: null, isDefault: true, label: 'Not Recorded' },
+  { value: 'Barley (spring)', id: -1 },
+  { value: 'Barley (winter)', id: -1 },
+  { value: 'Cover crop', id: -1 },
+  { value: 'Field beans (spring)', id: -1 },
+  { value: 'Field beans (winter)', id: -1 },
+  { value: 'Leafy vegetables', id: -1 },
+  { value: 'Linseed', id: -1 },
+  { value: 'Oats (spring)', id: -1 },
+  { value: 'Oats (winter)', id: -1 },
+  { value: 'Oilseed rape (spring)', id: -1 },
+  { value: 'Oilseed rape (winter)', id: -1 },
+  { value: 'Peas', id: -1 },
+  { value: 'Root vegetables', id: -1 },
+  { value: 'Sugar beet', id: -1 },
+  { value: 'Wheat (spring)', id: -1 },
+  { value: 'Wheat (winter)', id: -1 },
+];
+
+const marginTypes = [
+  { value: 2 },
+  { value: 6 },
+  { value: 12 },
+  { value: 18 },
+  { value: 24 },
+];
+
 const survey: Survey = {
   id: 727,
   name: 'beetle',
@@ -49,7 +84,100 @@ const survey: Survey = {
       },
     },
 
-    // field name
+    fieldName: {
+      menuProps: {
+        icon: clipboardOutline,
+        skipValueTranslation: true,
+        label: 'Name',
+      },
+      pageProps: {
+        headerProps: { title: 'Field' },
+        attrProps: {
+          input: 'textarea',
+          inputProps: {
+            placeholder: 'Enter the field name here.',
+          },
+        },
+      },
+    },
+    fieldMargins: {
+      menuProps: {
+        icon: clipboardOutline,
+        skipValueTranslation: true,
+        label: 'Margins',
+      },
+      pageProps: {
+        headerProps: { title: 'Margins' },
+        attrProps: [
+          {
+            input: 'slider',
+            info: 'What are the field margins?',
+            // inputProps: { max: 100 },
+          },
+          {
+            input: 'radio',
+            inputProps: { options: marginTypes },
+          },
+        ],
+      },
+    },
+
+    fieldCrop: {
+      menuProps: {
+        icon: clipboardOutline,
+        label: 'Crop',
+      },
+      pageProps: {
+        headerProps: { title: 'Crop' },
+        attrProps: {
+          input: 'radio',
+          inputProps: { options: cropTypes },
+        },
+      },
+      remote: { id: -1, values: cropTypes },
+    },
+
+    fieldTillage: {
+      menuProps: {
+        icon: clipboardOutline,
+        label: 'Tillage',
+      },
+      pageProps: {
+        headerProps: { title: 'Tillage' },
+        attrProps: {
+          input: 'radio',
+          inputProps: { options: tillageTypes },
+        },
+      },
+      remote: { id: -1, values: tillageTypes },
+    },
+
+    fieldInsecticides: {
+      menuProps: {
+        label: 'Insecticides use',
+        icon: clipboardOutline,
+        type: 'toggle',
+      },
+      remote: { id: -1 },
+    },
+
+    fieldHerbicides: {
+      menuProps: {
+        label: 'Herbicides use',
+        icon: clipboardOutline,
+        type: 'toggle',
+      },
+      remote: { id: -1 },
+    },
+
+    fieldUndersowing: {
+      menuProps: {
+        label: 'Undersowing',
+        icon: clipboardOutline,
+        type: 'toggle',
+      },
+      remote: { id: -1 },
+    },
   },
 
   smp: {
@@ -61,8 +189,15 @@ const survey: Survey = {
       // margin distance
 
       comment: {
-        menuProps: { icon: clipboardOutline, skipValueTranslation: true },
+        menuProps: {
+          label: 'Notes',
+          icon: clipboardOutline,
+          skipValueTranslation: true,
+        },
         pageProps: {
+          headerProps: {
+            title: 'Notes',
+          },
           attrProps: {
             input: 'textarea',
             info: 'Please add any extra info about this record.',
@@ -80,6 +215,7 @@ const survey: Survey = {
 
         attrs: {
           location: null,
+          margin: 'Edge',
         },
       });
 

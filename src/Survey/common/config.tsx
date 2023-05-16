@@ -1,12 +1,12 @@
+import { calendarOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { date } from '@flumens';
 import config from 'common/config';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 import { SeedmixSpecies } from 'common/data/seedmix';
-import { ResultWithWarehouseID } from 'common/services/plantNet';
 import appModel, { SeedMix } from 'models/app';
-import Occurrence from 'models/occurrence';
+import Occurrence, { Suggestion } from 'models/occurrence';
 import Sample from 'models/sample';
 
 const { POSSIBLE_THRESHOLD } = config;
@@ -168,6 +168,11 @@ export const verifyLocationSchema = Yup.mixed().test(
 );
 
 export const dateAttr = {
+  menuProps: {
+    icon: calendarOutline,
+    parse: 'date',
+  },
+
   pageProps: {
     attrProps: {
       input: 'date',
@@ -227,14 +232,14 @@ export enum MachineInvolvement {
 }
 
 export function attachClassifierResults(submission: any, occ: Occurrence) {
-  const { taxon } = occ.attrs;
+  const taxon = occ.getSpecies();
   const classifierVersion = taxon?.version || '';
 
   const getMediaPath = (media: any) => media.values.queued;
   const mediaPaths = submission.media.map(getMediaPath);
 
   const getSuggestion = (
-    { score, species, warehouseId }: ResultWithWarehouseID,
+    { score, scientificName, warehouseId }: Suggestion,
     index: number
   ) => {
     const topSpecies = index === 0;
@@ -245,7 +250,7 @@ export function attachClassifierResults(submission: any, occ: Occurrence) {
 
     return {
       values: {
-        taxon_name_given: species.scientificNameWithoutAuthor,
+        taxon_name_given: scientificName,
         probability_given: score,
         taxa_taxon_list_id: warehouseId,
         classifier_chosen: classifierChosen,
@@ -255,7 +260,7 @@ export function attachClassifierResults(submission: any, occ: Occurrence) {
   };
 
   const classifierSuggestions =
-    occ.attrs.taxon?.suggestions?.map(getSuggestion) || [];
+    occ.getSpecies()?.suggestions?.map(getSuggestion) || [];
 
   const hasSuggestions = classifierSuggestions.length;
   if (!hasSuggestions) {

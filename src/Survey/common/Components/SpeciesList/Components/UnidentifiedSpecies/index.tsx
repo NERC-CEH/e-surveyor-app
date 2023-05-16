@@ -11,27 +11,30 @@ import {
   IonButton,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import './styles.scss';
 
+type Model = Sample | Occurrence;
+
 interface Props {
-  sample: Sample;
+  model: Model;
   isDisabled: boolean;
   deEmphasisedIdentifyBtn: boolean;
-  onIdentify: (smp: Sample) => void;
-  onDelete: (smp: Sample) => void;
-  onClick: (smp: Sample) => void;
+  onIdentify: (model: Model) => void;
+  onDelete: (model: Model) => void;
+  onClick: (model: Model) => void;
 }
 
 const UnidentifiedSpeciesEntry: FC<Props> = ({
-  sample,
+  model,
   isDisabled,
   deEmphasisedIdentifyBtn,
   onIdentify,
   onDelete,
   onClick,
 }) => {
-  const [occ] = sample.occurrences;
+  const occ = model instanceof Occurrence ? model : model.occurrences[0];
   const [hasSpeciesPhoto] = occ.media;
 
   const identifying = occ.isIdentifying();
@@ -45,14 +48,14 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
   );
   const profilePhoto = <div className="plant-photo-profile">{photo}</div>;
 
-  const deleteWrap = () => onDelete(sample);
-  const onClickWrap = () => !identifying && onClick(sample);
+  const deleteWrap = () => onDelete(model);
+  const onClickWrap = () => !identifying && onClick(model);
 
   const onIdentifyWrap = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
 
-    return onIdentify(sample);
+    return onIdentify(model);
   };
 
   const buttonStyles = deEmphasisedIdentifyBtn ? 'outline' : 'solid';

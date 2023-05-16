@@ -7,12 +7,12 @@ export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
   const dict: any = {};
 
   const addToUniqueDict = (occ: Occurrence) => {
-    const { species } = occ.getSpecies() || {};
+    const species = occ.getSpecies();
     if (!species) return;
 
-    const commonNames = species.commonNames || [];
+    const { commonName, scientificName } = species;
 
-    dict[species.scientificNameWithoutAuthor] = commonNames[0] || '';
+    dict[scientificName] = commonName || '';
   };
 
   occurrences.forEach(addToUniqueDict);

@@ -18,6 +18,7 @@ import {
 } from '@ionic/react';
 import config from 'common/config';
 import appModel from 'models/app';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import Species from './Components/Species';
 import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
@@ -30,25 +31,29 @@ type Props = {
   isDisabled: boolean;
 };
 
-const isUnknown = (value: boolean) => (smp: Sample) =>
-  !!smp.getSpecies() === value;
+const isUnknown = (value: boolean) => (model: Model) =>
+  !!model.getSpecies() === value;
 
-function byCreateTime(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.metadata.created_on);
-  const date2 = new Date(smp2.metadata.created_on);
+type Model = Sample | Occurrence;
+
+function byCreateTime(m1: Model, m2: Model) {
+  const date1 = new Date(m1.metadata.createdOn);
+  const date2 = new Date(m2.metadata.createdOn);
   return date2.getTime() - date1.getTime();
 }
 
 const hasOver5UnidentifiedSpecies = (sample: Sample) => {
-  const unIdentifiedSpecies = (smp: Sample) => {
-    const [occ] = smp.occurrences;
+  const unIdentifiedSpecies = (model: Model) => {
+    const occ = model instanceof Occurrence ? model : model.occurrences[0];
     return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying();
   };
 
-  return sample.samples.filter(unIdentifiedSpecies).length >= 5;
+  const useOccurrences = sample.metadata.survey === 'beetle';
+  const list: any = useOccurrences ? sample.occurrences : sample.samples;
+  return list.filter(unIdentifiedSpecies).length >= 5;
 };
 
-function deleteSample(sample: Sample, alert: any) {
+function deleteSample(sample: Model, alert: any) {
   alert({
     header: 'Delete',
     skipTranslation: true,
@@ -74,11 +79,16 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const toast = useToast();
   const alert = useAlert();
 
-  const list = [...sample.samples].sort(byCreateTime);
+  const isBeetleSurvey = sample.metadata.survey === 'beetle';
+  const rawList = isBeetleSurvey ? sample.occurrences : sample.samples;
+  const list = [...rawList].sort(byCreateTime);
 
   useEffect(() => {
-    const hasSpeciesWithLowScore = (smp: Sample) => {
-      const score = smp.occurrences[0].attrs.taxon?.score;
+    if (isBeetleSurvey) return;
+
+    const hasSpeciesWithLowScore = (model: Model) => {
+      const occ = model instanceof Occurrence ? model : model.occurrences[0];
+      const score = occ.getSpecies()?.score;
       if (
         score &&
         score < POSITIVE_THRESHOLD &&
@@ -92,10 +102,10 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
         appModel.attrs.showFirstLowScorePhotoTip = false;
       }
     };
-    list.some(hasSpeciesWithLowScore);
+    (list as Model[]).some(hasSpeciesWithLowScore);
   }, [list]);
 
-  if (!sample.samples.length) {
+  if (!list.length) {
     return (
       <IonList>
         <InfoBackgroundMessage>
@@ -113,38 +123,46 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
       return;
     }
 
-    const identify = (smp: Sample) => smp.occurrences[0].identify();
+    const identify = (model: Model) =>
+      model instanceof Occurrence
+        ? model.identify()
+        : model.occurrences[0].identify();
+
     try {
-      await Promise.all(sample.samples.map(identify));
+      await Promise.all(list.map(identify));
     } catch (e: any) {
       toast.error(e.message, { position: 'bottom' });
     }
   };
 
-  const onIdentify = async (smp: Sample) => {
+  const onIdentify = async (model: Model) => {
     if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }
 
     try {
-      await smp.occurrences[0].identify();
+      await (model instanceof Occurrence
+        ? model.identify()
+        : model.occurrences[0].identify());
     } catch (e: any) {
       toast.error(e.message, { position: 'bottom' });
     }
   };
 
-  const onDelete = (smp: Sample) => {
-    deleteSample(smp, alert);
+  const onDelete = (model: Model) => {
+    deleteSample(model, alert);
   };
-  const navigateToSpeciesSample = (smp: Sample) =>
-    navigate(`${url}/species/${smp.cid}`);
+  const navigateToSpeciesSample = (model: Model) => {
+    if (model.parent.metadata.survey === 'beetle') return;
+    navigate(`${url}/species/${model.cid}`);
+  };
 
   const getSpeciesList = () => {
-    const getSpecies = (smp: Sample) => (
+    const getSpecies = (model: Model) => (
       <Species
-        key={smp.cid}
-        sample={smp}
+        key={model.cid}
+        model={model}
         isDisabled={isDisabled}
         onDelete={onDelete}
         onClick={navigateToSpeciesSample}
@@ -153,9 +171,18 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
 
     const speciesEntries = list.filter(isUnknown(true)).map(getSpecies);
 
+    if (!speciesEntries.length) return null;
+
     return (
-      <IonList lines="full">
-        <div className="rounded">{speciesEntries}</div>
+      <IonList id="list" lines="full">
+        <div className="rounded">
+          <IonItemDivider className="species-list-header">
+            <IonLabel slot="start">Species</IonLabel>
+            <IonLabel slot="end">{speciesEntries.length}</IonLabel>
+          </IonItemDivider>
+
+          {speciesEntries}
+        </div>
       </IonList>
     );
   };
@@ -163,10 +190,10 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   const getUnidentifiedSpeciesList = () => {
     const showIdentifyAllBtn = hasOver5UnidentifiedSpecies(sample);
 
-    const getSpecies = (smp: Sample) => (
+    const getSpecies = (model: Model) => (
       <UnidentifiedSpecies
-        key={smp.cid}
-        sample={smp}
+        key={model.cid}
+        model={model}
         isDisabled={isDisabled}
         onIdentify={onIdentify}
         deEmphasisedIdentifyBtn={showIdentifyAllBtn}

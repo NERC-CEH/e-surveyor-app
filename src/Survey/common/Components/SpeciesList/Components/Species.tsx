@@ -16,20 +16,21 @@ import {
   IonIcon,
 } from '@ionic/react';
 import config from 'common/config';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 
 type Props = {
-  sample: Sample;
+  model: Sample | Occurrence;
   isDisabled: boolean;
-  onDelete: (smp: Sample) => void;
-  onClick: (smp: Sample) => void;
+  onDelete: (model: Sample | Occurrence) => void;
+  onClick: (model: Sample | Occurrence) => void;
 };
 
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
 
-const Species: FC<Props> = ({ sample, isDisabled, onDelete, onClick }) => {
-  const species = sample.getSpecies();
-  const [occ] = sample.occurrences;
+const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
+  const species = model.getSpecies();
+  const occ = model instanceof Occurrence ? model : model.occurrences[0];
 
   let commonName: string;
   let scientificName: string;
@@ -45,8 +46,8 @@ const Species: FC<Props> = ({ sample, isDisabled, onDelete, onClick }) => {
   }
 
   if (species) {
-    scientificName = species.species.scientificNameWithoutAuthor;
-    [commonName] = species.species.commonNames;
+    scientificName = species.scientificName;
+    commonName = species.commonName;
     notFoundInUK = !species.warehouseId;
 
     const earthIcon = notFoundInUK ? earth : checkmarkCircle;
@@ -71,8 +72,8 @@ const Species: FC<Props> = ({ sample, isDisabled, onDelete, onClick }) => {
     }
   }
 
-  const deleteWrap = () => onDelete(sample);
-  const onClickWrap = () => onClick(sample);
+  const deleteWrap = () => onDelete(model);
+  const onClickWrap = () => onClick(model);
 
   const detailsIcon = detailIcon || '';
 
@@ -99,7 +100,7 @@ const Species: FC<Props> = ({ sample, isDisabled, onDelete, onClick }) => {
   };
 
   return (
-    <IonItemSliding className="species-list-item" key={sample.cid}>
+    <IonItemSliding className="species-list-item" key={model.cid}>
       <IonItem
         detail
         detailIcon={detailsIcon}

@@ -3,7 +3,7 @@
     --background: #ffb6413b;
   }
 
-  .species-list-header {
+  ion-item-divider.species-list-header {
     background: #e6e6e6 !important;
     color: #777777;
 
@@ -70,7 +70,7 @@
   height: 60px;
   min-width: 60px;
   max-width: 60px;
-  background-color: #f8f2e6;
+  background-color: #828282;
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
@@ -78,7 +78,7 @@
   img {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   ion-icon {

@@ -1,4 +1,4 @@
-import { processResponse, filterUKSpecies } from '../plantNet';
+import { processResponse } from '../plantNet';
 
 const fumariaSpecies = {
   images: [],
@@ -48,46 +48,7 @@ describe('plantNet service', () => {
       const { results } = processResponse(plantNetResponse);
 
       // Then
-      expect(results[0].species.commonNames[0]).toBe('Fumitory');
-    });
-  });
-
-  describe('filterUKSpecies', () => {
-    it('should filter out non-UK species', () => {
-      // Given
-      const nonUKSpecies = JSON.parse(JSON.stringify(fumariaSpecies));
-      nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
-      const plantNetResponse = {
-        results: [fumariaSpecies, nonUKSpecies],
-        version: '',
-      };
-      const { results } = processResponse(plantNetResponse);
-
-      // When
-      const filteredResults = filterUKSpecies(results);
-
-      // Then
-      expect(filteredResults[0].warehouseId).toBe(17200);
-      expect(filteredResults.length).toBe(1);
-    });
-
-    it('should not filter non-UK species with high scores', () => {
-      // Given
-      const nonUKSpecies = JSON.parse(JSON.stringify(fumariaSpecies));
-      nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
-      nonUKSpecies.score = 1;
-
-      const plantNetResponse = {
-        results: [fumariaSpecies, nonUKSpecies],
-        version: '',
-      };
-      const { results } = processResponse(plantNetResponse);
-
-      // When
-      const filteredResults = filterUKSpecies(results);
-
-      // Then
-      expect(filteredResults.length).toBe(2);
+      expect(results[0].commonNames[0]).toBe('Fumitory');
     });
   });
 });

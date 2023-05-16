@@ -23,10 +23,8 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
   const context = useContext(NavContext);
 
   const transformUKSIToAppTaxon = (taxon: Taxon) => ({
-    species: {
-      commonNames: taxon.common_name ? [taxon.common_name] : [],
-      scientificNameWithoutAuthor: taxon.scientific_name,
-    },
+    commonName: taxon.common_name || '',
+    scientificName: taxon.scientific_name,
     warehouseId: taxon.warehouse_id,
     machineInvolvement: MachineInvolvement.HUMAN,
     images: [],
@@ -55,7 +53,7 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
 
     const [occ] = subModel.occurrences;
     occ.attrs.taxon = {
-      ...occ.attrs.taxon,
+      ...occ.getSpecies(),
       ...transformUKSIToAppTaxon(taxon),
     };
 

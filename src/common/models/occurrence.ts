@@ -1,31 +1,68 @@
 import { observable } from 'mobx';
 import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@flumens';
-import identifyImage, {
-  ResultWithWarehouseID,
-  filterUKSpecies,
-} from 'common/services/plantNet';
-import { Species } from 'common/services/plantNetResponse.d';
+import identifyBeetleImage from 'common/services/beetles';
+import { filterUKSpecies } from 'common/services/helpers';
+import identifyPlantImage, { ResponseResult } from 'common/services/plantNet';
+import { Image, Gbif } from 'common/services/plantNet/plantNetResponse.d';
 import { MachineInvolvement } from 'Survey/common/config';
 import Media from './image';
 
-export type Taxon = Optional<
-  Omit<ResultWithWarehouseID, 'species'>,
-  'images'
-> & {
-  machineInvolvement?: MachineInvolvement;
-  species: OptionalExcept<
-    Species,
-    'commonNames' | 'scientificNameWithoutAuthor'
-  >;
-  suggestions?: ResultWithWarehouseID[];
-  version?: string;
+type PlantNetTaxonAttrs = {
+  images?: Image[];
+  gbif?: Gbif;
 };
+
+export type Suggestion = {
+  warehouseId: number;
+  score: number;
+  commonNames: string[];
+  scientificName: string;
+} & PlantNetTaxonAttrs;
+
+type ClassifierAttributes = {
+  score: number;
+  version?: string;
+  suggestions?: Suggestion[];
+  machineInvolvement?: MachineInvolvement;
+};
+
+export type Taxon = {
+  warehouseId: number;
+  commonName: string;
+  scientificName: string;
+} & ClassifierAttributes &
+  PlantNetTaxonAttrs;
 
 type Attrs = OccurrenceAttrs & { taxon?: Taxon };
 
 export default class AppOccurrence extends Occurrence {
   static fromJSON(json: any) {
     return super.fromJSON(json, Media);
+  }
+
+  constructor(...args: any[]) {
+    super(...args);
+
+    // backwards compatible, migrate old species suggestions
+    const oldSpecies = (this.attrs.taxon as any)?.species;
+    if (this.attrs.taxon && oldSpecies) {
+      console.log('Migrating old species suggestions');
+
+      this.attrs.taxon.commonName = oldSpecies.commonNames[0]; // eslint-disable-line
+      this.attrs.taxon.scientificName = oldSpecies.scientificNameWithoutAuthor;
+
+      if (this.attrs.taxon.suggestions) {
+        this.attrs.taxon.suggestions = this.attrs.taxon.suggestions.map(
+          (suggestion: any): any => ({
+            ...suggestion,
+            scientificName: suggestion.species.scientificNameWithoutAuthor,
+            commonNames: suggestion.species.commonNames,
+          })
+        );
+      }
+      delete (this.attrs.taxon as any)?.species;
+      this.save();
+    }
   }
 
   identification = observable({ identifying: false });
@@ -40,17 +77,67 @@ export default class AppOccurrence extends Occurrence {
 
   isDisabled = () => this.isUploaded();
 
-  async identify() {
+  identify = () =>
+    this.parent?.metadata.survey === 'beetle'
+      ? this.identifyBeetle()
+      : this.identifyPlant();
+
+  async identifyBeetle() {
     try {
       this.identification.identifying = true;
 
-      const { version, results: suggestions } = await identifyImage(this.media);
+      const { version, results: suggestions } = await identifyBeetleImage(
+        this.media
+      );
 
       this.identification.identifying = false;
 
       const byScore = (
-        sp1: ResultWithWarehouseID,
-        sp2: ResultWithWarehouseID
+        sp1: Pick<ResponseResult, 'score'>,
+        sp2: Pick<ResponseResult, 'score'>
+      ) => sp2.score - sp1.score;
+      suggestions.sort(byScore);
+
+      const attachSpecies = (media: Media) => {
+        media.attrs.identified = true; // eslint-disable-line no-param-reassign
+      };
+      this.media.forEach(attachSpecies);
+
+      const topSuggestion = suggestions[0];
+      if (!topSuggestion) return;
+
+      this.attrs.taxon = {
+        score: topSuggestion.score,
+        warehouseId: topSuggestion.warehouseId,
+        scientificName: topSuggestion.scientificName,
+        commonName: topSuggestion.commonNames[0],
+        machineInvolvement: MachineInvolvement.MACHINE,
+        version,
+        suggestions,
+      };
+    } catch (error) {
+      this.identification.identifying = false;
+      throw error;
+    }
+
+    if (!this.isPersistent()) return;
+
+    this.save();
+  }
+
+  async identifyPlant() {
+    try {
+      this.identification.identifying = true;
+
+      const { version, results: suggestions } = await identifyPlantImage(
+        this.media
+      );
+
+      this.identification.identifying = false;
+
+      const byScore = (
+        sp1: Pick<ResponseResult, 'score'>,
+        sp2: Pick<ResponseResult, 'score'>
       ) => sp2.score - sp1.score;
       suggestions.sort(byScore);
 
@@ -65,10 +152,17 @@ export default class AppOccurrence extends Occurrence {
       if (!topSuggestion) return;
 
       this.attrs.taxon = {
-        ...topSuggestion,
+        score: topSuggestion.score,
+        warehouseId: topSuggestion.warehouseId,
+        scientificName: topSuggestion.scientificName,
+        commonName: topSuggestion.commonNames[0],
         machineInvolvement: MachineInvolvement.MACHINE,
         version,
         suggestions,
+
+        // plantNet-specific
+        images: topSuggestion.images,
+        gbif: topSuggestion.gbif,
       };
     } catch (error) {
       this.identification.identifying = false;

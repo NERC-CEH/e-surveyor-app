@@ -5,16 +5,17 @@ import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
 import {
   captureImage,
+  device,
   Header,
-  Media,
-  Occurrence,
   Page,
   useLoader,
   useToast,
 } from '@flumens';
 import { NavContext, IonButton, IonIcon, isPlatform } from '@ionic/react';
 import config from 'common/config';
-import appModel from 'models/app';
+// import appModel from 'models/app';
+import Media from 'models/image';
+import Occurrence from 'models/occurrence';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
@@ -51,12 +52,14 @@ const Controller: FC<Props> = ({ sample }) => {
     if (!isValid) return;
 
     // eslint-disable-next-line no-param-reassign
-    sample.metadata.saved = true;
-    sample.save();
+    // sample.metadata.saved = true;
+    // sample.save();
 
-    appModel.attrs['draftId:beetle'] = '';
+    // appModel.attrs['draftId:beetle'] = '';
 
-    navigate(`${match.url}/report`);
+    toast.success('👷‍♂️ work in progress. This part is disabled');
+
+    // navigate(`${match.url}/report`);
   };
 
   const [editImage, setEditImage] = useState<URL>();
@@ -82,8 +85,9 @@ const Controller: FC<Props> = ({ sample }) => {
     };
     const occurrences = await Promise.all(beetlePhotos.map(getOccurrence));
     trapSample.occurrences.push(...occurrences);
-
     sample.save();
+
+    occurrences.forEach(occ => device.isOnline && occ.identify());
 
     loader.hide();
   };
@@ -137,6 +141,7 @@ const Controller: FC<Props> = ({ sample }) => {
         image={editImage}
         onDone={onDoneEdit}
         onCancel={onCancelEdit}
+        message="Place your tray at the center of the frame."
       />
 
       <canvas id="imageCanvas" className="hidden" />

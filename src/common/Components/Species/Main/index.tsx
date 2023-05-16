@@ -10,10 +10,10 @@ import {
   NavContext,
   IonLabel,
 } from '@ionic/react';
-import PhotoPicker from 'common/Components/PhotoPicker';
+import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import SpeciesCard from 'common/Components/SpeciesCard';
-import { filterUKSpecies } from 'common/services/plantNet';
-import Occurrence, { Taxon } from 'models/occurrence';
+import { filterUKSpecies } from 'common/services/helpers';
+import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import { MachineInvolvement } from 'Survey/common/config';
 import './styles.scss';
 
@@ -43,7 +43,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   }, [loader, isIdentifying]);
 
   const getSelectedSpecies = () => {
-    const { taxon: sp } = occurrence.attrs;
+    const sp = occurrence.getSpecies();
     if (!sp) return null;
 
     const setByUser = sp.machineInvolvement === MachineInvolvement.HUMAN;
@@ -56,12 +56,12 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   };
 
   const getAIResults = () => {
-    const setSpeciesAsMain = (sp: Taxon) => {
+    const setSpeciesAsMain = (sp: Suggestion) => {
       const taxon = JSON.parse(JSON.stringify(sp));
 
-      const topSuggestion = occurrence.attrs.taxon?.suggestions?.[0];
+      const topSuggestion = occurrence.getSpecies()?.suggestions?.[0];
       const isTopSuggestion =
-        topSuggestion?.species.scientificName === sp.species.scientificName;
+        topSuggestion?.scientificName === sp.scientificName;
 
       const machineInvolvement = isTopSuggestion
         ? MachineInvolvement.HUMAN_ACCEPTED_PREFERRED
@@ -69,7 +69,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
 
       // eslint-disable-next-line no-param-reassign
       occurrence.attrs.taxon = {
-        ...occurrence.attrs.taxon,
+        ...occurrence.getSpecies(),
         ...taxon,
         machineInvolvement,
         score: 1,
@@ -77,29 +77,36 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
       occurrence.save();
     };
 
-    const getSpeciesCard = (sp: Taxon) => {
+    const getSpeciesCard = (sp: Suggestion) => {
       const lowScore = sp.score <= 0.01; // 1%
       if (lowScore) return null;
 
       const onSelectWrap = () => setSpeciesAsMain(sp);
 
+      const suggestionAsTaxon: Taxon = {
+        score: sp.score,
+        warehouseId: sp.warehouseId,
+        commonName: sp.commonNames[0],
+        scientificName: sp.scientificName,
+      };
+
       return (
         <SpeciesCard
           key={sp.warehouseId}
-          species={sp}
+          species={suggestionAsTaxon}
           onSelect={!isDisabled && isPartOfSurvey ? onSelectWrap : null}
         />
       );
     };
 
-    const { taxon } = occurrence.attrs;
+    const taxon = occurrence.getSpecies();
     const suggestions = taxon?.suggestions;
     if (!suggestions?.length) return [];
 
     const UKSuggestions = filterUKSpecies(suggestions);
 
-    const nonSelectedSpecies = (sp: Taxon) =>
-      taxon && sp.species.commonNames[0] !== taxon.species.commonNames[0];
+    const nonSelectedSpecies = (sp: Suggestion) =>
+      taxon && sp.commonNames[0] !== taxon.commonName;
 
     return UKSuggestions.filter(nonSelectedSpecies).map(getSpeciesCard);
   };
@@ -143,7 +150,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
     const identifying = occurrence.isIdentifying();
 
     if (!identifying) {
-      const hasNoSpecies = !occurrence.attrs.taxon;
+      const hasNoSpecies = !occurrence.getSpecies();
       if (hasNoSpecies) {
         return (
           <div className="identifying">

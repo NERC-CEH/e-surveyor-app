@@ -42,6 +42,10 @@ type Attrs = SampleAttrs & {
   // beetle survey
   farm?: string;
   trapDays?: number;
+  fieldInsecticides?: boolean;
+  fieldHerbicides?: boolean;
+  fieldUndersowing?: boolean;
+  margin?: any;
 };
 
 export default class AppSample extends Sample {
