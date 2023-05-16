@@ -1,6 +1,11 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { createOutline, leaf, informationCircleOutline } from 'ionicons/icons';
+import {
+  createOutline,
+  leaf,
+  informationCircleOutline,
+  cameraOutline,
+} from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import {
   Main,
@@ -121,6 +126,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
           type="submit"
           expand="block"
         >
+          <IonIcon slot="start" icon={cameraOutline} size="large" />
           Add Trap
         </IonButton>
       )}

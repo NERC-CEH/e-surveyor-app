@@ -106,6 +106,16 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   }, [list]);
 
   if (!list.length) {
+    if (isBeetleSurvey)
+      return (
+        <IonList>
+          <InfoBackgroundMessage>
+            Your species list is empty. <br /> Tap the orange species button to
+            take a photo of a beetle for the AI to identify.
+          </InfoBackgroundMessage>
+        </IonList>
+      );
+
     return (
       <IonList>
         <InfoBackgroundMessage>

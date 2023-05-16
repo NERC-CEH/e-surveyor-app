@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { addCircleOutline, locationOutline } from 'ionicons/icons';
+import { cameraOutline, locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Main, MenuAttrItem, MenuAttrItemFromModel } from '@flumens';
 import { IonList, IonIcon, IonButton } from '@ionic/react';
@@ -30,7 +30,7 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
         expand="block"
         onClick={onAddNewSpecies}
       >
-        <IonIcon slot="start" icon={addCircleOutline} size="large" />
+        <IonIcon slot="start" icon={cameraOutline} size="large" />
         Species
       </IonButton>
     );
@@ -62,7 +62,10 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
             <SegmentInput
               options={marginOptions}
               value={subSample.attrs.margin}
-              onChange={console.log}
+              onChange={(value: any) => {
+                subSample.attrs.margin = value; // eslint-disable-line
+                subSample.save();
+              }}
             />
 
             <MenuAttrItemFromModel attr="comment" model={subSample} />

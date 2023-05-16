@@ -25,9 +25,11 @@ const SegmentInput: FC<Props> = ({ value, options, onChange }) => {
 
   const InfoButtonWIP: any = InfoButton;
 
+  const onChangeWrap = (e: any) => onChange(e.detail.value);
+
   return (
     <IonItem>
-      <IonSegment value={value} onChange={onChange} mode="ios">
+      <IonSegment value={value} onIonChange={onChangeWrap} mode="ios">
         {options.map(getOption)}
       </IonSegment>
 
