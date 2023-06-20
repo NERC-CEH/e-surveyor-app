@@ -28,6 +28,15 @@ const Credits: FC = () => (
           <b>Vilius Stankaitis</b> (Flumens)
         </P>
         <P skipTranslation>
+          <b>Alba Gomez Segura </b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
+          <b>Kelly Jowett</b> (Rothamsted Research)
+        </P>
+        <P skipTranslation>
+          <b>Ben Woodcock </b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
           <b>Biren Rathod</b> (UK Centre for Ecology & Hydrology)
         </P>
       </Section>
@@ -92,25 +101,13 @@ const Credits: FC = () => (
         <H>Photos</H>
         <P>
           Thanks to{' '}
-          <a href="https://unsplash.com/@mkvandergriff?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-            Maranda Vandergriff
-          </a>
-          ,{' '}
-          <a href="https://unsplash.com/@marcusneto?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-            Marcus Neto
-          </a>
-          ,{' '}
-          <a href="https://unsplash.com/@freestef?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-            Free Steph
-          </a>
-          ,{' '}
-          <a href="https://unsplash.com/@mickaeltournier?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-            Mickael Tournier
-          </a>{' '}
-          from{' '}
-          <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
-            Unsplash
-          </a>
+          <a href="https://unsplash.com/@mkvandergriff">Maranda Vandergriff</a>,{' '}
+          <a href="https://unsplash.com/@rgaleriacom">Ricardo Gomez Angel</a>,{' '}
+          <a href="https://unsplash.com/@secretasianman">Viateur Hwang</a>,{' '}
+          <a href="https://unsplash.com/@marcusneto">Marcus Neto</a>,{' '}
+          <a href="https://unsplash.com/@freestef">Free Steph</a>,{' '}
+          <a href="https://unsplash.com/@mickaeltournier">Mickael Tournier</a>{' '}
+          from <a href="https://unsplash.com">Unsplash</a>
         </P>
       </Section>
     </Main>
