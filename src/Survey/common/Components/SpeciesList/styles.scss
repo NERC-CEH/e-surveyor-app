@@ -16,41 +16,22 @@
     }
 
     ion-label {
-      width: 100%;
+      width: fit-content;
       text-align: center;
       font-weight: normal;
       font-size: 0.9em;
 
-      &:nth-of-type(2) {
-        padding-left: 16px;
-        text-align: left;
-      }
-      &:first-of-type {
-        max-width: 54px;
-      }
-      &:last-of-type {
+      &:nth-child(2) {
         max-width: 50px;
+        padding-left: 16px;
+        padding-right: 16px;
+        text-align: left;
       }
     }
 
     &.unknown {
-      ion-label {
-        max-width: 50%;
-        padding-left: 6px;
-        text-align: left;
-      }
-
-      ion-label.full-width {
-        max-width: 100%;
-      }
-
-      .count {
-        max-width: 50px;
-        padding-left: 0;
-        text-align: center;
-      }
-
       ion-button {
+        width: fit-content;
         margin: 0 auto;
         white-space: normal;
         position: absolute;

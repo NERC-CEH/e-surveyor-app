@@ -26,11 +26,6 @@ import './styles.scss';
 
 const { POSITIVE_THRESHOLD } = config;
 
-type Props = {
-  sample: Sample;
-  isDisabled: boolean;
-};
-
 const isUnknown = (value: boolean) => (model: Model) =>
   !!model.getSpecies() === value;
 
@@ -73,7 +68,13 @@ function deleteSample(sample: Model, alert: any) {
   });
 }
 
-const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
+type Props = {
+  sample: Sample;
+  isDisabled: boolean;
+  disableAI?: boolean;
+};
+
+const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
   const toast = useToast();
@@ -198,7 +199,8 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
   };
 
   const getUnidentifiedSpeciesList = () => {
-    const showIdentifyAllBtn = hasOver5UnidentifiedSpecies(sample);
+    const showIdentifyAllBtn =
+      !disableAI && hasOver5UnidentifiedSpecies(sample);
 
     const getSpecies = (model: Model) => (
       <UnidentifiedSpecies
@@ -209,6 +211,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
         deEmphasisedIdentifyBtn={showIdentifyAllBtn}
         onDelete={onDelete}
         onClick={navigateToSpeciesSample}
+        disableAI={disableAI}
       />
     );
 
@@ -219,39 +222,43 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled }) => {
     if (speciesEntries.length < 1) return null;
 
     return (
-      <>
-        <IonList id="list" lines="full">
-          <div className="rounded">
-            <IonItemDivider className="species-list-header unknown">
-              <IonLabel className={clsx(!showIdentifyAllBtn && 'full-width')}>
-                Unknown species
+      <IonList id="list" lines="full">
+        <div className="rounded">
+          <IonItemDivider className="species-list-header unknown">
+            <IonLabel
+              className={clsx(!showIdentifyAllBtn && 'full-width')}
+              slot="start"
+            >
+              Unknown species
+            </IonLabel>
+
+            {!showIdentifyAllBtn && (
+              <IonLabel className="count" slot="end">
+                {count}
               </IonLabel>
-
-              {!showIdentifyAllBtn && (
-                <IonLabel className="count">{count}</IonLabel>
-              )}
-
-              {showIdentifyAllBtn && (
-                <IonButton
-                  size="small"
-                  onClick={onIdentifyAll}
-                  color="secondary"
-                >
-                  Identify All
-                </IonButton>
-              )}
-            </IonItemDivider>
-
-            {!device.isOnline && (
-              <InfoMessage color="dark" className="offline-warning-note">
-                Auto-identification will not work while the device is offline.
-              </InfoMessage>
             )}
 
-            {speciesEntries}
-          </div>
-        </IonList>
-      </>
+            {showIdentifyAllBtn && (
+              <IonButton
+                size="small"
+                onClick={onIdentifyAll}
+                color="secondary"
+                slot="end"
+              >
+                Identify All
+              </IonButton>
+            )}
+          </IonItemDivider>
+
+          {!device.isOnline && (
+            <InfoMessage color="dark" className="offline-warning-note">
+              Auto-identification will not work while the device is offline.
+            </InfoMessage>
+          )}
+
+          {speciesEntries}
+        </div>
+      </IonList>
     );
   };
 

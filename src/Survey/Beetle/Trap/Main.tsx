@@ -28,6 +28,7 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
         color="secondary"
         type="submit"
         expand="block"
+        className="[--padding-end:40px] [--padding-start:40px]"
         onClick={onAddNewSpecies}
       >
         <IonIcon slot="start" icon={cameraOutline} size="large" />
@@ -78,7 +79,7 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
           </div>
         </IonList>
 
-        <SpeciesList sample={subSample} isDisabled={isDisabled} />
+        <SpeciesList sample={subSample} isDisabled={isDisabled} disableAI />
 
         {getNewSpeciesBtn()}
       </Main>

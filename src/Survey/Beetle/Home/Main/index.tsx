@@ -125,6 +125,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
           color="secondary"
           type="submit"
           expand="block"
+          className="[--padding-end:40px] [--padding-start:40px]"
         >
           <IonIcon slot="start" icon={cameraOutline} size="large" />
           Add Trap

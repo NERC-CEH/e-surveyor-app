@@ -3,14 +3,7 @@ import { observer } from 'mobx-react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
-import {
-  captureImage,
-  device,
-  Header,
-  Page,
-  useLoader,
-  useToast,
-} from '@flumens';
+import { captureImage, Header, Page, useLoader, useToast } from '@flumens';
 import { NavContext, IonButton, IonIcon, isPlatform } from '@ionic/react';
 import config from 'common/config';
 // import appModel from 'models/app';
@@ -87,7 +80,8 @@ const Controller: FC<Props> = ({ sample }) => {
     trapSample.occurrences.push(...occurrences);
     sample.save();
 
-    occurrences.forEach(occ => device.isOnline && occ.identify());
+    // TODO: enable once the AI is ready
+    // occurrences.forEach(occ => device.isOnline && occ.identify());
 
     loader.hide();
   };

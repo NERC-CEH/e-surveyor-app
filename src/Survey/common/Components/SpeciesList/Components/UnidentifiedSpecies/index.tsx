@@ -24,6 +24,7 @@ interface Props {
   onIdentify: (model: Model) => void;
   onDelete: (model: Model) => void;
   onClick: (model: Model) => void;
+  disableAI?: boolean;
 }
 
 const UnidentifiedSpeciesEntry: FC<Props> = ({
@@ -33,6 +34,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
   onIdentify,
   onDelete,
   onClick,
+  disableAI = false,
 }) => {
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
   const [hasSpeciesPhoto] = occ.media;
@@ -86,7 +88,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
           </IonLabel>
         )}
 
-        {hasSpeciesPhoto && !identifying && canBeIdentified && (
+        {!disableAI && hasSpeciesPhoto && !identifying && canBeIdentified && (
           <IonButton
             slot="end"
             class="occurrence-identify"
