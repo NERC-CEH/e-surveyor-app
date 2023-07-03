@@ -1,6 +1,4 @@
 import { FC } from 'react';
-import { informationCircleOutline } from 'ionicons/icons';
-import { InfoButton } from '@flumens';
 import {
   IonIcon,
   IonItem,
@@ -13,9 +11,15 @@ type Props = {
   value: any;
   options: any;
   onChange: any;
+  disabled?: boolean;
 };
 
-const SegmentInput: FC<Props> = ({ value, options, onChange }) => {
+const SegmentInput: FC<Props> = ({
+  value,
+  options,
+  onChange,
+  disabled = false,
+}) => {
   const getOption = ({ value: optionValue, icon, label }: any) => (
     <IonSegmentButton value={optionValue} key={optionValue}>
       {icon && <IonIcon icon={icon} />}
@@ -23,17 +27,20 @@ const SegmentInput: FC<Props> = ({ value, options, onChange }) => {
     </IonSegmentButton>
   );
 
-  const InfoButtonWIP: any = InfoButton;
-
   const onChangeWrap = (e: any) => onChange(e.detail.value);
 
   return (
     <IonItem>
-      <IonSegment value={value} onIonChange={onChangeWrap} mode="ios">
+      <IonSegment
+        value={value}
+        onIonChange={onChangeWrap}
+        mode="ios"
+        disabled={disabled}
+      >
         {options.map(getOption)}
       </IonSegment>
-
-      <InfoButtonWIP
+      {/* 
+      <InfoButton
         header="Margins"
         label={<IonIcon icon={informationCircleOutline} />}
         skipTranslation
@@ -43,7 +50,7 @@ const SegmentInput: FC<Props> = ({ value, options, onChange }) => {
           👷‍♂️ Work in progress. We can show more information about the margins
           option here.
         </div>
-      </InfoButtonWIP>
+      </InfoButton> */}
     </IonItem>
   );
 };

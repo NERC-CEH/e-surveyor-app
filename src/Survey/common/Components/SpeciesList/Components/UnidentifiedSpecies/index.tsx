@@ -22,7 +22,7 @@ interface Props {
   isDisabled: boolean;
   deEmphasisedIdentifyBtn: boolean;
   onIdentify: (model: Model) => void;
-  onDelete: (model: Model) => void;
+  onDelete?: (model: Model) => void;
   onClick: (model: Model) => void;
   disableAI?: boolean;
 }
@@ -50,7 +50,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
   );
   const profilePhoto = <div className="plant-photo-profile">{photo}</div>;
 
-  const deleteWrap = () => onDelete(model);
+  const deleteWrap = () => onDelete && onDelete(model);
   const onClickWrap = () => !identifying && onClick(model);
 
   const onIdentifyWrap = (e: any) => {
@@ -108,7 +108,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
         )}
       </IonItem>
 
-      {!isDisabled && (
+      {!isDisabled && onDelete && (
         <IonItemOptions side="end">
           <IonItemOption color="danger" onClick={deleteWrap}>
             Delete

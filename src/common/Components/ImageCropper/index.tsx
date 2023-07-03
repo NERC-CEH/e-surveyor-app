@@ -1,5 +1,5 @@
 import { FC, useState, useCallback, useEffect } from 'react';
-import Cropper from 'react-easy-crop';
+import Cropper, { CropperProps } from 'react-easy-crop';
 // eslint-disable-next-line import/no-unresolved
 import { Point, Area } from 'react-easy-crop/types';
 import { Filesystem, Directory } from '@capacitor/filesystem';
@@ -20,6 +20,7 @@ type Props = {
   onDone: (newImage: URL) => any;
   onCancel: any;
   message?: string;
+  cropperProps?: Partial<CropperProps>;
 };
 
 const ImageCropper: FC<Props> = ({
@@ -27,9 +28,11 @@ const ImageCropper: FC<Props> = ({
   onDone,
   onCancel,
   message = 'Place your plant at the center of the frame.',
+  cropperProps,
 }) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+  const [rotation, setRotation] = useState(0);
 
   const [croppedArea, setCroppedArea] = useState<Area>();
   const setCroppedAreaWrap = (_: any, area: Area) => setCroppedArea(area);
@@ -44,7 +47,7 @@ const ImageCropper: FC<Props> = ({
   const onDoneEditing = async () => {
     if (!croppedArea || !image) return;
 
-    const imageDataURL: URL = await cropImage(image, croppedArea);
+    const imageDataURL: URL = await cropImage(image, croppedArea, rotation);
     if (!isPlatform('hybrid')) {
       onDone(getObjectURL(imageDataURL));
       return;
@@ -82,13 +85,15 @@ const ImageCropper: FC<Props> = ({
             crop={crop}
             zoom={zoom}
             aspect={1}
-            rotation={0}
+            rotation={rotation}
+            onRotationChange={setRotation}
             onCropChange={setCrop}
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}
             showGrid={false}
             objectFit="horizontal-cover"
             style={{ containerStyle: { background: 'black' } }}
+            {...cropperProps}
           />
         )}
       </div>

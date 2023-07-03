@@ -2,10 +2,9 @@ import { RouteWithModels, AttrPage, ModelLocationMap } from '@flumens';
 import config from 'common/config';
 import appModel from 'models/app';
 import savedSamples from 'models/savedSamples';
-import EditSpecies from 'Components/Species';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
-import TaxonSearch from 'Survey/common/Components/TaxonSearch';
 import Details from './Details';
+import EditSpecies from './EditSpecies';
 import Home from './Home';
 import Trap from './Trap';
 import survey from './config';
@@ -36,9 +35,7 @@ const routes = [
   [`${baseURL}/:smpId/trap/:subSmpId`, Trap],
   [`${baseURL}/:smpId/trap/:subSmpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationWrap],
-  [`${baseURL}/:smpId/trap/:subSmpId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/trap/:subSmpId/species/:occId`, EditSpecies],
-  [`${baseURL}/:smpId/trap/:subSmpId/species/:occId/taxon`, TaxonSearch],
   // [`${baseURL}/:smpId/report`, Report],
 ];
 

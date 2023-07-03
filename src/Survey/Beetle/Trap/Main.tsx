@@ -9,6 +9,7 @@ import Sample from 'models/sample';
 import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
+import { marginOptions } from '../config';
 import './styles.scss';
 
 type Props = {
@@ -20,30 +21,7 @@ type Props = {
 const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
   const { url } = useRouteMatch();
 
-  const getNewSpeciesBtn = () => {
-    if (isDisabled) return <br />;
-
-    return (
-      <IonButton
-        color="secondary"
-        type="submit"
-        expand="block"
-        className="[--padding-end:40px] [--padding-start:40px]"
-        onClick={onAddNewSpecies}
-      >
-        <IonIcon slot="start" icon={cameraOutline} size="large" />
-        Species
-      </IonButton>
-    );
-  };
-
   const prettyGridRef = <GridRefValue sample={subSample} />;
-
-  const marginOptions = [
-    { value: 'Edge' },
-    { value: '5 meters in' },
-    { value: 'Centre' },
-  ];
 
   return (
     <>
@@ -67,6 +45,7 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
                 subSample.attrs.margin = value; // eslint-disable-line
                 subSample.save();
               }}
+              disabled={isDisabled}
             />
 
             <MenuAttrItemFromModel attr="comment" model={subSample} />
@@ -81,7 +60,18 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
 
         <SpeciesList sample={subSample} isDisabled={isDisabled} disableAI />
 
-        {getNewSpeciesBtn()}
+        {!isDisabled && (
+          <IonButton
+            color="secondary"
+            type="submit"
+            expand="block"
+            className="[--padding-end:40px] [--padding-start:40px]"
+            onClick={onAddNewSpecies}
+          >
+            <IonIcon slot="start" icon={cameraOutline} size="large" />
+            Add species
+          </IonButton>
+        )}
       </Main>
     </>
   );

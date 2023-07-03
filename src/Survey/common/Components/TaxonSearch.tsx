@@ -63,7 +63,7 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
   };
 
   return (
-    <Page id="precise-area-count-edit-taxa">
+    <Page id="taxon-search">
       <Header title="Species" />
       <Main>
         <TaxonSearch onSpeciesSelected={onSpeciesSelected} />

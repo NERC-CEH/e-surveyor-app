@@ -23,7 +23,8 @@ export interface Survey {
     create: (
       AppSample: typeof Sample,
       AppOccurrence?: typeof Occurrence,
-      photo?: any
+      photo?: any,
+      surveySample?: Sample
     ) => Sample;
 
     occ: {
@@ -34,6 +35,8 @@ export interface Survey {
     };
 
     modifySubmission?: (submission: any) => any;
+
+    verify?: (attrs: any, sample: any) => any;
   };
 
   verify?: (attrs: any, sample: any) => any;

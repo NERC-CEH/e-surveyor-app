@@ -44,7 +44,7 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
           />
           <MenuAttrItemFromModel attr="farm" model={sample} />
           <CounterInput
-            label="Trap outside"
+            label="Trapping period"
             onChange={onChangeTrapOutside}
             value={trapDays}
             icon={timeOutline}
@@ -72,6 +72,7 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
               sample.attrs.fieldInsecticides = val; // eslint-disable-line
               sample.save();
             }}
+            disabled={isDisabled}
           />
           <MenuAttrToggle
             icon={clipboardOutline}
@@ -81,6 +82,7 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
               sample.attrs.fieldHerbicides = val; // eslint-disable-line
               sample.save();
             }}
+            disabled={isDisabled}
           />
           <MenuAttrToggle
             icon={clipboardOutline}
@@ -90,6 +92,7 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
               sample.attrs.fieldUndersowing = val; // eslint-disable-line
               sample.save();
             }}
+            disabled={isDisabled}
           />
         </div>
       </IonList>

@@ -219,15 +219,29 @@ export default class AppSample extends Sample {
   gpsExtensionInit: any;
 }
 
-export const useValidateCheck = (sample: AppSample) => {
+export const useValidateCheck = (sample: Sample) => {
   const alert = useAlert();
 
-  return () => {
+  const showValidateCheck = () => {
     const invalids = sample.validateRemote();
     if (invalids) {
       alert({
         header: 'Survey incomplete',
-        message: getDeepErrorMessage(invalids),
+        skipTranslation: true,
+        // TODO: remove the replace once the flumens lib is fixed
+        message: (
+          <>
+            <div>
+              {getDeepErrorMessage(invalids)
+                .replaceAll('<b>', '')
+                .replaceAll('</b>', '')
+                .split('<br/>')
+                .map(val => (
+                  <div> {val}</div>
+                ))}
+            </div>
+          </>
+        ),
         buttons: [
           {
             text: 'Got it',
@@ -239,4 +253,6 @@ export const useValidateCheck = (sample: AppSample) => {
     }
     return true;
   };
+
+  return showValidateCheck;
 };

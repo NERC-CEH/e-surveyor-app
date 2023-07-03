@@ -110,9 +110,13 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
     if (isBeetleSurvey)
       return (
         <IonList>
-          <InfoBackgroundMessage>
+          {/* <InfoBackgroundMessage>
             Your species list is empty. <br /> Tap the orange species button to
             take a photo of a beetle for the AI to identify.
+          </InfoBackgroundMessage> */}
+          <InfoBackgroundMessage>
+            Your species list is empty. <br /> Tap the orange species button to
+            add your first beetle.
           </InfoBackgroundMessage>
         </IonList>
       );
@@ -165,7 +169,8 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
     deleteSample(model, alert);
   };
   const navigateToSpeciesSample = (model: Model) => {
-    if (model.parent.metadata.survey === 'beetle') return;
+    if (isBeetleSurvey && isDisabled) return;
+
     navigate(`${url}/species/${model.cid}`);
   };
 
@@ -175,7 +180,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
         key={model.cid}
         model={model}
         isDisabled={isDisabled}
-        onDelete={onDelete}
+        onDelete={!isBeetleSurvey ? onDelete : undefined}
         onClick={navigateToSpeciesSample}
       />
     );
@@ -209,7 +214,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
         isDisabled={isDisabled}
         onIdentify={onIdentify}
         deEmphasisedIdentifyBtn={showIdentifyAllBtn}
-        onDelete={onDelete}
+        onDelete={!isBeetleSurvey ? onDelete : undefined}
         onClick={navigateToSpeciesSample}
         disableAI={disableAI}
       />

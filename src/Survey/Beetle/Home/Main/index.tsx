@@ -20,6 +20,9 @@ import {
   IonButton,
   IonIcon,
   IonItemDivider,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
 } from '@ionic/react';
 import Sample from 'models/sample';
 import './styles.scss';
@@ -33,9 +36,10 @@ function byDate(smp1: Sample, smp2: Sample) {
 type Props = {
   sample: Sample;
   onAddNewTrap: () => void;
+  onTrapDelete: (trapSample: Sample) => void;
 };
 
-const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
+const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
   const match = useRouteMatch();
   const isDisabled = sample.isUploaded();
 
@@ -59,19 +63,28 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
     }
 
     const getTrap = (trapSample: Sample) => (
-      <IonItem
-        key={trapSample.cid}
-        routerLink={`${match.url}/trap/${trapSample.cid}`}
-        detail
-      >
-        {getTrapPhoto(trapSample)}
+      <IonItemSliding key={trapSample.cid}>
+        <IonItem routerLink={`${match.url}/trap/${trapSample.cid}`} detail>
+          {getTrapPhoto(trapSample)}
 
-        <IonLabel text-wrap>
-          <IonLabel>
-            <b>{trapSample.getPrettyName()}</b>
+          <IonLabel text-wrap>
+            <IonLabel>
+              <b>{trapSample.getPrettyName()}</b>
+            </IonLabel>
           </IonLabel>
-        </IonLabel>
-      </IonItem>
+        </IonItem>
+
+        {!isDisabled && (
+          <IonItemOptions side="end">
+            <IonItemOption
+              color="danger"
+              onClick={() => onTrapDelete(trapSample)}
+            >
+              Delete
+            </IonItemOption>
+          </IonItemOptions>
+        )}
+      </IonItemSliding>
     );
 
     return (
@@ -86,7 +99,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
     );
   };
 
-  const isFinished = sample.metadata.saved;
+  // const isFinished = sample.metadata.saved;
 
   return (
     <Main>
@@ -97,7 +110,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
       )}
 
       <IonList lines="full">
-        {isFinished && (
+        {/* {isFinished && (
           <IonButton
             color="secondary"
             type="submit"
@@ -106,7 +119,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
           >
             See Report
           </IonButton>
-        )}
+        )} */}
 
         <div className="rounded">
           <MenuAttrItem
@@ -114,7 +127,6 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap }) => {
             icon={createOutline}
             label="Details"
             skipValueTranslation
-            disabled={isDisabled}
           />
         </div>
       </IonList>

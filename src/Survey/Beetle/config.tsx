@@ -1,6 +1,6 @@
 import { clipboardOutline, locationOutline } from 'ionicons/icons';
 import * as Yup from 'yup';
-// import config from 'common/config';
+import { Option } from '@flumens/ionic/dist/components/RadioInput';
 import icon from 'common/images/pointIcon.svg';
 import { Survey } from 'common/surveys';
 // import Occurrence from 'models/occurrence';
@@ -14,31 +14,67 @@ export const getDetailsValidationSchema = Yup.object().shape({
   location: verifyLocationSchema,
 });
 
+// https://warehouse1.indicia.org.uk/index.php/taxon_list/edit/280?tab=taxa
+export const beetleSpecies: Option[] = [
+  { label: 'Abax parallelepipedus', value: '617294' },
+  { label: 'Amara', value: '617295' },
+  { label: 'Anchomenus dorsalis', value: '617296' },
+  { label: 'Badister bullatus', value: '617297' },
+  { label: 'Bembidion', value: '617298' },
+  { label: 'Brachinus crepitans', value: '617299' },
+  { label: 'Bradycellus', value: '617300' },
+  { label: 'Calathus fuscipes', value: '617301' },
+  { label: 'Calathus melanocephalus/cinctus', value: '617302' },
+  { label: 'Carabus', value: '617303' },
+  { label: 'Carbidae (smaller than 5mm)', value: '617304' },
+  { label: 'Harpalus affinis', value: '617305' },
+  { label: 'Harpalus rufipes', value: '617306' },
+  { label: 'Harpalus tardus', value: '617307' },
+  { label: 'Leistus ferrugineus', value: '617308' },
+  { label: 'Leistus fulvibarbis', value: '617309' },
+  { label: 'Leistus spinibarbis', value: '617310' },
+  { label: 'Loricera pilicornis', value: '617311' },
+  { label: 'Nebria brevicollis/salina', value: '617312' },
+  { label: 'Notiophilus', value: '617313' },
+  { label: 'Ophonus', value: '617314' },
+  { label: 'Poecilus cupreus/versicolor', value: '617315' },
+  { label: 'Pterostichus madidus', value: '617316' },
+  { label: 'Pterostichus melanarius', value: '617317' },
+  { label: 'Pterostichus niger', value: '617318' },
+  { label: 'Pterostichus nigrita', value: '617319' },
+  { label: 'Pterostichus strenuus', value: '617320' },
+  { label: 'Pterostichus vernalis', value: '617321' },
+
+  { isPlaceholder: true, value: '' },
+  { label: 'This is not a beetle', value: '617322' },
+];
+
 const tillageTypes = [
   { value: null, isDefault: true, label: 'Not Recorded' },
-  { value: 'Zero tillage', id: -1 },
-  { value: 'Shallow tillage', id: -1 },
-  { value: 'Mouldboard plough', id: -1 },
+  { value: 'Zero tillage', id: 21781 },
+  { value: 'Shallow tillage', id: 21782 },
+  { value: 'Mouldboard plough', id: 21783 },
 ];
 
 const cropTypes = [
   { value: null, isDefault: true, label: 'Not Recorded' },
-  { value: 'Barley (spring)', id: -1 },
-  { value: 'Barley (winter)', id: -1 },
-  { value: 'Cover crop', id: -1 },
-  { value: 'Field beans (spring)', id: -1 },
-  { value: 'Field beans (winter)', id: -1 },
-  { value: 'Leafy vegetables', id: -1 },
-  { value: 'Linseed', id: -1 },
-  { value: 'Oats (spring)', id: -1 },
-  { value: 'Oats (winter)', id: -1 },
-  { value: 'Oilseed rape (spring)', id: -1 },
-  { value: 'Oilseed rape (winter)', id: -1 },
-  { value: 'Peas', id: -1 },
-  { value: 'Root vegetables', id: -1 },
-  { value: 'Sugar beet', id: -1 },
-  { value: 'Wheat (spring)', id: -1 },
-  { value: 'Wheat (winter)', id: -1 },
+  { value: 'Barley (spring)', id: 21764 },
+  { value: 'Barley (winter)', id: 21765 },
+  { value: 'Cover crop', id: 21766 },
+  { value: 'Field beans (spring)', id: 21767 },
+  { value: 'Field beans (winter)', id: 21768 },
+  { value: 'Leafy vegetables', id: 21769 },
+  { value: 'Linseed', id: 21770 },
+  { value: 'Oats (spring)', id: 21771 },
+  { value: 'Oats (winter)', id: 21772 },
+  { value: 'Oilseed rape (spring)', id: 21773 },
+  { value: 'Oilseed rape (winter)', id: 21774 },
+  { value: 'Pasture/grassland', id: 21775 },
+  { value: 'Peas', id: 21776 },
+  { value: 'Root vegetables', id: 21777 },
+  { value: 'Sugar beet', id: 21778 },
+  { value: 'Wheat (spring)', id: 21779 },
+  { value: 'Wheat (winter)', id: 21780 },
 ];
 
 const marginTypes = [
@@ -47,6 +83,12 @@ const marginTypes = [
   { value: 12 },
   { value: 18 },
   { value: 24 },
+];
+
+export const marginOptions = [
+  { value: 'Edge', id: 21784 },
+  { value: '5 meters in', id: 21785 },
+  { value: 'Centre', id: 21786 },
 ];
 
 const survey: Survey = {
@@ -70,18 +112,11 @@ const survey: Survey = {
           },
         },
       },
+      remote: { id: 'location_name' },
     },
 
     trapDays: {
-      menuProps: { icon: locationOutline, skipValueTranslation: true },
-      pageProps: {
-        attrProps: {
-          input: 'textarea',
-          inputProps: {
-            placeholder: 'Enter the farm name here.',
-          },
-        },
-      },
+      remote: { id: 1778 },
     },
 
     fieldName: {
@@ -99,7 +134,9 @@ const survey: Survey = {
           },
         },
       },
+      remote: { id: 1779 },
     },
+
     fieldMargins: {
       menuProps: {
         icon: clipboardOutline,
@@ -111,8 +148,8 @@ const survey: Survey = {
         attrProps: [
           {
             input: 'slider',
-            info: 'What are the field margins?',
-            // inputProps: { max: 100 },
+            info: 'What is the field margin width?',
+            inputProps: { min: 1, max: 24 },
           },
           {
             input: 'radio',
@@ -120,6 +157,7 @@ const survey: Survey = {
           },
         ],
       },
+      remote: { id: 1780 },
     },
 
     fieldCrop: {
@@ -134,7 +172,7 @@ const survey: Survey = {
           inputProps: { options: cropTypes },
         },
       },
-      remote: { id: -1, values: cropTypes },
+      remote: { id: 1781, values: cropTypes },
     },
 
     fieldTillage: {
@@ -149,7 +187,7 @@ const survey: Survey = {
           inputProps: { options: tillageTypes },
         },
       },
-      remote: { id: -1, values: tillageTypes },
+      remote: { id: 1782, values: tillageTypes },
     },
 
     fieldInsecticides: {
@@ -158,7 +196,7 @@ const survey: Survey = {
         icon: clipboardOutline,
         type: 'toggle',
       },
-      remote: { id: -1 },
+      remote: { id: 1783 },
     },
 
     fieldHerbicides: {
@@ -167,7 +205,7 @@ const survey: Survey = {
         icon: clipboardOutline,
         type: 'toggle',
       },
-      remote: { id: -1 },
+      remote: { id: 1784 },
     },
 
     fieldUndersowing: {
@@ -176,7 +214,7 @@ const survey: Survey = {
         icon: clipboardOutline,
         type: 'toggle',
       },
-      remote: { id: -1 },
+      remote: { id: 1785 },
     },
   },
 
@@ -186,7 +224,9 @@ const survey: Survey = {
 
       location: locationAttr,
 
-      // margin distance
+      margin: {
+        remote: { id: 1786, values: marginOptions },
+      },
 
       comment: {
         menuProps: {
@@ -206,7 +246,7 @@ const survey: Survey = {
       },
     },
 
-    create(AppSample, _, photo) {
+    create(AppSample, _, photo, surveySample) {
       const sample = new AppSample({
         metadata: {
           survey: survey.name,
@@ -214,6 +254,8 @@ const survey: Survey = {
         },
 
         attrs: {
+          date: surveySample!.attrs.date,
+          sample_method_id: 24, // Pitfall trap
           location: null,
           margin: 'Edge',
         },
@@ -228,6 +270,20 @@ const survey: Survey = {
       return sample;
     },
 
+    verify(attrs) {
+      try {
+        Yup.object()
+          .shape({
+            location: verifyLocationSchema,
+          })
+          .validateSync(attrs, { abortEarly: false });
+      } catch (attrError) {
+        return attrError;
+      }
+
+      return null;
+    },
+
     occ: {
       attrs: {
         taxon: {
@@ -238,21 +294,21 @@ const survey: Survey = {
         },
       },
 
-      // verify(attrs) {
-      //   try {
-      //     Yup.object()
-      //       .shape({
-      //         taxon: Yup.object()
-      //           .nullable()
-      //           .required('Plant has not been identified'),
-      //       })
-      //       .validateSync(attrs, { abortEarly: false });
-      //   } catch (attrError) {
-      //     return attrError;
-      //   }
+      verify(attrs) {
+        try {
+          Yup.object()
+            .shape({
+              taxon: Yup.object()
+                .nullable()
+                .required('Beetle has not been identified'),
+            })
+            .validateSync(attrs, { abortEarly: false });
+        } catch (attrError) {
+          return attrError;
+        }
 
-      //   return null;
-      // },
+        return null;
+      },
 
       create(AppOccurrence, photo) {
         const occ = new AppOccurrence({
@@ -265,25 +321,7 @@ const survey: Survey = {
 
         return occ;
       },
-
-      // modifySubmission(submission: any, occ: Occurrence) {
-      //   // for non-UK species
-      //   if (!submission.values.taxa_taxon_list_id) {
-      //     return null;
-      //   }
-
-      //   return attachClassifierResults(submission, occ);
-      // },
     },
-
-    // modifySubmission(submission: any) {
-    //   // for non-UK species
-    //   if (!submission.occurrences.length) {
-    //     return null;
-    //   }
-
-    //   return submission;
-    // },
   },
 
   create(AppSample) {
@@ -293,7 +331,11 @@ const survey: Survey = {
         survey_id: survey.id,
       },
 
-      attrs: { location: null, trapDays: 1 },
+      attrs: {
+        sample_method_id: 2424, // Parent sample
+        location: null,
+        trapDays: 1,
+      },
     });
 
     sample.startGPS();
@@ -301,64 +343,25 @@ const survey: Survey = {
     return sample;
   },
 
-  // verify(attrs, sample) {
-  //   try {
-  //     const isIdentifying = sample.isIdentifying();
+  verify(attrs, sample) {
+    try {
+      const isIdentifying = sample.isIdentifying();
 
-  //     Yup.boolean()
-  //       .oneOf([false], 'Some photos are still being identified.')
-  //       .validateSync(isIdentifying, { abortEarly: false });
+      Yup.boolean()
+        .oneOf([false], 'Some photos are still being identified.')
+        .validateSync(isIdentifying, { abortEarly: false });
 
-  //     // const hasUnknownSpecies = sample.samples.some((subSample) => subSample.occure);
+      Yup.object()
+        .shape({
+          location: verifyLocationSchema,
+        })
+        .validateSync(attrs, { abortEarly: false });
+    } catch (attrError) {
+      return attrError;
+    }
 
-  //     // Yup.boolean()
-  //     //   .oneOf([false], 'Some photos are still being identified.')
-  //     //   .validateSync(isIdentifying, { abortEarly: false });
-
-  //     let hasValidSpecies = false;
-  //     const showReportIfScoreHigherThanThreshold = (subSample: any) => {
-  //       const { score } = subSample.getSpecies();
-
-  //       if (score > POSSIBLE_THRESHOLD) {
-  //         hasValidSpecies = true;
-  //       }
-  //     };
-
-  //     sample.samples.forEach(showReportIfScoreHigherThanThreshold);
-
-  //     Yup.boolean()
-  //       .oneOf([true], 'Please add some species.')
-  //       .validateSync(hasValidSpecies, { abortEarly: false });
-
-  //     const transectSchema = Yup.object().shape({
-  //       location: verifyLocationSchema,
-  //     });
-
-  //     transectSchema.validateSync(attrs, { abortEarly: false });
-  //   } catch (attrError) {
-  //     return attrError;
-  //   }
-
-  //   return null;
-  // },
-
-  // modifySubmission(submission: any) {
-  //   const subSamples = submission.samples;
-  //   submission.samples = []; // eslint-disable-line
-
-  //   const removeSubSamplesLayerIfNoLocation = (subSample: any) => {
-  //     const locationIsMissing = !subSample.values.entered_sref;
-  //     if (locationIsMissing) {
-  //       submission.occurrences.push(subSample.occurrences[0]);
-  //       return;
-  //     }
-  //     submission.samples.push(subSample);
-  //   };
-
-  //   subSamples.forEach(removeSubSamplesLayerIfNoLocation);
-
-  //   return submission;
-  // },
+    return null;
+  },
 };
 
 export default survey;

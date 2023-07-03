@@ -3,10 +3,17 @@ import { observer } from 'mobx-react';
 import { checkmarkCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
-import { captureImage, Header, Page, useLoader, useToast } from '@flumens';
+import {
+  captureImage,
+  Header,
+  Page,
+  useAlert,
+  useLoader,
+  useToast,
+} from '@flumens';
 import { NavContext, IonButton, IonIcon, isPlatform } from '@ionic/react';
 import config from 'common/config';
-// import appModel from 'models/app';
+import appModel from 'models/app';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample, { useValidateCheck } from 'models/sample';
@@ -17,6 +24,34 @@ import Main from './Main';
 import detectObjects from './objectDetection';
 
 type URL = string;
+
+const useTrapDeleteConfirmation = () => {
+  const alert = useAlert();
+
+  const confirmTrapDeletion = () =>
+    new Promise(resolve => {
+      alert({
+        header: 'Delete',
+        skipTranslation: true,
+        message: 'Are you sure you want to remove this trap from your survey?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'primary',
+            handler: () => resolve(false),
+          },
+          {
+            text: 'Delete',
+            cssClass: 'danger',
+            handler: () => resolve(true),
+          },
+        ],
+      });
+    });
+
+  return confirmTrapDeletion;
+};
 
 type Props = {
   sample: Sample;
@@ -29,6 +64,7 @@ const Controller: FC<Props> = ({ sample }) => {
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
   const loader = useLoader();
+  const confirmTrapDeletion = useTrapDeleteConfirmation();
 
   const onUpload = async () => {
     const isUserOK = await checkUserStatus();
@@ -45,14 +81,12 @@ const Controller: FC<Props> = ({ sample }) => {
     if (!isValid) return;
 
     // eslint-disable-next-line no-param-reassign
-    // sample.metadata.saved = true;
-    // sample.save();
+    sample.metadata.saved = true;
+    sample.save();
 
-    // appModel.attrs['draftId:beetle'] = '';
+    appModel.attrs['draftId:beetle'] = '';
 
-    toast.success('👷‍♂️ work in progress. This part is disabled');
-
-    // navigate(`${match.url}/report`);
+    navigate(`/home/surveys`, 'root');
   };
 
   const [editImage, setEditImage] = useState<URL>();
@@ -65,7 +99,7 @@ const Controller: FC<Props> = ({ sample }) => {
     // new subsample
     const dataDirPath = config.dataPath;
     const image = await Media.getImageModel(photoURL, dataDirPath);
-    const trapSample = survey.smp.create(Sample, null, image);
+    const trapSample = survey.smp.create(Sample, null, image, sample);
     sample.samples.push(trapSample);
 
     navigate(`${match.url}/trap/${trapSample.cid}`);
@@ -103,6 +137,13 @@ const Controller: FC<Props> = ({ sample }) => {
     setEditImage(imageToEdit);
   };
 
+  const onTrapDelete = async (trap: Sample) => {
+    const shouldDelete = await confirmTrapDeletion();
+    if (!shouldDelete) return;
+
+    trap.destroy();
+  };
+
   const onDoneEdit = (image: URL) => {
     attachImages(image);
     setEditImage(undefined);
@@ -130,12 +171,17 @@ const Controller: FC<Props> = ({ sample }) => {
         title="Trap survey"
         rightSlot={uploadButton}
       />
-      <Main sample={sample} onAddNewTrap={onAddNewTrap} />
+      <Main
+        sample={sample}
+        onAddNewTrap={onAddNewTrap}
+        onTrapDelete={onTrapDelete}
+      />
       <ImageCropper
         image={editImage}
         onDone={onDoneEdit}
         onCancel={onCancelEdit}
-        message="Place your tray at the center of the frame."
+        message="Align the rectangle with the edges of the tray."
+        cropperProps={{ aspect: 0.7 }}
       />
 
       <canvas id="imageCanvas" className="hidden" />

@@ -22,7 +22,7 @@ import Sample from 'models/sample';
 type Props = {
   model: Sample | Occurrence;
   isDisabled: boolean;
-  onDelete: (model: Sample | Occurrence) => void;
+  onDelete?: (model: Sample | Occurrence) => void;
   onClick: (model: Sample | Occurrence) => void;
 };
 
@@ -72,7 +72,7 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
     }
   }
 
-  const deleteWrap = () => onDelete(model);
+  const deleteWrap = () => onDelete && onDelete(model);
   const onClickWrap = () => onClick(model);
 
   const detailsIcon = detailIcon || '';
@@ -112,7 +112,7 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
         {getSpeciesName()}
       </IonItem>
 
-      {!isDisabled && (
+      {!isDisabled && onDelete && (
         <IonItemOptions side="end">
           <IonItemOption color="danger" onClick={deleteWrap}>
             Delete
