@@ -82,8 +82,11 @@ const TrapController: FC<Props> = ({ subSample }) => {
       // eslint-disable-next-line no-await-in-loop
       const mediaModel = await Media.getImageModel(photoURL, dataDirPath);
 
-      const survey = subSample.parent.getSurvey();
-      const newOccurrence = survey.smp.occ.create(Occurrence, mediaModel);
+      const survey = subSample.parent!.getSurvey();
+      const newOccurrence = survey.smp!.occ!.create!({
+        Occurrence,
+        photo: mediaModel,
+      });
 
       subSample.occurrences.push(newOccurrence);
       subSample.save();

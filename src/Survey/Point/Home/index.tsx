@@ -113,7 +113,11 @@ const HomeController: FC<Props> = ({ sample }) => {
       const image = await Media.getImageModel(photoURL, dataDirPath);
 
       const survey = sample.getSurvey();
-      const newSubSample = survey.smp.create(Sample, Occurrence, image);
+      const newSubSample = survey.smp!.create!({
+        Sample,
+        Occurrence,
+        photo: image,
+      });
 
       device.isOnline && newSubSample.occurrences[0].identify();
 

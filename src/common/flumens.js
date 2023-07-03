@@ -1,20 +1,26 @@
 export {
   default as Model,
+  Options as ModelOptions,
+  Metadata as ModelMetadata,
   Attrs as ModelAttrs,
 } from '@flumens/ionic/dist/models/Model';
 export {
   default as Sample,
   Attrs as SampleAttrs,
   Options as SampleOptions,
-} from '@flumens/ionic/dist/models/Sample';
+  Metadata as SampleMetadata,
+  RemoteConfig,
+} from '@flumens/ionic/dist/models/Indicia/Sample';
 export {
   default as Media,
   Attrs as MediaAttrs,
-} from '@flumens/ionic/dist/models/Media';
+} from '@flumens/ionic/dist/models/Indicia/Media';
 export {
   default as Occurrence,
   Attrs as OccurrenceAttrs,
-} from '@flumens/ionic/dist/models/Occurrence';
+  Options as OccurrenceOptions,
+  Metadata as OccurrenceMetadata,
+} from '@flumens/ionic/dist/models/Indicia/Occurrence';
 export {
   default as DrupalUserModel,
   Attrs as DrupalUserModelAttrs,
@@ -30,7 +36,11 @@ export { default as Main } from '@flumens/ionic/dist/components/Main';
 export { default as Header } from '@flumens/ionic/dist/components/Header';
 export { default as InfoMessage } from '@flumens/ionic/dist/components/InfoMessage';
 export { default as Collapse } from '@flumens/ionic/dist/components/Collapse';
-export { default as AttrPage } from '@flumens/ionic/dist/components/AttrPage';
+export {
+  default as AttrPage,
+  Props as PageProps,
+  AttrPropsExtended,
+} from '@flumens/ionic/dist/components/AttrPage';
 export { default as Gallery } from '@flumens/ionic/dist/components/Gallery';
 export { default as MenuAttrToggle } from '@flumens/ionic/dist/components/MenuAttrToggle';
 export { default as ModalHeader } from '@flumens/ionic/dist/components/ModalHeader';
@@ -38,7 +48,10 @@ export { default as Section } from '@flumens/ionic/dist/components/Section';
 export { default as InfoButton } from '@flumens/ionic/dist/components/InfoButton';
 export { default as PhotoPicker } from '@flumens/ionic/dist/components/PhotoPicker';
 export { default as MenuAttrItem } from '@flumens/ionic/dist/components/MenuAttrItem';
-export { default as MenuAttrItemFromModel } from '@flumens/ionic/dist/components/MenuAttrItemFromModel';
+export {
+  default as MenuAttrItemFromModel,
+  MenuProps as MenuAttrItemFromModelMenuProps,
+} from '@flumens/ionic/dist/components/MenuAttrItemFromModel';
 export { default as CounterInput } from '@flumens/ionic/dist/components/CounterInput';
 export { default as ModelLocationMap } from '@flumens/ionic/dist/components/ModelLocationMap';
 export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';

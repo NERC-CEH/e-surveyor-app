@@ -1,12 +1,18 @@
 import { calendarOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { date } from '@flumens';
+import {
+  date,
+  MenuAttrItemFromModelMenuProps,
+  PageProps,
+  RemoteConfig,
+} from '@flumens';
 import config from 'common/config';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel, { SeedMix } from 'models/app';
-import Occurrence, { Suggestion } from 'models/occurrence';
+import Media from 'models/image';
+import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 
 const { POSSIBLE_THRESHOLD } = config;
@@ -291,4 +297,77 @@ export function attachClassifierResults(submission: any, occ: Occurrence) {
       ],
     },
   };
+}
+
+type MenuProps = MenuAttrItemFromModelMenuProps;
+
+export type AttrConfig = {
+  menuProps?: MenuProps;
+  pageProps?: Omit<PageProps, 'attr' | 'model'>;
+  remote?: RemoteConfig;
+};
+
+interface Attrs {
+  [key: string]: AttrConfig;
+}
+
+type OccurrenceCreateOptions = {
+  Occurrence: typeof Occurrence;
+  taxon?: Taxon;
+  photo?: Media;
+};
+
+type OccurrenceConfig = {
+  render?: any[] | ((model: Occurrence) => any[]);
+  attrs: Attrs;
+  create?: (options: OccurrenceCreateOptions) => Occurrence;
+  verify?: (attrs: any) => any;
+  modifySubmission?: (submission: any, model: any) => any;
+  /**
+   * Set to true if multi-species surveys shouldn't auto-increment it to 1 when adding to lists.
+   */
+  skipAutoIncrement?: boolean;
+};
+
+type SampleCreateOptions = {
+  Sample: typeof Sample;
+  Occurrence?: typeof Occurrence;
+  taxon?: Taxon;
+  surveySample?: Sample;
+  photo?: Media;
+};
+
+export type SampleConfig = {
+  render?: any[] | ((model: Sample) => any[]);
+  attrs?: Attrs;
+  create?: (options: SampleCreateOptions) => Sample;
+  verify?: (attrs: any, model: any) => any;
+  modifySubmission?: (submission: any, model: any) => any;
+  smp?: SampleConfig;
+  occ?: OccurrenceConfig;
+};
+
+export interface Survey extends SampleConfig {
+  /**
+   * Remote warehouse survey ID.
+   */
+  id: number;
+  /**
+   * In-App survey code name.
+   */
+  name: string;
+  /**
+   * Pretty survey name to show in the UI.
+   */
+  label?: string;
+  deprecated?: boolean;
+  /**
+   * Remote website survey edit page path.
+   */
+  webForm?: string;
+
+  /**
+   * The icon of the survey.
+   */
+  icon?: string;
 }

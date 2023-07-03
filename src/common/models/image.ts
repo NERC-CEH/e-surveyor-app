@@ -4,15 +4,19 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { Media, MediaAttrs, createImage } from '@flumens';
+import { Media as MediaOriginal, MediaAttrs, createImage } from '@flumens';
 import { isPlatform } from '@ionic/react';
 import config from 'common/config';
+import Occurrence from './occurrence';
+import Sample from './sample';
 
 export type URL = string;
 
 type Attrs = MediaAttrs & { identified?: boolean };
 
-export default class AppMedia extends Media {
+export default class Media extends MediaOriginal<Attrs> {
+  declare parent?: Sample | Occurrence;
+
   /**
    * Create new image model with a photo
    * @param ImageModel Class representing the model.
@@ -23,7 +27,7 @@ export default class AppMedia extends Media {
   static async getImageModel(
     imageURL: URL,
     dataDirPath: string
-  ): Promise<AppMedia> {
+  ): Promise<Media> {
     if (!imageURL) {
       throw new Error('File not found while creating image model.');
     }
@@ -41,13 +45,13 @@ export default class AppMedia extends Media {
 
       data = imageURL.split('/').pop();
     } else {
-      [data, , width, height] = await AppMedia.getDataURI(imageURL, {
+      [data, , width, height] = await Media.getDataURI(imageURL, {
         width: 1000,
         height: 1000,
       });
     }
 
-    const imageModel: AppMedia = new AppMedia({
+    const imageModel: Media = new Media({
       attrs: {
         data,
         type: 'jpeg',
@@ -72,15 +76,13 @@ export default class AppMedia extends Media {
 
     // remove from internal storage
     if (!isPlatform('hybrid') || (window as any).testing) {
-      if (!this.parent) {
-        return null;
-      }
+      if (!this.parent) return;
 
       this.parent.media.remove(this);
 
-      if (!this.isPersistent()) return null;
+      if (!this.isPersistent()) return;
 
-      return this.parent.save();
+      this.parent.save();
     }
 
     try {
@@ -92,18 +94,16 @@ export default class AppMedia extends Media {
         });
       }
 
-      if (!this.parent) return null;
+      if (!this.parent) return;
 
       this.parent.media.remove(this);
 
-      if (!this.isPersistent()) return null;
+      if (!this.isPersistent()) return;
 
-      return this.parent.save();
+      this.parent.save();
     } catch (err) {
       console.error(err);
     }
-
-    return null;
   }
 
   getURL() {

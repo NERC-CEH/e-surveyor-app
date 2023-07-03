@@ -80,7 +80,11 @@ const QuadratController: FC<Props> = ({ subSample }) => {
       const image = await Media.getImageModel(photoURL, dataDirPath);
 
       const survey = subSample.getSurvey();
-      const newSubSample = survey.smp.create(Sample, Occurrence, image);
+      const newSubSample = survey.smp!.create!({
+        Sample,
+        Occurrence,
+        photo: image,
+      });
 
       device.isOnline && newSubSample.occurrences[0].identify();
 

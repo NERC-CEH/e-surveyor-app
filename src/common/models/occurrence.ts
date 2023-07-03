@@ -1,11 +1,16 @@
-import { observable } from 'mobx';
-import { Occurrence, OccurrenceAttrs, validateRemoteModel } from '@flumens';
+import { IObservableArray, observable } from 'mobx';
+import {
+  Occurrence as OccurrenceOriginal,
+  OccurrenceAttrs,
+  validateRemoteModel,
+} from '@flumens';
 import identifyBeetleImage from 'common/services/beetles';
 import { filterUKSpecies } from 'common/services/helpers';
 import identifyPlantImage, { ResponseResult } from 'common/services/plantNet';
 import { Image, Gbif } from 'common/services/plantNet/plantNetResponse.d';
-import { MachineInvolvement } from 'Survey/common/config';
+import { MachineInvolvement, Survey } from 'Survey/common/config';
 import Media from './image';
+import Sample from './sample';
 
 type PlantNetTaxonAttrs = {
   images?: Image[];
@@ -35,10 +40,16 @@ export type Taxon = {
 
 type Attrs = OccurrenceAttrs & { taxon?: Taxon };
 
-export default class AppOccurrence extends Occurrence {
+export default class Occurrence extends OccurrenceOriginal<Attrs> {
   static fromJSON(json: any) {
     return super.fromJSON(json, Media);
   }
+
+  declare media: IObservableArray<Media>;
+
+  declare parent?: Sample;
+
+  declare getSurvey: () => Survey;
 
   constructor(...args: any[]) {
     super(...args);
@@ -66,10 +77,6 @@ export default class AppOccurrence extends Occurrence {
   }
 
   identification = observable({ identifying: false });
-
-  attrs: Attrs = this.attrs;
-
-  media: Media[] = this.media;
 
   getSpecies = () => this.attrs.taxon;
 

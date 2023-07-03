@@ -99,7 +99,11 @@ const Controller: FC<Props> = ({ sample }) => {
     // new subsample
     const dataDirPath = config.dataPath;
     const image = await Media.getImageModel(photoURL, dataDirPath);
-    const trapSample = survey.smp.create(Sample, null, image, sample);
+    const trapSample = survey.smp!.create!({
+      Sample,
+      photo: image,
+      surveySample: sample,
+    });
     sample.samples.push(trapSample);
 
     navigate(`${match.url}/trap/${trapSample.cid}`);
@@ -108,7 +112,7 @@ const Controller: FC<Props> = ({ sample }) => {
     const [beetlePhotos] = await detectObjects(image.getURL());
     const getOccurrence = async (beetlePhotoURL: URL) => {
       const mediaModel = await Media.getImageModel(beetlePhotoURL, dataDirPath);
-      return survey.smp.occ.create(Occurrence, mediaModel);
+      return survey.smp!.occ!.create!({ Occurrence, photo: mediaModel });
     };
     const occurrences = await Promise.all(beetlePhotos.map(getOccurrence));
     trapSample.occurrences.push(...occurrences);

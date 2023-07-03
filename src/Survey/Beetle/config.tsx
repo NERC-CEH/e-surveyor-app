@@ -2,9 +2,8 @@ import { clipboardOutline, locationOutline } from 'ionicons/icons';
 import * as Yup from 'yup';
 import { Option } from '@flumens/ionic/dist/components/RadioInput';
 import icon from 'common/images/pointIcon.svg';
-import { Survey } from 'common/surveys';
-// import Occurrence from 'models/occurrence';
 import {
+  Survey,
   dateAttr,
   locationAttr,
   verifyLocationSchema,
@@ -246,8 +245,8 @@ const survey: Survey = {
       },
     },
 
-    create(AppSample, _, photo, surveySample) {
-      const sample = new AppSample({
+    create({ Sample, photo, surveySample }) {
+      const sample = new Sample({
         metadata: {
           survey: survey.name,
           survey_id: survey.id,
@@ -310,8 +309,8 @@ const survey: Survey = {
         return null;
       },
 
-      create(AppOccurrence, photo) {
-        const occ = new AppOccurrence({
+      create({ Occurrence, photo }) {
+        const occ = new Occurrence({
           attrs: { taxon: null },
         });
 
@@ -324,8 +323,8 @@ const survey: Survey = {
     },
   },
 
-  create(AppSample) {
-    const sample = new AppSample({
+  create({ Sample }) {
+    const sample = new Sample({
       metadata: {
         survey: survey.name,
         survey_id: survey.id,

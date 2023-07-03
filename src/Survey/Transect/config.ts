@@ -2,8 +2,8 @@ import * as Yup from 'yup';
 import { schemeHabitats } from 'common/data/habitats';
 import icon from 'common/images/transectIcon.svg';
 import appModel from 'models/app';
-import Occurrence from 'models/occurrence';
-import Sample from 'models/sample';
+import OccurrenceModel from 'models/occurrence';
+import SampleModel from 'models/sample';
 import {
   seedmixGroupAttr,
   seedmixAttr,
@@ -13,6 +13,7 @@ import {
   verifyLocationSchema,
   nameAttr,
   attachClassifierResults,
+  Survey,
 } from 'Survey/common/config';
 
 export const getDetailsValidationSchema = () =>
@@ -42,7 +43,7 @@ const surveyTypes = [
   { value: 'Custom', id: 17957 },
 ];
 
-const survey = {
+const survey: Survey = {
   id: 627,
   name: 'transect',
   label: 'Transect',
@@ -61,7 +62,7 @@ const survey = {
           input: 'radio',
           info: 'You can change your survey name here.',
           inputProps: { options: surveyTypes },
-          set: (value: any, sample: Sample) => {
+          set: (value: any, sample: SampleModel) => {
             sample.attrs.type = value; // eslint-disable-line
 
             sample.attrs.steps = 10; // eslint-disable-line
@@ -113,7 +114,7 @@ const survey = {
       pageProps: {
         attrProps: {
           input: 'radio',
-          inputProps: (model: Sample) => ({
+          inputProps: (model: SampleModel) => ({
             options:
               model.attrs.type === 'Agri-environment'
                 ? agriEnvironmentHabitats
@@ -148,12 +149,8 @@ const survey = {
         location: locationAttr,
       },
 
-      create(
-        AppSample: typeof Sample,
-        AppOccurrence: typeof Occurrence,
-        photo: any
-      ) {
-        const sample = new AppSample({
+      create({ Sample, Occurrence, photo }) {
+        const sample = new Sample({
           metadata: {
             survey: survey.name,
             survey_id: survey.id,
@@ -166,7 +163,10 @@ const survey = {
 
         sample.startGPS();
 
-        const occurrence = survey.smp.smp.occ.create(AppOccurrence, photo);
+        if (!Occurrence)
+          throw new Error('Occurrence class is missing in subSubSample create');
+
+        const occurrence = survey.smp!.smp!.occ!.create!({ Occurrence, photo });
         sample.occurrences.push(occurrence);
 
         return sample;
@@ -184,15 +184,17 @@ const survey = {
       occ: {
         attrs: {
           taxon: {
-            id: 'taxa_taxon_list_id',
-            values(taxon: any) {
-              return taxon.warehouseId;
+            remote: {
+              id: 'taxa_taxon_list_id',
+              values(taxon: any) {
+                return taxon.warehouseId;
+              },
             },
           },
         },
 
-        create(AppOccurrence: typeof Occurrence, photo: any) {
-          const occ = new AppOccurrence({
+        create({ Occurrence, photo }) {
+          const occ = new Occurrence({
             attrs: {
               taxon: null,
             },
@@ -205,7 +207,7 @@ const survey = {
           return occ;
         },
 
-        modifySubmission(submission: any, occ: Occurrence) {
+        modifySubmission(submission: any, occ: OccurrenceModel) {
           // for non-UK species
           if (!submission.values.taxa_taxon_list_id) {
             return null;
@@ -216,8 +218,8 @@ const survey = {
       },
     },
 
-    create(AppSample: typeof Sample) {
-      const sample = new AppSample({
+    create({ Sample }) {
+      const sample = new Sample({
         metadata: {
           survey: survey.name,
           survey_id: survey.id,
@@ -251,7 +253,7 @@ const survey = {
       return submission;
     },
 
-    verify(attrs: any, sample: Sample) {
+    verify(attrs: any, sample: SampleModel) {
       try {
         Yup.number()
           .min(1, 'Please add a quadrat photo.')
@@ -270,8 +272,8 @@ const survey = {
     },
   },
 
-  create(AppSample: typeof Sample) {
-    const sample = new AppSample({
+  create({ Sample }) {
+    const sample = new Sample({
       metadata: {
         survey: survey.name,
         survey_id: survey.id,
@@ -288,7 +290,7 @@ const survey = {
     return sample;
   },
 
-  verify(attrs: any, sample: Sample) {
+  verify(attrs: any, sample: SampleModel) {
     try {
       const id = sample.isIdentifying();
 

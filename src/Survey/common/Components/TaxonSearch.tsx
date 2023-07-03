@@ -40,7 +40,10 @@ const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
 
     if (!subModel) {
       const modelSurvey = model.getSurvey();
-      const newSubSample: Sample = modelSurvey.smp.create(Sample, Occurrence);
+      const newSubSample: Sample = modelSurvey.smp!.create!({
+        Sample,
+        Occurrence,
+      });
 
       model.samples.push(newSubSample);
 

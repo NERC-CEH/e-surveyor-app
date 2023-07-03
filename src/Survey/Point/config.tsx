@@ -1,8 +1,7 @@
 import * as Yup from 'yup';
 import config from 'common/config';
 import icon from 'common/images/pointIcon.svg';
-import { Survey } from 'common/surveys';
-import Occurrence from 'models/occurrence';
+import OccurrenceModel from 'models/occurrence';
 import {
   seedmixGroupAttr,
   seedmixAttr,
@@ -12,6 +11,7 @@ import {
   verifyLocationSchema,
   nameAttr,
   attachClassifierResults,
+  Survey,
 } from 'Survey/common/config';
 
 const { POSSIBLE_THRESHOLD } = config;
@@ -43,8 +43,8 @@ const survey: Survey = {
       location: locationAttr,
     },
 
-    create(AppSample, AppOccurrence, photo) {
-      const sample = new AppSample({
+    create({ Sample, Occurrence, photo }) {
+      const sample = new Sample({
         metadata: {
           survey: survey.name,
           survey_id: survey.id,
@@ -57,7 +57,13 @@ const survey: Survey = {
 
       sample.startGPS();
 
-      const occurrence = survey.smp.occ.create(AppOccurrence!, photo);
+      if (!Occurrence)
+        throw new Error('Occurrence class is missing in subSample create');
+
+      const occurrence = survey.smp!.occ!.create!({
+        Occurrence,
+        photo,
+      });
       sample.occurrences.push(occurrence);
 
       return sample;
@@ -91,8 +97,8 @@ const survey: Survey = {
         return null;
       },
 
-      create(AppOccurrence, photo) {
-        const occ = new AppOccurrence({
+      create({ Occurrence, photo }) {
+        const occ = new Occurrence({
           attrs: {
             taxon: null,
           },
@@ -105,7 +111,7 @@ const survey: Survey = {
         return occ;
       },
 
-      modifySubmission(submission: any, occ: Occurrence) {
+      modifySubmission(submission: any, occ: OccurrenceModel) {
         // for non-UK species
         if (!submission.values.taxa_taxon_list_id) {
           return null;
@@ -125,8 +131,8 @@ const survey: Survey = {
     },
   },
 
-  create(AppSample) {
-    const sample = new AppSample({
+  create({ Sample }) {
+    const sample = new Sample({
       metadata: {
         survey: survey.name,
         survey_id: survey.id,

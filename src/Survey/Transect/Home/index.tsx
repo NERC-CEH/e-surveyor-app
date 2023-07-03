@@ -50,7 +50,7 @@ const Controller: FC<Props> = ({ sample }) => {
     }
 
     const survey = sample.getSurvey();
-    const quadratSample = survey.smp.create(Sample);
+    const quadratSample = survey.smp!.create!({ Sample });
     sample.samples.push(quadratSample);
     sample.save();
 

@@ -19,8 +19,8 @@ import './images/empty-samples-list-icon.svg';
 import './styles.scss';
 
 function byCreateTime(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.metadata.created_on);
-  const date2 = new Date(smp2.metadata.created_on);
+  const date1 = new Date(smp1.metadata.createdOn);
+  const date2 = new Date(smp2.metadata.createdOn);
   return date2.getTime() - date1.getTime();
 }
 
@@ -101,7 +101,7 @@ const UserSurveys: FC<Props> = () => {
 
   const getSamplesList = (uploaded?: boolean) => {
     const uploadedSamples = (sample: Sample) =>
-      uploaded ? sample.metadata.synced_on : !sample.metadata.synced_on;
+      uploaded ? sample.isDisabled() : !sample.isDisabled();
     return savedSamples.filter(uploadedSamples).sort(byCreateTime);
   };
 

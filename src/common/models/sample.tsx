@@ -1,11 +1,12 @@
-import { reaction } from 'mobx';
+import { IObservableArray, reaction } from 'mobx';
 import {
   device,
   getDeepErrorMessage,
   useAlert,
-  Sample,
+  Sample as SampleOriginal,
   SampleAttrs,
   SampleOptions,
+  SampleMetadata,
 } from '@flumens';
 import config from 'common/config';
 import { SeedmixSpecies } from 'common/data/seedmix';
@@ -15,16 +16,33 @@ import { SpeciesNames } from 'Components/ReportView/helpers';
 import beetleSurveyConfig from 'Survey/Beetle/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
+import { Survey } from 'Survey/common/config';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
 import Media from './image';
 import Occurrence from './occurrence';
 import GPSExtension from './sampleGPSExt';
 import { modelStore } from './store';
 
-const surveyConfig: any = {
+const surveyConfigs = {
   point: pointSurveyConfig,
   transect: transectSurveyConfig,
   beetle: beetleSurveyConfig,
+};
+
+type Metadata = SampleMetadata & {
+  /**
+   * Survey name.
+   */
+  survey: keyof typeof surveyConfigs;
+  /**
+   * If the sample was saved and ready for upload.
+   */
+  saved?: boolean;
+  /**
+   * If the sample has basic top-level details entered.
+   * Doesn't mean the details aren't changed and are valid though.
+   */
+  completedDetails?: boolean;
 };
 
 type Attrs = SampleAttrs & {
@@ -48,9 +66,9 @@ type Attrs = SampleAttrs & {
   margin?: any;
 };
 
-export default class AppSample extends Sample {
+export default class Sample extends SampleOriginal<Attrs, Metadata> {
   static fromJSON(json: any) {
-    return super.fromJSON(json, Occurrence, AppSample, Media);
+    return super.fromJSON(json, Occurrence, Sample, Media);
   }
 
   static getSupportedSpeciesList(plants: SpeciesNames[]) {
@@ -72,7 +90,7 @@ export default class AppSample extends Sample {
   }
 
   static getUniqueSupportedSpecies(plants: SpeciesNames[]): Interaction[] {
-    const pollinators = AppSample.getSupportedSpeciesList(plants);
+    const pollinators = Sample.getSupportedSpeciesList(plants);
 
     const getPollinatorName = ({ pollinator }: Interaction) => pollinator;
 
@@ -94,16 +112,18 @@ export default class AppSample extends Sample {
       .filter(nonEmpty) as Interaction[];
   }
 
-  attrs: Attrs = this.attrs;
+  declare occurrences: IObservableArray<Occurrence>;
 
-  occurrences: Occurrence[] = this.occurrences;
+  declare samples: IObservableArray<Sample>;
 
-  samples: AppSample[] = this.samples;
+  declare media: IObservableArray<Media>;
 
-  media: Media[] = this.media;
+  declare parent?: Sample;
+
+  declare survey: Survey;
 
   constructor(options: SampleOptions) {
-    super(options);
+    super({ store: modelStore, ...options });
 
     this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
     // eslint-disable-next-line
@@ -111,7 +131,8 @@ export default class AppSample extends Sample {
       Authorization: `Bearer ${await userModel.getAccessToken()}`,
     });
 
-    this.survey = (surveyConfig as any)[this.metadata.survey];
+    const surveyName = this.metadata.survey;
+    this.survey = surveyConfigs[surveyName];
 
     Object.assign(this, GPSExtension());
 
@@ -129,8 +150,6 @@ export default class AppSample extends Sample {
     reaction(listenToOnlineChange, autoIdentifyIfCameOnline);
   }
 
-  store = modelStore;
-
   getSpecies() {
     if (!this.parent) {
       throw new Error('Parent does not exist');
@@ -143,7 +162,7 @@ export default class AppSample extends Sample {
 
   isIdentifying(): boolean {
     if (!this.parent) {
-      const identifying = (s: AppSample) => s.isIdentifying();
+      const identifying = (s: Sample) => s.isIdentifying();
       return this.samples.some(identifying);
     }
 
@@ -159,13 +178,13 @@ export default class AppSample extends Sample {
     }
 
     if (this.metadata.survey === 'beetle') {
-      const byId = ({ cid }: AppSample) => cid === this.cid;
+      const byId = ({ cid }: Sample) => cid === this.cid;
       const index = this.parent.samples.findIndex(byId);
 
       return `Trap #${index + 1}`;
     }
 
-    const byId = ({ cid }: AppSample) => cid === this.cid;
+    const byId = ({ cid }: Sample) => cid === this.cid;
     const index = this.parent.samples.findIndex(byId);
 
     return `Quadrat #${index + 1}`;
@@ -179,9 +198,18 @@ export default class AppSample extends Sample {
 
   cleanUp = () => {
     this.stopGPS();
-    const stopGPS = (smp: AppSample) => smp.stopGPS();
+    const stopGPS = (smp: Sample) => smp.stopGPS();
     this.samples.forEach(stopGPS);
   };
+
+  getSurvey() {
+    try {
+      return super.getSurvey() as Survey;
+    } catch (error) {
+      console.error(`Survey config was missing ${this.metadata.survey}`);
+      return {} as Survey;
+    }
+  }
 
   destroy = () => {
     this.cleanUp();

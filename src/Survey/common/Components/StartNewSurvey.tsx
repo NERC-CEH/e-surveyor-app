@@ -1,11 +1,11 @@
 import { useEffect, useContext } from 'react';
 import { useAlert } from '@flumens';
 import { NavContext } from '@ionic/react';
-import { Survey } from 'common/surveys';
 import appModel, { SurveyDraftKeys } from 'models/app';
 import Sample from 'models/sample';
 import savedSamples from 'models/savedSamples';
 import userModel from 'models/user';
+import { Survey } from '../config';
 
 async function showDraftAlert(alert: any) {
   const showDraftDialog = (resolve: any) => {
@@ -52,7 +52,7 @@ async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
 }
 
 async function getNewSample(survey: Survey, draftIdKey: keyof SurveyDraftKeys) {
-  const sample = await survey.create(Sample);
+  const sample = await survey.create!({ Sample });
   await sample.save();
 
   savedSamples.push(sample);
@@ -71,7 +71,7 @@ function StartNewSurvey({ survey }: Props): null {
   const alert = useAlert();
 
   const baseURL = `/survey/${survey.name}`;
-  const draftIdKey: keyof SurveyDraftKeys = `draftId:${survey.name}`;
+  const draftIdKey: any = `draftId:${survey.name}`;
 
   const pickDraftOrCreateSampleWrap = () => {
     const pickDraftOrCreateSample = async () => {
