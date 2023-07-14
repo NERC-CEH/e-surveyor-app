@@ -1,6 +1,6 @@
 import { configure as mobxConfig } from 'mobx';
 import i18n from 'i18next';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { initReactI18next } from 'react-i18next';
 import { App as AppPlugin } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -42,7 +42,9 @@ async function init() {
 
   appModel.attrs.appSession += 1;
 
-  ReactDOM.render(<App />, document.getElementById('root'));
+  const container = document.getElementById('root');
+  const root = createRoot(container!);
+  root.render(<App />);
 
   if (isPlatform('hybrid')) {
     StatusBar.setStyle({

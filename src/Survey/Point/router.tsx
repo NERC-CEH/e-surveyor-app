@@ -1,8 +1,7 @@
-import { RouteWithModels, AttrPage, ModelLocationMap } from '@flumens';
-import config from 'common/config';
-import appModel from 'models/app';
+import { RouteWithModels, AttrPage } from '@flumens';
 import savedSamples from 'models/savedSamples';
 import EditSpecies from 'Components/Species';
+import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
 import Home from './Home';
@@ -13,22 +12,11 @@ const baseURL = '/survey/point';
 
 const { AttrPageFromRoute } = AttrPage;
 
-const ModelLocationWrap = (props: any) => (
-  <ModelLocationMap
-    appModel={appModel}
-    mapProviderOptions={config.map}
-    useGridRef
-    useGridMap
-    model={props.sample}
-    {...props}
-  />
-);
-
 const routes = [
   [`${baseURL}`, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/map`, ModelLocationWrap],
+  [`${baseURL}/:smpId/map`, ModelLocationMap],
   [`${baseURL}/:smpId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/species/:subSmpId`, EditSpecies],
   [`${baseURL}/:smpId/species/:subSmpId/taxon`, TaxonSearch],

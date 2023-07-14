@@ -131,7 +131,7 @@ const TaxonSearch: ForwardRefRenderFunction<any, Props> = (
         ref={input}
         placeholder="Species name"
         debounce={300}
-        onIonChange={onInputKeystroke}
+        onIonInput={onInputKeystroke}
         onIonClear={onInputClear}
         showCancelButton="never"
       />

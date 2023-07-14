@@ -1,0 +1,93 @@
+/* eslint-disable no-restricted-syntax */
+import { useState } from 'react';
+import { observer } from 'mobx-react';
+import {
+  MapContainer,
+  MapHeader,
+  MapSettingsPanel,
+  Page,
+  Main,
+  RadioInput,
+  useMapStyles,
+  textToLocation,
+  mapEventToLocation,
+  toggleGPS,
+} from '@flumens';
+import config from 'common/config';
+
+type Props = {
+  subSample?: any;
+  sample: any;
+};
+
+const ModelLocationMap = ({ subSample, sample }: Props) => {
+  const model = subSample || sample;
+  const location = model.attrs.location || {};
+  const parentLocation = model.parent?.attrs.location;
+
+  const setLocation = async (newLocation: any) => {
+    if (!newLocation) return;
+    if (model.isGPSRunning()) model.stopGPS();
+
+    model.attrs.location = { ...model.attrs.location, ...newLocation };
+  };
+
+  const onManuallyTypedLocationChange = (e: any) =>
+    setLocation(textToLocation(e?.target?.value));
+
+  const [showSettings, setShowSettings] = useState(false);
+  const onCloseSettings = () => setShowSettings(false);
+  const onLayersClick = () => setShowSettings(!showSettings);
+
+  const [currentStyle, setCurrentStyle, styles] = useMapStyles();
+  const onStyleChange = (newLayer: string) => {
+    setCurrentStyle(newLayer);
+    setShowSettings(false);
+  };
+
+  const onMapClick = (e: any) => setLocation(mapEventToLocation(e));
+  const onGPSClick = () => toggleGPS(model);
+
+  return (
+    <Page id="model-location">
+      <MapHeader>
+        <MapHeader.Location
+          location={location}
+          onChange={onManuallyTypedLocationChange}
+          useGridRef
+        />
+      </MapHeader>
+      <Main>
+        <MapContainer
+          onClick={onMapClick}
+          accessToken={config.map.mapboxApiKey}
+          mapStyle={currentStyle}
+        >
+          <MapContainer.Control.Geolocate
+            isLocating={model.gps.locating}
+            onClick={onGPSClick}
+          />
+
+          <MapContainer.Control.Layers onClick={onLayersClick} />
+          <MapSettingsPanel isOpen={showSettings} onClose={onCloseSettings}>
+            <RadioInput
+              options={styles}
+              onChange={onStyleChange}
+              value={currentStyle}
+              className="no-padding"
+            />
+          </MapSettingsPanel>
+
+          <MapContainer.OSGBGrid />
+
+          <MapContainer.Marker
+            parentGridref={parentLocation?.gridref}
+            {...location}
+          />
+        </MapContainer>
+      </Main>
+    </Page>
+  );
+};
+
+export default observer(ModelLocationMap);

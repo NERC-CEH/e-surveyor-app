@@ -15,6 +15,7 @@ export {
   default as Media,
   Attrs as MediaAttrs,
 } from '@flumens/ionic/dist/models/Indicia/Media';
+export { validateRemoteModel } from '@flumens/ionic/dist/models/Indicia/helpers';
 export {
   default as Occurrence,
   Attrs as OccurrenceAttrs,
@@ -32,6 +33,7 @@ export { default as InfoBackgroundMessage } from '@flumens/ionic/dist/components
 export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
 export { default as LongPressButton } from '@flumens/ionic/dist/components/LongPressButton';
 export { default as InputWithValidation } from '@flumens/ionic/dist/components/InputWithValidation';
+export { default as RadioInput } from '@flumens/ionic/dist/components/RadioInput';
 export { default as Main } from '@flumens/ionic/dist/components/Main';
 export { default as Header } from '@flumens/ionic/dist/components/Header';
 export { default as InfoMessage } from '@flumens/ionic/dist/components/InfoMessage';
@@ -48,14 +50,20 @@ export { default as Section } from '@flumens/ionic/dist/components/Section';
 export { default as InfoButton } from '@flumens/ionic/dist/components/InfoButton';
 export { default as PhotoPicker } from '@flumens/ionic/dist/components/PhotoPicker';
 export { default as MenuAttrItem } from '@flumens/ionic/dist/components/MenuAttrItem';
+export { default as ModelValidationMessage } from '@flumens/ionic/dist/components/ModelValidationMessage';
 export {
   default as MenuAttrItemFromModel,
   MenuProps as MenuAttrItemFromModelMenuProps,
 } from '@flumens/ionic/dist/components/MenuAttrItemFromModel';
 export { default as CounterInput } from '@flumens/ionic/dist/components/CounterInput';
-export { default as ModelLocationMap } from '@flumens/ionic/dist/components/ModelLocationMap';
+export {
+  default as MapContainer,
+  useMapStyles,
+} from '@flumens/ionic/dist/components/Map/Container';
+export { default as MapHeader } from '@flumens/ionic/dist/components/Map/Header';
+export { default as MapSettingsPanel } from '@flumens/ionic/dist/components/Map/SettingsPanel';
+export * from '@flumens/ionic/dist/components/Map/utils';
 export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';
-export * from '@flumens/ionic/dist/utils/validation';
 export * from '@flumens/ionic/dist/utils/image';
 export { default as date } from '@flumens/ionic/dist/utils/date';
 export { default as initAnalytics } from '@flumens/ionic/dist/utils/analytics';

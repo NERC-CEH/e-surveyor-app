@@ -15,8 +15,8 @@ const OnlineStatus: FC<Props> = ({ sample, onUpload, uploadIsPrimary }) => {
 
   if (!saved) {
     return (
-      <IonLabel slot="end" class="survey-status">
-        <IonChip slot="end" class="survey-status">
+      <IonLabel slot="end" className="survey-status">
+        <IonChip slot="end" className="survey-status">
           <IonLabel>Draft</IonLabel>
         </IonChip>
       </IonLabel>
@@ -24,7 +24,7 @@ const OnlineStatus: FC<Props> = ({ sample, onUpload, uploadIsPrimary }) => {
   }
 
   if (sample.remote.synchronising) {
-    return <IonSpinner class="survey-status" />;
+    return <IonSpinner className="survey-status" />;
   }
 
   if (sample.isUploaded()) {
@@ -39,7 +39,7 @@ const OnlineStatus: FC<Props> = ({ sample, onUpload, uploadIsPrimary }) => {
 
   return (
     <IonButton
-      class="survey-status-upload"
+      className="survey-status-upload"
       color="secondary"
       onClick={onUploadWrap}
       fill={uploadIsPrimary ? undefined : 'outline'}

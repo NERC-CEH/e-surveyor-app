@@ -27,8 +27,12 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
     <>
       <Main>
         <IonList lines="full">
-          <br />
           <div className="rounded">
+            <SinglePhotoPicker
+              label="Trap photo"
+              model={subSample}
+              allowToCrop
+            />
             <MenuAttrItem
               routerLink={`${url}/map`}
               value={prettyGridRef}
@@ -49,12 +53,6 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
             />
 
             <MenuAttrItemFromModel attr="comment" model={subSample} />
-
-            <SinglePhotoPicker
-              label="Trap photo"
-              model={subSample}
-              allowToCrop
-            />
           </div>
         </IonList>
 

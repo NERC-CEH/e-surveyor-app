@@ -3,15 +3,15 @@
     margin: 10px auto;
     width: 90%;
 
-    ion-segment-button[aria-selected='false'].md {
+    ion-segment-button.md:not(.segment-button-checked) {
       color: #ffffffab;
     }
-    ion-segment-button[aria-selected='true'].md {
+    ion-segment-button.md.segment-button-checked {
       border-bottom: white 1px solid;
       color: white;
     }
 
-    ion-segment-button[aria-selected='true'].ios {
+    ion-segment-button.segment-button-checked.ios {
       color: black;
     }
   }

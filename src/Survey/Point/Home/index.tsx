@@ -7,7 +7,7 @@ import {
   Header,
   device,
   useAlert,
-  getDeepErrorMessage,
+  ModelValidationMessage,
   captureImage,
 } from '@flumens';
 import { IonButton, NavContext, isPlatform } from '@ionic/react';
@@ -170,10 +170,14 @@ const HomeController: FC<Props> = ({ sample }) => {
   const onFinish = async () => {
     const invalids = sample.validateRemote();
     if (invalids) {
-      const hasUnidentifiedOcc = (occ: any) => !occ.attributes.value.taxon;
-      const hasUnidentifiedSample = (smp: any) =>
-        Object.values(smp.occurrences).some(hasUnidentifiedOcc);
-      const hasUnidentified = Object.values(invalids.samples).some(
+      const hasUnidentifiedOcc = ({ model, attributes }: any) =>
+        model instanceof Occurrence && !attributes.value.taxon;
+
+      const hasUnidentifiedSample = ({ model, models }: any) =>
+        model instanceof Sample &&
+        Object.values(models).some(hasUnidentifiedOcc);
+
+      const hasUnidentified = Object.values(invalids.models).some(
         hasUnidentifiedSample
       );
 
@@ -193,7 +197,7 @@ const HomeController: FC<Props> = ({ sample }) => {
 
       alert({
         header: 'Survey incomplete',
-        message: getDeepErrorMessage(invalids),
+        message: <ModelValidationMessage {...invalids} />,
         buttons: [
           {
             text: 'Got it',

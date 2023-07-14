@@ -3,7 +3,7 @@
     background: white;
 
     ion-list[slot='content'] ion-item {
-      --background: #f4f5f861;
+      --border-style: none;
 
       img {
         display: block;

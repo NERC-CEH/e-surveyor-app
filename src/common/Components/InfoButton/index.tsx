@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, ReactNode } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { JSX } from '@ionic/core';
 import { IonContent, IonPopover, IonIcon, IonButton } from '@ionic/react';
@@ -6,6 +6,7 @@ import './styles.scss';
 
 type Props = {
   buttonProps?: JSX.IonButton;
+  children: ReactNode;
 };
 
 const InfoButton: FC<Props> = ({ children, buttonProps }) => {

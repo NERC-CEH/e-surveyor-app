@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { useAlert, useToast } from '@flumens';
+import { useAlert, useToast, date } from '@flumens';
 import {
   IonItem,
   IonItemSliding,
@@ -68,6 +68,15 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
           <h3>{survey.label}</h3>
           <h4>{sample.attrs.type}</h4>
           <h4>{sample.attrs.name}</h4>
+        </div>
+      );
+    }
+
+    if (survey.name === 'beetle') {
+      return (
+        <div className="species-info">
+          <h3>{survey.label}</h3>
+          <h4>{date.print(sample.attrs.date, true)}</h4>
         </div>
       );
     }

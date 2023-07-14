@@ -1,7 +1,7 @@
 import { IObservableArray, reaction } from 'mobx';
 import {
   device,
-  getDeepErrorMessage,
+  ModelValidationMessage,
   useAlert,
   Sample as SampleOriginal,
   SampleAttrs,
@@ -256,20 +256,7 @@ export const useValidateCheck = (sample: Sample) => {
       alert({
         header: 'Survey incomplete',
         skipTranslation: true,
-        // TODO: remove the replace once the flumens lib is fixed
-        message: (
-          <>
-            <div>
-              {getDeepErrorMessage(invalids)
-                .replaceAll('<b>', '')
-                .replaceAll('</b>', '')
-                .split('<br/>')
-                .map(val => (
-                  <div> {val}</div>
-                ))}
-            </div>
-          </>
-        ),
+        message: <ModelValidationMessage {...invalids} />,
         buttons: [
           {
             text: 'Got it',

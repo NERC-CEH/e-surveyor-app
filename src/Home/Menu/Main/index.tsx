@@ -45,7 +45,7 @@ const MenuMain: FC<Props> = ({
   const lang = appModel.attrs.language;
 
   const isNotVerified = user.verified === false; // verified is undefined in old versions
-  const userEmail = user.email;
+  const userEmail = user.email as string;
 
   return (
     <Main className="app-menu">
@@ -67,8 +67,8 @@ const MenuMain: FC<Props> = ({
 
           {isLoggedIn && isNotVerified && (
             <InfoMessage className="verification-warning">
-              Looks like your <b>{{ userEmail }}</b> email hasn't been verified
-              yet.
+              Looks like your <b>{{ userEmail } as any}</b> email hasn't been
+              verified yet.
               <div>
                 <IonButton fill="outline" onClick={refreshAccount}>
                   Refresh

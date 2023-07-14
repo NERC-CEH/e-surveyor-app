@@ -91,7 +91,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
         {!disableAI && hasSpeciesPhoto && !identifying && canBeIdentified && (
           <IonButton
             slot="end"
-            class="occurrence-identify"
+            className="occurrence-identify"
             color="secondary"
             onClick={onIdentifyWrap}
             fill={buttonStyles}

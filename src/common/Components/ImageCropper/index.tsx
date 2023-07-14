@@ -91,7 +91,7 @@ const ImageCropper: FC<Props> = ({
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}
             showGrid={false}
-            objectFit="horizontal-cover"
+            objectFit="cover"
             style={{ containerStyle: { background: 'black' } }}
             {...cropperProps}
           />

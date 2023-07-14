@@ -1,7 +1,7 @@
 import { clipboardOutline, locationOutline } from 'ionicons/icons';
 import * as Yup from 'yup';
 import { Option } from '@flumens/ionic/dist/components/RadioInput';
-import icon from 'common/images/pointIcon.svg';
+import icon from 'common/images/beetle.svg';
 import {
   Survey,
   dateAttr,
@@ -349,6 +349,10 @@ const survey: Survey = {
       Yup.boolean()
         .oneOf([false], 'Some photos are still being identified.')
         .validateSync(isIdentifying, { abortEarly: false });
+
+      Yup.array()
+        .min(1, 'Please add at least one trap.')
+        .validateSync(sample.samples, { abortEarly: false });
 
       Yup.object()
         .shape({

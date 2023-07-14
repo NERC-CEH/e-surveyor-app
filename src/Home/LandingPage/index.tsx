@@ -1,8 +1,8 @@
 import { useState, FC } from 'react';
 import { cameraOutline } from 'ionicons/icons';
-import { Grid } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/grid';
+import { Grid } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page, Main, device, useToast, captureImage } from '@flumens';
 import {

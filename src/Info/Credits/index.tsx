@@ -58,13 +58,13 @@ const Credits: FC = () => (
           </a>
         </p>
         <P>
-          This app was hand crafted with love by{' '}
           <a href="https://flumens.io" style={{ whiteSpace: 'nowrap' }}>
-            Flumens.
-          </a>{' '}
-          A technical consultancy that excels at building bespoke environmental
-          science and community focussed solutions. For suggestions and feedback
-          please do not hesitate to{' '}
+            Flumens
+          </a>
+          , a technical consultancy specializing in creating customized
+          environmental science and community-focused solutions, created this
+          app with love. If you have any feedback or suggestions, please don't
+          hesitate to{' '}
           <a href="mailto:enquiries%40flumens.io?subject=App%20Feedback">
             contact us
           </a>

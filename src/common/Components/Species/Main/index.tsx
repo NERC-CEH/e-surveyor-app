@@ -56,7 +56,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
   };
 
   const getAIResults = () => {
-    const setSpeciesAsMain = (sp: Suggestion) => {
+    const setSpeciesAsMain = ({ commonNames, ...sp }: Suggestion) => {
       const taxon = JSON.parse(JSON.stringify(sp));
 
       const topSuggestion = occurrence.getSpecies()?.suggestions?.[0];
@@ -71,6 +71,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
       occurrence.attrs.taxon = {
         ...occurrence.getSpecies(),
         ...taxon,
+        commonName: commonNames?.[0],
         machineInvolvement,
         score: 1,
       };
@@ -88,6 +89,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
         warehouseId: sp.warehouseId,
         commonName: sp.commonNames[0],
         scientificName: sp.scientificName,
+        images: sp.images,
       };
 
       return (

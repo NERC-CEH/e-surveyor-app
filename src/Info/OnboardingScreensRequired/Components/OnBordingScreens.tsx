@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
-import SwiperCore, { Pagination } from 'swiper';
+import SwiperCore from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page } from '@flumens';
 import {
@@ -26,7 +27,8 @@ import seedsImage from './images/third.jpg';
 import './styles.scss';
 
 // Fixes iOS 12 scrolling issue.
-const Main: FC = ({ children }) => <div>{children}</div>;
+type MainProps = { children: ReactNode };
+const Main: FC<MainProps> = ({ children }) => <div>{children}</div>;
 
 const WaveShape = () => (
   <div className="custom-shape-divider-bottom-1593438501">

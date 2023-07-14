@@ -88,7 +88,7 @@ const getSeedMix = (model: Sample) => {
 
 export const seedmixGroupAttr = {
   pageProps: {
-    headerProps: { label: 'Supplier' },
+    headerProps: { title: 'Supplier' },
     attrProps: {
       input: 'radio',
       info: 'Please indicate the supplier.',
@@ -106,7 +106,7 @@ export const seedmixGroupAttr = {
 
 export const seedmixAttr = {
   pageProps: {
-    headerProps: { label: 'Seed mix' },
+    headerProps: { title: 'Seed mix' },
     attrProps: {
       input: 'radio',
       info: (smp: Sample) => {
