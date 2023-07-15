@@ -15,7 +15,7 @@ import './styles.scss';
 
 const ImageDefault = observer(
   ({ media, isDisabled, onDelete, onClick }: any) => {
-    const mediaSrc = media.attrs.thumbnail || media.getURL();
+    const mediaSrc = media.getURL();
 
     return (
       <div className="img">

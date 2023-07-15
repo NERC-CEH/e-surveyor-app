@@ -61,8 +61,6 @@ export default class Media extends MediaOriginal<Attrs> {
       },
     });
 
-    await imageModel.addThumbnail();
-
     return imageModel;
   }
 
