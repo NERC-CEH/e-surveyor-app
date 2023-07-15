@@ -62,6 +62,9 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
           onClick={onMapClick}
           accessToken={config.map.mapboxApiKey}
           mapStyle={currentStyle}
+          maxPitch={0}
+          touchZoomRotate
+          dragRotate
         >
           <MapContainer.Control.Geolocate
             isLocating={model.gps.locating}

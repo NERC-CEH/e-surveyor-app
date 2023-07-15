@@ -13,7 +13,7 @@
   ion-content {
     --background: #fff url(./background.jpg) no-repeat center center / cover;
 
-    --padding-top: env(safe-area-inset-top) !important;
+    border-top: env(safe-area-inset-top) solid white; // fill in the gap between the logo and the top bar
     --overflow: hidden;
 
     img.logo {
