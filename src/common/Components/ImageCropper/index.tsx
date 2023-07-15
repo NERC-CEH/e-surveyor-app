@@ -27,7 +27,7 @@ type Props = {
 const ImageCropper: FC<Props> = ({
   image,
   onDone,
-  onCancel,
+  onCancel: onCancelProp,
   message = 'Place your plant at the center of the frame.',
   allowRotation,
   cropperProps,
@@ -40,6 +40,8 @@ const ImageCropper: FC<Props> = ({
   const setCroppedAreaWrap = (_: any, area: Area) => setCroppedArea(area);
   const onCropComplete = useCallback(setCroppedAreaWrap, [image]);
 
+  const [isModalReady, setIsModalReady] = useState(false);
+
   const resetOnNewImage = () => {
     setCrop({ x: 0, y: 0 });
     setZoom(1);
@@ -47,7 +49,14 @@ const ImageCropper: FC<Props> = ({
   };
   useEffect(resetOnNewImage, [image]);
 
+  const onCancelEditing = () => {
+    setIsModalReady(false);
+    onCancelProp();
+  };
+
   const onDoneEditing = async () => {
+    setIsModalReady(false);
+
     if (!croppedArea || !image) return;
 
     const imageDataURL: URL = await cropImage(image, croppedArea, rotation);
@@ -72,17 +81,20 @@ const ImageCropper: FC<Props> = ({
     onDone(uri);
   };
 
+  const fixCropper = () => setIsModalReady(true);
+
   return (
     <IonModal
       isOpen={!!image}
       backdropDismiss={false}
       animated={false}
       className="image-cropper"
+      onDidPresent={fixCropper}
     >
       <div>
         <InfoBackgroundMessage>{message}</InfoBackgroundMessage>
 
-        {image && (
+        {image && isModalReady && (
           <Cropper
             image={image}
             crop={crop}
@@ -94,7 +106,6 @@ const ImageCropper: FC<Props> = ({
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}
             showGrid={false}
-            objectFit="cover"
             style={{ containerStyle: { background: 'black' } }}
             {...cropperProps}
           />
@@ -109,7 +120,7 @@ const ImageCropper: FC<Props> = ({
             </IonButton>
           </IonButtons>
           <IonButtons slot="secondary">
-            <IonButton slot="start" onClick={onCancel}>
+            <IonButton slot="start" onClick={onCancelEditing}>
               Cancel
             </IonButton>
           </IonButtons>
