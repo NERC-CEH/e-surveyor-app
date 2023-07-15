@@ -20,6 +20,7 @@ type Props = {
   onDone: (newImage: URL) => any;
   onCancel: any;
   message?: string;
+  allowRotation?: boolean;
   cropperProps?: Partial<CropperProps>;
 };
 
@@ -28,6 +29,7 @@ const ImageCropper: FC<Props> = ({
   onDone,
   onCancel,
   message = 'Place your plant at the center of the frame.',
+  allowRotation,
   cropperProps,
 }) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
@@ -41,6 +43,7 @@ const ImageCropper: FC<Props> = ({
   const resetOnNewImage = () => {
     setCrop({ x: 0, y: 0 });
     setZoom(1);
+    setRotation(0);
   };
   useEffect(resetOnNewImage, [image]);
 
@@ -86,7 +89,7 @@ const ImageCropper: FC<Props> = ({
             zoom={zoom}
             aspect={1}
             rotation={rotation}
-            onRotationChange={setRotation}
+            onRotationChange={allowRotation ? setRotation : undefined}
             onCropChange={setCrop}
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}

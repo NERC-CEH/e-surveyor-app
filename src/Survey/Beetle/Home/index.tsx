@@ -185,6 +185,7 @@ const Controller: FC<Props> = ({ sample }) => {
         onDone={onDoneEdit}
         onCancel={onCancelEdit}
         message="Align the rectangle with the edges of the tray."
+        allowRotation
         cropperProps={{ aspect: 0.7 }}
       />
 
