@@ -5,8 +5,11 @@ import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
 import {
   captureImage,
+  getNewUUID,
+  getObjectURL,
   Header,
   Page,
+  saveFile,
   useAlert,
   useLoader,
   useToast,
@@ -24,6 +27,11 @@ import Main from './Main';
 import detectObjects from './objectDetection';
 
 type URL = string;
+
+const dataURItoFile = (dataURI: string) =>
+  isPlatform('hybrid')
+    ? saveFile(dataURI, `${getNewUUID()}.jpg`)
+    : getObjectURL(dataURI);
 
 const useTrapDeleteConfirmation = () => {
   const alert = useAlert();
@@ -109,7 +117,9 @@ const Controller: FC<Props> = ({ sample }) => {
     navigate(`${match.url}/trap/${trapSample.cid}`);
 
     // detect beetles and create occurrences
-    const [beetlePhotos] = await detectObjects(image.getURL());
+    const [beetlePhotoURIs] = await detectObjects(image.getURL());
+    const beetlePhotos = await Promise.all(beetlePhotoURIs.map(dataURItoFile));
+
     const getOccurrence = async (beetlePhotoURL: URL) => {
       const mediaModel = await Media.getImageModel(beetlePhotoURL, dataDirPath);
       return survey.smp!.occ!.create!({ Occurrence, photo: mediaModel });
