@@ -13,6 +13,9 @@
   ion-content {
     --background: #fff url(./background.jpg) no-repeat center center / cover;
 
+    --padding-top: env(safe-area-inset-top) !important;
+    --overflow: hidden;
+
     img.logo {
       position: absolute;
       width: 100%;
