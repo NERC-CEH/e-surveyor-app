@@ -56,13 +56,9 @@ const AppPhotoPicker: FC<Props> = ({
     const [image] = await captureImage({
       camera: shouldUseCamera,
     });
-    if (!image) {
-      return null;
-    }
+    if (!image) return null;
 
-    const imageModel = await Media.getImageModel(image, config.dataPath);
-
-    return imageModel;
+    return Media.getImageModel(image, config.dataPath);
   }
 
   const [editImage, setEditImage] = useState<Media>();
