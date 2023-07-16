@@ -33,12 +33,14 @@ interface Props
   model: Sample | Occurrence;
   maxImages?: number;
   allowToCrop?: boolean;
+  disabled?: boolean;
 }
 
 const AppPhotoPicker: FC<Props> = ({
   model,
   allowToCrop,
   maxImages,
+  disabled,
   ...restProps
 }) => {
   async function onAddNew(shouldUseCamera: boolean) {
@@ -74,7 +76,7 @@ const AppPhotoPicker: FC<Props> = ({
 
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled = model.parent && model.isDisabled();
+  const isDisabled = disabled || (model.parent && model.isDisabled());
   const maxPicsReached = !!maxImages && model.media.length >= maxImages;
 
   // eslint-disable-next-line react/no-unstable-nested-components

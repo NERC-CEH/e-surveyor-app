@@ -31,7 +31,7 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
             <SinglePhotoPicker
               label="Trap photo"
               model={subSample}
-              allowToCrop
+              disabled // we want to upload the original pic with the detected objects
             />
             <MenuAttrItem
               routerLink={`${url}/map`}
