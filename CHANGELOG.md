@@ -1,5 +1,6 @@
 ### 1.1.0
 
+Added Beetle survey.
 Bug fixes.
 
 ### 1.0.3
