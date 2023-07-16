@@ -8,12 +8,12 @@ import { Page, Main, device, useToast, captureImage } from '@flumens';
 import {
   IonLabel,
   IonButton,
-  IonCard,
   IonCardTitle,
   IonCardSubtitle,
   IonCardHeader,
   IonIcon,
   isPlatform,
+  IonRouterLink,
 } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
 import config from 'common/config';
@@ -73,7 +73,8 @@ const LandingPage: FC<Props> = () => {
         slidesPerView: 2,
         centeredSlides: false,
         centeredSlidesBounds: false,
-        // grid: { rows: 2 }, // uncomment when more than 2 surveys
+        grid: { rows: 2 }, // for when more than 2 surveys
+        spaceBetween: 30,
       }
     : {};
 
@@ -87,44 +88,52 @@ const LandingPage: FC<Props> = () => {
             centeredSlides
             centeredSlidesBounds
             className="surveys"
-            spaceBetween={5}
             slidesPerView={1.3}
             {...tabletLayout}
           >
             <SwiperSlide className="survey">
-              <IonCard routerLink="/survey/point">
-                <div className="card-wrapper">
-                  <img src={survey1} alt="" />
-                  <IonCardHeader>
-                    <IonCardTitle>Record a habitat</IonCardTitle>
-                    <IonCardSubtitle>Survey</IonCardSubtitle>
-                  </IonCardHeader>
-                </div>
-              </IonCard>
+              <div className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-md">
+                <IonRouterLink routerLink="/survey/point">
+                  <div className="card-wrapper">
+                    <img src={survey1} alt="" />
+
+                    <IonCardHeader className="bg-white">
+                      <IonCardTitle>Record a habitat</IonCardTitle>
+                      <IonCardSubtitle>Survey</IonCardSubtitle>
+                    </IonCardHeader>
+                  </div>
+                </IonRouterLink>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide className="survey">
-              <IonCard routerLink="/survey/transect">
-                <div className="card-wrapper">
-                  <img src={survey2} alt="" />
-                  <IonCardHeader>
-                    <IonCardTitle>Structured recording</IonCardTitle>
-                    <IonCardSubtitle>Transect survey</IonCardSubtitle>
-                  </IonCardHeader>
-                </div>
-              </IonCard>
+              <div className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-md">
+                <IonRouterLink routerLink="/survey/transect">
+                  <div className="card-wrapper">
+                    <img src={survey2} alt="" />
+
+                    <IonCardHeader className="bg-white">
+                      <IonCardTitle>Structured recording</IonCardTitle>
+                      <IonCardSubtitle>Transect survey</IonCardSubtitle>
+                    </IonCardHeader>
+                  </div>
+                </IonRouterLink>
+              </div>
             </SwiperSlide>
 
             <SwiperSlide className="survey">
-              <IonCard routerLink="/survey/beetle">
-                <div className="card-wrapper">
-                  <img src={survey3} alt="" />
-                  <IonCardHeader>
-                    <IonCardTitle>Farmland Carabids</IonCardTitle>
-                    <IonCardSubtitle>Beetle trap survey</IonCardSubtitle>
-                  </IonCardHeader>
-                </div>
-              </IonCard>
+              <div className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-md">
+                <IonRouterLink routerLink="/survey/beetle">
+                  <div className="card-wrapper">
+                    <img src={survey3} alt="" />
+
+                    <IonCardHeader className="bg-white">
+                      <IonCardTitle>Farmland Carabids</IonCardTitle>
+                      <IonCardSubtitle>Beetle trap survey</IonCardSubtitle>
+                    </IonCardHeader>
+                  </div>
+                </IonRouterLink>
+              </div>
             </SwiperSlide>
           </Swiper>
 
