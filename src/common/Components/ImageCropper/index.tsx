@@ -67,14 +67,25 @@ const ImageCropper: FC<Props> = ({
 
     const fileName: string = image.split('/').pop() as string;
 
+    try {
+      await Filesystem.deleteFile({
+        path: fileName,
+        directory: Directory.Data,
+      });
+    } catch (error) {
+      console.error('There was an error deleting a file', fileName);
+      // continue nevertheless
+    }
+
+    const newFileName = `c_${fileName}`;
     await Filesystem.writeFile({
-      path: fileName,
+      path: newFileName,
       data: imageDataURL,
       directory: Directory.Data,
     });
 
     const { uri } = await Filesystem.stat({
-      path: fileName,
+      path: newFileName,
       directory: Directory.Data,
     });
 
