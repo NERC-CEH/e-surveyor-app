@@ -15,6 +15,11 @@ export const getDetailsValidationSchema = Yup.object().shape({
 
 // https://warehouse1.indicia.org.uk/index.php/taxon_list/edit/280?tab=taxa
 export const beetleSpecies: Option[] = [
+  { label: 'This is not a beetle', value: '617322' },
+  { label: 'Unknown beetle', value: '617383' },
+
+  { isPlaceholder: true, value: '' },
+  { isPlaceholder: true, value: 'Species' },
   { label: 'Abax parallelepipedus', value: '617294' },
   { label: 'Amara', value: '617295' },
   { label: 'Anchomenus dorsalis', value: '617296' },
@@ -43,9 +48,6 @@ export const beetleSpecies: Option[] = [
   { label: 'Pterostichus nigrita', value: '617319' },
   { label: 'Pterostichus strenuus', value: '617320' },
   { label: 'Pterostichus vernalis', value: '617321' },
-
-  { isPlaceholder: true, value: '' },
-  { label: 'This is not a beetle', value: '617322' },
 ];
 
 const tillageTypes = [
@@ -191,7 +193,7 @@ const survey: Survey = {
 
     fieldInsecticides: {
       menuProps: {
-        label: 'Insecticides use',
+        label: 'Insecticides used',
         icon: clipboardOutline,
         type: 'toggle',
       },
@@ -200,7 +202,7 @@ const survey: Survey = {
 
     fieldHerbicides: {
       menuProps: {
-        label: 'Herbicides use',
+        label: 'Herbicides used',
         icon: clipboardOutline,
         type: 'toggle',
       },
