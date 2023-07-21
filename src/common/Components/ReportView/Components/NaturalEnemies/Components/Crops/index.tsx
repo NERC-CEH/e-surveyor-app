@@ -41,7 +41,7 @@ const NaturalEnemies: FC<Props> = ({ crops, group }) => {
     groups
   ).map(([groupName, species]: [string, string[]]) => [
     groupName,
-    [...new Set(species)].length,
+    Array.from(new Set(species)).length,
   ]);
 
   const getGroupItem = ([groupName, count]: [string, number]) => (

@@ -37,7 +37,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     groups
   ).map(([groupName, species]: [string, string[]]) => [
     groupName,
-    [...new Set(species)].length,
+    Array.from(new Set(species)).length,
   ]);
 
   const bySize = ([, count1]: [string, number], [, count2]: [string, number]) =>

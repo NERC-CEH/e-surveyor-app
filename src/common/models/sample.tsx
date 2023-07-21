@@ -102,9 +102,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     };
 
     const pollinatorsNameList = pollinators.map(getPollinatorName);
-    const uniquePollinatorsNameList = [
-      ...new Set(pollinatorsNameList),
-    ] as string[];
+    const uniquePollinatorsNameList = Array.from(new Set(pollinatorsNameList));
 
     const nonEmpty = (interaction: Interaction | undefined) => !!interaction;
     return uniquePollinatorsNameList
