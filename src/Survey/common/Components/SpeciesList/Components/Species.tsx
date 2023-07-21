@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { observer } from 'mobx-react';
 import {
   checkmarkCircle,
@@ -7,6 +7,7 @@ import {
   earth,
   leaf,
 } from 'ionicons/icons';
+import { Gallery } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
@@ -37,13 +38,40 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
   let idClass;
   let detailIcon;
   let notFoundInUK;
-  let speciesPhoto;
+  let speciesPhoto: any;
 
   const { media } = occ;
   if (media.length) {
     const photo = media[0];
     speciesPhoto = photo.attrs ? photo.getURL() : null;
   }
+
+  const [showingGallery, setShowGallery] = useState(false);
+  const showGallery = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowGallery(true);
+  };
+  const hideGallery = () => setShowGallery(false);
+
+  const getGallery = () => {
+    if (!speciesPhoto) return null;
+
+    return (
+      <div className="species-profile-photo">
+        <Gallery
+          isOpen={showingGallery}
+          items={[
+            {
+              src: speciesPhoto,
+            },
+          ]}
+          initialSlide={0}
+          onClose={hideGallery}
+        />
+      </div>
+    );
+  };
 
   if (species) {
     scientificName = species.scientificName;
@@ -78,11 +106,11 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
   const detailsIcon = detailIcon || '';
 
   const photo = speciesPhoto ? (
-    <img src={speciesPhoto} />
+    <img src={speciesPhoto} onClick={showGallery} />
   ) : (
     <IonIcon icon={leaf} />
   );
-  const profilePhoto = <div className="plant-photo-profile">{photo}</div>;
+  const profilePhoto = <div className="species-photo-profile">{photo}</div>;
 
   const getSpeciesName = () => {
     return (
@@ -119,6 +147,7 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
           </IonItemOption>
         </IonItemOptions>
       )}
+      {getGallery()}
     </IonItemSliding>
   );
 };
