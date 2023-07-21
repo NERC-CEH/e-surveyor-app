@@ -66,7 +66,8 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
           <MenuAttrItemFromModel attr="fieldTillage" model={sample} />
           <MenuAttrToggle
             icon={clipboardOutline}
-            label="Insecticides use"
+            // TODO: use config
+            label="Insecticides used"
             value={sample.attrs?.fieldInsecticides}
             onChange={(val: boolean) => {
               sample.attrs.fieldInsecticides = val; // eslint-disable-line
@@ -76,7 +77,8 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
           />
           <MenuAttrToggle
             icon={clipboardOutline}
-            label="Herbicides use"
+            // TODO: use config
+            label="Herbicides used"
             value={sample.attrs?.fieldHerbicides}
             onChange={(val: boolean) => {
               sample.attrs.fieldHerbicides = val; // eslint-disable-line
