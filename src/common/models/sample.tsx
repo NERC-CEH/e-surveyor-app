@@ -63,6 +63,11 @@ type Attrs = SampleAttrs & {
   fieldInsecticides?: boolean;
   fieldHerbicides?: boolean;
   fieldUndersowing?: boolean;
+  fieldCompanionCropping?: boolean;
+  fieldIntercropping?: boolean;
+  fieldNonCropHabitats?: string[];
+  fieldCrop?: string;
+  fieldTillage?: string;
   margin?: any;
 };
 

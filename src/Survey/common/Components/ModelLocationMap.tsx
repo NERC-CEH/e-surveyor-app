@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
+import { MapRef } from 'react-map-gl';
 import {
   MapContainer,
   MapHeader,
@@ -12,6 +13,7 @@ import {
   textToLocation,
   mapEventToLocation,
   toggleGPS,
+  mapFlyToLocation,
 } from '@flumens';
 import config from 'common/config';
 
@@ -48,6 +50,10 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
   const onMapClick = (e: any) => setLocation(mapEventToLocation(e));
   const onGPSClick = () => toggleGPS(model);
 
+  const [mapRef, setMapRef] = useState<MapRef>();
+  const flyToLocation = () => mapFlyToLocation(mapRef, location);
+  useEffect(flyToLocation, [mapRef, location]);
+
   return (
     <Page id="model-location">
       <MapHeader>
@@ -59,6 +65,7 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
       </MapHeader>
       <Main>
         <MapContainer
+          onReady={setMapRef}
           onClick={onMapClick}
           accessToken={config.map.mapboxApiKey}
           mapStyle={currentStyle}

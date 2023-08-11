@@ -16,8 +16,8 @@ const EditSpecies: FC<Props> = ({ occurrence }) => {
       model.attrs.taxon = {
         score: 1,
         warehouseId,
-        commonName: '',
-        scientificName: species?.label as string,
+        commonName: species?.commonName as string,
+        scientificName: (species?.scientificName as string) || species?.label,
       };
     },
     get() {

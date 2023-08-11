@@ -1,9 +1,14 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { cameraOutline, locationOutline } from 'ionicons/icons';
+import {
+  bookOutline,
+  cameraOutline,
+  locationOutline,
+  openOutline,
+} from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Main, MenuAttrItem, MenuAttrItemFromModel } from '@flumens';
-import { IonList, IonIcon, IonButton } from '@ionic/react';
+import { IonList, IonIcon, IonButton, IonLabel, IonItem } from '@ionic/react';
 import SegmentInput from 'common/Components/SegmentInput';
 import Sample from 'models/sample';
 import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
@@ -26,6 +31,21 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
   return (
     <>
       <Main>
+        <IonList lines="full">
+          <div className="rounded">
+            <IonItem
+              href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
+              detail
+              detailIcon={openOutline}
+            >
+              <IonIcon icon={bookOutline} size="small" slot="start" />
+              <IonLabel class="ion-text-wrap">
+                Click here for the guidance documents.
+              </IonLabel>
+            </IonItem>
+          </div>
+        </IonList>
+
         <IonList lines="full">
           <div className="rounded">
             <SinglePhotoPicker

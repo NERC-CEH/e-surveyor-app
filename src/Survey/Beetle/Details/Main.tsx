@@ -1,6 +1,13 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { clipboardOutline, locationOutline, timeOutline } from 'ionicons/icons';
+import {
+  bookOutline,
+  clipboardOutline,
+  informationCircleOutline,
+  locationOutline,
+  openOutline,
+  timeOutline,
+} from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import {
   CounterInput,
@@ -9,7 +16,13 @@ import {
   MenuAttrItemFromModel,
   MenuAttrToggle,
 } from '@flumens';
-import { IonItemDivider, IonList } from '@ionic/react';
+import {
+  IonIcon,
+  IonItem,
+  IonItemDivider,
+  IonLabel,
+  IonList,
+} from '@ionic/react';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 
@@ -30,6 +43,35 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
 
   return (
     <Main>
+      <IonList lines="full">
+        <div className="rounded">
+          <IonItem
+            href="https://www.youtube.com/watch?v=UVC_VykDy2o"
+            detail
+            detailIcon={openOutline}
+          >
+            <IonIcon
+              icon={informationCircleOutline}
+              size="small"
+              slot="start"
+            />
+            <IonLabel class="ion-text-wrap">
+              Click here to watch a video on how to setup pitfall traps.
+            </IonLabel>
+          </IonItem>
+          <IonItem
+            href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
+            detail
+            detailIcon={openOutline}
+          >
+            <IonIcon icon={bookOutline} size="small" slot="start" />
+            <IonLabel class="ion-text-wrap">
+              Click here for the guidance documents.
+            </IonLabel>
+          </IonItem>
+        </div>
+      </IonList>
+
       <IonList lines="full">
         <div className="rounded">
           <MenuAttrItemFromModel attr="date" model={sample} />
@@ -62,8 +104,23 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
         <div className="rounded">
           <MenuAttrItemFromModel attr="fieldName" model={sample} />
           <MenuAttrItemFromModel attr="fieldCrop" model={sample} />
+          {sample.attrs.fieldCrop === 'Other' && (
+            <MenuAttrItemFromModel attr="fieldCropOther" model={sample} />
+          )}
           <MenuAttrItemFromModel attr="fieldMargins" model={sample} />
+          <MenuAttrItemFromModel attr="fieldMarginsHabitat" model={sample} />
           <MenuAttrItemFromModel attr="fieldTillage" model={sample} />
+          {sample.attrs.fieldTillage === 'Other' && (
+            <MenuAttrItemFromModel attr="fieldTillageOther" model={sample} />
+          )}
+          <MenuAttrItemFromModel attr="fieldNonCropHabitats" model={sample} />
+          {sample.attrs.fieldNonCropHabitats?.includes('Other') && (
+            <MenuAttrItemFromModel
+              attr="fieldNonCropHabitatsOther"
+              model={sample}
+            />
+          )}
+
           <MenuAttrToggle
             icon={clipboardOutline}
             // TODO: use config
@@ -92,6 +149,26 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
             value={sample.attrs?.fieldUndersowing}
             onChange={(val: boolean) => {
               sample.attrs.fieldUndersowing = val; // eslint-disable-line
+              sample.save();
+            }}
+            disabled={isDisabled}
+          />
+          <MenuAttrToggle
+            icon={clipboardOutline}
+            label="Companion cropping"
+            value={sample.attrs?.fieldCompanionCropping}
+            onChange={(val: boolean) => {
+              sample.attrs.fieldCompanionCropping = val; // eslint-disable-line
+              sample.save();
+            }}
+            disabled={isDisabled}
+          />
+          <MenuAttrToggle
+            icon={clipboardOutline}
+            label="Intercropping"
+            value={sample.attrs?.fieldIntercropping}
+            onChange={(val: boolean) => {
+              sample.attrs.fieldIntercropping = val; // eslint-disable-line
               sample.save();
             }}
             disabled={isDisabled}
