@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
+import { getNewUUID } from '@flumens';
 import { IonModal } from '@ionic/react';
 import { SeedmixSpecies as SeedmixSpeciesFromRemote } from 'common/data/seedmix';
 import appModel, { SeedMix as SeedMixFromRemote } from 'models/app';
@@ -12,20 +13,6 @@ export type SeedmixSpecies = SeedmixSpeciesFromRemote & {
 };
 
 export type SeedMix = SeedMixFromRemote & { species: SeedmixSpecies[] };
-
-/**
- * Generate UUID.
- */
-/* eslint-disable no-bitwise, import/prefer-default-export */
-export function getNewUUID() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
-
-    return v.toString(16);
-  });
-}
-/* eslint-enable no-bitwise, import/prefer-default-export */
 
 const bySpeciesName = (sp1: SeedmixSpecies, sp2: SeedmixSpecies) => {
   const name1 = sp1.common_name || sp1.latin_name;

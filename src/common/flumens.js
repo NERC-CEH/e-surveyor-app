@@ -3,8 +3,8 @@ export {
   Options as ModelOptions,
   Metadata as ModelMetadata,
   Attrs as ModelAttrs,
-  getNewUUID,
 } from '@flumens/ionic/dist/models/Model';
+export { default as getNewUUID } from '@flumens/ionic/dist/utils/uuid';
 export {
   default as Sample,
   Attrs as SampleAttrs,
