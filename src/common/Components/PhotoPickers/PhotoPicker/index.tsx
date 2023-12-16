@@ -1,9 +1,8 @@
-import { FC, ComponentProps, useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
-import { useTranslation } from 'react-i18next';
 import { PhotoPicker, captureImage, URL } from '@flumens';
-import { useIonActionSheet, IonButton, IonIcon } from '@ionic/react';
+import { IonButton, IonIcon } from '@ionic/react';
 import ImageCropper from 'common/Components/ImageCropper';
 import config from 'common/config';
 import Media from 'models/image';
@@ -11,55 +10,39 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import './styles.scss';
 
-export function usePromptImageSource() {
-  const { t } = useTranslation();
-  const [presentActionSheet] = useIonActionSheet();
+export { usePromptImageSource } from '@flumens';
 
-  return () =>
-    new Promise<boolean | null>(resolve => {
-      presentActionSheet({
-        buttons: [
-          { text: t('Gallery'), handler: () => resolve(false) },
-          { text: t('Camera'), handler: () => resolve(true) },
-          { text: t('Cancel'), role: 'cancel', handler: () => resolve(null) },
-        ],
-        header: 'Choose a method to upload a photo',
-      });
-    });
-}
-
-interface Props extends Omit<ComponentProps<typeof PhotoPicker>, 'getImage'> {
+interface Props
+  extends Omit<ComponentProps<typeof PhotoPicker>, 'getImage' | 'value'> {
   model: Sample | Occurrence;
   maxImages?: number;
   allowToCrop?: boolean;
 }
 
-const AppPhotoPicker: FC<Props> = ({
+const AppPhotoPicker = ({
   model,
   allowToCrop,
   maxImages,
   ...restProps
-}) => {
-  const promptImageSource = usePromptImageSource();
-
-  async function getImageWrap() {
+}: Props) => {
+  const onAdd = async (shouldUseCamera: boolean) => {
     if (
       Number.isFinite(maxImages) &&
       model.media.length >= (maxImages as number)
     )
-      return null;
-
-    const shouldUseCamera = await promptImageSource();
-    const cancelled = shouldUseCamera === null;
-    if (cancelled) return null;
+      return;
 
     const [image] = await captureImage({
       camera: shouldUseCamera,
     });
-    if (!image) return null;
+    if (!image) return;
 
-    return Media.getImageModel(image, config.dataPath);
-  }
+    const imageModel = await Media.getImageModel(image, config.dataPath);
+    model.media.push(imageModel);
+    model.save();
+  };
+
+  const onRemove = async (media: any) => media.destroy();
 
   const [editImage, setEditImage] = useState<Media>();
 
@@ -119,8 +102,9 @@ const AppPhotoPicker: FC<Props> = ({
   return (
     <>
       <PhotoPicker
-        getImage={getImageWrap}
-        model={model}
+        value={model.media}
+        onAdd={onAdd}
+        onRemove={onRemove}
         placeholderCount={1}
         Image={allowToCrop ? ImageWithCropping : undefined}
         isDisabled={isDisabled || maxPicsReached}

@@ -6,6 +6,10 @@
   .quadrats-list {
     background: transparent;
 
+    ion-item-divider ion-label[slot='end'] {
+      text-align: right;
+    }
+
     ion-item {
       --padding-start: 9px;
       --padding-bottom: 5px;

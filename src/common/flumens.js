@@ -49,7 +49,10 @@ export { default as MenuAttrToggle } from '@flumens/ionic/dist/components/MenuAt
 export { default as ModalHeader } from '@flumens/ionic/dist/components/ModalHeader';
 export { default as Section } from '@flumens/ionic/dist/components/Section';
 export { default as InfoButton } from '@flumens/ionic/dist/components/InfoButton';
-export { default as PhotoPicker } from '@flumens/ionic/dist/components/PhotoPicker';
+export {
+  default as PhotoPicker,
+  usePromptImageSource,
+} from '@flumens/ionic/dist/components/PhotoPicker';
 export { default as MenuAttrItem } from '@flumens/ionic/dist/components/MenuAttrItem';
 export { default as ModelValidationMessage } from '@flumens/ionic/dist/components/ModelValidationMessage';
 export {

@@ -66,6 +66,8 @@ export default class Media extends MediaOriginal<Attrs> {
 
   attrs: Attrs = observable({
     identified: false,
+    // eslint-disable-next-line
+    // @ts-ignore
     ...this.attrs,
   });
 

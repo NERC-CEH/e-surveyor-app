@@ -93,7 +93,7 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
             min={1}
             isDisabled={isDisabled}
             valueLabel={
-              <span className="opacity-70">
+              <span className="self-center opacity-70">
                 {`${trapDays}` === '1' ? 'day' : 'days'}
               </span>
             }

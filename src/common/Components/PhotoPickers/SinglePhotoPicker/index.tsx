@@ -1,32 +1,14 @@
 import { FC, ComponentProps, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
-import { useTranslation } from 'react-i18next';
 import { captureImage, URL } from '@flumens';
-import { useIonActionSheet, IonButton, IonIcon } from '@ionic/react';
+import { IonButton, IonIcon } from '@ionic/react';
 import ImageCropper from 'common/Components/ImageCropper';
 import config from 'common/config';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import SinglePhotoPicker from './SinglePhotoPicker';
-
-export function usePromptImageSource() {
-  const { t } = useTranslation();
-  const [presentActionSheet] = useIonActionSheet();
-
-  return () =>
-    new Promise<boolean | null>(resolve => {
-      presentActionSheet({
-        buttons: [
-          { text: t('Gallery'), handler: () => resolve(false) },
-          { text: t('Camera'), handler: () => resolve(true) },
-          { text: t('Cancel'), role: 'cancel', handler: () => resolve(null) },
-        ],
-        header: 'Choose a method to upload a photo',
-      });
-    });
-}
 
 interface Props
   extends Omit<ComponentProps<typeof SinglePhotoPicker>, 'getImage'> {

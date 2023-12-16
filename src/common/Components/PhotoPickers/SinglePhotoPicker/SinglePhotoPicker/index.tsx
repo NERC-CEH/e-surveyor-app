@@ -167,7 +167,9 @@ const SinglePhotoPicker: FC<Props> = ({
     >
       <IonIcon slot="start" icon={cameraOutline} />
       <IonLabel>{label}</IonLabel>
-      <IonLabel slot="end">{getPhoto()}</IonLabel>
+      <IonLabel slot="end" className="flex">
+        {getPhoto()}
+      </IonLabel>
     </IonItem>
   );
 };

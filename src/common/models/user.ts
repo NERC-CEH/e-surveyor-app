@@ -18,11 +18,9 @@ const defaults: Attrs = {
 };
 
 class UserModel extends DrupalUserModel {
+  // eslint-disable-next-line
+  // @ts-ignore
   attrs: Attrs = DrupalUserModel.extendAttrs(this.attrs, defaults);
-
-  resetSchema: any = this.resetSchema;
-
-  loginSchema: any = this.loginSchema;
 
   registerSchema: any = Yup.object().shape({
     email: Yup.string().email().required(),
