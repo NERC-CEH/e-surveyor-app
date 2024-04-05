@@ -129,18 +129,29 @@ html.ios.plt-hybrid #status-bar-background {
 
 // FONTS START
 @font-face {
-  font-family: 'Museo300';
+  font-family: 'Museo';
+  src: url('./fonts/Museo100-Regular.ttf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Museo';
   src: url('./fonts/Museo300-Regular.ttf');
+  font-weight: 100;
 }
-
 @font-face {
-  font-family: 'Museo500';
+  font-family: 'Museo';
   src: url('./fonts/Museo500-Regular.ttf');
+  font-weight: 500;
 }
-
 @font-face {
-  font-family: 'Museo700';
+  font-family: 'Museo';
   src: url('./fonts/Museo700-Regular.ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Museo';
+  src: url('./fonts/Museo900-Regular.ttf');
+  font-weight: 900;
 }
 
 h1,
@@ -155,7 +166,7 @@ h3,
 .apps-section .apps-section-h,
 ion-item-divider,
 ion-footer ion-tab-button {
-  font-family: 'Museo300';
+  font-family: 'Museo';
 }
 // FONTS END
 
