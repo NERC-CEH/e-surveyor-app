@@ -1,33 +1,25 @@
-import { useState, FC } from 'react';
+import { useState } from 'react';
 import { cameraOutline } from 'ionicons/icons';
 import 'swiper/css';
 import 'swiper/css/grid';
 import { Grid } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page, Main, device, useToast, captureImage, Button } from '@flumens';
-import {
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardHeader,
-  IonIcon,
-  isPlatform,
-  IonRouterLink,
-} from '@ionic/react';
+import { IonIcon, isPlatform } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
 import config from 'common/config';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import SpeciesProfile from './Components/Species';
+import SurveyCard from './Components/SurveyCard';
 import survey3 from './beetleSurvey.jpg';
 import logo from './logo.svg';
 import survey2 from './ricardo-gomez.jpg';
 import './styles.scss';
 import survey1 from './viateur-hwang.jpg';
 
-interface Props {}
-
-const LandingPage: FC<Props> = () => {
+const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
@@ -79,59 +71,42 @@ const LandingPage: FC<Props> = () => {
   return (
     <Page id="home-landing">
       <Main>
-        <img src={logo} className="logo" />
+        <img
+          src={logo}
+          className="absolute max-h-[150px] w-full bg-white px-[74px] py-[13px]"
+        />
 
-        <div className="surveys-container">
+        <div className="flex h-full flex-col justify-evenly gap-5 overflow-hidden px-0 pb-[120px] pt-40">
           <Swiper
             centeredSlides
             centeredSlidesBounds
-            className="surveys"
+            className="w-[100vw]"
             slidesPerView={1.3}
             {...tabletLayout}
           >
-            <SwiperSlide className="survey">
-              <div className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-md">
-                <IonRouterLink routerLink="/survey/point">
-                  <div className="card-wrapper">
-                    <img src={survey1} alt="" />
-
-                    <IonCardHeader className="bg-white">
-                      <IonCardTitle>Record a habitat</IonCardTitle>
-                      <IonCardSubtitle>Survey</IonCardSubtitle>
-                    </IonCardHeader>
-                  </div>
-                </IonRouterLink>
-              </div>
+            <SwiperSlide>
+              <SurveyCard
+                image={survey1}
+                title="Record a habitat"
+                type="Survey"
+                link="/survey/point"
+              />
             </SwiperSlide>
-
-            <SwiperSlide className="survey">
-              <div className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-md">
-                <IonRouterLink routerLink="/survey/transect">
-                  <div className="card-wrapper">
-                    <img src={survey2} alt="" />
-
-                    <IonCardHeader className="bg-white">
-                      <IonCardTitle>Structured recording</IonCardTitle>
-                      <IonCardSubtitle>Transect survey</IonCardSubtitle>
-                    </IonCardHeader>
-                  </div>
-                </IonRouterLink>
-              </div>
+            <SwiperSlide>
+              <SurveyCard
+                image={survey2}
+                title="Structured recording"
+                type="Transect survey"
+                link="/survey/transect"
+              />
             </SwiperSlide>
-
-            <SwiperSlide className="survey">
-              <div className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-md">
-                <IonRouterLink routerLink="/survey/beetle">
-                  <div className="card-wrapper">
-                    <img src={survey3} alt="" />
-
-                    <IonCardHeader className="bg-white">
-                      <IonCardTitle>Farmland Carabids</IonCardTitle>
-                      <IonCardSubtitle>Beetle trap survey</IonCardSubtitle>
-                    </IonCardHeader>
-                  </div>
-                </IonRouterLink>
-              </div>
+            <SwiperSlide>
+              <SurveyCard
+                image={survey3}
+                title="Farmland Carabids"
+                type="Beetle trap survey"
+                link="/survey/beetle"
+              />
             </SwiperSlide>
           </Swiper>
 
