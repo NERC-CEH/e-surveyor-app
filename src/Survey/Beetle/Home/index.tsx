@@ -1,6 +1,5 @@
 import { FC, useContext, useState } from 'react';
 import { observer } from 'mobx-react';
-import { checkmarkCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
 import {
@@ -14,7 +13,7 @@ import {
   useLoader,
   useToast,
 } from '@flumens';
-import { NavContext, IonButton, IonIcon, isPlatform } from '@ionic/react';
+import { NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
 import appModel from 'models/app';
 import Media from 'models/image';
@@ -23,6 +22,7 @@ import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
 import detectObjects from './objectDetection';
 
@@ -166,16 +166,15 @@ const Controller: FC<Props> = ({ sample }) => {
 
   const isDisabled = sample.isUploaded();
 
+  const isInvalid = sample.validateRemote();
   const uploadButton =
     isDisabled || sample.remote.synchronising ? null : (
-      <IonButton
+      <HeaderButton
         onClick={sample.metadata.saved ? onUpload : onFinish}
-        color="secondary"
-        fill="solid"
+        isInvalid={isInvalid}
       >
-        <IonIcon icon={checkmarkCircleOutline} slot="start" />
         {sample.metadata.saved ? 'Upload' : 'Finish'}
-      </IonButton>
+      </HeaderButton>
     );
 
   return (

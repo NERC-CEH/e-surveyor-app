@@ -1,22 +1,14 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { Trans as T } from 'react-i18next';
+import { TypeOf } from 'zod';
 import { Page, Header, device, useToast, useAlert, useLoader } from '@flumens';
 import { NavContext } from '@ionic/react';
-import userModelProps from 'models/user';
+import userModel, { UserModel } from 'models/user';
 import Main from './Main';
-import './styles.scss';
 
-export type Details = {
-  password: string;
-  email: string;
-  fullName?: string | undefined;
-};
+type Details = TypeOf<typeof UserModel.registerSchema>;
 
-type Props = {
-  userModel: typeof userModelProps;
-};
-
-const RegisterContainer: FC<Props> = ({ userModel }) => {
+const RegisterContainer = () => {
   const context = useContext(NavContext);
   const alert = useAlert();
   const toast = useToast();
@@ -29,6 +21,7 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
   async function onRegister(details: Details) {
     const email = details.email.trim();
     const { password, fullName } = details;
+
     const otherDetails = {
       field_full_name: [{ value: fullName?.trim() }],
     };
@@ -43,16 +36,15 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
       await userModel.register(email, password, otherDetails);
 
       userModel.attrs.fullName = fullName; // eslint-disable-line
+      userModel.save();
 
       alert({
         header: 'Welcome aboard',
         message: (
-          <>
-            <T>
-              Before starting any surveys please check your email and click on
-              the verification link.
-            </T>
-          </>
+          <T>
+            Before starting any surveys please check your email and click on the
+            verification link.
+          </T>
         ),
         buttons: [
           {
@@ -62,11 +54,8 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
           },
         ],
       });
-    } catch (err) {
-      if (err instanceof Error) {
-        toast.error(err.message);
-      }
-      console.error(err, 'e');
+    } catch (err: any) {
+      toast.error(err);
     }
 
     loader.hide();
@@ -75,7 +64,7 @@ const RegisterContainer: FC<Props> = ({ userModel }) => {
   return (
     <Page id="user-register">
       <Header className="ion-no-border" title="Register" />
-      <Main schema={userModel.registerSchema} onSubmit={onRegister} />
+      <Main onSubmit={onRegister} />
     </Page>
   );
 };

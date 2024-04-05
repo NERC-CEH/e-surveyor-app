@@ -2,14 +2,9 @@ import { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { searchOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import { Main, useLoader } from '@flumens';
-import {
-  IonButton,
-  IonList,
-  IonIcon,
-  NavContext,
-  IonLabel,
-} from '@ionic/react';
+import { Button, Main, useLoader } from '@flumens';
+import { IonList, IonIcon, NavContext } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import SpeciesCard from 'common/Components/SpeciesCard';
 import { filterUKSpecies } from 'common/services/helpers';
@@ -19,9 +14,10 @@ import './styles.scss';
 
 type Props = {
   occurrence: Occurrence;
+  onReidentify?: any;
 };
 
-const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
+const EditSpeciesMain: FC<Props> = ({ occurrence, onReidentify }) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
   const loader = useLoader();
@@ -113,78 +109,60 @@ const EditSpeciesMain: FC<Props> = ({ occurrence }) => {
     return UKSuggestions.filter(nonSelectedSpecies).map(getSpeciesCard);
   };
 
-  const getSpeciesAddButton = () => {
-    if (isDisabled) {
-      return null;
-    }
+  const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
-    const navigateToSearch = () => navigate(`${match.url}/taxon`);
+  const identifying = occurrence.isIdentifying();
+  const hasNoSpecies = !occurrence.getSpecies();
 
-    return (
-      <IonList className="species-add-button">
-        <IonButton
-          mode="md"
-          onClick={navigateToSearch}
-          fill="outline"
-          className="footer"
-        >
-          <IonIcon slot="start" src={searchOutline} />
-          Search Species
-        </IonButton>
-      </IonList>
-    );
-  };
-
-  const showSpeciesMainPhoto = () => (
-    <div className="species-main-image-wrapper">
-      <div className="rounded">
-        <PhotoPicker
-          model={occurrence}
-          placeholderCount={1}
-          isDisabled={isDisabled}
-          allowToCrop
-        />
-      </div>
-    </div>
+  const identifyButton = !isIdentifying && occurrence?.canReIdentify() && (
+    <Button
+      onPress={onReidentify}
+      color="secondary"
+      className="mx-auto my-3 w-fit"
+      preventDefault
+    >
+      Reidentify
+    </Button>
   );
 
-  const getUnknownSpeciesMessage = () => {
-    const identifying = occurrence.isIdentifying();
-
-    if (!identifying) {
-      const hasNoSpecies = !occurrence.getSpecies();
-      if (hasNoSpecies) {
-        return (
-          <div className="identifying">
-            <IonLabel>
-              <h2>
-                <b>Sorry, we couldn't find any species 😕</b>
-              </h2>
-            </IonLabel>
-          </div>
-        );
-      }
-    }
-
-    return null;
-  };
-
   return (
-    <>
-      <Main id="edit-species">
-        {showSpeciesMainPhoto()}
+    <Main id="edit-species">
+      <div className="species-main-image-wrapper">
+        <div className="rounded">
+          <PhotoPicker
+            model={occurrence}
+            placeholderCount={1}
+            isDisabled={isDisabled}
+            allowToCrop
+          />
+        </div>
+      </div>
 
-        <IonList className="species-wrapper">
-          {getUnknownSpeciesMessage()}
+      {identifyButton}
 
-          {getSelectedSpecies()}
+      <IonList className="species-wrapper">
+        {!identifying && hasNoSpecies && (
+          <InfoBackgroundMessage>
+            <div>Sorry, we couldn't find any species 😕</div>
 
-          {getAIResults()}
+            {isPartOfSurvey && !isDisabled && (
+              <Button
+                onPress={navigateToSearch}
+                fill="outline"
+                className="mx-auto mt-6"
+                startAddon={<IonIcon className="size-6" src={searchOutline} />}
+              >
+                Search Species
+              </Button>
+            )}
+          </InfoBackgroundMessage>
+        )}
 
-          {isPartOfSurvey && getSpeciesAddButton()}
-        </IonList>
-      </Main>
-    </>
+        {getSelectedSpecies()}
+
+        {getAIResults()}
+      </IonList>
+    </Main>
   );
 };
 

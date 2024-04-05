@@ -1,30 +1,19 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import {
-  createOutline,
-  leaf,
-  informationCircleOutline,
-  cameraOutline,
-} from 'ionicons/icons';
+import { createOutline, leaf, cameraOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import {
-  Main,
-  MenuAttrItem,
-  InfoMessage,
-  InfoBackgroundMessage,
-} from '@flumens';
+import { Button, Main, MenuAttrItem } from '@flumens';
 import {
   IonList,
   IonItem,
-  IonLabel,
-  IonButton,
   IonIcon,
-  IonItemDivider,
   IonItemOption,
   IonItemOptions,
   IonItemSliding,
 } from '@ionic/react';
 import Sample from 'models/sample';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
+import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import './styles.scss';
 
 function byDate(smp1: Sample, smp2: Sample) {
@@ -48,7 +37,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
 
     const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
 
-    return <div className="photo">{photo}</div>;
+    return <div className="list-avatar">{photo}</div>;
   };
 
   const getList = () => {
@@ -65,13 +54,10 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
     const getTrap = (trapSample: Sample) => (
       <IonItemSliding key={trapSample.cid}>
         <IonItem routerLink={`${match.url}/trap/${trapSample.cid}`} detail>
-          {getTrapPhoto(trapSample)}
-
-          <IonLabel text-wrap>
-            <IonLabel>
-              <b>{trapSample.getPrettyName()}</b>
-            </IonLabel>
-          </IonLabel>
+          <div className="flex items-center gap-2">
+            {getTrapPhoto(trapSample)}
+            <h3 className="text-bold">{trapSample.getPrettyName()}</h3>
+          </div>
         </IonItem>
 
         {!isDisabled && (
@@ -89,38 +75,22 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
 
     return (
       <IonList className="traps-list" lines="full">
-        <IonItemDivider mode="ios">
-          Traps
-          <IonLabel slot="end">{sample.samples.length}</IonLabel>
-        </IonItemDivider>
-
-        <div className="rounded">{traps.map(getTrap)}</div>
+        <div className="rounded">
+          <div className="list-divider">
+            <div>Traps</div>
+            <div>{sample.samples.length}</div>
+          </div>
+          {traps.map(getTrap)}
+        </div>
       </IonList>
     );
   };
 
-  // const isFinished = sample.metadata.saved;
-
   return (
     <Main>
-      {isDisabled && (
-        <InfoMessage icon={informationCircleOutline} className="blue">
-          This survey has been finished and cannot be updated.
-        </InfoMessage>
-      )}
+      {isDisabled && <UploadedRecordInfoMessage />}
 
       <IonList lines="full">
-        {/* {isFinished && (
-          <IonButton
-            color="secondary"
-            type="submit"
-            expand="block"
-            routerLink={`${match.url}/report`}
-          >
-            See Report
-          </IonButton>
-        )} */}
-
         <div className="rounded">
           <MenuAttrItem
             routerLink={`${match.url}/details`}
@@ -132,16 +102,16 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
       </IonList>
 
       {!isDisabled && (
-        <IonButton
-          onClick={onAddNewTrap}
+        <Button
+          onPress={onAddNewTrap}
           color="secondary"
-          type="submit"
-          expand="block"
-          className="[--padding-end:40px] [--padding-start:40px]"
+          startAddon={
+            <IonIcon slot="start" icon={cameraOutline} className="size-6" />
+          }
+          className="mx-auto my-4"
         >
-          <IonIcon slot="start" icon={cameraOutline} size="large" />
           Add Trap
-        </IonButton>
+        </Button>
       )}
 
       {getList()}

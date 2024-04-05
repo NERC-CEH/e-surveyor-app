@@ -1,19 +1,18 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { useAlert, useToast, date } from '@flumens';
+import { useAlert, useToast, date, Badge } from '@flumens';
 import {
   IonItem,
   IonItemSliding,
   IonItemOptions,
   IonItemOption,
-  IonBadge,
   IonLabel,
   IonIcon,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
-import OnlineStatus from './components/OnlineStatus';
+import OnlineStatus from './OnlineStatus';
 import './styles.scss';
 
 const useDeleteAlert = (sample: Sample) => {
@@ -85,17 +84,16 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
 
     return (
       <div className="species-info">
-        <h3>
-          {survey.label}
-
-          {!!showSpeciesLength && (
-            <IonBadge>
-              <IonIcon icon={flowerIcon} />
-              {showSpeciesLength}
-            </IonBadge>
-          )}
-        </h3>
-
+        <h3>{survey.label}</h3>
+        {!!showSpeciesLength && (
+          <Badge
+            skipTranslation
+            className="py-[3px] text-sm"
+            startAddon={<IonIcon icon={flowerIcon} />}
+          >
+            {showSpeciesLength}
+          </Badge>
+        )}
         <h4>{sample.attrs.name}</h4>
       </div>
     );
@@ -113,8 +111,12 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
 
   return (
     <IonItemSliding className="survey-list-item">
-      <IonItem routerLink={href} detail>
-        <IonIcon icon={survey.icon} color="primary" />
+      <IonItem routerLink={href} detail={false}>
+        <IonIcon
+          icon={survey.icon}
+          color="primary"
+          className="shrink-0 rounded-full bg-neutral-100/50 p-2 text-3xl"
+        />
         <IonLabel>{getSampleInfo()}</IonLabel>
         <OnlineStatus
           sample={sample}

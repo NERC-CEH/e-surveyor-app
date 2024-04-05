@@ -1,22 +1,18 @@
 import { FC, useState } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
-import {
-  ModalHeader,
-  InfoBackgroundMessage,
-  Main,
-  InfoMessage,
-} from '@flumens';
+import { ModalHeader, Main, InfoMessage } from '@flumens';
 import {
   IonItem,
   IonLabel,
-  IonItemDivider,
   IonModal,
   IonBadge,
   IonList,
   IonNote,
+  IonIcon,
 } from '@ionic/react';
 import pollination from 'common/data/pollination';
 import Sample from 'models/sample';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import InfoButton from 'Components/InfoButton';
 import { SpeciesNames } from '../../helpers';
 import './styles.scss';
@@ -123,7 +119,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
             <IonLabel>{groupName}</IonLabel>
             <IonLabel slot="end">{count}</IonLabel>
           </IonItem>
-          <InfoMessage color="medium">{groupLabel}</InfoMessage>
+          <InfoMessage>{groupLabel}</InfoMessage>
         </>
       );
     };
@@ -136,18 +132,10 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
     return (
       <>
-        <IonItemDivider>
-          <IonLabel slot="start">
-            <b>
-              <small>Species</small>
-            </b>
-          </IonLabel>
-          <IonLabel className="ion-text-right" slot="end">
-            <b>
-              <small>Counts</small>
-            </b>
-          </IonLabel>
-        </IonItemDivider>
+        <div className="list-divider">
+          <div>Species</div>
+          <div>Counts</div>
+        </div>
 
         {listGroupCounts(species)}
       </>
@@ -174,26 +162,20 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
     if (!species.length) {
       return (
-        <IonList>
-          <IonItemDivider>
-            <IonLabel>Sorry, no species were found</IonLabel>
-          </IonItemDivider>
-        </IonList>
+        <InfoBackgroundMessage>
+          Sorry, no species were found
+        </InfoBackgroundMessage>
       );
     }
 
     return (
-      <>
-        <IonList>
-          <IonItemDivider>
-            <IonLabel>Found species</IonLabel>
-          </IonItemDivider>
-        </IonList>
+      <IonList>
+        <div className="rounded">
+          <div className="list-divider">Found species</div>
 
-        <IonList>
-          <div className="rounded">{species}</div>
-        </IonList>
-      </>
+          {species}
+        </div>
+      </IonList>
     );
   };
 
@@ -219,11 +201,9 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
     if (!species.length) {
       return (
-        <IonList>
-          <IonItemDivider>
-            <IonLabel>Sorry, no species were found</IonLabel>
-          </IonItemDivider>
-        </IonList>
+        <InfoBackgroundMessage>
+          Sorry, no species were found
+        </InfoBackgroundMessage>
       );
     }
 
@@ -241,19 +221,22 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
     return (
       <>
-        <InfoMessage icon={informationCircleOutline} className="blue">
+        <InfoMessage
+          startAddon={
+            <IonIcon src={informationCircleOutline} className="size-6" />
+          }
+          color="tertiary"
+          className="m-2"
+        >
           This is <b className={pollinatorClass}>{pollinatorClass}</b> class
           flower that supports <b>{pollinatorCount}</b> species
         </InfoMessage>
 
         <IonList>
-          <IonItemDivider>
-            <IonLabel>Found species</IonLabel>
-          </IonItemDivider>
-        </IonList>
-
-        <IonList>
-          <div className="rounded">{species}</div>
+          <div className="rounded">
+            <div className="list-divider">Found species</div>
+            {species}
+          </div>
         </IonList>
       </>
     );
@@ -269,7 +252,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
         <>
           <h3>
             <span>Pollinators count</span>
-            <InfoButton>
+            <InfoButton color="dark">
               <IonNote>
                 This section shows you how many pollinating species are
                 supported by each of the plants in your habitat. Tap the green
@@ -278,18 +261,10 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
             </InfoButton>
           </h3>
           <div className="rounded">
-            <IonItemDivider>
-              <IonLabel slot="start">
-                <b>
-                  <small>Species</small>
-                </b>
-              </IonLabel>
-              <IonLabel className="ion-text-right" slot="end">
-                <b>
-                  <small>Counts</small>
-                </b>
-              </IonLabel>
-            </IonItemDivider>
+            <div className="list-divider">
+              <div>Species</div>
+              <div>Counts</div>
+            </div>
 
             {getPollinators()}
           </div>
@@ -298,7 +273,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
       <h3>
         <span>Supported species groups</span>
-        <InfoButton>
+        <InfoButton color="dark">
           <IonNote>
             In this section, you can see the number of species within each group
             that you are supporting. Tap the group name to find out about their

@@ -1,9 +1,10 @@
 import { FC, useState } from 'react';
-import { ModalHeader, InfoBackgroundMessage } from '@flumens';
-import { IonItem, IonLabel, IonItemDivider, IonModal } from '@ionic/react';
+import { ModalHeader } from '@flumens';
+import { IonItem, IonLabel, IonModal } from '@ionic/react';
 import naturalEnemies, {
   Interaction as EnemyInteraction,
 } from 'common/data/naturalEnemies';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import { SpeciesNames } from '../../helpers';
 import Crops from './Components/Crops';
 
@@ -63,20 +64,12 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
   return (
     <>
-      <h3>Supported Crops</h3>
+      <h3 className="list-title">Supported Crops</h3>
       <div className="rounded">
-        <IonItemDivider>
-          <IonLabel slot="start">
-            <b>
-              <small>Plant</small>
-            </b>
-          </IonLabel>
-          <IonLabel className="ion-text-right" slot="end">
-            <b>
-              <small>Beneficial species</small>
-            </b>
-          </IonLabel>
-        </IonItemDivider>
+        <div className="list-divider">
+          <div>Plant</div>
+          <div>Beneficial species</div>
+        </div>
 
         {beneficialSpeciesGroups}
       </div>

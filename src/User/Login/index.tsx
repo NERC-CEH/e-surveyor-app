@@ -1,33 +1,30 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TypeOf } from 'zod';
 import { useToast, useLoader, Page, Header, device } from '@flumens';
 import { NavContext } from '@ionic/react';
-import userModelProps from 'models/user';
+import userModel, { UserModel } from 'models/user';
 import Main from './Main';
-import './styles.scss';
 
-export type Details = {
-  password: string;
-  email: string;
-};
+type Details = TypeOf<typeof UserModel.loginSchema>;
 
-type Props = {
-  userModel: typeof userModelProps;
-};
-
-const LoginController: FC<Props> = ({ userModel }) => {
-  const context = useContext(NavContext);
+const LoginController = () => {
+  const { navigate } = useContext(NavContext);
   const toast = useToast();
   const loader = useLoader();
+  const { t } = useTranslation();
 
   const onSuccessReturn = () => {
     const { email } = userModel.attrs;
-    toast.success(`Successfully logged in as: ${email}`);
-    context.navigate('/home/landing', 'root');
+
+    toast.success(t('Successfully logged in as: {{email}}', { email }), {
+      skipTranslation: true,
+    });
+
+    navigate('/home/landing', 'root');
   };
 
-  async function onLogin(details: Details) {
-    const { email, password } = details;
-
+  async function onLogin({ email, password }: Details) {
     if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
@@ -52,7 +49,7 @@ const LoginController: FC<Props> = ({ userModel }) => {
   return (
     <Page id="user-login">
       <Header className="ion-no-border" title="Login" />
-      <Main schema={userModel.loginSchema} onSubmit={onLogin} />
+      <Main onSubmit={onLogin} />
     </Page>
   );
 };

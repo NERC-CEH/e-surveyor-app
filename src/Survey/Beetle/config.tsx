@@ -21,12 +21,12 @@ const addLabels = (option: any) => {
   if (option.commonName) {
     option.label = // eslint-disable-line no-param-reassign
       (
-        <>
+        <div className="flex flex-col">
           <div>
             <b>{option.commonName}</b>
           </div>
           <i>{option.scientificName}</i>
-        </>
+        </div>
       );
     return option;
   }

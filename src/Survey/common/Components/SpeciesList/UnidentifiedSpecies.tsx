@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
-import { Gallery } from '@flumens';
+import { Button, Gallery } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
@@ -9,12 +9,10 @@ import {
   IonLabel,
   IonSpinner,
   IonIcon,
-  IonButton,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
-import './styles.scss';
 
 type Model = Sample | Occurrence;
 
@@ -28,7 +26,7 @@ interface Props {
   disableAI?: boolean;
 }
 
-const UnidentifiedSpeciesEntry: FC<Props> = ({
+const UnidentifiedSpeciesEntry = ({
   model,
   isDisabled,
   deEmphasisedIdentifyBtn,
@@ -36,7 +34,7 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
   onDelete,
   onClick,
   disableAI = false,
-}) => {
+}: Props) => {
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
   const [hasSpeciesPhoto] = occ.media;
 
@@ -56,18 +54,16 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
     if (!hasSpeciesPhoto) return null;
 
     return (
-      <div className="species-profile-photo">
-        <Gallery
-          isOpen={showingGallery}
-          items={[
-            {
-              src: hasSpeciesPhoto.getURL(),
-            },
-          ]}
-          initialSlide={0}
-          onClose={hideGallery}
-        />
-      </div>
+      <Gallery
+        isOpen={showingGallery}
+        items={[
+          {
+            src: hasSpeciesPhoto.getURL(),
+          },
+        ]}
+        initialSlide={0}
+        onClose={hideGallery}
+      />
     );
   };
 
@@ -76,64 +72,58 @@ const UnidentifiedSpeciesEntry: FC<Props> = ({
   ) : (
     <IonIcon icon={flowerIcon} />
   );
-  const profilePhoto = <div className="species-photo-profile">{photo}</div>;
+  const profilePhoto = <div className="list-avatar">{photo}</div>;
 
   const deleteWrap = () => onDelete && onDelete(model);
   const onClickWrap = () => !identifying && onClick(model);
 
-  const onIdentifyWrap = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    return onIdentify(model);
-  };
+  const onIdentifyWrap = () => onIdentify(model);
 
   const buttonStyles = deEmphasisedIdentifyBtn ? 'outline' : 'solid';
 
   return (
-    <IonItemSliding
-      className="species-list-item unknown"
-      disabled={identifying}
-    >
-      <IonItem detail={false} onClick={onClickWrap}>
-        {profilePhoto}
+    <IonItemSliding disabled={identifying}>
+      <IonItem
+        detail={false}
+        onClick={onClickWrap}
+        className="[--inner-padding-end:0px] [--padding-start:0px]"
+      >
+        <div className="flex w-full items-center gap-2 bg-warning-100/50 p-1">
+          {profilePhoto}
 
-        {!identifying && (
-          <IonLabel text-wrap>
-            <IonLabel
-              className="long unknown-species-label"
-              slot="start"
-              color="warning"
-            >
-              <b>Unknown species</b>
+          {!identifying && (
+            <IonLabel text-wrap>
+              <div className="font-semibold text-warning-900">
+                Unknown species
+              </div>
+
+              {!hasSpeciesPhoto && (
+                <IonLabel className="warning-message">
+                  Please add a photo
+                </IonLabel>
+              )}
             </IonLabel>
+          )}
 
-            {!hasSpeciesPhoto && (
-              <IonLabel className="warning-message">
-                Please add a photo
-              </IonLabel>
-            )}
-          </IonLabel>
-        )}
+          {!disableAI && hasSpeciesPhoto && !identifying && canBeIdentified && (
+            <Button
+              className="occurrence-identify py-1 text-xs"
+              color="secondary"
+              onPress={onIdentifyWrap}
+              fill={buttonStyles}
+              preventDefault
+            >
+              Identify
+            </Button>
+          )}
 
-        {!disableAI && hasSpeciesPhoto && !identifying && canBeIdentified && (
-          <IonButton
-            slot="end"
-            className="occurrence-identify"
-            color="secondary"
-            onClick={onIdentifyWrap}
-            fill={buttonStyles}
-          >
-            Identify
-          </IonButton>
-        )}
-
-        {identifying && (
-          <>
-            <IonLabel slot="end">Identifying...</IonLabel>
-            <IonSpinner slot="end" className="identifying" />
-          </>
-        )}
+          {identifying && (
+            <>
+              <IonLabel slot="end">Identifying...</IonLabel>
+              <IonSpinner slot="end" className="size-3 px-1" />
+            </>
+          )}
+        </div>
       </IonItem>
 
       {!isDisabled && onDelete && (

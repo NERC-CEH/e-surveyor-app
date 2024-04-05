@@ -1,15 +1,8 @@
 import { FC, useState } from 'react';
 import CountUp from 'react-countup';
 import { ModalHeader, Main } from '@flumens';
-import {
-  IonBadge,
-  IonIcon,
-  IonModal,
-  IonItemDivider,
-  IonLabel,
-  IonItem,
-  IonList,
-} from '@ionic/react';
+import { IonIcon, IonModal, IonLabel, IonItem, IonList } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import beeIcon from 'common/images/bee.svg';
 import Sample from 'models/sample';
 import { SpeciesNames } from '../helpers';
@@ -47,36 +40,31 @@ const PollinatorsBadge: FC<Props> = ({ uniqueSpecies }) => {
 
     if (!species.length) {
       return (
-        <IonList>
-          <IonItemDivider>
-            <IonLabel>Sorry, no species were found</IonLabel>
-          </IonItemDivider>
-        </IonList>
+        <InfoBackgroundMessage>
+          Sorry, no species were found
+        </InfoBackgroundMessage>
       );
     }
 
     return (
-      <>
-        <IonList>
-          <IonItemDivider>
-            <IonLabel>Found species</IonLabel>
-          </IonItemDivider>
-        </IonList>
+      <IonList>
+        <h3 className="list-title">Found species</h3>
 
-        <IonList>
-          <div className="rounded">{species}</div>
-        </IonList>
-      </>
+        <div className="rounded">{species}</div>
+      </IonList>
     );
   };
 
   return (
     <>
-      <div className="pollinators" onClick={() => setShowModal(true)}>
-        <IonIcon icon={beeIcon} />
-        <IonBadge color="dark">
+      <div
+        className="flex items-center justify-between gap-2"
+        onClick={() => setShowModal(true)}
+      >
+        <IonIcon icon={beeIcon} className="size-9" />
+        <div className="rounded-lg bg-primary-800 px-4 py-1 text-4xl font-bold text-white">
           <CountUp end={numberOfSpecies} duration={2.75} />
-        </IonBadge>
+        </div>
       </div>
 
       <IonModal mode="md" isOpen={!!showModal}>

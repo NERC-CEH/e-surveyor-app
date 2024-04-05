@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import 'chart.js/auto';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
-import { Gallery, InfoBackgroundMessage, device } from '@flumens';
+import { Gallery, device, Button } from '@flumens';
 import {
   IonCardHeader,
   IonCardSubtitle,
@@ -13,11 +13,10 @@ import {
   IonRow,
   IonGrid,
   IonCol,
-  IonList,
-  IonButton,
   IonIcon,
 } from '@ionic/react';
 import { Taxon } from 'models/occurrence';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import './styles.scss';
 
 const options = {
@@ -89,14 +88,12 @@ const SpeciesCard: FC<Props> = ({
     const items = species.images?.map(showSpImages) || [];
 
     return (
-      <div className="species-profile-photo">
-        <Gallery
-          isOpen={showGallery}
-          items={items}
-          initialSlide={photoIndex}
-          onClose={hideGallery}
-        />
-      </div>
+      <Gallery
+        isOpen={showGallery}
+        items={items}
+        initialSlide={photoIndex}
+        onClose={hideGallery}
+      />
     );
   };
 
@@ -173,7 +170,9 @@ const SpeciesCard: FC<Props> = ({
               </div>
             )}
 
-            {selectedSpeciesByUser && <IonIcon icon={checkmark} size="large" />}
+            {selectedSpeciesByUser && (
+              <IonIcon icon={checkmark} size="large" className="my-auto" />
+            )}
           </div>
         </IonCardHeader>
 
@@ -184,16 +183,9 @@ const SpeciesCard: FC<Props> = ({
         )}
 
         {onSelect && (
-          <IonList>
-            <IonButton
-              mode="md"
-              fill="outline"
-              className="footer"
-              onClick={onSelectWrap}
-            >
-              This is My Plant
-            </IonButton>
-          </IonList>
+          <Button fill="outline" className="footer" onPress={onSelectWrap}>
+            This is My Plant
+          </Button>
         )}
 
         {!species.warehouseId && (

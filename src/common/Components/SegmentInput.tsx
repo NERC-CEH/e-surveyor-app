@@ -40,7 +40,7 @@ const SegmentInput: FC<Props> = ({
         {options.map(getOption)}
       </IonSegment>
       {/* 
-      <InfoButton
+      <InfoButton color="dark"
         header="Margins"
         label={<IonIcon icon={informationCircleOutline} />}
         skipTranslation

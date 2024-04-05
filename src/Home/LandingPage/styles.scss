@@ -79,20 +79,5 @@
         margin: 0 auto;
       }
     }
-
-    ion-button.identify-plant {
-      height: 3em;
-      font-size: 1em;
-      --padding-end: 28px;
-      --box-shadow: 0 10px 40px 0 #00000026, 0 2px 9px 0 #0e2a0078;
-
-      ion-label {
-        width: 100%;
-      }
-
-      ion-icon {
-        font-size: 2em;
-      }
-    }
   }
 }

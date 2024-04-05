@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { InfoBackgroundMessage, useAlert } from '@flumens';
+import { Button, useAlert } from '@flumens';
 import {
   IonItem,
   IonList,
@@ -17,6 +17,7 @@ import {
   IonInput,
   IonItemDivider,
 } from '@ionic/react';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import { SeedmixSpecies, SeedMix } from '../../index';
 import './styles.scss';
 
@@ -169,15 +170,9 @@ const Seedmix: FC<Props> = ({
           </div>
         </IonList>
 
-        <IonButton
-          color="secondary"
-          shape="round"
-          expand="full"
-          type="submit"
-          onClick={() => history.push('/add')}
-        >
+        <Button color="secondary" onPress={() => history.push('/add')}>
           Add Species
-        </IonButton>
+        </Button>
 
         {getSpeciesList()}
       </IonContent>

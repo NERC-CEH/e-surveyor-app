@@ -1,15 +1,8 @@
 import { FC, useState } from 'react';
 import { ModalHeader, Main } from '@flumens';
-import {
-  IonItem,
-  IonLabel,
-  IonItemDivider,
-  IonModal,
-  IonList,
-} from '@ionic/react';
+import { IonItem, IonLabel, IonModal, IonList } from '@ionic/react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import Enemies from './Components/Enemies';
-import './styles.scss';
 
 type Props = {
   crops: EnemyInteraction[];
@@ -61,20 +54,13 @@ const NaturalEnemies: FC<Props> = ({ crops, group }) => {
   return (
     <Main className="survey-report crops">
       <IonList lines="full">
-        <h3>Crops</h3>
+        <h3 className="list-title">Crops</h3>
+
         <div className="rounded">
-          <IonItemDivider>
-            <IonLabel slot="start">
-              <b>
-                <small>Plant</small>
-              </b>
-            </IonLabel>
-            <IonLabel className="ion-text-right" slot="end">
-              <b>
-                <small>Beneficial species</small>
-              </b>
-            </IonLabel>
-          </IonItemDivider>
+          <div className="list-divider">
+            <div>Plant</div>
+            <div>Beneficial species</div>
+          </div>
 
           {groupedItems}
         </div>

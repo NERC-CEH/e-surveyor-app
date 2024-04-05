@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { Main, InfoButton, InfoMessage } from '@flumens';
-import { IonGrid, IonRow, IonCol } from '@ionic/react';
+import { IonIcon, IonList } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import twoPeopleRecording from 'common/images/twoPeopleRecording.jpg';
 import './styles.scss';
 
@@ -19,17 +19,17 @@ type Props = {
   habitatList: any;
 };
 
-const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
+const ReportMain = ({ stepCount, steps, habitatList }: Props) => {
   const getRowComponent = ({ scientificName, commonName, count }: any) => {
     const name = commonName || scientificName;
 
     return (
-      <IonRow key={name}>
-        <IonCol>{name}</IonCol>
-        <IonCol>
+      <div key={name} className="flex justify-between bg-white p-3">
+        <div>{name}</div>
+        <div>
           <b>{count}</b>/{stepCount}
-        </IonCol>
-      </IonRow>
+        </div>
+      </div>
     );
   };
 
@@ -103,43 +103,30 @@ const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
       .sort(alphabetically)
       .map(getRowComponent);
 
-    const header = (
-      <IonRow className="subheader">
-        <IonCol>
-          <h3>Species</h3>
-        </IonCol>
-        <IonCol>
-          <h3>Abundance</h3>
-        </IonCol>
-      </IonRow>
-    );
-
     const getGroup = (rows: any, label: any) => {
       if (!rows.length) {
         return (
           <>
-            <IonRow className="header">
-              <IonCol>
-                <h2>{label}</h2>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>No species found</IonCol>
-            </IonRow>
+            <h3 className="list-title">{label}</h3>
+
+            <InfoBackgroundMessage>No species found</InfoBackgroundMessage>
           </>
         );
       }
 
       return (
-        <>
-          <IonRow className="header">
-            <IonCol>
-              <h2>{label}</h2>
-            </IonCol>
-          </IonRow>
-          {header}
-          {rows}
-        </>
+        <IonList>
+          <h3 className="list-title">{label}</h3>
+
+          <div className="rounded">
+            <div className="list-divider">
+              <div>Species</div>
+              <div>Abundance</div>
+            </div>
+
+            {rows}
+          </div>
+        </IonList>
       );
     };
 
@@ -157,74 +144,71 @@ const ReportMain: FC<Props> = ({ stepCount, steps, habitatList }) => {
 
     const positive = counter.sort(alphabetically).map(getRowComponent);
 
-    const header = (
-      <IonRow className="subheader">
-        <IonCol>
-          <h3>Species</h3>
-        </IonCol>
-        <IonCol>
-          <h3>Abundance</h3>
-        </IonCol>
-      </IonRow>
-    );
-
     return (
-      <>
-        {header}
-        {positive}
-      </>
+      <IonList>
+        <div className="rounded">
+          <div className="list-divider">
+            <div>Species</div>
+            <div>Abundance</div>
+          </div>
+          {positive}
+        </div>
+      </IonList>
     );
   };
 
-  const getSpeciesRows = () => {
+  const getSpecies = () => {
     return habitatList
       ? getSpeciesCountRowsForHabitat()
       : getSpeciesCountRows();
   };
 
   return (
-    <>
-      <Main>
-        <InfoMessage icon={informationCircleOutline} className="blue">
-          What does my transect report mean?
-          <InfoButton label="READ MORE" header="Tips">
-            <div>
-              <img src={twoPeopleRecording} />
-              <p>
-                The transect report compares your survey to a list of plant
-                species that indicate good and bad quality habitat.
-              </p>
-              <p>
-                Any species listed under "Positive" suggest that your habitat is
-                good quality, and you are managing the land well.
-              </p>
-              <p>
-                Species listed under "Negative" indicate a poorer quality
-                habitat, which could mean that a land management change is
-                needed.
-              </p>
-              <p>
-                Each species has a fraction listed next to it, which tells you
-                the proportion of quadrats that the species was found in. For
-                example, 3/20 would mean that you did 20 quadrats, but only saw
-                this species in 3 of them.
-              </p>
-              <p>
-                As a guide, you can tell how common the species was by comparing
-                to the following percentages, although this may change depending
-                on the plant species or habitat type:
-              </p>
-              <p> 20% of quadrats or fewer = A rare species</p>
-              <p> 21% to 40% of quadrats = An occasional species </p>
-              <p> 41% to 60% of quadrats = A frequent species</p>
-              <p> 60% of quadrats or more = a very frequent species</p>
-            </div>
-          </InfoButton>
-        </InfoMessage>
+    <Main>
+      <InfoMessage
+        startAddon={
+          <IonIcon src={informationCircleOutline} className="size-6" />
+        }
+        color="tertiary"
+        className="m-2"
+      >
+        What does my transect report mean?
+        <InfoButton color="dark" label="READ MORE" header="Tips">
+          <div>
+            <img src={twoPeopleRecording} />
+            <p>
+              The transect report compares your survey to a list of plant
+              species that indicate good and bad quality habitat.
+            </p>
+            <p>
+              Any species listed under "Positive" suggest that your habitat is
+              good quality, and you are managing the land well.
+            </p>
+            <p>
+              Species listed under "Negative" indicate a poorer quality habitat,
+              which could mean that a land management change is needed.
+            </p>
+            <p>
+              Each species has a fraction listed next to it, which tells you the
+              proportion of quadrats that the species was found in. For example,
+              3/20 would mean that you did 20 quadrats, but only saw this
+              species in 3 of them.
+            </p>
+            <p>
+              As a guide, you can tell how common the species was by comparing
+              to the following percentages, although this may change depending
+              on the plant species or habitat type:
+            </p>
+            <p> 20% of quadrats or fewer = A rare species</p>
+            <p> 21% to 40% of quadrats = An occasional species </p>
+            <p> 41% to 60% of quadrats = A frequent species</p>
+            <p> 60% of quadrats or more = a very frequent species</p>
+          </div>
+        </InfoButton>
+      </InfoMessage>
 
-        <IonGrid>{getSpeciesRows()}</IonGrid>
-      </Main>
-    </>
+      {getSpecies()}
+    </Main>
   );
 };
 

@@ -1,11 +1,12 @@
 import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, useToast } from '@flumens';
-import { IonButton, NavContext } from '@ionic/react';
+import { NavContext } from '@ionic/react';
 import seedmixData from 'common/data/seedmix';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import Main from 'Components/ReportView';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import { CUSTOM_SEEDMIX_NAME } from 'Survey/common/config';
 
 type Props = {
@@ -37,9 +38,7 @@ const ReportController: FC<Props> = ({ sample }) => {
 
   const uploadButton =
     isDisabled || sample.remote.synchronising ? null : (
-      <IonButton onClick={onUpload} color="secondary" fill="solid">
-        Upload
-      </IonButton>
+      <HeaderButton onClick={onUpload}>Upload</HeaderButton>
     );
 
   const occurrences = sample.samples.map(smp => smp.occurrences[0]);

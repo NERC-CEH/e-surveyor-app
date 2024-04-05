@@ -1,28 +1,15 @@
 import { FC, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import clsx from 'clsx';
 import { useRouteMatch } from 'react-router';
-import {
-  InfoMessage,
-  useToast,
-  useAlert,
-  device,
-  InfoBackgroundMessage,
-} from '@flumens';
-import {
-  IonLabel,
-  IonList,
-  IonButton,
-  IonItemDivider,
-  NavContext,
-} from '@ionic/react';
+import { InfoMessage, useToast, useAlert, device, Button } from '@flumens';
+import { IonList, NavContext } from '@ionic/react';
 import config from 'common/config';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
-import Species from './Components/Species';
-import UnidentifiedSpecies from './Components/UnidentifiedSpecies';
-import './styles.scss';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
+import Species from './Species';
+import UnidentifiedSpecies from './UnidentifiedSpecies';
 
 const { POSITIVE_THRESHOLD } = config;
 
@@ -192,10 +179,10 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
     return (
       <IonList id="list" lines="full">
         <div className="rounded">
-          <IonItemDivider className="species-list-header">
-            <IonLabel slot="start">Species</IonLabel>
-            <IonLabel slot="end">{speciesEntries.length}</IonLabel>
-          </IonItemDivider>
+          <div className="list-divider">
+            <div>Species</div>
+            <div>{speciesEntries.length}</div>
+          </div>
 
           {speciesEntries}
         </div>
@@ -229,34 +216,24 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
     return (
       <IonList id="list" lines="full">
         <div className="rounded">
-          <IonItemDivider className="species-list-header unknown">
-            <IonLabel
-              className={clsx(!showIdentifyAllBtn && 'full-width')}
-              slot="start"
-            >
-              Unknown species
-            </IonLabel>
+          <div className="list-divider">
+            <div>Unknown species</div>
 
-            {!showIdentifyAllBtn && (
-              <IonLabel className="count" slot="end">
-                {count}
-              </IonLabel>
-            )}
+            {!showIdentifyAllBtn && <div>{count}</div>}
 
             {showIdentifyAllBtn && (
-              <IonButton
-                size="small"
-                onClick={onIdentifyAll}
+              <Button
+                onPress={onIdentifyAll}
                 color="secondary"
-                slot="end"
+                className="py-1 text-xs"
               >
                 Identify All
-              </IonButton>
+              </Button>
             )}
-          </IonItemDivider>
+          </div>
 
           {!device.isOnline && (
-            <InfoMessage color="dark" className="offline-warning-note">
+            <InfoMessage color="warning" inline>
               Auto-identification will not work while the device is offline.
             </InfoMessage>
           )}

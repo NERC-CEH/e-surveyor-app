@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { Page, Header, useToast, device } from '@flumens';
-import { IonButton } from '@ionic/react';
+import { Page, Header, useToast, device, Button } from '@flumens';
 import Sample from 'models/sample';
 import Main from './Main';
 
@@ -30,9 +29,9 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
 
   const isIdentifying = occ.isIdentifying();
   const identifyButton = !isIdentifying && occ.canReIdentify() && (
-    <IonButton onClick={identifySpecies} color="secondary" fill="solid">
+    <Button onPress={identifySpecies} color="secondary">
       Reidentify
-    </IonButton>
+    </Button>
   );
 
   return (

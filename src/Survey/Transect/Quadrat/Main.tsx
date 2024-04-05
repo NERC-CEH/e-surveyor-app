@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import { addCircleOutline, locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Main, MenuAttrItem, LongPressButton } from '@flumens';
+import { Main, MenuAttrItem, Button } from '@flumens';
 import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
 import Sample from 'models/sample';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
@@ -28,16 +28,15 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
     }
 
     return (
-      <LongPressButton
+      <Button
         color="secondary"
-        onLongClick={navigateToSearch}
-        type="submit"
-        expand="block"
-        onClick={photoSelect}
+        onLongPress={navigateToSearch}
+        onPress={photoSelect}
+        startAddon={<IonIcon icon={addCircleOutline} className="size-6" />}
+        className="mx-auto my-5"
       >
-        <IonIcon slot="start" icon={addCircleOutline} size="large" />
         Species
-      </LongPressButton>
+      </Button>
     );
   };
 

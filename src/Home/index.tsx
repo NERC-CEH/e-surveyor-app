@@ -8,7 +8,6 @@ import {
   IonRouterOutlet,
   IonTabs,
 } from '@ionic/react';
-import savedSamples from 'models/savedSamples';
 import PendingSurveysBadge from 'Components/PendingSurveysBadge';
 import LandingPage from './LandingPage';
 import Menu from './Menu';
@@ -35,8 +34,8 @@ const HomeController: FC = () => {
         <IonTabButton tab="home/surveys" href="/home/surveys">
           <div className="tab-highlight">
             <IonIcon icon={personOutline} />
+            <PendingSurveysBadge className="absolute bottom-1/4 left-2/4" />
           </div>
-          <PendingSurveysBadge savedSamples={savedSamples} />
         </IonTabButton>
 
         <IonTabButton tab="home/menu" href="/home/menu">

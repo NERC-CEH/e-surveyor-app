@@ -58,18 +58,16 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
     if (!speciesPhoto) return null;
 
     return (
-      <div className="species-profile-photo">
-        <Gallery
-          isOpen={showingGallery}
-          items={[
-            {
-              src: speciesPhoto,
-            },
-          ]}
-          initialSlide={0}
-          onClose={hideGallery}
-        />
-      </div>
+      <Gallery
+        isOpen={showingGallery}
+        items={[
+          {
+            src: speciesPhoto,
+          },
+        ]}
+        initialSlide={0}
+        onClose={hideGallery}
+      />
     );
   };
 
@@ -81,13 +79,13 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
     const earthIcon = notFoundInUK ? earth : checkmarkCircle;
 
     if (species.score > POSITIVE_THRESHOLD) {
-      idClass = 'id-icon-positive';
+      idClass = '[--detail-icon-color:var(--id-positive-color)]';
       detailIcon = earthIcon;
     } else if (species.score > POSSIBLE_THRESHOLD) {
-      idClass = 'id-icon-possible';
+      idClass = '[--detail-icon-color:var(--id-possible-color)]';
       detailIcon = helpCircle;
     } else {
-      idClass = 'id-icon-rejected';
+      idClass = '[--detail-icon-color:var(--id-rejected-color)]';
       detailIcon = closeCircle;
     }
 
@@ -110,7 +108,7 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
   ) : (
     <IonIcon icon={leaf} />
   );
-  const profilePhoto = <div className="species-photo-profile">{photo}</div>;
+  const profilePhoto = <div className="list-avatar">{photo}</div>;
 
   const getSpeciesName = () => {
     return (
@@ -128,16 +126,18 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
   };
 
   return (
-    <IonItemSliding className="species-list-item" key={model.cid}>
+    <IonItemSliding key={model.cid}>
       <IonItem
         detail
         detailIcon={detailsIcon}
-        className={idClass}
+        className={`[--detail-icon-opacity:1] [--padding-start:0px] ${idClass}`}
         onClick={onClickWrap}
       >
-        {profilePhoto}
+        <div className="flex items-center gap-2 p-1">
+          {profilePhoto}
 
-        {getSpeciesName()}
+          {getSpeciesName()}
+        </div>
       </IonItem>
 
       {!isDisabled && onDelete && (

@@ -15,4 +15,11 @@ savedSamples.uploadAll = async () => {
   console.log('SavedSamples: all records were uploaded!');
 };
 
+export function getPending() {
+  const byUploadStatus = (sample: Sample) =>
+    !sample.metadata.syncedOn && sample.metadata.saved;
+
+  return savedSamples.filter(byUploadStatus);
+}
+
 export default savedSamples;

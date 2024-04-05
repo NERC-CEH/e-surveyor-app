@@ -1,15 +1,7 @@
 import { FC, useState } from 'react';
 import CountUp from 'react-countup';
 import { ModalHeader, Main } from '@flumens';
-import {
-  IonBadge,
-  IonIcon,
-  IonModal,
-  IonItemDivider,
-  IonLabel,
-  IonItem,
-  IonList,
-} from '@ionic/react';
+import { IonIcon, IonModal, IonItem, IonList } from '@ionic/react';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import Seeds from 'common/images/seeds.svg';
 import Occurrence from 'models/occurrence';
@@ -59,11 +51,9 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
 
     return (
       <IonList>
-        <IonItemDivider>
-          <IonLabel>Found species</IonLabel>
-        </IonItemDivider>
-
         <div className="rounded">
+          <div className="list-divider">Found species</div>
+
           {selectedSeedmixSpecies
             .sort(bySpeciesName)
             .map(selectedSeedmixEntries)}
@@ -101,10 +91,12 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
 
     return (
       <IonList>
-        <IonItemDivider>
-          <IonLabel>Missing species</IonLabel>
-        </IonItemDivider>
-        <div className="rounded">{list}</div>
+        <h3 className="list-title">Missing species</h3>
+
+        <div className="rounded">
+          <div className="list-divider">Species</div>
+          {list}
+        </div>
       </IonList>
     );
   };
@@ -120,12 +112,15 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
 
   return (
     <>
-      <div className="seedmix" onClick={() => setShowModal(true)}>
-        <IonIcon icon={Seeds} />
-        <IonBadge color="dark">
+      <div
+        className="flex items-center justify-between gap-2"
+        onClick={() => setShowModal(true)}
+      >
+        <IonIcon icon={Seeds} className="size-9" />
+        <div className="rounded-lg bg-primary-800 px-4 py-1 text-4xl font-bold text-white">
           <CountUp end={selectedSeedmixSpecies.length} duration={2.75} />/
           {seedmixSpecies.length}
-        </IonBadge>
+        </div>
       </div>
 
       <IonModal mode="md" isOpen={!!showModal}>

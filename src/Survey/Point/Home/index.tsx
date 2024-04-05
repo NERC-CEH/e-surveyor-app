@@ -10,7 +10,7 @@ import {
   ModelValidationMessage,
   captureImage,
 } from '@flumens';
-import { IonButton, NavContext, isPlatform } from '@ionic/react';
+import { NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
 import appModel from 'models/app';
 import Media from 'models/image';
@@ -19,8 +19,8 @@ import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import ImageCropper from 'Components/ImageCropper';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
-import './styles.scss';
 
 type URL = string;
 
@@ -216,20 +216,19 @@ const HomeController: FC<Props> = ({ sample }) => {
     navToReport();
   };
 
-  if (!sample) {
-    return null;
-  }
+  if (!sample) return null;
 
   const isDisabled = sample.isUploaded();
 
+  const isInvalid = sample.validateRemote();
+
   const finishButton = sample.remote.synchronising ? null : (
-    <IonButton
+    <HeaderButton
       onClick={sample.metadata.saved ? navToReport : onFinish}
-      color="secondary"
-      fill="solid"
+      isInvalid={isInvalid}
     >
       {sample.metadata.saved ? 'See Report' : 'Finish'}
-    </IonButton>
+    </HeaderButton>
   );
 
   if (appModel.attrs.showFirstSurveyTip) showFirstSurveyTip(alert);

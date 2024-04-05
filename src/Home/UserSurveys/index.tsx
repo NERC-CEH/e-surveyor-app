@@ -1,19 +1,17 @@
 import { FC, useState } from 'react';
 import { observer } from 'mobx-react';
-import { Page, Main, device, useToast } from '@flumens';
+import { Page, Main, device, useToast, Button, Badge } from '@flumens';
 import {
   IonList,
   IonToolbar,
   IonHeader,
   IonLabel,
-  IonBadge,
   IonSegmentButton,
   IonSegment,
-  IonButton,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Sample from 'models/sample';
-import savedSamples from 'models/savedSamples';
+import savedSamples, { getPending } from 'models/savedSamples';
 import Survey from './components/Survey';
 import './images/empty-samples-list-icon.svg';
 import './styles.scss';
@@ -121,26 +119,19 @@ const UserSurveys: FC<Props> = () => {
   const uploadedSurveys = getSamplesList(true);
 
   const getPendingSurveysCount = () => {
-    if (!pendingSurveys.length) {
-      return null;
-    }
+    const pendingSurveysCount = getPending().length;
+    if (!pendingSurveysCount) return null;
 
     return (
-      <IonBadge color="secondary" slot="end">
-        {pendingSurveys.length}
-      </IonBadge>
-    );
-  };
-
-  const getUploadedSurveysCount = () => {
-    if (!uploadedSurveys.length) {
-      return null;
-    }
-
-    return (
-      <IonBadge color="light" slot="end">
-        {uploadedSurveys.length}
-      </IonBadge>
+      <Badge
+        color="warning"
+        skipTranslation
+        size="small"
+        fill="solid"
+        className="mx-1"
+      >
+        {pendingSurveysCount}
+      </Badge>
     );
   };
 
@@ -159,10 +150,7 @@ const UserSurveys: FC<Props> = () => {
             </IonSegmentButton>
 
             <IonSegmentButton value="uploaded">
-              <IonLabel className="ion-text-wrap">
-                Uploaded
-                {getUploadedSurveysCount()}
-              </IonLabel>
+              <IonLabel className="ion-text-wrap">Uploaded</IonLabel>
             </IonSegmentButton>
           </IonSegment>
         </IonToolbar>
@@ -170,15 +158,13 @@ const UserSurveys: FC<Props> = () => {
 
       <Main className="ion-padding">
         {showingPending && showUploadAll && (
-          <IonButton
-            expand="block"
-            size="small"
+          <Button
             className="upload-all-button"
             color="secondary"
-            onClick={onUploadAll}
+            onPress={onUploadAll}
           >
             Upload All
-          </IonButton>
+          </Button>
         )}
 
         {showingPending && getPendingSurveys(pendingSurveys, !showUploadAll)}

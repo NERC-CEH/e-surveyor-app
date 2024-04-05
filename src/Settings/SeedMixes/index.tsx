@@ -1,10 +1,9 @@
 import { FC, useState } from 'react';
 import { observer } from 'mobx-react';
-import { Page, Main, Header, InfoBackgroundMessage, useAlert } from '@flumens';
+import { Page, Main, Header, useAlert, Button } from '@flumens';
 import {
   IonItem,
   IonList,
-  IonButton,
   IonItemOption,
   IonItemOptions,
   IonLabel,
@@ -12,6 +11,7 @@ import {
   IonItemDivider,
 } from '@ionic/react';
 import appModel, { SeedMix } from 'models/app';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import EditSeedmix from './Components/EditSeedmix';
 import './styles.scss';
 
@@ -98,15 +98,9 @@ const Seedmixes: FC = () => {
     const addNewSeedmix = () => setNewSeedmix('new');
 
     return (
-      <IonButton
-        color="secondary"
-        fill="solid"
-        expand="full"
-        type="submit"
-        onClick={addNewSeedmix}
-      >
+      <Button color="secondary" onPress={addNewSeedmix}>
         Add new
-      </IonButton>
+      </Button>
     );
   };
 

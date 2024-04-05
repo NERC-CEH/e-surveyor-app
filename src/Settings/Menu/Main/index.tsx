@@ -70,7 +70,7 @@ const Menu: FC<Props> = ({
             value={use10stepsForCommonStandard}
             onChange={onCommonStandardToggle}
           />
-          <InfoMessage color="medium">
+          <InfoMessage>
             Use 10 steps when doing Common Standards survey.
           </InfoMessage>
           <MenuAttrToggle
@@ -79,7 +79,7 @@ const Menu: FC<Props> = ({
             onChange={onAutoIDWhenBackOnline}
             value={useAutoIDWhenBackOnline}
           />
-          <InfoMessage color="medium">
+          <InfoMessage>
             When working offline the app will not be able to automatically ID
             the species. Once reconnected to the Internet we can identify the
             species in the background.
@@ -99,7 +99,7 @@ const Menu: FC<Props> = ({
             onChange={onSendAnalyticsToggle}
             value={sendAnalytics}
           />
-          <InfoMessage color="medium">
+          <InfoMessage>
             Share app crash data so we can make the app more reliable.
           </InfoMessage>
 

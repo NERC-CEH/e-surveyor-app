@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import { z, object } from 'zod';
 import {
   DrupalUserModel,
   DrupalUserModelAttrs,
@@ -17,15 +17,24 @@ const defaults: Attrs = {
   fullName: '',
 };
 
-class UserModel extends DrupalUserModel {
+export class UserModel extends DrupalUserModel {
   // eslint-disable-next-line
   // @ts-ignore
   attrs: Attrs = DrupalUserModel.extendAttrs(this.attrs, defaults);
 
-  registerSchema: any = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
-    fullName: Yup.string().required(),
+  static registerSchema: any = object({
+    email: z.string().email('Please fill in'),
+    password: z.string().min(1, 'Please fill in'),
+    fullName: z.string().min(1, 'Please fill in'),
+  });
+
+  static resetSchema: any = object({
+    email: z.string().email('Please fill in'),
+  });
+
+  static loginSchema: any = object({
+    email: z.string().email('Please fill in'),
+    password: z.string().min(1, 'Please fill in'),
   });
 
   constructor(options: any) {

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { locationOutline, informationCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
-import { IonItemDivider, IonList } from '@ionic/react';
+import { IonIcon, IonItemDivider, IonList } from '@ionic/react';
 import Seeds from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import transectWShape from 'common/images/transectWShape.jpg';
@@ -31,9 +31,15 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
 
   return (
     <Main>
-      <InfoMessage icon={informationCircleOutline} className="blue">
+      <InfoMessage
+        startAddon={
+          <IonIcon src={informationCircleOutline} className="size-6" />
+        }
+        color="tertiary"
+        className="m-2"
+      >
         How to set up a transect?
-        <InfoButton label="READ MORE" header="Tips">
+        <InfoButton color="dark" label="READ MORE" header="Tips">
           <div>
             <p>
               Start by telling the app where you are doing the survey (your
@@ -106,7 +112,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           />
           {isDisabled ||
             (!isCustom && !!steps && (
-              <InfoMessage color="medium">
+              <InfoMessage>
                 This is the number of times that you will stop and search for
                 plants on your transect.
               </InfoMessage>
@@ -122,7 +128,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           />
           {isDisabled ||
             (!isCustom && !!quadratSize && (
-              <InfoMessage color="medium">
+              <InfoMessage>
                 This is the size of the area that you will search for plants in
                 each step.
               </InfoMessage>

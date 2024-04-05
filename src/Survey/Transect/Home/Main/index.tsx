@@ -1,29 +1,26 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { observer } from 'mobx-react';
 import {
   createOutline,
   leaf,
   bookmarkOutline,
   informationCircleOutline,
+  addCircleOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import {
-  Main,
-  MenuAttrItem,
-  InfoMessage,
-  InfoButton,
-  InfoBackgroundMessage,
-} from '@flumens';
+import { Main, MenuAttrItem, InfoMessage, InfoButton, Button } from '@flumens';
 import {
   IonList,
   IonItem,
   IonLabel,
-  IonButton,
   IonIcon,
   IonItemDivider,
+  NavContext,
 } from '@ionic/react';
 import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
 import Sample from 'models/sample';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
+import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import './styles.scss';
 
 function byDate(smp1: Sample, smp2: Sample) {
@@ -40,6 +37,7 @@ type Props = {
 
 const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
   const match = useRouteMatch();
+  const { navigate } = useContext(NavContext);
 
   const getQuadratsList = () => {
     return sample.samples.slice().sort(byDate);
@@ -102,14 +100,14 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
     }
 
     return (
-      <IonButton
-        onClick={onAddNewQuadrat}
+      <Button
+        onPress={onAddNewQuadrat}
         color="secondary"
-        type="submit"
-        expand="block"
+        startAddon={<IonIcon icon={addCircleOutline} className="size-6" />}
+        className="mx-auto my-5"
       >
         Add Quadrat
-      </IonButton>
+      </Button>
     );
   };
 
@@ -118,9 +116,15 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
   return (
     <Main>
       {!isDisabled && (
-        <InfoMessage icon={informationCircleOutline} className="blue">
+        <InfoMessage
+          startAddon={
+            <IonIcon src={informationCircleOutline} className="size-6" />
+          }
+          color="tertiary"
+          className="m-2"
+        >
           How to complete a transect?
-          <InfoButton label="READ MORE" header="Tips">
+          <InfoButton color="dark" label="READ MORE" header="Tips">
             <div>
               <img src={personTakingPhoto} />
               <p>
@@ -150,22 +154,17 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
         </InfoMessage>
       )}
 
-      {isDisabled && (
-        <InfoMessage icon={informationCircleOutline} className="blue">
-          This survey has been finished and cannot be updated.
-        </InfoMessage>
-      )}
+      {isDisabled && <UploadedRecordInfoMessage />}
 
       <IonList lines="full">
         {isComplete && (
-          <IonButton
+          <Button
             color="secondary"
-            type="submit"
-            expand="block"
-            routerLink={`${match.url}/report`}
+            className="mx-auto my-5"
+            onPress={() => navigate(`${match.url}/report`)}
           >
             See Report
-          </IonButton>
+          </Button>
         )}
 
         <div className="rounded">

@@ -7,6 +7,7 @@ import './styles.scss';
 type Props = {
   buttonProps?: JSX.IonButton;
   children: ReactNode;
+  color?: any;
 };
 
 const InfoButton: FC<Props> = ({ children, buttonProps }) => {

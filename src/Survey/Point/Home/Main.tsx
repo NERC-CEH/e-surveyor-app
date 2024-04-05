@@ -9,13 +9,7 @@ import {
   locationOutline,
   informationCircleOutline,
 } from 'ionicons/icons';
-import {
-  Main,
-  MenuAttrItem,
-  LongPressButton,
-  InfoMessage,
-  InfoButton,
-} from '@flumens';
+import { Main, MenuAttrItem, InfoMessage, InfoButton, Button } from '@flumens';
 import {
   IonItemDivider,
   IonIcon,
@@ -30,6 +24,7 @@ import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
+import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 
 interface MatchParams {
   url: string;
@@ -53,16 +48,15 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
     }
 
     return (
-      <LongPressButton
+      <Button
         color="secondary"
-        onLongClick={navigateToSearch}
-        type="submit"
-        expand="block"
-        onClick={photoSelect}
+        onLongPress={navigateToSearch}
+        onPress={photoSelect}
+        startAddon={<IonIcon icon={addCircleOutline} className="size-6" />}
+        className="mx-auto my-5"
       >
-        <IonIcon slot="start" icon={addCircleOutline} size="large" />
         Species
-      </LongPressButton>
+      </Button>
     );
   };
 
@@ -75,9 +69,15 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
   return (
     <Main>
       {!isDisabled && (
-        <InfoMessage icon={informationCircleOutline} className="blue">
+        <InfoMessage
+          startAddon={
+            <IonIcon src={informationCircleOutline} className="size-6" />
+          }
+          color="tertiary"
+          className="m-2"
+        >
           How to complete a survey?
-          <InfoButton label="READ MORE" header="Tips">
+          <InfoButton color="dark" label="READ MORE" header="Tips">
             <div>
               <p>
                 Start by giving your survey a name (such as the name of the
@@ -120,11 +120,7 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
         </InfoMessage>
       )}
 
-      {isDisabled && (
-        <InfoMessage icon={informationCircleOutline} className="blue">
-          This survey has been finished and cannot be updated.
-        </InfoMessage>
-      )}
+      {isDisabled && <UploadedRecordInfoMessage />}
 
       <IonList lines="full">
         <IonItemDivider>Details</IonItemDivider>

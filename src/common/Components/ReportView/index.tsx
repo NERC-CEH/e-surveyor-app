@@ -13,7 +13,6 @@ import NaturalEnemies from './Components/NaturalEnemies';
 import PollinatorsBadge from './Components/PollinatorsBadge';
 import PollinatorsList from './Components/PollinatorsList';
 import SeedmixBadge from './Components/SeedmixBadge';
-import './styles.scss';
 
 type Props = {
   occurrences: Occurrence[];
@@ -24,41 +23,43 @@ const ReportMain: FC<Props> = ({ occurrences, seedmixSpecies }) => {
   const uniqueSpecies = getUniqueSpecies(occurrences);
 
   return (
-    <>
-      <Main className="survey-report">
-        <InfoMessage icon={informationCircleOutline} className="blue">
-          What does this report mean?
-          <InfoButton label="READ MORE" header="Tips">
-            <div>
-              <p>
-                <IonIcon src={seedsIcon} /> <b>Seed Mix</b> tells you how many
-                of the plant species you sowed (through your seed mix) that
-                appeared in your survey. Tap to find out which species are
-                missing.
-              </p>
-              <p>
-                <IonIcon src={beeIcon} /> <b>Insect</b> tells you how many
-                insect species you are supporting. Tap for the full list of
-                species.
-              </p>
-            </div>
-          </InfoButton>
-        </InfoMessage>
+    <Main className="survey-report">
+      <InfoMessage
+        startAddon={
+          <IonIcon src={informationCircleOutline} className="size-6" />
+        }
+        color="tertiary"
+        className="m-2"
+      >
+        What does this report mean?
+        <InfoButton color="dark" label="READ MORE" header="Tips">
+          <div>
+            <p>
+              <IonIcon src={seedsIcon} /> <b>Seed Mix</b> tells you how many of
+              the plant species you sowed (through your seed mix) that appeared
+              in your survey. Tap to find out which species are missing.
+            </p>
+            <p>
+              <IonIcon src={beeIcon} /> <b>Insect</b> tells you how many insect
+              species you are supporting. Tap for the full list of species.
+            </p>
+          </div>
+        </InfoButton>
+      </InfoMessage>
 
-        <div className="report-header">
-          <SeedmixBadge
-            occurrences={occurrences}
-            seedmixSpecies={seedmixSpecies}
-          />
-          <PollinatorsBadge uniqueSpecies={uniqueSpecies} />
-        </div>
+      <div className="my-5 flex w-full justify-evenly">
+        <SeedmixBadge
+          occurrences={occurrences}
+          seedmixSpecies={seedmixSpecies}
+        />
+        <PollinatorsBadge uniqueSpecies={uniqueSpecies} />
+      </div>
 
-        <IonList lines="full">
-          <PollinatorsList uniqueSpecies={uniqueSpecies} />
-          <NaturalEnemies uniqueSpecies={uniqueSpecies} />
-        </IonList>
-      </Main>
-    </>
+      <IonList lines="full">
+        <PollinatorsList uniqueSpecies={uniqueSpecies} />
+        <NaturalEnemies uniqueSpecies={uniqueSpecies} />
+      </IonList>
+    </Main>
   );
 };
 

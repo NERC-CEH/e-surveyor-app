@@ -7,8 +7,8 @@ import {
   openOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Main, MenuAttrItem, MenuAttrItemFromModel } from '@flumens';
-import { IonList, IonIcon, IonButton, IonLabel, IonItem } from '@ionic/react';
+import { Button, Main, MenuAttrItem, MenuAttrItemFromModel } from '@flumens';
+import { IonList, IonIcon, IonLabel, IonItem } from '@ionic/react';
 import SegmentInput from 'common/Components/SegmentInput';
 import Sample from 'models/sample';
 import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
@@ -79,16 +79,16 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
         <SpeciesList sample={subSample} isDisabled={isDisabled} disableAI />
 
         {!isDisabled && (
-          <IonButton
+          <Button
+            onPress={onAddNewSpecies}
             color="secondary"
-            type="submit"
-            expand="block"
-            className="[--padding-end:40px] [--padding-start:40px]"
-            onClick={onAddNewSpecies}
+            startAddon={
+              <IonIcon slot="start" icon={cameraOutline} className="size-6" />
+            }
+            className="mx-auto my-4"
           >
-            <IonIcon slot="start" icon={cameraOutline} size="large" />
             Add species
-          </IonButton>
+          </Button>
         )}
       </Main>
     </>

@@ -44,18 +44,6 @@ const SpeciesProfile: FC<Props> = ({ occurrence, onClose }) => {
     }
   };
 
-  const isIdentifying = occurrence?.isIdentifying();
-  const identifyButton = !isIdentifying && occurrence?.canReIdentify() && (
-    <IonButton
-      onClick={identifySpecies}
-      color="secondary"
-      fill="solid"
-      type="submit"
-    >
-      Reidentify
-    </IonButton>
-  );
-
   return (
     <IonModal
       isOpen={!!occurrence}
@@ -81,10 +69,7 @@ const SpeciesProfile: FC<Props> = ({ occurrence, onClose }) => {
       </IonHeader>
 
       {segment === 'species' && !!occurrence && (
-        <>
-          {identifyButton}
-          <Profile occurrence={occurrence} />
-        </>
+        <Profile occurrence={occurrence} onReidentify={identifySpecies} />
       )}
 
       {segment === 'report' && !!occurrence && (

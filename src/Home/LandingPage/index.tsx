@@ -4,10 +4,8 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import { Grid } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Page, Main, device, useToast, captureImage } from '@flumens';
+import { Page, Main, device, useToast, captureImage, Button } from '@flumens';
 import {
-  IonLabel,
-  IonButton,
   IonCardTitle,
   IonCardSubtitle,
   IonCardHeader,
@@ -137,14 +135,13 @@ const LandingPage: FC<Props> = () => {
             </SwiperSlide>
           </Swiper>
 
-          <IonButton
-            className="identify-plant"
-            onClick={identifyPhoto}
-            color="light"
+          <Button
+            className="mx-auto w-fit px-5 text-lg shadow-2xl"
+            onPress={identifyPhoto}
+            startAddon={<IonIcon src={cameraOutline} className="size-6" />}
           >
-            <IonIcon src={cameraOutline} slot="end" />
-            <IonLabel>Identify plant</IonLabel>
-          </IonButton>
+            Identify plant
+          </Button>
         </div>
       </Main>
 

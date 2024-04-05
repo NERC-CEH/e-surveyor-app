@@ -1,31 +1,29 @@
-function exposeColorsAsCssVariables({ addBase, theme }) {
-  function extractColorVars(colorObj, colorGroup = '') {
-    return Object.keys(colorObj).reduce((vars, colorKey) => {
-      const value = colorObj[colorKey];
-      const cssVariable =
-        colorKey === 'DEFAULT'
-          ? `--color${colorGroup}`
-          : `--color${colorGroup}-${colorKey}`;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const flumensTailwind = require('@flumens/tailwind/tailwind.config.js');
 
-      const newVars =
-        typeof value === 'string'
-          ? { [cssVariable]: value }
-          : extractColorVars(value, `-${colorKey}`);
-
-      return { ...vars, ...newVars };
-    }, {});
-  }
-
-  addBase({
-    ':root': extractColorVars(theme('colors')),
-  });
-}
-
+const secondary = {
+  // https://www.tailwindshades.com/#color=37.02127659574467%2C100%2C53.92156862745098&step-up=9&step-down=11&hue-shift=0&name=sun&base-stop=5&v=1&overrides=e30%3D
+  DEFAULT: '#FFA514',
+  50: '#FFFEFC',
+  100: '#FFF7EA',
+  200: '#FFEAC6',
+  300: '#FFDDA3',
+  400: '#FFCF7F',
+  500: '#FFC15B',
+  600: '#FFB338',
+  700: '#FFA514',
+  800: '#B26D00',
+  900: '#513200',
+  950: '#211400',
+};
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './src/**/*.{ts,tsx}',
+    'node_modules/@flumens/ionic/dist/**/*.{js,ts,jsx,tsx}',
+    'node_modules/@flumens/tailwind/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -43,24 +41,10 @@ module.exports = {
           700: '#4B7834',
           800: '#314E22',
           900: '#16230F',
-          950: '#090E06'
+          950: '#090E06',
         },
 
-        secondary: {
-          // https://www.tailwindshades.com/#color=37.02127659574467%2C100%2C53.92156862745098&step-up=9&step-down=11&hue-shift=0&name=sun&base-stop=5&v=1&overrides=e30%3D
-          DEFAULT: '#FFA514',
-          50: '#FFF4E3',
-          100: '#FFEBCC',
-          200: '#FFDA9E',
-          300: '#FFC870',
-          400: '#FFB742',
-          500: '#FFA514',
-          600: '#DB8700',
-          700: '#A36400',
-          800: '#6B4200',
-          900: '#331F00',
-          950: '#170E00'
-        },
+        secondary,
 
         success: {
           // https://www.tailwindshades.com/#color=128.25396825396825%2C100%2C32&step-up=8&step-down=11&hue-shift=0&name=fun-green&base-stop=7&v=1&overrides=e30%3D
@@ -75,7 +59,7 @@ module.exports = {
           700: '#00A316',
           800: '#006B0F',
           900: '#003307',
-          950: '#001703'
+          950: '#001703',
         },
 
         tertiary: {
@@ -91,24 +75,10 @@ module.exports = {
           700: '#0069AF',
           800: '#004472',
           900: '#002034',
-          950: '#000D16'
+          950: '#000D16',
         },
 
-        warning: {
-          // https://www.tailwindshades.com/#color=48.48214285714286%2C100%2C43.92156862745098&step-up=8&step-down=11&hue-shift=0&name=corn&base-stop=6&v=1&overrides=e30%3D
-          DEFAULT: '#E0B500',
-          50: '#FFF3C1',
-          100: '#FFEFAD',
-          200: '#FFE784',
-          300: '#FFE05B',
-          400: '#FFD833',
-          500: '#FFD00A',
-          600: '#E0B500',
-          700: '#A88800',
-          800: '#705A00',
-          900: '#382D00',
-          950: '#1C1600'
-        },
+        warning: secondary,
 
         danger: {
           // https://www.tailwindshades.com/#color=0%2C85.36585365853658%2C59.80392156862745&step-up=8&step-down=11&hue-shift=0&name=flamingo&base-stop=5&v=1&overrides=e30%3D
@@ -123,11 +93,10 @@ module.exports = {
           700: '#B30E0E',
           800: '#7F0A0A',
           900: '#4B0606',
-          950: '#310404'
-        }
+          950: '#310404',
+        },
       },
     },
   },
-  plugins: [exposeColorsAsCssVariables],
-}
-
+  plugins: flumensTailwind.plugins,
+};

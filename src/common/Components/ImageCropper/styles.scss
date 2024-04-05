@@ -1,4 +1,6 @@
 .image-cropper {
+  --background: black;
+
   ion-footer {
     position: absolute; // since it is outside ion-content
     bottom: 0;

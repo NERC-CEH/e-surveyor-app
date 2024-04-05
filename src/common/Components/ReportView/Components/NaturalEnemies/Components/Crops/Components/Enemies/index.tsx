@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Main } from '@flumens';
-import { IonItem, IonLabel, IonItemDivider, IonList } from '@ionic/react';
+import { IonItem, IonLabel, IonList } from '@ionic/react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
 import './styles.scss';
@@ -62,18 +62,10 @@ const NaturalEnemies: FC<Props> = ({ crops, group, crop }) => {
     <Main className="survey-report beneficial-species">
       <IonList lines="full">
         <div className="rounded">
-          <IonItemDivider>
-            <IonLabel slot="start">
-              <b>
-                <small>Beneficial species</small>
-              </b>
-            </IonLabel>
-            <IonLabel slot="end">
-              <b>
-                <small>Host plant</small>
-              </b>
-            </IonLabel>
-          </IonItemDivider>
+          <div className="list-divider">
+            <div>Beneficial species</div>
+            <div>Host plant</div>
+          </div>
 
           {items}
         </div>

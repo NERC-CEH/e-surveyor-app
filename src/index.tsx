@@ -5,10 +5,11 @@ import { initReactI18next } from 'react-i18next';
 import { App as AppPlugin } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
-import { initAnalytics } from '@flumens';
+import { sentryOptions } from '@flumens';
 import { setupIonicReact, isPlatform } from '@ionic/react';
+import * as SentryBrowser from '@sentry/browser';
+import * as Sentry from '@sentry/capacitor';
 import config from 'common/config';
-import 'common/theme.scss';
 import appModel from 'models/app';
 import savedSamples from 'models/savedSamples';
 import userModel from 'models/user';
@@ -16,29 +17,32 @@ import App from './App';
 
 i18n.use(initReactI18next).init({ lng: 'en' });
 
-setupIonicReact({
-  hardwareBackButton: false, // android back button
-  swipeBackEnabled: false,
-});
+console.log('🚩 App starting.');
+
+setupIonicReact();
 
 mobxConfig({ enforceActions: 'never' });
 
-async function init() {
+(async function () {
   await userModel.ready;
   await appModel.ready;
-  await savedSamples._init;
+  await savedSamples.ready;
 
   appModel.attrs.sendAnalytics &&
-    initAnalytics({
-      dsn: config.sentryDNS,
-      environment: config.environment,
-      build: config.build,
-      release: config.version,
-      userId: userModel.id,
-      tags: {
-        'app.appSession': appModel.attrs.appSession,
+    Sentry.init(
+      {
+        ...sentryOptions,
+        dsn: config.sentryDNS,
+        environment: config.environment,
+        release: config.version,
+        dist: config.build,
+        initialScope: {
+          user: { id: userModel.id },
+          tags: { session: appModel.attrs.appSession },
+        },
       },
-    });
+      SentryBrowser.init
+    );
 
   appModel.attrs.appSession += 1;
 
@@ -57,6 +61,4 @@ async function init() {
       /* disable android app exit using back button */
     });
   }
-}
-
-init();
+})();

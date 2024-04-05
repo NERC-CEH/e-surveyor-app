@@ -1,13 +1,22 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { arrowForwardCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Header, useAlert } from '@flumens';
-import { IonButton, IonIcon } from '@ionic/react';
 import Sample from 'models/sample';
 import useRouter from 'helpers/router';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
+
+const validate = (sample: Sample) => {
+  try {
+    getDetailsValidationSchema.validateSync(sample.attrs);
+  } catch (attrError) {
+    return attrError;
+  }
+
+  return null;
+};
 
 type Props = {
   sample: Sample;
@@ -20,9 +29,8 @@ const Controller: FC<Props> = ({ sample }) => {
   const alert = useAlert();
 
   const onDone = () => {
-    try {
-      getDetailsValidationSchema.validateSync(sample.attrs);
-    } catch (attrError) {
+    const invalids = validate(sample);
+    if (invalids) {
       alert({
         header: 'Missing',
         message:
@@ -43,11 +51,11 @@ const Controller: FC<Props> = ({ sample }) => {
 
   const { completedDetails } = sample.metadata;
 
+  const isInvalid = !!validate(sample);
   const doneButton = !completedDetails && (
-    <IonButton onClick={onDone} color="secondary" fill="solid">
+    <HeaderButton onClick={onDone} isInvalid={isInvalid}>
       Next
-      <IonIcon icon={arrowForwardCircleOutline} slot="end" />
-    </IonButton>
+    </HeaderButton>
   );
 
   const onChangeTrapOutside = (value: number) => {

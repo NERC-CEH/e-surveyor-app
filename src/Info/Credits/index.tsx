@@ -53,8 +53,8 @@ const Credits: FC = () => (
       </Section>
       <Section>
         <p className="logo">
-          <a href="https://flumens.io">
-            <img src={flumensLogo} alt="" />
+          <a href="https://flumens.io" aria-label="Flumens link">
+            <img src={flumensLogo} alt="flumens" />
           </a>
         </p>
         <P>

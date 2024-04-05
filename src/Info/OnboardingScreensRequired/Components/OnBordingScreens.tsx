@@ -6,14 +6,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Page } from '@flumens';
+import { Button, Page } from '@flumens';
 import {
   IonButton,
   IonHeader,
   IonToolbar,
   IonButtons,
   IonIcon,
-  IonLabel,
   IonFooter,
 } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
@@ -179,10 +178,13 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                   quality of the habitat you have created.
                 </p>
 
-                <IonButton color="secondary" onClick={exit}>
-                  <IonLabel>Let's start!</IonLabel>
-                  <IonIcon slot="end" icon={arrowForward} />
-                </IonButton>
+                <Button
+                  color="secondary"
+                  onPress={exit}
+                  endAddon={<IonIcon className="size-5" icon={arrowForward} />}
+                >
+                  Let's start!
+                </Button>
               </div>
             </div>
           </SwiperSlide>

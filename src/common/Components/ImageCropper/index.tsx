@@ -3,7 +3,7 @@ import Cropper, { CropperProps } from 'react-easy-crop';
 // eslint-disable-next-line import/no-unresolved
 import { Point, Area } from 'react-easy-crop/types';
 import { Filesystem, Directory } from '@capacitor/filesystem';
-import { InfoBackgroundMessage, getObjectURL, cropImage, URL } from '@flumens';
+import { getObjectURL, cropImage, URL } from '@flumens';
 // eslint-disable-line import/no-unresolved
 import {
   IonButton,
@@ -13,6 +13,7 @@ import {
   IonButtons,
   isPlatform,
 } from '@ionic/react';
+import InfoBackgroundMessage from '../InfoBackgroundMessage';
 import './styles.scss';
 
 type Props = {
