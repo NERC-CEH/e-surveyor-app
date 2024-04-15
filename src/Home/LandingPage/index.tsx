@@ -84,14 +84,14 @@ const LandingPage = () => {
             slidesPerView={1.3}
             {...tabletLayout}
           >
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <SurveyCard
                 image={survey1}
                 title="Moth trap"
                 type="Survey"
                 link="/survey/moth"
               />
-            </SwiperSlide>
+            </SwiperSlide> */}
             <SwiperSlide>
               <SurveyCard
                 image={survey1}
