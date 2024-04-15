@@ -59,6 +59,7 @@ type Attrs = SampleAttrs & {
 
   // beetle survey
   farm?: string;
+  fieldName?: string;
   trapDays?: number;
   fieldInsecticides?: boolean;
   fieldHerbicides?: boolean;
