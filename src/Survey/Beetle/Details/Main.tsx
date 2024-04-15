@@ -1,37 +1,33 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import {
   bookOutline,
   clipboardOutline,
-  informationCircleOutline,
   locationOutline,
   openOutline,
   timeOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import {
+  Button,
   CounterInput,
+  Input,
   Main,
   MenuAttrItem,
   MenuAttrItemFromModel,
-  MenuAttrToggle,
+  Toggle,
 } from '@flumens';
-import {
-  IonIcon,
-  IonItem,
-  IonItemDivider,
-  IonLabel,
-  IonList,
-} from '@ionic/react';
+import { IonIcon, IonList } from '@ionic/react';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
+
+const clipboardIcon = <IonIcon src={clipboardOutline} className="size-6 " />;
 
 type Props = {
   sample: Sample;
   onChangeTrapOutside: (value: number) => void;
 };
 
-const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
+const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
   const match = useRouteMatch();
 
   const { trapDays } = sample.attrs;
@@ -43,37 +39,27 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
 
   return (
     <Main>
-      <IonList lines="full">
-        <div className="rounded">
-          <IonItem
-            href="https://www.youtube.com/watch?v=UVC_VykDy2o"
-            detail
-            detailIcon={openOutline}
-          >
-            <IonIcon
-              icon={informationCircleOutline}
-              size="small"
-              slot="start"
-            />
-            <IonLabel class="ion-text-wrap">
-              Click here to watch a video on how to setup pitfall traps.
-            </IonLabel>
-          </IonItem>
-          <IonItem
-            href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
-            detail
-            detailIcon={openOutline}
-          >
-            <IonIcon icon={bookOutline} size="small" slot="start" />
-            <IonLabel class="ion-text-wrap">
-              Click here for the guidance documents.
-            </IonLabel>
-          </IonItem>
-        </div>
-      </IonList>
+      <div className="flex flex-col gap-1 pb-5">
+        <Button
+          href="https://www.youtube.com/watch?v=UVC_VykDy2o"
+          prefix={<IonIcon icon={bookOutline} size="small" />}
+          suffix={<IonIcon icon={openOutline} size="small" />}
+          className="mx-3 text-left"
+        >
+          Click here to watch a video on how to setup pitfall traps.
+        </Button>
+        <Button
+          href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
+          prefix={<IonIcon icon={bookOutline} size="small" />}
+          suffix={<IonIcon icon={openOutline} size="small" />}
+          className="mx-3 text-left"
+        >
+          Click here for the guidance documents.
+        </Button>
+      </div>
 
       <IonList lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <MenuAttrItemFromModel attr="date" model={sample} />
           <MenuAttrItem
             routerLink={`${match.url}/map`}
@@ -84,25 +70,30 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
             disabled={isDisabled}
             required
           />
-          <MenuAttrItemFromModel attr="farm" model={sample} />
+          <Input
+            label="Farm name"
+            prefix={<IonIcon src={locationOutline} className="size-6" />}
+            value={sample.attrs.farm}
+            onChange={(val: string) => (sample.attrs.farm = val)} // eslint-disable-line
+          />
           <CounterInput
             label="Trapping period"
             onChange={onChangeTrapOutside}
             value={trapDays}
-            icon={timeOutline}
-            min={1}
-            isDisabled={isDisabled}
-            valueLabel={
-              <span className="self-center opacity-70">
-                {`${trapDays}` === '1' ? 'day' : 'days'}
-              </span>
-            }
+            prefix={<IonIcon src={timeOutline} className="size-6" />}
+            minValue={1}
+            suffix={`${trapDays}` === '1' ? 'day' : 'days'}
           />
         </div>
 
-        <IonItemDivider mode="ios">Field</IonItemDivider>
-        <div className="rounded">
-          <MenuAttrItemFromModel attr="fieldName" model={sample} />
+        <h3 className="list-title">Field</h3>
+        <div className="rounded-list">
+          <Input
+            label="Name"
+            prefix={<IonIcon src={clipboardOutline} className="size-6" />}
+            value={sample.attrs.fieldName}
+            onChange={(val: string) => (sample.attrs.fieldName = val)} // eslint-disable-line
+          />
           <MenuAttrItemFromModel attr="fieldCrop" model={sample} />
           {sample.attrs.fieldCrop === 'Other' && (
             <MenuAttrItemFromModel attr="fieldCropOther" model={sample} />
@@ -120,58 +111,37 @@ const MainComponent: FC<Props> = ({ sample, onChangeTrapOutside }) => {
               model={sample}
             />
           )}
-
-          <MenuAttrToggle
-            icon={clipboardOutline}
-            // TODO: use config
+          <Toggle
+            prefix={clipboardIcon}
             label="Insecticides used"
-            value={sample.attrs?.fieldInsecticides}
-            onChange={(val: boolean) => {
-              sample.attrs.fieldInsecticides = val; // eslint-disable-line
-              sample.save();
-            }}
-            disabled={isDisabled}
+            defaultSelected={sample.attrs.fieldInsecticides}
+            onChange={(val: boolean) => (sample.attrs.fieldInsecticides = val)} // eslint-disable-line
           />
-          <MenuAttrToggle
-            icon={clipboardOutline}
-            // TODO: use config
+          <Toggle
+            prefix={clipboardIcon}
             label="Herbicides used"
-            value={sample.attrs?.fieldHerbicides}
-            onChange={(val: boolean) => {
-              sample.attrs.fieldHerbicides = val; // eslint-disable-line
-              sample.save();
-            }}
-            disabled={isDisabled}
+            defaultSelected={sample.attrs.fieldHerbicides}
+            onChange={(val: boolean) => (sample.attrs.fieldHerbicides = val)} // eslint-disable-line
           />
-          <MenuAttrToggle
-            icon={clipboardOutline}
+          <Toggle
+            prefix={clipboardIcon}
             label="Undersowing"
-            value={sample.attrs?.fieldUndersowing}
-            onChange={(val: boolean) => {
-              sample.attrs.fieldUndersowing = val; // eslint-disable-line
-              sample.save();
-            }}
-            disabled={isDisabled}
+            defaultSelected={sample.attrs.fieldUndersowing}
+            onChange={(val: boolean) => (sample.attrs.fieldUndersowing = val)} // eslint-disable-line
           />
-          <MenuAttrToggle
-            icon={clipboardOutline}
+          <Toggle
+            prefix={clipboardIcon}
             label="Companion cropping"
-            value={sample.attrs?.fieldCompanionCropping}
-            onChange={(val: boolean) => {
-              sample.attrs.fieldCompanionCropping = val; // eslint-disable-line
-              sample.save();
-            }}
-            disabled={isDisabled}
+            defaultSelected={sample.attrs.fieldCompanionCropping}
+            onChange={
+              (val: boolean) => (sample.attrs.fieldCompanionCropping = val) // eslint-disable-line
+            }
           />
-          <MenuAttrToggle
-            icon={clipboardOutline}
+          <Toggle
+            prefix={clipboardIcon}
             label="Intercropping"
-            value={sample.attrs?.fieldIntercropping}
-            onChange={(val: boolean) => {
-              sample.attrs.fieldIntercropping = val; // eslint-disable-line
-              sample.save();
-            }}
-            disabled={isDisabled}
+            defaultSelected={sample.attrs.fieldIntercropping}
+            onChange={(val: boolean) => (sample.attrs.fieldIntercropping = val)} // eslint-disable-line
           />
         </div>
       </IonList>

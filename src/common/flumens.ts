@@ -32,11 +32,6 @@ export { default as Store } from '@flumens/ionic/dist/models/Store';
 export { default as initStoredSamples } from '@flumens/ionic/dist/models/initStoredSamples';
 export { default as Page } from '@flumens/ionic/dist/components/Page';
 export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
-export { default as LongPressButton } from '@flumens/ionic/dist/components/LongPressButton';
-export {
-  default as RadioInput,
-  type Option as RadioOption,
-} from '@flumens/ionic/dist/components/RadioInput';
 export { default as Main } from '@flumens/ionic/dist/components/Main';
 export { default as Header } from '@flumens/ionic/dist/components/Header';
 export { default as Collapse } from '@flumens/ionic/dist/components/Collapse';
@@ -49,7 +44,6 @@ export {
 export { default as ModelValidationMessage } from '@flumens/ionic/dist/components/ModelValidationMessage';
 export { default as ImageWithBackground } from '@flumens/ionic/dist/components/ImageWithBackground';
 export { default as Gallery } from '@flumens/ionic/dist/components/Gallery';
-export { default as MenuAttrToggle } from '@flumens/ionic/dist/components/MenuAttrToggle';
 export { default as ModalHeader } from '@flumens/ionic/dist/components/ModalHeader';
 export { default as Section } from '@flumens/ionic/dist/components/Section';
 export { default as InfoButton } from '@flumens/ionic/dist/components/InfoButton';
@@ -62,7 +56,6 @@ export {
   default as MenuAttrItemFromModel,
   type MenuProps as MenuAttrItemFromModelMenuProps,
 } from '@flumens/ionic/dist/components/MenuAttrItemFromModel';
-export { default as CounterInput } from '@flumens/ionic/dist/components/CounterInput';
 export {
   default as MapContainer,
   useMapStyles,
@@ -97,3 +90,14 @@ export {
   default as InfoMessage,
   type Props as InfoMessageProps,
 } from '@flumens/tailwind/dist/components/InfoMessage';
+export {
+  default as RadioInput,
+  type RadioOption,
+} from '@flumens/tailwind/dist/components/Radio';
+export { default as Select } from '@flumens/tailwind/dist/components/Select';
+export { default as Toggle } from '@flumens/tailwind/dist/components/Switch';
+export { default as CounterInput } from '@flumens/tailwind/dist/components/NumberInput';
+export {
+  default as TailwindContext,
+  type ContextValue as TailwindContextValue,
+} from '@flumens/tailwind/dist/components/Context';

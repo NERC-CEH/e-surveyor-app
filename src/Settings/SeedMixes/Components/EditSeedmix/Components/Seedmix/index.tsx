@@ -15,7 +15,6 @@ import {
   IonItemOptions,
   IonLabel,
   IonInput,
-  IonItemDivider,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import { SeedmixSpecies, SeedMix } from '../../index';
@@ -110,7 +109,7 @@ const Seedmix: FC<Props> = ({
     return (
       <IonItemSliding className="seedmix-list-item" key={species.warehouse_id}>
         <IonItem>
-          <IonLabel slot="start">{taxonName}</IonLabel>
+          <div>{taxonName}</div>
         </IonItem>
 
         <IonItemOptions side="end">
@@ -125,19 +124,17 @@ const Seedmix: FC<Props> = ({
   const getSpeciesList = () => {
     if (!seedmix?.species.length)
       return (
-        <IonList>
-          <InfoBackgroundMessage>
-            Your custom seedmix list is empty.
-          </InfoBackgroundMessage>
-        </IonList>
+        <InfoBackgroundMessage>
+          Your custom seedmix list is empty.
+        </InfoBackgroundMessage>
       );
 
     const speciesEntries = seedmix?.species.map(getItem);
 
     return (
       <IonList>
-        <IonItemDivider>Species</IonItemDivider>
-        <div className="rounded">{speciesEntries}</div>
+        <h3 className="list-title">Species</h3>
+        <div className="rounded-list">{speciesEntries}</div>
       </IonList>
     );
   };
@@ -160,7 +157,7 @@ const Seedmix: FC<Props> = ({
 
       <IonContent>
         <IonList className="list-with-padding">
-          <div className="rounded">
+          <div className="rounded-list">
             <IonItem>
               <IonLabel position="fixed">
                 <b>Name</b>
@@ -170,7 +167,11 @@ const Seedmix: FC<Props> = ({
           </div>
         </IonList>
 
-        <Button color="secondary" onPress={() => history.push('/add')}>
+        <Button
+          color="secondary"
+          onPress={() => history.push('/add')}
+          className="mx-auto my-5"
+        >
           Add Species
         </Button>
 

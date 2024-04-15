@@ -1,9 +1,9 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { addCircleOutline, locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Main, MenuAttrItem, Button } from '@flumens';
-import { IonItemDivider, IonList, IonIcon, NavContext } from '@ionic/react';
+import { IonList, IonIcon, NavContext } from '@ionic/react';
 import Sample from 'models/sample';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -16,7 +16,7 @@ type Props = {
   isDisabled: boolean;
 };
 
-const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
+const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
 
@@ -32,7 +32,7 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
         color="secondary"
         onLongPress={navigateToSearch}
         onPress={photoSelect}
-        startAddon={<IonIcon icon={addCircleOutline} className="size-6" />}
+        prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
         className="mx-auto my-5"
       >
         Species
@@ -47,7 +47,7 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
       <Main>
         <IonList lines="full">
           <br />
-          <div className="rounded">
+          <div className="rounded-list">
             <MenuAttrItem
               routerLink={`${url}/map`}
               value={prettyGridRef}
@@ -58,8 +58,8 @@ const QuadratMain: FC<Props> = ({ subSample, photoSelect, isDisabled }) => {
             />
           </div>
 
-          <IonItemDivider mode="ios">Quadrat photo</IonItemDivider>
-          <div className="rounded">
+          <h3 className="list-title">Quadrat photo</h3>
+          <div className="rounded-list">
             <PhotoPicker
               model={subSample}
               maxImages={1}

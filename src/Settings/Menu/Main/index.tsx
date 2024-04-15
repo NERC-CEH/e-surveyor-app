@@ -1,8 +1,7 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
-import { Main, useAlert, MenuAttrToggle, InfoMessage } from '@flumens';
-import { IonItemDivider, IonIcon, IonList, IonItem } from '@ionic/react';
+import { Main, useAlert, Toggle, InfoMessage } from '@flumens';
+import { IonIcon, IonList, IonItem } from '@ionic/react';
 import config from 'common/config';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import seedMixIcon from 'common/images/seeds.svg';
@@ -43,13 +42,13 @@ type Props = {
   useAutoIDWhenBackOnline: any;
 };
 
-const Menu: FC<Props> = ({
+const Menu = ({
   resetApp,
   onToggle,
   sendAnalytics,
   use10stepsForCommonStandard,
   useAutoIDWhenBackOnline,
-}) => {
+}: Props) => {
   const showAlertDialog = useResetDialog(resetApp);
 
   const onSendAnalyticsToggle = (checked: boolean) =>
@@ -62,44 +61,44 @@ const Menu: FC<Props> = ({
   return (
     <Main className="app-settings">
       <IonList lines="full">
-        <IonItemDivider>Surveying</IonItemDivider>
-        <div className="rounded">
-          <MenuAttrToggle
-            icon={transectIcon}
+        <h3 className="list-title">Surveying</h3>
+        <div className="rounded-list">
+          <Toggle
+            prefix={<IonIcon src={transectIcon} className="size-5" />}
             label="Shorter Common Standards"
             value={use10stepsForCommonStandard}
             onChange={onCommonStandardToggle}
           />
-          <InfoMessage>
+          <InfoMessage inline>
             Use 10 steps when doing Common Standards survey.
           </InfoMessage>
-          <MenuAttrToggle
+          <Toggle
             label="Identify when reconnected"
-            icon={flowerIcon}
+            prefix={<IonIcon src={flowerIcon} className="size-5" />}
             onChange={onAutoIDWhenBackOnline}
             value={useAutoIDWhenBackOnline}
           />
-          <InfoMessage>
+          <InfoMessage inline>
             When working offline the app will not be able to automatically ID
             the species. Once reconnected to the Internet we can identify the
             species in the background.
           </InfoMessage>
 
-          <IonItem routerLink="/settings/seedmixes">
+          <IonItem routerLink="/settings/seedmixes" detail>
             <IonIcon icon={seedMixIcon} size="small" slot="start" />
             My seed mixes
           </IonItem>
         </div>
 
-        <IonItemDivider>Application</IonItemDivider>
-        <div className="rounded">
-          <MenuAttrToggle
+        <h3 className="list-title">Application</h3>
+        <div className="rounded-list">
+          <Toggle
             label="Share App Analytics"
-            icon={shareSocialOutline}
+            prefix={<IonIcon src={shareSocialOutline} className="size-5" />}
             onChange={onSendAnalyticsToggle}
             value={sendAnalytics}
           />
-          <InfoMessage>
+          <InfoMessage inline>
             Share app crash data so we can make the app more reliable.
           </InfoMessage>
 

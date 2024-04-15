@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { locationOutline, informationCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
-import { IonIcon, IonItemDivider, IonList } from '@ionic/react';
+import { IonIcon, IonList } from '@ionic/react';
 import Seeds from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import transectWShape from 'common/images/transectWShape.jpg';
@@ -18,7 +17,7 @@ type Props = {
   isDisabled?: boolean;
 };
 
-const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
+const MainComponent = ({ sample, isDisabled }: Props) => {
   const match = useRouteMatch();
 
   const { type, seedmixgroup, seedmix, quadratSize, steps, habitat } =
@@ -32,9 +31,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
   return (
     <Main>
       <InfoMessage
-        startAddon={
-          <IonIcon src={informationCircleOutline} className="size-6" />
-        }
+        prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
         color="tertiary"
         className="m-2"
       >
@@ -81,7 +78,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
       </InfoMessage>
 
       <IonList lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${match.url}/map`}
             value={prettyGridRef}
@@ -92,8 +89,8 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           />
         </div>
 
-        <IonItemDivider mode="ios">Survey</IonItemDivider>
-        <div className="rounded">
+        <h3 className="list-title">Survey</h3>
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${match.url}/type`}
             value={type || ''}
@@ -112,7 +109,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           />
           {isDisabled ||
             (!isCustom && !!steps && (
-              <InfoMessage>
+              <InfoMessage inline>
                 This is the number of times that you will stop and search for
                 plants on your transect.
               </InfoMessage>
@@ -128,7 +125,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           />
           {isDisabled ||
             (!isCustom && !!quadratSize && (
-              <InfoMessage>
+              <InfoMessage inline>
                 This is the size of the area that you will search for plants in
                 each step.
               </InfoMessage>
@@ -145,12 +142,10 @@ const MainComponent: FC<Props> = ({ sample, isDisabled }) => {
           )}
         </div>
 
-        <IonItemDivider mode="ios">
-          <span>
-            Seed mix (<i>optional</i>)
-          </span>
-        </IonItemDivider>
-        <div className="rounded">
+        <h3 className="list-title">
+          Seed mix (<i>optional</i>)
+        </h3>
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${match.url}/seedmixgroup`}
             icon={Seeds}

@@ -85,7 +85,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
           <IonLabel slot="end">{`${sample.samples.length}/${sample.attrs.steps}`}</IonLabel>
         </IonItemDivider>
 
-        <div className="rounded">{quadrats.map(getQuadrat)}</div>
+        <div className="rounded-list">{quadrats.map(getQuadrat)}</div>
       </IonList>
     );
   };
@@ -103,7 +103,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
       <Button
         onPress={onAddNewQuadrat}
         color="secondary"
-        startAddon={<IonIcon icon={addCircleOutline} className="size-6" />}
+        prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
         className="mx-auto my-5"
       >
         Add Quadrat
@@ -117,9 +117,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
     <Main>
       {!isDisabled && (
         <InfoMessage
-          startAddon={
-            <IonIcon src={informationCircleOutline} className="size-6" />
-          }
+          prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
           color="tertiary"
           className="m-2"
         >
@@ -167,7 +165,7 @@ const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
           </Button>
         )}
 
-        <div className="rounded">
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${match.url}/details`}
             icon={createOutline}

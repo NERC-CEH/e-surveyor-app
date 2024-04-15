@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import { MapRef } from 'react-map-gl';
 import {
   MapContainer,
   MapHeader,
@@ -50,7 +49,7 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
   const onMapClick = (e: any) => setLocation(mapEventToLocation(e));
   const onGPSClick = () => toggleGPS(model);
 
-  const [mapRef, setMapRef] = useState<MapRef>();
+  const [mapRef, setMapRef] = useState<any>();
   const flyToLocation = () => mapFlyToLocation(mapRef, location);
   useEffect(flyToLocation, [mapRef, location]);
 
@@ -63,7 +62,7 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
           useGridRef
         />
       </MapHeader>
-      <Main>
+      <Main className="[--padding-bottom:0px] [--padding-top:0px]">
         <MapContainer
           onReady={setMapRef}
           onClick={onMapClick}
@@ -83,7 +82,8 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
               options={styles}
               onChange={onStyleChange}
               value={currentStyle}
-              className="no-padding"
+              className="px-2"
+              platform="ios"
             />
           </MapSettingsPanel>
 

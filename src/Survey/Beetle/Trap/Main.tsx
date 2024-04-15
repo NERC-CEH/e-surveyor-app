@@ -7,9 +7,8 @@ import {
   openOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Button, Main, MenuAttrItem, MenuAttrItemFromModel } from '@flumens';
-import { IonList, IonIcon, IonLabel, IonItem } from '@ionic/react';
-import SegmentInput from 'common/Components/SegmentInput';
+import { Button, Input, Main, MenuAttrItem, Select } from '@flumens';
+import { IonList, IonIcon } from '@ionic/react';
 import Sample from 'models/sample';
 import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -29,25 +28,20 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
   const prettyGridRef = <GridRefValue sample={subSample} />;
 
   return (
-    <>
-      <Main>
-        <IonList lines="full">
-          <div className="rounded">
-            <IonItem
-              href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
-              detail
-              detailIcon={openOutline}
-            >
-              <IonIcon icon={bookOutline} size="small" slot="start" />
-              <IonLabel class="ion-text-wrap">
-                Click here for the guidance documents.
-              </IonLabel>
-            </IonItem>
-          </div>
-        </IonList>
+    <Main>
+      <div className="flex flex-col pb-5">
+        <Button
+          href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
+          prefix={<IonIcon icon={bookOutline} size="small" />}
+          suffix={<IonIcon icon={openOutline} size="small" />}
+          className="mx-3 text-left"
+        >
+          Click here for the guidance documents.
+        </Button>
 
         <IonList lines="full">
-          <div className="rounded">
+          <h3 className="list-title">Details</h3>
+          <div className="rounded-list">
             <SinglePhotoPicker
               label="Trap photo"
               model={subSample}
@@ -61,37 +55,52 @@ const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
               skipValueTranslation
               disabled={isDisabled}
             />
-
-            <SegmentInput
+            {/* <div className="border-b-[0.5px] border-neutral-200 bg-white">
+              <div className="bg-neutral-50/50 p-1">
+                <RadioInput
+                  options={marginOptions}
+                  value={subSample.attrs.margin}
+                  onChange={(value: any) => (subSample.attrs.margin = value)} // eslint-disable-line
+                  icon={false}
+                  size="small"
+                  inline
+                />
+              </div>
+            </div> */}
+            <Select
+              label="Position"
               options={marginOptions}
               value={subSample.attrs.margin}
-              onChange={(value: any) => {
-                subSample.attrs.margin = value; // eslint-disable-line
-                subSample.save();
-              }}
-              disabled={isDisabled}
+              onChange={(value: any) => (subSample.attrs.margin = value)} // eslint-disable-line
+              prefix={<IonIcon icon={locationOutline} className="size-6" />}
             />
-
-            <MenuAttrItemFromModel attr="comment" model={subSample} />
+            <Input
+              label="Notes"
+              labelPlacement="floating"
+              value={subSample.attrs.comment}
+              onChange={(value: any) => (subSample.attrs.comment = value)} // eslint-disable-line
+              isMultiline
+            />
           </div>
         </IonList>
 
-        <SpeciesList sample={subSample} isDisabled={isDisabled} disableAI />
+        <h3 className="list-title px-3">Species</h3>
+        <div className="flex flex-col gap-5">
+          <SpeciesList sample={subSample} isDisabled={isDisabled} disableAI />
 
-        {!isDisabled && (
-          <Button
-            onPress={onAddNewSpecies}
-            color="secondary"
-            startAddon={
-              <IonIcon slot="start" icon={cameraOutline} className="size-6" />
-            }
-            className="mx-auto my-4"
-          >
-            Add species
-          </Button>
-        )}
-      </Main>
-    </>
+          {!isDisabled && (
+            <Button
+              onPress={onAddNewSpecies}
+              color="secondary"
+              prefix={<IonIcon icon={cameraOutline} className="size-6" />}
+              className="mx-auto"
+            >
+              Add species
+            </Button>
+          )}
+        </div>
+      </div>
+    </Main>
   );
 };
 

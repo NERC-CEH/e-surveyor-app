@@ -25,9 +25,7 @@ const ReportMain: FC<Props> = ({ occurrences, seedmixSpecies }) => {
   return (
     <Main className="survey-report">
       <InfoMessage
-        startAddon={
-          <IonIcon src={informationCircleOutline} className="size-6" />
-        }
+        prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
         color="tertiary"
         className="m-2"
       >

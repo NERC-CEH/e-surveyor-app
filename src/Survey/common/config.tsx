@@ -34,7 +34,7 @@ const getSeedMixGroups = () => {
     .sort(alphabetically);
 
   const notRecorded = {
-    value: null,
+    value: '',
     isDefault: true,
     label: 'Not recorded',
   };
@@ -68,7 +68,7 @@ const getSeedMix = (model: Sample) => {
     .map(addValueToObject);
 
   const notRecorded = {
-    value: null,
+    value: '',
     isDefault: true,
     label: 'Not recorded',
   };
@@ -96,7 +96,7 @@ export const seedmixGroupAttr = {
       set: (value: any, sample: Sample) => {
         if (sample.attrs.seedmixgroup !== value) {
           sample.attrs.seedmixgroup = value; // eslint-disable-line
-          sample.attrs.seedmix = null; // eslint-disable-line
+          sample.attrs.seedmix = ''; // eslint-disable-line
         }
       },
     },

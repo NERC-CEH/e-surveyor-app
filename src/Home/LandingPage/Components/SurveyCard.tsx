@@ -10,7 +10,7 @@ type Props = {
 const SurveyCard = ({ image, title, type, link }: Props) => (
   <IonRouterLink
     routerLink={link}
-    className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white shadow-2xl"
+    className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white"
   >
     <div className="flex h-full w-full flex-col">
       <img

@@ -61,7 +61,7 @@ const NaturalEnemies: FC<Props> = ({ crops, group, crop }) => {
   return (
     <Main className="survey-report beneficial-species">
       <IonList lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">
             <div>Beneficial species</div>
             <div>Host plant</div>

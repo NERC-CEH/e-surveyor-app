@@ -51,7 +51,7 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
 
     return (
       <IonList>
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">Found species</div>
 
           {selectedSeedmixSpecies
@@ -93,7 +93,7 @@ const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
       <IonList>
         <h3 className="list-title">Missing species</h3>
 
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">Species</div>
           {list}
         </div>

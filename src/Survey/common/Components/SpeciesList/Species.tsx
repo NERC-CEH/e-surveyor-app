@@ -11,7 +11,6 @@ import { Gallery } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
-  IonLabel,
   IonItemOptions,
   IonItemOption,
   IonIcon,
@@ -112,16 +111,10 @@ const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
 
   const getSpeciesName = () => {
     return (
-      <IonLabel text-wrap>
-        {commonName && (
-          <IonLabel className="long" slot="start">
-            <b>{commonName}</b>
-          </IonLabel>
-        )}
-        <IonLabel className="long" slot="start">
-          <i>{scientificName}</i>
-        </IonLabel>
-      </IonLabel>
+      <div className="flex flex-col">
+        {commonName && <div className="font-semibold">{commonName}</div>}
+        <div className="italic">{scientificName}</div>
+      </div>
     );
   };
 

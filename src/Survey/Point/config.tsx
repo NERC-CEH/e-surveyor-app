@@ -140,6 +140,8 @@ const survey: Survey = {
 
       attrs: {
         name: new Date().toLocaleDateString('en-UK'),
+        seedmix: '',
+        seedmixgroup: '',
         location: null,
       },
     });

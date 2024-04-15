@@ -27,6 +27,8 @@ module.exports = {
   ],
   theme: {
     extend: {
+      ...flumensTailwind.theme?.extend,
+
       colors: {
         primary: {
           // https://www.tailwindshades.com/#color=99.78260869565216%2C39.31623931623931%2C45.88235294117647&step-up=9&step-down=12&hue-shift=0&name=apple&base-stop=6&v=1&overrides=e30%3D

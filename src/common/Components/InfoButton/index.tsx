@@ -1,37 +1,24 @@
-import { FC, useState, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
-import { JSX } from '@ionic/core';
-import { IonContent, IonPopover, IonIcon, IonButton } from '@ionic/react';
+import { Button } from '@flumens';
+import { IonContent, IonPopover, IonIcon } from '@ionic/react';
 import './styles.scss';
 
 type Props = {
-  buttonProps?: JSX.IonButton;
   children: ReactNode;
-  color?: any;
 };
 
-const InfoButton: FC<Props> = ({ children, buttonProps }) => {
+const InfoButton = ({ children }: Props) => {
   const [infoState, setShowInfo] = useState<any>({
     showInfo: false,
     event: undefined,
   });
 
-  const showInfo = (e: any) => {
-    e.persist();
-    setShowInfo({ showInfo: true, event: e });
-  };
-
+  const showInfo = (e: any) => setShowInfo({ showInfo: true, event: e });
   const hideInfo = () => setShowInfo({ showInfo: false, event: undefined });
 
   return (
-    <IonButton
-      slot="icon-only"
-      size="small"
-      shape="round"
-      fill="clear"
-      onClick={showInfo}
-      {...buttonProps}
-    >
+    <Button fill="clear" onPress={showInfo} className="inline-block py-0">
       <IonIcon src={informationCircleOutline} />
       <IonPopover
         className="info-popover"
@@ -41,7 +28,7 @@ const InfoButton: FC<Props> = ({ children, buttonProps }) => {
       >
         <IonContent>{children}</IonContent>
       </IonPopover>
-    </IonButton>
+    </Button>
   );
 };
 

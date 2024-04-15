@@ -73,7 +73,7 @@ const LandingPage = () => {
       <Main>
         <img
           src={logo}
-          className="absolute max-h-[150px] w-full bg-white px-[74px] py-[13px]"
+          className="absolute -mt-2 max-h-[150px] w-full bg-white px-[74px] py-[13px]"
         />
 
         <div className="flex h-full flex-col justify-evenly gap-5 overflow-hidden px-0 pb-[120px] pt-40">
@@ -84,6 +84,14 @@ const LandingPage = () => {
             slidesPerView={1.3}
             {...tabletLayout}
           >
+            <SwiperSlide>
+              <SurveyCard
+                image={survey1}
+                title="Moth trap"
+                type="Survey"
+                link="/survey/moth"
+              />
+            </SwiperSlide>
             <SwiperSlide>
               <SurveyCard
                 image={survey1}
@@ -113,7 +121,7 @@ const LandingPage = () => {
           <Button
             className="mx-auto w-fit px-5 text-lg shadow-2xl"
             onPress={identifyPhoto}
-            startAddon={<IonIcon src={cameraOutline} className="size-6" />}
+            prefix={<IonIcon src={cameraOutline} className="size-6" />}
           >
             Identify plant
           </Button>

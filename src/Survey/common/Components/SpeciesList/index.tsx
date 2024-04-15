@@ -178,7 +178,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
 
     return (
       <IonList id="list" lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">
             <div>Species</div>
             <div>{speciesEntries.length}</div>
@@ -215,7 +215,7 @@ const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
 
     return (
       <IonList id="list" lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">
             <div>Unknown species</div>
 

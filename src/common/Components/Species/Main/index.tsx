@@ -1,9 +1,9 @@
-import { FC, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { searchOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, useLoader } from '@flumens';
-import { IonList, IonIcon, NavContext } from '@ionic/react';
+import { IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import SpeciesCard from 'common/Components/SpeciesCard';
@@ -17,7 +17,7 @@ type Props = {
   onReidentify?: any;
 };
 
-const EditSpeciesMain: FC<Props> = ({ occurrence, onReidentify }) => {
+const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
   const { navigate } = useContext(NavContext);
   const match = useRouteMatch();
   const loader = useLoader();
@@ -114,33 +114,33 @@ const EditSpeciesMain: FC<Props> = ({ occurrence, onReidentify }) => {
   const identifying = occurrence.isIdentifying();
   const hasNoSpecies = !occurrence.getSpecies();
 
-  const identifyButton = !isIdentifying && occurrence?.canReIdentify() && (
-    <Button
-      onPress={onReidentify}
-      color="secondary"
-      className="mx-auto my-3 w-fit"
-      preventDefault
-    >
-      Reidentify
-    </Button>
-  );
+  const identifyButton = !isIdentifying &&
+    occurrence?.canReIdentify() &&
+    onReidentify && (
+      <Button
+        onPress={onReidentify}
+        color="secondary"
+        className="mx-auto my-3 w-fit"
+        preventDefault
+      >
+        Reidentify
+      </Button>
+    );
 
   return (
     <Main id="edit-species">
-      <div className="species-main-image-wrapper">
-        <div className="rounded">
-          <PhotoPicker
-            model={occurrence}
-            placeholderCount={1}
-            isDisabled={isDisabled}
-            allowToCrop
-          />
-        </div>
+      <div className="species-main-image-wrapper mx-auto -mt-1 max-w-xl">
+        <PhotoPicker
+          model={occurrence}
+          placeholderCount={1}
+          isDisabled={isDisabled}
+          allowToCrop
+        />
       </div>
 
       {identifyButton}
 
-      <IonList className="species-wrapper">
+      <div className="mx-auto flex max-w-xl flex-col gap-5 p-3">
         {!identifying && hasNoSpecies && (
           <InfoBackgroundMessage>
             <div>Sorry, we couldn't find any species 😕</div>
@@ -149,8 +149,8 @@ const EditSpeciesMain: FC<Props> = ({ occurrence, onReidentify }) => {
               <Button
                 onPress={navigateToSearch}
                 fill="outline"
-                className="mx-auto mt-6"
-                startAddon={<IonIcon className="size-6" src={searchOutline} />}
+                className="mx-auto mt-6 text-sm"
+                prefix={<IonIcon className="size-6" src={searchOutline} />}
               >
                 Search Species
               </Button>
@@ -161,7 +161,7 @@ const EditSpeciesMain: FC<Props> = ({ occurrence, onReidentify }) => {
         {getSelectedSpecies()}
 
         {getAIResults()}
-      </IonList>
+      </div>
     </Main>
   );
 };

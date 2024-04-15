@@ -36,7 +36,7 @@ const InfoBackgroundMessage = ({
         'mx-auto my-12 w-4/5 max-w-60 bg-white text-center shadow-sm',
         className
       )}
-      endAddon={hideButton}
+      suffix={hideButton}
     >
       {children}
     </InfoMessage>

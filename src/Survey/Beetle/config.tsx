@@ -1,6 +1,6 @@
-import { clipboardOutline, locationOutline } from 'ionicons/icons';
+import { clipboardOutline } from 'ionicons/icons';
 import * as Yup from 'yup';
-import { Option } from '@flumens/ionic/dist/components/RadioInput';
+import { RadioOption } from '@flumens';
 import icon from 'common/images/beetle.svg';
 import {
   Survey,
@@ -13,7 +13,11 @@ export const getDetailsValidationSchema = Yup.object().shape({
   location: verifyLocationSchema,
 });
 
-type ExtendedOption = Option & { commonName?: string; scientificName?: string };
+type ExtendedOption = RadioOption & {
+  label?: string;
+  commonName?: string;
+  scientificName?: string;
+};
 
 const addLabels = (option: any) => {
   if (option.label || option.isPlaceholder) return option;
@@ -22,10 +26,8 @@ const addLabels = (option: any) => {
     option.label = // eslint-disable-line no-param-reassign
       (
         <div className="flex flex-col">
-          <div>
-            <b>{option.commonName}</b>
-          </div>
-          <i>{option.scientificName}</i>
+          <div className="font-semibold">{option.commonName}</div>
+          <div className="italic">{option.scientificName}</div>
         </div>
       );
     return option;
@@ -272,15 +274,6 @@ const survey: Survey = {
     location: locationAttr,
 
     farm: {
-      menuProps: { icon: locationOutline, skipValueTranslation: true },
-      pageProps: {
-        attrProps: {
-          input: 'textarea',
-          inputProps: {
-            placeholder: 'Enter the farm name here.',
-          },
-        },
-      },
       remote: { id: 'location_name' },
     },
 
@@ -289,20 +282,6 @@ const survey: Survey = {
     },
 
     fieldName: {
-      menuProps: {
-        icon: clipboardOutline,
-        skipValueTranslation: true,
-        label: 'Name',
-      },
-      pageProps: {
-        headerProps: { title: 'Field' },
-        attrProps: {
-          input: 'textarea',
-          inputProps: {
-            placeholder: 'Enter the field name here.',
-          },
-        },
-      },
       remote: { id: 1779 },
     },
 
@@ -460,23 +439,6 @@ const survey: Survey = {
 
       margin: {
         remote: { id: 1786, values: marginOptions },
-      },
-
-      comment: {
-        menuProps: {
-          label: 'Notes',
-          icon: clipboardOutline,
-          skipValueTranslation: true,
-        },
-        pageProps: {
-          headerProps: {
-            title: 'Notes',
-          },
-          attrProps: {
-            input: 'textarea',
-            info: 'Please add any extra info about this record.',
-          },
-        },
       },
     },
 

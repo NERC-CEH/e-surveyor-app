@@ -42,38 +42,30 @@ const LoginMain = ({ onSubmit }: Props) => {
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="rounded">
+          <div className="rounded-list">
             <ControlledInput
               control={control}
               name="email"
-              startAddon={
-                <IonIcon icon={mailOutline} className="mx-2 opacity-60" />
-              }
+              prefix={<IonIcon icon={mailOutline} className="size-5" />}
               type="email"
-              autoComplete="off"
               placeholder="Email"
-              platform="ios"
             />
             <ControlledInput
               control={control}
               name="password"
-              startAddon={
-                <IonIcon icon={keyOutline} className="mx-2 opacity-60" />
-              }
-              endAddon={
+              prefix={<IonIcon icon={keyOutline} className="size-5" />}
+              suffix={
                 <IonIcon
                   icon={showPassword ? eyeOutline : eyeOffOutline}
-                  className="opacity-60"
+                  className="size-5 opacity-50"
                   onClick={togglePassword}
                 />
               }
               type={showPassword ? 'text' : 'password'}
-              autoComplete="off"
               placeholder="Password"
-              platform="ios"
             />
           </div>
-          <div className="flex justify-end">
+          <div className="my-4 flex justify-end">
             <IonRouterLink
               routerLink="/user/reset"
               className="text-sm text-primary-950"

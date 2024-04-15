@@ -8,7 +8,7 @@ const UploadedRecordInfoMessage = () => {
   return (
     <InfoMessage
       color="tertiary"
-      startAddon={<IonIcon src={informationCircleOutline} className="size-6" />}
+      prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
       skipTranslation
     >
       <T>

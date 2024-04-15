@@ -89,7 +89,7 @@ const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
           <Badge
             skipTranslation
             className="py-[3px] text-sm"
-            startAddon={<IonIcon icon={flowerIcon} />}
+            prefix={<IonIcon icon={flowerIcon} />}
           >
             {showSpeciesLength}
           </Badge>

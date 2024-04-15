@@ -181,7 +181,8 @@ const OnboardingScreens: FC<Props> = ({ appModel }) => {
                 <Button
                   color="secondary"
                   onPress={exit}
-                  endAddon={<IonIcon className="size-5" icon={arrowForward} />}
+                  className="mx-auto mt-7"
+                  suffix={<IonIcon className="size-5" icon={arrowForward} />}
                 >
                   Let's start!
                 </Button>

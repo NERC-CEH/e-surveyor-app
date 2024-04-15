@@ -56,7 +56,7 @@ const NaturalEnemies: FC<Props> = ({ crops, group }) => {
       <IonList lines="full">
         <h3 className="list-title">Crops</h3>
 
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">
             <div>Plant</div>
             <div>Beneficial species</div>

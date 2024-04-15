@@ -41,51 +41,37 @@ const RegisterMain = ({ onSubmit }: Props) => {
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
-          <div className="rounded">
+          <div className="rounded-list">
             <ControlledInput
               control={control}
               name="fullName"
-              startAddon={
-                <IonIcon icon={personOutline} className="mx-2 opacity-60" />
-              }
-              autoComplete="off"
+              prefix={<IonIcon icon={personOutline} className="size-5" />}
               placeholder="Full Name"
-              platform="ios"
             />
-
             <ControlledInput
               control={control}
               name="email"
-              startAddon={
-                <IonIcon icon={mailOutline} className="mx-2 opacity-60" />
-              }
+              prefix={<IonIcon icon={mailOutline} className="size-5" />}
               type="email"
-              autoComplete="off"
               placeholder="Email"
-              platform="ios"
             />
-
             <ControlledInput
               control={control}
               name="password"
-              startAddon={
-                <IonIcon icon={keyOutline} className="mx-2 opacity-60" />
-              }
-              endAddon={
+              prefix={<IonIcon icon={keyOutline} className="size-5" />}
+              suffix={
                 <IonIcon
                   icon={showPassword ? eyeOutline : eyeOffOutline}
-                  className="opacity-60"
+                  className="size-5 opacity-50"
                   onClick={togglePassword}
                 />
               }
               type={showPassword ? 'text' : 'password'}
-              autoComplete="off"
               placeholder="Password"
-              platform="ios"
             />
           </div>
 
-          <div className="px-5 py-1 text-sm">
+          <div className="my-4 px-5 text-sm">
             <T>
               By clicking Sign Up, you agree to our{' '}
               <IonRouterLink href={`${config.backend.url}/privacy-notice`}>

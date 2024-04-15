@@ -29,7 +29,7 @@ export default () => (
         <IonItemDivider>
           <T>User</T>
         </IonItemDivider>
-        <div className="rounded">
+        <div className="rounded-list">
           <Collapse title="Sign in/out or register">
             <p>
               <T>
@@ -59,7 +59,7 @@ export default () => (
         <IonItemDivider>
           <T>Surveys</T>
         </IonItemDivider>
-        <div className="rounded">
+        <div className="rounded-list">
           <Collapse title="Sync. with the website">
             <p>
               <T>All your saved surveys will be shown on your account page.</T>
@@ -99,7 +99,7 @@ export default () => (
         <IonItemDivider>
           <T>Record a habitat</T>
         </IonItemDivider>
-        <div className="rounded">
+        <div className="rounded-list">
           <Collapse title="How to complete a survey">
             <div>
               <p>
@@ -234,7 +234,7 @@ export default () => (
         <IonItemDivider>
           <T>Structured recording</T>
         </IonItemDivider>
-        <div className="rounded">
+        <div className="rounded-list">
           <Collapse title="Why should I do a transect?">
             <p>
               Because transects are carried out using an industry standard
@@ -360,7 +360,7 @@ export default () => (
         <IonItemDivider>
           <T>Identify a Species</T>
         </IonItemDivider>
-        <div className="rounded">
+        <div className="rounded-list">
           <Collapse title="Why is the AI not certain what my species is?">
             <p>
               There are some common reasons why the AI might be uncertain.
@@ -417,7 +417,7 @@ export default () => (
         <IonItemDivider>
           <T>Other</T>
         </IonItemDivider>
-        <div className="rounded">
+        <div className="rounded-list">
           <Collapse title="Reset the application">
             <p>
               <T>Go to the application settings page</T>{' '}

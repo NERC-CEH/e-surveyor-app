@@ -118,7 +118,7 @@ const ReportMain = ({ stepCount, steps, habitatList }: Props) => {
         <IonList>
           <h3 className="list-title">{label}</h3>
 
-          <div className="rounded">
+          <div className="rounded-list">
             <div className="list-divider">
               <div>Species</div>
               <div>Abundance</div>
@@ -146,7 +146,7 @@ const ReportMain = ({ stepCount, steps, habitatList }: Props) => {
 
     return (
       <IonList>
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">
             <div>Species</div>
             <div>Abundance</div>
@@ -166,9 +166,7 @@ const ReportMain = ({ stepCount, steps, habitatList }: Props) => {
   return (
     <Main>
       <InfoMessage
-        startAddon={
-          <IonIcon src={informationCircleOutline} className="size-6" />
-        }
+        prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
         color="tertiary"
         className="m-2"
       >

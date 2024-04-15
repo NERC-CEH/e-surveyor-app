@@ -7,16 +7,9 @@ import {
   addCircleOutline,
   bookmarkOutline,
   locationOutline,
-  informationCircleOutline,
 } from 'ionicons/icons';
 import { Main, MenuAttrItem, InfoMessage, InfoButton, Button } from '@flumens';
-import {
-  IonItemDivider,
-  IonIcon,
-  IonList,
-  NavContext,
-  IonNote,
-} from '@ionic/react';
+import { IonIcon, IonList, NavContext } from '@ionic/react';
 import cameraButton from 'common/images/cameraButton.png';
 import mapPicker from 'common/images/mapPicker.png';
 import Seeds from 'common/images/seeds.svg';
@@ -52,8 +45,8 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
         color="secondary"
         onLongPress={navigateToSearch}
         onPress={photoSelect}
-        startAddon={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="mx-auto my-5"
+        prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
+        className="mx-auto my-10"
       >
         Species
       </Button>
@@ -67,64 +60,63 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
   const baseURL = match.url;
 
   return (
-    <Main>
+    <Main className="[--padding-bottom:20px]">
       {!isDisabled && (
         <InfoMessage
-          startAddon={
-            <IonIcon src={informationCircleOutline} className="size-6" />
-          }
           color="tertiary"
           className="m-2"
+          suffix={
+            <InfoButton color="dark" label="READ MORE" header="Tips">
+              <div>
+                <p>
+                  Start by giving your survey a name (such as the name of the
+                  place you are surveying) and location. The app can pick up on
+                  your current location, but if you want to survey somewhere
+                  else, you can do this by clicking on the right arrow and using
+                  the map to choose your location.
+                </p>
+                <img src={mapPicker} />
+                <p>
+                  Choose your seed supplier from the drop down menu, and then
+                  choose the name of your seed mix. This will allow the app to
+                  compare the plant species you sowed to the plants you see in
+                  the survey.
+                </p>
+                <p>You can now begin to add plants to your survey. </p>
+                <img src={cameraButton} />
+                <p>
+                  If you have identified the plants yourself, hold down the
+                  orange species button and write the name of your plant species
+                  into the text box.
+                </p>
+                <p>
+                  If you would like the AI to identify your plants, tap on the
+                  camera button and take a photo of the plant you would like to
+                  identify. If the AI isn't sure what your plant is, it will put
+                  an [orange question mark] or [red cross] next to the photo and
+                  species name. You can tap to see images of different possible
+                  plant species, and choose which you think is correct by
+                  clicking "This is my plant".
+                </p>
+                <p>Click here to find out how to take an AI-friendly image.</p>
+                <p>
+                  Keep going until you have a list of all of your plants, and
+                  then click the finish button in the top right corner to view
+                  your report.
+                </p>
+              </div>
+            </InfoButton>
+          }
         >
           How to complete a survey?
-          <InfoButton color="dark" label="READ MORE" header="Tips">
-            <div>
-              <p>
-                Start by giving your survey a name (such as the name of the
-                place you are surveying) and location. The app can pick up on
-                your current location, but if you want to survey somewhere else,
-                you can do this by clicking on the right arrow and using the map
-                to choose your location.
-              </p>
-              <img src={mapPicker} />
-              <p>
-                Choose your seed supplier from the drop down menu, and then
-                choose the name of your seed mix. This will allow the app to
-                compare the plant species you sowed to the plants you see in the
-                survey.
-              </p>
-              <p>You can now begin to add plants to your survey. </p>
-              <img src={cameraButton} />
-              <p>
-                If you have identified the plants yourself, hold down the orange
-                species button and write the name of your plant species into the
-                text box.
-              </p>
-              <p>
-                If you would like the AI to identify your plants, tap on the
-                camera button and take a photo of the plant you would like to
-                identify. If the AI isn't sure what your plant is, it will put
-                an [orange question mark] or [red cross] next to the photo and
-                species name. You can tap to see images of different possible
-                plant species, and choose which you think is correct by clicking
-                "This is my plant".
-              </p>
-              <p> Click here to find out how to take an AI-friendly image. </p>
-              <p>
-                Keep going until you have a list of all of your plants, and then
-                click the finish button in the top right corner to view your
-                report.
-              </p>
-            </div>
-          </InfoButton>
         </InfoMessage>
       )}
 
       {isDisabled && <UploadedRecordInfoMessage />}
 
       <IonList lines="full">
-        <IonItemDivider>Details</IonItemDivider>
-        <div className="rounded">
+        <h3 className="list-title">Details</h3>
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${baseURL}/name`}
             icon={bookmarkOutline}
@@ -143,20 +135,17 @@ const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
           />
         </div>
 
-        <IonItemDivider>
-          <div>
-            Seed mix
-            <InfoButtonPopover buttonProps={{ color: 'medium' }}>
-              <IonNote>
-                Choose your seed supplier from the drop down menu, and then
-                choose the name of your seed mix. This will allow the app to
-                compare the plant species you sowed to the plants you see in the
-                survey.
-              </IonNote>
-            </InfoButtonPopover>
-          </div>
-        </IonItemDivider>
-        <div className="rounded">
+        <h3 className="list-title">
+          Seed mix
+          <InfoButtonPopover>
+            <div className="font-light">
+              Choose your seed supplier from the drop down menu, and then choose
+              the name of your seed mix. This will allow the app to compare the
+              plant species you sowed to the plants you see in the survey.
+            </div>
+          </InfoButtonPopover>
+        </h3>
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${baseURL}/seedmixgroup`}
             icon={Seeds}

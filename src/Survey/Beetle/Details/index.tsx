@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useContext, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Page, Header, useAlert } from '@flumens';
+import { Page, Header, useAlert, TailwindContext } from '@flumens';
 import Sample from 'models/sample';
 import useRouter from 'helpers/router';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
@@ -63,10 +63,20 @@ const Controller: FC<Props> = ({ sample }) => {
     sample.attrs.trapDays = value;
   };
 
+  const isDisabled = sample.isDisabled();
+
+  const origContext = useContext(TailwindContext);
+  const tailwindContext = useMemo(
+    () => ({ ...origContext, isDisabled }),
+    [origContext, isDisabled]
+  );
+
   return (
     <Page id="beetle-details">
       <Header title="Survey details" rightSlot={doneButton} />
-      <Main sample={sample} onChangeTrapOutside={onChangeTrapOutside} />
+      <TailwindContext.Provider value={tailwindContext}>
+        <Main sample={sample} onChangeTrapOutside={onChangeTrapOutside} />
+      </TailwindContext.Provider>
     </Page>
   );
 };

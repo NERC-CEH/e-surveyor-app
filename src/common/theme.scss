@@ -1,6 +1,4 @@
-@import '@ionic/core/css/core.css';
 @import '@ionic/core/css/ionic.bundle.css';
-
 @import '@flumens/ionic/dist/themes/rounded.css';
 
 @tailwind base;
@@ -82,10 +80,10 @@
   --ion-color-light-shade: var(--color-slate-200);
   --ion-color-light-tint: var(--color-white);
 
-  --ion-page-background: #f6f4f7;
+  --ion-page-background: var(--color-neutral-100);
 
   --ion-headings-font-weight: 300;
-  --ion-item-border-color: rgb(0, 0, 0, 0.2);
+  --ion-item-border-color: #e5e5e5; // tailwind neutral-200
 
   --ion-toolbar-background: var(--ion-color-primary);
   --ion-toolbar-color: #fff;
@@ -110,16 +108,7 @@ html.ios.plt-hybrid #status-bar-background {
 
 // info messages
 .attr-page .info-message {
-  --background: rgba(var(--ion-color-tertiary-rgb), 0.1);
-  background: white; // above is transparent
-
-  ion-note {
-    color: var(--ion-color-tertiary-dark);
-    font-size: 1em;
-  }
-  ion-icon {
-    color: var(--ion-color-tertiary-dark) !important;
-  }
+  @apply border-tertiary-300/40 bg-tertiary-50 text-tertiary-900;
 }
 
 // don't know why this is needed but it fixed location name being off
@@ -158,7 +147,8 @@ h1,
 ion-title,
 ion-card-title,
 .gallery-modal .title {
-  font-family: 'Museo500';
+  font-family: 'Museo';
+  font-weight: 500;
 }
 
 h2,
@@ -208,22 +198,6 @@ ion-toolbar {
   );
 }
 
-// info messages
-.attr-page .info-message {
-  --background: rgba(var(--ion-color-tertiary-rgb), 0.1);
-  background: white; // above is transparent
-
-  ion-note,
-  ion-button,
-  ion-icon {
-    color: var(--ion-color-tertiary-dark) !important;
-  }
-
-  ion-button {
-    --border-color: var(--ion-color-tertiary-dark);
-  }
-}
-
 // ??
 html[mode='ios'] .tabs-inner {
   margin-top: var(--ion-safe-area-top);
@@ -256,16 +230,34 @@ ion-item.menu-attr-item ion-label[slot='end'] {
 
 /** Ionic 7 fixes END **/
 
-// list item
+// list item picture
 .list-avatar {
   @apply flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-md bg-neutral-100;
 }
 
 // top of the list title
 .list-title {
-  @apply mx-2 my-4;
+  @apply mx-2 mb-3 mt-5 flex items-center text-[1.0625rem];
 }
+
 // top of the list item
 .list-divider {
   @apply flex items-center justify-between bg-neutral-200/70 p-1 px-2 text-sm text-neutral-600;
+}
+
+// Make Android icons dark, same as iOS
+ion-icon[slot='start'].md {
+  color: var(--ion-text-color, #000);
+}
+
+// Makes iOS menu items same height as Android
+ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+// Add padding to pages
+ion-content {
+  --padding-top: 5px;
+  --padding-bottom: 30px;
 }

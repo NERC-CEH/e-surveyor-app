@@ -26,22 +26,16 @@ const HomeController: FC = () => {
 
       <IonTabBar slot="bottom">
         <IonTabButton tab="home/landing" href="/home/landing">
-          <div className="tab-highlight">
-            <IonIcon icon={homeOutline} />
-          </div>
+          <IonIcon icon={homeOutline} />
         </IonTabButton>
 
         <IonTabButton tab="home/surveys" href="/home/surveys">
-          <div className="tab-highlight">
-            <IonIcon icon={personOutline} />
-            <PendingSurveysBadge className="absolute bottom-1/4 left-2/4" />
-          </div>
+          <IonIcon icon={personOutline} />
+          <PendingSurveysBadge className="absolute bottom-1/4 left-2/4" />
         </IonTabButton>
 
         <IonTabButton tab="home/menu" href="/home/menu">
-          <div className="tab-highlight">
-            <IonIcon icon={menuOutline} />
-          </div>
+          <IonIcon icon={menuOutline} />
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

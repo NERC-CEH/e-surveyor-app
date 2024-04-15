@@ -4,5 +4,9 @@
 
     border-top: env(safe-area-inset-top) solid white; // fill in the gap between the logo and the top bar
     --overflow: hidden;
+
+    &::part(background) {
+      filter: blur(2px) brightness(93%);
+    }
   }
 }

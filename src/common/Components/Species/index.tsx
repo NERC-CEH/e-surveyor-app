@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { observer } from 'mobx-react';
-import { Page, Header, useToast, device, Button } from '@flumens';
+import { Page, Header, useToast, device } from '@flumens';
 import Sample from 'models/sample';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
 
 type Props = {
@@ -29,9 +30,7 @@ const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
 
   const isIdentifying = occ.isIdentifying();
   const identifyButton = !isIdentifying && occ.canReIdentify() && (
-    <Button onPress={identifySpecies} color="secondary">
-      Reidentify
-    </Button>
+    <HeaderButton onClick={identifySpecies}>Reidentify</HeaderButton>
   );
 
   return (

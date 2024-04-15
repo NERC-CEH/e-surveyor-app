@@ -65,7 +65,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
   return (
     <>
       <h3 className="list-title">Supported Crops</h3>
-      <div className="rounded">
+      <div className="rounded-list">
         <div className="list-divider">
           <div>Plant</div>
           <div>Beneficial species</div>

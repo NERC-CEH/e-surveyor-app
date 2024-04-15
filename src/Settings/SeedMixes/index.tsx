@@ -8,12 +8,10 @@ import {
   IonItemOptions,
   IonLabel,
   IonItemSliding,
-  IonItemDivider,
 } from '@ionic/react';
 import appModel, { SeedMix } from 'models/app';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import EditSeedmix from './Components/EditSeedmix';
-import './styles.scss';
 
 const useDeleteConfirmation = () => {
   const alert = useAlert();
@@ -47,11 +45,9 @@ const Seedmixes: FC = () => {
   const getSeedmixes = () => {
     if (!appModel.attrs.seedmixes.length)
       return (
-        <IonList>
-          <InfoBackgroundMessage>
-            Your custom seedmix list is empty.
-          </InfoBackgroundMessage>
-        </IonList>
+        <InfoBackgroundMessage>
+          Your custom seedmix list is empty.
+        </InfoBackgroundMessage>
       );
 
     const getSeedmixEntry = ({ name, id, species }: SeedMix) => {
@@ -82,11 +78,11 @@ const Seedmixes: FC = () => {
 
     return (
       <IonList>
-        <div className="rounded">
-          <IonItemDivider className="seedmix-list-header">
-            <IonLabel>Seedmix</IonLabel>
-            <IonLabel>Species</IonLabel>
-          </IonItemDivider>
+        <div className="rounded-list">
+          <div className="list-divider">
+            <div>Seedmix</div>
+            <div>Species</div>
+          </div>
 
           {seedmixListItems}
         </div>
@@ -94,16 +90,7 @@ const Seedmixes: FC = () => {
     );
   };
 
-  const getNewSeedMixButton = () => {
-    const addNewSeedmix = () => setNewSeedmix('new');
-
-    return (
-      <Button color="secondary" onPress={addNewSeedmix}>
-        Add new
-      </Button>
-    );
-  };
-
+  const addNewSeedmix = () => setNewSeedmix('new');
   const onCancelSeedmix = () => setNewSeedmix('');
 
   const onSaveSeedmix = (seedmixToSave: SeedMix) =>
@@ -114,7 +101,13 @@ const Seedmixes: FC = () => {
       <Header title="My seedmixes" />
 
       <Main>
-        {getNewSeedMixButton()}
+        <Button
+          color="secondary"
+          onPress={addNewSeedmix}
+          className="mx-auto my-5"
+        >
+          Add new
+        </Button>
 
         {getSeedmixes()}
       </Main>

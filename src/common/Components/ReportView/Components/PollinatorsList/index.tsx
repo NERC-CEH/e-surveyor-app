@@ -7,7 +7,6 @@ import {
   IonModal,
   IonBadge,
   IonList,
-  IonNote,
   IonIcon,
 } from '@ionic/react';
 import pollination from 'common/data/pollination';
@@ -170,7 +169,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
     return (
       <IonList>
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">Found species</div>
 
           {species}
@@ -222,9 +221,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
     return (
       <>
         <InfoMessage
-          startAddon={
-            <IonIcon src={informationCircleOutline} className="size-6" />
-          }
+          prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
           color="tertiary"
           className="m-2"
         >
@@ -233,7 +230,7 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
         </InfoMessage>
 
         <IonList>
-          <div className="rounded">
+          <div className="rounded-list">
             <div className="list-divider">Found species</div>
             {species}
           </div>
@@ -252,15 +249,15 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
         <>
           <h3>
             <span>Pollinators count</span>
-            <InfoButton color="dark">
-              <IonNote>
+            <InfoButton>
+              <div className="font-light">
                 This section shows you how many pollinating species are
                 supported by each of the plants in your habitat. Tap the green
                 button to find out which species each plant supports.
-              </IonNote>
+              </div>
             </InfoButton>
           </h3>
-          <div className="rounded">
+          <div className="rounded-list">
             <div className="list-divider">
               <div>Species</div>
               <div>Counts</div>
@@ -273,15 +270,15 @@ const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
 
       <h3>
         <span>Supported species groups</span>
-        <InfoButton color="dark">
-          <IonNote>
+        <InfoButton>
+          <div className="font-light">
             In this section, you can see the number of species within each group
             that you are supporting. Tap the group name to find out about their
             benefits, and to see a full list of your supported species.
-          </IonNote>
+          </div>
         </InfoButton>
       </h3>
-      <div className="rounded">{getSupportedSpecies()}</div>
+      <div className="rounded-list">{getSupportedSpecies()}</div>
 
       <IonModal mode="md" isOpen={!!showModal}>
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />

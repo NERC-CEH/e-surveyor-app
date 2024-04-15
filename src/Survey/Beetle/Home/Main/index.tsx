@@ -56,7 +56,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
         <IonItem routerLink={`${match.url}/trap/${trapSample.cid}`} detail>
           <div className="flex items-center gap-2">
             {getTrapPhoto(trapSample)}
-            <h3 className="text-bold">{trapSample.getPrettyName()}</h3>
+            <h3>{trapSample.getPrettyName()}</h3>
           </div>
         </IonItem>
 
@@ -75,7 +75,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
 
     return (
       <IonList className="traps-list" lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <div className="list-divider">
             <div>Traps</div>
             <div>{sample.samples.length}</div>
@@ -91,7 +91,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
       {isDisabled && <UploadedRecordInfoMessage />}
 
       <IonList lines="full">
-        <div className="rounded">
+        <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${match.url}/details`}
             icon={createOutline}
@@ -105,9 +105,7 @@ const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
         <Button
           onPress={onAddNewTrap}
           color="secondary"
-          startAddon={
-            <IonIcon slot="start" icon={cameraOutline} className="size-6" />
-          }
+          prefix={<IonIcon icon={cameraOutline} className="size-6" />}
           className="mx-auto my-4"
         >
           Add Trap

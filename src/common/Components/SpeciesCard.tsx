@@ -1,23 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useState, FC } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
 import 'chart.js/auto';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
 import { Gallery, device, Button } from '@flumens';
-import {
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCard,
-  IonRow,
-  IonGrid,
-  IonCol,
-  IonIcon,
-} from '@ionic/react';
+import { IonIcon } from '@ionic/react';
 import { Taxon } from 'models/occurrence';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
-import './styles.scss';
 
 const options = {
   cutout: '80%',
@@ -63,11 +53,7 @@ interface Props {
   selectedSpeciesByUser?: any;
 }
 
-const SpeciesCard: FC<Props> = ({
-  species,
-  onSelect,
-  selectedSpeciesByUser,
-}) => {
+const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
   const [showGallery, setShowGallery] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -105,9 +91,10 @@ const SpeciesCard: FC<Props> = ({
   const getImage = (sp: any, index: number) => {
     if (!sp) {
       return (
-        <IonCol size="3" key={index}>
-          <div className="species-placeholder-images" />
-        </IonCol>
+        <div
+          key={index}
+          className="w-full rounded-[15px] bg-[#f1f1f1] px-0 py-[50%]"
+        />
       );
     }
 
@@ -116,27 +103,21 @@ const SpeciesCard: FC<Props> = ({
     const onImageClicked = () => onSpeciesImageClicked(index);
 
     return (
-      <IonCol size="3" key={spImage}>
-        <img
-          className="species-images"
-          src={spImage}
-          onClick={onImageClicked}
-        />
-      </IonCol>
+      <img
+        key={spImage}
+        className="overflow-hidden rounded-[15px]"
+        src={spImage}
+        onClick={onImageClicked}
+      />
     );
   };
 
   const getImages = () => {
     const firstFourImages = species.images?.slice(0, 4) || [];
+    const placeholderImages = new Array(4 - firstFourImages.length);
+    placeholderImages.fill(null);
 
-    const showImage = [
-      ...firstFourImages,
-      ...new Array(4 - firstFourImages.length),
-    ];
-
-    const images = showImage.map(getImage);
-
-    return images;
+    return [...firstFourImages, ...placeholderImages].map(getImage);
   };
 
   const { commonName, scientificName, score } = species;
@@ -149,41 +130,46 @@ const SpeciesCard: FC<Props> = ({
     <>
       {getGallery()}
 
-      <IonCard id="species-profile-card">
-        <IonCardHeader>
-          <div className="wrapper">
-            <div className="species-names-wrapper">
-              <IonCardTitle>{commonName}</IonCardTitle>
-              <IonCardSubtitle>
-                <i>{scientificName}</i>
-              </IonCardSubtitle>
-            </div>
-
-            {!selectedSpeciesByUser && (
-              <div id="doughnut">
-                <Doughnut
-                  data={getDoughnutData(score)}
-                  options={options}
-                  redraw
-                />
-                <div className="label">{getDoughnutData(score).text}</div>
-              </div>
-            )}
-
-            {selectedSpeciesByUser && (
-              <IonIcon icon={checkmark} size="large" className="my-auto" />
-            )}
+      <div className="flex flex-col gap-2 rounded-md border border-solid border-neutral-200 bg-white p-3 [&:first-of-type]:border-[var(--color-primary-800)]">
+        <div className="flex justify-between gap-2">
+          <div className="flex flex-col justify-center gap-1">
+            <h3 className="font-semibold">{commonName}</h3>
+            <h3 className="italic opacity-70">{scientificName}</h3>
           </div>
-        </IonCardHeader>
+
+          {!selectedSpeciesByUser && (
+            <div className="p-[5px]; relative h-[70px] w-[70px] self-center">
+              <Doughnut
+                data={getDoughnutData(score)}
+                options={options}
+                redraw
+              />
+              <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.9em] font-medium">
+                {getDoughnutData(score).text}
+              </div>
+            </div>
+          )}
+
+          {selectedSpeciesByUser && (
+            <IonIcon
+              icon={checkmark}
+              size="large"
+              className="my-auto"
+              color="success"
+            />
+          )}
+        </div>
 
         {!!images.length && isOnline && (
-          <IonGrid>
-            <IonRow>{getImages()}</IonRow>
-          </IonGrid>
+          <div className="grid grid-cols-4 gap-2">{getImages()}</div>
         )}
 
         {onSelect && (
-          <Button fill="outline" className="footer" onPress={onSelectWrap}>
+          <Button
+            fill="outline"
+            className="mt-3 p-2 text-sm"
+            onPress={onSelectWrap}
+          >
             This is My Plant
           </Button>
         )}
@@ -194,7 +180,7 @@ const SpeciesCard: FC<Props> = ({
             <IonIcon icon={earthOutline} />
           </InfoBackgroundMessage>
         )}
-      </IonCard>
+      </div>
     </>
   );
 };

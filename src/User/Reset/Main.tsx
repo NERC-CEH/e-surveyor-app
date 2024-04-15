@@ -29,17 +29,13 @@ const ResetMain = ({ onSubmit }: Props) => {
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="rounded">
+          <div className="rounded-list">
             <ControlledInput
               control={control}
               name="email"
-              startAddon={
-                <IonIcon icon={mailOutline} className="mx-2 opacity-60" />
-              }
+              prefix={<IonIcon icon={mailOutline} className="size-5" />}
               type="email"
-              autoComplete="off"
               placeholder="Email"
-              platform="ios"
             />
           </div>
 

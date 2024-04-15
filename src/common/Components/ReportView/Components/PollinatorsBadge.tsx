@@ -50,7 +50,7 @@ const PollinatorsBadge: FC<Props> = ({ uniqueSpecies }) => {
       <IonList>
         <h3 className="list-title">Found species</h3>
 
-        <div className="rounded">{species}</div>
+        <div className="rounded-list">{species}</div>
       </IonList>
     );
   };
