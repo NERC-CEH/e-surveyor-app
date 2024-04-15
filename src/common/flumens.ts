@@ -90,6 +90,7 @@ export {
   default as InfoMessage,
   type Props as InfoMessageProps,
 } from '@flumens/tailwind/dist/components/InfoMessage';
+export { default as InfoBackgroundMessage } from '@flumens/tailwind/dist/components/InfoBackgroundMessage';
 export {
   default as RadioInput,
   type RadioOption,
