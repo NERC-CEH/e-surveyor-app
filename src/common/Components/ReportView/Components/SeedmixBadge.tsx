@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import CountUp from 'react-countup';
 import { ModalHeader, Main } from '@flumens';
 import { IonIcon, IonModal, IonItem, IonList } from '@ionic/react';
@@ -30,7 +30,7 @@ type Props = {
   seedmixSpecies?: SeedmixSpecies[];
 };
 
-const SeedmixBadge: FC<Props> = ({ occurrences, seedmixSpecies }) => {
+const SeedmixBadge = ({ occurrences, seedmixSpecies }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
   if (!seedmixSpecies?.length) return null;

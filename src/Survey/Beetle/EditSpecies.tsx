@@ -1,11 +1,10 @@
-import { FC } from 'react';
 import { AttrPage } from 'common/flumens';
 import Occurrence from 'models/occurrence';
 import { beetleSpecies } from './config';
 
 type Props = { occurrence: Occurrence };
 
-const EditSpecies: FC<Props> = ({ occurrence }) => {
+const EditSpecies = ({ occurrence }: Props) => {
   const attrProps = {
     input: 'radio',
     inputProps: { options: beetleSpecies },

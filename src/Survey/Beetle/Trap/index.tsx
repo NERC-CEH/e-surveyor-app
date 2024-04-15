@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
@@ -65,7 +65,7 @@ const showFirstPhotoTip = (alert: any) => {
   });
 };
 
-const TrapController: FC<Props> = ({ subSample }) => {
+const TrapController = ({ subSample }: Props) => {
   const alert = useAlert();
   const [editImage, setEditImage] = useState<URL>();
   const { navigate } = useContext(NavContext);

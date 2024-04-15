@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import {
   settingsOutline,
@@ -28,14 +27,14 @@ type Props = {
   appModel: typeof AppModelType;
 };
 
-const MenuMain: FC<Props> = ({
+const MenuMain = ({
   isLoggedIn,
   user,
   logOut,
   appModel,
   refreshAccount,
   resendVerificationEmail,
-}) => {
+}: Props) => {
   const lang = appModel.attrs.language;
 
   const isNotVerified = user.verified === false; // verified is undefined in old versions

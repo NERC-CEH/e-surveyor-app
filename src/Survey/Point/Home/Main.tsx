@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import 'ionicons/dist/svg/checkmark-circle-outline.svg';
 import 'ionicons/dist/svg/close-circle-outline.svg';
@@ -30,7 +30,7 @@ type Props = {
   isDisabled: boolean;
 };
 
-const HomeMain: FC<Props> = ({ sample, photoSelect, match, isDisabled }) => {
+const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
   const { navigate } = useContext(NavContext);
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);

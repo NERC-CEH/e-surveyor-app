@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Header, Page, Main, Section } from '@flumens';
 import flumensLogo from 'common/images/flumens.svg';
 import plantNetLogo from './Pl@ntNet_logo.png';
@@ -6,7 +5,7 @@ import './styles.scss';
 
 const { P, H } = Section;
 
-const Credits: FC = () => (
+const Credits = () => (
   <Page id="credits">
     <Header title="Credits" />
     <Main className="ion-padding">

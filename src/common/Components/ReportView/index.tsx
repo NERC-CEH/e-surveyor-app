@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { Main, InfoButton, InfoMessage } from '@flumens';
@@ -19,7 +18,7 @@ type Props = {
   seedmixSpecies?: SeedmixSpecies[];
 };
 
-const ReportMain: FC<Props> = ({ occurrences, seedmixSpecies }) => {
+const ReportMain = ({ occurrences, seedmixSpecies }: Props) => {
   const uniqueSpecies = getUniqueSpecies(occurrences);
 
   return (

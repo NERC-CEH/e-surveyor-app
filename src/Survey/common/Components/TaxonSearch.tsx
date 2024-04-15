@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Main, Header } from '@flumens';
 import { NavContext } from '@ionic/react';
@@ -19,7 +19,7 @@ type Taxon = {
   warehouse_id: number;
 };
 
-const Controller: FC<Props> = ({ sample, subSample, subSubSample }) => {
+const Controller = ({ sample, subSample, subSubSample }: Props) => {
   const context = useContext(NavContext);
 
   const transformUKSIToAppTaxon = (taxon: Taxon) => ({

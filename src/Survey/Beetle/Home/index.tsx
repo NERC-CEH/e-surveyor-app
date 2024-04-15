@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
@@ -65,7 +65,7 @@ type Props = {
   sample: Sample;
 };
 
-const Controller: FC<Props> = ({ sample }) => {
+const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const toast = useToast();

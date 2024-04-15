@@ -1,4 +1,4 @@
-import { FC, createRef, useEffect } from 'react';
+import { createRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonButton,
@@ -16,10 +16,7 @@ interface Props {
   selectedSpecies: number[];
 }
 
-const SeedmixFindSpecies: FC<Props> = ({
-  onSpeciesSelected,
-  selectedSpecies,
-}) => {
+const SeedmixFindSpecies = ({ onSpeciesSelected, selectedSpecies }: Props) => {
   const history = useHistory();
   const input = createRef<any>();
 

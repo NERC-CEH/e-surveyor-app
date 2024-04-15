@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { ModalHeader, Main, InfoMessage } from '@flumens';
 import {
@@ -55,7 +55,7 @@ type Props = {
   uniqueSpecies: SpeciesNames[];
 };
 
-const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
+const NaturalEnemies = ({ uniqueSpecies }: Props) => {
   const [showModal, setShowModal] = useState('');
 
   const uniqueSupportedSpecies = getUniqueSupportedSpecies(uniqueSpecies);

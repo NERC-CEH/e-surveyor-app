@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import CountUp from 'react-countup';
 import { ModalHeader, Main } from '@flumens';
 import { IonIcon, IonModal, IonLabel, IonItem, IonList } from '@ionic/react';
@@ -18,7 +18,7 @@ type Props = {
   uniqueSpecies: SpeciesNames[];
 };
 
-const PollinatorsBadge: FC<Props> = ({ uniqueSpecies }) => {
+const PollinatorsBadge = ({ uniqueSpecies }: Props) => {
   const [showModal, setShowModal] = useState(false);
 
   const uniqueSupportedSpecies = getUniqueSupportedSpecies(uniqueSpecies);

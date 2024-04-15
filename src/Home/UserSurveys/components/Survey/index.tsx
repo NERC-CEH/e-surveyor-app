@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { useAlert, useToast, date, Badge } from '@flumens';
 import {
@@ -44,7 +43,7 @@ type Props = {
   uploadIsPrimary?: boolean;
 };
 
-const Survey: FC<Props> = ({ sample, uploadIsPrimary }) => {
+const Survey = ({ sample, uploadIsPrimary }: Props) => {
   const deleteSurvey = useDeleteAlert(sample);
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();

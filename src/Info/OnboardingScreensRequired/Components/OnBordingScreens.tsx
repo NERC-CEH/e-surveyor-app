@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { observer } from 'mobx-react';
 import { arrowForward, closeOutline } from 'ionicons/icons';
 import SwiperCore from 'swiper';
@@ -27,7 +27,7 @@ import './styles.scss';
 
 // Fixes iOS 12 scrolling issue.
 type MainProps = { children: ReactNode };
-const Main: FC<MainProps> = ({ children }) => <div>{children}</div>;
+const Main = ({ children }: MainProps) => <div>{children}</div>;
 
 const WaveShape = () => (
   <div className="custom-shape-divider-bottom-1593438501">
@@ -49,7 +49,7 @@ interface Props {
   appModel: typeof AppModelType;
 }
 
-const OnboardingScreens: FC<Props> = ({ appModel }) => {
+const OnboardingScreens = ({ appModel }: Props) => {
   const [moreSlidesExist, setMoreSlidesExist] = useState(true);
   const [controlledSwiper, setControlledSwiper] = useState<SwiperCore>();
 

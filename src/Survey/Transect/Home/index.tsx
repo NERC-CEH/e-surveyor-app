@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Header, Page, useToast } from '@flumens';
@@ -13,7 +13,7 @@ type Props = {
   sample: Sample;
 };
 
-const Controller: FC<Props> = ({ sample }) => {
+const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const toast = useToast();

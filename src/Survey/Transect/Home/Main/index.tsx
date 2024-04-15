@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import {
   createOutline,
@@ -35,7 +35,7 @@ type Props = {
   isDisabled?: boolean;
 };
 
-const MainComponent: FC<Props> = ({ sample, isDisabled, onAddNewQuadrat }) => {
+const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
 

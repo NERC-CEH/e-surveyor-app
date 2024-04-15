@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Page, Header, useToast } from '@flumens';
@@ -20,7 +19,7 @@ type Props = {
   savedSamples: any;
 };
 
-const MenuController: FC<Props> = ({ userModel, appModel, savedSamples }) => {
+const MenuController = ({ userModel, appModel, savedSamples }: Props) => {
   const toast = useToast();
 
   const {

@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { homeOutline, menuOutline, personOutline } from 'ionicons/icons';
 import { Redirect, Route } from 'react-router';
 import {
@@ -14,7 +13,7 @@ import Menu from './Menu';
 import UserSurveys from './UserSurveys';
 import './styles.scss';
 
-const HomeController: FC = () => {
+const HomeController = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>

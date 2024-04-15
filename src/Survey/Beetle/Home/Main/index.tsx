@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { createOutline, leaf, cameraOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
@@ -28,7 +27,7 @@ type Props = {
   onTrapDelete: (trapSample: Sample) => void;
 };
 
-const MainComponent: FC<Props> = ({ sample, onAddNewTrap, onTrapDelete }) => {
+const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
   const match = useRouteMatch();
   const isDisabled = sample.isUploaded();
 

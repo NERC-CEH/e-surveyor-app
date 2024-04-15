@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { IonItem } from '@ionic/react';
 import { Species } from '../../../index';
 import './styles.scss';
@@ -40,7 +39,7 @@ type Props = {
   onSelect: (species: Species, edit: boolean) => void;
 };
 
-const SpeciesItem: FC<Props> = ({ species, searchPhrase, onSelect }) => {
+const SpeciesItem = ({ species, searchPhrase, onSelect }: Props) => {
   const prettyName = prettifyName(species, searchPhrase);
   const { isRecorded } = species;
 

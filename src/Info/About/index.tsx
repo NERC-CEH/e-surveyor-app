@@ -1,10 +1,9 @@
-import { FC } from 'react';
 import { Page, Main, Header, Section } from '@flumens';
 import './styles.scss';
 
 const { P } = Section;
 
-const About: FC = () => (
+const About = () => (
   <Page id="about">
     <Header title="About" />
     <Main className="ion-padding">

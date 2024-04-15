@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import {
   bookOutline,
@@ -22,7 +21,7 @@ type Props = {
   isDisabled: boolean;
 };
 
-const TrapMain: FC<Props> = ({ subSample, onAddNewSpecies, isDisabled }) => {
+const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
   const { url } = useRouteMatch();
 
   const prettyGridRef = <GridRefValue sample={subSample} />;

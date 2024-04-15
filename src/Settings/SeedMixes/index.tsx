@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Main, Header, useAlert, Button } from '@flumens';
 import {
@@ -38,7 +38,7 @@ const useDeleteConfirmation = () => {
   };
 };
 
-const Seedmixes: FC = () => {
+const Seedmixes = () => {
   const [newSeedmix, setNewSeedmix] = useState<string>('');
   const confirmDelete = useDeleteConfirmation();
 

@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header } from '@flumens';
 import habitats from 'common/data/habitats';
@@ -10,7 +9,7 @@ type Props = {
   sample: Sample;
 };
 
-const ReportController: FC<Props> = ({ sample }) => {
+const ReportController = ({ sample }: Props) => {
   // TODO: Refactor when attr is renew
   const habitatsData: any = habitats;
   const getSteps = () => {

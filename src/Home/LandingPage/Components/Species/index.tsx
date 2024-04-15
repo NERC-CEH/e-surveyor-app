@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { close } from 'ionicons/icons';
 import { device, useToast } from '@flumens';
@@ -23,7 +23,7 @@ interface Props {
   onClose: any;
 }
 
-const SpeciesProfile: FC<Props> = ({ occurrence, onClose }) => {
+const SpeciesProfile = ({ occurrence, onClose }: Props) => {
   const [segment, setSegment] = useState('species');
   const toast = useToast();
 

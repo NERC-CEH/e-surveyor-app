@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
 import { InfoMessage, useToast, useAlert, device, Button } from '@flumens';
@@ -61,7 +61,7 @@ type Props = {
   disableAI?: boolean;
 };
 
-const SpeciesList: FC<Props> = ({ sample, isDisabled, disableAI = false }) => {
+const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
   const toast = useToast();

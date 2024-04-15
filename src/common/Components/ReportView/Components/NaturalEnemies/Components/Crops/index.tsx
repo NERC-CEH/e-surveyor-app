@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { ModalHeader, Main } from '@flumens';
 import { IonItem, IonLabel, IonModal, IonList } from '@ionic/react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
@@ -9,7 +9,7 @@ type Props = {
   group: string;
 };
 
-const NaturalEnemies: FC<Props> = ({ crops, group }) => {
+const NaturalEnemies = ({ crops, group }: Props) => {
   const [showModal, setShowModal] = useState('');
 
   const groupItems = (agg: any, item: EnemyInteraction) => {

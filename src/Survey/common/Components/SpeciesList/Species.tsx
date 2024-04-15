@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
 import {
   checkmarkCircle,
@@ -28,7 +28,7 @@ type Props = {
 
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
 
-const Species: FC<Props> = ({ model, isDisabled, onDelete, onClick }) => {
+const Species = ({ model, isDisabled, onDelete, onClick }: Props) => {
   const species = model.getSpecies();
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
 

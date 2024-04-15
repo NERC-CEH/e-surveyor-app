@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, useToast, device } from '@flumens';
 import Sample from 'models/sample';
@@ -10,7 +9,7 @@ type Props = {
   subSubSample: Sample;
 };
 
-const EditSpecies: FC<Props> = ({ subSample, subSubSample }) => {
+const EditSpecies = ({ subSample, subSubSample }: Props) => {
   const toast = useToast();
   const sample = subSubSample || subSample;
   const [occ] = sample.occurrences;

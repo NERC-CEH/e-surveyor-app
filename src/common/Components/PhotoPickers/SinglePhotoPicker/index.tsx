@@ -1,4 +1,4 @@
-import { FC, ComponentProps, useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
 import { captureImage, URL } from '@flumens';
@@ -18,13 +18,13 @@ interface Props
   disabled?: boolean;
 }
 
-const AppPhotoPicker: FC<Props> = ({
+const AppPhotoPicker = ({
   model,
   allowToCrop,
   maxImages,
   disabled,
   ...restProps
-}) => {
+}: Props) => {
   async function onAddNew(shouldUseCamera: boolean) {
     const [image] = await captureImage({
       camera: shouldUseCamera,

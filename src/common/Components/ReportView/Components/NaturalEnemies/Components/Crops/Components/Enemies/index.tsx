@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Main } from '@flumens';
 import { IonItem, IonLabel, IonList } from '@ionic/react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
@@ -13,7 +12,7 @@ type Props = {
   crop: string;
 };
 
-const NaturalEnemies: FC<Props> = ({ crops, group, crop }) => {
+const NaturalEnemies = ({ crops, group, crop }: Props) => {
   const bySelectedGroup = (interaction: EnemyInteraction) =>
     interaction.crop_group === group;
   const bySelectedCrop = (interaction: EnemyInteraction) =>

@@ -1,4 +1,4 @@
-import { FC, useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Cropper, { CropperProps } from 'react-easy-crop';
 // eslint-disable-next-line import/no-unresolved
 import { Point, Area } from 'react-easy-crop/types';
@@ -25,14 +25,14 @@ type Props = {
   cropperProps?: Partial<CropperProps>;
 };
 
-const ImageCropper: FC<Props> = ({
+const ImageCropper = ({
   image,
   onDone,
   onCancel: onCancelProp,
   message = 'Place your plant at the center of the frame.',
   allowRotation,
   cropperProps,
-}) => {
+}: Props) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);

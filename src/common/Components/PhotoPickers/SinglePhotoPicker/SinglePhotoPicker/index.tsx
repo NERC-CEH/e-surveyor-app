@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { addOutline, cameraOutline, closeOutline } from 'ionicons/icons';
@@ -113,14 +112,14 @@ function useDeletePrompt() {
     });
 }
 
-const SinglePhotoPicker: FC<Props> = ({
+const SinglePhotoPicker = ({
   model,
   label = 'Photo',
   onAddNew: onAddNewProp,
   isDisabled,
   className,
   Image = ImageDefault,
-}) => {
+}: Props) => {
   const [photo] = model.media;
   const promptToDelete = useDeletePrompt();
   const promptImageSource = usePromptImageSource();

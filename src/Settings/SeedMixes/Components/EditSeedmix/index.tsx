@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 import { getNewUUID } from '@flumens';
 import { IonModal } from '@ionic/react';
@@ -33,11 +33,7 @@ interface Props {
   onSaveSeedmix: (seedmix: SeedMix) => void;
 }
 
-const EditSeedmix: FC<Props> = ({
-  seedMixId,
-  onCancelSeedmix,
-  onSaveSeedmix,
-}) => {
+const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
   const [seedmix, setSeedmix] = useState<SeedMix>(getBlankSeedmix());
 
   useEffect(() => {

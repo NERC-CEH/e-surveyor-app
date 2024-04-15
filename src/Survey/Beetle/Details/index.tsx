@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Header, useAlert, TailwindContext } from '@flumens';
@@ -22,7 +22,7 @@ type Props = {
   sample: Sample;
 };
 
-const Controller: FC<Props> = ({ sample }) => {
+const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const router = useRouter();
 

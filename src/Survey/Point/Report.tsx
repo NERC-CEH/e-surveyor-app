@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, useToast } from '@flumens';
 import { NavContext } from '@ionic/react';
@@ -13,7 +13,7 @@ type Props = {
   sample: Sample;
 };
 
-const ReportController: FC<Props> = ({ sample }) => {
+const ReportController = ({ sample }: Props) => {
   const { navigate } = useContext(NavContext);
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();

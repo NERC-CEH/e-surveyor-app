@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, useAlert } from '@flumens';
 import {
@@ -78,13 +77,13 @@ interface Props {
   onNameChange: (e: any) => void;
 }
 
-const Seedmix: FC<Props> = ({
+const Seedmix = ({
   seedmix,
   onCancel,
   onSave,
   onSpeciesDelete,
   onNameChange,
-}) => {
+}: Props) => {
   const history = useHistory();
   const confirmCancel = useCancelConfirmation();
   const confirmDelete = useDeleteConfirmation();

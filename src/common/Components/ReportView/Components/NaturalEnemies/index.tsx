@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { ModalHeader } from '@flumens';
 import { IonItem, IonLabel, IonModal } from '@ionic/react';
 import naturalEnemies, {
@@ -12,7 +12,7 @@ type Props = {
   uniqueSpecies: SpeciesNames[];
 };
 
-const NaturalEnemies: FC<Props> = ({ uniqueSpecies }) => {
+const NaturalEnemies = ({ uniqueSpecies }: Props) => {
   const [showModal, setShowModal] = useState('');
 
   const uniqueSpeciesFlat = uniqueSpecies.flat();

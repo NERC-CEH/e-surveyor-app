@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { Capacitor } from '@capacitor/core';
 import { Page, Header, device, captureImage, useAlert } from '@flumens';
@@ -64,7 +64,7 @@ const showFirstPhotoTip = (alert: any) => {
   });
 };
 
-const QuadratController: FC<Props> = ({ subSample }) => {
+const QuadratController = ({ subSample }: Props) => {
   const alert = useAlert();
   const [editImage, setEditImage] = useState<URL>();
 

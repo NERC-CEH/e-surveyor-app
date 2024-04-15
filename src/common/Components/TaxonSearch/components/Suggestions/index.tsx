@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { IonList } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Species from './components/Species';
@@ -57,11 +56,11 @@ type Props = {
   searchPhrase: string;
   onSpeciesSelected: any;
 };
-const Suggestions: FC<Props> = ({
+const Suggestions = ({
   searchResults,
   searchPhrase,
   onSpeciesSelected,
-}) => {
+}: Props) => {
   if (!searchResults) {
     return (
       <IonList id="suggestions" lines="none">
