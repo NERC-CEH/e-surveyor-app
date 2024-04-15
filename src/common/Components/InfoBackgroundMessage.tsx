@@ -6,12 +6,7 @@ interface Props extends InfoMessageProps {
   name?: keyof Attrs;
 }
 
-const InfoBackgroundMessageWrap = ({
-  name,
-  children,
-  className,
-  ...props
-}: Props) => {
+const InfoBackgroundMessageWrap = ({ name, children, ...props }: Props) => {
   if (name && !appModel.attrs[name]) return null;
 
   const onHide = name
