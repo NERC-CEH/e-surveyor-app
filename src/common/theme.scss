@@ -93,7 +93,7 @@
   --id-possible-color: var(--ion-color-secondary);
   --id-rejected-color: var(--ion-color-danger);
 
-  --form-value-color: var(--color-primary-800);
+  --form-value-color: rgba(var(--color-tertiary-800-rgb), 0.85);
 }
 
 // status bar
@@ -260,4 +260,10 @@ ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios {
 ion-content {
   --padding-top: 5px;
   --padding-bottom: 30px;
+}
+
+// Make menu item value colours same as form values, e.g. Settings page
+ion-item .sc-ion-label-md-h.sc-ion-label-md-s.md[slot='end'],
+ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios[slot='end'] {
+  color: var(--form-value-color);
 }
