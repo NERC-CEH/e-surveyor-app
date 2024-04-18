@@ -39,7 +39,7 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
 
   return (
     <Main>
-      <div className="flex flex-col gap-1 pb-5">
+      <div className="mx-auto flex max-w-2xl flex-col gap-1 pb-5">
         <Button
           href="https://www.youtube.com/watch?v=UVC_VykDy2o"
           prefix={<IonIcon icon={bookOutline} size="small" />}
