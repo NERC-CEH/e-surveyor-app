@@ -21,9 +21,7 @@ const getSeedMixGroups = () => {
   const addValueToObject = (seedMixGroup: any) => ({ value: seedMixGroup });
 
   const getUniqueValues = (unique: any, item: any) => {
-    return unique.includes(item.mix_group)
-      ? unique
-      : [...unique, item.mix_group];
+    return unique.includes(item.mixGroup) ? unique : [...unique, item.mixGroup];
   };
 
   const alphabetically = (v1: any, v2: any) => v1.value.localeCompare(v2.value);
@@ -56,10 +54,10 @@ const getSeedMix = (model: Sample) => {
     return { value: seedMix };
   };
 
-  const bySeedmixGroups = (seedmix: any) => seedmix.mix_group === seedmixgroup;
+  const bySeedmixGroups = (seedmix: any) => seedmix.mixGroup === seedmixgroup;
 
   const getUniqueValues = (unique: any, item: any) => {
-    return unique.includes(item.mix_name) ? unique : [...unique, item.mix_name];
+    return unique.includes(item.mixName) ? unique : [...unique, item.mixName];
   };
 
   const seedMixes = seedmixData
@@ -147,7 +145,7 @@ export const customSeedmixAttr = {
   remote: {
     id: 1647,
     values: (values: SeedmixSpecies[]) => {
-      const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouse_id;
+      const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
 
       return values.map(getWarehouseId).join(','); // eslint-disable-line
     },

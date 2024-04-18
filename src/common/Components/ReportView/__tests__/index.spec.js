@@ -15,7 +15,7 @@ describe('ReportView', () => {
       // Given
       const seedmixName = Object.keys(seedmixData)[0];
       const seedmix = seedmixData[seedmixName];
-      const species = seedmix[0].latin_name;
+      const species = seedmix[0].latinName;
 
       const sample = new SampleWithNoGPS({ attrs: { seedmix: seedmixName } });
 
@@ -42,7 +42,7 @@ describe('ReportView', () => {
       // Given
       const seedmixName = Object.keys(seedmixData)[0];
       const seedmix = seedmixData[seedmixName];
-      const species = seedmix[0].latin_name;
+      const species = seedmix[0].latinName;
 
       const sample = new SampleWithNoGPS({
         attrs: {

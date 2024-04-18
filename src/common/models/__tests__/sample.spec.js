@@ -16,7 +16,7 @@ describe('Sample', () => {
           group: 'Butterfly',
           plant: 'Poterium sanguisorba',
           pollinator: 'Polyommatus icarus',
-          pollinator_common_name: 'Common Blue',
+          pollinatorCommonName: 'Common Blue',
         },
       ]);
     });

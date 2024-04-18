@@ -35,7 +35,7 @@ describe('App', () => {
       // When
       const updatedSeedmix = JSON.parse(JSON.stringify(seedmix));
       updatedSeedmix.name = 'seedmix update';
-      updatedSeedmix.species.push({ warehouse_id: 1 });
+      updatedSeedmix.species.push({ warehouseId: 1 });
 
       app.saveSeedmix(updatedSeedmix);
 

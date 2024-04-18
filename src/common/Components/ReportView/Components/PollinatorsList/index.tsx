@@ -26,7 +26,7 @@ export const SPECIES_GROUPS = {
 
 interface Pollinator {
   pollinator: string;
-  pollinator_common_name: string;
+  pollinatorCommonName: string;
 }
 
 const byName = ([taxon, name]: SpeciesNames, [taxon2, name2]: SpeciesNames) => {
@@ -48,7 +48,7 @@ interface Species {
   pollinator: string;
   plant: string;
   group: string;
-  pollinator_common_name: string;
+  pollinatorCommonName: string;
 }
 
 type Props = {
@@ -71,8 +71,8 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   const getPollinators = () => {
     const getPollinatorsEntries = ([name, commonName]: SpeciesNames) => {
-      const hasLatinName = ({ latin_name }: { latin_name: string }) =>
-        latin_name === name;
+      const hasLatinName = ({ latinName }: { latinName: string }) =>
+        latinName === name;
 
       const pollinator = pollination.find(hasLatinName);
 
@@ -80,10 +80,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
         return null;
       }
 
-      const {
-        pollinator_count: pollinatorCount,
-        pollinator_class: pollinatorClass,
-      } = pollinator;
+      const { pollinatorCount, pollinatorClass } = pollinator;
 
       const selectedName = commonName || name;
 
@@ -144,7 +141,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
   const getSpeciesGroupModalList = (groupName: string) => {
     const getPollinatorsEntries = ({
       pollinator: taxon,
-      pollinator_common_name: commonName,
+      pollinatorCommonName: commonName,
     }: Pollinator) => {
       return (
         <IonItem key={commonName || taxon}>
@@ -183,7 +180,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
       plant === speciesName;
     const getPollinatorsEntries = ({
       pollinator: latinName,
-      pollinator_common_name: commonName,
+      pollinatorCommonName: commonName,
     }: Pollinator) => {
       const taxonName = commonName || latinName;
       return (
@@ -207,15 +204,15 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
     }
 
     // eslint-disable-next-line camelcase
-    const hasLatinName = ({ latin_name }: { latin_name: string }) =>
-      latin_name === speciesName;
+    const hasLatinName = ({ latinName }: { latinName: string }) =>
+      latinName === speciesName;
     const pollinator = pollination.find(hasLatinName);
 
     let pollinatorCount;
     let pollinatorClass;
     if (pollinator) {
-      pollinatorCount = pollinator.pollinator_count;
-      pollinatorClass = pollinator.pollinator_class;
+      pollinatorCount = pollinator.pollinatorCount;
+      pollinatorClass = pollinator.pollinatorClass;
     }
 
     return (

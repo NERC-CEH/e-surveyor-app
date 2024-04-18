@@ -15,23 +15,23 @@ export type Species = {
   /**
    * Warehouse id
    */
-  warehouse_id: number;
+  warehouseId: number;
   /**
    * Which name was it found when doing search
    */
-  found_in_name: 'scientific_name' | 'common_name';
+  foundInName: 'scientificName' | 'commonName';
   /**
    * Scientific name
    */
-  scientific_name: string;
+  scientificName: string;
   /**
    * Common name
    */
-  common_name?: string;
+  commonName?: string;
   /**
    * Genus array index
    */
-  array_id?: number;
+  arrayId?: number;
   /**
    * ?
    */
@@ -39,11 +39,11 @@ export type Species = {
   /**
    * Species array index
    */
-  species_id?: number;
+  speciesId?: number;
   /**
    * Species name index, to know where found
    */
-  species_name_id?: number;
+  speciesNameId?: number;
   /**
    * Species group
    */
@@ -61,7 +61,7 @@ const annotateRecordedTaxa = (
   recordedTaxa: number[]
 ) => {
   const recordedTaxaWrap = (result: Species) =>
-    recordedTaxa.includes(result.preferredId || result.warehouse_id)
+    recordedTaxa.includes(result.preferredId || result.warehouseId)
       ? { ...result, ...{ isRecorded: true } }
       : result;
 

@@ -100,13 +100,13 @@ const Seedmix = ({
       const shouldDelete = await confirmDelete();
       if (!shouldDelete) return;
 
-      onSpeciesDelete(species.warehouse_id);
+      onSpeciesDelete(species.warehouseId);
     };
 
-    const taxonName = species.common_name || species.latin_name;
+    const taxonName = species.commonName || species.latinName;
 
     return (
-      <IonItemSliding className="seedmix-list-item" key={species.warehouse_id}>
+      <IonItemSliding className="seedmix-list-item" key={species.warehouseId}>
         <IonItem>
           <div>{taxonName}</div>
         </IonItem>

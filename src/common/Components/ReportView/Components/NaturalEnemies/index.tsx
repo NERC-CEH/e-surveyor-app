@@ -17,18 +17,18 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   const uniqueSpeciesFlat = uniqueSpecies.flat();
   const matchesPlant = (interaction: EnemyInteraction) =>
-    uniqueSpeciesFlat.includes(interaction.plant_latin_name);
+    uniqueSpeciesFlat.includes(interaction.plantLatinName);
   const crops = naturalEnemies.filter(matchesPlant);
 
   const groupItems = (agg: any, item: EnemyInteraction) => {
-    if (!agg[item.crop_group]) {
+    if (!agg[item.cropGroup]) {
       // eslint-disable-next-line no-param-reassign
-      agg[item.crop_group] = [item.beneficial_insect_common_name];
+      agg[item.cropGroup] = [item.beneficialInsectCommonName];
       return agg;
     }
 
     // eslint-disable-next-line no-param-reassign
-    agg[item.crop_group].push(item.beneficial_insect_common_name);
+    agg[item.cropGroup].push(item.beneficialInsectCommonName);
     return agg;
   };
 

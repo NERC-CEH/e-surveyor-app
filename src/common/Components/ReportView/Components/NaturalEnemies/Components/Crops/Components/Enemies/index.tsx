@@ -14,17 +14,17 @@ type Props = {
 
 const NaturalEnemies = ({ crops, group, crop }: Props) => {
   const bySelectedGroup = (interaction: EnemyInteraction) =>
-    interaction.crop_group === group;
+    interaction.cropGroup === group;
   const bySelectedCrop = (interaction: EnemyInteraction) =>
-    interaction.crop_common_name === crop;
+    interaction.cropCommonName === crop;
 
   const normalisePlantName = (
     interaction: EnemyInteraction
   ): [string, string] => {
-    const plantName = plantCommonNames[interaction.plant_latin_name]
-      ? plantCommonNames[interaction.plant_latin_name]
-      : interaction.plant_latin_name;
-    const beneficialSpecies = interaction.beneficial_insect_common_name; // || interacion.pest_latin_name;
+    const plantName = plantCommonNames[interaction.plantLatinName]
+      ? plantCommonNames[interaction.plantLatinName]
+      : interaction.plantLatinName;
+    const beneficialSpecies = interaction.beneficialInsectCommonName; // || interacion.pest_latin_name;
     return [beneficialSpecies, plantName];
   };
 

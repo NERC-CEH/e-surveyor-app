@@ -12,10 +12,10 @@ function deDuplicateSuggestions(suggestions: any) {
   const results: any = [];
 
   const taxonWrap = (taxon: any) => {
-    const name = taxon[taxon.found_in_name] || '';
+    const name = taxon[taxon.foundInName] || '';
     const nameNormalized = name.toLocaleLowerCase();
 
-    const previousName = previous[previous.found_in_name] || '';
+    const previousName = previous[previous.foundInName] || '';
     const previousNameNormalized = previousName.toLocaleLowerCase();
 
     const noCommonNames = !nameNormalized || !previousNameNormalized;
@@ -80,7 +80,7 @@ const Suggestions = ({
     const deDuped = deDuplicateSuggestions(searchResults);
 
     const speciesWrap = (species: any) => {
-      const key = `${species.warehouse_id}-${species.found_in_name}-${species.isFavourite}`;
+      const key = `${species.warehouseId}-${species.foundInName}-${species.isFavourite}`;
 
       return (
         <Species

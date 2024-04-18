@@ -17,8 +17,8 @@ function turnNamesArrayIntoLangObject(array) {
       language: languageCode,
       id,
       taxon: name,
-      preferred_taxon: taxon,
-      preferred_taxa_taxon_list_id: preferredId,
+      preferredTaxon: taxon,
+      preferredTaxaTaxonListId: preferredId,
     } = term;
 
     if (languageCode === 'Latin') {
@@ -30,9 +30,9 @@ function turnNamesArrayIntoLangObject(array) {
     agg[language] || (agg[language] = []); // eslint-disable-line
 
     const species = {
-      warehouse_id: parseInt(id, 10),
-      common_name: capitalize(name),
-      scientific_name: taxon,
+      warehouseId: parseInt(id, 10),
+      commonName: capitalize(name),
+      scientificName: taxon,
       preferredId: parseInt(preferredId, 10),
     };
 

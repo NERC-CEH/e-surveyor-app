@@ -16,9 +16,7 @@ const onClick = (e: any, species: Species, onSelect: any) => {
  * @private
  */
 function prettifyName(species: Species, searchPhrase: string) {
-  const foundInName = species.found_in_name;
-
-  const name = species[foundInName] as string;
+  const name = species[species.foundInName] as string;
 
   const searchPos = name.toLowerCase().indexOf(searchPhrase);
   if (!(searchPos >= 0)) {

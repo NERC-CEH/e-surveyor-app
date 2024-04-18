@@ -11,7 +11,7 @@ const { getUniqueSupportedSpecies } = Sample;
 
 interface Pollinator {
   pollinator: string;
-  pollinator_common_name: string;
+  pollinatorCommonName: string;
 }
 
 type Props = {
@@ -27,7 +27,7 @@ const PollinatorsBadge = ({ uniqueSpecies }: Props) => {
   const getSpeciesPollinatorsModalList = () => {
     const getPollinatorsEntries = ({
       pollinator: taxon,
-      pollinator_common_name: commonName,
+      pollinatorCommonName: commonName,
     }: Pollinator) => (
       <IonItem key={taxon}>
         <IonLabel>{commonName || taxon}</IonLabel>

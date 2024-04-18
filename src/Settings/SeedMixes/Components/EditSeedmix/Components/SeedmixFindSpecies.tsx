@@ -22,10 +22,10 @@ const SeedmixFindSpecies = ({ onSpeciesSelected, selectedSpecies }: Props) => {
 
   const onSpeciesSelectedWrap = (sp: Species) => {
     const seedmixSpecies = {
-      mix_name: 'Custom',
-      common_name: sp.common_name,
-      latin_name: sp.scientific_name,
-      warehouse_id: sp.preferredId || sp.warehouse_id,
+      mixName: 'Custom',
+      commonName: sp.commonName,
+      latinName: sp.scientificName,
+      warehouseId: sp.preferredId || sp.warehouseId,
     };
     onSpeciesSelected(seedmixSpecies);
 

@@ -24,7 +24,7 @@ export function getSeedmixUse(
   occurrences: Occurrence[],
   seedmixSpecies: SeedmixSpecies[]
 ): SpeciesNames[] {
-  const extractLatinName = ({ latin_name }: SeedmixSpecies) => latin_name; // eslint-disable-line camelcase
+  const extractLatinName = ({ latinName }: SeedmixSpecies) => latinName; // eslint-disable-line camelcase
   const selectedSeedmixLatinNames = seedmixSpecies.map(extractLatinName);
 
   const seedmixIncludesSpecies = ([scientificName]: SpeciesNames) =>
@@ -40,7 +40,7 @@ export function getMissingSeedmixSpecies(
 ) {
   const selectedSeedmixSpecies = getSeedmixUse(occurrences, seedmixSpecies);
 
-  const getMissingSelectedSeedmixSpecies = ({ latin_name: latinName }: any) => {
+  const getMissingSelectedSeedmixSpecies = ({ latinName }: any) => {
     const hasLatinName = ([latin]: any) => latin === latinName;
     return !selectedSeedmixSpecies.find(hasLatinName);
   };

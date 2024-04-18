@@ -17,13 +17,13 @@ const API = {
   /**
    * Returns an array of species in format
    {
-     array_id: "Genus array index"
-     species_id: "Species array index"
-     species_name_id: "Species name index" //to know where found
-     warehouse_id: "Warehouse id"
+     arrayId: "Genus array index"
+     speciesId: "Species array index"
+     speciesNameId: "Species name index" //to know where found
+     warehouseId: "Warehouse id"
      group: "Species group"
-     scientific_name: "Scientific name"
-     common_name: "Common name"
+     scientificName: "Scientific name"
+     commonName: "Common name"
      synonym: "Common name synonym"
    }
    */

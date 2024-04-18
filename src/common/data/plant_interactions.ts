@@ -4,7 +4,7 @@ export type Interaction = {
   pollinator: string;
   plant: string;
   group: string;
-  pollinator_common_name: string;
+  pollinatorCommonName: string;
 };
 
 const uniqArrayHashes: any = [];

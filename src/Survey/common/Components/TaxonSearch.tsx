@@ -14,18 +14,18 @@ type Props = {
 };
 
 type Taxon = {
-  scientific_name: string;
-  common_name?: string;
-  warehouse_id: number;
+  scientificName: string;
+  commonName?: string;
+  warehouseId: number;
 };
 
 const Controller = ({ sample, subSample, subSubSample }: Props) => {
   const context = useContext(NavContext);
 
   const transformUKSIToAppTaxon = (taxon: Taxon) => ({
-    commonName: taxon.common_name || '',
-    scientificName: taxon.scientific_name,
-    warehouseId: taxon.warehouse_id,
+    commonName: taxon.commonName || '',
+    scientificName: taxon.scientificName,
+    warehouseId: taxon.warehouseId,
     machineInvolvement: MachineInvolvement.HUMAN,
     images: [],
     score: 1,

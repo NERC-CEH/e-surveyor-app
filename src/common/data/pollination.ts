@@ -2,17 +2,17 @@ import Sample from 'models/sample';
 import pollination from './cacheRemote/pollination.json';
 
 type Pollinator = {
-  latin_name: string;
-  pollinator_count: number;
-  pollinator_class: string;
+  latinName: string;
+  pollinatorCount: number;
+  pollinatorClass: string;
 };
 
 const getRecalculatedPollinator = (sp: Pollinator): Pollinator => {
   const pollinatorCount = Sample.getUniqueSupportedSpecies([
-    [sp.latin_name, ''],
+    [sp.latinName, ''],
   ]).length;
 
-  return { ...sp, pollinator_count: pollinatorCount };
+  return { ...sp, pollinatorCount };
 };
 
 export default pollination.map(getRecalculatedPollinator) as Pollinator[];

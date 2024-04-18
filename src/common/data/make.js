@@ -1,10 +1,13 @@
 const fs = require('fs');
 const fetchSheet = require('@flumens/fetch-onedrive-excel'); // eslint-disable-line
+const _ = require('lodash');
 
 const drive =
   'sites/flumensio.sharepoint.com,6230bb4b-9d52-4589-a065-9bebfdb9ce63,21520adc-6195-4b5f-91f6-7af0b129ff5c/drive';
 
 const file = '01UPL42ZVRTEH6ILWMRFG3I5MIKC4YA7YW';
+
+const camelCase = doc => _.mapKeys(doc, (__, key) => _.camelCase(key));
 
 function saveSpeciesToFile(data, sheetName) {
   const saveSpeciesToFileWrap = (resolve, reject) => {
@@ -58,7 +61,7 @@ function getEnglishPlantNames() {
 
   const mapTaxonToCommonName = (agg, taxon) => ({
     ...agg,
-    [taxon.preferred_taxon]: taxon.taxon,
+    [taxon.preferredTaxon]: taxon.taxon,
   });
 
   const filteredData = data
@@ -72,7 +75,8 @@ function getEnglishPlantNames() {
 }
 
 const fetchAndSave = async sheet => {
-  const sheetData = await fetchSheet({ drive, file, sheet });
+  let sheetData = await fetchSheet({ drive, file, sheet });
+  sheetData = sheetData.map(camelCase);
   saveSpeciesToFile(sheetData, sheet);
 };
 

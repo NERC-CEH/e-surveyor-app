@@ -75,10 +75,10 @@ function search(
         // no need to add genus if searching for species
         // why speciesEntry[WAREHOUSE_INDEX] see 'sandDustHack' in generator
         fullRes = {
-          array_id: speciesArrayIndex,
-          found_in_name: 'scientific_name',
-          warehouse_id: speciesEntry[WAREHOUSE_INDEX],
-          scientific_name: speciesEntry[SCI_NAME_INDEX],
+          arrayId: speciesArrayIndex,
+          foundInName: 'scientificName',
+          warehouseId: speciesEntry[WAREHOUSE_INDEX],
+          scientificName: speciesEntry[SCI_NAME_INDEX],
         };
         results.push(fullRes);
       }
@@ -98,22 +98,22 @@ function search(
             if (otherWordsRegex.test(speciesInArray[SPECIES_SCI_NAME_INDEX])) {
               // add full sci name
               fullRes = {
-                array_id: speciesArrayIndex,
-                species_id: speciesIndex,
-                found_in_name: 'scientific_name',
-                warehouse_id: speciesInArray[WAREHOUSE_INDEX],
-                scientific_name: `${speciesEntry[SCI_NAME_INDEX]} ${speciesInArray[SPECIES_SCI_NAME_INDEX]}`,
+                arrayId: speciesArrayIndex,
+                speciesId: speciesIndex,
+                foundInName: 'scientificName',
+                warehouseId: speciesInArray[WAREHOUSE_INDEX],
+                scientificName: `${speciesEntry[SCI_NAME_INDEX]} ${speciesInArray[SPECIES_SCI_NAME_INDEX]}`,
               };
               results.push(fullRes);
             }
           } else {
             // if only genus search add its species
             fullRes = {
-              array_id: speciesArrayIndex,
-              species_id: speciesIndex,
-              found_in_name: 'scientific_name',
-              warehouse_id: speciesInArray[WAREHOUSE_INDEX],
-              scientific_name: `${speciesEntry[SCI_NAME_INDEX]} ${speciesInArray[SPECIES_SCI_NAME_INDEX]}`,
+              arrayId: speciesArrayIndex,
+              speciesId: speciesIndex,
+              foundInName: 'scientificName',
+              warehouseId: speciesInArray[WAREHOUSE_INDEX],
+              scientificName: `${speciesEntry[SCI_NAME_INDEX]} ${speciesInArray[SPECIES_SCI_NAME_INDEX]}`,
             };
             results.push(fullRes);
           }

@@ -21,8 +21,8 @@ const bySpeciesName = (
 };
 
 const bySeedmixName = (
-  { latin_name: taxon, common_name: name }: SeedmixSpecies,
-  { latin_name: taxon2, common_name: name2 }: SeedmixSpecies
+  { latinName: taxon, commonName: name }: SeedmixSpecies,
+  { latinName: taxon2, commonName: name2 }: SeedmixSpecies
 ) => (name || taxon).localeCompare(name2 || taxon2);
 
 type Props = {
@@ -75,14 +75,14 @@ const SeedmixBadge = ({ occurrences, seedmixSpecies }: Props) => {
     }
 
     const selectedSeedmixSpeciesEntries = ({
-      common_name,
-      latin_name,
+      commonName,
+      latinName,
     }: {
-      common_name?: string;
-      latin_name: string;
+      commonName?: string;
+      latinName: string;
     }) => {
-      const taxonName = common_name || latin_name;
-      return <IonItem key={taxonName}>{common_name || latin_name}</IonItem>;
+      const taxonName = commonName || latinName;
+      return <IonItem key={taxonName}>{commonName || latinName}</IonItem>;
     };
 
     const list = missingSeedmixSpecies

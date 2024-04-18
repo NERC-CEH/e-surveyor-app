@@ -1,212 +1,212 @@
 [
   {
-    "latin_name": "Achillea millefolium",
-    "pollinator_count": 61,
-    "pollinator_class": "high"
+    "latinName": "Achillea millefolium",
+    "pollinatorCount": 61,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Alliaria petiolata",
-    "pollinator_count": 33,
-    "pollinator_class": "medium"
+    "latinName": "Alliaria petiolata",
+    "pollinatorCount": 33,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Brassica nigra",
-    "pollinator_count": 12,
-    "pollinator_class": "low"
+    "latinName": "Brassica nigra",
+    "pollinatorCount": 12,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Brassica oleracea",
-    "pollinator_count": 26,
-    "pollinator_class": "medium"
+    "latinName": "Brassica oleracea",
+    "pollinatorCount": 26,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Brassica rapa",
-    "pollinator_count": 11,
-    "pollinator_class": "low"
+    "latinName": "Brassica rapa",
+    "pollinatorCount": 11,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Centaurea nigra",
-    "pollinator_count": 154,
-    "pollinator_class": "high"
+    "latinName": "Centaurea nigra",
+    "pollinatorCount": 154,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Centaurea scabiosa",
-    "pollinator_count": 142,
-    "pollinator_class": "high"
+    "latinName": "Centaurea scabiosa",
+    "pollinatorCount": 142,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Crepis capillaris",
-    "pollinator_count": 55,
-    "pollinator_class": "high"
+    "latinName": "Crepis capillaris",
+    "pollinatorCount": 55,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Daucus carota",
-    "pollinator_count": 93,
-    "pollinator_class": "high"
+    "latinName": "Daucus carota",
+    "pollinatorCount": 93,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Dipsacus fullonum",
-    "pollinator_count": 52,
-    "pollinator_class": "high"
+    "latinName": "Dipsacus fullonum",
+    "pollinatorCount": 52,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Filipendula ulmaria",
-    "pollinator_count": 42,
-    "pollinator_class": "medium"
+    "latinName": "Filipendula ulmaria",
+    "pollinatorCount": 42,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Galium album",
-    "pollinator_count": 11,
-    "pollinator_class": "low"
+    "latinName": "Galium album",
+    "pollinatorCount": 11,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Galium verum",
-    "pollinator_count": 15,
-    "pollinator_class": "low"
+    "latinName": "Galium verum",
+    "pollinatorCount": 15,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Geranium pratense",
-    "pollinator_count": 44,
-    "pollinator_class": "medium"
+    "latinName": "Geranium pratense",
+    "pollinatorCount": 44,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Helianthus annuus",
-    "pollinator_count": 9,
-    "pollinator_class": "low"
+    "latinName": "Helianthus annuus",
+    "pollinatorCount": 9,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Hypochaeris radicata",
-    "pollinator_count": 62,
-    "pollinator_class": "high"
+    "latinName": "Hypochaeris radicata",
+    "pollinatorCount": 62,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Knautia arvensis",
-    "pollinator_count": 58,
-    "pollinator_class": "high"
+    "latinName": "Knautia arvensis",
+    "pollinatorCount": 58,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Lathyrus pratensis",
-    "pollinator_count": 21,
-    "pollinator_class": "medium"
+    "latinName": "Lathyrus pratensis",
+    "pollinatorCount": 21,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Leontodon hispidus",
-    "pollinator_count": 93,
-    "pollinator_class": "high"
+    "latinName": "Leontodon hispidus",
+    "pollinatorCount": 93,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Leucanthemum vulgare",
-    "pollinator_count": 90,
-    "pollinator_class": "high"
+    "latinName": "Leucanthemum vulgare",
+    "pollinatorCount": 90,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Linum usitatissimum",
-    "pollinator_count": 1,
-    "pollinator_class": "low"
+    "latinName": "Linum usitatissimum",
+    "pollinatorCount": 1,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Lotus corniculatus",
-    "pollinator_count": 81,
-    "pollinator_class": "high"
+    "latinName": "Lotus corniculatus",
+    "pollinatorCount": 81,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Lychnis flos-cuculi",
-    "pollinator_count": 28,
-    "pollinator_class": "medium"
+    "latinName": "Lychnis flos-cuculi",
+    "pollinatorCount": 28,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Malva moschata",
-    "pollinator_count": 8,
-    "pollinator_class": "low"
+    "latinName": "Malva moschata",
+    "pollinatorCount": 8,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Medicago lupulina",
-    "pollinator_count": 18,
-    "pollinator_class": "low"
+    "latinName": "Medicago lupulina",
+    "pollinatorCount": 18,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Onobrychis viciifolia",
-    "pollinator_count": 26,
-    "pollinator_class": "medium"
+    "latinName": "Onobrychis viciifolia",
+    "pollinatorCount": 26,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Papaver rhoeas",
-    "pollinator_count": 10,
-    "pollinator_class": "low"
+    "latinName": "Papaver rhoeas",
+    "pollinatorCount": 10,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Plantago lanceolata",
-    "pollinator_count": 24,
-    "pollinator_class": "medium"
+    "latinName": "Plantago lanceolata",
+    "pollinatorCount": 24,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Plantago media",
-    "pollinator_count": 2,
-    "pollinator_class": "low"
+    "latinName": "Plantago media",
+    "pollinatorCount": 2,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Poterium sanguisorba",
-    "pollinator_count": 1,
-    "pollinator_class": "low"
+    "latinName": "Poterium sanguisorba",
+    "pollinatorCount": 1,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Primula veris",
-    "pollinator_count": 11,
-    "pollinator_class": "low"
+    "latinName": "Primula veris",
+    "pollinatorCount": 11,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Prunella vulgaris",
-    "pollinator_count": 42,
-    "pollinator_class": "medium"
+    "latinName": "Prunella vulgaris",
+    "pollinatorCount": 42,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Ranunculus acris",
-    "pollinator_count": 176,
-    "pollinator_class": "high"
+    "latinName": "Ranunculus acris",
+    "pollinatorCount": 176,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Rhinanthus minor",
-    "pollinator_count": 18,
-    "pollinator_class": "low"
+    "latinName": "Rhinanthus minor",
+    "pollinatorCount": 18,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Silene dioica",
-    "pollinator_count": 60,
-    "pollinator_class": "high"
+    "latinName": "Silene dioica",
+    "pollinatorCount": 60,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Sinapis alba",
-    "pollinator_count": 13,
-    "pollinator_class": "low"
+    "latinName": "Sinapis alba",
+    "pollinatorCount": 13,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Stachys officinalis",
-    "pollinator_count": 32,
-    "pollinator_class": "medium"
+    "latinName": "Stachys officinalis",
+    "pollinatorCount": 32,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Stachys sylvatica",
-    "pollinator_count": 14,
-    "pollinator_class": "low"
+    "latinName": "Stachys sylvatica",
+    "pollinatorCount": 14,
+    "pollinatorClass": "low"
   },
   {
-    "latin_name": "Trifolium hybridum",
-    "pollinator_count": 50,
-    "pollinator_class": "medium"
+    "latinName": "Trifolium hybridum",
+    "pollinatorCount": 50,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Trifolium pratense",
-    "pollinator_count": 71,
-    "pollinator_class": "high"
+    "latinName": "Trifolium pratense",
+    "pollinatorCount": 71,
+    "pollinatorClass": "high"
   },
   {
-    "latin_name": "Vicia cracca",
-    "pollinator_count": 44,
-    "pollinator_class": "medium"
+    "latinName": "Vicia cracca",
+    "pollinatorCount": 44,
+    "pollinatorClass": "medium"
   },
   {
-    "latin_name": "Vicia sativa",
-    "pollinator_count": 37,
-    "pollinator_class": "medium"
+    "latinName": "Vicia sativa",
+    "pollinatorCount": 37,
+    "pollinatorClass": "medium"
   }
 ]

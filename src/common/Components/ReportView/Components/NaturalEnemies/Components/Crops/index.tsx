@@ -13,18 +13,18 @@ const NaturalEnemies = ({ crops, group }: Props) => {
   const [showModal, setShowModal] = useState('');
 
   const groupItems = (agg: any, item: EnemyInteraction) => {
-    if (!agg[item.crop_common_name]) {
+    if (!agg[item.cropCommonName]) {
       // eslint-disable-next-line no-param-reassign
-      agg[item.crop_common_name] = [item.beneficial_insect_common_name];
+      agg[item.cropCommonName] = [item.beneficialInsectCommonName];
       return agg;
     }
 
     // eslint-disable-next-line no-param-reassign
-    agg[item.crop_common_name].push(item.beneficial_insect_common_name);
+    agg[item.cropCommonName].push(item.beneficialInsectCommonName);
     return agg;
   };
 
-  const bySelectedGroup = (crop: EnemyInteraction) => crop.crop_group === group;
+  const bySelectedGroup = (crop: EnemyInteraction) => crop.cropGroup === group;
 
   const groups: { [key: string]: string[] } = crops
     .filter(bySelectedGroup)

@@ -9,14 +9,14 @@ import SeedmixFindSpecies from './Components/SeedmixFindSpecies';
 
 export type SeedmixSpecies = SeedmixSpeciesFromRemote & {
   /** The warehouse id will always exist from search. */
-  warehouse_id: number;
+  warehouseId: number;
 };
 
 export type SeedMix = SeedMixFromRemote & { species: SeedmixSpecies[] };
 
 const bySpeciesName = (sp1: SeedmixSpecies, sp2: SeedmixSpecies) => {
-  const name1 = sp1.common_name || sp1.latin_name;
-  const name2 = sp2.common_name || sp2.latin_name;
+  const name1 = sp1.commonName || sp1.latinName;
+  const name2 = sp2.commonName || sp2.latinName;
 
   return name1.localeCompare(name2);
 };
@@ -62,7 +62,7 @@ const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
   };
 
   const onSpeciesDelete = (warehouseId: number) => {
-    const byId = (sp: SeedmixSpecies) => sp.warehouse_id !== warehouseId;
+    const byId = (sp: SeedmixSpecies) => sp.warehouseId !== warehouseId;
     const filteredList = seedmix.species.filter(byId);
     setSeedmix({ ...seedmix, species: filteredList } as SeedMix);
   };
@@ -76,7 +76,7 @@ const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
   const onNameChange = (e: any) =>
     setSeedmix({ ...seedmix, name: e.target.value } as SeedMix);
 
-  const getWarehouseID = (sp: SeedmixSpecies) => sp.warehouse_id;
+  const getWarehouseID = (sp: SeedmixSpecies) => sp.warehouseId;
   const selectedSpecies = seedmix.species.map(getWarehouseID);
 
   return (
