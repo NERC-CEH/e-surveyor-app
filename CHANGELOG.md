@@ -1,3 +1,7 @@
+### 1.2.0
+
+Added Moth trap survey.
+
 ### 1.1.0
 
 Added Beetle survey.

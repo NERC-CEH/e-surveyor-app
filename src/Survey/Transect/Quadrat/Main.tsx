@@ -4,6 +4,7 @@ import { addCircleOutline, locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Main, MenuAttrItem, Button } from '@flumens';
 import { IonList, IonIcon, NavContext } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Sample from 'models/sample';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -71,7 +72,19 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
 
         {getNewImageButton()}
 
-        <SpeciesList sample={subSample} isDisabled={isDisabled} />
+        <SpeciesList
+          sample={subSample}
+          isDisabled={isDisabled}
+          useSpeciesProfile
+        />
+
+        {!subSample.occurrences.length && (
+          <InfoBackgroundMessage>
+            Your species list is empty. <br /> Hold down the orange species
+            button to list plant species yourself, or tap to take a photo for
+            the AI to identify.
+          </InfoBackgroundMessage>
+        )}
       </Main>
     </>
   );

@@ -1,17 +1,12 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
 import { InfoMessage, useToast, useAlert, device, Button } from '@flumens';
 import { IonList, NavContext } from '@ionic/react';
-import config from 'common/config';
-import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
-import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import Species from './Species';
 import UnidentifiedSpecies from './UnidentifiedSpecies';
-
-const { POSITIVE_THRESHOLD } = config;
 
 const isUnknown = (value: boolean) => (model: Model) =>
   !!model.getSpecies() === value;
@@ -24,14 +19,16 @@ function byCreateTime(m1: Model, m2: Model) {
   return date2.getTime() - date1.getTime();
 }
 
-const hasOver5UnidentifiedSpecies = (sample: Sample) => {
+const hasOver5UnidentifiedSpecies = (
+  sample: Sample,
+  useSubSamples: boolean
+) => {
   const unIdentifiedSpecies = (model: Model) => {
     const occ = model instanceof Occurrence ? model : model.occurrences[0];
     return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying();
   };
 
-  const useOccurrences = sample.metadata.survey === 'beetle';
-  const list: any = useOccurrences ? sample.occurrences : sample.samples;
+  const list: any = useSubSamples ? sample.samples : sample.occurrences;
   return list.filter(unIdentifiedSpecies).length >= 5;
 };
 
@@ -58,66 +55,29 @@ function deleteSample(sample: Model, alert: any) {
 type Props = {
   sample: Sample;
   isDisabled: boolean;
+  useSubSamples?: boolean;
+  useSpeciesProfile?: boolean;
   disableAI?: boolean;
+  disableDelete?: boolean;
 };
 
-const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
+const SpeciesList = ({
+  sample,
+  isDisabled,
+  disableAI = false,
+  disableDelete = false,
+  useSubSamples = false,
+  useSpeciesProfile = false,
+}: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
   const toast = useToast();
   const alert = useAlert();
 
-  const isBeetleSurvey = sample.metadata.survey === 'beetle';
-  const rawList = isBeetleSurvey ? sample.occurrences : sample.samples;
+  const rawList = !useSubSamples ? sample.occurrences : sample.samples;
   const list = [...rawList].sort(byCreateTime);
 
-  useEffect(() => {
-    if (isBeetleSurvey) return;
-
-    const hasSpeciesWithLowScore = (model: Model) => {
-      const occ = model instanceof Occurrence ? model : model.occurrences[0];
-      const score = occ.getSpecies()?.score;
-      if (
-        score &&
-        score < POSITIVE_THRESHOLD &&
-        appModel.attrs.showFirstLowScorePhotoTip
-      ) {
-        alert({
-          message:
-            "The AI isn't sure about your photo, tap to check other possible species.",
-          buttons: [{ text: 'OK' }],
-        });
-        appModel.attrs.showFirstLowScorePhotoTip = false;
-      }
-    };
-    (list as Model[]).some(hasSpeciesWithLowScore);
-  }, [list]);
-
-  if (!list.length) {
-    if (isBeetleSurvey)
-      return (
-        <IonList>
-          {/* <InfoBackgroundMessage>
-            Your species list is empty. <br /> Tap the orange species button to
-            take a photo of a beetle for the AI to identify.
-          </InfoBackgroundMessage> */}
-          <InfoBackgroundMessage>
-            Your species list is empty. <br /> Tap the orange species button to
-            add your first beetle.
-          </InfoBackgroundMessage>
-        </IonList>
-      );
-
-    return (
-      <IonList>
-        <InfoBackgroundMessage>
-          Your species list is empty. <br /> Hold down the orange species button
-          to list plant species yourself, or tap to take a photo for the AI to
-          identify.
-        </InfoBackgroundMessage>
-      </IonList>
-    );
-  }
+  if (!list.length) return null;
 
   const onIdentifyAll = async () => {
     if (!device.isOnline) {
@@ -152,11 +112,10 @@ const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
     }
   };
 
-  const onDelete = (model: Model) => {
-    deleteSample(model, alert);
-  };
+  const onDelete = (model: Model) => deleteSample(model, alert);
+
   const navigateToSpeciesSample = (model: Model) => {
-    if (isBeetleSurvey && isDisabled) return;
+    if (!useSpeciesProfile || isDisabled) return;
 
     navigate(`${url}/species/${model.cid}`);
   };
@@ -167,7 +126,7 @@ const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
         key={model.cid}
         model={model}
         isDisabled={isDisabled}
-        onDelete={!isBeetleSurvey ? onDelete : undefined}
+        onDelete={!disableDelete ? onDelete : undefined}
         onClick={navigateToSpeciesSample}
       />
     );
@@ -192,7 +151,7 @@ const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
 
   const getUnidentifiedSpeciesList = () => {
     const showIdentifyAllBtn =
-      !disableAI && hasOver5UnidentifiedSpecies(sample);
+      !disableAI && hasOver5UnidentifiedSpecies(sample, useSubSamples);
 
     const getSpecies = (model: Model) => (
       <UnidentifiedSpecies
@@ -201,7 +160,7 @@ const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
         isDisabled={isDisabled}
         onIdentify={onIdentify}
         deEmphasisedIdentifyBtn={showIdentifyAllBtn}
-        onDelete={!isBeetleSurvey ? onDelete : undefined}
+        onDelete={!disableDelete ? onDelete : undefined}
         onClick={navigateToSpeciesSample}
         disableAI={disableAI}
       />
@@ -217,7 +176,7 @@ const SpeciesList = ({ sample, isDisabled, disableAI = false }: Props) => {
       <IonList id="list" lines="full">
         <div className="rounded-list">
           <div className="list-divider">
-            <div>Unknown species</div>
+            <div>Unidentified species</div>
 
             {!showIdentifyAllBtn && <div>{count}</div>}
 

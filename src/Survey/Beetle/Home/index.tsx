@@ -177,12 +177,20 @@ const Controller = ({ sample }: Props) => {
       </HeaderButton>
     );
 
+  const isTraining = !!sample.attrs.training;
+  const trainingModeSubheader = isTraining && (
+    <div className="bg-black p-1 text-center text-sm text-white">
+      Training Mode
+    </div>
+  );
+
   return (
     <Page id="beetle-home">
       <Header
         backButtonLabel="Home"
         title="Trap survey"
         rightSlot={uploadButton}
+        subheader={trainingModeSubheader}
       />
       <Main
         sample={sample}

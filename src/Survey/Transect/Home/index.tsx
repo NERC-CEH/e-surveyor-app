@@ -70,12 +70,20 @@ const Controller = ({ sample }: Props) => {
       </HeaderButton>
     );
 
+  const isTraining = !!sample.attrs.training;
+  const trainingModeSubheader = isTraining && (
+    <div className="bg-black p-1 text-center text-sm text-white">
+      Training Mode
+    </div>
+  );
+
   return (
     <Page id="transect-home">
       <Header
         backButtonLabel="Home"
         title="Transect"
         rightSlot={uploadButton}
+        subheader={trainingModeSubheader}
       />
       <Main
         sample={sample}

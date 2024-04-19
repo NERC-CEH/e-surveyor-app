@@ -6,8 +6,12 @@ import {
 } from '@flumens';
 import identifyBeetleImage from 'common/services/beetles';
 import { filterUKSpecies } from 'common/services/helpers';
-import identifyPlantImage, { ResponseResult } from 'common/services/plantNet';
+import identifyPlantImage, {
+  ResponseResult as PlantNetResult,
+} from 'common/services/plantNet';
 import { Image, Gbif } from 'common/services/plantNet/plantNetResponse.d';
+import identifyMothImage from 'common/services/waarneming';
+import { UNKNOWN_SPECIES } from 'Survey/Moth/config';
 import { MachineInvolvement, Survey } from 'Survey/common/config';
 import Media from './image';
 import Sample from './sample';
@@ -84,10 +88,16 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
 
   isDisabled = () => this.isUploaded();
 
-  identify = () =>
-    this.parent?.metadata.survey === 'beetle'
-      ? this.identifyBeetle()
-      : this.identifyPlant();
+  identify = () => {
+    switch (this.parent?.metadata.survey) {
+      case 'beetle':
+        return this.identifyBeetle();
+      case 'moth':
+        return this.identifyMoth();
+      default:
+        return this.identifyPlant();
+    }
+  };
 
   async identifyBeetle() {
     try {
@@ -100,8 +110,8 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       this.identification.identifying = false;
 
       const byScore = (
-        sp1: Pick<ResponseResult, 'score'>,
-        sp2: Pick<ResponseResult, 'score'>
+        sp1: Pick<PlantNetResult, 'score'>,
+        sp2: Pick<PlantNetResult, 'score'>
       ) => sp2.score - sp1.score;
       suggestions.sort(byScore);
 
@@ -143,8 +153,8 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       this.identification.identifying = false;
 
       const byScore = (
-        sp1: Pick<ResponseResult, 'score'>,
-        sp2: Pick<ResponseResult, 'score'>
+        sp1: Pick<PlantNetResult, 'score'>,
+        sp2: Pick<PlantNetResult, 'score'>
       ) => sp2.score - sp1.score;
       suggestions.sort(byScore);
 
@@ -181,6 +191,49 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
     this.save();
   }
 
+  async identifyMoth() {
+    if (!this.media.length)
+      throw new Error('Occurrence media is missing for automatic ID.');
+
+    try {
+      this.identification.identifying = true;
+
+      await this.media[0].uploadFile();
+      const url = this.media[0].getRemoteURL();
+
+      const { version, results: suggestions } = await identifyMothImage(url);
+
+      this.identification.identifying = false;
+
+      const byScore = (sp1: Suggestion, sp2: Suggestion) =>
+        sp2.score - sp1.score;
+      suggestions.sort(byScore);
+
+      this.media[0].attrs.identified = true;
+
+      const topSuggestion = suggestions[0];
+      if (!topSuggestion) {
+        this.attrs.taxon = UNKNOWN_SPECIES;
+        return;
+      }
+
+      this.attrs.taxon = {
+        score: topSuggestion.score,
+        warehouseId: topSuggestion.warehouseId,
+        scientificName: topSuggestion.scientificName,
+        commonName: topSuggestion.commonNames[0],
+        machineInvolvement: MachineInvolvement.MACHINE,
+        version,
+        suggestions,
+      };
+    } catch (error) {
+      this.identification.identifying = false;
+      throw error;
+    }
+
+    this.save();
+  }
+
   isPersistent() {
     return !!this.parent;
   }
@@ -194,4 +247,13 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
 
   // 'filter' instead of 'some' to trigger mobx listeners to all media objects
   isIdentifying = () => this.identification.identifying;
+
+  getTaxonName() {
+    const { taxon } = this.attrs;
+    if (!taxon) return '';
+
+    if (taxon.foundInName) return taxon[taxon.foundInName];
+
+    return taxon.commonName || taxon.scientificName;
+  }
 }

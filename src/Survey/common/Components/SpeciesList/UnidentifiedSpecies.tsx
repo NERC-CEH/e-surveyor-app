@@ -6,7 +6,6 @@ import {
   IonItem,
   IonItemOptions,
   IonItemOption,
-  IonLabel,
   IonSpinner,
   IonIcon,
 } from '@ionic/react';
@@ -91,38 +90,32 @@ const UnidentifiedSpeciesEntry = ({
         <div className="flex w-full items-center gap-2 bg-warning-100/50 p-1">
           {profilePhoto}
 
-          {!identifying && (
-            <IonLabel text-wrap>
-              <div className="font-semibold text-warning-900">
-                Unknown species
-              </div>
+          <div className="flex w-full justify-between">
+            <div>
+              <div className="font-semibold text-warning-900">Unidentified</div>
 
               {!hasSpeciesPhoto && (
-                <IonLabel className="warning-message">
-                  Please add a photo
-                </IonLabel>
+                <div className="text-warning-900">Please add a photo</div>
               )}
-            </IonLabel>
-          )}
+            </div>
 
-          {!disableAI && hasSpeciesPhoto && !identifying && canBeIdentified && (
-            <Button
-              className="occurrence-identify py-1 text-xs"
-              color="secondary"
-              onPress={onIdentifyWrap}
-              fill={buttonStyles}
-              preventDefault
-            >
-              Identify
-            </Button>
-          )}
+            {!disableAI &&
+              !identifying &&
+              hasSpeciesPhoto &&
+              canBeIdentified && (
+                <Button
+                  className="occurrence-identify py-1 text-xs"
+                  color="secondary"
+                  onPress={onIdentifyWrap}
+                  fill={buttonStyles}
+                  preventDefault
+                >
+                  Identify
+                </Button>
+              )}
 
-          {identifying && (
-            <>
-              <IonLabel slot="end">Identifying...</IonLabel>
-              <IonSpinner slot="end" className="size-3 px-1" />
-            </>
-          )}
+            {identifying && <IonSpinner className="mr-2 size-5" />}
+          </div>
         </div>
       </IonItem>
 

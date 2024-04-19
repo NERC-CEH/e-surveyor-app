@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import 'ionicons/dist/svg/checkmark-circle-outline.svg';
 import 'ionicons/dist/svg/close-circle-outline.svg';
@@ -8,16 +8,28 @@ import {
   bookmarkOutline,
   locationOutline,
 } from 'ionicons/icons';
-import { Main, MenuAttrItem, InfoMessage, InfoButton, Button } from '@flumens';
+import {
+  Main,
+  MenuAttrItem,
+  InfoMessage,
+  InfoButton,
+  Button,
+  useAlert,
+} from '@flumens';
 import { IonIcon, IonList, NavContext } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import config from 'common/config';
 import cameraButton from 'common/images/cameraButton.png';
 import mapPicker from 'common/images/mapPicker.png';
 import Seeds from 'common/images/seeds.svg';
+import appModel from 'common/models/app';
 import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
+
+const { POSITIVE_THRESHOLD } = config;
 
 interface MatchParams {
   url: string;
@@ -31,6 +43,7 @@ type Props = {
 };
 
 const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
+  const alert = useAlert();
   const { navigate } = useContext(NavContext);
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
@@ -58,6 +71,26 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
   const prettyGridRef = <GridRefValue sample={sample} />;
 
   const baseURL = match.url;
+
+  useEffect(() => {
+    const hasSpeciesWithLowScore = (model: Sample) => {
+      const [occ] = model.occurrences;
+      const score = occ.getSpecies()?.score;
+      if (
+        score &&
+        score < POSITIVE_THRESHOLD &&
+        appModel.attrs.showFirstLowScorePhotoTip
+      ) {
+        alert({
+          message:
+            "The AI isn't sure about your photo, tap to check other possible species.",
+          buttons: [{ text: 'OK' }],
+        });
+        appModel.attrs.showFirstLowScorePhotoTip = false;
+      }
+    };
+    sample.samples.some(hasSpeciesWithLowScore);
+  }, [sample.samples]);
 
   return (
     <Main className="[--padding-bottom:20px]">
@@ -167,7 +200,20 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
 
       {getNewImageButton()}
 
-      <SpeciesList sample={sample} isDisabled={isDisabled} />
+      <SpeciesList
+        sample={sample}
+        isDisabled={isDisabled}
+        useSubSamples
+        useSpeciesProfile
+      />
+
+      {!sample.samples.length && (
+        <InfoBackgroundMessage>
+          Your species list is empty. <br /> Hold down the orange species button
+          to list plant species yourself, or tap to take a photo for the AI to
+          identify.
+        </InfoBackgroundMessage>
+      )}
     </Main>
   );
 };

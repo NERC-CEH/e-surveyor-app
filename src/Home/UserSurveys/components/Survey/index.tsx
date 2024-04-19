@@ -79,6 +79,15 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
       );
     }
 
+    if (survey.name === 'moth') {
+      return (
+        <div className="species-info">
+          <h3>{survey.label}</h3>
+          <h4>{date.print(sample.attrs.date, true)}</h4>
+        </div>
+      );
+    }
+
     const showSpeciesLength = sample.samples.length;
 
     return (
@@ -113,8 +122,7 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
       <IonItem routerLink={href} detail={false}>
         <IonIcon
           icon={survey.icon}
-          color="primary"
-          className="shrink-0 rounded-full bg-neutral-100/50 p-2 text-3xl"
+          className="shrink-0 rounded-full bg-primary-50/80 p-3 text-3xl"
         />
         <IonLabel>{getSampleInfo()}</IonLabel>
         <OnlineStatus

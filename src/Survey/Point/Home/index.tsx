@@ -233,12 +233,20 @@ const HomeController = ({ sample }: Props) => {
 
   if (appModel.attrs.showFirstSurveyTip) showFirstSurveyTip(alert);
 
+  const isTraining = !!sample.attrs.training;
+  const trainingModeSubheader = isTraining && (
+    <div className="bg-black p-1 text-center text-sm text-white">
+      Training Mode
+    </div>
+  );
+
   return (
     <Page id="survey-default-edit">
       <Header
         title="Survey"
         rightSlot={finishButton}
         defaultHref="/home/surveys"
+        subheader={trainingModeSubheader}
       />
       <Main
         match={match}

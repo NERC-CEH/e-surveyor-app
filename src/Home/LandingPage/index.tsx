@@ -15,6 +15,7 @@ import SpeciesProfile from './Components/Species';
 import SurveyCard from './Components/SurveyCard';
 import survey3 from './beetleSurvey.jpg';
 import logo from './logo.svg';
+import survey4 from './mothSurvey.jpg';
 import survey2 from './ricardo-gomez.jpg';
 import './styles.scss';
 import survey1 from './viateur-hwang.jpg';
@@ -84,14 +85,22 @@ const LandingPage = () => {
             slidesPerView={1.3}
             {...tabletLayout}
           >
-            {/* <SwiperSlide>
+            <SwiperSlide>
               <SurveyCard
-                image={survey1}
+                image={survey4}
                 title="Moth trap"
                 type="Survey"
                 link="/survey/moth"
               />
-            </SwiperSlide> */}
+            </SwiperSlide>
+            <SwiperSlide>
+              <SurveyCard
+                image={survey3}
+                title="Farmland Carabids"
+                type="Beetle trap survey"
+                link="/survey/beetle"
+              />
+            </SwiperSlide>
             <SwiperSlide>
               <SurveyCard
                 image={survey1}
@@ -106,14 +115,6 @@ const LandingPage = () => {
                 title="Structured recording"
                 type="Transect survey"
                 link="/survey/transect"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SurveyCard
-                image={survey3}
-                title="Farmland Carabids"
-                type="Beetle trap survey"
-                link="/survey/beetle"
               />
             </SwiperSlide>
           </Swiper>

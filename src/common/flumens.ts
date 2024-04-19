@@ -46,6 +46,7 @@ export { default as ImageWithBackground } from '@flumens/ionic/dist/components/I
 export { default as Gallery } from '@flumens/ionic/dist/components/Gallery';
 export { default as ModalHeader } from '@flumens/ionic/dist/components/ModalHeader';
 export { default as Section } from '@flumens/ionic/dist/components/Section';
+export { default as DatetimeInput } from '@flumens/ionic/dist/components/DatetimeInput';
 export { default as InfoButton } from '@flumens/ionic/dist/components/InfoButton';
 export {
   default as PhotoPicker,
@@ -66,6 +67,7 @@ export * from '@flumens/ionic/dist/components/Map/utils';
 export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';
 export * from '@flumens/ionic/dist/utils/image';
 export * from '@flumens/ionic/dist/utils/errors';
+export * from '@flumens/ionic/dist/utils/type';
 export { default as date } from '@flumens/ionic/dist/utils/date';
 export { options as sentryOptions } from '@flumens/ionic/dist/utils/sentry';
 export { default as device } from '@flumens/ionic/dist/utils/device';

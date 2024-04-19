@@ -27,13 +27,25 @@ const Credits = () => (
           <b>Vilius Stankaitis</b> (Flumens)
         </P>
         <P skipTranslation>
-          <b>Alba Gomez Segura </b> (UK Centre for Ecology & Hydrology)
+          <b>Michael Pocock</b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
+          <b>Abigail Lowe</b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
+          <b>Lucy Ridding</b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
+          <b>Grace Skinner</b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
+          <b>Alba Gomez Segura</b> (UK Centre for Ecology & Hydrology)
         </P>
         <P skipTranslation>
           <b>Kelly Jowett</b> (Rothamsted Research)
         </P>
         <P skipTranslation>
-          <b>Ben Woodcock </b> (UK Centre for Ecology & Hydrology)
+          <b>Ben Woodcock</b> (UK Centre for Ecology & Hydrology)
         </P>
         <P skipTranslation>
           <b>Biren Rathod</b> (UK Centre for Ecology & Hydrology)
@@ -99,14 +111,13 @@ const Credits = () => (
       <Section>
         <H>Photos</H>
         <P>
-          Thanks to{' '}
+          Thanks to Martin Harvey,{' '}
           <a href="https://unsplash.com/@mkvandergriff">Maranda Vandergriff</a>,{' '}
           <a href="https://unsplash.com/@rgaleriacom">Ricardo Gomez Angel</a>,{' '}
           <a href="https://unsplash.com/@secretasianman">Viateur Hwang</a>,{' '}
           <a href="https://unsplash.com/@marcusneto">Marcus Neto</a>,{' '}
-          <a href="https://unsplash.com/@freestef">Free Steph</a>,{' '}
-          <a href="https://unsplash.com/@mickaeltournier">Mickael Tournier</a>{' '}
-          from <a href="https://unsplash.com">Unsplash</a>
+          <a href="https://unsplash.com/@freestef">Free Steph</a> and{' '}
+          <a href="https://unsplash.com/@mickaeltournier">Mickael Tournier</a>.
         </P>
       </Section>
     </Main>

@@ -160,6 +160,15 @@ ion-footer ion-tab-button {
 }
 // FONTS END
 
+// training subheader
+.training-survey {
+  background: black;
+  text-align: center;
+  padding: 4px;
+  color: white;
+  font-size: 0.8em;
+}
+
 // the background camera must see through it all
 body {
   background-color: transparent;
@@ -266,4 +275,12 @@ ion-content {
 ion-item .sc-ion-label-md-h.sc-ion-label-md-s.md[slot='end'],
 ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios[slot='end'] {
   color: var(--form-value-color);
+}
+
+// Fix date attribute value opacity to match other items
+.date-input-attr
+  ion-accordion:last-of-type
+  ion-item[slot='header']
+  ion-label[slot='end'] {
+  opacity: 1 !important;
 }

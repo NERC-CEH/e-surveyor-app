@@ -26,6 +26,14 @@ export interface Attrs extends ModelAttrs, SurveyDraftKeys {
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;
   sendAnalytics: boolean;
+  /**
+   * If the app should do bandwidth-heavy connections using WiFi only.
+   */
+  useWiFiDataConnection: boolean;
+  /**
+   * Flag new samples for training.
+   */
+  useTraining: boolean;
   transects?: any[];
   seedmixes: SeedMix[];
 }
@@ -41,6 +49,8 @@ const defaults: Attrs = {
   showFirstLowScorePhotoTip: true,
   useAutoIDWhenBackOnline: true,
   use10stepsForCommonStandard: false,
+  useWiFiDataConnection: false,
+  useTraining: false,
   sendAnalytics: true,
   seedmixes: [],
 };

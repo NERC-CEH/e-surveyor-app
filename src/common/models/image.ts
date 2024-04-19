@@ -9,10 +9,11 @@ import { isPlatform } from '@ionic/react';
 import config from 'common/config';
 import Occurrence from './occurrence';
 import Sample from './sample';
+import userModel from './user';
 
 export type URL = string;
 
-type Attrs = MediaAttrs & { identified?: boolean };
+type Attrs = MediaAttrs & { identified?: boolean; species: any };
 
 export default class Media extends MediaOriginal<Attrs> {
   declare parent?: Sample | Occurrence;
@@ -64,12 +65,29 @@ export default class Media extends MediaOriginal<Attrs> {
     return imageModel;
   }
 
+  identification = observable({ identifying: false });
+
   attrs: Attrs = observable({
     identified: false,
     // eslint-disable-next-line
     // @ts-ignore
     ...this.attrs,
   });
+
+  constructor(options: any) {
+    super(options);
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.remote.headers = async () => ({
+      Authorization: `Bearer ${await userModel.getAccessToken()}`,
+    });
+
+    this.attrs = observable(this.attrs);
+  }
 
   async destroy() {
     console.log('MediaModel: destroying.');

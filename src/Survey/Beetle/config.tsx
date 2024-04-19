@@ -2,6 +2,7 @@ import { clipboardOutline } from 'ionicons/icons';
 import * as Yup from 'yup';
 import { RadioOption } from '@flumens';
 import icon from 'common/images/beetle.svg';
+import appModel from 'common/models/app';
 import {
   Survey,
   dateAttr,
@@ -528,6 +529,7 @@ const survey: Survey = {
       },
 
       attrs: {
+        training: appModel.attrs.useTraining,
         sample_method_id: 2424, // Parent sample
         location: null,
         trapDays: 1,

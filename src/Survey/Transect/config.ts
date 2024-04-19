@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { schemeHabitats } from 'common/data/habitats';
-import icon from 'common/images/transectIcon.svg';
+import icon from 'common/images/transectIconBlack.svg';
 import appModel from 'models/app';
 import OccurrenceModel from 'models/occurrence';
 import SampleModel from 'models/sample';
@@ -280,6 +280,7 @@ const survey: Survey = {
       },
 
       attrs: {
+        training: appModel.attrs.useTraining,
         name: new Date().toLocaleDateString('en-UK'),
         location: null,
       },

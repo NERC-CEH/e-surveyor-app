@@ -8,6 +8,7 @@ import {
 import { useRouteMatch } from 'react-router';
 import { Button, Input, Main, MenuAttrItem, Select } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Sample from 'models/sample';
 import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -85,7 +86,19 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
 
         <h3 className="list-title px-3">Species</h3>
         <div className="flex flex-col gap-5">
-          <SpeciesList sample={subSample} isDisabled={isDisabled} disableAI />
+          <SpeciesList
+            sample={subSample}
+            isDisabled={isDisabled}
+            disableAI
+            disableDelete
+          />
+
+          {!subSample.occurrences.length && (
+            <InfoBackgroundMessage>
+              Your species list is empty. <br /> Tap the orange species button
+              to add your first beetle.
+            </InfoBackgroundMessage>
+          )}
 
           {!isDisabled && (
             <Button

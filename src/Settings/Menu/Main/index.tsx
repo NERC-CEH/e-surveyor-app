@@ -1,5 +1,10 @@
 import { observer } from 'mobx-react';
-import { arrowUndoSharp, shareSocialOutline } from 'ionicons/icons';
+import {
+  arrowUndoSharp,
+  schoolOutline,
+  shareSocialOutline,
+  wifiOutline,
+} from 'ionicons/icons';
 import { Main, useAlert, Toggle, InfoMessage } from '@flumens';
 import { IonIcon, IonList, IonItem } from '@ionic/react';
 import config from 'common/config';
@@ -37,9 +42,11 @@ const useResetDialog = (resetApp: any) => {
 type Props = {
   resetApp: any;
   onToggle: (prop: string, checked: boolean) => void;
-  sendAnalytics: any;
-  use10stepsForCommonStandard: any;
-  useAutoIDWhenBackOnline: any;
+  sendAnalytics: boolean;
+  use10stepsForCommonStandard: boolean;
+  useAutoIDWhenBackOnline: boolean;
+  useWiFiDataConnection: boolean;
+  useTraining: boolean;
 };
 
 const Menu = ({
@@ -48,6 +55,8 @@ const Menu = ({
   sendAnalytics,
   use10stepsForCommonStandard,
   useAutoIDWhenBackOnline,
+  useWiFiDataConnection,
+  useTraining,
 }: Props) => {
   const showAlertDialog = useResetDialog(resetApp);
 
@@ -57,6 +66,10 @@ const Menu = ({
     onToggle('use10stepsForCommonStandard', checked);
   const onAutoIDWhenBackOnline = (checked: boolean) =>
     onToggle('useAutoIDWhenBackOnline', checked);
+  const onWiFiDataConnection = (checked: boolean) =>
+    onToggle('useWiFiDataConnection', checked);
+  const onTrainingToggle = (checked: boolean) =>
+    onToggle('useTraining', checked);
 
   return (
     <Main className="app-settings">
@@ -66,7 +79,7 @@ const Menu = ({
           <Toggle
             prefix={<IonIcon src={transectIcon} className="size-5" />}
             label="Shorter Common Standards"
-            value={use10stepsForCommonStandard}
+            defaultSelected={use10stepsForCommonStandard}
             onChange={onCommonStandardToggle}
           />
           <InfoMessage inline>
@@ -76,14 +89,33 @@ const Menu = ({
             label="Identify when reconnected"
             prefix={<IonIcon src={flowerIcon} className="size-5" />}
             onChange={onAutoIDWhenBackOnline}
-            value={useAutoIDWhenBackOnline}
+            defaultSelected={useAutoIDWhenBackOnline}
           />
           <InfoMessage inline>
             When working offline the app will not be able to automatically ID
             the species. Once reconnected to the Internet we can identify the
             species in the background.
           </InfoMessage>
-
+          <Toggle
+            label="Use Wi-Fi to upload images"
+            prefix={<IonIcon src={wifiOutline} className="size-5" />}
+            onChange={onWiFiDataConnection}
+            defaultSelected={useWiFiDataConnection}
+          />
+          <InfoMessage inline>
+            Uncheck this if you don't want the app to use mobile data for heavy
+            bandwidth connections e.g. image upload.
+          </InfoMessage>
+          <Toggle
+            prefix={<IonIcon src={schoolOutline} className="size-6" />}
+            label="Training Mode"
+            defaultSelected={useTraining}
+            onChange={onTrainingToggle}
+          />
+          <InfoMessage inline>
+            Mark any new records as &#39;training&#39; and exclude from all
+            reports.
+          </InfoMessage>
           <IonItem routerLink="/settings/seedmixes" detail>
             <IonIcon icon={seedMixIcon} size="small" slot="start" />
             My seed mixes
@@ -96,7 +128,7 @@ const Menu = ({
             label="Share App Analytics"
             prefix={<IonIcon src={shareSocialOutline} className="size-5" />}
             onChange={onSendAnalyticsToggle}
-            value={sendAnalytics}
+            defaultSelected={sendAnalytics}
           />
           <InfoMessage inline>
             Share app crash data so we can make the app more reliable.

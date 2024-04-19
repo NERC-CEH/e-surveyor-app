@@ -235,7 +235,11 @@ export enum MachineInvolvement {
   MACHINE = 5,
 }
 
-export function attachClassifierResults(submission: any, occ: Occurrence) {
+export function attachClassifierResults(
+  submission: any,
+  occ: Occurrence,
+  classifierID?: string | number
+) {
   const taxon = occ.getSpecies();
   const classifierVersion = taxon?.version || '';
 
@@ -286,7 +290,7 @@ export function attachClassifierResults(submission: any, occ: Occurrence) {
       classification_results: [
         {
           values: {
-            classifier_id: config.classifierID,
+            classifier_id: classifierID || config.classifierID,
             classifier_version: classifierVersion,
           },
           classification_suggestions: classifierSuggestions,

@@ -14,6 +14,7 @@ import appModel from 'models/app';
 import userModel from 'models/user';
 import { SpeciesNames } from 'Components/ReportView/helpers';
 import beetleSurveyConfig from 'Survey/Beetle/config';
+import mothSurveyConfig from 'Survey/Moth/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import { Survey } from 'Survey/common/config';
@@ -27,6 +28,7 @@ const surveyConfigs = {
   point: pointSurveyConfig,
   transect: transectSurveyConfig,
   beetle: beetleSurveyConfig,
+  moth: mothSurveyConfig,
 };
 
 type Metadata = SampleMetadata & {
@@ -70,6 +72,10 @@ type Attrs = SampleAttrs & {
   fieldCrop?: string;
   fieldTillage?: string;
   margin?: any;
+
+  // moth survey
+  surveyStartTime?: any;
+  surveyEndTime?: any;
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {
@@ -146,6 +152,12 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
       const { useAutoIDWhenBackOnline } = appModel.attrs;
       if (!isOnline || this.isIdentifying() || !useAutoIDWhenBackOnline) return;
+
+      if (
+        appModel.attrs.useWiFiDataConnection &&
+        device.connectionType !== 'wifi'
+      )
+        return;
 
       this.occurrences[0].identify();
     };

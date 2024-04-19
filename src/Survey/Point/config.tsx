@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import config from 'common/config';
 import icon from 'common/images/pointIcon.svg';
+import appModel from 'common/models/app';
 import OccurrenceModel from 'models/occurrence';
 import {
   seedmixGroupAttr,
@@ -19,7 +20,7 @@ const { POSSIBLE_THRESHOLD } = config;
 const survey: Survey = {
   id: 626,
   name: 'point',
-  label: 'Survey',
+  label: 'Habitat',
   icon,
 
   attrs: {
@@ -139,6 +140,7 @@ const survey: Survey = {
       },
 
       attrs: {
+        training: appModel.attrs.useTraining,
         name: new Date().toLocaleDateString('en-UK'),
         seedmix: '',
         seedmixgroup: '',

@@ -26,6 +26,8 @@ const MenuController = ({ userModel, appModel, savedSamples }: Props) => {
     sendAnalytics,
     use10stepsForCommonStandard,
     useAutoIDWhenBackOnline,
+    useWiFiDataConnection,
+    useTraining,
   } = appModel.attrs;
 
   const resetApp = async () => {
@@ -55,7 +57,9 @@ const MenuController = ({ userModel, appModel, savedSamples }: Props) => {
         sendAnalytics={sendAnalytics}
         use10stepsForCommonStandard={use10stepsForCommonStandard}
         onToggle={onToggleWrap}
+        useTraining={useTraining}
         useAutoIDWhenBackOnline={useAutoIDWhenBackOnline}
+        useWiFiDataConnection={useWiFiDataConnection}
       />
     </Page>
   );
