@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { useAlert, useToast, date, Badge } from '@flumens';
+import { useAlert, useToast, Badge, getRelativeDate } from '@flumens';
 import {
   IonItem,
   IonItemSliding,
@@ -70,20 +70,11 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
       );
     }
 
-    if (survey.name === 'beetle') {
+    if (survey.name === 'beetle' || survey.name === 'moth') {
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>
-          <h4>{date.print(sample.attrs.date, true)}</h4>
-        </div>
-      );
-    }
-
-    if (survey.name === 'moth') {
-      return (
-        <div className="species-info">
-          <h3>{survey.label}</h3>
-          <h4>{date.print(sample.attrs.date, true)}</h4>
+          <h4>{getRelativeDate(sample.attrs.date)}</h4>
         </div>
       );
     }

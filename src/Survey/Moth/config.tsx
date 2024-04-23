@@ -2,7 +2,7 @@ import { when } from 'mobx';
 import { chatboxOutline } from 'ionicons/icons';
 import SunCalc from 'suncalc';
 import { z, object } from 'zod';
-import { date as dateHelp, isValidLocation } from '@flumens';
+import { dateFormat, isValidLocation } from '@flumens';
 import icon from 'common/images/moth-inside-icon.svg';
 import appModel from 'common/models/app';
 import Occurrence from 'models/occurrence';
@@ -84,7 +84,7 @@ const survey: Survey = {
     },
 
     date: {
-      remote: { values: (date: Date) => dateHelp.print(date, false) },
+      remote: { values: (date: number) => dateFormat.format(new Date(date)) },
     },
 
     comment: commentAttr,

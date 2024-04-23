@@ -68,7 +68,7 @@ export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';
 export * from '@flumens/ionic/dist/utils/image';
 export * from '@flumens/ionic/dist/utils/errors';
 export * from '@flumens/ionic/dist/utils/type';
-export { default as date } from '@flumens/ionic/dist/utils/date';
+export * from '@flumens/ionic/dist/utils/date';
 export { options as sentryOptions } from '@flumens/ionic/dist/utils/sentry';
 export { default as device } from '@flumens/ionic/dist/utils/device';
 export {

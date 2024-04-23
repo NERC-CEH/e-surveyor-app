@@ -2,7 +2,7 @@ import { calendarOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import {
-  date,
+  dateFormat,
   MenuAttrItemFromModelMenuProps,
   PageProps,
   RemoteConfig,
@@ -183,7 +183,7 @@ export const dateAttr = {
       inputProps: { max: () => new Date() },
     },
   },
-  remote: { values: (d: any) => date.print(d, false) },
+  remote: { values: (date: string) => dateFormat.format(new Date(date)) },
 };
 
 export const locationAttr = {
