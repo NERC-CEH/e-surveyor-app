@@ -86,6 +86,7 @@ const getData = async () => {
   await fetchAndSave('plant_interactions');
   await fetchAndSave('habitats');
   await fetchAndSave('natural_enemies');
+  await fetchAndSave('beetles');
 
   await filterUKSIPlants();
   await getEnglishPlantNames();
