@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { observer } from 'mobx-react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { Main, InfoButton, InfoMessage } from '@flumens';

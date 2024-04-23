@@ -203,7 +203,6 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
       );
     }
 
-    // eslint-disable-next-line camelcase
     const hasLatinName = ({ latinName }: { latinName: string }) =>
       latinName === speciesName;
     const pollinator = pollination.find(hasLatinName);

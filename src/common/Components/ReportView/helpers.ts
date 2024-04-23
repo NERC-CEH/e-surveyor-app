@@ -24,7 +24,7 @@ export function getSeedmixUse(
   occurrences: Occurrence[],
   seedmixSpecies: SeedmixSpecies[]
 ): SpeciesNames[] {
-  const extractLatinName = ({ latinName }: SeedmixSpecies) => latinName; // eslint-disable-line camelcase
+  const extractLatinName = ({ latinName }: SeedmixSpecies) => latinName;
   const selectedSeedmixLatinNames = seedmixSpecies.map(extractLatinName);
 
   const seedmixIncludesSpecies = ([scientificName]: SpeciesNames) =>
