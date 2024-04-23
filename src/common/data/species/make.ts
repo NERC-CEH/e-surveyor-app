@@ -1,11 +1,11 @@
-// get local environment variables from .env
-const fs = require('fs');
-const uksiPlants = require('../cacheRemote/uksi_plants.json');
-const optimise = require('./helperOptimise');
+import fs from 'fs';
+import uksiPlants from '../cacheRemote/uksi_plants.json';
+import optimise from './helperOptimise';
 
 // ideally the warehouse report should return only the latin names
-function sortAlphabetically(species) {
-  const alphabetically = (sp1, sp2) => sp1.taxon.localeCompare(sp2.taxon);
+function sortAlphabetically(species: any) {
+  const alphabetically = (sp1: any, sp2: any) =>
+    sp1.taxon.localeCompare(sp2.taxon);
   return species.sort(alphabetically);
 }
 

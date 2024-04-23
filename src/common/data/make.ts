@@ -1,20 +1,21 @@
-const fs = require('fs');
-const fetchSheet = require('@flumens/fetch-onedrive-excel'); // eslint-disable-line
-const _ = require('lodash');
+import fs from 'fs';
+import _ from 'lodash';
+// eslint-disable-next-line
+import fetchSheet from '@flumens/fetch-onedrive-excel';
 
 const drive =
   'sites/flumensio.sharepoint.com,6230bb4b-9d52-4589-a065-9bebfdb9ce63,21520adc-6195-4b5f-91f6-7af0b129ff5c/drive';
 
 const file = '01UPL42ZVRTEH6ILWMRFG3I5MIKC4YA7YW';
 
-const camelCase = doc => _.mapKeys(doc, (__, key) => _.camelCase(key));
+const camelCase = (doc: any) => _.mapKeys(doc, (__, key) => _.camelCase(key));
 
-function saveSpeciesToFile(data, sheetName) {
-  const saveSpeciesToFileWrap = (resolve, reject) => {
+function saveSpeciesToFile(data: any, sheetName: string) {
+  return new Promise((resolve, reject) => {
     const fileName = `./cacheRemote/${sheetName}.json`;
     console.log(`Writing ${fileName}`);
 
-    const dataOption = err => {
+    const dataOption = (err: any) => {
       if (err) {
         reject(err);
         return;
@@ -24,18 +25,14 @@ function saveSpeciesToFile(data, sheetName) {
     };
 
     fs.writeFile(fileName, JSON.stringify(data, null, 2), dataOption);
-  };
-  return new Promise(saveSpeciesToFileWrap);
+  });
 }
 
 function filterUKSIPlants() {
-  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json');
+  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json', 'utf8');
   const data = JSON.parse(rawData);
 
-  const extractTaxon = (
-    agg,
-    { taxon, id, language, preferred } // eslint-disable-line camelcase
-  ) => {
+  const extractTaxon = (agg: any, { taxon, id, language, preferred }: any) => {
     if (language !== 'Latin') return agg;
 
     if (agg[taxon] && !preferred) return agg; // don't overwrite preferred ones
@@ -54,12 +51,12 @@ function filterUKSIPlants() {
 }
 
 function getEnglishPlantNames() {
-  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json');
+  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json', 'utf8');
   const data = JSON.parse(rawData);
 
-  const englishOnly = ({ language }) => language === 'English';
+  const englishOnly = ({ language }: any) => language === 'English';
 
-  const mapTaxonToCommonName = (agg, taxon) => ({
+  const mapTaxonToCommonName = (agg: any, taxon: any) => ({
     ...agg,
     [taxon.preferredTaxon]: taxon.taxon,
   });
@@ -74,7 +71,7 @@ function getEnglishPlantNames() {
   );
 }
 
-const fetchAndSave = async sheet => {
+const fetchAndSave = async (sheet: string) => {
   let sheetData = await fetchSheet({ drive, file, sheet });
   sheetData = sheetData.map(camelCase);
   saveSpeciesToFile(sheetData, sheet);
