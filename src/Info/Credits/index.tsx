@@ -1,7 +1,6 @@
 import { Header, Page, Main, Section } from '@flumens';
 import flumensLogo from 'common/images/flumens.svg';
 import plantNetLogo from './Pl@ntNet_logo.png';
-import './styles.scss';
 
 const { P, H } = Section;
 
@@ -53,9 +52,10 @@ const Credits = () => (
       </Section>
 
       <Section>
-        <p className="logo">
-          <img src={plantNetLogo} />
-        </p>
+        <img
+          src={plantNetLogo}
+          className="mx-auto mb-0 mt-[30px] block w-2/5 max-w-[200px]"
+        />
         <P>
           The image-based plant species identification service used, is based on
           the Pl@ntNet recognition api, regularly updated and accessible through
@@ -63,11 +63,13 @@ const Credits = () => (
         </P>
       </Section>
       <Section>
-        <p className="logo">
-          <a href="https://flumens.io" aria-label="Flumens link">
-            <img src={flumensLogo} alt="flumens" />
-          </a>
-        </p>
+        <a href="https://flumens.io" aria-label="Flumens link">
+          <img
+            src={flumensLogo}
+            alt="flumens"
+            className="mx-auto mb-0 mt-[30px] block w-2/5 max-w-[200px]"
+          />
+        </a>
         <P>
           <a href="https://flumens.io" style={{ whiteSpace: 'nowrap' }}>
             Flumens

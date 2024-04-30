@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Header, useAlert } from '@flumens';
+import { NavContext } from '@ionic/react';
 import Sample from 'models/sample';
-import useRouter from 'helpers/router';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
@@ -24,7 +25,7 @@ type Props = {
 const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const alert = useAlert();
-  const router = useRouter();
+  const { navigate } = useContext(NavContext);
 
   const onDone = () => {
     const invalids = validate(sample);
@@ -43,7 +44,7 @@ const Controller = ({ sample }: Props) => {
     sample.save();
 
     const url = match.url.replace('/details', '');
-    router.replace(url);
+    navigate(url, 'forward', 'replace');
   };
 
   const { completedDetails } = sample.metadata;

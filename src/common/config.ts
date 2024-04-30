@@ -21,9 +21,6 @@ const CONFIG = {
   POSITIVE_THRESHOLD: 0.7,
   POSSIBLE_THRESHOLD: 0.2,
 
-  // use prod logging if testing otherwise full log
-  log: !isTestEnv,
-
   // error analytics
   sentryDNS: (!isTestEnv && process.env.APP_SENTRY_KEY) as string,
 

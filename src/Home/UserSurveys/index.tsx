@@ -13,7 +13,6 @@ import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Sample from 'models/sample';
 import savedSamples, { getPending } from 'models/savedSamples';
 import Survey from './components/Survey';
-import './images/empty-samples-list-icon.svg';
 import './styles.scss';
 
 function byCreateTime(smp1: Sample, smp2: Sample) {

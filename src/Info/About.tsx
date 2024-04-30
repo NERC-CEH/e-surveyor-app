@@ -1,5 +1,4 @@
 import { Page, Main, Header, Section } from '@flumens';
-import './styles.scss';
 
 const { P } = Section;
 

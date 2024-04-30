@@ -1,17 +1,57 @@
 import { observer } from 'mobx-react';
 import {
   arrowUndoSharp,
+  personRemoveOutline,
   schoolOutline,
   shareSocialOutline,
+  warningOutline,
   wifiOutline,
 } from 'ionicons/icons';
 import { Main, useAlert, Toggle, InfoMessage } from '@flumens';
-import { IonIcon, IonList, IonItem } from '@ionic/react';
+import { IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import config from 'common/config';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import seedMixIcon from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
-import './styles.scss';
+import { Attrs } from 'common/models/app';
+
+function useUserDeleteDialog(deleteUser: any) {
+  const alert = useAlert();
+
+  const showUserDeleteDialog = () => {
+    alert({
+      header: 'Account delete',
+      message: (
+        <>
+          Are you sure you want to delete your account?
+          <InfoMessage
+            color="danger"
+            prefix={<IonIcon src={warningOutline} />}
+            skipTranslation
+          >
+            This will remove your account on the{' '}
+            <b>{{ url: config.backend.url } as any}</b> website. You will lose
+            access to any records that you have previously submitted using the
+            app or website.
+          </InfoMessage>
+        </>
+      ),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: deleteUser,
+        },
+      ],
+    });
+  };
+
+  return showUserDeleteDialog;
+}
 
 const useResetDialog = (resetApp: any) => {
   const alert = useAlert();
@@ -41,12 +81,14 @@ const useResetDialog = (resetApp: any) => {
 
 type Props = {
   resetApp: any;
-  onToggle: (prop: string, checked: boolean) => void;
+  onToggle: (prop: keyof Attrs, checked: boolean) => void;
   sendAnalytics: boolean;
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;
   useWiFiDataConnection: boolean;
   useTraining: boolean;
+  isLoggedIn: boolean;
+  deleteUser: any;
 };
 
 const Menu = ({
@@ -57,8 +99,11 @@ const Menu = ({
   useAutoIDWhenBackOnline,
   useWiFiDataConnection,
   useTraining,
+  isLoggedIn,
+  deleteUser,
 }: Props) => {
   const showAlertDialog = useResetDialog(resetApp);
+  const showUserDeleteDialog = useUserDeleteDialog(deleteUser);
 
   const onSendAnalyticsToggle = (checked: boolean) =>
     onToggle('sendAnalytics', checked);
@@ -139,9 +184,24 @@ const Menu = ({
             Reset App
           </IonItem>
         </div>
+
+        <h3 className="list-title">Account</h3>
+        <div className="destructive-item rounded-list">
+          {isLoggedIn && (
+            <>
+              <IonItem onClick={showUserDeleteDialog} className="!text-danger">
+                <IonIcon icon={personRemoveOutline} size="small" slot="start" />
+                <IonLabel>Delete account</IonLabel>
+              </IonItem>
+              <InfoMessage inline>
+                You can delete your user account from the system.
+              </InfoMessage>
+            </>
+          )}
+        </div>
       </IonList>
 
-      <p className="app-version">{`v${config.version} (${config.build})`}</p>
+      <p className="m-0 mx-auto w-full max-w-2xl p-2.5 text-right opacity-60">{`v${config.version} (${config.build})`}</p>
     </Main>
   );
 };

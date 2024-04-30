@@ -13,7 +13,6 @@ import User from './User/router';
 
 const platform = isPlatform('ios') ? 'ios' : 'android';
 const tailwindContext: TailwindContextValue = { platform };
-console.log('platform', platform);
 
 const HomeRedirect = () => <Redirect to="home/landing" />;
 
