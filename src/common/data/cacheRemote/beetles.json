@@ -10,7 +10,8 @@
     "dispersal": "Running only",
     "predation": "Adults and larvae feed on slugs, snails, grubs.",
     "features": "Size, Violet metallic colour at edges of wing cases, smooth texture of wing cases. Violet hue and metallic shimmer can be reduced in some specimens, especially in pitfall trap samples that are over a week old. Check for the pinched 'waist', with a rounded point to the end of the wing cases.",
-    "similarSpecies": "Carabus problematicus: This is a species more commonly found in woodland habitiats than on farms. Texture of elytra (wing cases) with noticeable parallel lines vertically."
+    "similarSpecies": "Carabus problematicus: This is a species more commonly found in woodland habitiats than on farms. Texture of elytra (wing cases) with noticeable parallel lines vertically.",
+    "annotations": "The texture of the wing cases is much less lined in the violet ground beetle."
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "dispersal": "Running only",
     "predation": "General crop pests including slugs, snails, grubs and aphids.",
     "features": "Distinctive ‘shoulderblade’ ridge (1) along the side of the wing cases (elytra). Pronotum (middle section) quite straight towards the base (2), with two deep darts each side. Width of pronotum is almost as broad as the wing cases.",
-    "similarSpecies": "Common Blackclock P. madidus, and Great Blackclock P. niger both lack the shoulderblade ridge, and have more sinuate pronotums (middle sections), narrowed at the base, so that they are not as wide as the wing cases."
+    "similarSpecies": "Common Blackclock P. madidus, and Great Blackclock P. niger both lack the shoulderblade ridge, and have more sinuate pronotums (middle sections), narrowed at the base, so that they are not as wide as the wing cases.",
+    "annotations": "The side of the middle section in the common shoulderblade is a regular curve, and the shoulderblade it is named for is prominent on the top of the wing case"
   },
   {
     "id": 3,
@@ -35,7 +37,8 @@
     "activity": "Nocturnal",
     "dispersal": "running  ",
     "predation": "Adults and larvae feed on slugs, snails, and grubs.",
-    "features": "Size, less curved sides to pronotum (middle section) (1), no bristles on the underside of the end tarsal segment (with claw) (2)"
+    "features": "Size, less curved sides to pronotum (middle section) (1), no bristles on the underside of the end tarsal segment (with claw) (2)",
+    "annotations": "The great blackclock has a middle section that bulges out more on the top edge. The end section of its feet have no hairs on the underneath"
   },
   {
     "id": 4,
@@ -48,7 +51,8 @@
     "dispersal": "running",
     "predation": "Adults and larvae feed on pretty much all crop pests on the ground and in soil.",
     "features": "Pronotum (middle section) rounded with distinct tooth at the hind edge (1). Bristles on the underside of last tarsal (foot) segment (with claw) (2).",
-    "similarSpecies": "Common blackclock P. madidus: No tooth on hind angle. Great blackclock P. niger: no bristles on the underside of end tarsal (foot) segment."
+    "similarSpecies": "Common blackclock P. madidus: No tooth on hind angle. Great blackclock P. niger: no bristles on the underside of end tarsal (foot) segment.",
+    "annotations": "The Rainbeetle blackclock has a middle section that bulges out more on the middle, with a distinct tooth at the bottom. The end section of its feet have hairs on the underneath"
   },
   {
     "id": 5,
@@ -61,7 +65,8 @@
     "dispersal": "running",
     "predation": "Adults and larvae feed on pretty\nmuch all crop pests on the ground and in\nsoil.",
     "features": "Legs can be black or reddish. Pronotum (middle section) rounded with no tooth at the hind edge (1), and two darts (fovea) each side. One dot like puncture on the 3rd line (interval) out from the centre of the wing cases, near the tip (2)",
-    "similarSpecies": "Rain Beetle Blackclock P. melanarius: tooth on hind angle. Great Blackclock P. niger: no bristles on the underside of end tarsal (foot) segment. Other scarcer Pterostichus species have rounded pronotums, but either none, or more than one puncture on wing cases."
+    "similarSpecies": "Rain Beetle Blackclock P. melanarius: tooth on hind angle. Great Blackclock P. niger: no bristles on the underside of end tarsal (foot) segment. Other scarcer Pterostichus species have rounded pronotums, but either none, or more than one puncture on wing cases.",
+    "annotations": "The common blackclock has a middle section with a very smooth middle section, with a curved edge at the bottom. They also have a dot on their wing cases which may be quite visible, but not always clear."
   },
   {
     "id": 6,
@@ -74,7 +79,8 @@
     "dispersal": "Flight",
     "predation": "Weed seeds – particularly in larval stage. Can be a pest in strawberry crops.",
     "features": "Has the Seed-eater beetles (Harpalus species) characteristic wide head and offset jaws, notched forearms and hairy legs. Unmistakable golden furred elytra (wing cases) – with muddy samples can look matte brown but still stands out.",
-    "similarSpecies": "Other Seed-eater beetles – but these are much rarer"
+    "similarSpecies": "Other Seed-eater beetles – but these are much rarer",
+    "annotations": "The golden hairs on the wing cases of the Strawberry seed beetle are distinctive, but may be less visible in wet or muddy beetles."
   },
   {
     "id": 7,
@@ -87,7 +93,8 @@
     "dispersal": "Rare flight",
     "predation": "Adults are notable predators of pest fly larvae.",
     "features": "Heart-shaped pronotum with broad edge line (1). Fine pale hairs on the upper surface of the hind tarsi (2). Gradual dark tips to tarsal segments.",
-    "similarSpecies": "Other Heartshield species are smaller, with darker antenna. Nebria salina have a narrow edge to the pronotum (middle section) and no hairs on the upper surface of the hind leg feet segments (tarsi). these are hard to see with a field lens, but N. brevicollis is more abundant in cropped area, so it is very likely to be this species. Plate-jaw species – Heartshields have jaws narrower than antennas"
+    "similarSpecies": "Other Heartshield species are smaller, with darker antenna. Nebria salina have a narrow edge to the pronotum (middle section) and no hairs on the upper surface of the hind leg feet segments (tarsi). these are hard to see with a field lens, but N. brevicollis is more abundant in cropped area, so it is very likely to be this species. Plate-jaw species – Heartshields have jaws narrower than antennas",
+    "annotations": "The heartshield has jaws narrower than its eyes and antennaes. The common heartshield can be distinguised from other heartshields by its hairy tops to leg segments, darker ends to leg segments, and broad border on its middle section."
   },
   {
     "id": 8,
@@ -100,7 +107,8 @@
     "dispersal": "Active flier",
     "predation": "Adults and larvae feed on mites and springtails.",
     "features": "Tear shaped pronotum (1). Three clear depressions on the wing cases. Antennal hairs distinctive (used for trapping prey) (2).",
-    "similarSpecies": "Heartshield species - see opposite, pronotum (middle section) more rounded Can be confused with Plate\u0002jaws - check jaws narrower than eyes."
+    "similarSpecies": "Heartshield species - see opposite, pronotum (middle section) more rounded Can be confused with Plate\u0002jaws - check jaws narrower than eyes.",
+    "annotations": "The hair trap ground beetle has a tear shaped middle section, and distinctive hairy antennae "
   },
   {
     "id": 9,
@@ -113,7 +121,8 @@
     "dispersal": "Flight",
     "predation": "Adults and larvae eat weed seeds.",
     "features": "First antennal segment always pale (1). Variety of metallic colours, males brighter than females. Legs can be red or black. Seed-eater species characteristic wide head and uneven jaws, notched forearms and heavyset hairy legs (2) (see Strawberry Seed-beetle). Rounded end to wing cases (elytra). Single dart (fovea) indistinct (3).",
-    "similarSpecies": "Copper greenclock – seed eater has wider and smooth head, one pale antennal segment, and one dart on middle section Sunshiner species – pronotum (middle section) is in line with elytra to give bullet shape Other iridescent Seed-eaters – Copper seed-eater has punctured and hairy outer intervals of the elytra."
+    "similarSpecies": "Copper greenclock – seed eater has wider and smooth head, one pale antennal segment, and one dart on middle section Sunshiner species – pronotum (middle section) is in line with elytra to give bullet shape Other iridescent Seed-eaters – Copper seed-eater has punctured and hairy outer intervals of the elytra.",
+    "annotations": "The copper seed eater has one pale antennae segment, a broad head, broad legs, and one dart on it's middle section"
   },
   {
     "id": 10,
@@ -126,7 +135,8 @@
     "dispersal": "Flight",
     "predation": "Weed seeds and invertebrate crop pests.",
     "features": "Bright coppery green, rarely blue or purplish. Head clearly pitted. First two antennal segments pale (1). Legs black – rare form has red legs. Pointed end to wing cases (elytra). Two basal darts (fovea), very distinct (3).",
-    "similarSpecies": "Copper Seed-eater – see over, legs darker, finer, and less hairy (2). Other Greenclock species P. Versicolour is smaller, has less than 8 hairs on hind leg (tibia), and indistinct pitting on the head."
+    "similarSpecies": "Copper Seed-eater – see over, legs darker, finer, and less hairy (2). Other Greenclock species P. Versicolour is smaller, has less than 8 hairs on hind leg (tibia), and indistinct pitting on the head.",
+    "annotations": "The copper greenclock has two pale antennae segments, a puntured narrow head, narrow legs, and two darts on its middle section"
   },
   {
     "id": 11,
@@ -139,7 +149,8 @@
     "dispersal": "some individuals fly (if conditions give rise to a dispersive generation)",
     "predation": " Adults consume a range of\ninvertebrate crop pests.",
     "features": "Characteristic saw toothed feet of Calathus species (1). Black body, head and pronotum (middle section) shiny, elytra (wing cases) duller. Pronotum slightly narrower at base than the elytra (2), with pitting on the base. Legs can be pale OR dark.",
-    "similarSpecies": "Larger than other Calathus species."
+    "similarSpecies": "Larger than other Calathus species.",
+    "annotations": "The sawfoot ground beetle has wing cases slightly wider than its middle section where they join, and the feet sections have a sawlike appearance."
   },
   {
     "id": 12,
@@ -152,7 +163,8 @@
     "dispersal": "some individuals fly (if conditions give rise to a dispersive generation)",
     "predation": "Adults consume a range of invertebrate crop pests",
     "features": "Characteristic saw toothed feet of Calathus species (1). Head and elytra slightly metallic black or very dark brown. Pronotum (middle section) and legs reddish. Individuals in upland areas may have darker legs and pronotum.",
-    "similarSpecies": "Other scarcer Calathus species – melanocephalus has darker legs, and a protruding tooth on elytral (wing case) shoulders (2)."
+    "similarSpecies": "Other scarcer Calathus species – melanocephalus has darker legs, and a protruding tooth on elytral (wing case) shoulders (2).",
+    "annotations": "The saddled sawfoot has a protruding tooth on the shoulder of its wing cases, and sawlike feet sections."
   },
   {
     "id": 13,
@@ -165,7 +177,8 @@
     "dispersal": "Running",
     "predation": "Adults consume general invertebrate crop pests.",
     "features": "Long protruding jaws (1), long first antennal segment (2), heart shaped pronotum (middle section) with single dart (fovea) and red legs.",
-    "similarSpecies": "Similar to small Blackclock (Pterostichus species), can be distinguished by long jaws."
+    "similarSpecies": "Similar to small Blackclock (Pterostichus species), can be distinguished by long jaws.",
+    "annotations": "The longjaw ground beetle has notably long jaws, and a long first segment of its antennae"
   },
   {
     "id": 14,
@@ -178,7 +191,8 @@
     "dispersal": "Flight",
     "predation": "Adults feed on springtails and mites.",
     "features": "Bright metallic blue shine on head, pronotums (middle sections) and wing cases. Legs can be dark or reddish.",
-    "similarSpecies": "Other Plate-jaw species: Prussian has dark antenna (1), blue colour and wrinkles on the sides of its head (2). Heart-shields – Plate-jaws have jaws wider than antennas."
+    "similarSpecies": "Other Plate-jaw species: Prussian has dark antenna (1), blue colour and wrinkles on the sides of its head (2). Heart-shields – Plate-jaws have jaws wider than antennas.",
+    "annotations": "The plate jaw has long jaws, but also wide- wider than antennaes. It also has wrinkles on the side of its head."
   },
   {
     "id": 15,
@@ -191,7 +205,8 @@
     "dispersal": "Flies readily, climbs vegetation",
     "predation": "Key predator of pest aphids.",
     "features": "Small heart shaped pronotum (middle section) and rectangular wing cases, blunt at the end, distinctive to Demetrias species. Straw coloured elytra and legs, with dark head and reddish pronotum.",
-    "similarSpecies": "Can be distinguished from other Demetrias species by its hairy temples (1), and black centre to underside."
+    "similarSpecies": "Can be distinguished from other Demetrias species by its hairy temples (1), and black centre to underside.",
+    "annotations": "The Hairy-templed thatcher is named for its hairy temples."
   },
   {
     "id": 16,
@@ -204,7 +219,8 @@
     "dispersal": "Readily flies",
     "predation": "Adults are a notable predator of pest aphids, and other small crop pests.",
     "features": "Greenish iridescent pronotum (middle section) and head. Unmistakable ‘club’ pattern on wing cases (elytra). In wet and muddy samples can be hard to see, but pulling wing cases out reveals pattern.",
-    "similarSpecies": "Prussian plate-jaw has unpatterned elytra, large jaws, and a wider pronotum."
+    "similarSpecies": "Prussian plate-jaw has unpatterned elytra, large jaws, and a wider pronotum.",
+    "annotations": "The copper club back has a disticntive club shaped dark patch on its wing cases"
   },
   {
     "id": 17,
@@ -217,7 +233,8 @@
     "dispersal": "Active flight, can form swarms",
     "predation": "Adults predate in soil at base of crops. Eats eggs and pupae of flea beetles.",
     "features": "Size, colour. Rounded pronotum (middle section) and elytra (wing cases). Prominent brow ridges characteristic of Trechus species (1). Many small brown carabids are hard to distinguish with a hand lens, but Sienna Flat-beetle is the most common of cropped areas.",
-    "similarSpecies": "Wingless Flat-beetle (Trechus obtusus) – Sienna Flat-beetle has wings, which are easy to open out in samples by pulling the elytra back. Wingless Flat-beetle is unwinged."
+    "similarSpecies": "Wingless Flat-beetle (Trechus obtusus) – Sienna Flat-beetle has wings, which are easy to open out in samples by pulling the elytra back. Wingless Flat-beetle is unwinged.",
+    "annotations": "The sienna flat beetle has prominent eyebrow like ridges"
   },
   {
     "id": 18,
@@ -230,7 +247,8 @@
     "dispersal": "Flight",
     "predation": "Adults and larvae eat springtails and mites.",
     "features": "Huge eyes are distinctive of Notiophilus species. This species has coppery metallic colour, with a paler patch towards the end of the wing cases, the extent of this patch varies. A pattern of indented stripes on wing cases (elytra) with a gap at the middle should be visible with a hand lens.",
-    "similarSpecies": "Other scarcer Big-eyed Beetle species (Notiophilus)."
+    "similarSpecies": "Other scarcer Big-eyed Beetle species (Notiophilus).",
+    "annotations": "Big eyed beetles have huge eyes in comparison to most other carabids"
   },
   {
     "id": 19,
@@ -242,7 +260,8 @@
     "activity": "range",
     "dispersal": "moslty flight dispersive",
     "predation": "General crop pests and weed seeds",
-    "features": "A group of very similar species difficult to identify to species level. However they predate and behave similarly, so for functional approaches, genus level ID (Amara) is sufficient. Smooth line from pronotum (middle section) to wing cases (elytra), making a distinctive rounded bullet shape (1). Sizes vary from 5-12mm"
+    "features": "A group of very similar species difficult to identify to species level. However they predate and behave similarly, so for functional approaches, genus level ID (Amara) is sufficient. Smooth line from pronotum (middle section) to wing cases (elytra), making a distinctive rounded bullet shape (1). Sizes vary from 5-12mm",
+    "annotations": "Sunshiner and moonshiner species are all a very similar rounded shape"
   },
   {
     "id": 20,
@@ -254,6 +273,7 @@
     "activity": "range",
     "dispersal": "mostly active fliers",
     "predation": "Aphids and other small crop pests",
-    "features": "A group of very similar species difficult to identify to species level. However, they predate and behave similarly, so for functional approaches, genus level ID (Bembidion) is sufficient. Small size: around 5-7mm. Large eyes, narrow waist. Flattened body, often shining or metallic. Named for the narrow ends to the mouthparts (palps) which may be visible with a hand lens (1)."
+    "features": "A group of very similar species difficult to identify to species level. However, they predate and behave similarly, so for functional approaches, genus level ID (Bembidion) is sufficient. Small size: around 5-7mm. Large eyes, narrow waist. Flattened body, often shining or metallic. Named for the narrow ends to the mouthparts (palps) which may be visible with a hand lens (1).",
+    "annotations": "Pin palps are named for the very narrow ends to their palps, which are mouthparts"
   }
 ]

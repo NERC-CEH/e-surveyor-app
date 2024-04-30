@@ -1,0 +1,15 @@
+.swiper {
+  .swiper-pagination {
+    position: absolute;
+    bottom: -20px;
+
+    .swiper-pagination-bullet {
+      opacity: 0.5;
+      --bullet-background: grey;
+    }
+    .swiper-pagination-bullet-active {
+      opacity: 0.8;
+      background: var(--ion-color-primary);
+    }
+  }
+}
