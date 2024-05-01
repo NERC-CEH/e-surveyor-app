@@ -9,7 +9,7 @@ import {
   leaf,
 } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
-import { Gallery } from '@flumens';
+import { Button, Gallery } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
@@ -64,6 +64,7 @@ const getDoughnutData = (score: number) => {
 type Props = {
   model: Sample | Occurrence;
   isDisabled: boolean;
+  onReidentify?: any;
   useDoughnut?: boolean;
   onDelete?: (model: Sample | Occurrence) => void;
   onClick: (model: Sample | Occurrence) => void;
@@ -75,6 +76,7 @@ const Species = ({
   onDelete,
   onClick,
   useDoughnut,
+  onReidentify,
 }: Props) => {
   const species = model.getSpecies();
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
@@ -165,10 +167,13 @@ const Species = ({
     );
   };
 
+  const showReidentify = onReidentify && species.score <= 0.1;
+  const onReidentifyWrap = () => onReidentify(model);
+
   return (
     <IonItemSliding key={model.cid}>
       <IonItem
-        detail={!useDoughnut}
+        detail={!useDoughnut && !showReidentify}
         detailIcon={detailsIcon}
         className={clsx(
           `[--detail-icon-opacity:1] [--padding-start:0px] ${idClass}`,
@@ -176,14 +181,14 @@ const Species = ({
         )}
         onClick={onClickWrap}
       >
-        <div className="flex w-full justify-between gap-2 p-1">
+        <div className="flex w-full items-center justify-between gap-2 p-1">
           <div className="flex items-center gap-3 ">
             {profilePhoto}
 
             {getSpeciesName()}
           </div>
 
-          {useDoughnut && (
+          {useDoughnut && !showReidentify && (
             <div className="p-[5px]; relative h-[40px] w-[40px] shrink-0 self-center">
               <Doughnut
                 data={getDoughnutData(species.score)}
@@ -194,6 +199,16 @@ const Species = ({
                 {getDoughnutData(species.score).text}
               </div>
             </div>
+          )}
+
+          {showReidentify && (
+            <Button
+              onPress={onReidentifyWrap}
+              preventDefault
+              className="px-2 py-1 text-sm"
+            >
+              Reidentify
+            </Button>
           )}
         </div>
       </IonItem>

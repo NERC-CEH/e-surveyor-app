@@ -1,8 +1,19 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
-import { InfoMessage, useToast, useAlert, device, Button } from '@flumens';
-import { IonList, NavContext } from '@ionic/react';
+import { Capacitor } from '@capacitor/core';
+import {
+  InfoMessage,
+  useToast,
+  useAlert,
+  device,
+  Button,
+  usePromptImageSource,
+  captureImage,
+} from '@flumens';
+import { IonList, isPlatform, NavContext } from '@ionic/react';
+import CONFIG from 'common/config';
+import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import Species from './Species';
@@ -60,6 +71,7 @@ type Props = {
   disableAI?: boolean;
   disableDelete?: boolean;
   useDoughnut?: boolean;
+  allowReidentify?: boolean;
 };
 
 const SpeciesList = ({
@@ -70,11 +82,13 @@ const SpeciesList = ({
   useSubSamples = false,
   useSpeciesProfile = false,
   useDoughnut = false,
+  allowReidentify = false,
 }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
   const toast = useToast();
   const alert = useAlert();
+  const promptImageSource = usePromptImageSource();
 
   const rawList = !useSubSamples ? sample.occurrences : sample.samples;
   const list = [...rawList].sort(byCreateTime);
@@ -114,6 +128,48 @@ const SpeciesList = ({
     }
   };
 
+  const onReidentify = async (model: Model) => {
+    if (!device.isOnline) {
+      toast.warn("Sorry, looks like you're offline.");
+      return;
+    }
+
+    async function getImage() {
+      const shouldUseCamera = await promptImageSource();
+      const cancelled = shouldUseCamera === null;
+      if (cancelled) return [];
+
+      const images = await captureImage(
+        shouldUseCamera ? { camera: true } : { multiple: false }
+      );
+      if (!images.length) return [];
+
+      const getImageModel = (image: any) =>
+        Media.getImageModel(
+          isPlatform('hybrid') ? Capacitor.convertFileSrc(image) : image,
+          CONFIG.dataPath
+        ) as Promise<Media>;
+
+      const imageModels = images.map(getImageModel);
+
+      return Promise.all(imageModels);
+    }
+
+    try {
+      const images = await getImage();
+      if (!images.length) return;
+
+      const occ = model instanceof Occurrence ? model : model.occurrences[0];
+      await occ.media[0].destroy();
+      delete occ.attrs.taxon;
+      occ.media.push(images[0]);
+
+      await occ.identify();
+    } catch (e: any) {
+      toast.error(e.message, { position: 'bottom' });
+    }
+  };
+
   const onDelete = (model: Model) => deleteSample(model, alert);
 
   const navigateToSpeciesSample = (model: Model) => {
@@ -130,6 +186,7 @@ const SpeciesList = ({
         isDisabled={isDisabled}
         onDelete={!disableDelete ? onDelete : undefined}
         onClick={navigateToSpeciesSample}
+        onReidentify={allowReidentify ? onReidentify : undefined}
         useDoughnut={useDoughnut}
       />
     );

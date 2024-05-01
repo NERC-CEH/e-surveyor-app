@@ -129,7 +129,12 @@ const HomeMain = ({
         </InfoBackgroundMessage>
       )}
 
-      <SpeciesList sample={sample} isDisabled={isDisabled} useDoughnut />
+      <SpeciesList
+        sample={sample}
+        isDisabled={isDisabled}
+        useDoughnut
+        allowReidentify
+      />
 
       {!isDisabled && hasSpecies && (
         <InfoBackgroundMessage name="showWiFiSettingTip">
