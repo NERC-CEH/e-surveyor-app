@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
+import clsx from 'clsx';
 import {
   checkmarkCircle,
   helpCircle,
@@ -7,6 +8,7 @@ import {
   earth,
   leaf,
 } from 'ionicons/icons';
+import { Doughnut } from 'react-chartjs-2';
 import { Gallery } from '@flumens';
 import {
   IonItemSliding,
@@ -19,16 +21,61 @@ import config from 'common/config';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 
+const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
+
+const options = {
+  cutout: '75%',
+  layout: {
+    padding: { top: -9 }, // for some reason the chart is moved down
+  },
+  tooltip: { enabled: false }, // Disable the on-canvas tooltip
+  animation: { animation: false, animateRotate: false },
+};
+
+const getDoughnutData = (score: number) => {
+  const scorePercent = parseInt((score * 100).toFixed(0), 10);
+
+  const color = () => {
+    if (scorePercent > POSITIVE_THRESHOLD * 100) {
+      return '#4b9a43'; // green
+    }
+
+    if (scorePercent > POSSIBLE_THRESHOLD * 100) {
+      return '#ffbc5e'; // yellow
+    }
+
+    return '#ff4e46'; // red
+  };
+
+  const remainingScorePercent = 100 - scorePercent;
+
+  return {
+    datasets: [
+      {
+        data: [scorePercent, remainingScorePercent],
+        backgroundColor: [color(), '#f5f5f5'],
+        borderWidth: [0, 0],
+      },
+    ],
+    text: `${scorePercent}%`,
+  };
+};
+
 type Props = {
   model: Sample | Occurrence;
   isDisabled: boolean;
+  useDoughnut?: boolean;
   onDelete?: (model: Sample | Occurrence) => void;
   onClick: (model: Sample | Occurrence) => void;
 };
 
-const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
-
-const Species = ({ model, isDisabled, onDelete, onClick }: Props) => {
+const Species = ({
+  model,
+  isDisabled,
+  onDelete,
+  onClick,
+  useDoughnut,
+}: Props) => {
   const species = model.getSpecies();
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
 
@@ -121,15 +168,33 @@ const Species = ({ model, isDisabled, onDelete, onClick }: Props) => {
   return (
     <IonItemSliding key={model.cid}>
       <IonItem
-        detail
+        detail={!useDoughnut}
         detailIcon={detailsIcon}
-        className={`[--detail-icon-opacity:1] [--padding-start:0px] ${idClass}`}
+        className={clsx(
+          `[--detail-icon-opacity:1] [--padding-start:0px] ${idClass}`,
+          useDoughnut && '[--inner-padding-end:0]'
+        )}
         onClick={onClickWrap}
       >
-        <div className="flex items-center gap-2 p-1">
-          {profilePhoto}
+        <div className="flex w-full justify-between gap-2 p-1">
+          <div className="flex items-center gap-3 ">
+            {profilePhoto}
 
-          {getSpeciesName()}
+            {getSpeciesName()}
+          </div>
+
+          {useDoughnut && (
+            <div className="p-[5px]; relative h-[40px] w-[40px] shrink-0 self-center">
+              <Doughnut
+                data={getDoughnutData(species.score)}
+                options={options}
+                redraw
+              />
+              <div className="surveyEndTime absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.7em]">
+                {getDoughnutData(species.score).text}
+              </div>
+            </div>
+          )}
         </div>
       </IonItem>
 

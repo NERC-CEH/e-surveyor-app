@@ -1,7 +1,13 @@
 import { observer } from 'mobx-react';
-import { cameraOutline, timeOutline } from 'ionicons/icons';
+import { calendarOutline, cameraOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Main, MenuAttrItem, Button, MenuAttrItemFromModel } from '@flumens';
+import {
+  Main,
+  MenuAttrItem,
+  Button,
+  MenuAttrItemFromModel,
+  toISOTimezoneString,
+} from '@flumens';
 import {
   IonList,
   IonIcon,
@@ -30,26 +36,6 @@ const HomeMain = ({
 }: Props) => {
   const { url } = useRouteMatch();
 
-  const getTimeInput = (attr: string) => (
-    <div>
-      <IonDatetimeButton
-        datetime={attr}
-        slot="end"
-        className="[--ion-color-step-300:rgba(var(--color-tertiary-800-rgb),0.04)] [--ion-text-color:var(--form-value-color)]"
-      />
-      <IonModal keepContentsMounted className="[--border-radius:10px]">
-        <IonDatetime
-          id={attr}
-          presentation="time"
-          onIonChange={
-            (e: any) => ((sample.attrs as any)[attr] = e.detail.value) // eslint-disable-line
-          }
-          value={(sample.attrs as any)[attr]}
-        />
-      </IonModal>
-    </div>
-  );
-
   return (
     <Main>
       {isDisabled && <UploadedRecordInfoMessage />}
@@ -65,31 +51,35 @@ const HomeMain = ({
             disabled={isDisabled}
           />
           <IonItem className="m-0 rounded-none [--border-radius:0] [--border-style:solid] [--inner-padding-end:8px]">
-            <IonIcon src={timeOutline} slot="start" />
-            <IonLabel>Start-End time</IonLabel>
+            <IonIcon src={calendarOutline} slot="start" />
+            <IonLabel>Survey time</IonLabel>
             <div className="flex items-center gap-1">
-              {getTimeInput('surveyStartTime')}- {getTimeInput('surveyEndTime')}
+              <div>
+                <IonDatetimeButton
+                  datetime="surveyEndTime"
+                  slot="end"
+                  className="[--ion-color-step-300:rgba(var(--color-tertiary-800-rgb),0.04)] [--ion-text-color:var(--form-value-color)]"
+                />
+                <IonModal
+                  keepContentsMounted
+                  className="[--border-radius:10px]"
+                >
+                  <IonDatetime
+                    id="surveyEndTime"
+                    presentation="date-time"
+                    preferWheel
+                    onIonChange={(e: any) => {
+                      // eslint-disable-next-line
+                      (sample.attrs as any).surveyEndTime = toISOTimezoneString(
+                        new Date(e.detail.value)
+                      );
+                    }}
+                    value={(sample.attrs as any).surveyEndTime}
+                  />
+                </IonModal>
+              </div>
             </div>
           </IonItem>
-
-          {/* <DatetimeInput
-            onChange={(value: any) => (sample.attrs.surveyStartTime = value)}
-            label="Start time"
-            icon={timeOutline}
-            presentation="time"
-            format={{ options: { hour: '2-digit', minute: '2-digit' } }}
-            value={sample.attrs.surveyStartTime}
-            autoFocus={false}
-          />
-          <DatetimeInput
-            onChange={(value: any) => (sample.attrs.surveyEndTime = value)}
-            label="Start time"
-            icon={timeOutline}
-            presentation="time"
-            format={{ options: { hour: '2-digit', minute: '2-digit' } }}
-            value={sample.attrs.surveyEndTime}
-            autoFocus={false}
-          /> */}
 
           <MenuAttrItemFromModel
             model={sample}
@@ -110,7 +100,7 @@ const HomeMain = ({
         </Button>
       )}
 
-      <SpeciesList sample={sample} isDisabled={isDisabled} />
+      <SpeciesList sample={sample} isDisabled={isDisabled} useDoughnut />
     </Main>
   );
 };

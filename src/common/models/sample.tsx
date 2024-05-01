@@ -74,7 +74,6 @@ type Attrs = SampleAttrs & {
   margin?: any;
 
   // moth survey
-  surveyStartTime?: any;
   surveyEndTime?: any;
 };
 

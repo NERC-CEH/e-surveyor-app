@@ -1,12 +1,9 @@
-import { when } from 'mobx';
 import { chatboxOutline } from 'ionicons/icons';
-import SunCalc from 'suncalc';
 import { z, object } from 'zod';
-import { dateFormat, isValidLocation } from '@flumens';
+import { dateFormat, toISOTimezoneString } from '@flumens';
 import icon from 'common/images/moth-inside-icon.svg';
 import appModel from 'common/models/app';
 import Occurrence from 'models/occurrence';
-import AppSample from 'models/sample';
 import {
   Survey,
   locationAttr,
@@ -29,35 +26,6 @@ const dateTimeFormat = new Intl.DateTimeFormat('en-GB', {
   minute: 'numeric',
 });
 
-const getSetDefaultTime = (sample: AppSample) => () => {
-  const { surveyStartTime } = sample.attrs;
-  if (surveyStartTime) return;
-
-  const { location } = sample.attrs;
-  if (!isValidLocation(location)) return;
-  // debugger;
-  // end time
-  const date = new Date(sample.attrs.date);
-  const { sunrise } = SunCalc.getTimes(
-    date,
-    location.latitude,
-    location.longitude
-  );
-  // eslint-disable-next-line no-param-reassign
-  sample.attrs.surveyEndTime = new Date(sunrise).toISOString(); // UTC time
-
-  // start time
-  const oneDayBefore = new Date(date.setDate(date.getDate() - 1));
-  const { sunset } = SunCalc.getTimes(
-    oneDayBefore,
-    location.latitude,
-    location.longitude
-  );
-  // eslint-disable-next-line no-param-reassign
-  sample.attrs.surveyStartTime = new Date(sunset).toISOString(); // UTC time
-  sample.save();
-};
-
 const classifierID = 20098;
 
 const survey: Survey = {
@@ -68,13 +36,6 @@ const survey: Survey = {
 
   attrs: {
     location: locationAttr,
-
-    surveyStartTime: {
-      remote: {
-        id: 1385,
-        values: (date: number) => dateTimeFormat.format(new Date(date)),
-      },
-    },
 
     surveyEndTime: {
       remote: {
@@ -138,14 +99,13 @@ const survey: Survey = {
       },
       attrs: {
         training: appModel.attrs.useTraining,
+        surveyEndTime: toISOTimezoneString(new Date()),
         location: null,
         comment: null,
       },
     });
 
     sample.startGPS();
-
-    when(() => !!sample.attrs.location, getSetDefaultTime(sample));
 
     return sample;
   },
@@ -159,4 +119,5 @@ export const UNKNOWN_SPECIES = {
   commonName: 'Unknown',
   preferredId: 538737,
   foundInName: 'commonName',
+  score: 0,
 };

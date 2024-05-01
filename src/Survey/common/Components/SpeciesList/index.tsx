@@ -59,6 +59,7 @@ type Props = {
   useSpeciesProfile?: boolean;
   disableAI?: boolean;
   disableDelete?: boolean;
+  useDoughnut?: boolean;
 };
 
 const SpeciesList = ({
@@ -68,6 +69,7 @@ const SpeciesList = ({
   disableDelete = false,
   useSubSamples = false,
   useSpeciesProfile = false,
+  useDoughnut = false,
 }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
@@ -128,6 +130,7 @@ const SpeciesList = ({
         isDisabled={isDisabled}
         onDelete={!disableDelete ? onDelete : undefined}
         onClick={navigateToSpeciesSample}
+        useDoughnut={useDoughnut}
       />
     );
 
