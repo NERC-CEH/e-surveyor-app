@@ -91,6 +91,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
             isDisabled={isDisabled}
             disableAI
             disableDelete
+            useSpeciesProfile
           />
 
           {!subSample.occurrences.length && (
