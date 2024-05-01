@@ -75,6 +75,7 @@ type Attrs = SampleAttrs & {
 
   // moth survey
   surveyEndTime?: any;
+  otherHabitat?: any;
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {

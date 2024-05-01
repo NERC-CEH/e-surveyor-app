@@ -7,6 +7,8 @@ import {
   Button,
   MenuAttrItemFromModel,
   toISOTimezoneString,
+  Select,
+  Input,
 } from '@flumens';
 import {
   IonList,
@@ -18,11 +20,13 @@ import {
   IonModal,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import habitatIcon from 'common/images/habitats.svg';
 import mothInsideBoxIcon from 'common/images/moth-inside-icon.svg';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
+import { habitatValues } from '../config';
 
 type Props = {
   sample: Sample;
@@ -38,6 +42,7 @@ const HomeMain = ({
   const { url } = useRouteMatch();
 
   const hasSpecies = !!sample.occurrences.length;
+  const isOtherHabitat = sample.attrs.habitat === 'Other (please specify)';
 
   return (
     <Main>
@@ -83,7 +88,21 @@ const HomeMain = ({
               </div>
             </div>
           </IonItem>
-
+          <Select
+            options={habitatValues}
+            onChange={(habitat: any) => (sample.attrs.habitat = habitat)} // eslint-disable-line
+            value={sample.attrs.habitat}
+            label="Habitat"
+            prefix={<IonIcon src={habitatIcon} className="size-6" />}
+          />
+          {isOtherHabitat && (
+            <Input
+              label="Other habitat"
+              prefix={<IonIcon src={habitatIcon} className="size-6" />}
+              onChange={(habitat: any) => (sample.attrs.otherHabitat = habitat)} // eslint-disable-line
+              value={sample.attrs.otherHabitat}
+            />
+          )}
           <MenuAttrItemFromModel
             model={sample}
             attr="comment"

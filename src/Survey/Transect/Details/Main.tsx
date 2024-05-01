@@ -3,12 +3,12 @@ import { locationOutline, informationCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, InfoButton } from '@flumens';
 import { IonIcon, IonList } from '@ionic/react';
+import habitatIcon from 'common/images/habitats.svg';
 import Seeds from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import transectWShape from 'common/images/transectWShape.jpg';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
-import habitatIcon from './habitats.svg';
 import squareIcon from './square.svg';
 import stepsIcon from './steps.svg';
 

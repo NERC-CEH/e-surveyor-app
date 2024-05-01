@@ -10,6 +10,12 @@ import {
   attachClassifierResults,
 } from 'Survey/common/config';
 
+export const habitatValues = [
+  { value: 'Arable field margin', id: 22140 },
+  { value: 'Rough ground', id: 22141 },
+  { value: 'Other (please specify)', id: 22142 },
+];
+
 const commentAttr = {
   menuProps: { icon: chatboxOutline, skipValueTranslation: true },
   pageProps: {
@@ -48,6 +54,8 @@ const survey: Survey = {
       remote: { values: (date: number) => dateFormat.format(new Date(date)) },
     },
 
+    habitat: { remote: { id: 1866, values: habitatValues } },
+    otherHabitat: { remote: { id: 1867 } },
     comment: commentAttr,
   },
 
