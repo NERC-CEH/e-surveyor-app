@@ -17,6 +17,7 @@ import {
   IonLabel,
   IonModal,
 } from '@ionic/react';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import mothInsideBoxIcon from 'common/images/moth-inside-icon.svg';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -35,6 +36,8 @@ const HomeMain = ({
   photoSelect, // eslint-disable-line
 }: Props) => {
   const { url } = useRouteMatch();
+
+  const hasSpecies = !!sample.occurrences.length;
 
   return (
     <Main>
@@ -100,7 +103,21 @@ const HomeMain = ({
         </Button>
       )}
 
+      {!hasSpecies && (
+        <InfoBackgroundMessage>
+          Your species list is empty. <br /> tap the orange Add button take a
+          photo of a moth for the AI to identify.
+        </InfoBackgroundMessage>
+      )}
+
       <SpeciesList sample={sample} isDisabled={isDisabled} useDoughnut />
+
+      {!isDisabled && hasSpecies && (
+        <InfoBackgroundMessage name="showWiFiSettingTip">
+          To avoid uploading photos while using mobile data, you can disable
+          this feature in the app settings.
+        </InfoBackgroundMessage>
+      )}
     </Main>
   );
 };
