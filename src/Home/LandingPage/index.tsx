@@ -17,6 +17,7 @@ import survey3 from './beetleSurvey.jpg';
 import logo from './logo.svg';
 import survey4 from './mothSurvey.jpg';
 import survey2 from './ricardo-gomez.jpg';
+import rothamstedLogo from './rothamsted-logo.png';
 import './styles.scss';
 import survey1 from './viateur-hwang.jpg';
 
@@ -99,7 +100,14 @@ const LandingPage = () => {
                 title="Farmland Carabids"
                 type="Beetle trap survey"
                 link="/survey/beetle"
-              />
+              >
+                <div className="absolute right-0 top-0 w-3/5 rounded-bl-2xl bg-white/85 md:w-1/2">
+                  <div className="px-2 pt-2 text-right text-xs text-black/80 md:text-sm">
+                    In partnership with
+                  </div>
+                  <img src={rothamstedLogo} className="mr-1 !w-full p-1" />
+                </div>
+              </SurveyCard>
             </SwiperSlide>
             <SwiperSlide>
               <SurveyCard
