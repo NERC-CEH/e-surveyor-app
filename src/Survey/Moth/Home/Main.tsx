@@ -19,10 +19,11 @@ import {
   IonLabel,
   IonModal,
 } from '@ionic/react';
-import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import habitatIcon from 'common/images/habitats.svg';
 import mothInsideBoxIcon from 'common/images/moth-inside-icon.svg';
 import Sample from 'models/sample';
+import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
@@ -50,10 +51,12 @@ const HomeMain = ({
 
       <IonList lines="full">
         <div className="rounded-list">
+          <SinglePhotoPicker model={sample} label="Trap photo" />
+
           <MenuAttrItem
             routerLink={`${url}/location`}
             icon={mothInsideBoxIcon}
-            label="Moth trap"
+            label="Location"
             skipValueTranslation
             value={<GridRefValue sample={sample} />}
             disabled={isDisabled}
