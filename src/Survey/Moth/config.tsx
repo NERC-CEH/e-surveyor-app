@@ -12,7 +12,11 @@ import {
 
 export const habitatValues = [
   { value: 'Arable field margin', id: 22140 },
+  { value: 'Woodland', id: 22169 },
+  { value: 'Meadow', id: 22171 },
   { value: 'Rough ground', id: 22141 },
+  { value: 'Pond/Lake', id: 22170 },
+  { value: 'Downland', id: 22172 },
   { value: 'Other (please specify)', id: 22142 },
 ];
 
