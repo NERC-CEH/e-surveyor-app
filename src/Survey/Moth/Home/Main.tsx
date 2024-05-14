@@ -1,5 +1,10 @@
 import { observer } from 'mobx-react';
-import { calendarOutline, cameraOutline } from 'ionicons/icons';
+import {
+  bookOutline,
+  calendarOutline,
+  cameraOutline,
+  openOutline,
+} from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import {
   Main,
@@ -48,6 +53,17 @@ const HomeMain = ({
   return (
     <Main>
       {isDisabled && <UploadedRecordInfoMessage />}
+
+      <div className="rounded-list">
+        <Button
+          href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
+          prefix={<IonIcon icon={bookOutline} className="size-6" />}
+          suffix={<IonIcon icon={openOutline} />}
+          className="mx-3 text-left"
+        >
+          Project information
+        </Button>
+      </div>
 
       <IonList lines="full">
         <div className="rounded-list">
