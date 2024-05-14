@@ -24,7 +24,7 @@ import Sample from 'models/sample';
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
 
 const options = {
-  cutout: '75%',
+  cutout: '80%',
   layout: {
     padding: { top: -9 }, // for some reason the chart is moved down
   },
