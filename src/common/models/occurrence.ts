@@ -212,7 +212,8 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       this.media[0].attrs.identified = true;
 
       const topSuggestion = suggestions[0];
-      if (!topSuggestion) {
+      const isNonUKSpecies = !Number.isFinite(topSuggestion?.warehouseId);
+      if (!topSuggestion || isNonUKSpecies) {
         this.attrs.taxon = UNKNOWN_SPECIES;
         return;
       }

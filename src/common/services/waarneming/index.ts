@@ -10,23 +10,22 @@ import userModel from 'common/models/user';
 
 const remoteSchema = object({
   probability: z.number(),
-  taxa_taxon_list_id: z.string(),
-  taxon: z.string(),
 
-  classifier_id: z.string().optional(),
-  classifier_name: z.string().optional(),
-  group: z.number().optional(),
-  authority: z.string().optional(),
-  preferred_taxa_taxon_list_id: z.string().optional(),
-  language_iso: z.string().optional(),
-  preferred: z.string().optional(),
-  preferred_taxon: z.string().optional(),
-  preferred_authority: z.string().optional(),
-  /**
-   * @deprecated this comes from the server which might differ from the app ones. Don't use it.
-   */
-  default_common_name: z.string().optional(),
-  taxon_meaning_id: z.string().optional(),
+  // will be null, if doesn't match any moth species in the UKSI list.
+  taxon: z.string().nullable().optional(),
+  taxa_taxon_list_id: z.string().nullable().optional(),
+
+  classifier_id: z.string().nullable().optional(),
+  classifier_name: z.string().nullable().optional(),
+  group: z.number().nullable().optional(),
+  authority: z.string().nullable().optional(),
+  preferred_taxa_taxon_list_id: z.string().nullable().optional(),
+  language_iso: z.string().nullable().optional(),
+  preferred: z.string().nullable().optional(),
+  preferred_taxon: z.string().nullable().optional(),
+  preferred_authority: z.string().nullable().optional(),
+  default_common_name: z.string().nullable().optional(),
+  taxon_meaning_id: z.string().nullable().optional(),
 });
 
 type RemoteAttributes = z.infer<typeof remoteSchema>;
