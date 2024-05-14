@@ -111,10 +111,9 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
   return (
     <IonItemSliding className="survey-list-item">
       <IonItem routerLink={href} detail={false}>
-        <IonIcon
-          icon={survey.icon}
-          className="shrink-0 rounded-full bg-primary-50/80 p-3 text-3xl"
-        />
+        <div className="list-avatar">
+          <IonIcon icon={survey.icon} className="bg-primary-50/80 text-3xl" />
+        </div>
         <IonLabel>{getSampleInfo()}</IonLabel>
         <OnlineStatus
           sample={sample}

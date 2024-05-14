@@ -1,4 +1,6 @@
 #surveys-list ion-content {
+  --padding-bottom: 100px;
+
   ion-list {
     background: transparent;
 
@@ -8,6 +10,9 @@
       background: white;
 
       ion-item {
+        --padding-start: 5px;
+        --padding-top: 2px;
+        --padding-bottom: 2px;
         --border-width: 0;
 
         .species-info {
@@ -20,6 +25,8 @@
 
         > ion-label {
           margin-left: 18px;
+          margin-top: 0;
+          margin-bottom: 0;
         }
 
         h3 {

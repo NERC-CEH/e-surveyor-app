@@ -152,7 +152,11 @@ const Species = ({
   const detailsIcon = detailIcon || '';
 
   const photo = speciesPhoto ? (
-    <img src={speciesPhoto} onClick={showGallery} />
+    <img
+      src={speciesPhoto}
+      onClick={showGallery}
+      className="h-full w-full object-cover"
+    />
   ) : (
     <IonIcon icon={leaf} />
   );
