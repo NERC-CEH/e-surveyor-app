@@ -80,7 +80,12 @@ function StartNewSurvey({ survey }: Props): null {
         return;
       }
 
-      let sample = await getDraft(draftIdKey, alert);
+      let sample;
+
+      const isMothSurvey = survey.name === 'moth';
+      if (!isMothSurvey) {
+        sample = await getDraft(draftIdKey, alert);
+      }
 
       if (!sample) {
         sample = await getNewSample(survey, draftIdKey);
