@@ -123,7 +123,7 @@ const HomeController = ({ sample }: Props) => {
   return (
     <Page id="survey-moth-home">
       <Header
-        title="Moth-trap survey"
+        title="Moth recording"
         rightSlot={finishButton}
         subheader={trainingModeSubheader}
       />

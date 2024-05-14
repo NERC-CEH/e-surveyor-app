@@ -266,7 +266,7 @@ export const marginOptions = [
 const survey: Survey = {
   id: 727,
   name: 'beetle',
-  label: 'Trap',
+  label: 'Beetle trap',
   icon,
 
   attrs: {

@@ -89,7 +89,7 @@ const LandingPage = () => {
             <SwiperSlide>
               <SurveyCard
                 image={survey4}
-                title="Moth trap"
+                title="Moth recording"
                 type="Survey"
                 link="/survey/moth"
               />

@@ -37,7 +37,7 @@ const classifierID = 20098;
 const survey: Survey = {
   id: 763,
   name: 'moth',
-  label: 'Moth-trap',
+  label: 'Moth recording',
   icon,
 
   attrs: {
