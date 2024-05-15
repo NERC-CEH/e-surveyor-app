@@ -54,7 +54,7 @@ const HomeMain = ({
     <Main>
       {isDisabled && <UploadedRecordInfoMessage />}
 
-      <div className="rounded-list">
+      <div className="rounded-list mt-2">
         <Button
           href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
           prefix={<IonIcon icon={bookOutline} className="size-6" />}
@@ -67,7 +67,11 @@ const HomeMain = ({
 
       <IonList lines="full">
         <div className="rounded-list">
-          <SinglePhotoPicker model={sample} label="Trap photo" />
+          <SinglePhotoPicker
+            model={sample}
+            label="Trap photo"
+            disabled={isDisabled}
+          />
 
           <MenuAttrItem
             routerLink={`${url}/location`}
@@ -79,7 +83,7 @@ const HomeMain = ({
           />
           <IonItem className="m-0 rounded-none [--border-radius:0] [--border-style:solid] [--inner-padding-end:8px]">
             <IonIcon src={calendarOutline} slot="start" />
-            <IonLabel>Survey time</IonLabel>
+            <IonLabel className="!opacity-100">Survey time</IonLabel>
             <div className="flex items-center gap-1">
               <div>
                 <IonDatetimeButton
@@ -102,6 +106,7 @@ const HomeMain = ({
                       );
                     }}
                     value={(sample.attrs as any).surveyEndTime}
+                    disabled={isDisabled}
                   />
                 </IonModal>
               </div>
@@ -113,6 +118,7 @@ const HomeMain = ({
             value={sample.attrs.habitat}
             label="Habitat"
             prefix={<IonIcon src={habitatIcon} className="size-6" />}
+            isDisabled={isDisabled}
           />
           {isOtherHabitat && (
             <Input
@@ -120,12 +126,14 @@ const HomeMain = ({
               prefix={<IonIcon src={habitatIcon} className="size-6" />}
               onChange={(habitat: any) => (sample.attrs.otherHabitat = habitat)} // eslint-disable-line
               value={sample.attrs.otherHabitat}
+              isDisabled={isDisabled}
             />
           )}
           <MenuAttrItemFromModel
             model={sample}
             attr="comment"
             skipValueTranslation
+            disabled={isDisabled}
           />
         </div>
       </IonList>
