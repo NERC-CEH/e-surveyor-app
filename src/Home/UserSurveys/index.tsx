@@ -153,7 +153,7 @@ const UserSurveys = () => {
         </IonToolbar>
       </IonHeader>
 
-      <Main className="ion-padding">
+      <Main className="ion-padding [--padding-top:calc(var(--ion-safe-area-top,0)_+_80px)]">
         {showingPending && showUploadAll && (
           <Button
             className="upload-all-button"

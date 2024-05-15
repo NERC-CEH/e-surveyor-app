@@ -98,7 +98,7 @@
 
 // status bar
 html.ios.plt-hybrid #status-bar-background {
-  background: #443553;
+  background: #122a19;
   width: 100vw;
   height: env(safe-area-inset-top);
   position: fixed;
@@ -205,11 +205,6 @@ ion-toolbar {
     rgba(102, 163, 71, 1) 0%,
     rgba(131, 163, 71, 1) 100%
   );
-}
-
-// ??
-html[mode='ios'] .tabs-inner {
-  margin-top: var(--ion-safe-area-top);
 }
 
 /** Ionic 7 fixes START **/

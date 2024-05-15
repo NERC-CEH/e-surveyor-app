@@ -52,7 +52,7 @@ mobxConfig({ enforceActions: 'never' });
 
   if (isPlatform('hybrid')) {
     StatusBar.setStyle({
-      style: StatusBarStyle.Light,
+      style: StatusBarStyle.Dark,
     });
 
     SplashScreen.hide();

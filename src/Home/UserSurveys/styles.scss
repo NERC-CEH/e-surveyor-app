@@ -1,4 +1,6 @@
 #surveys-list {
+  margin-top: 0; // to counter the ion-safe-area-top which is calculated in JS
+
   ion-header {
     ion-badge {
       display: inline;
@@ -22,8 +24,6 @@
   }
 
   ion-content {
-    --padding-top: 80px;
-
     .info-background-message {
       margin-top: 100px;
     }
