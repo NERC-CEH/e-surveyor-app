@@ -88,6 +88,22 @@ const LandingPage = () => {
           >
             <SwiperSlide>
               <SurveyCard
+                image={survey1}
+                title="Record a habitat"
+                type="Survey"
+                link="/survey/point"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SurveyCard
+                image={survey2}
+                title="Structured recording"
+                type="Transect survey"
+                link="/survey/transect"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SurveyCard
                 image={survey4}
                 title="Moth recording"
                 type="Survey"
@@ -108,22 +124,6 @@ const LandingPage = () => {
                   <img src={rothamstedLogo} className="mr-1 !w-full p-1" />
                 </div>
               </SurveyCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <SurveyCard
-                image={survey1}
-                title="Record a habitat"
-                type="Survey"
-                link="/survey/point"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SurveyCard
-                image={survey2}
-                title="Structured recording"
-                type="Transect survey"
-                link="/survey/transect"
-              />
             </SwiperSlide>
           </Swiper>
 
