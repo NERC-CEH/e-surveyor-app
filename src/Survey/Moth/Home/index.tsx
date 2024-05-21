@@ -5,7 +5,6 @@ import { useRouteMatch } from 'react-router';
 import { Capacitor } from '@capacitor/core';
 import { Page, useToast, captureImage, device, Header } from '@flumens';
 import { NavContext, isPlatform } from '@ionic/react';
-import { usePromptImageSource } from 'common/Components/PhotoPickers/PhotoPicker';
 import CONFIG from 'common/config';
 import appModel from 'models/app';
 import Media from 'models/image';
@@ -26,8 +25,6 @@ const HomeController = ({ sample }: Props) => {
   const toast = useToast();
   const checkSampleStatus = useValidateCheck(sample);
   const checkUserStatus = useUserStatusCheck();
-
-  const promptImageSource = usePromptImageSource();
 
   const isDisabled = sample.isDisabled();
 
@@ -67,12 +64,8 @@ const HomeController = ({ sample }: Props) => {
     }
   };
 
-  const photoSelect = async () => {
+  const photoSelect = async (shouldUseCamera: boolean = true) => {
     async function getImage() {
-      const shouldUseCamera = await promptImageSource();
-      const cancelled = shouldUseCamera === null;
-      if (cancelled) return [];
-
       const images = await captureImage(
         shouldUseCamera ? { camera: true } : { multiple: true }
       );
@@ -105,6 +98,8 @@ const HomeController = ({ sample }: Props) => {
     });
   };
 
+  const gallerySelect = () => photoSelect(false);
+
   const isInvalid = sample.validateRemote();
 
   const finishButton = sample.remote.synchronising ? null : (
@@ -127,7 +122,12 @@ const HomeController = ({ sample }: Props) => {
         rightSlot={finishButton}
         subheader={trainingModeSubheader}
       />
-      <Main sample={sample} isDisabled={isDisabled} photoSelect={photoSelect} />
+      <Main
+        sample={sample}
+        isDisabled={isDisabled}
+        photoSelect={photoSelect}
+        gallerySelect={gallerySelect}
+      />
     </Page>
   );
 };

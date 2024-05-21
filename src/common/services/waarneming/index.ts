@@ -64,7 +64,12 @@ export default async function identify(
 
     res.data.forEach(d => remoteSchema.parse(d));
 
-    const results = res.data.map(normalizeBaseValues);
+    if (!res?.data)
+      throw new Error(
+        "We couldn't identify the photo at the moment, try again later."
+      );
+
+    const results = res.data?.map(normalizeBaseValues);
 
     return { version: 1, results };
   } catch (error: any) {

@@ -37,13 +37,15 @@ import { habitatValues } from '../config';
 type Props = {
   sample: Sample;
   photoSelect: any;
+  gallerySelect: any;
   isDisabled: boolean;
 };
 
 const HomeMain = ({
   sample,
   isDisabled,
-  photoSelect, // eslint-disable-line
+  photoSelect,
+  gallerySelect,
 }: Props) => {
   const { url } = useRouteMatch();
 
@@ -54,12 +56,12 @@ const HomeMain = ({
     <Main>
       {isDisabled && <UploadedRecordInfoMessage />}
 
-      <div className="rounded-list mt-2">
+      <div className="rounded-list mx-auto mb-2 mt-2 max-w-[600px]">
         <Button
           href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
           prefix={<IonIcon icon={bookOutline} className="size-6" />}
           suffix={<IonIcon icon={openOutline} />}
-          className="mx-3 text-left"
+          className="mx-2 border-none text-left"
         >
           Project information
         </Button>
@@ -69,7 +71,7 @@ const HomeMain = ({
         <div className="rounded-list">
           <SinglePhotoPicker
             model={sample}
-            label="Trap photo"
+            label="Trap site photo"
             disabled={isDisabled}
           />
 
@@ -143,6 +145,7 @@ const HomeMain = ({
           color="secondary"
           prefix={<IonIcon src={cameraOutline} className="size-5" />}
           onPress={photoSelect}
+          onLongPress={gallerySelect}
           className="mx-auto mb-5 mt-10"
         >
           Add
