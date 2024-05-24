@@ -11,7 +11,7 @@ export default (normSearchPhrase, results) => {
   let commonNames = [];
   languageSpeciesNames.forEach(
     // eslint-disable-next-line
-    ({ warehouseId, scientificName, commonName, preferredId }) => {
+    ({ warehouseId, scientificName, commonName, preferredId, tvk }) => {
       const matches = commonName.match(new RegExp(normSearchPhrase, 'i'));
       if (matches && results.length + commonNames.length <= MAX_RESULTS) {
         commonNames.push({
@@ -20,6 +20,7 @@ export default (normSearchPhrase, results) => {
           commonName,
           scientificName,
           preferredId,
+          tvk,
         });
       }
     }

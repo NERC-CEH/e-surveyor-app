@@ -1,0 +1,281 @@
+[
+  {
+    "broadHabitat": "Broadleaved, mixed and yew woodland",
+    "rank": 1,
+    "matchingCoefficient": 75,
+    "UKHab": "w1",
+    "description": "Vegetation dominated by broadleaved trees >5m high when mature, with tree cover >20%. Also includes scrub (<5 m) if >30% cover. This habitat includes stands of both native and non-native broadleaved trees and yew.",
+    "typicalSpecies": [
+      {
+        "scientificName": "Fraxinus excelsior",
+        "commonName": "Ash",
+        "bsbiid": "2cd4p9h.yxr",
+        "bsbiphotoindex": 3
+      },
+      {
+        "scientificName": "Corylus avellana",
+        "commonName": "Hazel",
+        "bsbiid": "2cd4p9h.r9",
+        "bsbiphotoindex": 18
+      },
+      {
+        "scientificName": "Quercus robur",
+        "commonName": "Pedunculate Oak",
+        "bsbiid": "2cd4p9h.1y5",
+        "bsbiphotoindex": 33
+      },
+      {
+        "scientificName": "Fagus sylvatica",
+        "commonName": "Beech",
+        "bsbiid": "2cd4p9h.fa2",
+        "bsbiphotoindex": 6
+      },
+      {
+        "scientificName": "Ilex aquifolium",
+        "commonName": "Holly",
+        "bsbiid": "2cd4p9h.yp2",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Betula pubescens",
+        "commonName": "Downy Birch",
+        "bsbiid": "2cd4p9h.bmf",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "�Mercurialis perennis",
+        "commonName": "Dog's Mercury",
+        "bsbiid": "2cd4p9h.1ga",
+        "bsbiphotoindex": 3
+      }
+    ]
+  },
+  {
+    "broadHabitat": "Coniferous woodland",
+    "rank": 2,
+    "matchingCoefficient": 25,
+    "UKHab": "w2",
+    "description": "Vegetation dominated by trees >5m high when mature, which forms a canopy having a cover of >20%. This habitat includes semi-natural stands and plantations and includes both native and non-native coniferous trees.",
+    "typicalSpecies": [
+      {
+        "scientificName": "Pinus sylvestris",
+        "commonName": "Scots Pine",
+        "bsbiid": "2cd4p9h.fwn",
+        "bsbiphotoindex": 5
+      },
+      {
+        "scientificName": "Juniperus communis",
+        "commonName": "Common Juniper",
+        "bsbiid": "2cd4p9h.8r1",
+        "bsbiphotoindex": 2
+      },
+      {
+        "scientificName": "Vaccinium myrtillus",
+        "commonName": "Bilberry",
+        "bsbiid": "2cd4p9h.w50",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Ilex aquifolium",
+        "commonName": "Holly",
+        "bsbiid": "2cd4p9h.yp2",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Corylus avellana",
+        "commonName": "Hazel",
+        "bsbiid": "2cd4p9h.r9",
+        "bsbiphotoindex": 18
+      },
+      {
+        "scientificName": "Betula pubescens",
+        "commonName": "Downy Birch",
+        "bsbiid": "2cd4p9h.bmf",
+        "bsbiphotoindex": 1
+      }
+    ]
+  },
+  {
+    "broadHabitat": "Boundary and linear features",
+    "rank": 3,
+    "matchingCoefficient": 25,
+    "UKHab": "h2, c1a, u1e, f2d",
+    "description": "Linearly arranged landscape features such as hedgerows, lines of trees, walls, stone and earth banks, grass strips and dry ditches. This broad habitat is asscoiated with the following UKHab codes: h2 (hedgerows), c1a (arable field margins), u1e (built linear features) and f2d (aquatic marginal vegetation).",
+    "typicalSpecies": [
+      {
+        "scientificName": "Crataegus monogyna",
+        "commonName": "Hawthorn",
+        "bsbiid": "2cd4p9h.f6c",
+        "bsbiphotoindex": 5
+      },
+      {
+        "scientificName": "Prunus spinosa",
+        "commonName": "Blackthorn",
+        "bsbiid": "2cd4p9h.cfv",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Rubus fruticosus",
+        "commonName": "Bramble",
+        "bsbiid": "2cd4p9h.vzf",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Anthriscus sylvestris",
+        "commonName": "Cow Parsley",
+        "bsbiid": "2cd4p9h.v7e",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Corylus avellana",
+        "commonName": "Hazel",
+        "bsbiid": "2cd4p9h.r9",
+        "bsbiphotoindex": 18
+      },
+      {
+        "scientificName": "Clematis vitalba",
+        "commonName": "Traveller's-joy",
+        "bsbiid": "2cd4p9h.8hq",
+        "bsbiphotoindex": 3
+      },
+      {
+        "scientificName": "Lonicera periclymenum",
+        "commonName": "Honeysuckle",
+        "bsbiid": "2cd4p9h.ff9",
+        "bsbiphotoindex": 14
+      }
+    ]
+  },
+  {
+    "broadHabitat": "Improved grassland",
+    "rank": 4,
+    "matchingCoefficient": 25,
+    "UKHab": "g4 (modified grassland)",
+    "description": "Species-poor vegetation dominated by a few fast-growing grasses such as Rye-grasses Lolium spp. and white clover Trifolium repens on fertile, neutral soils. This habitat is typically either managed as pasture or mown regularly for silage production or in non-agricultural contexts for recreation and amenity purposes.",
+    "typicalSpecies": [
+      {
+        "scientificName": "Lolium perenne",
+        "commonName": "Perennial Rye-grass",
+        "bsbiid": "2cd4p9h.5c1",
+        "bsbiphotoindex": 12
+      },
+      {
+        "scientificName": "Trifolium repens",
+        "commonName": "White Clover",
+        "bsbiid": "2cd4p9h.m5y",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Ranunculus repens",
+        "commonName": "Creeping Buttercup",
+        "bsbiid": "2cd4p9h.vt4",
+        "bsbiphotoindex": 7
+      },
+      {
+        "scientificName": "Plantago major",
+        "commonName": "Greater Plantain",
+        "bsbiid": "2cd4p9h.p08",
+        "bsbiphotoindex": 4
+      },
+      {
+        "scientificName": "Taraxacum",
+        "commonName": "Dandelion",
+        "bsbiid": "2cd4p9h.fsn"
+      },
+      {
+        "scientificName": "Rumex obtusifolius",
+        "commonName": "Broad-leaved Dock",
+        "bsbiid": "2cd4p9h.m1d",
+        "bsbiphotoindex": 2
+      },
+      {
+        "scientificName": "Stellaria media",
+        "commonName": "Common Chickweed",
+        "bsbiid": "2cd4p9h.w2r",
+        "bsbiphotoindex": 1
+      }
+    ]
+  },
+  {
+    "broadHabitat": "Neutral grassland",
+    "rank": 5,
+    "matchingCoefficient": 25,
+    "UKHab": "g3",
+    "description": "Vegetation dominated by grasses and herbs on a range of neutral soils usually with a pH of between 4.5 and 6.5. It includes enclosed dry hay meadows and pastures, together with a range of grasslands which are periodically inundated with water or permanently moist.",
+    "typicalSpecies": [
+      {
+        "scientificName": "Rhinanthus minor",
+        "commonName": "Yellow-rattle",
+        "bsbiid": "2cd4p9h.966"
+      },
+      {
+        "scientificName": "Leucanthemum vulgare",
+        "commonName": "Oxeye Daisy",
+        "bsbiid": "2cd4p9h.q4",
+        "bsbiphotoindex": 5
+      },
+      {
+        "scientificName": "Dactylis glomerata",
+        "commonName": "Cock's-foot",
+        "bsbiid": "2cd4p9h.f6z",
+        "bsbiphotoindex": 4
+      },
+      {
+        "scientificName": "Holcus lanatus",
+        "commonName": "Yorkshire-fog",
+        "bsbiid": "2cd4p9h.17g",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Filipendula ulmaria",
+        "commonName": "Meadowsweet",
+        "bsbiid": "2cd4p9h.54r",
+        "bsbiphotoindex": 8
+      },
+      {
+        "scientificName": "Galium verum",
+        "commonName": "Lady's Bedstraw",
+        "bsbiid": "2cd4p9h.13b",
+        "bsbiphotoindex": 9
+      },
+      {
+        "scientificName": "Betonica officinalis",
+        "commonName": "Betony",
+        "bsbiid": "2cd4p9h.6yb1xg",
+        "bsbiphotoindex": 1
+      }
+    ]
+  },
+  {
+    "broadHabitat": "Inland rock",
+    "rank": 6,
+    "matchingCoefficient": 25,
+    "UKHab": "s1",
+    "description": "Natural and artificial exposed rock surfaces, such as inland cliffs, caves, screes and limestone pavements, as well as various forms of excavations and waste tips such as quarries and quarry waste.",
+    "typicalSpecies": [
+      {
+        "scientificName": "Saxifraga cespitosa",
+        "commonName": "Tufted Saxifrage",
+        "bsbiid": "2cd4p9h.eq2"
+      },
+      {
+        "scientificName": "Thymus drucei",
+        "commonName": "Wild Thyme",
+        "bsbiid": "2cd4p9h.7mm638",
+        "bsbiphotoindex": 20
+      },
+      {
+        "scientificName": "Rhodiola rosea",
+        "commonName": "Roseroot",
+        "bsbiid": "2cd4p9h.7mm4xg",
+        "bsbiphotoindex": 4
+      },
+      {
+        "scientificName": "Asplenium viride",
+        "commonName": "Green Spleenwort",
+        "bsbiid": "2cd4p9h.b4",
+        "bsbiphotoindex": 2
+      }
+    ]
+  }
+]

@@ -52,6 +52,10 @@ export type Species = {
    * Common name synonym
    */
   synonym?: string;
+  /**
+   * Common name synonym
+   */
+  tvk?: string;
 };
 
 const MIN_SEARCH_LENGTH = 2;

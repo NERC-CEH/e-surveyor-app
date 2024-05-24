@@ -11,6 +11,7 @@ type ResponseResultA = {
   warehouseId: number;
   commonNames: string[];
   scientificName: string;
+  tvk: string;
 };
 
 type Response = {
@@ -25,6 +26,7 @@ export const processResponse = (res: ServiceResponse): Response => {
       warehouseId: parseInt(result.indicia_taxon_id, 10),
       scientificName: result.class,
       commonNames: [], // TODO:
+      tvk: '',
     };
   };
 

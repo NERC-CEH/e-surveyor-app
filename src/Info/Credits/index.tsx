@@ -38,6 +38,9 @@ const Credits = () => (
           <b>Grace Skinner</b> (UK Centre for Ecology & Hydrology)
         </P>
         <P skipTranslation>
+          <b>Zeke Marshall</b> (UK Centre for Ecology & Hydrology)
+        </P>
+        <P skipTranslation>
           <b>Alba Gomez Segura</b> (UK Centre for Ecology & Hydrology)
         </P>
         <P skipTranslation>
@@ -89,7 +92,9 @@ const Credits = () => (
         <H>Funding</H>
         <P>
           We are grateful to the UKRI ASSIST project, Defra and the Joint Nature
-          Conservation Committee for funding this application.
+          Conservation Committee for funding this application. The moth
+          application and the habitat reporting received funding from JNCC
+          through the Natural Capital Ecosystem Assessment.
         </P>
       </Section>
 
@@ -120,6 +125,11 @@ const Credits = () => (
           <a href="https://unsplash.com/@marcusneto">Marcus Neto</a>,{' '}
           <a href="https://unsplash.com/@freestef">Free Steph</a> and{' '}
           <a href="https://unsplash.com/@mickaeltournier">Mickael Tournier</a>.
+        </P>
+        <P>
+          Thanks to Rob Still and Chris Gibson for providing plant photos for
+          the habitat report, which feature in the latest WILDGuides for British
+          & Irish Wildflowers and Plants.
         </P>
       </Section>
     </Main>

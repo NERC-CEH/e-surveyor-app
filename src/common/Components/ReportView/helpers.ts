@@ -1,7 +1,12 @@
 import { SeedmixSpecies } from 'common/data/seedmix';
 import Occurrence from 'models/occurrence';
 
-export type SpeciesNames = [string, string];
+type ScientificName = string;
+type CommonName = string;
+type TVK = string;
+export type SpeciesNames =
+  | [ScientificName, CommonName]
+  | [ScientificName, CommonName, TVK];
 
 export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
   const dict: any = {};
@@ -10,14 +15,14 @@ export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
     const species = occ.getSpecies();
     if (!species) return;
 
-    const { commonName, scientificName } = species;
+    const { commonName, scientificName, tvk } = species;
 
-    dict[scientificName] = commonName || '';
+    dict[scientificName] = [commonName || '', tvk];
   };
 
   occurrences.forEach(addToUniqueDict);
 
-  return Object.entries(dict);
+  return Object.entries(dict).map((s: any) => [s[0], ...s[1]] as any);
 }
 
 export function getSeedmixUse(

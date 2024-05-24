@@ -1,3 +1,7 @@
+### 1.3.0
+
+Added habitat suggestions.
+
 ### 1.2.0
 
 Added Moth trap survey.

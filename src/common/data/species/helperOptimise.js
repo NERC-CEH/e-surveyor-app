@@ -1,12 +1,12 @@
 const taxonCleaner = require('./helperClean');
 
-const TAXON = 'taxon';
-const ID = 'id';
 const GENUS_ID_INDEX = 0;
 const GENUS_TAXON_INDEX = 1;
-const GENUS_SPECIES_INDEX = 2;
+const GENUS_TVK_INDEX = 2;
+const GENUS_SPECIES_INDEX = 3;
 const SPECIES_ID_INDEX = 0;
 const SPECIES_TAXON_INDEX = 1;
+const SPECIES_TVK_INDEX = 2;
 
 function normalizeValue(value) {
   // check if int
@@ -25,7 +25,7 @@ function isGenusDuplicate(optimised, taxa, index) {
     return false;
   }
   const genus = optimised[lastEntry];
-  if (genus[TAXON] !== taxa[TAXON]) {
+  if (genus.taxon !== taxa.taxon) {
     // couldn't find duplicate
     return false;
   }
@@ -55,6 +55,7 @@ function getLastGenus(
     lastGenus = [];
     lastGenus[GENUS_ID_INDEX] = 0;
     lastGenus[GENUS_TAXON_INDEX] = genusName;
+    lastGenus[GENUS_TVK_INDEX] = '';
     lastGenus[GENUS_SPECIES_INDEX] = [];
     optimised.push(lastGenus);
     return lastGenus;
@@ -85,7 +86,8 @@ function addGenus(optimised, taxa) {
   }
 
   const genus = [];
-  genus[GENUS_ID_INDEX] = Number.parseInt(taxa[ID], 10);
+  genus[GENUS_ID_INDEX] = Number.parseInt(taxa.id, 10);
+  genus[GENUS_TVK_INDEX] = taxa.externalKey;
   genus[GENUS_TAXON_INDEX] = taxon;
   genus[GENUS_SPECIES_INDEX] = [];
 
@@ -114,7 +116,7 @@ function addSpecies(optimised, taxa) {
     speciesArray = lastGenus[GENUS_SPECIES_INDEX];
   }
 
-  const id = normalizeValue(taxa[ID]);
+  const id = normalizeValue(taxa.id);
 
   const taxon = taxaNameSplitted.slice(1).join(' ');
   const taxonClean = taxonCleaner(taxon, false);
@@ -126,6 +128,7 @@ function addSpecies(optimised, taxa) {
   const species = [];
   species[SPECIES_ID_INDEX] = id;
   species[SPECIES_TAXON_INDEX] = taxonClean;
+  species[SPECIES_TVK_INDEX] = taxa.externalKey;
 
   speciesArray.push(species);
 }

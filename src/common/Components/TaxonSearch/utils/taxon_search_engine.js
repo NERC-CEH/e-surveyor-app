@@ -25,6 +25,7 @@ const API = {
      scientificName: "Scientific name"
      commonName: "Common name"
      synonym: "Common name synonym"
+     tvk: "TVK"
    }
    */
   async search(searchPhrase, options = {}) {

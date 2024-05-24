@@ -71,7 +71,7 @@ export default async function appendModelToFormData(
 
 const blacklisted = blackListedData.map(sp => sp.taxon);
 
-export function filterUKSpecies(results: Suggestion[]) {
+export function filterUKSpecies(results: Suggestion[]): Suggestion[] {
   let removedSpeciesScores = 0;
 
   const isUKSpeciesOrHighScore = (result: Suggestion) => {

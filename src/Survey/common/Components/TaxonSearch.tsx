@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { Page, Main, Header } from '@flumens';
 import { NavContext } from '@ionic/react';
 import TaxonSearch from 'common/Components/TaxonSearch';
-import Occurrence from 'models/occurrence';
+import Occurrence, { Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 import { MachineInvolvement } from 'Survey/common/config';
 
@@ -13,22 +13,17 @@ type Props = {
   subSubSample?: Sample;
 };
 
-type Taxon = {
-  scientificName: string;
-  commonName?: string;
-  warehouseId: number;
-};
-
 const Controller = ({ sample, subSample, subSubSample }: Props) => {
   const context = useContext(NavContext);
 
-  const transformUKSIToAppTaxon = (taxon: Taxon) => ({
+  const transformUKSIToAppTaxon = (taxon: Taxon): Taxon => ({
     commonName: taxon.commonName || '',
     scientificName: taxon.scientificName,
     warehouseId: taxon.warehouseId,
     machineInvolvement: MachineInvolvement.HUMAN,
     images: [],
     score: 1,
+    tvk: taxon.tvk,
   });
 
   const onSpeciesSelected = async (taxon: Taxon) => {
@@ -55,10 +50,11 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
     }
 
     const [occ] = subModel.occurrences;
-    occ.attrs.taxon = {
+    const newTaxon = {
       ...occ.getSpecies(),
       ...transformUKSIToAppTaxon(taxon),
     };
+    occ.attrs.taxon = newTaxon;
 
     model.save();
 

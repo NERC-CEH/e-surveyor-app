@@ -53,6 +53,7 @@ type Attrs = SampleAttrs & {
   type?: any;
   steps?: any;
   date?: any;
+  seeded?: any;
   seedmix?: any;
   quadratSize?: any;
   seedmixgroup?: any;

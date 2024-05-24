@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ModalHeader } from '@flumens';
-import { IonItem, IonLabel, IonModal } from '@ionic/react';
+import { IonItem, IonLabel, IonList, IonModal } from '@ionic/react';
 import naturalEnemies, {
   Interaction as EnemyInteraction,
 } from 'common/data/naturalEnemies';
@@ -57,13 +57,13 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   if (!beneficialSpeciesGroups.length)
     return (
-      <InfoBackgroundMessage>
+      <InfoBackgroundMessage className="my-3">
         This report does not have any natural enemies species interactions data.
       </InfoBackgroundMessage>
     );
 
   return (
-    <>
+    <IonList lines="full">
       <h3 className="list-title">Supported Crops</h3>
       <div className="rounded-list">
         <div className="list-divider">
@@ -78,7 +78,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />
         <Crops crops={crops} group={showModal} />
       </IonModal>
-    </>
+    </IonList>
   );
 };
 

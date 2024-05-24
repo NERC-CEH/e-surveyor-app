@@ -227,7 +227,7 @@ const HomeController = ({ sample }: Props) => {
       onClick={sample.metadata.saved ? navToReport : onFinish}
       isInvalid={isInvalid}
     >
-      {sample.metadata.saved ? 'See Report' : 'Finish'}
+      {sample.metadata.saved ? 'Report' : 'Finish'}
     </HeaderButton>
   );
 

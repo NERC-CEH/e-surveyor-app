@@ -32,13 +32,18 @@ function filterUKSIPlants() {
   const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json', 'utf8');
   const data = JSON.parse(rawData);
 
-  const extractTaxon = (agg: any, { taxon, id, language, preferred }: any) => {
+  const extractTaxon = (
+    agg: any,
+    { taxon, id, language, preferred, externalKey }: any
+  ) => {
     if (language !== 'Latin') return agg;
 
     if (agg[taxon] && !preferred) return agg; // don't overwrite preferred ones
 
+    if (!id || !externalKey) throw new Error('id or externalKey is missing');
+
     // eslint-disable-next-line no-param-reassign
-    agg[taxon] = id;
+    agg[taxon] = [id, externalKey];
     return agg;
   };
 

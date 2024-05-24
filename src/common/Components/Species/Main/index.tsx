@@ -63,14 +63,16 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
         ? MachineInvolvement.HUMAN_ACCEPTED_PREFERRED
         : MachineInvolvement.HUMAN_ACCEPTED_LESS_PREFERRED;
 
-      // eslint-disable-next-line no-param-reassign
-      occurrence.attrs.taxon = {
+      const newTaxon: Taxon = {
         ...occurrence.getSpecies(),
         ...taxon,
         commonName: commonNames?.[0],
         machineInvolvement,
         score: 1,
       };
+
+      // eslint-disable-next-line no-param-reassign
+      occurrence.attrs.taxon = newTaxon;
       occurrence.save();
     };
 
@@ -86,6 +88,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
         commonName: sp.commonNames[0],
         scientificName: sp.scientificName,
         images: sp.images,
+        tvk: '',
       };
 
       return (

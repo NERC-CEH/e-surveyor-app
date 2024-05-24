@@ -66,7 +66,8 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
     );
   };
 
-  const { seedmixgroup, seedmix, name } = sample.attrs;
+  const { seeded, seedmixgroup, seedmix, name } = sample.attrs;
+  const isSeeded = seeded === 'Yes';
 
   const prettyGridRef = <GridRefValue sample={sample} />;
 
@@ -100,7 +101,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           className="m-2"
           suffix={
             <InfoButton color="dark" label="READ MORE" header="Tips">
-              <div>
+              <div className="[&>*]:my-2">
                 <p>
                   Start by giving your survey a name (such as the name of the
                   place you are surveying) and location. The app can pick up on
@@ -108,13 +109,24 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
                   else, you can do this by clicking on the right arrow and using
                   the map to choose your location.
                 </p>
-                <img src={mapPicker} />
+
                 <p>
-                  Choose your seed supplier from the drop down menu, and then
-                  choose the name of your seed mix. This will allow the app to
-                  compare the plant species you sowed to the plants you see in
-                  the survey.
+                  Choose an area to survey where the vegetation is uniform
+                  (homogenous) i.e. the plants present and their structure looks
+                  similar. If your survey area is not uniform, for example, you
+                  may have grassland and hedgerow patches present, record the
+                  plants associated with these areas in separate surveys.
                 </p>
+
+                <img src={mapPicker} />
+
+                <p>
+                  If the survey area has been seeded select yes and then choose
+                  your seed supplier from the drop down menu, and the name of
+                  your seed mix. This will allow the app to compare the plant
+                  species you sowed to the plants you see in the survey.
+                </p>
+
                 <p>You can now begin to add plants to your survey. </p>
                 <img src={cameraButton} />
                 <p>
@@ -180,21 +192,31 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
         </h3>
         <div className="rounded-list">
           <MenuAttrItem
-            routerLink={`${baseURL}/seedmixgroup`}
+            routerLink={`${baseURL}/seeded`}
             icon={Seeds}
-            label="Supplier"
-            value={seedmixgroup || ''}
+            label="Seeded"
+            value={seeded || ''}
             disabled={isDisabled}
           />
+          {isSeeded && (
+            <MenuAttrItem
+              routerLink={`${baseURL}/seedmixgroup`}
+              icon={Seeds}
+              label="Supplier"
+              value={seedmixgroup || ''}
+              disabled={isDisabled}
+            />
+          )}
 
-          <MenuAttrItem
-            routerLink={`${baseURL}/seedmix`}
-            icon={Seeds}
-            label="Mix"
-            value={seedmix || ''}
-            // styles="opacity:0.8"
-            disabled={!seedmixgroup || isDisabled}
-          />
+          {isSeeded && sample.attrs.seedmixgroup && (
+            <MenuAttrItem
+              routerLink={`${baseURL}/seedmix`}
+              icon={Seeds}
+              label="Mix"
+              value={seedmix || ''}
+              disabled={!seedmixgroup || isDisabled}
+            />
+          )}
         </div>
       </IonList>
 

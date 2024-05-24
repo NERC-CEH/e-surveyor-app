@@ -1,5 +1,5 @@
 import { AttrPage } from 'common/flumens';
-import Occurrence from 'models/occurrence';
+import Occurrence, { Taxon } from 'models/occurrence';
 import { beetleSpecies } from './config';
 
 type Props = { occurrence: Occurrence };
@@ -11,13 +11,16 @@ const EditSpecies = ({ occurrence }: Props) => {
     set(warehouseId: number, model: Occurrence) {
       const byWarehouseId = (option: any) => option.value === warehouseId;
       const species = beetleSpecies.find(byWarehouseId);
-      // eslint-disable-next-line no-param-reassign
-      model.attrs.taxon = {
+      const taxon: Taxon = {
         score: 1,
         warehouseId,
-        commonName: species?.commonName as string,
-        scientificName: (species?.scientificName as string) || species?.label,
+        commonName: species?.commonName || '',
+        scientificName: species?.scientificName || species?.label || '',
+        tvk: '',
       };
+
+      // eslint-disable-next-line no-param-reassign
+      model.attrs.taxon = taxon;
     },
     get() {
       return occurrence.attrs.taxon?.warehouseId;

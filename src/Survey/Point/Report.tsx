@@ -57,7 +57,11 @@ const ReportController = ({ sample }: Props) => {
         rightSlot={uploadButton}
         defaultHref="/home/surveys"
       />
-      <Main occurrences={occurrences} seedmixSpecies={seedmixSpecies} />
+      <Main
+        occurrences={occurrences}
+        seedmixSpecies={seedmixSpecies}
+        showHabitats={sample.attrs.seeded !== 'Yes'}
+      />
     </Page>
   );
 };

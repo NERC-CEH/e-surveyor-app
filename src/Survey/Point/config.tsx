@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import config from 'common/config';
 import icon from 'common/images/pointIcon.svg';
 import appModel from 'common/models/app';
+import SampleModel from 'common/models/sample';
 import OccurrenceModel from 'models/occurrence';
 import {
   seedmixGroupAttr,
@@ -14,6 +15,12 @@ import {
   attachClassifierResults,
   Survey,
 } from 'Survey/common/config';
+
+const seededValues = [
+  { value: 'Yes', id: 22177 },
+  { value: 'No', id: 22178 },
+  { value: `Don't know`, id: 22179 },
+];
 
 const { POSSIBLE_THRESHOLD } = config;
 
@@ -29,6 +36,23 @@ const survey: Survey = {
     location: locationAttr,
 
     name: nameAttr,
+
+    seeded: {
+      pageProps: {
+        headerProps: { title: 'Seeded' },
+        attrProps: {
+          input: 'radio',
+          info: 'Has the survey area been seeded?',
+          inputProps: { options: seededValues },
+          set: (value: any, sample: SampleModel) => {
+            sample.attrs.seeded = value; // eslint-disable-line
+            sample.attrs.seedmixgroup = ''; // eslint-disable-line
+            sample.attrs.seedmix = ''; // eslint-disable-line
+          },
+        },
+      },
+      remote: { id: 1868, values: seededValues },
+    },
 
     seedmixgroup: seedmixGroupAttr,
 

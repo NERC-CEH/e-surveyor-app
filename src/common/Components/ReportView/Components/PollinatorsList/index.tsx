@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
-import { ModalHeader, Main, InfoMessage } from '@flumens';
-import {
-  IonItem,
-  IonLabel,
-  IonModal,
-  IonBadge,
-  IonList,
-  IonIcon,
-} from '@ionic/react';
+import { ModalHeader, Main, InfoMessage, Badge } from '@flumens';
+import { IonItem, IonLabel, IonModal, IonList, IonIcon } from '@ionic/react';
 import pollination from 'common/data/pollination';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
@@ -64,7 +57,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   if (!numberOfSpecies)
     return (
-      <InfoBackgroundMessage>
+      <InfoBackgroundMessage className="my-3">
         This report does not have any supported species groups.
       </InfoBackgroundMessage>
     );
@@ -85,13 +78,19 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
       const selectedName = commonName || name;
 
       return (
-        <IonItem onClick={() => setShowModal(name)} key={selectedName}>
-          <IonLabel>{selectedName}</IonLabel>
-          <IonLabel slot="end" className="pollinator-class">
-            <IonBadge className={`${pollinatorClass}`}>
-              {pollinatorCount}
-            </IonBadge>
-          </IonLabel>
+        <IonItem
+          onClick={() => setShowModal(name)}
+          key={selectedName}
+          className="[--inner-padding-end:0]"
+        >
+          <div className="flex w-full justify-between py-4">
+            <div className="">{selectedName}</div>
+            <div className="pollinator-class flex h-fit min-w-12 shrink-0 justify-center">
+              <Badge className={`${pollinatorClass}`} skipTranslation>
+                {pollinatorCount}
+              </Badge>
+            </div>
+          </div>
         </IonItem>
       );
     };
@@ -242,8 +241,8 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
   return (
     <>
       {showPollinators && (
-        <>
-          <h3>
+        <IonList lines="full">
+          <h3 className="list-title">
             <span>Pollinators count</span>
             <InfoButton>
               <div className="font-light">
@@ -261,20 +260,23 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
             {getPollinators()}
           </div>
-        </>
+        </IonList>
       )}
 
-      <h3>
-        <span>Supported species groups</span>
-        <InfoButton>
-          <div className="font-light">
-            In this section, you can see the number of species within each group
-            that you are supporting. Tap the group name to find out about their
-            benefits, and to see a full list of your supported species.
-          </div>
-        </InfoButton>
-      </h3>
-      <div className="rounded-list">{getSupportedSpecies()}</div>
+      <IonList lines="full">
+        <h3 className="list-title">
+          <span>Supported species groups</span>
+          <InfoButton>
+            <div className="font-light">
+              In this section, you can see the number of species within each
+              group that you are supporting. Tap the group name to find out
+              about their benefits, and to see a full list of your supported
+              species.
+            </div>
+          </InfoButton>
+        </h3>
+        <div className="rounded-list">{getSupportedSpecies()}</div>
+      </IonList>
 
       <IonModal mode="md" isOpen={!!showModal}>
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />

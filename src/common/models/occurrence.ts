@@ -26,6 +26,7 @@ export type Suggestion = {
   score: number;
   commonNames: string[];
   scientificName: string;
+  tvk: string;
 } & PlantNetTaxonAttrs;
 
 type ClassifierAttributes = {
@@ -39,6 +40,7 @@ export type Taxon = {
   warehouseId: number;
   commonName: string;
   scientificName: string;
+  tvk: string;
 } & ClassifierAttributes &
   PlantNetTaxonAttrs;
 
@@ -82,7 +84,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
 
   identification = observable({ identifying: false });
 
-  getSpecies = () => this.attrs.taxon;
+  getSpecies = (): Taxon => this.attrs.taxon;
 
   validateRemote = validateRemoteModel;
 
@@ -123,7 +125,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       const topSuggestion = suggestions[0];
       if (!topSuggestion) return;
 
-      this.attrs.taxon = {
+      const taxon: Taxon = {
         score: topSuggestion.score,
         warehouseId: topSuggestion.warehouseId,
         scientificName: topSuggestion.scientificName,
@@ -131,7 +133,10 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         machineInvolvement: MachineInvolvement.MACHINE,
         version,
         suggestions,
+        tvk: '',
       };
+
+      this.attrs.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
@@ -168,7 +173,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       const topSuggestion = UKSuggestions[0];
       if (!topSuggestion) return;
 
-      this.attrs.taxon = {
+      const taxon: Taxon = {
         score: topSuggestion.score,
         warehouseId: topSuggestion.warehouseId,
         scientificName: topSuggestion.scientificName,
@@ -176,11 +181,14 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         machineInvolvement: MachineInvolvement.MACHINE,
         version,
         suggestions,
+        tvk: topSuggestion.tvk,
 
         // plantNet-specific
         images: topSuggestion.images,
         gbif: topSuggestion.gbif,
       };
+
+      this.attrs.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
@@ -218,15 +226,18 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         return;
       }
 
-      this.attrs.taxon = {
+      const taxon: Taxon = {
         score: topSuggestion.score,
         warehouseId: topSuggestion.warehouseId,
         scientificName: topSuggestion.scientificName,
         commonName: topSuggestion.commonNames[0],
         machineInvolvement: MachineInvolvement.MACHINE,
-        version,
+        version: `${version}`,
         suggestions,
+        tvk: '',
       };
+
+      this.attrs.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;

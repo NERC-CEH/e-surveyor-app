@@ -1,0 +1,349 @@
+[
+  {
+    "NVCHabitat": "H9e",
+    "rank": 1,
+    "similarityScore": 0.1134,
+    "fullName": "Calluna vulgaris-Deschampsia flexuosa heath, Molinia caerulea sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Molinia caerulea",
+        "commonName": "Purple Moor-grass",
+        "bsbiid": "2cd4p9h.fgn",
+        "bsbiphotoindex": 3
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H18b",
+    "rank": 2,
+    "similarityScore": 0.112,
+    "fullName": "Vaccinium myrtillus-Deschampsia flexuosa heath, Alchemilla alpina-Carex pilulifera sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Vaccinium myrtillus",
+        "commonName": "Bilberry",
+        "bsbiid": "2cd4p9h.w50",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Galium saxatile",
+        "commonName": "Heath Bedstraw",
+        "bsbiid": "2cd4p9h.vhm",
+        "bsbiphotoindex": 2
+      },
+      {
+        "scientificName": "Festuca ovina",
+        "commonName": "Sheep's Fescues",
+        "bsbiid": "2cd4p9h.vg5"
+      },
+      {
+        "scientificName": "Potentilla erecta",
+        "commonName": "Tormentil",
+        "bsbiid": "2cd4p9h.5v7",
+        "bsbiphotoindex": 2
+      },
+      {
+        "scientificName": "Agrostis capillaris",
+        "commonName": "Common Bent",
+        "bsbiid": "2cd4p9h.x8p",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Anthoxanthum odoratum",
+        "commonName": "Sweet Vernal-grass",
+        "bsbiid": "2cd4p9h.xaq",
+        "bsbiphotoindex": 9
+      },
+      {
+        "scientificName": "Alchemilla alpina",
+        "commonName": "Alpine Lady's-mantle",
+        "bsbiid": "2cd4p9h.x8s",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Carex pilulifera",
+        "commonName": "Pill Sedge",
+        "bsbiid": "2cd4p9h.4sw",
+        "bsbiphotoindex": 4
+      },
+      {
+        "scientificName": "Luzula campestris",
+        "commonName": "Field Wood-rush",
+        "bsbiid": "2cd4p9h.vm8",
+        "bsbiphotoindex": 2
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H18",
+    "rank": 3,
+    "similarityScore": 0.1087,
+    "fullName": "Vaccinium myrtillus-Deschampsia flexuosa heath",
+    "typicalSpecies": [
+      {
+        "scientificName": "Vaccinium myrtillus",
+        "commonName": "Bilberry",
+        "bsbiid": "2cd4p9h.w50",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Galium saxatile",
+        "commonName": "Heath Bedstraw",
+        "bsbiid": "2cd4p9h.vhm",
+        "bsbiphotoindex": 2
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H9d",
+    "rank": 4,
+    "similarityScore": 0.0988,
+    "fullName": "Calluna vulgaris-Deschampsia flexuosa heath, Galium saxatile sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Galium saxatile",
+        "commonName": "Heath Bedstraw",
+        "bsbiid": "2cd4p9h.vhm",
+        "bsbiphotoindex": 2
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H18a",
+    "rank": 5,
+    "similarityScore": 0.0985,
+    "fullName": "Vaccinium myrtillus-Deschampsia flexuosa heath, Hylocomium splendens-Rhytidiadelphus loreus sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Vaccinium myrtillus",
+        "commonName": "Bilberry",
+        "bsbiid": "2cd4p9h.w50",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Galium saxatile",
+        "commonName": "Heath Bedstraw",
+        "bsbiid": "2cd4p9h.vhm",
+        "bsbiphotoindex": 2
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H9a",
+    "rank": 6,
+    "similarityScore": 0.0944,
+    "fullName": "Calluna vulgaris-Deschampsia flexuosa heath, Hypnum cupressiforme sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H10d",
+    "rank": 7,
+    "similarityScore": 0.0831,
+    "fullName": "Calluna vulgaris-Erica cinerea heath, Thymus praecox-Carex pulicaris sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Erica cinerea",
+        "commonName": "Bell Heather",
+        "bsbiid": "2cd4p9h.537",
+        "bsbiphotoindex": 4
+      },
+      {
+        "scientificName": "Potentilla erecta",
+        "commonName": "Tormentil",
+        "bsbiid": "2cd4p9h.5v7",
+        "bsbiphotoindex": 2
+      },
+      {
+        "scientificName": "Festuca ovina",
+        "commonName": "Sheep's Fescues",
+        "bsbiid": "2cd4p9h.vg5"
+      },
+      {
+        "scientificName": "Anthoxanthum odoratum",
+        "commonName": "Sweet Vernal-grass",
+        "bsbiid": "2cd4p9h.xaq",
+        "bsbiphotoindex": 9
+      },
+      {
+        "scientificName": "Thymus drucei",
+        "commonName": "Wild Thyme",
+        "bsbiid": "2cd4p9h.7mm638",
+        "bsbiphotoindex": 20
+      },
+      {
+        "scientificName": "Danthonia decumbens",
+        "commonName": "Heath-grass",
+        "bsbiid": "2cd4p9h.5mx",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Viola riviniana",
+        "commonName": "Common Dog-violet",
+        "bsbiid": "2cd4p9h.cp8",
+        "bsbiphotoindex": 5
+      },
+      {
+        "scientificName": "Prunella vulgaris",
+        "commonName": "Selfheal",
+        "bsbiid": "2cd4p9h.p1p",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Carex pulicaris",
+        "commonName": "Flea Sedge",
+        "bsbiid": "2cd4p9h.vae",
+        "bsbiphotoindex": 2
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H8e",
+    "rank": 8,
+    "similarityScore": 0.0811,
+    "fullName": "Calluna vulgaris-Ulex gallii heath, Vaccinium myrtillus sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Ulex gallii",
+        "commonName": "Western Gorse",
+        "bsbiid": "2cd4p9h.p9e",
+        "bsbiphotoindex": 5
+      },
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Vaccinium myrtillus",
+        "commonName": "Bilberry",
+        "bsbiid": "2cd4p9h.w50",
+        "bsbiphotoindex": 1
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H9c",
+    "rank": 9,
+    "similarityScore": 0.0807,
+    "fullName": "Calluna vulgaris-Deschampsia flexuosa heath, species-poor sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Avenella flexuosa",
+        "commonName": "Wavy Hair-grass",
+        "bsbiid": "2cd4p9h.veyn0r",
+        "bsbiphotoindex": 1
+      }
+    ]
+  },
+  {
+    "NVCHabitat": "H10c",
+    "rank": 10,
+    "similarityScore": 0.0798,
+    "fullName": "Calluna vulgaris-Erica cinerea heath, Festuca ovina-Anthoxanthum odoratum sub-community",
+    "typicalSpecies": [
+      {
+        "scientificName": "Calluna vulgaris",
+        "commonName": "Heather",
+        "bsbiid": "2cd4p9h.yea",
+        "bsbiphotoindex": 1
+      },
+      {
+        "scientificName": "Erica cinerea",
+        "commonName": "Bell Heather",
+        "bsbiid": "2cd4p9h.537",
+        "bsbiphotoindex": 4
+      },
+      {
+        "scientificName": "Potentilla erecta",
+        "commonName": "Tormentil",
+        "bsbiid": "2cd4p9h.5v7",
+        "bsbiphotoindex": 2
+      },
+      {
+        "scientificName": "Festuca ovina",
+        "commonName": "Sheep's Fescues",
+        "bsbiid": "2cd4p9h.vg5"
+      },
+      {
+        "scientificName": "Anthoxanthum odoratum",
+        "commonName": "Sweet Vernal-grass",
+        "bsbiid": "2cd4p9h.xaq",
+        "bsbiphotoindex": 9
+      }
+    ]
+  }
+]

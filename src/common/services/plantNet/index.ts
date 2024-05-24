@@ -10,13 +10,20 @@ export type { Species };
 
 const { backend } = config;
 
-const UKSIPlants: { [key: string]: number } = UKSIPlantsData;
-const UKPlantNames: { [key: string]: string } = UKPlantNamesData;
+type ScientificName = string;
+type CommonName = string;
+type WarehouseId = number;
+type TVK = string;
+const UKSIPlants = UKSIPlantsData as unknown as {
+  [key: ScientificName]: [WarehouseId, TVK];
+};
+const UKPlantNames: { [key: ScientificName]: CommonName } = UKPlantNamesData;
 
 export type ResponseResult = Omit<Result, 'species'> & {
   commonNames: string[];
   scientificName: string;
   warehouseId: number;
+  tvk: string;
 };
 
 type Response = {
@@ -51,11 +58,14 @@ export const processResponse = (
     const speciesUKName = UKPlantNames[scientificName];
     const commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
 
+    const [warehouseId, tvk] = UKSIPlants[scientificName] || [];
+
     return {
       ...restResult,
       scientificName,
       commonNames,
-      warehouseId: UKSIPlants[scientificName],
+      warehouseId,
+      tvk,
     };
   };
 

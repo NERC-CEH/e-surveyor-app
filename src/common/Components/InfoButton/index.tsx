@@ -1,4 +1,5 @@
 import { useState, ReactNode } from 'react';
+import clsx from 'clsx';
 import { informationCircleOutline } from 'ionicons/icons';
 import { Button } from '@flumens';
 import { IonContent, IonPopover, IonIcon } from '@ionic/react';
@@ -6,9 +7,10 @@ import './styles.scss';
 
 type Props = {
   children: ReactNode;
+  className?: string;
 };
 
-const InfoButton = ({ children }: Props) => {
+const InfoButton = ({ children, className }: Props) => {
   const [infoState, setShowInfo] = useState<any>({
     showInfo: false,
     event: undefined,
@@ -18,7 +20,11 @@ const InfoButton = ({ children }: Props) => {
   const hideInfo = () => setShowInfo({ showInfo: false, event: undefined });
 
   return (
-    <Button fill="clear" onPress={showInfo} className="inline-block py-0">
+    <Button
+      fill="clear"
+      onPress={showInfo}
+      className={clsx('inline-block py-0', className)}
+    >
       <IonIcon src={informationCircleOutline} />
       <IonPopover
         className="info-popover"

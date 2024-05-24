@@ -241,7 +241,7 @@ ion-item.menu-attr-item ion-label[slot='end'] {
 
 // top of the list title
 .list-title {
-  @apply mx-2 mb-3 mt-5 flex items-center text-[1.0625rem];
+  @apply mx-1 mb-3 mt-4 flex items-center text-lg;
 }
 
 // top of the list item

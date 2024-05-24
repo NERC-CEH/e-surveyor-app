@@ -60,6 +60,7 @@ export default async function identify(
       warehouseId: parseInt(sp.taxa_taxon_list_id!, 10),
       scientificName: sp.taxon || sp.classifier_name || '',
       commonNames: sp.default_common_name ? [sp.default_common_name] : [],
+      tvk: '',
     });
 
     res.data.forEach(d => remoteSchema.parse(d));
