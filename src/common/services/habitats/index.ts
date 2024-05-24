@@ -33,7 +33,7 @@ export async function identifyBroad(species: TVK[]): Promise<BroadHabitat[]> {
   const options = {
     url: `${backend.habitatPredictUrl}/broadhabitat`,
     method: 'post',
-    body: { input_tvks: species },
+    data: { input_tvks: species },
   };
 
   try {
@@ -83,7 +83,7 @@ export async function identifyNVC(species: TVK[]): Promise<NVCHabitat[]> {
   const options = {
     url: `${backend.habitatPredictUrl}/nvc`,
     method: 'post',
-    body: { input_tvks: species },
+    data: { input_tvks: species },
   };
 
   try {
