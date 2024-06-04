@@ -35,6 +35,10 @@ const NVCHabitatMain = ({ habitat }: Props) => {
     </IonItem>
   );
 
+  const typicalSpecies = Array.isArray(habitat.typicalSpecies)
+    ? habitat.typicalSpecies
+    : [];
+
   return (
     <Main>
       <div className="my-2 px-2">
@@ -57,9 +61,7 @@ const NVCHabitatMain = ({ habitat }: Props) => {
         </h3>
 
         <h3 className="list-title">Constant species</h3>
-        <div className="rounded-list">
-          {(habitat.typicalSpecies as any)?.map(getSpeciesItem)}
-        </div>
+        <div className="rounded-list">{typicalSpecies.map(getSpeciesItem)}</div>
       </div>
     </Main>
   );
