@@ -62,21 +62,22 @@ export async function identifyBroad(species: TVK[]): Promise<BroadHabitat[]> {
   }
 }
 
+const typicalSpeciesSchema = object({
+  commonName: z.string().optional(),
+  scientificName: z.string(),
+  bsbiid: z.string().optional(),
+  bsbiphotoindex: z.number().optional(),
+});
+
 const remoteNVCHabitatSchema = object({
   NVCHabitat: z.string(),
   similarityScore: z.number(),
   rank: z.number(),
-  fullName: z.string(),
-  typicalSpecies: z.array(
-    object({
-      commonName: z.string(),
-      scientificName: z.string(),
-      bsbiid: z.string().optional(),
-      bsbiphotoindex: z.number().optional(),
-    })
-  ),
+  fullName: z.string().optional(),
+  typicalSpecies: z.array(typicalSpeciesSchema).or(object({})),
 });
 
+export type TypicalSpecies = z.infer<typeof typicalSpeciesSchema>;
 export type NVCHabitat = z.infer<typeof remoteNVCHabitatSchema>;
 
 export async function identifyNVC(species: TVK[]): Promise<NVCHabitat[]> {

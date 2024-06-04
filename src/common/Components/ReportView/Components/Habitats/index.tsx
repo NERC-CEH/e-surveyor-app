@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { InfoBackgroundMessage, ModalHeader } from '@flumens';
-import { device } from '@flumens/ionic/dist';
+import { Button, InfoBackgroundMessage, ModalHeader } from '@flumens';
+import { device, useAlert, useToast } from '@flumens/ionic/dist';
 import { IonItem, IonList, IonModal, IonSkeletonText } from '@ionic/react';
+import ExpandableList from 'common/Components/ExpandableList';
 import {
   identifyBroad,
   identifyNVC,
@@ -10,22 +11,66 @@ import {
 } from 'common/services/habitats';
 import InfoButtonPopover from 'Components/InfoButton';
 import { SpeciesNames } from '../../helpers';
-import Habitat from './Habitat';
+import BroadHabitatMain from './BroadHabitat';
+import NVCHabitatMain from './NVCHabitat';
 
 type Props = {
   uniqueSpecies: SpeciesNames[];
 };
 
+const useNVCAlert = () => {
+  const toast = useToast();
+  const alert = useAlert();
+
+  const showAlert = () =>
+    new Promise(resolve => {
+      alert({
+        header: 'NVC',
+        skipTranslation: true,
+        message:
+          'Have you collected an exhaustive plant list for your survey area?',
+        buttons: [
+          {
+            text: 'No',
+            handler() {
+              resolve(false);
+              toast.warn('Please add more plants to your survey.');
+            },
+            role: 'cancel',
+          },
+          {
+            text: 'Yes',
+            handler() {
+              resolve(true);
+            },
+          },
+        ],
+      });
+    });
+
+  return showAlert;
+};
+
 const Habitats = ({ uniqueSpecies }: Props) => {
-  const [showModal, setShowModal] = useState<BroadHabitat>();
+  const [showBroadModal, setShowBroadModal] = useState<BroadHabitat>();
+  const [showNVCModal, setShowNVCModal] = useState<boolean>();
+  const showNVCAlert = useNVCAlert();
 
   const [isLoading, setIsLoading] = useState(false);
   const [broadHabitats, setBroadHabitats] = useState<BroadHabitat[]>();
-  const [, setNVCHabitats] = useState<NVCHabitat[]>();
+  const [nvcHabitats, setNVCHabitats] = useState<NVCHabitat[]>();
+
+  const navigateToNVC = async () => {
+    const proceed = await showNVCAlert();
+    if (!proceed) return;
+    setShowNVCModal(true);
+  };
 
   const refreshHabitats = () => {
     (async () => {
       if (!device.isOnline) return;
+
+      if (uniqueSpecies.length <= 1) return; // 0-1 species results in 500 response from the service
 
       console.log('Refreshing habitats');
       setIsLoading(true);
@@ -81,7 +126,7 @@ const Habitats = ({ uniqueSpecies }: Props) => {
   };
 
   const getHabitatItem = (habitat: BroadHabitat) => (
-    <IonItem key={habitat.UKHab} onClick={() => setShowModal(habitat)}>
+    <IonItem key={habitat.UKHab} onClick={() => setShowBroadModal(habitat)}>
       <div className="flex w-full items-center justify-between gap-2 py-2">
         <div className="flex flex-col">
           <div className="line-clamp-2 font-semibold text-black/85">
@@ -100,7 +145,7 @@ const Habitats = ({ uniqueSpecies }: Props) => {
 
   return (
     <>
-      <IonList lines="full" className="max-w-xl">
+      <IonList lines="full" className="w-full max-w-2xl">
         <h3 className="list-title">
           Habitats
           <InfoButtonPopover>
@@ -112,24 +157,45 @@ const Habitats = ({ uniqueSpecies }: Props) => {
             </div>
           </InfoButtonPopover>
         </h3>
-        <div className="rounded-list">
+        <div className="overflow-hidden rounded-md">
           <div className="list-divider">
             <div>Broad habitat</div>
             <div>Match</div>
           </div>
 
-          {broadHabitats?.map(getHabitatItem)}
+          <ExpandableList maxItems={2}>
+            {broadHabitats?.map(getHabitatItem) || []}
+          </ExpandableList>
 
           {isLoading && getLoader()}
         </div>
-      </IonList>
 
-      <IonModal isOpen={!!showModal}>
+        {!isLoading && (
+          <div className="mx-auto mb-3 mt-6 flex w-fit items-center gap-4">
+            <Button onPress={navigateToNVC}>NVC habitats</Button>
+            <InfoButtonPopover className="p-0">
+              <div className="font-light">
+                This option shows you which NVC habitat types are associated
+                with the plant list you recorded.
+              </div>
+            </InfoButtonPopover>
+          </div>
+        )}
+      </IonList>
+      <IonModal isOpen={!!showBroadModal}>
         <ModalHeader
-          title={showModal?.broadHabitat || ''}
-          onClose={() => setShowModal(undefined)}
+          title={showBroadModal?.broadHabitat || ''}
+          onClose={() => setShowBroadModal(undefined)}
         />
-        {showModal && <Habitat habitat={showModal} />}
+        {showBroadModal && <BroadHabitatMain habitat={showBroadModal} />}
+      </IonModal>
+
+      <IonModal isOpen={!!showNVCModal}>
+        <ModalHeader
+          title="NVC habitats"
+          onClose={() => setShowNVCModal(false)}
+        />
+        {nvcHabitats && <NVCHabitatMain habitats={nvcHabitats} />}
       </IonModal>
     </>
   );
