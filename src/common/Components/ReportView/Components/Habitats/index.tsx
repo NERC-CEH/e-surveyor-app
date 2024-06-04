@@ -12,7 +12,7 @@ import {
 import InfoButtonPopover from 'Components/InfoButton';
 import { SpeciesNames } from '../../helpers';
 import BroadHabitatMain from './BroadHabitat';
-import NVCHabitatMain from './NVCHabitat';
+import NVCHabitatsMain from './NVCHabitats';
 
 type Props = {
   uniqueSpecies: SpeciesNames[];
@@ -137,7 +137,7 @@ const Habitats = ({ uniqueSpecies }: Props) => {
           </div>
         </div>
         <div className="text-[var(--form-value-color)]">
-          {habitat.matchingCoefficient}%
+          {habitat.matchingCoefficient.toFixed(0)}%
         </div>
       </div>
     </IonItem>
@@ -159,7 +159,7 @@ const Habitats = ({ uniqueSpecies }: Props) => {
         </h3>
         <div className="overflow-hidden rounded-md">
           <div className="list-divider">
-            <div>Broad habitat</div>
+            <div>Broad habitats</div>
             <div>Match</div>
           </div>
 
@@ -172,11 +172,14 @@ const Habitats = ({ uniqueSpecies }: Props) => {
 
         {!isLoading && (
           <div className="mx-auto mb-3 mt-6 flex w-fit items-center gap-4">
-            <Button onPress={navigateToNVC}>NVC habitats</Button>
+            <Button onPress={navigateToNVC}>NVC types</Button>
             <InfoButtonPopover className="p-0">
               <div className="font-light">
-                This option shows you which NVC habitat types are associated
-                with the plant list you recorded.
+                This option shows you which National Vegetation Classification
+                (NVC) types are associated with the plant list you recorded.
+                This is a more detailed habitat classification, so a full
+                exhaustive plant list must be recorded before these results are
+                presented.
               </div>
             </InfoButtonPopover>
           </div>
@@ -191,11 +194,8 @@ const Habitats = ({ uniqueSpecies }: Props) => {
       </IonModal>
 
       <IonModal isOpen={!!showNVCModal}>
-        <ModalHeader
-          title="NVC habitats"
-          onClose={() => setShowNVCModal(false)}
-        />
-        {nvcHabitats && <NVCHabitatMain habitats={nvcHabitats} />}
+        <ModalHeader title="NVC types" onClose={() => setShowNVCModal(false)} />
+        {nvcHabitats && <NVCHabitatsMain habitats={nvcHabitats} />}
       </IonModal>
     </>
   );

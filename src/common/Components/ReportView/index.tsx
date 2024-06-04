@@ -43,7 +43,7 @@ const ReportMain = ({ showHabitats, occurrences, seedmixSpecies }: Props) => {
             </p>
 
             <p>
-              Habitat tells you which broad habitat types are associated with
+              Habitats tells you which broad habitat types are associated with
               the plant list you recorded.
             </p>
           </div>

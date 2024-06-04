@@ -184,9 +184,11 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           Seed mix
           <InfoButtonPopover>
             <div className="font-light">
-              Choose your seed supplier from the drop down menu, and then choose
-              the name of your seed mix. This will allow the app to compare the
-              plant species you sowed to the plants you see in the survey.
+              Has your survey area been seeded? If yes, you will have the option
+              to choose your seed supplier from the drop down menu, and then
+              choose the name of your seed mix. This will allow the app to
+              compare the plant species you sowed to the plants you see in the
+              survey.
             </div>
           </InfoButtonPopover>
         </h3>
