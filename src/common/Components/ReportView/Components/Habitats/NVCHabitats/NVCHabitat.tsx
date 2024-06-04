@@ -42,7 +42,9 @@ const NVCHabitatMain = ({ habitat }: Props) => {
   return (
     <Main>
       <div className="my-2 px-2">
-        <div className="rounded-md bg-white p-4">{habitat.fullName}</div>
+        <div className="rounded-md bg-white p-4">
+          {habitat.fullName || 'No description'}
+        </div>
 
         <h3 className="list-title">
           Score:
@@ -60,8 +62,14 @@ const NVCHabitatMain = ({ habitat }: Props) => {
           </InfoButtonPopover>
         </h3>
 
-        <h3 className="list-title">Constant species</h3>
-        <div className="rounded-list">{typicalSpecies.map(getSpeciesItem)}</div>
+        {!!typicalSpecies.length && (
+          <>
+            <h3 className="list-title">Constant species</h3>
+            <div className="rounded-list">
+              {typicalSpecies.map(getSpeciesItem)}
+            </div>
+          </>
+        )}
       </div>
     </Main>
   );
