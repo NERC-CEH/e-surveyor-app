@@ -11,11 +11,7 @@ import './styles.scss';
 
 const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
 
-export const SPECIES_GROUPS = {
-  Bee: 'Bees are fantastic pollinators.',
-  Butterfly: 'Butterflies are great pollinators.',
-  Hoverfly: 'Hoverflies are great pollinators, and are useful in pest control.',
-};
+const SPECIES_GROUPS = ['Bee', 'Butterfly', 'Hoverfly'];
 
 interface Pollinator {
   pollinator: string;
@@ -99,7 +95,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
   };
 
   const listGroupCounts = (species: Species[]) => {
-    const getGroupEntries = ([groupName, groupLabel]: string[]) => {
+    const getGroupEntries = (groupName: string) => {
       const byGroupName = ({ group }: { group: string }) => group === groupName;
 
       const count = species.filter(byGroupName).length;
@@ -109,17 +105,14 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
       }
 
       return (
-        <>
-          <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
-            <IonLabel>{groupName}</IonLabel>
-            <IonLabel slot="end">{count}</IonLabel>
-          </IonItem>
-          <InfoMessage>{groupLabel}</InfoMessage>
-        </>
+        <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
+          <IonLabel>{groupName}</IonLabel>
+          <IonLabel slot="end">{count}</IonLabel>
+        </IonItem>
       );
     };
 
-    return Object.entries(SPECIES_GROUPS).map(getGroupEntries);
+    return SPECIES_GROUPS.map(getGroupEntries);
   };
 
   const getSupportedSpecies = () => {
@@ -236,7 +229,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   const showPollinators = uniqueSpecies.length > 1; // no need if just a single species
 
-  const isSpeciesGroupModal = Object.keys(SPECIES_GROUPS).includes(showModal);
+  const isSpeciesGroupModal = SPECIES_GROUPS.includes(showModal);
 
   return (
     <>
@@ -269,9 +262,10 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
           <InfoButton>
             <div className="font-light">
               In this section, you can see the number of species within each
-              group that you are supporting. Tap the group name to find out
-              about their benefits, and to see a full list of your supported
-              species.
+              group that you are supporting. Tap the group name to see a full
+              list of your supported species. Bees, butterflies and hoverflies
+              are great pollinators and hoverflies are also useful in pest
+              control.
             </div>
           </InfoButton>
         </h3>
