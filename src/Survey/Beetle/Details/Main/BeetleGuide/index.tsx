@@ -5,8 +5,8 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Badge, Main, ModalHeader } from '@flumens';
 import { IonModal } from '@ionic/react';
+import FullScreenPhotoViewer from 'common/Components/FullScreenPhotoViewer';
 import beetles from 'common/data/cacheRemote/beetles.json';
-import FullScreenPhotoViewer from './FullScreenPhotoViewer';
 import './images';
 import './styles.scss';
 
@@ -112,7 +112,10 @@ const BeetleGuide = ({ isOpen, onClose }: Props) => {
       </IonModal>
 
       <FullScreenPhotoViewer
-        species={showSpecies}
+        photos={[
+          `/images/${showSpecies?.id}_1.jpg`,
+          `/images/${showSpecies?.id}_2.jpg`,
+        ]}
         onClose={() => setShowGallery(undefined)}
         showGallery={showGallery}
       />

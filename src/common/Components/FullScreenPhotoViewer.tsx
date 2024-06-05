@@ -1,25 +1,19 @@
 /* eslint-disable @getify/proper-arrows/name */
-import { FC } from 'react';
 import clsx from 'clsx';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Gallery, useOnHideModal } from '@flumens';
 import '@ionic/react/css/ionic-swiper.css';
-import { Beetle } from '.';
 
-// import '../styles.scss';
+type URL = string;
 
 type Props = {
-  species?: Beetle;
+  photos: URL[];
   onClose: () => void;
   showGallery?: number;
 };
 
-const FullScreenPhotoViewer: FC<Props> = ({
-  species,
-  onClose,
-  showGallery,
-}) => {
+const FullScreenPhotoViewer = ({ photos, onClose, showGallery }: Props) => {
   let items: any = [];
   let initialSlide = 0;
   let className = 'white-background';
@@ -30,10 +24,7 @@ const FullScreenPhotoViewer: FC<Props> = ({
   const swiperProps: any = {};
 
   if (Number.isInteger(showGallery)) {
-    items = [
-      { src: `/images/${species?.id}_1.jpg` },
-      { src: `/images/${species?.id}_2.jpg` },
-    ];
+    items = photos?.map((photo: string) => ({ src: photo }));
     initialSlide = showGallery || 0;
     className = '';
   }
