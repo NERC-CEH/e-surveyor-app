@@ -23,7 +23,10 @@ const TypicalSpeciesItem = ({ species }: Props) => {
             showGallery={showGallery}
             onClose={() => setShowGallery(undefined)}
             photos={[
-              `https://atlasimages.bsbi.org/processed/${species.bsbiid}/${species.bsbiid}-${species.bsbiphotoindex}/${species.bsbiid}-${species.bsbiphotoindex}-1920w.webp`,
+              [
+                `https://atlasimages.bsbi.org/processed/${species.bsbiid}/${species.bsbiid}-${species.bsbiphotoindex}/${species.bsbiid}-${species.bsbiphotoindex}-1920w.webp`,
+                'Rob Still/Chris Gibson',
+              ],
             ]}
           />
           <img

@@ -126,10 +126,14 @@ const Credits = () => (
           <a href="https://unsplash.com/@freestef">Free Steph</a> and{' '}
           <a href="https://unsplash.com/@mickaeltournier">Mickael Tournier</a>.
         </P>
+
         <P>
           Thanks to Rob Still and Chris Gibson for providing plant photos for
-          the habitat report, which feature in the latest WILDGuides for British
-          & Irish Wildflowers and Plants.
+          the habitat report, which feature in the latest{' '}
+          <a href="https://press.princeton.edu/books/paperback/9780691245409/british-and-irish-wild-flowers-and-plants">
+            WILDGuides for British & Irish Wildflowers and Plants
+          </a>
+          .
         </P>
       </Section>
     </Main>

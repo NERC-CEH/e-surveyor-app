@@ -8,7 +8,7 @@ import '@ionic/react/css/ionic-swiper.css';
 type URL = string;
 
 type Props = {
-  photos: URL[];
+  photos: URL[] | [URL, string][];
   onClose: () => void;
   showGallery?: number;
 };
@@ -24,7 +24,16 @@ const FullScreenPhotoViewer = ({ photos, onClose, showGallery }: Props) => {
   const swiperProps: any = {};
 
   if (Number.isInteger(showGallery)) {
-    items = photos?.map((photo: string) => ({ src: photo }));
+    items = photos?.map((photoArr: string | string[]) => {
+      if (Array.isArray(photoArr)) {
+        return {
+          src: photoArr[0],
+          footer: photoArr[1],
+        };
+      }
+
+      return { src: photoArr };
+    });
     initialSlide = showGallery || 0;
     className = '';
   }
