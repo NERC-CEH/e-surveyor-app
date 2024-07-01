@@ -1,6 +1,11 @@
 import { observer } from 'mobx-react';
 import { Route, Redirect } from 'react-router-dom';
-import { TailwindContext, TailwindContextValue } from '@flumens';
+import {
+  TailwindBlockContext,
+  TailwindContext,
+  TailwindContextValue,
+  defaultContext,
+} from '@flumens';
 import { IonApp, IonRouterOutlet, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import 'common/theme.scss';
@@ -13,6 +18,11 @@ import User from './User/router';
 
 const platform = isPlatform('ios') ? 'ios' : 'android';
 const tailwindContext: TailwindContextValue = { platform };
+const tailwindBlockContext = {
+  ...defaultContext,
+  ...tailwindContext,
+  basePath: '',
+};
 
 const HomeRedirect = () => <Redirect to="home/landing" />;
 
@@ -21,14 +31,16 @@ const App = () => (
     <IonReactRouter>
       <OnboardingScreens>
         <TailwindContext.Provider value={tailwindContext}>
-          <IonRouterOutlet id="main">
-            <Route path="/home" component={Home} />
-            {Info}
-            {User}
-            {Survey}
-            {Settings}
-            <Route exact path="/" component={HomeRedirect} />
-          </IonRouterOutlet>
+          <TailwindBlockContext.Provider value={tailwindBlockContext}>
+            <IonRouterOutlet id="main">
+              <Route path="/home" component={Home} />
+              {Info}
+              {User}
+              {Survey}
+              {Settings}
+              <Route exact path="/" component={HomeRedirect} />
+            </IonRouterOutlet>
+          </TailwindBlockContext.Provider>
         </TailwindContext.Provider>
       </OnboardingScreens>
     </IonReactRouter>

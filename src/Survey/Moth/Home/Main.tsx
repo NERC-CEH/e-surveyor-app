@@ -1,35 +1,22 @@
 import { observer } from 'mobx-react';
-import {
-  bookOutline,
-  calendarOutline,
-  cameraOutline,
-  openOutline,
-} from 'ionicons/icons';
+import { bookOutline, cameraOutline, openOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import {
   Main,
   MenuAttrItem,
   Button,
   MenuAttrItemFromModel,
-  toISOTimezoneString,
   Select,
   Input,
 } from '@flumens';
-import {
-  IonList,
-  IonIcon,
-  IonItem,
-  IonDatetimeButton,
-  IonDatetime,
-  IonLabel,
-  IonModal,
-} from '@ionic/react';
+import { IonList, IonIcon } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import habitatIcon from 'common/images/habitats.svg';
 import mothInsideBoxIcon from 'common/images/moth-inside-icon.svg';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
+import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import { habitatValues } from '../config';
@@ -83,37 +70,7 @@ const HomeMain = ({
             value={<GridRefValue sample={sample} />}
             disabled={isDisabled}
           />
-          <IonItem className="m-0 rounded-none [--border-radius:0] [--border-style:solid] [--inner-padding-end:8px]">
-            <IonIcon src={calendarOutline} slot="start" />
-            <IonLabel className="!opacity-100">Survey time</IonLabel>
-            <div className="flex items-center gap-1">
-              <div>
-                <IonDatetimeButton
-                  datetime="surveyEndTime"
-                  slot="end"
-                  className="[--ion-color-step-300:rgba(var(--color-tertiary-800-rgb),0.04)] [--ion-text-color:var(--form-value-color)]"
-                />
-                <IonModal
-                  keepContentsMounted
-                  className="[--border-radius:10px]"
-                >
-                  <IonDatetime
-                    id="surveyEndTime"
-                    presentation="date-time"
-                    preferWheel
-                    onIonChange={(e: any) => {
-                      // eslint-disable-next-line
-                      (sample.attrs as any).surveyEndTime = toISOTimezoneString(
-                        new Date(e.detail.value)
-                      );
-                    }}
-                    value={(sample.attrs as any).surveyEndTime}
-                    disabled={isDisabled}
-                  />
-                </IonModal>
-              </div>
-            </div>
-          </IonItem>
+          <MenuDateAttr model={sample} />
           <Select
             options={habitatValues}
             onChange={(habitat: any) => (sample.attrs.habitat = habitat)} // eslint-disable-line

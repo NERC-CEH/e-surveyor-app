@@ -104,3 +104,12 @@ export {
   default as TailwindContext,
   type ContextValue as TailwindContextValue,
 } from '@flumens/tailwind/dist/components/Context';
+export {
+  type Block as BlockT,
+  type ChoiceValues,
+} from '@flumens/tailwind/dist/Survey';
+export {
+  default as TailwindBlockContext,
+  defaultContext,
+} from '@flumens/tailwind/dist/components/Block/Context';
+export { default as Block } from '@flumens/tailwind/dist/components/Block';

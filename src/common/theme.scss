@@ -279,3 +279,8 @@ ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios[slot='end'] {
   ion-label[slot='end'] {
   opacity: 1 !important;
 }
+
+// pull the menu input values to the right
+.text-input-block input {
+  text-align: right;
+}

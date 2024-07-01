@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import clsx from 'clsx';
 import { Trans as T } from 'react-i18next';
 import { IonItem, IonLabel } from '@ionic/react';
 
@@ -7,6 +8,7 @@ const MAX_ITEMS = 5;
 const ExpandableList: FC<any> = ({
   children: itemsProp,
   maxItems = MAX_ITEMS,
+  className,
 }: any) => {
   const [showMore, setShowMore] = useState(false);
   const items = itemsProp.slice(0, maxItems);
@@ -15,7 +17,7 @@ const ExpandableList: FC<any> = ({
   const hidingMoreThanTwo = restItems.length >= 2;
 
   return (
-    <div className="flex flex-col">
+    <div className={clsx('flex flex-col', className)}>
       {items}
 
       {hidingMoreThanTwo && !showMore && (

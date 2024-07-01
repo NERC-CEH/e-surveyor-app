@@ -18,6 +18,7 @@ import logo from './logo.svg';
 import survey4 from './mothSurvey.jpg';
 import survey2 from './ricardo-gomez.jpg';
 import rothamstedLogo from './rothamsted-logo.png';
+import survey5 from './soilSurvey.jpg';
 import './styles.scss';
 import survey1 from './viateur-hwang.jpg';
 
@@ -86,6 +87,14 @@ const LandingPage = () => {
             slidesPerView={1.3}
             {...tabletLayout}
           >
+            <SwiperSlide>
+              <SurveyCard
+                image={survey5}
+                title="Soil survey"
+                type="SOM, VSA and worm count"
+                link="/survey/soil"
+              />
+            </SwiperSlide>
             <SwiperSlide>
               <SurveyCard
                 image={survey1}

@@ -1,11 +1,13 @@
-import BeetleRoutes from './Beetle/router';
-import MothRoutes from './Moth/router';
-import PointRoutes from './Point/router';
-import TransectRoutes from './Transect/router';
+import beetleRoutes from './Beetle/router';
+import mothRoutes from './Moth/router';
+import pointRoutes from './Point/router';
+import soilRoutes from './Soil/router';
+import transectRoutes from './Transect/router';
 
 export default [
-  ...PointRoutes,
-  ...TransectRoutes,
-  ...BeetleRoutes,
-  ...MothRoutes,
+  ...pointRoutes,
+  ...transectRoutes,
+  ...beetleRoutes,
+  ...mothRoutes,
+  ...soilRoutes,
 ];

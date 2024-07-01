@@ -7,6 +7,7 @@ import {
   SampleAttrs,
   SampleOptions,
   SampleMetadata,
+  ChoiceValues,
 } from '@flumens';
 import config from 'common/config';
 import { SeedmixSpecies } from 'common/data/seedmix';
@@ -16,6 +17,13 @@ import { SpeciesNames } from 'Components/ReportView/helpers';
 import beetleSurveyConfig from 'Survey/Beetle/config';
 import mothSurveyConfig from 'Survey/Moth/config';
 import pointSurveyConfig from 'Survey/Point/config';
+import soilSurveyConfig, {
+  coverCropAttr,
+  cropAttr,
+  landUseAttr,
+  landUseOtherAttr,
+  wormCountAttr,
+} from 'Survey/Soil/config';
 import transectSurveyConfig from 'Survey/Transect/config';
 import { Survey } from 'Survey/common/config';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
@@ -29,7 +37,10 @@ const surveyConfigs = {
   transect: transectSurveyConfig,
   beetle: beetleSurveyConfig,
   moth: mothSurveyConfig,
+  soil: soilSurveyConfig,
 };
+
+export type SoilSubSampleType = 'worms' | 'som' | 'vsa';
 
 type Metadata = SampleMetadata & {
   /**
@@ -45,9 +56,15 @@ type Metadata = SampleMetadata & {
    * Doesn't mean the details aren't changed and are valid though.
    */
   completedDetails?: boolean;
+  /**
+   * Soil survey sub-samples.
+   */
+  type: SoilSubSampleType;
 };
 
-type Attrs = SampleAttrs & {
+const cropAttrId = cropAttr().id;
+
+export type Attrs = SampleAttrs & {
   habitat?: any;
   name?: any;
   type?: any;
@@ -77,6 +94,13 @@ type Attrs = SampleAttrs & {
   // moth survey
   surveyEndTime?: any;
   otherHabitat?: any;
+
+  // soil survey
+  [landUseAttr.id]?: ChoiceValues<typeof landUseAttr.choices>[];
+  [coverCropAttr.id]?: ChoiceValues<typeof coverCropAttr.choices>[];
+  [landUseOtherAttr.id]?: string;
+  [cropAttrId]?: string;
+  [wormCountAttr.id]?: number;
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {
@@ -199,6 +223,14 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
       const index = this.parent.samples.findIndex(byId);
 
       return `Trap #${index + 1}`;
+    }
+
+    if (this.metadata.survey === 'soil' && this.parent) {
+      const byId = ({ cid }: Sample) => cid === this.cid;
+      const byWormsType = (smp: Sample) => smp.metadata.type === 'worms';
+      const index = this.parent.samples.filter(byWormsType).findIndex(byId);
+
+      return `Sample #${index + 1}`;
     }
 
     const byId = ({ cid }: Sample) => cid === this.cid;

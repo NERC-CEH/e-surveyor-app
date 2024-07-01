@@ -2,6 +2,7 @@ import { calendarOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import {
+  BlockT,
   dateFormat,
   MenuAttrItemFromModelMenuProps,
   PageProps,
@@ -13,7 +14,7 @@ import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel, { SeedMix } from 'models/app';
 import Media from 'models/image';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
-import Sample from 'models/sample';
+import Sample, { SoilSubSampleType } from 'models/sample';
 
 const { POSSIBLE_THRESHOLD } = config;
 
@@ -306,6 +307,7 @@ type MenuProps = MenuAttrItemFromModelMenuProps;
 export type AttrConfig = {
   menuProps?: MenuProps;
   pageProps?: Omit<PageProps, 'attr' | 'model'>;
+  block?: BlockOrFn;
   remote?: RemoteConfig;
 };
 
@@ -337,6 +339,10 @@ type SampleCreateOptions = {
   taxon?: Taxon;
   surveySample?: Sample;
   photo?: Media;
+  /**
+   * For soil survey subsamples
+   */
+  type?: SoilSubSampleType;
 };
 
 export type SampleConfig = {
@@ -349,6 +355,14 @@ export type SampleConfig = {
   occ?: OccurrenceConfig;
 };
 
+export type BlockOrFn = BlockT | ((record?: any) => BlockT);
+
+type AttrType = { [x: string]: { block: BlockT | ((record?: any) => BlockT) } };
+export const blockToAttr = (blockOrFn: BlockOrFn): AttrType =>
+  typeof blockOrFn === 'function'
+    ? { [blockOrFn().id]: { block: blockOrFn } }
+    : { [blockOrFn.id]: { block: blockOrFn } };
+
 export interface Survey extends SampleConfig {
   /**
    * Remote warehouse survey ID.
@@ -357,7 +371,7 @@ export interface Survey extends SampleConfig {
   /**
    * In-App survey code name.
    */
-  name: string;
+  name: 'soil' | 'beetle' | 'transect' | 'moth' | 'point';
   /**
    * Pretty survey name to show in the UI.
    */

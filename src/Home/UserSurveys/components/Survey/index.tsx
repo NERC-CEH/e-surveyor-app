@@ -70,7 +70,11 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
       );
     }
 
-    if (survey.name === 'beetle' || survey.name === 'moth') {
+    if (
+      survey.name === 'beetle' ||
+      survey.name === 'moth' ||
+      survey.name === 'soil'
+    ) {
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>

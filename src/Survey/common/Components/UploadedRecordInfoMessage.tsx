@@ -8,8 +8,9 @@ const UploadedRecordInfoMessage = () => {
   return (
     <InfoMessage
       color="tertiary"
-      prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
+      prefix={<IonIcon src={informationCircleOutline} className="size-7" />}
       skipTranslation
+      className="m-3"
     >
       <T>
         This record has been submitted and cannot be edited within this App.
@@ -17,8 +18,8 @@ const UploadedRecordInfoMessage = () => {
       <Button
         href={`${config.backend.url}/my-records`}
         fill="outline"
-        color="primary"
-        className="mx-auto mt-5 max-w-sm"
+        color="tertiary"
+        className="mx-auto mt-5 max-w-sm p-2"
       >
         E-Surveyor website
       </Button>

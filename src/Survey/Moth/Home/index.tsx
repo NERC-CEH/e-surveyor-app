@@ -34,8 +34,6 @@ const HomeController = ({ sample }: Props) => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    await appModel.save();
-
     const saveAndReturn = () => {
       sample.cleanUp();
       sample.save();
