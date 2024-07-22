@@ -191,6 +191,13 @@ export const coverCropOtherAttr = {
   appearance: 'multiline',
 } as const;
 
+export const SOMIDAttr = {
+  id: 'SOMID-1',
+  type: 'text_input',
+  prefix: listOutlineIcon,
+  title: 'Sample ID',
+} as const;
+
 export const soilTypeAttr = {
   id: 'soil-1',
   type: 'choice_input',
@@ -268,6 +275,48 @@ export const rootsAttr = {
   ],
 } as const;
 
+export const SOMPatternAttr = {
+  id: 'som-pattern-1',
+  type: 'choice_input',
+  title: 'Pattern',
+  prefix: listOutlineIcon,
+  appearance: 'button',
+  choices: [
+    { title: '‘W’ pattern', data_name: 'w-1' },
+    { title: 'Whole field', data_name: 'field-1' },
+  ],
+} as const;
+
+export const SOMDepthAttr = {
+  id: 'som-depth-1',
+  type: 'number_input',
+  title: 'Depth',
+  prefix: listOutlineIcon,
+  suffix: 'cm',
+  appearance: 'counter',
+  validations: { min: 0, max: 200 },
+} as const;
+
+export const SOMDiameterAttr = {
+  id: 'som-diameter-1',
+  type: 'number_input',
+  title: 'Auger diameter',
+  prefix: listOutlineIcon,
+  suffix: 'cm',
+  appearance: 'counter',
+  validations: { min: 0, max: 20 },
+} as const;
+
+export const SOMStonesAttr = {
+  id: 'som-stones-1',
+  type: 'number_input',
+  title: 'Stones',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
 export const wormCountAttr = {
   id: 'worm-count-1',
   type: 'number_input',
@@ -335,9 +384,6 @@ const survey: Survey = {
         surveyId: survey.id,
       },
     });
-
-    const vsaSample = survey.smp!.create!({ Sample, type: 'vsa' });
-    sample.samples.push(vsaSample);
 
     sample.startGPS();
 

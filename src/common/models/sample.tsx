@@ -18,6 +18,7 @@ import beetleSurveyConfig from 'Survey/Beetle/config';
 import mothSurveyConfig from 'Survey/Moth/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import soilSurveyConfig, {
+  SOMIDAttr,
   coverCropAttr,
   cropAttr,
   landUseAttr,
@@ -101,6 +102,7 @@ export type Attrs = SampleAttrs & {
   [landUseOtherAttr.id]?: string;
   [cropAttrId]?: string;
   [wormCountAttr.id]?: number;
+  [SOMIDAttr.id]?: string;
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {

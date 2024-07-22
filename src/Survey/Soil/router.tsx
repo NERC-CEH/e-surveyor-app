@@ -5,10 +5,13 @@ import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Home from './Home';
 import Management from './Management';
 import Report from './Report';
-import SOM from './SOM';
-import VSA from './VSA';
-import Worm from './Worm';
-import Worms from './Worms';
+import SOMHome from './SOM/Home';
+import SOMLab from './SOM/Lab';
+import SOMList from './SOM/List';
+import VSAHome from './VSA/Home';
+import VSAList from './VSA/List';
+import WormHome from './Worms/Home';
+import WormList from './Worms/List';
 import survey from './config';
 
 const { AttrPageFromRoute } = AttrPage;
@@ -22,13 +25,17 @@ const routes = [
   [`${baseURL}/:smpId/report`, Report],
   [`${baseURL}/:smpId/management`, Management],
   [`${baseURL}/:smpId/management/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/vsa/:subSmpId`, VSA],
+  [`${baseURL}/:smpId/vsa`, VSAList],
+  [`${baseURL}/:smpId/vsa/:subSmpId`, VSAHome],
   [`${baseURL}/:smpId/vsa/:subSmpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/vsa/:subSmpId/location`, ModelLocationMap],
-  [`${baseURL}/:smpId/worms`, Worms],
-  [`${baseURL}/:smpId/worms/:subSmpId`, Worm],
+  [`${baseURL}/:smpId/worms`, WormList],
+  [`${baseURL}/:smpId/worms/:subSmpId`, WormHome],
   [`${baseURL}/:smpId/worms/:subSmpId/location`, ModelLocationMap],
-  [`${baseURL}/:smpId/som`, SOM],
+  [`${baseURL}/:smpId/som`, SOMList],
+  [`${baseURL}/:smpId/som/:subSmpId`, SOMHome],
+  [`${baseURL}/:smpId/som/:subSmpId/location`, ModelLocationMap],
+  [`${baseURL}/:smpId/som/lab`, SOMLab],
 ];
 
 export default RouteWithModels.fromArray(savedSamples, routes);

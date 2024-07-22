@@ -3,15 +3,7 @@ import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { addOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import {
-  Page,
-  Header,
-  Main,
-  Button,
-  InfoMessage,
-  useAlert,
-  Badge,
-} from '@flumens';
+import { Page, Header, Main, Button, InfoMessage, Badge } from '@flumens';
 import {
   IonIcon,
   IonItem,
@@ -23,43 +15,16 @@ import {
 } from '@ionic/react';
 import ExpandableList from 'common/Components/ExpandableList';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import { useEntryDeleteConfirmation } from 'common/helpers/hooks';
 import Sample from 'models/sample';
-import { wormCountAttr } from './config';
-import worm from './worm.svg';
-
-const useEntryDeleteConfirmation = () => {
-  const alert = useAlert();
-
-  const confirmTrapDeletion = () =>
-    new Promise(resolve => {
-      alert({
-        header: 'Delete',
-        skipTranslation: true,
-        message: 'Are you sure you want to remove this entry from your survey?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            cssClass: 'primary',
-            handler: () => resolve(false),
-          },
-          {
-            text: 'Delete',
-            cssClass: 'danger',
-            handler: () => resolve(true),
-          },
-        ],
-      });
-    });
-
-  return confirmTrapDeletion;
-};
+import { wormCountAttr } from '../config';
+import worm from '../worm.svg';
 
 interface Props {
   sample: Sample;
 }
 
-const Worms = ({ sample }: Props) => {
+const WormList = ({ sample }: Props) => {
   const { url } = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const confirmEntryDeletion = useEntryDeleteConfirmation();
@@ -87,7 +52,7 @@ const Worms = ({ sample }: Props) => {
     if (!wormSamples.length)
       return (
         <InfoBackgroundMessage>
-          You have not added any samples yet
+          You have not added any entries yet
         </InfoBackgroundMessage>
       );
 
@@ -103,19 +68,19 @@ const Worms = ({ sample }: Props) => {
       return <div className="list-avatar m-1">{photo}</div>;
     };
 
-    const getEntry = (trapSample: Sample) => {
-      const count = trapSample.attrs[wormCountAttr.id] || 0;
+    const getEntry = (wormSample: Sample) => {
+      const count = wormSample.attrs[wormCountAttr.id] || 0;
       return (
-        <IonItemSliding key={trapSample.cid}>
+        <IonItemSliding key={wormSample.cid}>
           <IonItem
-            routerLink={`${url}/${trapSample.cid}`}
+            routerLink={`${url}/${wormSample.cid}`}
             detail
             className="[--padding-start:0]"
           >
             <div className="flex w-full items-center gap-2">
-              {getSamplePhoto(trapSample)}
+              {getSamplePhoto(wormSample)}
               <div className="flex w-full justify-between gap-2">
-                <h3>{trapSample.getPrettyName()}</h3>
+                <h3>{wormSample.getPrettyName()}</h3>
                 {count > 0 && <Badge>{`${count}`}</Badge>}
               </div>
             </div>
@@ -125,7 +90,7 @@ const Worms = ({ sample }: Props) => {
             <IonItemOptions side="end">
               <IonItemOption
                 color="danger"
-                onClick={() => onSampleDelete(trapSample)}
+                onClick={() => onSampleDelete(wormSample)}
               >
                 Delete
               </IonItemOption>
@@ -139,7 +104,7 @@ const Worms = ({ sample }: Props) => {
       <IonList className="traps-list" lines="full">
         <div className="rounded-list">
           <div className="list-divider">
-            <div>Samples</div>
+            <div>Entries</div>
             <div>{wormSamples.length}</div>
           </div>
           {wormSamples.map(getEntry)}
@@ -202,4 +167,4 @@ const Worms = ({ sample }: Props) => {
   );
 };
 
-export default observer(Worms);
+export default observer(WormList);

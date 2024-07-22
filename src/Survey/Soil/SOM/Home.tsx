@@ -2,31 +2,31 @@
 import { observer } from 'mobx-react';
 import { locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Page, Header, Main, Block, MenuAttrItem } from '@flumens';
+import { Page, Header, Main, MenuAttrItem, Block } from '@flumens';
 import { IonList } from '@ionic/react';
-import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
-import { wormCountAttr } from './config';
+import { SOMIDAttr } from '../config';
 
 interface Props {
   subSample: Sample;
 }
 
-const Worm = ({ subSample }: Props) => {
+const SOMHome = ({ subSample }: Props) => {
   const { url } = useRouteMatch();
 
-  const recordAttrs = {
-    record: subSample.attrs,
-    isDisabled: subSample.isDisabled(),
-  };
-
   return (
-    <Page id="survey-soil-worm">
-      <Header title="Earthworm" />
+    <Page id="survey-soil-som">
+      <Header title="SOM" />
       <Main>
         <IonList lines="full">
           <div className="rounded-list">
+            <Block
+              block={SOMIDAttr}
+              record={subSample.attrs}
+              isDisabled={subSample.isDisabled()}
+            />
+
             <MenuAttrItem
               routerLink={`${url}/location`}
               icon={locationOutline}
@@ -35,8 +35,6 @@ const Worm = ({ subSample }: Props) => {
               value={<GridRefValue sample={subSample} />}
               disabled={subSample.isDisabled()}
             />
-            <SinglePhotoPicker label="Photo" model={subSample} />
-            <Block block={wormCountAttr} {...recordAttrs} />
           </div>
         </IonList>
       </Main>
@@ -44,4 +42,4 @@ const Worm = ({ subSample }: Props) => {
   );
 };
 
-export default observer(Worm);
+export default observer(SOMHome);

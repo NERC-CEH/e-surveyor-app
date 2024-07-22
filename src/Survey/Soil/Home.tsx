@@ -94,7 +94,7 @@ const Home = ({ sample }: Props) => {
 
           <div className="list-title">Surveys</div>
           <div className="rounded-list">
-            <IonItem routerLink={`${url}/vsa/${sample.samples[0].cid}`}>
+            <IonItem routerLink={`${url}/vsa`}>
               <IonIcon src={field} slot="start" />
               <IonLabel>Visual Soil Assessment</IonLabel>
             </IonItem>

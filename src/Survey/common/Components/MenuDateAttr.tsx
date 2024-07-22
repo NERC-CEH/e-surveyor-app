@@ -15,7 +15,7 @@ const MenuDateAttr = ({ model }: Props) => {
   return (
     <IonItem className="m-0 rounded-none [--border-radius:0] [--border-style:solid] [--inner-padding-end:8px]">
       <IonIcon src={calendarOutline} slot="start" />
-      <IonLabel className="!opacity-100">Survey time</IonLabel>
+      <IonLabel className="!opacity-100">Date</IonLabel>
       <div className="flex items-center gap-1">
         <div>
           <IonDatetimeButton
