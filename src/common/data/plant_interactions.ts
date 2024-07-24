@@ -8,7 +8,7 @@ export type Interaction = {
 };
 
 const uniqArrayHashes: any = [];
-const getUnique = (sp: Interaction) => {
+const getUnique = (sp: Partial<Interaction>) => {
   const spHash = JSON.stringify(sp);
   if (uniqArrayHashes.includes(spHash)) {
     return false;
@@ -17,4 +17,12 @@ const getUnique = (sp: Interaction) => {
   return true;
 };
 
-export default plantInteractions.filter(getUnique);
+const getComplete = (sp: Partial<Interaction>) => {
+  return (
+    !!sp.group && !!sp.plant && !!sp.pollinator && !!sp.pollinatorCommonName
+  );
+};
+
+export default plantInteractions
+  .filter(getComplete)
+  .filter(getUnique) as Interaction[];
