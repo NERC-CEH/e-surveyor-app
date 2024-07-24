@@ -22,7 +22,6 @@ import {
   SOMDiameterAttr,
   SOMIDAttr,
   SOMPatternAttr,
-  SOMStonesAttr,
 } from '../config';
 import soil from '../soil.svg';
 
@@ -132,7 +131,6 @@ const SOMList = ({ sample }: Props) => {
             <Block block={SOMPatternAttr} {...recordAttrs} />
             <Block block={SOMDepthAttr} {...recordAttrs} />
             <Block block={SOMDiameterAttr} {...recordAttrs} />
-            <Block block={SOMStonesAttr} {...recordAttrs} />
 
             <IonItem routerLink={`${url}/lab`} detail>
               <IonIcon src={flaskOutline} slot="start" />

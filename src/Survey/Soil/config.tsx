@@ -307,16 +307,6 @@ export const SOMDiameterAttr = {
   validations: { min: 0, max: 20 },
 } as const;
 
-export const SOMStonesAttr = {
-  id: 'som-stones-1',
-  type: 'number_input',
-  title: 'Stones',
-  prefix: listOutlineIcon,
-  suffix: '%',
-  appearance: 'counter',
-  validations: { min: 0, max: 100 },
-} as const;
-
 export const wormCountAttr = {
   id: 'worm-count-1',
   type: 'number_input',
