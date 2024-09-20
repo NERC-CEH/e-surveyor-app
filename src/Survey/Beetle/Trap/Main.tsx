@@ -29,17 +29,17 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
 
   return (
     <Main>
-      <div className="flex flex-col pb-5">
-        <Button
-          href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
-          prefix={<IonIcon icon={bookOutline} size="small" />}
-          suffix={<IonIcon icon={openOutline} size="small" />}
-          className="mx-3 text-left"
-        >
-          Click here for the guidance documents.
-        </Button>
-
+      <div className="mt-2 flex flex-col pb-5">
         <IonList lines="full">
+          <Button
+            href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
+            prefix={<IonIcon icon={bookOutline} size="small" />}
+            suffix={<IonIcon icon={openOutline} size="small" />}
+            className="text-left"
+          >
+            Click here for the guidance documents.
+          </Button>
+
           <h3 className="list-title">Details</h3>
           <div className="rounded-list">
             <SinglePhotoPicker

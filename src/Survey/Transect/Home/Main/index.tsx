@@ -104,7 +104,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
         onPress={onAddNewQuadrat}
         color="secondary"
         prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="mx-auto my-5"
+        className="mx-auto mb-2 mt-8"
       >
         Add Quadrat
       </Button>

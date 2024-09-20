@@ -59,7 +59,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
         onLongPress={navigateToSearch}
         onPress={photoSelect}
         prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="mx-auto my-10"
+        className="mx-auto mb-3 mt-7"
       >
         Species
       </Button>
@@ -95,69 +95,73 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
 
   return (
     <Main className="[--padding-bottom:20px]">
-      {!isDisabled && (
-        <InfoMessage
-          color="tertiary"
-          className="m-2"
-          suffix={
-            <InfoButton color="dark" label="READ MORE" header="Tips">
-              <div className="[&>*]:my-2">
-                <p>
-                  Start by giving your survey a name (such as the name of the
-                  place you are surveying) and location. The app can pick up on
-                  your current location, but if you want to survey somewhere
-                  else, you can do this by clicking on the right arrow and using
-                  the map to choose your location.
-                </p>
-
-                <p>
-                  Choose an area to survey where the vegetation is uniform
-                  (homogenous) i.e. the plants present and their structure looks
-                  similar. If your survey area is not uniform, for example, you
-                  may have grassland and hedgerow patches present, record the
-                  plants associated with these areas in separate surveys.
-                </p>
-
-                <img src={mapPicker} />
-
-                <p>
-                  If the survey area has been seeded select yes and then choose
-                  your seed supplier from the drop down menu, and the name of
-                  your seed mix. This will allow the app to compare the plant
-                  species you sowed to the plants you see in the survey.
-                </p>
-
-                <p>You can now begin to add plants to your survey. </p>
-                <img src={cameraButton} />
-                <p>
-                  If you have identified the plants yourself, hold down the
-                  orange species button and write the name of your plant species
-                  into the text box.
-                </p>
-                <p>
-                  If you would like the AI to identify your plants, tap on the
-                  camera button and take a photo of the plant you would like to
-                  identify. If the AI isn't sure what your plant is, it will put
-                  an [orange question mark] or [red cross] next to the photo and
-                  species name. You can tap to see images of different possible
-                  plant species, and choose which you think is correct by
-                  clicking "This is my plant".
-                </p>
-                <p>Click here to find out how to take an AI-friendly image.</p>
-                <p>
-                  Keep going until you have a list of all of your plants, and
-                  then click the finish button in the top right corner to view
-                  your report.
-                </p>
-              </div>
-            </InfoButton>
-          }
-        >
-          How to complete a survey?
-        </InfoMessage>
-      )}
-
       <IonList lines="full">
+        {!isDisabled && (
+          <InfoMessage
+            color="tertiary"
+            className="mt-2"
+            suffix={
+              <InfoButton color="dark" label="READ MORE" header="Tips">
+                <div className="[&>*]:my-2">
+                  <p>
+                    Start by giving your survey a name (such as the name of the
+                    place you are surveying) and location. The app can pick up
+                    on your current location, but if you want to survey
+                    somewhere else, you can do this by clicking on the right
+                    arrow and using the map to choose your location.
+                  </p>
+
+                  <p>
+                    Choose an area to survey where the vegetation is uniform
+                    (homogenous) i.e. the plants present and their structure
+                    looks similar. If your survey area is not uniform, for
+                    example, you may have grassland and hedgerow patches
+                    present, record the plants associated with these areas in
+                    separate surveys.
+                  </p>
+
+                  <img src={mapPicker} />
+
+                  <p>
+                    If the survey area has been seeded select yes and then
+                    choose your seed supplier from the drop down menu, and the
+                    name of your seed mix. This will allow the app to compare
+                    the plant species you sowed to the plants you see in the
+                    survey.
+                  </p>
+
+                  <p>You can now begin to add plants to your survey. </p>
+                  <img src={cameraButton} />
+                  <p>
+                    If you have identified the plants yourself, hold down the
+                    orange species button and write the name of your plant
+                    species into the text box.
+                  </p>
+                  <p>
+                    If you would like the AI to identify your plants, tap on the
+                    camera button and take a photo of the plant you would like
+                    to identify. If the AI isn't sure what your plant is, it
+                    will put an [orange question mark] or [red cross] next to
+                    the photo and species name. You can tap to see images of
+                    different possible plant species, and choose which you think
+                    is correct by clicking "This is my plant".
+                  </p>
+                  <p>
+                    Click here to find out how to take an AI-friendly image.
+                  </p>
+                  <p>
+                    Keep going until you have a list of all of your plants, and
+                    then click the finish button in the top right corner to view
+                    your report.
+                  </p>
+                </div>
+              </InfoButton>
+            }
+          >
+            How to complete a survey?
+          </InfoMessage>
+        )}
+
         <div className="rounded-list">
           {isDisabled && <UploadedRecordInfoMessage />}
         </div>

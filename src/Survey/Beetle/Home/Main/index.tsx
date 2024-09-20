@@ -107,7 +107,7 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
           onPress={onAddNewTrap}
           color="secondary"
           prefix={<IonIcon icon={cameraOutline} className="size-6" />}
-          className="mx-auto my-4"
+          className="mx-auto mb-3 mt-7"
         >
           Add Trap
         </Button>
