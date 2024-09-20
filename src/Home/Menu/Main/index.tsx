@@ -10,12 +10,13 @@ import {
   informationCircleOutline,
   openOutline,
   helpBuoyOutline,
+  mailOpenOutline,
 } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Main, InfoMessage } from '@flumens';
 import { IonIcon, IonList, IonItem, IonButton } from '@ionic/react';
 import config from 'common/config';
-import AppModelType from 'models/app';
+import { AppModel } from 'models/app';
 import './styles.scss';
 
 type Props = {
@@ -24,7 +25,9 @@ type Props = {
   resendVerificationEmail: any;
   isLoggedIn: any;
   user: any;
-  appModel: typeof AppModelType;
+  userInfo: string;
+  deviceInfo: string;
+  appModel: AppModel;
 };
 
 const MenuMain = ({
@@ -34,6 +37,8 @@ const MenuMain = ({
   appModel,
   refreshAccount,
   resendVerificationEmail,
+  userInfo,
+  deviceInfo,
 }: Props) => {
   const lang = appModel.attrs.language;
 
@@ -129,6 +134,15 @@ const MenuMain = ({
           <IonItem routerLink="/info/credits" detail>
             <IonIcon icon={heartOutline} size="small" slot="start" />
             <T>Credits</T>
+          </IonItem>
+          <IonItem
+            href={`mailto:esurveyor%40ceh.ac.uk?subject=E-Surveyor%20App%20Feedback&body=%0A%0A%0AApp%3A%20 v${config.version}%0AUser: ${userInfo}%0ADevice: ${deviceInfo}`}
+            target="_blank"
+            detail
+            detailIcon={openOutline}
+          >
+            <IonIcon icon={mailOpenOutline} size="small" slot="start" />
+            <T>Give feedback</T>
           </IonItem>
           <IonItem
             href={`${config.backend.url}/privacy-notice?lang=${lang}`}

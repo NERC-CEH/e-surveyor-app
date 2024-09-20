@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react';
 import { Trans as T } from 'react-i18next';
+import { Device } from '@capacitor/device';
 import { Page, useAlert, useToast, useLoader } from '@flumens';
+import { isPlatform } from '@ionic/core';
 import appModel from 'models/app';
 import userModel from 'models/user';
 import Main from './Main';
@@ -36,6 +38,20 @@ const useConfirmationDialog = () => {
     });
   };
 };
+
+let userInfo = '';
+(async () => {
+  await userModel.ready;
+  userInfo = `drupal_id=${userModel.id || 'unknown'}, warehouse_id=${
+    userModel.attrs.indiciaUserId || 'unknown'
+  }`;
+})();
+
+let deviceInfo = isPlatform('android') ? 'android' : 'ios';
+(async () => {
+  const { model, operatingSystem, osVersion } = await Device.getInfo();
+  deviceInfo = `${model}, ${operatingSystem}, ${osVersion}`;
+})();
 
 const Controller = () => {
   const showLogoutConfirmationDialog = useConfirmationDialog();
@@ -87,6 +103,8 @@ const Controller = () => {
         logOut={logOut}
         refreshAccount={checkActivation}
         resendVerificationEmail={resendVerificationEmail}
+        userInfo={userInfo}
+        deviceInfo={deviceInfo}
       />
     </Page>
   );
