@@ -87,9 +87,11 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
 
   return (
     <Main>
-      {isDisabled && <UploadedRecordInfoMessage />}
+      <IonList lines="full" className="mb-2 flex flex-col gap-4">
+        <div className="rounded-list">
+          {isDisabled && <UploadedRecordInfoMessage />}
+        </div>
 
-      <IonList lines="full">
         <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${match.url}/details`}

@@ -24,7 +24,7 @@ import supportedGroupsTable from './supportedGroups.png';
 export default () => (
   <Page id="help">
     <Header title="Help" />
-    <Main className="ion-padding">
+    <Main>
       <IonList>
         <IonItemDivider>
           <T>User</T>

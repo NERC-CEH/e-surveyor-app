@@ -4,5 +4,20 @@
 	"bundledWebRuntime": false,
 	"npmClient": "npm",
 	"webDir": "build",
-	"cordova": {}
+	"cordova": {},
+	"packageClassList": [
+		"CameraPreview",
+		"AppPlugin",
+		"CAPCameraPlugin",
+		"DevicePlugin",
+		"FilesystemPlugin",
+		"GeolocationPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"CAPNetworkPlugin",
+		"SplashScreenPlugin",
+		"StatusBarPlugin",
+		"SentryCapacitor",
+		"CDVPlugin"
+	]
 }

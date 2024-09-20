@@ -113,7 +113,7 @@ const VSAList = ({ sample }: Props) => {
     <Page id="survey-soil-vsa">
       <Header title="VSA" />
       <Main>
-        <IonList lines="full" className="mt-8">
+        <div className="mt-8">
           {!isDisabled && (
             <Button
               onPress={onAddNewSample}
@@ -125,8 +125,8 @@ const VSAList = ({ sample }: Props) => {
             </Button>
           )}
 
-          <div className="rounded-list">{getList()}</div>
-        </IonList>
+          {getList()}
+        </div>
       </Main>
     </Page>
   );

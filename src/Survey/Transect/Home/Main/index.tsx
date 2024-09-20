@@ -152,9 +152,11 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
         </InfoMessage>
       )}
 
-      {isDisabled && <UploadedRecordInfoMessage />}
-
       <IonList lines="full">
+        <div className="rounded-list">
+          {isDisabled && <UploadedRecordInfoMessage />}
+        </div>
+
         {isComplete && (
           <Button
             color="secondary"

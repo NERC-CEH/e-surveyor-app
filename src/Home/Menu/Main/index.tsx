@@ -52,7 +52,10 @@ const MenuMain = ({
           {isLoggedIn && (
             <IonItem detail id="logout-button" onClick={logOut}>
               <IonIcon icon={exitOutline} size="small" slot="start" />
-              <T>Logout</T>
+              <span className="font-medium">
+                {' '}
+                <T>Logout</T>
+              </span>
               {': '}
               {user.fullName}
             </IonItem>

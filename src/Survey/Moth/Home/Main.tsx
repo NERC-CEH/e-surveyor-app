@@ -41,20 +41,22 @@ const HomeMain = ({
 
   return (
     <Main>
-      {isDisabled && <UploadedRecordInfoMessage />}
+      <IonList lines="full" className="mb-2 flex flex-col gap-4">
+        <div className="rounded-list">
+          {isDisabled && <UploadedRecordInfoMessage />}
+        </div>
 
-      <div className="rounded-list mx-auto mb-2 mt-2 max-w-[600px]">
-        <Button
-          href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
-          prefix={<IonIcon icon={bookOutline} className="size-6" />}
-          suffix={<IonIcon icon={openOutline} />}
-          className="mx-2 border-none text-left"
-        >
-          Project information
-        </Button>
-      </div>
+        <div className="rounded-list">
+          <Button
+            href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
+            prefix={<IonIcon icon={bookOutline} className="size-6" />}
+            suffix={<IonIcon icon={openOutline} />}
+            className="border-none text-left"
+          >
+            Project information
+          </Button>
+        </div>
 
-      <IonList lines="full">
         <div className="rounded-list">
           <SinglePhotoPicker
             model={sample}

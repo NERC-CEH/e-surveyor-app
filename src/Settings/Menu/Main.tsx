@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import {
-  arrowUndoSharp,
+  arrowUndoOutline,
   personRemoveOutline,
   schoolOutline,
   shareSocialOutline,
@@ -180,7 +180,7 @@ const Menu = ({
           </InfoMessage>
 
           <IonItem id="app-reset-btn" onClick={showAlertDialog}>
-            <IonIcon icon={arrowUndoSharp} size="small" slot="start" />
+            <IonIcon icon={arrowUndoOutline} size="small" slot="start" />
             Reset App
           </IonItem>
         </div>

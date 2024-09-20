@@ -157,9 +157,11 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
         </InfoMessage>
       )}
 
-      {isDisabled && <UploadedRecordInfoMessage />}
-
       <IonList lines="full">
+        <div className="rounded-list">
+          {isDisabled && <UploadedRecordInfoMessage />}
+        </div>
+
         <h3 className="list-title">Details</h3>
         <div className="rounded-list">
           <MenuAttrItem

@@ -139,7 +139,7 @@ const SOMList = ({ sample }: Props) => {
           </div>
         </IonList>
 
-        <IonList lines="full" className="mt-8">
+        <div className="mt-8">
           {!isDisabled && (
             <Button
               onPress={onAddNewSample}
@@ -151,8 +151,8 @@ const SOMList = ({ sample }: Props) => {
             </Button>
           )}
 
-          <div className="rounded-list">{getList()}</div>
-        </IonList>
+          {getList()}
+        </div>
       </Main>
     </Page>
   );

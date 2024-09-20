@@ -70,9 +70,11 @@ const Home = ({ sample }: Props) => {
         subheader={trainingModeSubheader}
       />
       <Main>
-        {isDisabled && <UploadedRecordInfoMessage />}
-
         <IonList lines="full">
+          <div className="rounded-list">
+            {isDisabled && <UploadedRecordInfoMessage />}
+          </div>
+
           <div className="list-title">Details</div>
           <div className="rounded-list">
             <MenuDateAttr model={sample} />

@@ -46,7 +46,7 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
   return (
     <>
       <Main>
-        <div className="mx-auto flex max-w-2xl flex-col gap-1 pb-5">
+        <div className="mx-auto my-5 flex max-w-2xl flex-col gap-1">
           <Button
             href="https://www.youtube.com/watch?v=UVC_VykDy2o"
             prefix={<IonIcon icon={playCircleOutline} className="size-6" />}
@@ -72,7 +72,7 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
           </Button>
         </div>
 
-        <IonList lines="full">
+        <IonList lines="full" className="mb-2">
           <h3 className="list-title">Details</h3>
           <div className="rounded-list">
             <MenuAttrItemFromModel attr="date" model={sample} />

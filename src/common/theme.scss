@@ -6,10 +6,6 @@
 @tailwind utilities;
 
 @layer base {
-  a:not([role='button']) {
-    // change link colours
-    color: var(--ion-color-primary);
-  }
   h1 {
     // tailwind is loaded later than ionic so resets some of the ionic's base styles
     @apply mt-5 text-2xl;
@@ -98,17 +94,12 @@
 
 // status bar
 html.ios.plt-hybrid #status-bar-background {
-  background: #415335;
-  width: 100vw;
-  height: env(safe-area-inset-top);
   position: fixed;
   top: 0;
   z-index: 1000;
-}
-
-// info messages
-.attr-page .info-message {
-  @apply border-tertiary-300/40 bg-tertiary-50 text-tertiary-900;
+  background: #415335;
+  width: 100vw;
+  height: env(safe-area-inset-top);
 }
 
 // don't know why this is needed but it fixed location name being off
@@ -118,66 +109,78 @@ html.ios.plt-hybrid #status-bar-background {
 
 // FONTS START
 @font-face {
-  font-family: 'Museo';
-  src: url('./fonts/Museo100-Regular.ttf');
   font-weight: 300;
+  src: url('./fonts/Quicksand-Light.ttf');
+  font-family: 'Quicksand';
 }
 @font-face {
-  font-family: 'Museo';
-  src: url('./fonts/Museo300-Regular.ttf');
-  font-weight: 100;
+  font-weight: 400;
+  src: url('./fonts/Quicksand-Regular.ttf');
+  font-family: 'Quicksand';
 }
 @font-face {
-  font-family: 'Museo';
-  src: url('./fonts/Museo500-Regular.ttf');
   font-weight: 500;
+  src: url('./fonts/Quicksand-Medium.ttf');
+  font-family: 'Quicksand';
 }
 @font-face {
-  font-family: 'Museo';
-  src: url('./fonts/Museo700-Regular.ttf');
+  font-weight: 600;
+  src: url('./fonts/Quicksand-SemiBold.ttf');
+  font-family: 'Quicksand';
+}
+@font-face {
   font-weight: 700;
-}
-@font-face {
-  font-family: 'Museo';
-  src: url('./fonts/Museo900-Regular.ttf');
-  font-weight: 900;
+  src: url('./fonts/Quicksand-Bold.ttf');
+  font-family: 'Quicksand';
 }
 
-h1,
 ion-title,
-ion-card-title,
-.gallery-modal .title {
-  font-family: 'Museo';
-  font-weight: 500;
+h1 {
+  font-weight: 700;
+  font-family: 'Quicksand' !important;
 }
 
+ion-item-divider,
+ion-badge,
+ion-label.bold,
+b {
+  font-weight: 600;
+  font-family: 'Quicksand' !important;
+}
+
+.apps-section .apps-section-h,
 h2,
 h3,
-.apps-section .apps-section-h,
-ion-item-divider,
-ion-footer ion-tab-button {
-  font-family: 'Museo';
+h4,
+h5,
+p,
+div,
+input,
+ion-button,
+button,
+span,
+ion-back-button,
+ion-item-option,
+ion-note,
+ion-label,
+ion-chip,
+ion-item {
+  font-weight: 400;
+  font-family: 'Quicksand' !important;
 }
 // FONTS END
-
-// training subheader
-.training-survey {
-  background: black;
-  text-align: center;
-  padding: 4px;
-  color: white;
-  font-size: 0.8em;
-}
 
 // the background camera must see through it all
 body {
   background-color: transparent;
 }
 
+// header colours
+.apps-section .apps-section-h,
 h1,
 h2,
 h3 {
-  color: var(--ion-color-primary-dark);
+  color: var(--color-primary-900);
 }
 
 .id-positive {
@@ -192,12 +195,6 @@ h3 {
   color: var(--id-rejected-color);
 }
 
-// add extra padding to solid header buttons
-ion-header ion-toolbar ion-button[fill='solid'] {
-  --padding-end: 15px;
-  --padding-start: 15px;
-}
-
 // nice page header
 ion-toolbar {
   --ion-toolbar-background: linear-gradient(
@@ -207,6 +204,79 @@ ion-toolbar {
   );
 }
 
+// change link colours
+a {
+  color: var(--color-primary-700);
+  font-weight: 600;
+}
+
+// info messages
+.info-message.border-tertiary-100,
+.attr-page .info-message {
+  @apply border-tertiary-300/40 bg-tertiary-50 text-tertiary-900;
+}
+
+// ACCESSIBILITY IMPROVEMENTS START
+ion-button:not(.button-has-icon-only),
+ion-item {
+  font-size: 1em;
+  &.md {
+    font-size: 0.9em;
+  }
+}
+// clearer image picker empty message
+.photo-picker {
+  &.ios .empty {
+    font-size: 0.9em !important;
+  }
+  &.md .empty {
+    font-size: 1em !important;
+  }
+}
+
+// brighter and bigger divider
+ion-item-divider {
+  padding: 0 5px 7px 5px;
+  color: var(--ion-text-color);
+  font-size: 0.9em;
+}
+
+// clearer menu items
+.menu-attr-item,
+.attr-wrapper {
+  ion-label[slot='end'] {
+    opacity: 1 !important;
+    color: #000000b3;
+  }
+}
+
+// menu date picker match other input value colors
+.date-input-attr ion-label[slot='end'] {
+  color: var(--form-value-color);
+  font-size: 1rem;
+}
+
+// larger collapse headers
+.collapse-block ion-label.ion-text-wrap {
+  font-size: 1rem;
+}
+
+// clearer alert messages
+ion-alert div.alert-message.sc-ion-alert-md {
+  color: black;
+  font-size: 1.1em;
+}
+
+// increase link and menu label visibility
+.field-label,
+ion-item[detail='true'][href],
+ion-item > ion-icon + ion-label,
+ion-item.item > ion-icon + ion-label.sc-ion-label-md-h {
+  font-weight: 500;
+  font-size: 1rem;
+}
+// ACCESSIBILITY IMPROVEMENTS END
+
 /** Ionic 7 fixes START **/
 
 // Fix end-slot label placement
@@ -214,18 +284,17 @@ ion-label[slot='end'] {
   text-align: right;
 }
 
-// Fix cropped radio button icons
-ion-radio {
-  padding-right: 1px;
-}
-
-ion-list.apps-section {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.checkbox-input-attr .hasIcon ion-checkbox {
-  max-width: 85%;
+// subtle borders around rounded items
+.search-result:nth-child(odd),
+.survey-list-item,
+.slider-input-attr,
+.input-list-attr .input-list-attr-item,
+.radio-input-attr ion-item,
+#suggestions .empty,
+.taxa-filter-edit-dialog-form ion-item,
+.rounded-list:not(:empty) {
+  border: 1px solid rgba(var(--color-primary-800-rgb), 0.2);
+  border-radius: var(--theme-border-radius);
 }
 
 ion-item.menu-attr-item ion-label[slot='end'] {
@@ -241,17 +310,32 @@ ion-item.menu-attr-item ion-label[slot='end'] {
 
 // top of the list title
 .list-title {
-  @apply mx-1 mb-3 mt-4 flex items-center text-lg;
+  @apply mx-1 mb-3 mt-4 flex items-center text-base font-semibold;
 }
 
 // top of the list item
 .list-divider {
-  @apply flex items-center justify-between bg-neutral-200/70 p-1 px-2 text-sm text-neutral-600;
+  @apply flex items-center justify-between bg-primary-700/10 p-1 px-2 text-sm text-primary-800;
 }
 
 // Make Android icons dark, same as iOS
 ion-icon[slot='start'].md {
   color: var(--ion-text-color, #000);
+}
+
+// unify icon stroke widths
+ion-icon.size-5,
+ion-icon.size-6,
+.menu-attr-item ion-icon[slot='start'],
+ion-item > ion-icon[slot='start'],
+.single-photo-picker ion-icon[slot='start'] {
+  --ionicon-stroke-width: 24px;
+}
+
+// make all menu icons same size
+ion-icon[slot='start'][size='small'] {
+  width: 25px;
+  height: 24px;
 }
 
 // Makes iOS menu items same height as Android
@@ -260,24 +344,18 @@ ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios {
   margin-bottom: 12px;
 }
 
-// Add padding to pages
-ion-content {
-  --padding-top: 5px;
-  --padding-bottom: 30px;
-}
-
 // Make menu item value colours same as form values, e.g. Settings page
 ion-item .sc-ion-label-md-h.sc-ion-label-md-s.md[slot='end'],
 ion-item .sc-ion-label-ios-h.sc-ion-label-ios-s.ios[slot='end'] {
   color: var(--form-value-color);
 }
 
-// Fix date attribute value opacity to match other items
-.date-input-attr
-  ion-accordion:last-of-type
-  ion-item[slot='header']
-  ion-label[slot='end'] {
-  opacity: 1 !important;
+// Unify menu lines with Tailwind package components
+.date-input-attr ion-accordion:last-of-type ion-item[slot='header'],
+.list-ios-lines-full ion-item.item-lines-default,
+.list-md-lines-full ion-item.item-lines-default {
+  --border-width: 0 0 0.5px 0 !important;
+  --border-color: #e5e5e5 !important;
 }
 
 // pull the menu input values to the right

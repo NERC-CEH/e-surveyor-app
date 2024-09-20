@@ -10,7 +10,6 @@ const UploadedRecordInfoMessage = () => {
       color="tertiary"
       prefix={<IonIcon src={informationCircleOutline} className="size-7" />}
       skipTranslation
-      className="m-3"
     >
       <T>
         This record has been submitted and cannot be edited within this App.

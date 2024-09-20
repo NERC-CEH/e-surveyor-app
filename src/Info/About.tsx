@@ -5,7 +5,7 @@ const { P } = Section;
 const About = () => (
   <Page id="about">
     <Header title="About" />
-    <Main className="ion-padding">
+    <Main>
       <Section>
         <P>
           E-Surveyor helps you to assess the quality of the wildflower habitat

@@ -148,7 +148,7 @@ const WormList = ({ sample }: Props) => {
           </ul>
         </InfoMessage>
 
-        <IonList lines="full" className="mt-8">
+        <div className="mt-8">
           {!isDisabled && !reachedMax && (
             <Button
               onPress={onAddNewSample}
@@ -160,8 +160,8 @@ const WormList = ({ sample }: Props) => {
             </Button>
           )}
 
-          <div className="rounded-list">{getList()}</div>
-        </IonList>
+          {getList()}
+        </div>
       </Main>
     </Page>
   );

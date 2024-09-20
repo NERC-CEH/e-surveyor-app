@@ -76,7 +76,6 @@ const survey: Survey = {
     verify: attrs =>
       object({
         taxon: object({}, { required_error: 'Moth has not been identified.' }),
-        // @ts-expect-error ignore
       }).safeParse(attrs).error,
 
     create({ Occurrence: AppOccurrence, taxon, photo }) {
@@ -100,7 +99,6 @@ const survey: Survey = {
         { latitude: z.number(), longitude: z.number() },
         { invalid_type_error: 'Please select location.' }
       ),
-      // @ts-expect-error ignore
     }).safeParse(attrs).error,
 
   create({ Sample }) {
