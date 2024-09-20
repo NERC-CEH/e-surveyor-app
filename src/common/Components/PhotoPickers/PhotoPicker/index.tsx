@@ -39,6 +39,8 @@ const AppPhotoPicker = ({
 
     const imageModel = await Media.getImageModel(image, config.dataPath);
     model.media.push(imageModel);
+
+    if (!model.isPersistent()) return;
     model.save();
   };
 
