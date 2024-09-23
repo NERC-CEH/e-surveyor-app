@@ -268,7 +268,7 @@ ion-alert div.alert-message.sc-ion-alert-md {
 }
 
 // increase link and menu label visibility
-.field-label,
+.field-label:first-of-type,
 ion-item[detail='true'][href],
 ion-item > ion-icon + ion-label,
 ion-item.item > ion-icon + ion-label.sc-ion-label-md-h {
