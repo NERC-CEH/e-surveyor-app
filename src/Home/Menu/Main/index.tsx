@@ -11,6 +11,7 @@ import {
   openOutline,
   helpBuoyOutline,
   mailOpenOutline,
+  documentTextOutline,
 } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Main, InfoMessage } from '@flumens';
@@ -46,7 +47,7 @@ const MenuMain = ({
   const userEmail = user.email as string;
 
   return (
-    <Main className="app-menu [--padding-top:var(--ion-safe-area-top)]">
+    <Main className="app-menu [--padding-bottom:100px] [--padding-top:var(--ion-safe-area-top)]">
       <h1>
         <T>Menu</T>
       </h1>
@@ -122,6 +123,10 @@ const MenuMain = ({
             <IonIcon icon={helpBuoyOutline} size="small" slot="start" />
             <T>Help</T>
           </IonItem>
+          <IonItem routerLink="/info/credits" detail>
+            <IonIcon icon={heartOutline} size="small" slot="start" />
+            <T>Credits</T>
+          </IonItem>
           <IonItem
             href="https://plantnet.org/en/how-why/"
             target="_blank"
@@ -130,10 +135,6 @@ const MenuMain = ({
           >
             <IonIcon icon={cameraOutline} size="small" slot="start" />
             <T>What makes a good image?</T>
-          </IonItem>
-          <IonItem routerLink="/info/credits" detail>
-            <IonIcon icon={heartOutline} size="small" slot="start" />
-            <T>Credits</T>
           </IonItem>
           <IonItem
             href={`mailto:esurveyor%40ceh.ac.uk?subject=E-Surveyor%20App%20Feedback&body=%0A%0A%0AApp%3A%20 v${config.version}%0AUser: ${userInfo}%0ADevice: ${deviceInfo}`}
@@ -151,7 +152,16 @@ const MenuMain = ({
             detailIcon={openOutline}
           >
             <IonIcon icon={lockClosedOutline} size="small" slot="start" />
-            <T>Privacy Policy</T>
+            <T>Privacy policy</T>
+          </IonItem>
+          <IonItem
+            href={`${config.backend.url}/terms-of-use?lang=${lang}`}
+            target="_blank"
+            detail
+            detailIcon={openOutline}
+          >
+            <IonIcon icon={documentTextOutline} size="small" slot="start" />
+            <T>Terms of use</T>
           </IonItem>
         </div>
       </IonList>
