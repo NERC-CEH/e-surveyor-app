@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Page, Header, Main, MenuAttrItem, Block } from '@flumens';
+import { Page, Header, Main, MenuAttrItem, Block, useAlert } from '@flumens';
 import { IonIcon, IonItem, IonLabel, IonList, NavContext } from '@ionic/react';
+import appModel from 'common/models/app';
 import Sample, { useValidateCheck } from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
@@ -16,6 +17,36 @@ import soil from './soil.svg';
 import tractor from './tractor.svg';
 import worm from './worm.svg';
 
+const useDataSharingPrompt = () => {
+  const alert = useAlert();
+
+  useEffect(() => {
+    if (!appModel.attrs.showSoilDataSharingTip) return;
+
+    alert({
+      header: 'Data sharing',
+      message: (
+        <>
+          Data collected can optionally be uploaded to the E-Surveyor{' '}
+          <a href="https://esurveyor.ceh.ac.uk/">website</a> where you can
+          access and download your data. Uploaded data will also be used by
+          UKCEH and partners to support our research into soil health. More
+          details can be found in our{' '}
+          <a href="https://esurveyor.ceh.ac.uk/terms-of-use">terms of use</a>.
+        </>
+      ),
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            appModel.attrs.showSoilDataSharingTip = false;
+          },
+        },
+      ],
+    });
+  }, []);
+};
+
 interface Props {
   sample: Sample;
 }
@@ -26,6 +57,8 @@ const Home = ({ sample }: Props) => {
   const checkSampleStatus = useValidateCheck(sample);
 
   const isDisabled = sample.isDisabled();
+
+  useDataSharingPrompt();
 
   const onFinish = async () => {
     const isValid = checkSampleStatus();
