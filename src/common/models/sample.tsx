@@ -23,6 +23,7 @@ import soilSurveyConfig, {
   cropAttr,
   landUseAttr,
   landUseOtherAttr,
+  prevCoverCropAttr,
   wormCountAttr,
 } from 'Survey/Soil/config';
 import transectSurveyConfig from 'Survey/Transect/config';
@@ -99,6 +100,7 @@ export type Attrs = SampleAttrs & {
   // soil survey
   [landUseAttr.id]?: ChoiceValues<typeof landUseAttr.choices>[];
   [coverCropAttr.id]?: ChoiceValues<typeof coverCropAttr.choices>[];
+  [prevCoverCropAttr.id]?: ChoiceValues<typeof prevCoverCropAttr.choices>[];
   [landUseOtherAttr.id]?: string;
   [cropAttrId]?: string;
   [wormCountAttr.id]?: number;

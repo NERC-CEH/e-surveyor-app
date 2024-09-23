@@ -12,9 +12,10 @@ import {
   cropOtherAttr,
   landUseAttr,
   landUseOtherAttr,
+  prevCoverCropAttr,
   prevCrop1Attr,
   prevCrop2Attr,
-  prevCrop3Attr,
+  prevOverCropOtherAttr,
   tillageAttr,
 } from './config';
 
@@ -30,6 +31,8 @@ const Management = ({ sample }: Props) => {
     !!sample.attrs?.[cropAttr().id]?.includes(CROP_OTHER_VALUE);
   const hasCoverCropOther =
     !!sample.attrs?.[coverCropAttr.id]?.includes(CROP_OTHER_VALUE);
+  const hasPrevCoverCropOther =
+    !!sample.attrs?.[prevCoverCropAttr.id]?.includes(CROP_OTHER_VALUE);
 
   const recordAttrs = {
     record: sample.attrs,
@@ -40,7 +43,7 @@ const Management = ({ sample }: Props) => {
     <Page id="survey-soil-management">
       <Header title="Management" />
       <Main>
-        <IonList lines="full">
+        <IonList lines="full" className="flex flex-col gap-2">
           <div className="rounded-list">
             <Block block={landUseAttr} {...recordAttrs} />
             {hasLandUseOther && (
@@ -52,13 +55,20 @@ const Management = ({ sample }: Props) => {
 
             <Block block={prevCrop1Attr(sample.attrs)} {...recordAttrs} />
             <Block block={prevCrop2Attr(sample.attrs)} {...recordAttrs} />
-            <Block block={prevCrop3Attr(sample.attrs)} {...recordAttrs} />
+          </div>
 
+          <div className="rounded-list">
             <Block block={coverCropAttr} {...recordAttrs} />
             {hasCoverCropOther && (
               <Block block={coverCropOtherAttr} {...recordAttrs} />
             )}
+            <Block block={prevCoverCropAttr} {...recordAttrs} />
+            {hasPrevCoverCropOther && (
+              <Block block={prevOverCropOtherAttr} {...recordAttrs} />
+            )}
+          </div>
 
+          <div className="rounded-list">
             <Block block={tillageAttr} {...recordAttrs} />
           </div>
         </IonList>
