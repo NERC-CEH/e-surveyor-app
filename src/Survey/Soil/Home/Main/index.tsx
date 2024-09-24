@@ -10,6 +10,7 @@ import GridRefValue from 'Survey/common/Components/GridRefValue';
 import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import { farmNameAttr, fieldNameAttr } from '../../config';
+import soil from '../../soil.svg';
 import tractor from '../../tractor.svg';
 import SampleEntry from './Sample';
 
@@ -47,7 +48,7 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
             <div>{sample.samples.length}</div>
           </div>
           {samples.map((smp: Sample) => (
-            <SampleEntry sample={smp} onDelete={onSampleDelete} />
+            <SampleEntry key={smp.cid} sample={smp} onDelete={onSampleDelete} />
           ))}
         </div>
       </IonList>
@@ -77,6 +78,10 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
           <IonItem routerLink={`${url}/management`}>
             <IonIcon src={tractor} slot="start" />
             <IonLabel>Management</IonLabel>
+          </IonItem>
+          <IonItem routerLink={`${url}/som`}>
+            <IonIcon src={soil} slot="start" />
+            <IonLabel>SOM</IonLabel>
           </IonItem>
         </div>
       </IonList>

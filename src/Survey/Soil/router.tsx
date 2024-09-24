@@ -5,6 +5,8 @@ import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Home from './Home';
 import Management from './Management';
 import Report from './Report';
+import SOM from './SOM';
+import Lab from './SOM/Lab';
 import SampleHome from './Sample';
 import VSA from './Sample/VSA';
 import Worms from './Sample/Worms';
@@ -21,6 +23,9 @@ const routes = [
   [`${baseURL}/:smpId/report`, Report],
   [`${baseURL}/:smpId/management`, Management],
   [`${baseURL}/:smpId/management/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/som`, SOM],
+  [`${baseURL}/:smpId/som/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/som/lab`, Lab],
   [`${baseURL}/:smpId/sample/:subSmpId`, SampleHome],
   [`${baseURL}/:smpId/sample/:subSmpId/location`, ModelLocationMap],
   [`${baseURL}/:smpId/sample/:subSmpId/worms`, Worms],

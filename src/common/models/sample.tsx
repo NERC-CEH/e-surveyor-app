@@ -21,6 +21,9 @@ import soilSurveyConfig, {
   SOMIDAttr,
   coverCropAttr,
   cropAttr,
+  labClayAttr,
+  labSandAttr,
+  labSiltAttr,
   landUseAttr,
   landUseOtherAttr,
   prevCoverCropAttr,
@@ -107,6 +110,9 @@ export type Attrs = SampleAttrs & {
   [wormCountAttr.id]?: number;
   [SOMIDAttr.id]?: string;
   [sampleNameAttr.id]?: string;
+  [labSandAttr.id]: number;
+  [labSiltAttr.id]: number;
+  [labClayAttr.id]: number;
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {

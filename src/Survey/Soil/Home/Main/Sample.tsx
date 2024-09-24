@@ -62,7 +62,7 @@ const SampleEntry = ({ sample, onDelete }: Props) => {
   };
 
   return (
-    <IonItemSliding key={sample.cid} {...contextMenuProps}>
+    <IonItemSliding {...contextMenuProps}>
       <IonItem
         routerLink={`${match.url}/sample/${sample.cid}`}
         detail

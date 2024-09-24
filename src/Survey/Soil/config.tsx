@@ -356,6 +356,163 @@ export const SOMDiameterAttr = {
   validations: { min: 1.3, max: 20 },
 } as const;
 
+export const labNameAttr = {
+  id: 'lab-name-1',
+  type: 'text_input',
+  title: 'Lab name',
+  prefix: listOutlineIcon,
+} as const;
+
+export const labTOCAttr = {
+  id: 'som-TOC-Carbonate-1',
+  type: 'number_input',
+  title: 'Total Organic Carbon',
+  prefix: listOutlineIcon,
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
+export const labSOMAttr = {
+  id: 'som-SOM-Carbonate-1',
+  type: 'number_input',
+  title: 'Soil Organic Matter (TOC x 1.72)',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labLOIAttr = {
+  id: 'som-LOI-Carbonate-1',
+  type: 'number_input',
+  title: 'Loss on Ignition',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labCalciumCarbonateAttr = {
+  id: 'som-Calcium-Carbonate-1',
+  type: 'number_input',
+  title: 'Calcium Carbonate',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labNitrogenAttr = {
+  id: 'som-Nitrogen-1',
+  type: 'number_input',
+  title: 'Total Nitrogen',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labCationAttr = {
+  id: 'som-Cation-1',
+  type: 'number_input',
+  title: 'Cation Exchange Capacity',
+  prefix: listOutlineIcon,
+  suffix: 'meq/l',
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
+export const labSandAttr = {
+  id: 'som-Sand-1',
+  type: 'number_input',
+  title: 'Sand',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labSiltAttr = {
+  id: 'som-Silt-1',
+  type: 'number_input',
+  title: 'Silt',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labClayAttr = {
+  id: 'som-Clay-1',
+  type: 'number_input',
+  title: 'Clay',
+  prefix: listOutlineIcon,
+  suffix: '%',
+  appearance: 'counter',
+  validations: { min: 0, max: 100 },
+} as const;
+
+export const labNRMAttr = {
+  id: 'som-NRM-1',
+  type: 'number_input',
+  title: 'NRM scoop density',
+  prefix: listOutlineIcon,
+  suffix: 'g/cm3',
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
+export const labTypeAttr = {
+  id: 'som-type-1',
+  type: 'choice_input',
+  title: 'Method',
+  prefix: listOutlineIcon,
+  appearance: 'button',
+  choices: [
+    { title: 'Full (pipette)', data_name: 'full-1' },
+    { title: 'Quick (Laser)', data_name: 'quick-1' },
+  ],
+} as const;
+
+export const labPHAttr = {
+  id: 'som-pH-1',
+  type: 'number_input',
+  title: 'pH',
+  prefix: listOutlineIcon,
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
+export const labKAttr = {
+  id: 'som-k-1',
+  type: 'number_input',
+  title: 'K',
+  prefix: listOutlineIcon,
+  suffix: 'mg/l',
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
+export const labPAttr = {
+  id: 'som-p-1',
+  type: 'number_input',
+  title: 'P',
+  prefix: listOutlineIcon,
+  suffix: 'mg/l',
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
+export const labMgAttr = {
+  id: 'som-Mg-1',
+  type: 'number_input',
+  title: 'Mg',
+  prefix: listOutlineIcon,
+  suffix: 'mg/l',
+  appearance: 'counter',
+  validations: { min: 0 },
+} as const;
+
 export const wormCountAttr = {
   id: 'worm-count-1',
   type: 'number_input',
