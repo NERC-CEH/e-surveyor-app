@@ -22,4 +22,10 @@ export function getPending() {
   return savedSamples.filter(byUploadStatus);
 }
 
+export function byDate(smp1: Sample, smp2: Sample) {
+  const date1 = new Date(smp1.attrs.date);
+  const date2 = new Date(smp2.attrs.date);
+  return date2.getTime() - date1.getTime();
+}
+
 export default savedSamples;

@@ -36,7 +36,7 @@
     "@capacitor/splash-screen": "6.0.2",
     "@capacitor/status-bar": "6.0.1",
     "@flumens/bigu": "0.4.0",
-    "@flumens/ionic": "2.0.0-alpha.61",
+    "@flumens/ionic": "2.0.0-alpha.62",
     "@flumens/tailwind": "0.19.1",
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.9.0",

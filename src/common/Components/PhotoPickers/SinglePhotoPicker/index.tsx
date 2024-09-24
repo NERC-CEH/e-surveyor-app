@@ -16,6 +16,7 @@ interface Props
   maxImages?: number;
   allowToCrop?: boolean;
   disabled?: boolean;
+  caption?: string;
 }
 
 const AppPhotoPicker = ({
@@ -23,6 +24,7 @@ const AppPhotoPicker = ({
   allowToCrop,
   maxImages,
   disabled,
+  caption,
   ...restProps
 }: Props) => {
   async function onAddNew(shouldUseCamera: boolean) {
@@ -33,6 +35,9 @@ const AppPhotoPicker = ({
     if (!image) return;
 
     const imageModel = await Media.getImageModel(image, config.dataPath);
+    if (caption) {
+      imageModel.attrs.caption = caption;
+    }
 
     const imageArray = Array.isArray(imageModel) ? imageModel : [imageModel];
     model.media.push(...imageArray);
@@ -102,6 +107,7 @@ const AppPhotoPicker = ({
         model={model}
         Image={ImageWithCropping}
         isDisabled={isDisabled || maxPicsReached}
+        caption={caption}
         {...restProps}
       />
       {allowToCrop && (

@@ -1,14 +1,13 @@
 import { Main } from '@flumens';
-import Sample from 'common/models/sample';
-import mockup from './report.png';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 
-type Props = { sample: Sample };
-
-const ReportMain = ({ sample }: Props) => {
-  console.log(sample.cid);
+const ReportMain = () => {
   return (
     <Main>
-      <img src={mockup} alt="" className="" />
+      <InfoBackgroundMessage>
+        This area is still in development, and in the future, it will display a
+        soil survey report.
+      </InfoBackgroundMessage>
     </Main>
   );
 };

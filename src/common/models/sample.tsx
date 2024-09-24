@@ -24,6 +24,7 @@ import soilSurveyConfig, {
   landUseAttr,
   landUseOtherAttr,
   prevCoverCropAttr,
+  sampleNameAttr,
   wormCountAttr,
 } from 'Survey/Soil/config';
 import transectSurveyConfig from 'Survey/Transect/config';
@@ -105,6 +106,7 @@ export type Attrs = SampleAttrs & {
   [cropAttrId]?: string;
   [wormCountAttr.id]?: number;
   [SOMIDAttr.id]?: string;
+  [sampleNameAttr.id]?: string;
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {
@@ -230,11 +232,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     }
 
     if (this.metadata.survey === 'soil' && this.parent) {
-      const byId = ({ cid }: Sample) => cid === this.cid;
-      const byWormsType = (smp: Sample) => smp.metadata.type === 'worms';
-      const index = this.parent.samples.filter(byWormsType).findIndex(byId);
-
-      return `Sample #${index + 1}`;
+      return this.attrs[sampleNameAttr.id];
     }
 
     const byId = ({ cid }: Sample) => cid === this.cid;

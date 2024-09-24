@@ -14,7 +14,7 @@ import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel, { SeedMix } from 'models/app';
 import Media from 'models/image';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
-import Sample, { SoilSubSampleType } from 'models/sample';
+import Sample from 'models/sample';
 
 const { POSSIBLE_THRESHOLD } = config;
 
@@ -342,7 +342,7 @@ type SampleCreateOptions = {
   /**
    * For soil survey subsamples
    */
-  type?: SoilSubSampleType;
+  name?: string;
 };
 
 export type SampleConfig = {

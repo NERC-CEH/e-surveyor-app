@@ -5,9 +5,10 @@ import { listOutline, locationOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import { Survey, blockToAttr, locationAttr } from 'Survey/common/config';
 import field from './field.svg';
-import soilIcon from './soil.svg';
+import soil from './soil.svg';
 
 const fieldIcon = (<IonIcon src={field} className="size-6" />) as any;
+const soilIcon = (<IonIcon src={soil} className="size-6" />) as any;
 
 const locationOutlineIcon = (
   <IonIcon src={locationOutline} className="size-6" />
@@ -364,11 +365,27 @@ export const wormCountAttr = {
   validations: { required: true, min: 0 },
 } as const;
 
+export const sampleNameAttr = {
+  id: 'location_name',
+  type: 'text_input',
+  title: 'Sample name',
+  prefix: locationOutlineIcon,
+  validations: { required: true },
+} as const;
+
+export const somAttr = {
+  id: 'location_name',
+  type: 'yes_no_input',
+  title: 'Soil Organic Matter (SOM)',
+  prefix: soilIcon,
+  validations: { required: true },
+} as const;
+
 const survey: Survey = {
   id: -1,
   name: 'soil',
   label: 'Soil survey',
-  icon: soilIcon,
+  icon: soil,
 
   attrs: {
     location: locationAttr,
@@ -387,13 +404,14 @@ const survey: Survey = {
       ...blockToAttr(soilStrengthAttr),
     },
 
-    create({ Sample, type }) {
+    create({ Sample, name }) {
       const sample = new Sample({
         metadata: {
           survey: survey.name,
-          type,
         },
-        attrs: {},
+        attrs: {
+          [sampleNameAttr.id]: name,
+        },
       });
 
       sample.startGPS();

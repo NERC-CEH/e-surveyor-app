@@ -1,21 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Page, Header, Main, MenuAttrItem, Block, useAlert } from '@flumens';
-import { IonIcon, IonItem, IonLabel, IonList, NavContext } from '@ionic/react';
+import { Page, Header, useAlert } from '@flumens';
+import { NavContext } from '@ionic/react';
 import appModel from 'common/models/app';
 import Sample, { useValidateCheck } from 'models/sample';
-import GridRefValue from 'Survey/common/Components/GridRefValue';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
-import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
-import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
-import { farmNameAttr, fieldNameAttr } from './config';
-import field from './field.svg';
-import soil from './soil.svg';
-import tractor from './tractor.svg';
-import worm from './worm.svg';
+import config from '../config';
+import Main from './Main';
 
 const useDataSharingPrompt = () => {
   const alert = useAlert();
@@ -56,8 +49,6 @@ const Home = ({ sample }: Props) => {
   const { navigate } = useContext(NavContext);
   const checkSampleStatus = useValidateCheck(sample);
 
-  const isDisabled = sample.isDisabled();
-
   useDataSharingPrompt();
 
   const onFinish = async () => {
@@ -75,6 +66,15 @@ const Home = ({ sample }: Props) => {
     saveAndReturn();
   };
 
+  const onSampleDelete = (smp: Sample) => smp.destroy();
+  const onSampleAdd = () => {
+    const name = `Sample #${sample.samples.length + 1}`;
+    const smp = config.smp?.create!({ Sample, name });
+    sample.samples.push(smp!);
+    sample.save();
+    navigate(`${url}/sample/${smp!.cid}`);
+  };
+
   const isInvalid = sample.validateRemote();
 
   const finishButton = sample.remote.synchronising ? null : (
@@ -90,60 +90,18 @@ const Home = ({ sample }: Props) => {
     </div>
   );
 
-  const recordAttrs = {
-    record: sample.attrs,
-    isDisabled: sample.isDisabled(),
-  };
-
   return (
-    <Page id="survey-moth-home">
+    <Page id="survey-soil-home">
       <Header
         title="Survey"
         rightSlot={finishButton}
         subheader={trainingModeSubheader}
       />
-      <Main>
-        <IonList lines="full">
-          <div className="rounded-list">
-            {isDisabled && <UploadedRecordInfoMessage />}
-          </div>
-
-          <div className="list-title">Details</div>
-          <div className="rounded-list">
-            <MenuDateAttr model={sample} />
-            <MenuAttrItem
-              routerLink={`${url}/location`}
-              icon={locationOutline}
-              label="Location"
-              skipValueTranslation
-              value={<GridRefValue sample={sample} />}
-              disabled={isDisabled}
-            />
-            <Block block={farmNameAttr} {...recordAttrs} />
-            <Block block={fieldNameAttr} {...recordAttrs} />
-            <IonItem routerLink={`${url}/management`}>
-              <IonIcon src={tractor} slot="start" />
-              <IonLabel>Management</IonLabel>
-            </IonItem>
-          </div>
-
-          <div className="list-title">Surveys</div>
-          <div className="rounded-list">
-            <IonItem routerLink={`${url}/vsa`}>
-              <IonIcon src={field} slot="start" />
-              <IonLabel>Visual Soil Assessment</IonLabel>
-            </IonItem>
-            <IonItem routerLink={`${url}/worms`}>
-              <IonIcon src={worm} slot="start" />
-              <IonLabel>Earthworm Survey</IonLabel>
-            </IonItem>
-            <IonItem routerLink={`${url}/som`}>
-              <IonIcon src={soil} slot="start" />
-              <IonLabel>Soil Organic Matter (SOM) Survey</IonLabel>
-            </IonItem>
-          </div>
-        </IonList>
-      </Main>
+      <Main
+        sample={sample}
+        onSampleDelete={onSampleDelete}
+        onSampleAdd={onSampleAdd}
+      />
     </Page>
   );
 };

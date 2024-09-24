@@ -3,17 +3,12 @@ import { createOutline, cameraOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, MenuAttrItem } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
+import { byDate } from 'common/models/savedSamples';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import Trap from './Trap';
 import './styles.scss';
-
-function byDate(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.attrs.date);
-  const date2 = new Date(smp2.attrs.date);
-  return date2.getTime() - date1.getTime();
-}
 
 type Props = {
   sample: Sample;

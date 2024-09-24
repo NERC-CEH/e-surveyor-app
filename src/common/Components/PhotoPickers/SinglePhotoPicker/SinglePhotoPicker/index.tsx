@@ -55,6 +55,10 @@ type Props = {
    */
   label?: string;
   /**
+   * Caption to filter media.
+   */
+  caption?: string;
+  /**
    * Image component class.
    */
   Image?: any;
@@ -119,8 +123,10 @@ const SinglePhotoPicker = ({
   isDisabled,
   className,
   Image = ImageDefault,
+  caption,
 }: Props) => {
-  const [photo] = model.media;
+  const byCaption = (m: any) => (caption ? m.attrs.caption === caption : true);
+  const [photo] = model.media.filter(byCaption);
   const promptToDelete = useDeletePrompt();
   const promptImageSource = usePromptImageSource();
 
