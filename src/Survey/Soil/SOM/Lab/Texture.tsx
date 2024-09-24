@@ -6,20 +6,12 @@ import {
   labCalciumCarbonateAttr,
   labCationAttr,
   labClayAttr,
-  labKAttr,
-  labLOIAttr,
-  labMgAttr,
   labNRMAttr,
-  labNameAttr,
   labNitrogenAttr,
-  labPAttr,
-  labPHAttr,
-  labSOMAttr,
   labSandAttr,
   labSiltAttr,
-  labTOCAttr,
   labTypeAttr,
-} from '../config';
+} from '../../config';
 
 type Props = { sample: Sample };
 
@@ -32,18 +24,10 @@ const Lab = ({ sample }: Props) => {
     !!sample.attrs[labClayAttr.id];
 
   return (
-    <Page id="survey-soil-som-lab">
-      <Header title="Lab results" />
+    <Page id="survey-soil-som-lab-texture">
+      <Header title="Texture analyses" />
       <Main>
         <IonList lines="full">
-          <div className="rounded-list">
-            <Block block={labNameAttr} {...recordAttrs} />
-            <Block block={labTOCAttr} {...recordAttrs} />
-            <Block block={labSOMAttr} {...recordAttrs} />
-            <Block block={labLOIAttr} {...recordAttrs} />
-          </div>
-
-          <div className="list-title">Texture analyses</div>
           <div className="rounded-list">
             <Block block={labCalciumCarbonateAttr} {...recordAttrs} />
             <Block block={labNitrogenAttr} {...recordAttrs} />
@@ -53,14 +37,6 @@ const Lab = ({ sample }: Props) => {
             <Block block={labClayAttr} {...recordAttrs} />
             {showLabType && <Block block={labTypeAttr} {...recordAttrs} />}
             <Block block={labNRMAttr} {...recordAttrs} />
-          </div>
-
-          <div className="list-title">pH and nutrient analysis</div>
-          <div className="rounded-list">
-            <Block block={labPHAttr} {...recordAttrs} />
-            <Block block={labPAttr} {...recordAttrs} />
-            <Block block={labKAttr} {...recordAttrs} />
-            <Block block={labMgAttr} {...recordAttrs} />
           </div>
         </IonList>
       </Main>

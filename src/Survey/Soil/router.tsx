@@ -7,6 +7,8 @@ import Management from './Management';
 import Report from './Report';
 import SOM from './SOM';
 import Lab from './SOM/Lab';
+import Nutrient from './SOM/Lab/Nutrient';
+import Texture from './SOM/Lab/Texture';
 import SampleHome from './Sample';
 import VSA from './Sample/VSA';
 import Worms from './Sample/Worms';
@@ -26,6 +28,8 @@ const routes = [
   [`${baseURL}/:smpId/som`, SOM],
   [`${baseURL}/:smpId/som/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/som/lab`, Lab],
+  [`${baseURL}/:smpId/som/lab/texture`, Texture],
+  [`${baseURL}/:smpId/som/lab/nutrient`, Nutrient],
   [`${baseURL}/:smpId/sample/:subSmpId`, SampleHome],
   [`${baseURL}/:smpId/sample/:subSmpId/location`, ModelLocationMap],
   [`${baseURL}/:smpId/sample/:subSmpId/worms`, Worms],
