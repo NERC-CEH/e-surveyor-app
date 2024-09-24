@@ -9,7 +9,6 @@ import {
   Header,
   Page,
   saveFile,
-  useAlert,
   useLoader,
   useToast,
 } from '@flumens';
@@ -33,34 +32,6 @@ const dataURItoFile = (dataURI: string) =>
     ? saveFile(dataURI, `${getNewUUID()}.jpg`)
     : getObjectURL(dataURI);
 
-const useTrapDeleteConfirmation = () => {
-  const alert = useAlert();
-
-  const confirmTrapDeletion = () =>
-    new Promise(resolve => {
-      alert({
-        header: 'Delete',
-        skipTranslation: true,
-        message: 'Are you sure you want to remove this trap from your survey?',
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            cssClass: 'primary',
-            handler: () => resolve(false),
-          },
-          {
-            text: 'Delete',
-            cssClass: 'danger',
-            handler: () => resolve(true),
-          },
-        ],
-      });
-    });
-
-  return confirmTrapDeletion;
-};
-
 type Props = {
   sample: Sample;
 };
@@ -72,7 +43,6 @@ const Controller = ({ sample }: Props) => {
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
   const loader = useLoader();
-  const confirmTrapDeletion = useTrapDeleteConfirmation();
 
   const onUpload = async () => {
     const isUserOK = await checkUserStatus();
@@ -151,12 +121,7 @@ const Controller = ({ sample }: Props) => {
     setEditImage(imageToEdit);
   };
 
-  const onTrapDelete = async (trap: Sample) => {
-    const shouldDelete = await confirmTrapDeletion();
-    if (!shouldDelete) return;
-
-    trap.destroy();
-  };
+  const onTrapDelete = async (trap: Sample) => trap.destroy();
 
   const onDoneEdit = (image: URL) => {
     attachImages(image);

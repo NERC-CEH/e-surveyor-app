@@ -5,7 +5,6 @@ import { Capacitor } from '@capacitor/core';
 import {
   InfoMessage,
   useToast,
-  useAlert,
   device,
   Button,
   usePromptImageSource,
@@ -43,26 +42,6 @@ const hasOver5UnidentifiedSpecies = (
   return list.filter(unIdentifiedSpecies).length >= 5;
 };
 
-function deleteSample(sample: Model, alert: any) {
-  alert({
-    header: 'Delete',
-    skipTranslation: true,
-    message: 'Are you sure you want to remove this entry from your survey?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'primary',
-      },
-      {
-        text: 'Delete',
-        cssClass: 'danger',
-        handler: () => sample.destroy(),
-      },
-    ],
-  });
-}
-
 type Props = {
   sample: Sample;
   isDisabled: boolean;
@@ -87,7 +66,6 @@ const SpeciesList = ({
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
   const toast = useToast();
-  const alert = useAlert();
   const promptImageSource = usePromptImageSource();
 
   const rawList = !useSubSamples ? sample.occurrences : sample.samples;
@@ -170,8 +148,6 @@ const SpeciesList = ({
     }
   };
 
-  const onDelete = (model: Model) => deleteSample(model, alert);
-
   const navigateToSpeciesSample = (model: Model) => {
     if (!useSpeciesProfile || isDisabled) return;
 
@@ -179,17 +155,21 @@ const SpeciesList = ({
   };
 
   const getSpeciesList = () => {
-    const getSpecies = (model: Model) => (
-      <Species
-        key={model.cid}
-        model={model}
-        isDisabled={isDisabled}
-        onDelete={!disableDelete ? onDelete : undefined}
-        onClick={navigateToSpeciesSample}
-        onReidentify={allowReidentify ? onReidentify : undefined}
-        useDoughnut={useDoughnut}
-      />
-    );
+    const getSpecies = (model: Model) => {
+      const onDelete = () => model.destroy();
+
+      return (
+        <Species
+          key={model.cid}
+          model={model}
+          isDisabled={isDisabled}
+          onDelete={!disableDelete ? onDelete : undefined}
+          onClick={navigateToSpeciesSample}
+          onReidentify={allowReidentify ? onReidentify : undefined}
+          useDoughnut={useDoughnut}
+        />
+      );
+    };
 
     const speciesEntries = list.filter(isUnknown(true)).map(getSpecies);
 
@@ -213,18 +193,22 @@ const SpeciesList = ({
     const showIdentifyAllBtn =
       !disableAI && hasOver5UnidentifiedSpecies(sample, useSubSamples);
 
-    const getSpecies = (model: Model) => (
-      <UnidentifiedSpecies
-        key={model.cid}
-        model={model}
-        isDisabled={isDisabled}
-        onIdentify={onIdentify}
-        deEmphasisedIdentifyBtn={showIdentifyAllBtn}
-        onDelete={!disableDelete ? onDelete : undefined}
-        onClick={navigateToSpeciesSample}
-        disableAI={disableAI}
-      />
-    );
+    const getSpecies = (model: Model) => {
+      const onDelete = () => model.destroy();
+
+      return (
+        <UnidentifiedSpecies
+          key={model.cid}
+          model={model}
+          isDisabled={isDisabled}
+          onIdentify={onIdentify}
+          deEmphasisedIdentifyBtn={showIdentifyAllBtn}
+          onDelete={!disableDelete ? onDelete : undefined}
+          onClick={navigateToSpeciesSample}
+          disableAI={disableAI}
+        />
+      );
+    };
 
     const speciesEntries = list.filter(isUnknown(false)).map(getSpecies);
 

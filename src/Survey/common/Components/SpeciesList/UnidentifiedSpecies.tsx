@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
-import { Button, Gallery } from '@flumens';
+import { Button, Gallery, useAlert, useContextMenu } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
@@ -8,10 +8,50 @@ import {
   IonItemOption,
   IonSpinner,
   IonIcon,
+  useIonActionSheet,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
+
+const useDeleteAlert = (onDelete: any) => {
+  const alert = useAlert();
+
+  return () => {
+    alert({
+      header: 'Delete',
+      skipTranslation: true,
+      message: 'Are you sure you want to remove it from your device?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'primary',
+        },
+        {
+          text: 'Delete',
+          cssClass: 'danger',
+          handler: onDelete,
+        },
+      ],
+    });
+  };
+};
+
+const useMenu = (deleteSurvey: any) => {
+  const [present] = useIonActionSheet();
+
+  const showMenu = () =>
+    present({
+      header: 'Actions',
+      buttons: [
+        { text: 'Delete', role: 'destructive', handler: deleteSurvey },
+        { text: 'Cancel', role: 'cancel' },
+      ],
+    });
+
+  return showMenu;
+};
 
 type Model = Sample | Occurrence;
 
@@ -20,7 +60,7 @@ interface Props {
   isDisabled: boolean;
   deEmphasisedIdentifyBtn: boolean;
   onIdentify: (model: Model) => void;
-  onDelete?: (model: Model) => void;
+  onDelete?: () => void;
   onClick: (model: Model) => void;
   disableAI?: boolean;
 }
@@ -34,6 +74,10 @@ const UnidentifiedSpeciesEntry = ({
   onClick,
   disableAI = false,
 }: Props) => {
+  const showDeleteAlert = useDeleteAlert(onDelete);
+  const showMenu = useMenu(showDeleteAlert);
+  const { contextMenuProps } = useContextMenu({ onShow: showMenu });
+
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
   const [hasSpeciesPhoto] = occ.media;
 
@@ -73,7 +117,6 @@ const UnidentifiedSpeciesEntry = ({
   );
   const profilePhoto = <div className="list-avatar">{photo}</div>;
 
-  const deleteWrap = () => onDelete && onDelete(model);
   const onClickWrap = () => !identifying && onClick(model);
 
   const onIdentifyWrap = () => onIdentify(model);
@@ -81,7 +124,7 @@ const UnidentifiedSpeciesEntry = ({
   const buttonStyles = deEmphasisedIdentifyBtn ? 'outline' : 'solid';
 
   return (
-    <IonItemSliding disabled={identifying}>
+    <IonItemSliding disabled={identifying} {...contextMenuProps}>
       <IonItem
         detail={false}
         onClick={onClickWrap}
@@ -121,7 +164,7 @@ const UnidentifiedSpeciesEntry = ({
 
       {!isDisabled && onDelete && (
         <IonItemOptions side="end">
-          <IonItemOption color="danger" onClick={deleteWrap}>
+          <IonItemOption color="danger" onClick={showDeleteAlert}>
             Delete
           </IonItemOption>
         </IonItemOptions>

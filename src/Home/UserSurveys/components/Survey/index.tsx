@@ -1,5 +1,11 @@
 import { observer } from 'mobx-react';
-import { useAlert, useToast, Badge, getRelativeDate } from '@flumens';
+import {
+  useAlert,
+  useToast,
+  Badge,
+  getRelativeDate,
+  useContextMenu,
+} from '@flumens';
 import {
   IonItem,
   IonItemSliding,
@@ -7,6 +13,7 @@ import {
   IonItemOption,
   IonLabel,
   IonIcon,
+  useIonActionSheet,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Sample, { useValidateCheck } from 'models/sample';
@@ -14,7 +21,7 @@ import { useUserStatusCheck } from 'models/user';
 import OnlineStatus from './OnlineStatus';
 import './styles.scss';
 
-const useDeleteAlert = (sample: Sample) => {
+const useDeleteAlert = (onDelete: any) => {
   const alert = useAlert();
 
   return () => {
@@ -31,24 +38,42 @@ const useDeleteAlert = (sample: Sample) => {
         {
           text: 'Delete',
           cssClass: 'danger',
-          handler: () => sample.destroy(),
+          handler: onDelete,
         },
       ],
     });
   };
 };
 
+const useMenu = (deleteSurvey: any) => {
+  const [present] = useIonActionSheet();
+
+  const showMenu = () =>
+    present({
+      header: 'Actions',
+      buttons: [
+        { text: 'Delete', role: 'destructive', handler: deleteSurvey },
+        { text: 'Cancel', role: 'cancel' },
+      ],
+    });
+
+  return showMenu;
+};
+
 type Props = {
   sample: Sample;
+  onDelete: () => void;
   uploadIsPrimary?: boolean;
 };
 
-const Survey = ({ sample, uploadIsPrimary }: Props) => {
-  const deleteSurvey = useDeleteAlert(sample);
+const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
+  const showDeleteAlert = useDeleteAlert(onDelete);
+  const showMenu = useMenu(showDeleteAlert);
+  const { contextMenuProps } = useContextMenu({ onShow: showMenu });
+
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
-
   const survey = sample.getSurvey();
 
   let href;
@@ -113,7 +138,7 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
   };
 
   return (
-    <IonItemSliding className="survey-list-item">
+    <IonItemSliding className="survey-list-item" {...contextMenuProps}>
       <IonItem routerLink={href} detail={false}>
         <div className="list-avatar">
           <IonIcon icon={survey.icon} className="bg-primary-50/80 text-3xl" />
@@ -127,7 +152,7 @@ const Survey = ({ sample, uploadIsPrimary }: Props) => {
       </IonItem>
 
       <IonItemOptions side="end">
-        <IonItemOption color="danger" onClick={deleteSurvey}>
+        <IonItemOption color="danger" onClick={showDeleteAlert}>
           Delete
         </IonItemOption>
       </IonItemOptions>

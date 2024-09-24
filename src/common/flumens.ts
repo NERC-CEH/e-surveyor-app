@@ -113,3 +113,4 @@ export {
   defaultContext,
 } from '@flumens/tailwind/dist/components/Block/Context';
 export { default as Block } from '@flumens/tailwind/dist/components/Block';
+export { default as useContextMenu } from '@flumens/tailwind/dist/hooks/useContextMenu';

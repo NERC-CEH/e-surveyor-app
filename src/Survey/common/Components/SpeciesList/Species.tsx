@@ -9,13 +9,14 @@ import {
   leaf,
 } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
-import { Button, Gallery } from '@flumens';
+import { Button, Gallery, useAlert, useContextMenu } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
   IonItemOptions,
   IonItemOption,
   IonIcon,
+  useIonActionSheet,
 } from '@ionic/react';
 import config from 'common/config';
 import Occurrence from 'models/occurrence';
@@ -61,12 +62,51 @@ const getDoughnutData = (score: number) => {
   };
 };
 
+const useDeleteAlert = (onDelete: any) => {
+  const alert = useAlert();
+
+  return () => {
+    alert({
+      header: 'Delete',
+      skipTranslation: true,
+      message: 'Are you sure you want to remove it from your device?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'primary',
+        },
+        {
+          text: 'Delete',
+          cssClass: 'danger',
+          handler: onDelete,
+        },
+      ],
+    });
+  };
+};
+
+const useMenu = (deleteSurvey: any) => {
+  const [present] = useIonActionSheet();
+
+  const showMenu = () =>
+    present({
+      header: 'Actions',
+      buttons: [
+        { text: 'Delete', role: 'destructive', handler: deleteSurvey },
+        { text: 'Cancel', role: 'cancel' },
+      ],
+    });
+
+  return showMenu;
+};
+
 type Props = {
   model: Sample | Occurrence;
   isDisabled: boolean;
   onReidentify?: any;
   useDoughnut?: boolean;
-  onDelete?: (model: Sample | Occurrence) => void;
+  onDelete?: () => void;
   onClick: (model: Sample | Occurrence) => void;
 };
 
@@ -78,6 +118,10 @@ const Species = ({
   useDoughnut,
   onReidentify,
 }: Props) => {
+  const showDeleteAlert = useDeleteAlert(onDelete);
+  const showMenu = useMenu(showDeleteAlert);
+  const { contextMenuProps } = useContextMenu({ onShow: showMenu });
+
   const species = model.getSpecies();
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
 
@@ -146,7 +190,6 @@ const Species = ({
     }
   }
 
-  const deleteWrap = () => onDelete && onDelete(model);
   const onClickWrap = () => onClick(model);
 
   const detailsIcon = detailIcon || '';
@@ -175,7 +218,7 @@ const Species = ({
   const onReidentifyWrap = () => onReidentify(model);
 
   return (
-    <IonItemSliding key={model.cid}>
+    <IonItemSliding key={model.cid} {...contextMenuProps}>
       <IonItem
         detail={!useDoughnut && !showReidentify}
         detailIcon={detailsIcon}
@@ -219,7 +262,7 @@ const Species = ({
 
       {!isDisabled && onDelete && (
         <IonItemOptions side="end">
-          <IonItemOption color="danger" onClick={deleteWrap}>
+          <IonItemOption color="danger" onClick={showDeleteAlert}>
             Delete
           </IonItemOption>
         </IonItemOptions>

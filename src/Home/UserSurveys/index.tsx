@@ -39,13 +39,19 @@ function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
     );
   }
 
-  const getSurveyEntry = (sample: Sample) => (
-    <Survey
-      key={sample.cid}
-      sample={sample}
-      uploadIsPrimary={uploadIsPrimary}
-    />
-  );
+  const getSurveyEntry = (sample: Sample) => {
+    const onDelete = () => sample.destroy();
+
+    return (
+      <Survey
+        key={sample.cid}
+        sample={sample}
+        uploadIsPrimary={uploadIsPrimary}
+        onDelete={onDelete}
+      />
+    );
+  };
+
   const surveysList = surveys.map(getSurveyEntry);
 
   if (finishedSurvey) {
@@ -80,9 +86,10 @@ function getUploadedSurveys(surveys: any[]) {
     );
   }
 
-  const getUploadedSurveyEntry = (sample: Sample) => (
-    <Survey key={sample.cid} sample={sample} />
-  );
+  const getUploadedSurveyEntry = (sample: Sample) => {
+    const onDelete = () => sample.destroy();
+    return <Survey key={sample.cid} sample={sample} onDelete={onDelete} />;
+  };
   const surveysList = surveys.map(getUploadedSurveyEntry);
 
   return <IonList lines="full">{surveysList}</IonList>;
