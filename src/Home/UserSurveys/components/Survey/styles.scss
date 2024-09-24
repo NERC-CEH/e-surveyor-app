@@ -5,8 +5,8 @@
     background: transparent;
 
     .survey-list-item {
-      border-radius: 10px;
       margin-bottom: 15px;
+      border-radius: 10px;
       background: white;
 
       ion-item {
@@ -24,14 +24,14 @@
         }
 
         > ion-label {
-          margin-left: 18px;
           margin-top: 0;
           margin-bottom: 0;
+          margin-left: 18px;
         }
 
         h3 {
-          font-size: 1.1em;
           font-weight: 500;
+          font-size: 1.1em;
         }
       }
     }

@@ -6,15 +6,15 @@ $text-color: #132f00;
     position: absolute;
     bottom: -1px;
     left: 0;
+    transform: rotate(180deg);
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    transform: rotate(180deg);
   }
 
   .custom-shape-divider-bottom-1593438501 svg {
-    position: relative;
     display: block;
+    position: relative;
     width: calc(100% + 1.3px);
     height: 42px;
   }
@@ -32,11 +32,11 @@ $text-color: #132f00;
 
 @mixin slide {
   .slide-header {
-    background-size: cover;
-    height: 50%;
-    width: 100%;
     position: absolute;
     top: 0;
+    background-size: cover;
+    width: 100%;
+    height: 50%;
   }
   @include wave;
 }
@@ -51,12 +51,12 @@ $text-color: #132f00;
       --ion-color-dark-contrast: #ffffff;
 
       ion-button {
+        margin: 10px;
         border-radius: 50%;
+        background: #ffffffcf;
+        width: 40px;
         // padding: 0px 9px;
         height: 40px;
-        width: 40px;
-        margin: 10px;
-        background: #ffffffcf;
         color: $text-color !important;
       }
     }
@@ -70,12 +70,12 @@ $text-color: #132f00;
       --border-color: transparent;
 
       ion-button {
+        margin: 10px;
         border-radius: 50%;
         background: var(--ion-color-secondary);
-        color: #4d380a;
-        height: 60px;
         width: 60px;
-        margin: 10px;
+        height: 60px;
+        color: #4d380a;
         color: $text-color;
       }
     }
@@ -95,9 +95,9 @@ $text-color: #132f00;
     position: fixed !important;
     top: 0;
     left: 0;
+    background: white;
     width: 100vw;
     height: 100vh;
-    background: white;
 
     .swiper-slide.first {
       @include slide;
@@ -114,9 +114,9 @@ $text-color: #132f00;
         background-position: 34%;
       }
       ion-button {
-        font-size: 1.1rem;
-        font-weight: 500;
         color: $text-color;
+        font-weight: 500;
+        font-size: 1.1rem;
       }
     }
 
@@ -127,9 +127,9 @@ $text-color: #132f00;
         background-position: 34%;
       }
       ion-button {
-        font-size: 1.1rem;
-        font-weight: 500;
         color: $text-color;
+        font-weight: 500;
+        font-size: 1.1rem;
       }
     }
 
@@ -140,9 +140,9 @@ $text-color: #132f00;
         background-position: 34%;
       }
       ion-button {
-        font-size: 1.1rem;
-        font-weight: 500;
         color: $text-color;
+        font-weight: 500;
+        font-size: 1.1rem;
       }
     }
 
@@ -153,9 +153,9 @@ $text-color: #132f00;
         background-position: 34%;
       }
       ion-button {
-        font-size: 1.1rem;
-        font-weight: 500;
         color: $text-color;
+        font-weight: 500;
+        font-size: 1.1rem;
       }
     }
 
@@ -166,22 +166,22 @@ $text-color: #132f00;
     }
 
     h2 {
-      letter-spacing: 2px;
-      font-size: 1.9rem;
       margin: 10px 4px 0 2px;
-      text-align: center;
-      color: $text-color;
       padding: 0 20px;
+      color: $text-color;
+      font-size: 1.9rem;
+      letter-spacing: 2px;
+      text-align: center;
     }
 
     p {
-      font-size: 1.3rem;
       margin-bottom: 9px;
-      text-align: left;
-      color: #4d380a;
-      line-height: 1.5em;
-      color: $text-color;
       padding: 10px 30px;
+      color: #4d380a;
+      color: $text-color;
+      font-size: 1.3rem;
+      line-height: 1.5em;
+      text-align: left;
     }
 
     .swiper-pagination-bullets {

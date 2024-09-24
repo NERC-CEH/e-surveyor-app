@@ -9,17 +9,17 @@
 
     ion-toolbar {
       --ion-toolbar-background: transparent;
+
+      position: fixed;
+      color: var(--ion-color-main);
       &.md {
         --ion-toolbar-background: white;
       }
 
       ion-segment-button {
-        padding-left: 10px;
         padding-right: 10px;
+        padding-left: 10px;
       }
-
-      position: fixed;
-      color: var(--ion-color-main);
     }
   }
 

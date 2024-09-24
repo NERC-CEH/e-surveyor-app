@@ -19,24 +19,24 @@
       .photo {
         position: relative;
         margin: 0 8px 2px 0;
-        height: 60px;
+        border-radius: 5px;
+        background-color: #f8f2e6;
         min-width: 60px;
         max-width: 60px;
-        background-color: #f8f2e6;
-        border-radius: 5px;
+        height: 60px;
         overflow: hidden;
         text-align: center;
 
         img {
-          height: 100%;
           width: 100%;
+          height: 100%;
           object-fit: cover;
         }
 
         ion-icon {
+          margin: 0 auto;
           width: 50%;
           height: 100%;
-          margin: 0 auto;
           color: #b38b39;
         }
       }

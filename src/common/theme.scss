@@ -168,6 +168,10 @@ ion-item {
   font-weight: 400;
   font-family: 'Quicksand' !important;
 }
+
+button[type='button'] > div {
+  font-weight: 500;
+}
 // FONTS END
 
 // the background camera must see through it all

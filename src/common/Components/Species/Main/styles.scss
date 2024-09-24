@@ -1,8 +1,8 @@
 #edit-species {
   .species-main-image-wrapper {
     #img-picker-array {
-      height: 200px;
       padding: 5px 0;
+      height: 200px;
 
       #img-array {
         .img {
@@ -11,11 +11,11 @@
 
           .crop-button {
             position: absolute;
-            bottom: 0;
             right: 0;
-            height: 50px;
-            width: 50px;
+            bottom: 0;
             margin: -1px;
+            width: 50px;
+            height: 50px;
             --background: #ffffff4a;
             --background-activated: #00000078;
 
