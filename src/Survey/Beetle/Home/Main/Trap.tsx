@@ -1,5 +1,6 @@
 import { leaf } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import {
   IonItemSliding,
   IonItem,
@@ -7,6 +8,7 @@ import {
   IonItemOption,
   useIonActionSheet,
   IonIcon,
+  isPlatform,
 } from '@ionic/react';
 import { useAlert, useContextMenu } from 'common/flumens';
 import Sample from 'models/sample';
@@ -29,7 +31,9 @@ const useDeleteAlert = (onDelete: any) => {
 const useMenu = (deleteSurvey: any) => {
   const [present] = useIonActionSheet();
 
-  const showMenu = () =>
+  const showMenu = () => {
+    isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
+
     present({
       header: 'Actions',
       buttons: [
@@ -37,6 +41,7 @@ const useMenu = (deleteSurvey: any) => {
         { text: 'Cancel', role: 'cancel' },
       ],
     });
+  };
 
   return showMenu;
 };

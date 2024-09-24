@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import {
   useAlert,
   useToast,
@@ -14,6 +15,7 @@ import {
   IonLabel,
   IonIcon,
   useIonActionSheet,
+  isPlatform,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Sample, { useValidateCheck } from 'models/sample';
@@ -48,7 +50,9 @@ const useDeleteAlert = (onDelete: any) => {
 const useMenu = (deleteSurvey: any) => {
   const [present] = useIonActionSheet();
 
-  const showMenu = () =>
+  const showMenu = () => {
+    isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
+
     present({
       header: 'Actions',
       buttons: [
@@ -56,6 +60,7 @@ const useMenu = (deleteSurvey: any) => {
         { text: 'Cancel', role: 'cancel' },
       ],
     });
+  };
 
   return showMenu;
 };

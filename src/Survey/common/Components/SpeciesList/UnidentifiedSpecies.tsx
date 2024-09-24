@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Button, Gallery, useAlert, useContextMenu } from '@flumens';
 import {
   IonItemSliding,
@@ -9,6 +10,7 @@ import {
   IonSpinner,
   IonIcon,
   useIonActionSheet,
+  isPlatform,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Occurrence from 'models/occurrence';
@@ -41,7 +43,9 @@ const useDeleteAlert = (onDelete: any) => {
 const useMenu = (deleteSurvey: any) => {
   const [present] = useIonActionSheet();
 
-  const showMenu = () =>
+  const showMenu = () => {
+    isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
+
     present({
       header: 'Actions',
       buttons: [
@@ -49,6 +53,7 @@ const useMenu = (deleteSurvey: any) => {
         { text: 'Cancel', role: 'cancel' },
       ],
     });
+  };
 
   return showMenu;
 };

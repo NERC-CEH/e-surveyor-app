@@ -9,6 +9,7 @@ import {
   leaf,
 } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Button, Gallery, useAlert, useContextMenu } from '@flumens';
 import {
   IonItemSliding,
@@ -17,6 +18,7 @@ import {
   IonItemOption,
   IonIcon,
   useIonActionSheet,
+  isPlatform,
 } from '@ionic/react';
 import config from 'common/config';
 import Occurrence from 'models/occurrence';
@@ -89,7 +91,9 @@ const useDeleteAlert = (onDelete: any) => {
 const useMenu = (deleteSurvey: any) => {
   const [present] = useIonActionSheet();
 
-  const showMenu = () =>
+  const showMenu = () => {
+    isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
+
     present({
       header: 'Actions',
       buttons: [
@@ -97,6 +101,7 @@ const useMenu = (deleteSurvey: any) => {
         { text: 'Cancel', role: 'cancel' },
       ],
     });
+  };
 
   return showMenu;
 };
