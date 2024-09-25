@@ -5,8 +5,8 @@ import { IonList, IonItem, IonIcon, IonLabel } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'common/models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
+import field from '../common/field.svg';
 import { sampleNameAttr, somAttr } from '../config';
-import field from '../field.svg';
 import worm from './worm.svg';
 
 type Props = { subSample: Sample };

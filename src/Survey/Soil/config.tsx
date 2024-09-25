@@ -4,8 +4,8 @@
 import { listOutline, locationOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import { Survey, blockToAttr, locationAttr } from 'Survey/common/config';
-import field from './field.svg';
-import soil from './soil.svg';
+import field from './common/field.svg';
+import soil from './common/soil.svg';
 
 const fieldIcon = (<IonIcon src={field} className="size-6" />) as any;
 const soilIcon = (<IonIcon src={soil} className="size-6" />) as any;

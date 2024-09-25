@@ -9,9 +9,9 @@ import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
+import soil from '../../common/soil.svg';
+import tractor from '../../common/tractor.svg';
 import { farmNameAttr, fieldNameAttr } from '../../config';
-import soil from '../../soil.svg';
-import tractor from '../../tractor.svg';
 import SampleEntry from './Sample';
 
 type Props = {
