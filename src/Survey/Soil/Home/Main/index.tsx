@@ -1,7 +1,8 @@
-import { addOutline, locationOutline } from 'ionicons/icons';
+import { useContext } from 'react';
+import { addOutline, locationOutline, mapOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem } from '@flumens/ionic/dist';
-import { IonList, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { IonList, IonItem, IonIcon, IonLabel, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import { Block, Button } from 'common/flumens';
 import { byDate } from 'common/models/savedSamples';
@@ -21,6 +22,7 @@ type Props = {
 };
 
 const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
+  const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
   const isDisabled = sample.isDisabled();
 
@@ -86,16 +88,26 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
         </div>
       </IonList>
 
-      {!isDisabled && (
+      <div className="mb-4 mt-8 flex items-center justify-center gap-8">
+        {!isDisabled && (
+          <Button
+            onPress={onSampleAdd}
+            color="secondary"
+            prefix={<IonIcon icon={addOutline} className="size-6" />}
+          >
+            Add Sample
+          </Button>
+        )}
+
         <Button
-          onPress={onSampleAdd}
-          color="secondary"
-          prefix={<IonIcon icon={addOutline} className="size-6" />}
-          className="mx-auto mb-3 mt-7"
+          onPress={() => navigate(`${url}/past-locations`)}
+          fill="outline"
+          className="px-4"
+          prefix={<IonIcon src={mapOutline} className="size-5" />}
         >
-          Add Sample
+          Map
         </Button>
-      )}
+      </div>
 
       {getList()}
     </Main>

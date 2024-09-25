@@ -4,6 +4,7 @@ import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Home from './Home';
 import Management from './Management';
+import PastSampleMap from './PastSampleMap';
 import Report from './Report';
 import SOM from './SOM';
 import Lab from './SOM/Lab';
@@ -22,6 +23,7 @@ const routes = [
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/location`, ModelLocationMap],
+  [`${baseURL}/:smpId/past-locations`, PastSampleMap],
   [`${baseURL}/:smpId/report`, Report],
   [`${baseURL}/:smpId/management`, Management],
   [`${baseURL}/:smpId/management/:attr`, AttrPageFromRoute],
