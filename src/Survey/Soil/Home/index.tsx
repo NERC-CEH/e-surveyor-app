@@ -63,6 +63,10 @@ const Home = ({ sample }: Props) => {
 
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
+    sample.save();
+
+    appModel.attrs[`draftId:${config.name}`] = '';
+
     saveAndReturn();
   };
 

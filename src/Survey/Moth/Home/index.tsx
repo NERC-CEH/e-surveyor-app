@@ -12,6 +12,7 @@ import Occurrence from 'models/occurrence';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import config from '../config';
 import Main from './Main';
 
 interface Props {
@@ -42,6 +43,8 @@ const HomeController = ({ sample }: Props) => {
 
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
+    appModel.attrs[`draftId:${config.name}`] = '';
+
     saveAndReturn();
   };
 

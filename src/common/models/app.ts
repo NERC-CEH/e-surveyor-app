@@ -6,6 +6,8 @@ export type SurveyDraftKeys = {
   'draftId:point'?: string;
   'draftId:transect'?: string;
   'draftId:beetle'?: string;
+  'draftId:moth'?: string;
+  'draftId:soil'?: string;
 };
 
 export type SeedMix = {
