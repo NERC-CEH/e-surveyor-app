@@ -29,7 +29,7 @@ const OnlineStatus = ({ sample, onUpload, uploadIsPrimary }: Props) => {
       fill={uploadIsPrimary ? undefined : 'outline'}
       preventDefault
       className={clsx(
-        'max-w-28 shrink-0 whitespace-nowrap px-4 py-1',
+        'max-w-28 shrink-0 whitespace-nowrap px-4 py-1 text-sm',
         !isValid && 'opacity-50'
       )}
     >

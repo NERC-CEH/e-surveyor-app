@@ -531,7 +531,7 @@ export const sampleNameAttr = {
 } as const;
 
 export const somAttr = {
-  id: 'location_name',
+  id: 'som-1',
   type: 'yes_no_input',
   title: 'Soil Organic Matter (SOM)',
   prefix: soilIcon,

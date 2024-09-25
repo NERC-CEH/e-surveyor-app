@@ -58,7 +58,7 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
   };
 
   return (
-    <Main>
+    <Main className="[--padding-bottom:50px]">
       <IonList lines="full">
         <div className="rounded-list">
           {isDisabled && <UploadedRecordInfoMessage />}

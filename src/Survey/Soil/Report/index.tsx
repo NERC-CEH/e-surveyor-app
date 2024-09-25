@@ -27,11 +27,12 @@ const Report = ({ sample }: Props) => {
   };
 
   const isInvalid = sample.validateRemote();
-  const finishButton = sample.remote.synchronising ? null : (
-    <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
-      Upload
-    </HeaderButton>
-  );
+  const finishButton =
+    sample.remote.synchronising || sample.isDisabled() ? null : (
+      <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
+        Upload
+      </HeaderButton>
+    );
 
   return (
     <Page id="survey-soil-report">

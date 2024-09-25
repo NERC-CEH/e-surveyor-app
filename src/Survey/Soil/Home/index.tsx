@@ -70,7 +70,7 @@ const Home = ({ sample }: Props) => {
     saveAndReturn();
   };
 
-  const onSampleDelete = (smp: Sample) => smp.destroy();
+  const onSampleDelete = (smp: Sample) => !sample.isDisabled() && smp.destroy();
   const onSampleAdd = () => {
     const name = `Sample #${sample.samples.length + 1}`;
     const smp = config.smp?.create!({ Sample, name });
