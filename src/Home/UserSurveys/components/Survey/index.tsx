@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import {
@@ -16,6 +17,7 @@ import {
   IonIcon,
   useIonActionSheet,
   isPlatform,
+  NavContext,
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Sample, { useValidateCheck } from 'models/sample';
@@ -50,7 +52,13 @@ const useDeleteAlert = (onDelete: any) => {
 const useMenu = (deleteSurvey: any) => {
   const [present] = useIonActionSheet();
 
-  const showMenu = () => {
+  const showMenu = (e: any) => {
+    const isUploadButton = [
+      e?.target?.parentNode?.nodeName,
+      e?.target?.nodeName,
+    ].includes('BUTTON');
+    if (isUploadButton) return; // fixes upload button press calling context menu - for some reason react-aria button doesn't trigger touchend event to cancel timeout
+
     isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
 
     present({
@@ -72,6 +80,8 @@ type Props = {
 };
 
 const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
+  const { navigate } = useContext(NavContext);
+
   const showDeleteAlert = useDeleteAlert(onDelete);
   const showMenu = useMenu(showDeleteAlert);
   const { contextMenuProps } = useContextMenu({ onShow: showMenu });
@@ -80,14 +90,6 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
   const survey = sample.getSurvey();
-
-  let href;
-  if (!sample.remote.synchronising) {
-    href = `/survey/${survey.name}/${sample.cid}`;
-    if (!sample.isDetailsComplete()) {
-      href += '/details';
-    }
-  }
 
   function getSampleInfo() {
     if (survey.name === 'transect') {
@@ -142,9 +144,19 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
     sample.upload().catch(toast.error);
   };
 
+  const openItem = () => {
+    if (sample.remote.synchronising) return; // fixes button onPressUp and other accidental navigation
+
+    let href = `/survey/${survey.name}/${sample.cid}`;
+    if (!sample.isDetailsComplete()) {
+      href += '/details';
+    }
+    navigate(href);
+  };
+
   return (
     <IonItemSliding className="survey-list-item" {...contextMenuProps}>
-      <IonItem routerLink={href} detail={false}>
+      <IonItem onClick={openItem} detail={false}>
         <div className="list-avatar">
           <IonIcon icon={survey.icon} className="bg-primary-50/80 text-3xl" />
         </div>
