@@ -1,6 +1,6 @@
 import { RouteWithModels, AttrPage } from '@flumens';
 import appModel from 'models/app';
-import savedSamples from 'models/savedSamples';
+import samples from 'models/samples';
 import userModel from 'models/user';
 import EditSpecies from 'Components/Species';
 import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
@@ -38,4 +38,4 @@ const routes = [
   [`${baseURL}/:smpId/report`, Report],
 ];
 
-export default RouteWithModels.fromArray(savedSamples, routes);
+export default RouteWithModels.fromArray(samples, routes);

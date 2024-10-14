@@ -16,7 +16,7 @@ import {
 type Props = { sample: Sample };
 
 const Lab = ({ sample }: Props) => {
-  const recordAttrs = { record: sample.attrs, isDisabled: sample.isDisabled() };
+  const recordAttrs = { record: sample.attrs };
 
   const showLabType =
     !!sample.attrs[labSandAttr.id] ||

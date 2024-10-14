@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Button, InfoBackgroundMessage, ModalHeader } from '@flumens';
-import { device, useAlert, useToast } from '@flumens/ionic/dist';
+import {
+  Button,
+  InfoBackgroundMessage,
+  ModalHeader,
+  device,
+  useAlert,
+  useToast,
+} from '@flumens';
 import { IonItem, IonList, IonModal, IonSkeletonText } from '@ionic/react';
 import ExpandableList from 'common/Components/ExpandableList';
 import {

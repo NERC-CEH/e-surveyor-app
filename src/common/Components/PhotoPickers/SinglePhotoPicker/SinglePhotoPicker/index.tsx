@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { addOutline, cameraOutline, closeOutline } from 'ionicons/icons';
 import { useTranslation } from 'react-i18next';
-import { useAlert } from '@flumens/ionic/dist/hooks';
+import { useAlert } from '@flumens';
 import {
   IonButton,
   IonIcon,

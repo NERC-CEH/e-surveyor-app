@@ -1,15 +1,13 @@
 import { useContext } from 'react';
 import { addOutline, locationOutline, mapOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import { Main, MenuAttrItem } from '@flumens/ionic/dist';
+import { Main, MenuAttrItem, Block, Button } from '@flumens';
 import { IonList, IonItem, IonIcon, IonLabel, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
-import { Block, Button } from 'common/flumens';
-import { byDate } from 'common/models/savedSamples';
+import { byDate } from 'common/models/samples';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
-import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import soil from '../../common/soil.svg';
 import tractor from '../../common/tractor.svg';
 import { farmNameAttr, fieldNameAttr } from '../../config';
@@ -24,16 +22,13 @@ type Props = {
 const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
-  const isDisabled = sample.isDisabled();
 
   const recordAttrs = {
     record: sample.attrs,
-    isDisabled,
   };
 
   const getList = () => {
     const samples = sample.samples.slice().sort(byDate);
-
     if (!samples.length) {
       return (
         <InfoBackgroundMessage>
@@ -60,20 +55,15 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
   return (
     <Main className="[--padding-bottom:50px]">
       <IonList lines="full">
-        <div className="rounded-list">
-          {isDisabled && <UploadedRecordInfoMessage />}
-        </div>
-
         <div className="list-title">Details</div>
         <div className="rounded-list">
-          <MenuDateAttr model={sample} />
+          <MenuDateAttr {...recordAttrs} />
           <MenuAttrItem
             routerLink={`${url}/location`}
             icon={locationOutline}
             label="Location"
             skipValueTranslation
             value={<GridRefValue sample={sample} />}
-            disabled={isDisabled}
           />
           <Block block={farmNameAttr} {...recordAttrs} />
           <Block block={fieldNameAttr} {...recordAttrs} />
@@ -89,15 +79,13 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
       </IonList>
 
       <div className="mb-4 mt-8 flex items-center justify-center gap-8">
-        {!isDisabled && (
-          <Button
-            onPress={onSampleAdd}
-            color="secondary"
-            prefix={<IonIcon icon={addOutline} className="size-6" />}
-          >
-            Add Sample
-          </Button>
-        )}
+        <Button
+          onPress={onSampleAdd}
+          color="secondary"
+          prefix={<IonIcon icon={addOutline} className="size-6" />}
+        >
+          Add Sample
+        </Button>
 
         <Button
           onPress={() => navigate(`${url}/past-locations`)}

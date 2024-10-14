@@ -48,7 +48,7 @@ const Controller = ({ sample }: Props) => {
     const isUserOK = await checkUserStatus();
     if (!isUserOK) return;
 
-    const isUploading = await sample.upload().catch(toast.error);
+    const isUploading = await sample.syncRemote().catch(toast.error);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');

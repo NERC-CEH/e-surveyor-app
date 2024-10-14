@@ -19,7 +19,6 @@ interface Props {
 const VSA = ({ subSample }: Props) => {
   const recordAttrs = {
     record: subSample.attrs,
-    isDisabled: subSample.isDisabled(),
   };
 
   return (

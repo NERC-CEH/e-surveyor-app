@@ -7,11 +7,10 @@ import {
   IonLabel,
   IonModal,
 } from '@ionic/react';
-import { Sample } from 'common/flumens';
 
-type Props = { model: Sample };
+type Props = { record: any; isDisabled?: boolean };
 
-const MenuDateAttr = ({ model }: Props) => {
+const MenuDateAttr = ({ record, isDisabled }: Props) => {
   return (
     <IonItem className="m-0 rounded-none [--border-radius:0] [--border-style:solid] [--inner-padding-end:8px]">
       <IonIcon src={calendarOutline} slot="start" />
@@ -30,10 +29,10 @@ const MenuDateAttr = ({ model }: Props) => {
               preferWheel
               onIonChange={(e: any) => {
                 // eslint-disable-next-line
-                (model.attrs as any).date = e.detail.value.split('T')[0];
+                record.date = e.detail.value.split('T')[0];
               }}
-              value={(model.attrs as any).date}
-              disabled={model.isDisabled()}
+              value={record.date}
+              disabled={isDisabled}
               max={new Date().toISOString()}
             />
           </IonModal>

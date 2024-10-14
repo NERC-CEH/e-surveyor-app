@@ -11,7 +11,8 @@ import identifyPlantImage, {
 } from 'common/services/plantNet';
 import { Image, Gbif } from 'common/services/plantNet/plantNetResponse.d';
 import identifyMothImage from 'common/services/waarneming';
-import { UNKNOWN_SPECIES } from 'Survey/Moth/config';
+import beetleSurveyConfig from 'Survey/Beetle/config';
+import mothSurveyConfig, { UNKNOWN_SPECIES } from 'Survey/Moth/config';
 import { MachineInvolvement, Survey } from 'Survey/common/config';
 import Media from './image';
 import Sample from './sample';
@@ -91,10 +92,10 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
   isDisabled = () => this.isUploaded();
 
   identify = () => {
-    switch (this.parent?.metadata.survey) {
-      case 'beetle':
+    switch (this.parent?.attrs.surveyId) {
+      case beetleSurveyConfig.id:
         return this.identifyBeetle();
-      case 'moth':
+      case mothSurveyConfig.id:
         return this.identifyMoth();
       default:
         return this.identifyPlant();

@@ -72,7 +72,7 @@ const HomeMain = ({
             value={<GridRefValue sample={sample} />}
             disabled={isDisabled}
           />
-          <MenuDateAttr model={sample} />
+          <MenuDateAttr record={sample.attrs} isDisabled={isDisabled} />
           <Select
             options={habitatValues}
             onChange={(habitat: any) => (sample.attrs.habitat = habitat)} // eslint-disable-line

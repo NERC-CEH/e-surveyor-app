@@ -1,35 +1,33 @@
 export {
   default as Model,
   type Options as ModelOptions,
-  type Metadata as ModelMetadata,
   type Attrs as ModelAttrs,
-} from '@flumens/ionic/dist/models/Model';
-export { default as getNewUUID } from '@flumens/ionic/dist/utils/uuid';
+} from '@flumens/models/dist/Model';
+export { default as getNewUUID } from '@flumens/utils/dist/uuid';
 export {
   default as Sample,
   type Attrs as SampleAttrs,
   type Options as SampleOptions,
   type Metadata as SampleMetadata,
   type RemoteConfig,
-} from '@flumens/ionic/dist/models/Indicia/Sample';
+} from '@flumens/models/dist/Indicia/Sample';
 export {
   default as Media,
   type Attrs as MediaAttrs,
-} from '@flumens/ionic/dist/models/Indicia/Media';
-export { validateRemoteModel } from '@flumens/ionic/dist/models/Indicia/helpers';
+} from '@flumens/models/dist/Indicia/Media';
+export { validateRemoteModel } from '@flumens/models/dist/Indicia/helpers';
 export {
   default as Occurrence,
   type Attrs as OccurrenceAttrs,
   type Options as OccurrenceOptions,
   type Metadata as OccurrenceMetadata,
-} from '@flumens/ionic/dist/models/Indicia/Occurrence';
+} from '@flumens/models/dist/Indicia/Occurrence';
 export {
   default as DrupalUserModel,
   type Attrs as DrupalUserModelAttrs,
-} from '@flumens/ionic/dist/models/DrupalUserModel';
-export { default as Collection } from '@flumens/ionic/dist/models/Collection';
-export { default as Store } from '@flumens/ionic/dist/models/Store';
-export { default as initStoredSamples } from '@flumens/ionic/dist/models/initStoredSamples';
+} from '@flumens/models/dist/Drupal/User';
+export { default as Collection } from '@flumens/models/dist/Collection';
+export { default as SampleCollection } from '@flumens/models/dist/Indicia/SampleCollection';
 export { default as Page } from '@flumens/ionic/dist/components/Page';
 export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
 export { default as Main } from '@flumens/ionic/dist/components/Main';
@@ -63,19 +61,21 @@ export {
 } from '@flumens/ionic/dist/components/Map/Container';
 export { default as MapHeader } from '@flumens/ionic/dist/components/Map/Header';
 export { default as MapSettingsPanel } from '@flumens/ionic/dist/components/Map/SettingsPanel';
+export { default as LocationMarker } from '@flumens/ionic/dist/components/Map/Container/LocationMarker';
 export * from '@flumens/ionic/dist/components/Map/utils';
 export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';
-export * from '@flumens/ionic/dist/utils/image';
-export * from '@flumens/ionic/dist/utils/errors';
-export * from '@flumens/ionic/dist/utils/type';
-export * from '@flumens/ionic/dist/utils/date';
-export { options as sentryOptions } from '@flumens/ionic/dist/utils/sentry';
-export { default as device } from '@flumens/ionic/dist/utils/device';
+export * from '@flumens/utils/dist/image';
+export * from '@flumens/utils/dist/errors';
+export * from '@flumens/utils/dist/type';
+export * from '@flumens/utils/dist/date';
+export { options as sentryOptions } from '@flumens/utils/dist/sentry';
+export { default as device } from '@flumens/utils/dist/device';
 export {
   type Location,
   prettyPrintLocation,
   updateModelLocation,
-} from '@flumens/ionic/dist/utils/location';
+  isValidLocation,
+} from '@flumens/utils/dist/location';
 export {
   useDisableBackButton,
   useOnBackButton,

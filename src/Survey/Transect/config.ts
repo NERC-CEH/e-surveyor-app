@@ -151,12 +151,8 @@ const survey: Survey = {
 
       create({ Sample, Occurrence, photo }) {
         const sample = new Sample({
-          metadata: {
-            survey: survey.name,
-            survey_id: survey.id,
-          },
-
           attrs: {
+            surveyId: survey.id,
             location: null,
           },
         });
@@ -220,12 +216,8 @@ const survey: Survey = {
 
     create({ Sample }) {
       const sample = new Sample({
-        metadata: {
-          survey: survey.name,
-          survey_id: survey.id,
-        },
-
         attrs: {
+          surveyId: survey.id,
           location: null,
         },
       });
@@ -236,19 +228,14 @@ const survey: Survey = {
     },
 
     modifySubmission(submission: any) {
-      const subSamples = submission.samples;
-      submission.samples = []; // eslint-disable-line
-
-      const removeSubSamplesLayerIfNoLocation = (subSample: any) => {
+      const setSubSampleLocationIfMissing = (subSample: any) => {
         const locationIsMissing = !subSample.values.entered_sref;
         if (locationIsMissing) {
-          submission.occurrences.push(subSample.occurrences[0]);
-          return;
+          subSample.values.entered_sref = submission.values.entered_sref; // eslint-disable-line no-param-reassign
         }
-        submission.samples.push(subSample);
       };
 
-      subSamples.forEach(removeSubSamplesLayerIfNoLocation);
+      submission.samples.forEach(setSubSampleLocationIfMissing);
 
       return submission;
     },
@@ -274,12 +261,8 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      metadata: {
-        survey: survey.name,
-        survey_id: survey.id,
-      },
-
       attrs: {
+        surveyId: survey.id,
         training: appModel.attrs.useTraining,
         name: new Date().toLocaleDateString('en-UK'),
         location: null,

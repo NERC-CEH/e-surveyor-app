@@ -3,7 +3,7 @@ import { useAlert } from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel, { SurveyDraftKeys } from 'models/app';
 import Sample from 'models/sample';
-import savedSamples from 'models/savedSamples';
+import samples from 'models/samples';
 import userModel from 'models/user';
 import { Survey } from '../config';
 
@@ -37,7 +37,7 @@ async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
   const draftID = appModel.attrs[draftIdKey];
   if (draftID) {
     const draftById = ({ cid }: Sample) => cid === draftID;
-    const draftSample = savedSamples.find(draftById);
+    const draftSample = samples.find(draftById);
     if (draftSample && !draftSample.isDisabled()) {
       const continueDraftRecord = await showDraftAlert(alert);
       if (continueDraftRecord) {
@@ -55,7 +55,7 @@ async function getNewSample(survey: Survey, draftIdKey: keyof SurveyDraftKeys) {
   const sample = await survey.create!({ Sample });
   await sample.save();
 
-  savedSamples.push(sample);
+  samples.push(sample);
 
   appModel.attrs[draftIdKey] = sample.cid;
 

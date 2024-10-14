@@ -445,12 +445,8 @@ const survey: Survey = {
 
     create({ Sample, photo, surveySample }) {
       const sample = new Sample({
-        metadata: {
-          survey: survey.name,
-          survey_id: survey.id,
-        },
-
         attrs: {
+          surveyId: survey.id,
           date: surveySample!.attrs.date,
           sample_method_id: 24, // Pitfall trap
           location: null,
@@ -523,12 +519,8 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      metadata: {
-        survey: survey.name,
-        survey_id: survey.id,
-      },
-
       attrs: {
+        surveyId: survey.id,
         training: appModel.attrs.useTraining,
         sample_method_id: 2424, // Parent sample
         location: null,

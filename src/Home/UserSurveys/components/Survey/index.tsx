@@ -134,14 +134,16 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
     );
   }
 
-  const onUpload = async () => {
+  const onSync = async () => {
+    if (!sample.requiresRemoteSync()) return;
+
     const isUserOK = await checkUserStatus();
     if (!isUserOK) return;
 
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    sample.upload().catch(toast.error);
+    sample.syncRemote().catch(toast.error);
   };
 
   const openItem = () => {
@@ -157,13 +159,13 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
   return (
     <IonItemSliding className="survey-list-item" {...contextMenuProps}>
       <IonItem onClick={openItem} detail={false}>
-        <div className="list-avatar">
+        <div className="list-avatar ml-2">
           <IonIcon icon={survey.icon} className="bg-primary-50/80 text-3xl" />
         </div>
         <IonLabel>{getSampleInfo()}</IonLabel>
         <OnlineStatus
           sample={sample}
-          onUpload={onUpload}
+          onSync={onSync}
           uploadIsPrimary={!!uploadIsPrimary}
         />
       </IonItem>

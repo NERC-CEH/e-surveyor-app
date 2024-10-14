@@ -103,11 +103,8 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      metadata: {
-        survey_id: survey.id,
-        survey: survey.name,
-      },
       attrs: {
+        surveyId: survey.id,
         training: appModel.attrs.useTraining,
         surveyEndTime: toISOTimezoneString(new Date()),
         location: null,

@@ -13,7 +13,7 @@ interface Props {
 
 const SOMHome = ({ sample }: Props) => {
   const { url } = useRouteMatch();
-  const recordAttrs = { record: sample.attrs, isDisabled: sample.isDisabled() };
+  const recordAttrs = { record: sample.attrs };
 
   return (
     <Page id="survey-soil-som">

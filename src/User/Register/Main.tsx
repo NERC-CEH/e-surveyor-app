@@ -40,7 +40,10 @@ const RegisterMain = ({ onSubmit }: Props) => {
           <T>Create a free account</T>
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
+        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+          {/* Fake onSubmit on Enter */}
+          <input type="submit" className="hidden" />
+
           <div className="rounded-list">
             <ControlledInput
               control={control}
@@ -87,7 +90,7 @@ const RegisterMain = ({ onSubmit }: Props) => {
           <Button
             className={clsx('mx-auto mt-8', !formState.isValid && 'opacity-50')}
             color="primary"
-            type="submit"
+            onPress={() => handleSubmit(onSubmit)()}
           >
             Sign Up
           </Button>

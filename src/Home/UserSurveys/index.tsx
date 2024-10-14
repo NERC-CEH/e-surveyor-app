@@ -11,13 +11,13 @@ import {
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Sample from 'models/sample';
-import savedSamples, { getPending } from 'models/savedSamples';
+import samples, { getPending, uploadAll } from 'models/samples';
 import Survey from './components/Survey';
 import './styles.scss';
 
 function byCreateTime(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.metadata.createdOn);
-  const date2 = new Date(smp2.metadata.createdOn);
+  const date1 = new Date(smp1.createdAt);
+  const date2 = new Date(smp2.createdAt);
   return date2.getTime() - date1.getTime();
 }
 
@@ -77,20 +77,20 @@ function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
   );
 }
 
-function getUploadedSurveys(surveys: any[]) {
+function getAllSurveys(surveys: any[]) {
   if (!surveys.length) {
     return (
       <IonList lines="full">
-        <InfoBackgroundMessage>No uploaded surveys</InfoBackgroundMessage>
+        <InfoBackgroundMessage>No surveys</InfoBackgroundMessage>
       </IonList>
     );
   }
 
-  const getUploadedSurveyEntry = (sample: Sample) => {
+  const getAllSurveyEntry = (sample: Sample) => {
     const onDelete = () => sample.destroy();
     return <Survey key={sample.cid} sample={sample} onDelete={onDelete} />;
   };
-  const surveysList = surveys.map(getUploadedSurveyEntry);
+  const surveysList = surveys.map(getAllSurveyEntry);
 
   return <IonList lines="full">{surveysList}</IonList>;
 }
@@ -101,10 +101,10 @@ const UserSurveys = () => {
 
   const onSegmentClick = (e: any) => setSegment(e.detail.value);
 
-  const getSamplesList = (uploaded?: boolean) => {
-    const uploadedSamples = (sample: Sample) =>
-      uploaded ? sample.isDisabled() : !sample.isDisabled();
-    return savedSamples.filter(uploadedSamples).sort(byCreateTime);
+  const getSamplesList = (pending?: boolean) => {
+    const allSamples = (sample: Sample) =>
+      pending ? sample.requiresRemoteSync() : true;
+    return samples.filter(allSamples).sort(byCreateTime);
   };
 
   const onUploadAll = () => {
@@ -113,14 +113,14 @@ const UserSurveys = () => {
       return;
     }
 
-    savedSamples.uploadAll();
+    uploadAll();
   };
 
   const showingPending = segment === 'pending';
-  const showingUploaded = segment === 'uploaded';
+  const showingAll = segment === 'all';
 
-  const pendingSurveys = getSamplesList();
-  const uploadedSurveys = getSamplesList(true);
+  const pendingSurveys = getSamplesList(true);
+  const allSurveys = getSamplesList();
 
   const getPendingSurveysCount = () => {
     const pendingSurveysCount = getPending().length;
@@ -153,8 +153,8 @@ const UserSurveys = () => {
               </IonLabel>
             </IonSegmentButton>
 
-            <IonSegmentButton value="uploaded">
-              <IonLabel className="ion-text-wrap">Uploaded</IonLabel>
+            <IonSegmentButton value="all">
+              <IonLabel className="ion-text-wrap">All</IonLabel>
             </IonSegmentButton>
           </IonSegment>
         </IonToolbar>
@@ -172,7 +172,7 @@ const UserSurveys = () => {
         )}
 
         {showingPending && getPendingSurveys(pendingSurveys, !showUploadAll)}
-        {showingUploaded && getUploadedSurveys(uploadedSurveys)}
+        {showingAll && getAllSurveys(allSurveys)}
       </Main>
     </Page>
   );

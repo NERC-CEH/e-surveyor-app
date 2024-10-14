@@ -56,8 +56,6 @@ const SampleEntry = ({ sample, onDelete }: Props) => {
   const showMenu = useMenu(showDeleteAlert);
   const { contextMenuProps } = useContextMenu({ onShow: showMenu });
 
-  const isDisabled = sample.isUploaded();
-
   const getSamplePhoto = (smp: Sample) => {
     const pic = smp.media[0]?.getURL();
 
@@ -79,13 +77,11 @@ const SampleEntry = ({ sample, onDelete }: Props) => {
         </div>
       </IonItem>
 
-      {!isDisabled && (
-        <IonItemOptions side="end">
-          <IonItemOption color="danger" onClick={showDeleteAlert}>
-            Delete
-          </IonItemOption>
-        </IonItemOptions>
-      )}
+      <IonItemOptions side="end">
+        <IonItemOption color="danger" onClick={showDeleteAlert}>
+          Delete
+        </IonItemOption>
+      </IonItemOptions>
     </IonItemSliding>
   );
 };

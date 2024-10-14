@@ -24,8 +24,8 @@ const isUnknown = (value: boolean) => (model: Model) =>
 type Model = Sample | Occurrence;
 
 function byCreateTime(m1: Model, m2: Model) {
-  const date1 = new Date(m1.metadata.createdOn);
-  const date2 = new Date(m2.metadata.createdOn);
+  const date1 = new Date(m1.createdAt);
+  const date2 = new Date(m2.createdAt);
   return date2.getTime() - date1.getTime();
 }
 

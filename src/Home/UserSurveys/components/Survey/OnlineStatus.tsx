@@ -7,25 +7,26 @@ import './styles.scss';
 
 type Props = {
   sample: Sample;
-  onUpload: () => void;
+  onSync: () => void;
   uploadIsPrimary?: boolean;
 };
 
-const OnlineStatus = ({ sample, onUpload, uploadIsPrimary }: Props) => {
+const OnlineStatus = ({ sample, onSync, uploadIsPrimary }: Props) => {
   const { saved } = sample.metadata;
   if (!saved) return <Badge className="max-w-32">Draft</Badge>;
 
   if (sample.remote.synchronising)
     return <IonSpinner className="mr-2 size-4" />;
 
-  if (sample.isUploaded()) return null;
+  if (!sample.requiresRemoteSync()) return null;
 
   const isValid = !sample.validateRemote();
+  const isUploaded = sample.isUploaded();
 
   return (
     <Button
       color="secondary"
-      onPress={onUpload}
+      onPress={onSync}
       fill={uploadIsPrimary ? undefined : 'outline'}
       preventDefault
       className={clsx(
@@ -33,7 +34,7 @@ const OnlineStatus = ({ sample, onUpload, uploadIsPrimary }: Props) => {
         !isValid && 'opacity-50'
       )}
     >
-      Upload
+      {isUploaded ? 'Sync' : 'Upload'}
     </Button>
   );
 };

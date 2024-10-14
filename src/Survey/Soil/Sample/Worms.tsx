@@ -13,7 +13,6 @@ interface Props {
 const WormHome = ({ subSample }: Props) => {
   const recordAttrs = {
     record: subSample.attrs,
-    isDisabled: subSample.isDisabled(),
   };
 
   return (

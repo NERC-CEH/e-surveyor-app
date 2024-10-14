@@ -1,4 +1,4 @@
-import { useAlert } from '@flumens/ionic/dist';
+import { useAlert } from '@flumens';
 
 // eslint-disable-next-line import/prefer-default-export
 export const useEntryDeleteConfirmation = () => {

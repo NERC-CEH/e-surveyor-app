@@ -17,7 +17,12 @@ describe('ReportView', () => {
       const seedmix = seedmixData[seedmixName];
       const species = seedmix[0].latinName;
 
-      const sample = new SampleWithNoGPS({ attrs: { seedmix: seedmixName } });
+      const sample = new SampleWithNoGPS({
+        attrs: {
+          surveyId: config.id,
+          seedmix: seedmixName,
+        },
+      });
 
       const subSmp = config.smp.create({ Sample: SampleWithNoGPS, Occurrence });
 
@@ -46,6 +51,7 @@ describe('ReportView', () => {
 
       const sample = new SampleWithNoGPS({
         attrs: {
+          surveyId: config.id,
           seedmix: seedmixName,
         },
       });

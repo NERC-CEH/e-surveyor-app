@@ -4,7 +4,7 @@ import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Page, Header, useToast, useLoader } from '@flumens';
 import { isPlatform, NavContext } from '@ionic/react';
 import appModel, { Attrs } from 'models/app';
-import savedSamples from 'models/savedSamples';
+import samples from 'models/samples';
 import userModel from 'models/user';
 import Main from './Main';
 
@@ -55,7 +55,7 @@ const MenuController = () => {
     console.log('Settings:Menu:Controller: resetting the application!', 'w');
 
     try {
-      await savedSamples.resetDefaults();
+      await samples.reset();
       await appModel.resetDefaults();
       await userModel.resetDefaults();
       toast.success('Done');

@@ -3,12 +3,18 @@
 /* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import { MapContainer, Page, Main, mapFlyToLocation, Header } from '@flumens';
-import { isValidLocation } from '@flumens/ionic/dist';
-import LocationMarker from '@flumens/ionic/dist/components/Map/Container/LocationMarker';
+import {
+  MapContainer,
+  Page,
+  Main,
+  mapFlyToLocation,
+  Header,
+  isValidLocation,
+  LocationMarker,
+} from '@flumens';
 import config from 'common/config';
 import Sample from 'common/models/sample';
-import savedSamples from 'common/models/savedSamples';
+import samples from 'common/models/samples';
 import surveyConfig from '../config';
 import GeolocateButton from './GeolocateButton';
 
@@ -36,9 +42,8 @@ const PastSampleMap = ({ sample: model }: Props) => {
   const flyToLocation = () => mapFlyToLocation(mapRef, location);
   useEffect(flyToLocation, [mapRef, location]);
 
-  const bySoilSurvey = (smp: Sample) =>
-    smp.metadata.survey === surveyConfig.name;
-  const soilSurveys = savedSamples.filter(bySoilSurvey);
+  const bySoilSurvey = (smp: Sample) => smp.attrs.surveyId === surveyConfig.id;
+  const soilSurveys = samples.filter(bySoilSurvey);
 
   const soilSurveyMarkers = soilSurveys.flatMap((smp: Sample) => {
     const randomColor = uuidToColor(smp.cid);

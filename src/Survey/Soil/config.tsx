@@ -93,19 +93,19 @@ const GRASSLAND_LAND_USE_OPTIONS = [
   { title: 'Temporary Grassland - conventional', data_name: 'temporary-1' },
   {
     title: 'Temporary Grassland - grass-clover ley',
-    data_name: 'temporary-2',
+    data_name: 'temporary-32',
   },
   {
     title: 'Temporary Grassland - Lucerne',
-    data_name: 'temporary-2',
+    data_name: 'temporary-22',
   },
   {
     title: 'Temporary Grassland - Herbal Ley',
-    data_name: 'temporary-2',
+    data_name: 'temporary-12',
   },
   {
     title: 'Temporary Grassland - Fodder Crop',
-    data_name: 'temporary-2',
+    data_name: 'temporary-02',
   },
 ];
 const cropChoices = {
@@ -368,6 +368,7 @@ export const labTOCAttr = {
   type: 'number_input',
   title: 'Total Organic Carbon',
   prefix: listOutlineIcon,
+  step: 0.01,
   appearance: 'counter',
   validations: { min: 0 },
 } as const;
@@ -377,6 +378,7 @@ export const labSOMAttr = {
   type: 'number_input',
   title: 'Soil Organic Matter (TOC x 1.72)',
   prefix: listOutlineIcon,
+  step: 0.1,
   suffix: '%',
   appearance: 'counter',
   validations: { min: 0, max: 100 },
@@ -387,6 +389,7 @@ export const labLOIAttr = {
   type: 'number_input',
   title: 'Loss on Ignition',
   prefix: listOutlineIcon,
+  step: 0.1,
   suffix: '%',
   appearance: 'counter',
   validations: { min: 0, max: 100 },
@@ -408,6 +411,7 @@ export const labNitrogenAttr = {
   title: 'Total Nitrogen',
   prefix: listOutlineIcon,
   suffix: '%',
+  step: 0.01,
   appearance: 'counter',
   validations: { min: 0, max: 100 },
 } as const;
@@ -418,6 +422,7 @@ export const labCationAttr = {
   title: 'Cation Exchange Capacity',
   prefix: listOutlineIcon,
   suffix: 'meq/l',
+  step: 0.1,
   appearance: 'counter',
   validations: { min: 0 },
 } as const;
@@ -480,7 +485,7 @@ export const labPHAttr = {
   title: 'pH',
   prefix: listOutlineIcon,
   appearance: 'counter',
-  validations: { min: 0 },
+  validations: { min: 0, max: 14 },
 } as const;
 
 export const labKAttr = {

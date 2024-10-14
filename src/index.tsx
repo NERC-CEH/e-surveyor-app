@@ -1,17 +1,21 @@
 import { configure as mobxConfig } from 'mobx';
 import i18n from 'i18next';
+import 'jeep-sqlite';
 import { createRoot } from 'react-dom/client';
 import { initReactI18next } from 'react-i18next';
 import { App as AppPlugin } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { sentryOptions } from '@flumens';
+import { loadingController } from '@ionic/core';
 import { setupIonicReact, isPlatform } from '@ionic/react';
 import * as SentryBrowser from '@sentry/browser';
 import * as Sentry from '@sentry/capacitor';
 import config from 'common/config';
+import migrate from 'common/models/migrate';
+import { db } from 'common/models/store';
 import appModel from 'models/app';
-import savedSamples from 'models/savedSamples';
+import samples from 'models/samples';
 import userModel from 'models/user';
 import App from './App';
 
@@ -24,9 +28,18 @@ setupIonicReact();
 mobxConfig({ enforceActions: 'never' });
 
 (async function () {
-  await userModel.ready;
-  await appModel.ready;
-  await savedSamples.ready;
+  if (isPlatform('hybrid') && !localStorage.getItem('sqliteMigrated')) {
+    (await loadingController.create({ message: 'Upgrading...' })).present();
+    await migrate();
+    localStorage.setItem('sqliteMigrated', 'true');
+    window.location.reload();
+    return;
+  }
+
+  await db.init();
+  await userModel.fetch();
+  await appModel.fetch();
+  await samples.fetch();
 
   appModel.attrs.sendAnalytics &&
     Sentry.init(

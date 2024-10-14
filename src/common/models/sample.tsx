@@ -36,23 +36,19 @@ import plantInteractions, { Interaction } from '../data/plant_interactions';
 import Media from './image';
 import Occurrence from './occurrence';
 import GPSExtension from './sampleGPSExt';
-import { modelStore } from './store';
+import { samplesStore } from './store';
 
 const surveyConfigs = {
-  point: pointSurveyConfig,
-  transect: transectSurveyConfig,
-  beetle: beetleSurveyConfig,
-  moth: mothSurveyConfig,
-  soil: soilSurveyConfig,
+  [pointSurveyConfig.id]: pointSurveyConfig,
+  [transectSurveyConfig.id]: transectSurveyConfig,
+  [beetleSurveyConfig.id]: beetleSurveyConfig,
+  [mothSurveyConfig.id]: mothSurveyConfig,
+  [soilSurveyConfig.id]: soilSurveyConfig,
 };
 
 export type SoilSubSampleType = 'worms' | 'som' | 'vsa';
 
 type Metadata = SampleMetadata & {
-  /**
-   * Survey name.
-   */
-  survey: keyof typeof surveyConfigs;
   /**
    * If the sample was saved and ready for upload.
    */
@@ -71,6 +67,7 @@ type Metadata = SampleMetadata & {
 const cropAttrId = cropAttr().id;
 
 export type Attrs = SampleAttrs & {
+  surveyId: keyof typeof surveyConfigs;
   habitat?: any;
   name?: any;
   type?: any;
@@ -170,7 +167,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   declare survey: Survey;
 
   constructor(options: SampleOptions) {
-    super({ store: modelStore, ...options });
+    super({ store: samplesStore, ...options });
 
     this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
     // eslint-disable-next-line
@@ -178,8 +175,24 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
       Authorization: `Bearer ${await userModel.getAccessToken()}`,
     });
 
-    const surveyName = this.metadata.survey;
-    this.survey = surveyConfigs[surveyName];
+    this.survey = surveyConfigs[this.attrs.surveyId];
+
+    if (!this.survey) {
+      // backwards compatible
+      this.survey = surveyConfigs[(this.attrs as any).survey_id];
+
+      const surveyConfigsByName: any = {
+        point: pointSurveyConfig,
+        transect: transectSurveyConfig,
+        beetle: beetleSurveyConfig,
+        moth: mothSurveyConfig,
+        soil: soilSurveyConfig,
+      };
+
+      this.survey =
+        this.survey || surveyConfigsByName[(this.metadata as any).survey];
+      this.attrs.surveyId = this.survey.id;
+    }
 
     Object.assign(this, GPSExtension());
 
@@ -226,18 +239,18 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   }
 
   getPrettyName() {
-    if (!this.parent || this.metadata.survey === 'point') {
+    if (!this.parent || this.attrs.surveyId === pointSurveyConfig.id) {
       return '';
     }
 
-    if (this.metadata.survey === 'beetle') {
+    if (this.attrs.surveyId === beetleSurveyConfig.id) {
       const byId = ({ cid }: Sample) => cid === this.cid;
       const index = this.parent.samples.findIndex(byId);
 
       return `Trap #${index + 1}`;
     }
 
-    if (this.metadata.survey === 'soil' && this.parent) {
+    if (this.attrs.surveyId === soilSurveyConfig.id && this.parent) {
       return this.attrs[sampleNameAttr.id];
     }
 
@@ -249,7 +262,8 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
   isDetailsComplete() {
     const requiresDetails =
-      this.metadata.survey === 'transect' || this.metadata.survey === 'beetle';
+      this.attrs.surveyId === transectSurveyConfig.id ||
+      this.attrs.surveyId === beetleSurveyConfig.id;
     return requiresDetails ? this.metadata.completedDetails : true;
   }
 
@@ -263,7 +277,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     try {
       return super.getSurvey() as Survey;
     } catch (error) {
-      console.error(`Survey config was missing ${this.metadata.survey}`);
+      console.error(`Survey config was missing ${this.attrs.surveyId}`);
       return {} as Survey;
     }
   }
@@ -273,8 +287,8 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     return super.destroy();
   };
 
-  async upload() {
-    if (this.remote.synchronising || this.isUploaded()) return true;
+  async syncRemote() {
+    if (this.remote.synchronising || !this.requiresRemoteSync()) return true;
 
     const invalids = this.validateRemote();
     if (invalids) return false;
@@ -286,8 +300,12 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
     this.cleanUp();
 
-    this.saveRemote();
+    if (!this.syncedAt) {
+      this.saveRemote();
+      return true;
+    }
 
+    this.updateRemote();
     return true;
   }
 

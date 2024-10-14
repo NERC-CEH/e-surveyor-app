@@ -3,7 +3,7 @@ import { createOutline, cameraOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, MenuAttrItem } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
-import { byDate } from 'common/models/savedSamples';
+import { byDate } from 'common/models/samples';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';

@@ -12,6 +12,7 @@ const indiciaUrl =
 const isTestEnv = process.env.NODE_ENV === 'test';
 
 const CONFIG = {
+  name: process.env.APP_NAME as string,
   environment: process.env.NODE_ENV as string,
   version: process.env.APP_VERSION as string,
   build: process.env.APP_BUILD as string,

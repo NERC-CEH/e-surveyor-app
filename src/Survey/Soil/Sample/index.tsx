@@ -6,14 +6,14 @@ import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker'
 import Sample from 'common/models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import field from '../common/field.svg';
-import { sampleNameAttr, somAttr } from '../config';
+import { sampleNameAttr, somAttr, wormCountAttr } from '../config';
 import worm from './worm.svg';
 
 type Props = { subSample: Sample };
 
 const SampleHome = ({ subSample: sample }: Props) => {
   const { url } = useRouteMatch();
-  const isDisabled = sample.isDisabled();
+  const worms = sample.attrs[wormCountAttr.id];
 
   return (
     <Page id="survey-soil-sample-home">
@@ -28,13 +28,8 @@ const SampleHome = ({ subSample: sample }: Props) => {
               label="Location"
               skipValueTranslation
               value={<GridRefValue sample={sample} />}
-              disabled={isDisabled}
             />
-            <Block
-              block={sampleNameAttr}
-              isDisabled={isDisabled}
-              record={sample.attrs}
-            />
+            <Block block={sampleNameAttr} record={sample.attrs} />
             <SinglePhotoPicker label="Photo" model={sample} caption="Sample" />
           </div>
 
@@ -47,12 +42,9 @@ const SampleHome = ({ subSample: sample }: Props) => {
             <IonItem routerLink={`${url}/worms`}>
               <IonIcon src={worm} slot="start" />
               <IonLabel>Earthworm Survey</IonLabel>
+              <IonLabel slot="end">{worms || ''}</IonLabel>
             </IonItem>
-            <Block
-              block={somAttr}
-              isDisabled={isDisabled}
-              record={sample.attrs}
-            />
+            <Block block={somAttr} record={sample.attrs} />
           </div>
         </IonList>
       </Main>

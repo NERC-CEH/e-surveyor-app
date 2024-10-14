@@ -24,9 +24,7 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
   const navigateToSearch = () => navigate(`${url}/taxon`);
 
   const getNewImageButton = () => {
-    if (isDisabled) {
-      return <br />;
-    }
+    if (isDisabled) return null;
 
     return (
       <Button
@@ -76,9 +74,10 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
           sample={subSample}
           isDisabled={isDisabled}
           useSpeciesProfile
+          useSubSamples
         />
 
-        {!subSample.occurrences.length && (
+        {!subSample.samples.length && (
           <InfoBackgroundMessage>
             Your species list is empty. <br /> Hold down the orange species
             button to list plant species yourself, or tap to take a photo for

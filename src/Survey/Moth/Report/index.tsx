@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useToast, Page, Header } from '@flumens/ionic/dist';
+import { useToast, Page, Header } from '@flumens';
 import { NavContext } from '@ionic/react';
 import Sample, { useValidateCheck } from 'common/models/sample';
 import { useUserStatusCheck } from 'common/models/user';
@@ -21,7 +21,7 @@ const Report = ({ sample }: Props) => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    sample.upload().catch(toast.error);
+    sample.syncRemote().catch(toast.error);
 
     navigate(`/home/surveys`, 'root');
   };

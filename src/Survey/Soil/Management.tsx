@@ -34,10 +34,7 @@ const Management = ({ sample }: Props) => {
   const hasPrevCoverCropOther =
     !!sample.attrs?.[prevCoverCropAttr.id]?.includes(CROP_OTHER_VALUE);
 
-  const recordAttrs = {
-    record: sample.attrs,
-    isDisabled: sample.isDisabled(),
-  };
+  const recordAttrs = { record: sample.attrs };
 
   return (
     <Page id="survey-soil-management">

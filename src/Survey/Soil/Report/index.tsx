@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useToast, Page, Header } from '@flumens/ionic/dist';
+import { useToast, Page, Header } from '@flumens';
 import { NavContext } from '@ionic/react';
 import Sample, { useValidateCheck } from 'common/models/sample';
 import { useUserStatusCheck } from 'common/models/user';
@@ -14,23 +14,26 @@ const Report = ({ sample }: Props) => {
   const checkSampleStatus = useValidateCheck(sample);
   const checkUserStatus = useUserStatusCheck();
 
-  const onFinish = async () => {
+  const onSync = async () => {
     const isUserOK = await checkUserStatus();
     if (!isUserOK) return;
 
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    sample.upload().catch(toast.error);
+    sample.syncRemote().catch(toast.error);
 
     navigate(`/home/surveys`, 'root');
   };
 
   const isInvalid = sample.validateRemote();
+  const requiresSync = sample.requiresRemoteSync();
+  const isUploaded = sample.isUploaded();
+
   const finishButton =
-    sample.remote.synchronising || sample.isDisabled() ? null : (
-      <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
-        Upload
+    sample.remote.synchronising || !requiresSync ? null : (
+      <HeaderButton onClick={onSync} isInvalid={isInvalid}>
+        {isUploaded ? 'Sync' : 'Upload'}
       </HeaderButton>
     );
 
