@@ -7,7 +7,7 @@ import {
   device,
 } from '@flumens';
 import CONFIG from 'common/config';
-import { genericStore } from './store';
+import { mainStore } from './store';
 
 export interface Attrs extends DrupalUserModelAttrs {
   fullName?: string;
@@ -80,7 +80,7 @@ export class UserModel extends DrupalUserModel {
 
 const userModel = new UserModel({
   cid: 'user',
-  store: genericStore,
+  store: mainStore,
   config: CONFIG.backend,
 });
 

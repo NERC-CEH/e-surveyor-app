@@ -1,28 +1,22 @@
 import SQLiteDatabase from '@flumens/models/dist/Stores/SQLiteDatabase';
-import { db } from 'common/models/store';
+import { isPlatform } from '@ionic/core';
+import { db, mainStore, samplesStore } from 'common/models/store';
 
 export default async () => {
   console.log('SQLite migrate: START');
   try {
-    await SQLiteDatabase.migrateCordova();
-    console.log('SQLite migrate: file moved');
+    await SQLiteDatabase.migrateCordova(isPlatform('ios'));
 
     await db.init();
     console.log('SQLite migrate: db initialised');
 
-    await db.query({
-      sql: `CREATE TABLE IF NOT EXISTS main
-      (
-            id         VARCHAR(36),
-            cid        VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT id,
-            data       JSONB                   NOT NULL,
-            created_at INTEGER                 NOT NULL,
-            updated_at INTEGER                 NOT NULL,
-            synced_at  INTEGER
-      );`,
-    });
-    await db.query({
-      sql: `INSERT INTO main (id, cid, data, created_at, updated_at, synced_at)
+    await mainStore.ready;
+
+    const tables = await db.query({ sql: 'select * from sqlite_schema' });
+    const hasGeneric = tables.find((t: any) => t.name === 'generic');
+    if (hasGeneric) {
+      await db.query({
+        sql: `INSERT INTO main (id, cid, data, created_at, updated_at, synced_at)
         SELECT json(value) ->> "$.id",
               key,
               COALESCE(json(value)->>"$.attrs", "{}"),
@@ -31,23 +25,17 @@ export default async () => {
               json(value) ->> "$.metadata.syncedOn"
         FROM generic;
     `,
-    });
-    console.log('SQLite migrate: main migrated');
+      });
 
-    await db.query({
-      sql: `CREATE TABLE IF NOT EXISTS samples
-        (
-            id         VARCHAR(36),
-            cid        VARCHAR(36) PRIMARY KEY NOT NULL DEFAULT id,
-            data       JSONB                   NOT NULL,
-            created_at INTEGER                 NOT NULL,
-            updated_at INTEGER                 NOT NULL,
-            synced_at  INTEGER
-      );`,
-    });
+      console.log('SQLite migrate: main migrated');
+    }
 
-    await db.query({
-      sql: `INSERT INTO samples (id, cid, data, created_at, updated_at, synced_at)
+    await samplesStore.ready;
+
+    const hasModels = tables.find((t: any) => t.name === 'models');
+    if (hasModels) {
+      await db.query({
+        sql: `INSERT INTO samples (id, cid, data, created_at, updated_at, synced_at)
         SELECT
               json(value) ->> "$.id",
               key,
@@ -58,8 +46,9 @@ export default async () => {
         FROM models
         ORDER BY id DESC
         LIMIT 1000;`,
-    });
-    console.log('SQLite migrate: samples migrated');
+      });
+      console.log('SQLite migrate: samples migrated');
+    }
   } catch (error) {
     console.error(error);
     console.log('SQLite migrate: error');

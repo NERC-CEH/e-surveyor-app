@@ -1,6 +1,6 @@
 import { Model, ModelAttrs } from '@flumens';
 import { SeedmixSpecies } from 'common/data/seedmix';
-import { genericStore } from './store';
+import { mainStore } from './store';
 
 export type SurveyDraftKeys = {
   'draftId:point'?: string;
@@ -90,6 +90,6 @@ class AppModel extends Model {
   }
 }
 
-const appModel = new AppModel({ cid: 'app', store: genericStore });
+const appModel = new AppModel({ cid: 'app', store: mainStore });
 
 export { appModel as default, AppModel };
