@@ -185,20 +185,29 @@ const Menu = ({
           </IonItem>
         </div>
 
-        <h3 className="list-title">Account</h3>
-        <div className="destructive-item rounded-list">
-          {isLoggedIn && (
-            <>
-              <IonItem onClick={showUserDeleteDialog} className="!text-danger">
-                <IonIcon icon={personRemoveOutline} size="small" slot="start" />
-                <IonLabel>Delete account</IonLabel>
-              </IonItem>
-              <InfoMessage inline>
-                You can delete your user account from the system.
-              </InfoMessage>
-            </>
-          )}
-        </div>
+        {isLoggedIn && (
+          <>
+            <h3 className="list-title">Account</h3>
+            <div className="destructive-item rounded-list">
+              <>
+                <IonItem
+                  onClick={showUserDeleteDialog}
+                  className="!text-danger"
+                >
+                  <IonIcon
+                    icon={personRemoveOutline}
+                    size="small"
+                    slot="start"
+                  />
+                  <IonLabel>Delete account</IonLabel>
+                </IonItem>
+                <InfoMessage inline>
+                  You can delete your user account from the system.
+                </InfoMessage>
+              </>
+            </div>
+          </>
+        )}
       </IonList>
 
       <p className="m-0 mx-auto w-full max-w-2xl p-2.5 text-right opacity-60">{`v${config.version} (${config.build})`}</p>
