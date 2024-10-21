@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react';
 import {
   arrowUndoOutline,
+  cloudDownloadOutline,
+  cloudUploadOutline,
   personRemoveOutline,
   schoolOutline,
   shareSocialOutline,
@@ -8,6 +10,7 @@ import {
   wifiOutline,
 } from 'ionicons/icons';
 import { Main, useAlert, Toggle, InfoMessage } from '@flumens';
+import { isPlatform } from '@ionic/core';
 import { IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
 import config from 'common/config';
 import flowerIcon from 'common/images/flowerIcon.svg';
@@ -15,6 +18,36 @@ import seedMixIcon from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
 import { Attrs } from 'common/models/app';
 
+function useDatabaseExportDialog(exportFn: any) {
+  const alert = useAlert();
+
+  const showDatabaseExportDialog = () => {
+    alert({
+      header: 'Export',
+      message: (
+        <>
+          Are you sure you want to export the data?
+          <p className="my-2 font-bold">
+            This feature is intended solely for technical support and is not a
+            supported method for exporting your data
+          </p>
+        </>
+      ),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Export',
+          handler: exportFn,
+        },
+      ],
+    });
+  };
+
+  return showDatabaseExportDialog;
+}
 function useUserDeleteDialog(deleteUser: any) {
   const alert = useAlert();
 
@@ -89,6 +122,8 @@ type Props = {
   useTraining: boolean;
   isLoggedIn: boolean;
   deleteUser: any;
+  exportDatabase: any;
+  importDatabase: any;
 };
 
 const Menu = ({
@@ -101,9 +136,13 @@ const Menu = ({
   useTraining,
   isLoggedIn,
   deleteUser,
+  exportDatabase,
+  importDatabase,
 }: Props) => {
   const showAlertDialog = useResetDialog(resetApp);
   const showUserDeleteDialog = useUserDeleteDialog(deleteUser);
+
+  const showDatabaseExportDialog = useDatabaseExportDialog(exportDatabase);
 
   const onSendAnalyticsToggle = (checked: boolean) =>
     onToggle('sendAnalytics', checked);
@@ -181,8 +220,20 @@ const Menu = ({
 
           <IonItem id="app-reset-btn" onClick={showAlertDialog}>
             <IonIcon icon={arrowUndoOutline} size="small" slot="start" />
-            Reset App
+            Reset app
           </IonItem>
+
+          <IonItem onClick={showDatabaseExportDialog}>
+            <IonIcon icon={cloudDownloadOutline} size="small" slot="start" />
+            Export database
+          </IonItem>
+
+          {!isPlatform('hybrid') && (
+            <IonItem onClick={importDatabase}>
+              <IonIcon icon={cloudUploadOutline} size="small" slot="start" />
+              Import database
+            </IonItem>
+          )}
         </div>
 
         {isLoggedIn && (
