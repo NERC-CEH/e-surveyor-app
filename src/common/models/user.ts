@@ -17,11 +17,7 @@ const defaults: Attrs = {
   fullName: '',
 };
 
-export class UserModel extends DrupalUserModel {
-  // eslint-disable-next-line
-  // @ts-ignore
-  attrs: Attrs = DrupalUserModel.extendAttrs(this.attrs, defaults);
-
+export class UserModel extends DrupalUserModel<Attrs> {
   static registerSchema: any = object({
     email: z.string().email('Please fill in'),
     password: z.string().min(1, 'Please fill in'),
@@ -38,7 +34,7 @@ export class UserModel extends DrupalUserModel {
   });
 
   constructor(options: any) {
-    super(options);
+    super({ ...options, attrs: { ...defaults, ...options.attrs } });
 
     const checkForValidation = () => {
       if (this.isLoggedIn() && !this.attrs.verified) {

@@ -28,7 +28,7 @@ const ReportController = ({ sample }: Props) => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    const isUploading = await sample.syncRemote().catch(toast.error);
+    const isUploading = await sample.syncRemote(toast.error);
     if (!isUploading) return;
 
     navigate(`/home/surveys`, 'root');

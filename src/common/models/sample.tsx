@@ -287,7 +287,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     return super.destroy();
   };
 
-  async syncRemote() {
+  async syncRemote(onError?: any) {
     if (this.remote.synchronising || !this.requiresRemoteSync()) return true;
 
     const invalids = this.validateRemote();
@@ -301,7 +301,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     this.cleanUp();
 
     if (!this.syncedAt) {
-      this.saveRemote();
+      this.saveRemote().catch(onError);
       return true;
     }
 

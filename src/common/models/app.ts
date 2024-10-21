@@ -61,10 +61,10 @@ const defaults: Attrs = {
   seedmixes: [],
 };
 
-class AppModel extends Model {
-  // eslint-disable-next-line
-  // @ts-ignore
-  attrs: Attrs = Model.extendAttrs(this.attrs, defaults);
+class AppModel extends Model<Attrs> {
+  constructor(options: any) {
+    super({ ...options, attrs: { ...defaults, ...options.attrs } });
+  }
 
   deleteSeedmix(seedmixId: string) {
     const byId = (seedmix: SeedMix) => seedmix.id === seedmixId;

@@ -21,7 +21,7 @@ const Report = ({ sample }: Props) => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    sample.syncRemote().catch(toast.error);
+    sample.syncRemote(toast.error);
 
     navigate(`/home/surveys`, 'root');
   };
