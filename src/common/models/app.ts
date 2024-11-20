@@ -31,6 +31,10 @@ export interface Attrs extends ModelAttrs, SurveyDraftKeys {
   useAutoIDWhenBackOnline: boolean;
   sendAnalytics: boolean;
   /**
+   * Enable un-released features.
+   */
+  useExperiments: boolean;
+  /**
    * If the app should do bandwidth-heavy connections using WiFi only.
    */
   useWiFiDataConnection: boolean;
@@ -55,6 +59,7 @@ const defaults: Attrs = {
   showSoilDataSharingTip: true,
   useAutoIDWhenBackOnline: true,
   use10stepsForCommonStandard: false,
+  useExperiments: false,
   useWiFiDataConnection: false,
   useTraining: false,
   sendAnalytics: true,

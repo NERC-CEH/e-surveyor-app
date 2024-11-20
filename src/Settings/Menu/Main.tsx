@@ -3,6 +3,7 @@ import {
   arrowUndoOutline,
   cloudDownloadOutline,
   cloudUploadOutline,
+  flameOutline,
   personRemoveOutline,
   schoolOutline,
   shareSocialOutline,
@@ -120,6 +121,7 @@ type Props = {
   useAutoIDWhenBackOnline: boolean;
   useWiFiDataConnection: boolean;
   useTraining: boolean;
+  useExperiments: boolean;
   isLoggedIn: boolean;
   deleteUser: any;
   exportDatabase: any;
@@ -134,6 +136,7 @@ const Menu = ({
   useAutoIDWhenBackOnline,
   useWiFiDataConnection,
   useTraining,
+  useExperiments,
   isLoggedIn,
   deleteUser,
   exportDatabase,
@@ -154,6 +157,8 @@ const Menu = ({
     onToggle('useWiFiDataConnection', checked);
   const onTrainingToggle = (checked: boolean) =>
     onToggle('useTraining', checked);
+  const onExperimentsToggle = (checked: boolean) =>
+    onToggle('useExperiments', checked);
 
   return (
     <Main className="app-settings">
@@ -216,6 +221,17 @@ const Menu = ({
           />
           <InfoMessage inline>
             Share app crash data so we can make the app more reliable.
+          </InfoMessage>
+
+          <Toggle
+            prefix={<IonIcon src={flameOutline} className="size-6" />}
+            label="Experimental Features"
+            defaultSelected={useExperiments}
+            onChange={onExperimentsToggle}
+          />
+          <InfoMessage inline>
+            Some features are in a trial state and are subject to change in
+            future releases.
           </InfoMessage>
 
           <IonItem id="app-reset-btn" onClick={showAlertDialog}>

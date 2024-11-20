@@ -54,6 +54,7 @@ const MenuController = () => {
     useAutoIDWhenBackOnline,
     useWiFiDataConnection,
     useTraining,
+    useExperiments,
   } = appModel.attrs;
 
   const resetApp = async () => {
@@ -120,6 +121,7 @@ const MenuController = () => {
         use10stepsForCommonStandard={use10stepsForCommonStandard}
         onToggle={onToggle}
         useTraining={useTraining}
+        useExperiments={useExperiments}
         useAutoIDWhenBackOnline={useAutoIDWhenBackOnline}
         useWiFiDataConnection={useWiFiDataConnection}
         exportDatabase={exportDatabase}

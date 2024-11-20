@@ -300,6 +300,11 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
     this.cleanUp();
 
+    if (this.attrs.surveyId === soilSurveyConfig.id) {
+      onError('Uploading of a Beta survey is not enabled yet.');
+      return false;
+    }
+
     if (!this.syncedAt) {
       this.saveRemote().catch(onError);
       return true;

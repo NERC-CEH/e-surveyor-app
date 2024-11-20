@@ -1,6 +1,7 @@
 ### 1.4.0
 
-Added Soil survey.
+Added Soil survey (Beta).
+Bug fixes.
 
 ### 1.3.1
 

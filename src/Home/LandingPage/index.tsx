@@ -8,6 +8,7 @@ import { Page, Main, device, useToast, captureImage, Button } from '@flumens';
 import { IonIcon, isPlatform } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
 import config from 'common/config';
+import appModel from 'common/models/app';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
@@ -26,6 +27,8 @@ const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
+
+  const { useExperiments } = appModel.attrs;
 
   const hideSpeciesModal = () => {
     species?.media.forEach(media => media.destroy());
@@ -87,14 +90,16 @@ const LandingPage = () => {
             slidesPerView={1.3}
             {...tabletLayout}
           >
-            <SwiperSlide>
-              <SurveyCard
-                image={survey5}
-                title="Soil survey"
-                type="SOM, VSA and worm count"
-                link="/survey/soil"
-              />
-            </SwiperSlide>
+            {useExperiments && (
+              <SwiperSlide>
+                <SurveyCard
+                  image={survey5}
+                  title="Soil survey"
+                  type="SOM, VSA and worm count"
+                  link="/survey/soil"
+                />
+              </SwiperSlide>
+            )}
             <SwiperSlide>
               <SurveyCard
                 image={survey1}
