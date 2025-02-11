@@ -1,7 +1,7 @@
 {
   "name": "uk.ac.ceh.esurveyor",
-  "version": "1.4.0",
-  "title": "E-Surveyor",
+  "version": "1.5.0",
+  "title": "e-Surveyor",
   "scripts": {
     "prepare": "husky",
     "start": "webpack serve --progress --port 8000",

@@ -137,7 +137,7 @@ const MenuMain = ({
             <T>What makes a good image?</T>
           </IonItem>
           <IonItem
-            href={`mailto:esurveyor%40ceh.ac.uk?subject=E-Surveyor%20App%20Feedback&body=%0A%0A%0AApp%3A%20 v${config.version}%0AUser: ${userInfo}%0ADevice: ${deviceInfo}`}
+            href={`mailto:esurveyor%40ceh.ac.uk?subject=e-Surveyor%20App%20Feedback&body=%0A%0A%0AApp%3A%20 v${config.version}%0AUser: ${userInfo}%0ADevice: ${deviceInfo}`}
             target="_blank"
             detail
             detailIcon={openOutline}

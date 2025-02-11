@@ -20,7 +20,7 @@ const useDataSharingPrompt = () => {
       header: 'Data sharing',
       message: (
         <>
-          Data collected can optionally be uploaded to the E-Surveyor{' '}
+          Data collected can optionally be uploaded to the e-Surveyor{' '}
           <a href="https://esurveyor.ceh.ac.uk/">website</a> where you can
           access and download your data. Uploaded data will also be used by
           UKCEH and partners to support our research into soil health. More

@@ -1,3 +1,7 @@
+### 1.5.0
+
+Updated app name.
+
 ### 1.4.0
 
 Added Soil survey (Beta).

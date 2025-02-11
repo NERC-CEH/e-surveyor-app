@@ -8,7 +8,7 @@ const About = () => (
     <Main>
       <Section>
         <P>
-          E-Surveyor helps you to assess the quality of the wildflower habitat
+          e-Surveyor helps you to assess the quality of the wildflower habitat
           you have created on your farm.
         </P>
 

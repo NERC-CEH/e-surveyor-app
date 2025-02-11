@@ -95,7 +95,7 @@ const OnboardingScreens = ({ appModel }: Props) => {
               <div className="message">
                 <h2>Welcome</h2>
                 <p>
-                  E-Surveyor helps you to assess the quality of habitats you
+                  e-Surveyor helps you to assess the quality of habitats you
                   manage.
                 </p>
               </div>

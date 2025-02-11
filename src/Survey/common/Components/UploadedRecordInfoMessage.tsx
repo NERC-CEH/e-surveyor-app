@@ -25,7 +25,7 @@ const UploadedRecordInfoMessage = ({ children: childrenProp }: Props) => {
         color="tertiary"
         className="mx-auto mt-5 max-w-sm p-2"
       >
-        E-Surveyor website
+        e-Surveyor website
       </Button>
     </InfoMessage>
   );
