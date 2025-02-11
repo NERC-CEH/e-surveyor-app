@@ -236,7 +236,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
       {showPollinators && (
         <IonList lines="full">
           <h3 className="list-title">
-            <span>Pollinators count</span>
+            Pollinators count
             <InfoButton>
               <div className="font-light">
                 This section shows you how many pollinating species are
@@ -258,7 +258,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
       <IonList lines="full">
         <h3 className="list-title">
-          <span>Supported species groups</span>
+          Supported species groups
           <InfoButton>
             <div className="font-light">
               In this section, you can see the number of species within each

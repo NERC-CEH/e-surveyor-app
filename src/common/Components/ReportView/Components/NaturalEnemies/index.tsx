@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ModalHeader } from '@flumens';
 import { IonItem, IonLabel, IonList, IonModal } from '@ionic/react';
+import InfoButton from 'common/Components/InfoButton';
 import naturalEnemies, {
   Interaction as EnemyInteraction,
 } from 'common/data/naturalEnemies';
@@ -64,7 +65,16 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   return (
     <IonList lines="full">
-      <h3 className="list-title">Supported Crops</h3>
+      <h3 className="list-title">
+        Supported Crops
+        <InfoButton>
+          <div className="font-light">
+            This list shows which crops could benefit from the insects attracted
+            to your flowers, click on items in the list for more detail on which
+            flowers and which insects are providing the benefit.
+          </div>
+        </InfoButton>
+      </h3>
       <div className="rounded-list">
         <div className="list-divider">
           <div>Plant</div>
