@@ -34,9 +34,14 @@ const PollinatorsBadge = ({ uniqueSpecies }: Props) => {
       </IonItem>
     );
 
-    const species = getUniqueSupportedSpecies(uniqueSpecies).map(
-      getPollinatorsEntries
-    );
+    const byName = (s1: Pollinator, s2: Pollinator) => {
+      const name1 = s1.pollinatorCommonName || s1.pollinator;
+      const name2 = s2.pollinatorCommonName || s2.pollinator;
+      return name1.localeCompare(name2);
+    };
+    const species = getUniqueSupportedSpecies(uniqueSpecies)
+      .sort(byName)
+      .map(getPollinatorsEntries);
 
     if (!species.length) {
       return (

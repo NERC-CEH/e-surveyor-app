@@ -24,12 +24,9 @@ const byName = ([taxon, name]: SpeciesNames, [taxon2, name2]: SpeciesNames) => {
   return selectedName.localeCompare(selectedName2);
 };
 
-const byPollinatorName = (
-  { pollinator: taxon }: Pollinator,
-  { pollinator: taxon2 }: Pollinator
-) => {
-  const selectedName = taxon;
-  const selectedName2 = taxon2;
+const byPollinatorName = (s1: Pollinator, s2: Pollinator) => {
+  const selectedName = s1.pollinatorCommonName || s1.pollinator;
+  const selectedName2 = s2.pollinatorCommonName || s2.pollinator;
   return selectedName.localeCompare(selectedName2);
 };
 
