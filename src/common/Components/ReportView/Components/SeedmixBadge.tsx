@@ -52,7 +52,9 @@ const SeedmixBadge = ({ occurrences, seedmixSpecies }: Props) => {
     return (
       <IonList>
         <div className="rounded-list">
-          <div className="list-divider">Found species</div>
+          <div className="list-divider">
+            Species associated with your plants
+          </div>
 
           {selectedSeedmixSpecies
             .sort(bySpeciesName)

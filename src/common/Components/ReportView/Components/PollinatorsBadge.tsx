@@ -48,9 +48,12 @@ const PollinatorsBadge = ({ uniqueSpecies }: Props) => {
 
     return (
       <IonList>
-        <h3 className="list-title">Found species</h3>
-
-        <div className="rounded-list">{species}</div>
+        <div className="rounded-list">
+          <div className="list-divider">
+            Species associated with your plants
+          </div>
+          {species}
+        </div>
       </IonList>
     );
   };

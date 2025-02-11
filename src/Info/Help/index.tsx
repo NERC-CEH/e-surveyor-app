@@ -158,7 +158,7 @@ export default () => (
                 species.
               </p>
               <p>
-                <b>Pollinators count</b>
+                <b>Potential pollinator count</b>
               </p>
               <img src={pollinatorsTable} />
               <p>
@@ -173,7 +173,7 @@ export default () => (
               <img src={insects} />
 
               <p>
-                <b>Supported species groups</b>
+                <b>Potentially supported species</b>
               </p>
               <img src={supportedGroupsTable} />
               <p>
