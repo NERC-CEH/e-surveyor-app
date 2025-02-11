@@ -213,7 +213,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
           color="tertiary"
           className="m-2"
         >
-          This is <b className={pollinatorClass}>{pollinatorClass}</b> class
+          This is a <b className={pollinatorClass}>{pollinatorClass}</b> class
           flower that supports <b>{pollinatorCount}</b> species
         </InfoMessage>
 
