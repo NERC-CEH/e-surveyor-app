@@ -110,6 +110,7 @@ const AppPhotoPicker = ({
         placeholderCount={1}
         Image={allowToCrop ? ImageWithCropping : undefined}
         isDisabled={isDisabled || maxPicsReached}
+        buttonLabel={<span className="mx-2">Add photos</span>}
         {...restProps}
       />
       {allowToCrop && (
