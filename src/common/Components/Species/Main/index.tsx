@@ -146,23 +146,22 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
         {!identifying && hasNoSpecies && (
           <InfoBackgroundMessage>
             <div>Sorry, we couldn't find any species 😕</div>
-
-            {isPartOfSurvey && !isDisabled && (
-              <Button
-                onPress={navigateToSearch}
-                fill="outline"
-                className="mx-auto mt-6 text-sm"
-                prefix={<IonIcon className="size-6" src={searchOutline} />}
-              >
-                Search Species
-              </Button>
-            )}
           </InfoBackgroundMessage>
         )}
 
         {getSelectedSpecies()}
 
         {getAIResults()}
+
+        {isPartOfSurvey && !isDisabled && (
+          <Button
+            onPress={navigateToSearch}
+            className="mx-auto mt-6 text-sm"
+            prefix={<IonIcon className="size-6" src={searchOutline} />}
+          >
+            Search Species
+          </Button>
+        )}
       </div>
     </Main>
   );
