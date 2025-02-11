@@ -105,7 +105,7 @@ export {
   type ContextValue as TailwindContextValue,
 } from '@flumens/tailwind/dist/components/Context';
 export {
-  type Block as BlockT,
+  type BlockConf as BlockT,
   type ChoiceValues,
 } from '@flumens/tailwind/dist/Survey';
 export {

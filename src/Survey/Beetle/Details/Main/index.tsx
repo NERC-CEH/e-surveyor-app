@@ -24,11 +24,11 @@ import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import BeetleGuide from './BeetleGuide';
 
-const clipboardIcon = <IonIcon src={clipboardOutline} className="size-6 " />;
+const clipboardIcon = <IonIcon src={clipboardOutline} className="size-6" />;
 
 type Props = {
   sample: Sample;
-  onChangeTrapOutside: (value: number) => void;
+  onChangeTrapOutside: any;
 };
 
 const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {

@@ -20,7 +20,7 @@ const listOutlineIcon = (
 
 export const farmNameAttr = {
   id: 'farmName-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Farm name',
   prefix: locationOutlineIcon,
   validations: { required: true },
@@ -28,7 +28,7 @@ export const farmNameAttr = {
 
 export const fieldNameAttr = {
   id: 'fieldName-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Field name',
   prefix: locationOutlineIcon,
   validations: { required: true },
@@ -41,18 +41,18 @@ const LAND_USE_ARABLE_LEY_VALUE = 'Arable-Ley-1';
 
 export const landUseAttr = {
   id: 'landUse-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Land use',
   prefix: listOutlineIcon,
   container: 'page',
   choices: [
-    { title: 'Arable', data_name: LAND_USE_ARABLE_VALUE },
-    { title: 'Arable-Ley', data_name: LAND_USE_ARABLE_LEY_VALUE },
-    { title: 'Grassland', data_name: LAND_USE_GRASSLAND_VALUE },
-    { title: 'Perennial Fruit', data_name: 'Perennial-1' },
-    { title: 'Woodland', data_name: 'Woodland-1' },
-    { title: 'Fallow', data_name: 'Fallow-1' },
-    { title: 'Other', data_name: LAND_USE_OTHER_VALUE },
+    { title: 'Arable', dataName: LAND_USE_ARABLE_VALUE },
+    { title: 'Arable-Ley', dataName: LAND_USE_ARABLE_LEY_VALUE },
+    { title: 'Grassland', dataName: LAND_USE_GRASSLAND_VALUE },
+    { title: 'Perennial Fruit', dataName: 'Perennial-1' },
+    { title: 'Woodland', dataName: 'Woodland-1' },
+    { title: 'Fallow', dataName: 'Fallow-1' },
+    { title: 'Other', dataName: LAND_USE_OTHER_VALUE },
   ],
   onChange(newValue: any, _: any, { record }: any) {
     // eslint-disable-next-line no-param-reassign
@@ -66,46 +66,46 @@ export const landUseAttr = {
 
 export const landUseOtherAttr = {
   id: 'landUseOther-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Other land use',
   appearance: 'multiline',
 } as const;
 
 export const CROP_OTHER_VALUE = 'Other-1';
 const ARABLE_LAND_USE_OPTIONS = [
-  { title: 'Wheat', data_name: 'Wheat-1' },
-  { title: 'Barley', data_name: 'Barley-1' },
-  { title: 'Oats', data_name: 'Oats-1' },
-  { title: 'Oilseed rape', data_name: 'Oilseed-1' },
-  { title: 'Sugar beet', data_name: 'Sugar-1' },
-  { title: 'Field peas', data_name: 'Peas-1' },
-  { title: 'Field beans', data_name: 'Field-1' },
-  { title: 'Fresh vegetables', data_name: 'Fresh-1' },
-  { title: 'Plants and flowers', data_name: 'Plants-1' },
-  { title: 'Potatoes', data_name: 'Potatoes-1' },
-  { title: 'Fresh fruit', data_name: 'Fresh-1' },
-  { title: 'Linseed', data_name: 'Linseed-1' },
-  { title: 'Other', data_name: CROP_OTHER_VALUE },
+  { title: 'Wheat', dataName: 'Wheat-1' },
+  { title: 'Barley', dataName: 'Barley-1' },
+  { title: 'Oats', dataName: 'Oats-1' },
+  { title: 'Oilseed rape', dataName: 'Oilseed-1' },
+  { title: 'Sugar beet', dataName: 'Sugar-1' },
+  { title: 'Field peas', dataName: 'Peas-1' },
+  { title: 'Field beans', dataName: 'Field-1' },
+  { title: 'Fresh vegetables', dataName: 'Fresh-1' },
+  { title: 'Plants and flowers', dataName: 'Plants-1' },
+  { title: 'Potatoes', dataName: 'Potatoes-1' },
+  { title: 'Fresh fruit', dataName: 'Fresh-1' },
+  { title: 'Linseed', dataName: 'Linseed-1' },
+  { title: 'Other', dataName: CROP_OTHER_VALUE },
 ];
 const GRASSLAND_LAND_USE_OPTIONS = [
-  { title: 'Permanent improved grassland', data_name: 'improved-1' },
-  { title: 'Permanent unimproved grassland', data_name: 'unimproved-1' },
-  { title: 'Temporary Grassland - conventional', data_name: 'temporary-1' },
+  { title: 'Permanent improved grassland', dataName: 'improved-1' },
+  { title: 'Permanent unimproved grassland', dataName: 'unimproved-1' },
+  { title: 'Temporary Grassland - conventional', dataName: 'temporary-1' },
   {
     title: 'Temporary Grassland - grass-clover ley',
-    data_name: 'temporary-32',
+    dataName: 'temporary-32',
   },
   {
     title: 'Temporary Grassland - Lucerne',
-    data_name: 'temporary-22',
+    dataName: 'temporary-22',
   },
   {
     title: 'Temporary Grassland - Herbal Ley',
-    data_name: 'temporary-12',
+    dataName: 'temporary-12',
   },
   {
     title: 'Temporary Grassland - Fodder Crop',
-    data_name: 'temporary-02',
+    dataName: 'temporary-02',
   },
 ];
 const cropChoices = {
@@ -121,7 +121,7 @@ export const cropAttr = (attrs?: any) => {
   const landUse = attrs?.[landUseAttr.id] as keyof typeof cropChoices;
   return {
     id: 'crop-1',
-    type: 'choice_input',
+    type: 'choiceInput',
     title: 'Current crop',
     hidden: !attrs || !cropChoices[landUse],
     prefix: listOutlineIcon,
@@ -134,7 +134,7 @@ export const prevCrop1Attr = (attrs?: any) => {
   const landUse = attrs?.[landUseAttr.id] as keyof typeof cropChoices;
   return {
     id: 'prev-crop-1',
-    type: 'choice_input',
+    type: 'choiceInput',
     title: 'Most recent cropping',
     hidden: !attrs || !cropChoices[landUse],
     prefix: listOutlineIcon,
@@ -147,7 +147,7 @@ export const prevCrop2Attr = (attrs?: any) => {
   const landUse = attrs?.[landUseAttr.id] as keyof typeof cropChoices;
   return {
     id: 'prev-crop-2',
-    type: 'choice_input',
+    type: 'choiceInput',
     title: 'Previous cropping',
     hidden: !attrs || !cropChoices[landUse],
     prefix: listOutlineIcon,
@@ -158,187 +158,187 @@ export const prevCrop2Attr = (attrs?: any) => {
 
 export const cropOtherAttr = {
   id: 'cropOther-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Other crop',
   appearance: 'multiline',
 } as const;
 
 export const tillageAttr = {
   id: 'tillage-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Tillage practices',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: 'Conventional - Plough', data_name: 'Tillage-1' },
-    { title: 'Conventional - Top Down', data_name: 'Tillage-2' },
-    { title: 'Minimal/conservation tillage', data_name: 'Minimal-1' },
-    { title: 'No-till', data_name: 'No-till-1' },
+    { title: 'Conventional - Plough', dataName: 'Tillage-1' },
+    { title: 'Conventional - Top Down', dataName: 'Tillage-2' },
+    { title: 'Minimal/conservation tillage', dataName: 'Minimal-1' },
+    { title: 'No-till', dataName: 'No-till-1' },
   ],
 } as const;
 
 const COVER_CROP_OTHER_VALUE = 'Other-1';
 export const coverCropAttr = {
   id: 'coverCrop-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Current cover or catch crop',
   prefix: listOutlineIcon,
   container: 'page',
   multiple: true,
   choices: [
-    { title: 'Barley', data_name: 'Barley-1' },
-    { title: 'Clover', data_name: 'Clover-1' },
-    { title: 'Field Beans', data_name: 'Field-1' },
-    { title: 'Forage Rape', data_name: 'Rap-1' },
-    { title: 'Kale', data_name: 'Kale-1' },
-    { title: 'Mustard', data_name: 'Mustard-1' },
-    { title: 'Oats', data_name: 'Oats-1' },
-    { title: 'Peas', data_name: 'Peas-1' },
-    { title: 'Phacelia', data_name: 'Phaceli-1' },
-    { title: 'Radish', data_name: 'Radis-1' },
-    { title: 'Straw  ', data_name: 'Straw-1' },
-    { title: 'Stubble Turnips', data_name: 'Turnip-1' },
-    { title: 'Vetch', data_name: 'Vetc-1' },
-    { title: 'Westerwolds Ryegrass', data_name: 'Westerwolds-1' },
-    { title: 'Winter Rye', data_name: 'Winter-1' },
-    { title: 'Other', data_name: COVER_CROP_OTHER_VALUE },
+    { title: 'Barley', dataName: 'Barley-1' },
+    { title: 'Clover', dataName: 'Clover-1' },
+    { title: 'Field Beans', dataName: 'Field-1' },
+    { title: 'Forage Rape', dataName: 'Rap-1' },
+    { title: 'Kale', dataName: 'Kale-1' },
+    { title: 'Mustard', dataName: 'Mustard-1' },
+    { title: 'Oats', dataName: 'Oats-1' },
+    { title: 'Peas', dataName: 'Peas-1' },
+    { title: 'Phacelia', dataName: 'Phaceli-1' },
+    { title: 'Radish', dataName: 'Radis-1' },
+    { title: 'Straw  ', dataName: 'Straw-1' },
+    { title: 'Stubble Turnips', dataName: 'Turnip-1' },
+    { title: 'Vetch', dataName: 'Vetc-1' },
+    { title: 'Westerwolds Ryegrass', dataName: 'Westerwolds-1' },
+    { title: 'Winter Rye', dataName: 'Winter-1' },
+    { title: 'Other', dataName: COVER_CROP_OTHER_VALUE },
   ],
 } as const;
 
 export const prevCoverCropAttr = {
   id: 'prec-coverCrop-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Preceding cover or catch crop',
   prefix: listOutlineIcon,
   container: 'page',
   multiple: true,
   choices: [
-    { title: 'Field Beans', data_name: 'Field-1' },
-    { title: 'Peas', data_name: 'Peas-1' },
-    { title: 'Clover', data_name: 'Clover-1' },
-    { title: 'Mustard', data_name: 'Mustard-1' },
-    { title: 'Kale', data_name: 'Kale-1' },
-    { title: 'Winter Rye', data_name: 'Winter-1' },
-    { title: 'Oats', data_name: 'Oats-1' },
-    { title: 'Barley', data_name: 'Barley-1' },
-    { title: 'Straw  ', data_name: 'Straw-1' },
-    { title: 'Other', data_name: COVER_CROP_OTHER_VALUE },
+    { title: 'Field Beans', dataName: 'Field-1' },
+    { title: 'Peas', dataName: 'Peas-1' },
+    { title: 'Clover', dataName: 'Clover-1' },
+    { title: 'Mustard', dataName: 'Mustard-1' },
+    { title: 'Kale', dataName: 'Kale-1' },
+    { title: 'Winter Rye', dataName: 'Winter-1' },
+    { title: 'Oats', dataName: 'Oats-1' },
+    { title: 'Barley', dataName: 'Barley-1' },
+    { title: 'Straw  ', dataName: 'Straw-1' },
+    { title: 'Other', dataName: COVER_CROP_OTHER_VALUE },
   ],
 } as const;
 
 export const coverCropOtherAttr = {
   id: 'coverCropOther-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Other current cover crop',
   appearance: 'multiline',
 } as const;
 
 export const prevOverCropOtherAttr = {
   id: 'prev-coverCropOther-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Other preceding cover crop',
   appearance: 'multiline',
 } as const;
 
 export const SOMIDAttr = {
   id: 'SOMID-1',
-  type: 'text_input',
+  type: 'textInput',
   prefix: listOutlineIcon,
   title: 'Sample ID',
 } as const;
 
 export const soilTypeAttr = {
   id: 'soil-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Broad soil type',
   prefix: fieldIcon,
   container: 'page',
   choices: [
-    { title: 'Heavy clay soils with poor drainage', data_name: 'Heavy-1' },
-    { title: 'Light soils with free drainage', data_name: 'Light-1' },
+    { title: 'Heavy clay soils with poor drainage', dataName: 'Heavy-1' },
+    { title: 'Light soils with free drainage', dataName: 'Light-1' },
     {
       title: 'Light soils with moderate & poor drainage',
-      data_name: 'Light-m-1',
+      dataName: 'Light-m-1',
     },
-    { title: 'Medium soils with free drainage', data_name: 'free-1' },
-    { title: 'Medium soils with moderate drainage', data_name: 'moderate-1' },
-    { title: 'Medium with soils poor drainage', data_name: 'poor-1' },
-    { title: 'Peat', data_name: 'Peat-1' },
-    { title: 'Organic soils with poor drainage', data_name: 'Organic-poor-1' },
-    { title: 'Organic soils with free drainage', data_name: 'Organic-1' },
-    { title: 'Man-made soils', data_name: 'Man-1' },
-    { title: 'Alluvial and coastal soils', data_name: 'Alluvial-1' },
-    { title: 'Shallow soils', data_name: 'Shallow-1' },
+    { title: 'Medium soils with free drainage', dataName: 'free-1' },
+    { title: 'Medium soils with moderate drainage', dataName: 'moderate-1' },
+    { title: 'Medium with soils poor drainage', dataName: 'poor-1' },
+    { title: 'Peat', dataName: 'Peat-1' },
+    { title: 'Organic soils with poor drainage', dataName: 'Organic-poor-1' },
+    { title: 'Organic soils with free drainage', dataName: 'Organic-1' },
+    { title: 'Man-made soils', dataName: 'Man-1' },
+    { title: 'Alluvial and coastal soils', dataName: 'Alluvial-1' },
+    { title: 'Shallow soils', dataName: 'Shallow-1' },
   ],
 } as const;
 
 export const soilSurfaceAttr = {
   id: 'soilsurface-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Soil surface condition',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: 'Strong', data_name: 'Strong-1' },
-    { title: 'Moderate', data_name: 'Moderate-1' },
-    { title: 'Weak', data_name: 'Weak-1' },
+    { title: 'Strong', dataName: 'Strong-1' },
+    { title: 'Moderate', dataName: 'Moderate-1' },
+    { title: 'Weak', dataName: 'Weak-1' },
   ],
 } as const;
 
 export const aggregateSizeAttr = {
   id: 'aggregates-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Size of aggregates',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: 'Small rounded', data_name: 'Small-1' },
-    { title: 'Some medium/angular', data_name: 'some-1' },
-    { title: 'Large/no aggregates', data_name: 'large-1' },
+    { title: 'Small rounded', dataName: 'Small-1' },
+    { title: 'Some medium/angular', dataName: 'some-1' },
+    { title: 'Large/no aggregates', dataName: 'large-1' },
   ],
 } as const;
 
 export const soilStrengthAttr = {
   id: 'strength-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Soil strength',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: 'Friable', data_name: 'Friable-1' },
-    { title: 'Firm', data_name: 'Firm-1' },
-    { title: 'Compact', data_name: 'Compact-1' },
+    { title: 'Friable', dataName: 'Friable-1' },
+    { title: 'Firm', dataName: 'Firm-1' },
+    { title: 'Compact', dataName: 'Compact-1' },
   ],
 } as const;
 
 export const rootsAttr = {
   id: 'roots-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Visible roots',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: 'Abundant roots', data_name: 'Abundant-1' },
-    { title: 'Roots confined to pores/fissures', data_name: 'Roots-1' },
-    { title: 'Without or few roots', data_name: 'Without-1' },
+    { title: 'Abundant roots', dataName: 'Abundant-1' },
+    { title: 'Roots confined to pores/fissures', dataName: 'Roots-1' },
+    { title: 'Without or few roots', dataName: 'Without-1' },
   ],
 } as const;
 
 export const SOMPatternAttr = {
   id: 'som-pattern-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Pattern',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: '‘W’ pattern', data_name: 'w-1' },
-    { title: 'Whole field', data_name: 'field-1' },
+    { title: '‘W’ pattern', dataName: 'w-1' },
+    { title: 'Whole field', dataName: 'field-1' },
   ],
 } as const;
 
 export const SOMDepthAttr = {
   id: 'som-depth-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Depth',
   prefix: listOutlineIcon,
   suffix: 'cm',
@@ -348,7 +348,7 @@ export const SOMDepthAttr = {
 
 export const SOMDiameterAttr = {
   id: 'som-diameter-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Auger diameter',
   prefix: listOutlineIcon,
   suffix: 'cm',
@@ -358,14 +358,14 @@ export const SOMDiameterAttr = {
 
 export const labNameAttr = {
   id: 'lab-name-1',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Lab name',
   prefix: listOutlineIcon,
 } as const;
 
 export const labTOCAttr = {
   id: 'som-TOC-Carbonate-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Total Organic Carbon',
   prefix: listOutlineIcon,
   step: 0.01,
@@ -375,7 +375,7 @@ export const labTOCAttr = {
 
 export const labSOMAttr = {
   id: 'som-SOM-Carbonate-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Soil Organic Matter (TOC x 1.72)',
   prefix: listOutlineIcon,
   step: 0.1,
@@ -386,7 +386,7 @@ export const labSOMAttr = {
 
 export const labLOIAttr = {
   id: 'som-LOI-Carbonate-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Loss on Ignition',
   prefix: listOutlineIcon,
   step: 0.1,
@@ -397,7 +397,7 @@ export const labLOIAttr = {
 
 export const labCalciumCarbonateAttr = {
   id: 'som-Calcium-Carbonate-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Calcium Carbonate',
   prefix: listOutlineIcon,
   suffix: '%',
@@ -407,7 +407,7 @@ export const labCalciumCarbonateAttr = {
 
 export const labNitrogenAttr = {
   id: 'som-Nitrogen-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Total Nitrogen',
   prefix: listOutlineIcon,
   suffix: '%',
@@ -418,7 +418,7 @@ export const labNitrogenAttr = {
 
 export const labCationAttr = {
   id: 'som-Cation-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Cation Exchange Capacity',
   prefix: listOutlineIcon,
   suffix: 'meq/l',
@@ -429,7 +429,7 @@ export const labCationAttr = {
 
 export const labSandAttr = {
   id: 'som-Sand-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Sand',
   prefix: listOutlineIcon,
   suffix: '%',
@@ -439,7 +439,7 @@ export const labSandAttr = {
 
 export const labSiltAttr = {
   id: 'som-Silt-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Silt',
   prefix: listOutlineIcon,
   suffix: '%',
@@ -449,7 +449,7 @@ export const labSiltAttr = {
 
 export const labClayAttr = {
   id: 'som-Clay-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Clay',
   prefix: listOutlineIcon,
   suffix: '%',
@@ -459,7 +459,7 @@ export const labClayAttr = {
 
 export const labNRMAttr = {
   id: 'som-NRM-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'NRM scoop density',
   prefix: listOutlineIcon,
   suffix: 'g/cm3',
@@ -469,19 +469,19 @@ export const labNRMAttr = {
 
 export const labTypeAttr = {
   id: 'som-type-1',
-  type: 'choice_input',
+  type: 'choiceInput',
   title: 'Method',
   prefix: listOutlineIcon,
   appearance: 'button',
   choices: [
-    { title: 'Full (pipette)', data_name: 'full-1' },
-    { title: 'Quick (Laser)', data_name: 'quick-1' },
+    { title: 'Full (pipette)', dataName: 'full-1' },
+    { title: 'Quick (Laser)', dataName: 'quick-1' },
   ],
 } as const;
 
 export const labPHAttr = {
   id: 'som-pH-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'pH',
   prefix: listOutlineIcon,
   appearance: 'counter',
@@ -490,7 +490,7 @@ export const labPHAttr = {
 
 export const labKAttr = {
   id: 'som-k-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'K',
   prefix: listOutlineIcon,
   suffix: 'mg/l',
@@ -500,7 +500,7 @@ export const labKAttr = {
 
 export const labPAttr = {
   id: 'som-p-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'P',
   prefix: listOutlineIcon,
   suffix: 'mg/l',
@@ -510,7 +510,7 @@ export const labPAttr = {
 
 export const labMgAttr = {
   id: 'som-Mg-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Mg',
   prefix: listOutlineIcon,
   suffix: 'mg/l',
@@ -520,7 +520,7 @@ export const labMgAttr = {
 
 export const wormCountAttr = {
   id: 'worm-count-1',
-  type: 'number_input',
+  type: 'numberInput',
   title: 'Worm count',
   prefix: listOutlineIcon,
   appearance: 'counter',
@@ -529,7 +529,7 @@ export const wormCountAttr = {
 
 export const sampleNameAttr = {
   id: 'location_name',
-  type: 'text_input',
+  type: 'textInput',
   title: 'Sample name',
   prefix: locationOutlineIcon,
   validations: { required: true },
@@ -537,7 +537,7 @@ export const sampleNameAttr = {
 
 export const somAttr = {
   id: 'som-1',
-  type: 'yes_no_input',
+  type: 'yesNoInput',
   title: 'Soil Organic Matter (SOM)',
   prefix: soilIcon,
   validations: { required: true },
@@ -573,6 +573,7 @@ const survey: Survey = {
         },
         attrs: {
           [sampleNameAttr.id]: name,
+          enteredSrefSystem: 4326,
         },
       });
 
@@ -601,6 +602,8 @@ const survey: Survey = {
         [fieldNameAttr.id]: '', // TODO: copy over previous
         [SOMDiameterAttr.id]: 1.3,
         surveyId: survey.id,
+        date: new Date().toISOString(),
+        enteredSrefSystem: 4326,
       },
     });
 

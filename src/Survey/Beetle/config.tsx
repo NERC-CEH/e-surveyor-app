@@ -451,6 +451,7 @@ const survey: Survey = {
           sample_method_id: 24, // Pitfall trap
           location: null,
           margin: 'Edge',
+          enteredSrefSystem: 4326,
         },
       });
 
@@ -522,9 +523,11 @@ const survey: Survey = {
       attrs: {
         surveyId: survey.id,
         training: appModel.attrs.useTraining,
+        date: new Date().toISOString(),
         sample_method_id: 2424, // Parent sample
         location: null,
         trapDays: 1,
+        enteredSrefSystem: 4326,
       },
     });
 

@@ -73,6 +73,7 @@ const survey: Survey = {
         attrs: {
           surveyId: survey.id,
           location: null,
+          enteredSrefSystem: 4326,
         },
       });
 
@@ -157,10 +158,12 @@ const survey: Survey = {
       attrs: {
         surveyId: survey.id,
         training: appModel.attrs.useTraining,
+        date: new Date().toISOString(),
         name: new Date().toLocaleDateString('en-UK'),
         seedmix: '',
         seedmixgroup: '',
         location: null,
+        enteredSrefSystem: 4326,
       },
     });
 

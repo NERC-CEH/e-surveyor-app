@@ -106,9 +106,11 @@ const survey: Survey = {
       attrs: {
         surveyId: survey.id,
         training: appModel.attrs.useTraining,
+        date: new Date().toISOString(),
         surveyEndTime: toISOTimezoneString(new Date()),
         location: null,
         comment: null,
+        enteredSrefSystem: 4326,
       },
     });
 
