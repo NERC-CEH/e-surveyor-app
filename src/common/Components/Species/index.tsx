@@ -28,8 +28,13 @@ const EditSpecies = ({ subSample, subSubSample }: Props) => {
   };
 
   const isIdentifying = occ.isIdentifying();
-  const identifyButton = !isIdentifying && occ.canReIdentify() && (
-    <HeaderButton onClick={identifySpecies}>Reidentify</HeaderButton>
+  const identifyButton = (
+    <HeaderButton
+      onClick={identifySpecies}
+      className={isIdentifying ? 'opacity-30' : ''}
+    >
+      Reidentify
+    </HeaderButton>
   );
 
   return (

@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
+import clsx from 'clsx';
 import { searchOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, useLoader } from '@flumens';
@@ -117,18 +118,16 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
   const identifying = occurrence.isIdentifying();
   const hasNoSpecies = !occurrence.getSpecies();
 
-  const identifyButton = !isIdentifying &&
-    occurrence?.canReIdentify() &&
-    onReidentify && (
-      <Button
-        onPress={onReidentify}
-        color="secondary"
-        className="mx-auto my-3 w-fit"
-        preventDefault
-      >
-        Reidentify
-      </Button>
-    );
+  const identifyButton = onReidentify && (
+    <Button
+      onPress={onReidentify}
+      color="secondary"
+      preventDefault
+      className={clsx('mx-auto my-3 w-fit', isIdentifying ? 'opacity-30' : '')}
+    >
+      Reidentify
+    </Button>
+  );
 
   return (
     <Main id="edit-species">
