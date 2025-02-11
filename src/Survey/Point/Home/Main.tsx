@@ -171,7 +171,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           <MenuAttrItem
             routerLink={`${baseURL}/name`}
             icon={bookmarkOutline}
-            label="Name"
+            label="Survey name"
             value={name || ''}
             disabled={isDisabled}
           />
