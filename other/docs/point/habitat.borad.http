@@ -1,0 +1,12 @@
+###
+# @name broad
+POST https://connect-apps.ceh.ac.uk/ESHAAPI/broadhabitat
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "input_tvks": [
+    "NBNSYS0000004445",
+    "NHMSYS0000457103"
+  ]
+}

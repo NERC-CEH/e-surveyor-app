@@ -1,0 +1,8 @@
+###
+# @name Identify
+POST https://esurveyor.ceh.ac.uk/api-proxy/waarneming
+  ?_api_proxy_uri=identify-proxy%2Fv1%2F%3Fapp_name%3Duni-jena
+Authorization: Bearer {{access_token}}
+Content-Type: application/x-www-form-urlencoded
+
+image = https://inaturalist-open-data.s3.amazonaws.com/photos/156517600/original.jpeg

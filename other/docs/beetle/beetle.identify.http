@@ -1,0 +1,11 @@
+###
+# @name Identify
+POST https://connect-apps.ceh.ac.uk/carabids/api/predict
+Authorization: Bearer {{access_token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="Screenshot 2024-04-03 at 18.14.10.png"
+
+< ../../trap_images/Amara_aenea_2.jpg
+--WebAppBoundary

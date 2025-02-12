@@ -1,0 +1,5 @@
+GET https://my-api.plantnet.org/v2/identify/all
+  ?api-key={{plantnet_api_key}}
+  &images=https://my.plantnet.org/images/image_1.jpeg
+  &organs=flower
+  &include-related-images=true
