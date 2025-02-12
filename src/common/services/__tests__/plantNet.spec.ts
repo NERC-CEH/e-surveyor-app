@@ -25,9 +25,14 @@ describe('plantNet service', () => {
   describe('processResponse', () => {
     it('should return with warehouse IDs', () => {
       // Given
-      const plantNetResponse = {
-        results: [fumariaSpecies],
-        version: '',
+      const plantNetResponse: any = {
+        suggestions: [
+          { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
+        ],
+        raw: {
+          results: [fumariaSpecies],
+          version: '',
+        },
       };
 
       // When
@@ -39,9 +44,14 @@ describe('plantNet service', () => {
 
     it('should return results UK names', () => {
       // Given
-      const plantNetResponse = {
-        results: [fumariaSpecies],
-        version: '',
+      const plantNetResponse: any = {
+        suggestions: [
+          { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
+        ],
+        raw: {
+          results: [fumariaSpecies],
+          version: '',
+        },
       };
 
       // When

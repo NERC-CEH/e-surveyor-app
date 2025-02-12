@@ -27,9 +27,15 @@ describe('filterUKSpecies', () => {
     // Given
     const nonUKSpecies = JSON.parse(JSON.stringify(fumariaSpecies));
     nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
-    const plantNetResponse = {
-      results: [fumariaSpecies, nonUKSpecies],
-      version: '',
+    const plantNetResponse: any = {
+      suggestions: [
+        { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
+        { taxon: nonUKSpecies.species.scientificNameWithoutAuthor },
+      ],
+      raw: {
+        results: [fumariaSpecies, nonUKSpecies],
+        version: '',
+      },
     };
     const { results } = processResponse(plantNetResponse);
 
@@ -47,9 +53,15 @@ describe('filterUKSpecies', () => {
     nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
     nonUKSpecies.score = 1;
 
-    const plantNetResponse = {
-      results: [fumariaSpecies, nonUKSpecies],
-      version: '',
+    const plantNetResponse: any = {
+      suggestions: [
+        { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
+        { taxon: nonUKSpecies.species.scientificNameWithoutAuthor },
+      ],
+      raw: {
+        results: [fumariaSpecies, nonUKSpecies],
+        version: '',
+      },
     };
     const { results } = processResponse(plantNetResponse);
 

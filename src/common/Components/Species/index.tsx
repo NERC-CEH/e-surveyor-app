@@ -28,7 +28,7 @@ const EditSpecies = ({ subSample, subSubSample }: Props) => {
   };
 
   const isIdentifying = occ.isIdentifying();
-  const identifyButton = (
+  const identifyButton = !!occ.media.length && (
     <HeaderButton
       onClick={identifySpecies}
       className={isIdentifying ? 'opacity-30' : ''}

@@ -1,0 +1,17 @@
+###
+# @name Identify
+POST https://esurveyor.ceh.ac.uk/api/plantnet
+  ?images=
+  &include-related-images=true
+Authorization: Bearer {{access_token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="organs"
+
+auto
+--WebAppBoundary
+Content-Disposition: form-data; name="images"; filename="Screenshot 2024-04-15 at 09.38.34.png"
+
+< ../../toms_images/00b8bf8eae6223a99c1d2403e787c9384f0a5206.JPG
+--WebAppBoundary

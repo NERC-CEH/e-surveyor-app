@@ -52,7 +52,11 @@ const AppPhotoPicker = ({
     if (!editImage) return;
 
     const newImageModel = await Media.getImageModel(image, config.dataPath);
-    Object.assign(editImage?.attrs, newImageModel.attrs);
+    Object.assign(editImage?.attrs, {
+      ...newImageModel.attrs,
+      queued: null, // in case it was uploaded
+    });
+
     if (editImage.isPersistent) {
       if (editImage.isPersistent()) editImage.save();
     } else {

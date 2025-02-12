@@ -152,8 +152,14 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
     try {
       this.identification.identifying = true;
 
+      const date = this.createdAt;
+      const location =
+        this.parent?.attrs.location || this.parent?.parent?.attrs.location;
+
       const { version, results: suggestions } = await identifyPlantImage(
-        this.media
+        this.media,
+        date,
+        location
       );
 
       this.identification.identifying = false;
@@ -172,7 +178,10 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       this.media.forEach(attachSpecies);
 
       const topSuggestion = UKSuggestions[0];
-      if (!topSuggestion) return;
+      if (!topSuggestion) {
+        this.attrs.taxon = null;
+        return;
+      }
 
       const taxon: Taxon = {
         score: topSuggestion.score,
