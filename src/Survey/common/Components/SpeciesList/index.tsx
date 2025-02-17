@@ -202,7 +202,6 @@ const SpeciesList = ({
           model={model}
           isDisabled={isDisabled}
           onIdentify={onIdentify}
-          deEmphasisedIdentifyBtn={showIdentifyAllBtn}
           onDelete={!disableDelete ? onDelete : undefined}
           onClick={navigateToSpeciesSample}
           disableAI={disableAI}

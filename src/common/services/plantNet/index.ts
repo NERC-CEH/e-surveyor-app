@@ -72,9 +72,10 @@ export const processResponse = (
     };
   };
 
-  const indiciaSuggestedSpecies = res.suggestions.map(
-    (s: IndiciaAISuggestion) => s.taxon
-  );
+  const passes = (s: IndiciaAISuggestion) => s.record_cleaner === 'pass';
+  const indiciaSuggestedSpecies = res.suggestions
+    .filter(passes)
+    .map((s: IndiciaAISuggestion) => s.taxon);
 
   const isIndiciaSuggested = (r: Result) =>
     indiciaSuggestedSpecies.includes(r.species.scientificNameWithoutAuthor);

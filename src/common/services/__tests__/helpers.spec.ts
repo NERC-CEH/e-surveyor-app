@@ -29,8 +29,14 @@ describe('filterUKSpecies', () => {
     nonUKSpecies.species.scientificNameWithoutAuthor = 'Alpine Fumaria';
     const plantNetResponse: any = {
       suggestions: [
-        { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
-        { taxon: nonUKSpecies.species.scientificNameWithoutAuthor },
+        {
+          taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
+          record_cleaner: 'pass',
+        },
+        {
+          taxon: nonUKSpecies.species.scientificNameWithoutAuthor,
+          record_cleaner: 'pass',
+        },
       ],
       raw: {
         results: [fumariaSpecies, nonUKSpecies],
@@ -55,8 +61,14 @@ describe('filterUKSpecies', () => {
 
     const plantNetResponse: any = {
       suggestions: [
-        { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
-        { taxon: nonUKSpecies.species.scientificNameWithoutAuthor },
+        {
+          taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
+          record_cleaner: 'pass',
+        },
+        {
+          taxon: nonUKSpecies.species.scientificNameWithoutAuthor,
+          record_cleaner: 'pass',
+        },
       ],
       raw: {
         results: [fumariaSpecies, nonUKSpecies],

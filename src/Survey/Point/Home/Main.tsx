@@ -48,24 +48,6 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
-  const getNewImageButton = () => {
-    if (isDisabled) {
-      return <br />;
-    }
-
-    return (
-      <Button
-        color="secondary"
-        onLongPress={navigateToSearch}
-        onPress={photoSelect}
-        prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="mx-auto mb-3 mt-7"
-      >
-        Species
-      </Button>
-    );
-  };
-
   const { seeded, seedmixgroup, seedmix, name } = sample.attrs;
   const isSeeded = seeded === 'Yes';
 
@@ -228,7 +210,19 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
         </div>
       </IonList>
 
-      {getNewImageButton()}
+      {!isDisabled ? (
+        <Button
+          color="secondary"
+          onLongPress={navigateToSearch}
+          onPress={photoSelect}
+          prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
+          className="mx-auto mb-3 mt-7"
+        >
+          Species
+        </Button>
+      ) : (
+        <br />
+      )}
 
       <SpeciesList
         sample={sample}

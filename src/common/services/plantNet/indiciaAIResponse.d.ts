@@ -3,7 +3,7 @@ export type IndiciaAISuggestion = {
   taxon: string;
   taxa_taxon_list_id: string;
   taxon_group_id: string;
-  record_cleaner: 'omit' | 'pass';
+  record_cleaner: 'omit' | 'pass' | 'fail';
 };
 
 export default interface IndiciaAIResponse<T> {

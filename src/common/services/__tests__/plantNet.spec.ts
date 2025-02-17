@@ -27,7 +27,10 @@ describe('plantNet service', () => {
       // Given
       const plantNetResponse: any = {
         suggestions: [
-          { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
+          {
+            taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
+            record_cleaner: 'pass',
+          },
         ],
         raw: {
           results: [fumariaSpecies],
@@ -46,7 +49,10 @@ describe('plantNet service', () => {
       // Given
       const plantNetResponse: any = {
         suggestions: [
-          { taxon: fumariaSpecies.species.scientificNameWithoutAuthor },
+          {
+            taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
+            record_cleaner: 'pass',
+          },
         ],
         raw: {
           results: [fumariaSpecies],

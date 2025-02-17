@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
-import { Button, Gallery, useAlert, useContextMenu } from '@flumens';
+import { Gallery, useAlert, useContextMenu } from '@flumens';
 import {
   IonItemSliding,
   IonItem,
@@ -63,7 +63,6 @@ type Model = Sample | Occurrence;
 interface Props {
   model: Model;
   isDisabled: boolean;
-  deEmphasisedIdentifyBtn: boolean;
   onIdentify: (model: Model) => void;
   onDelete?: () => void;
   onClick: (model: Model) => void;
@@ -73,7 +72,6 @@ interface Props {
 const UnidentifiedSpeciesEntry = ({
   model,
   isDisabled,
-  deEmphasisedIdentifyBtn,
   onIdentify,
   onDelete,
   onClick,
@@ -126,14 +124,13 @@ const UnidentifiedSpeciesEntry = ({
 
   const onIdentifyWrap = () => onIdentify(model);
 
-  const buttonStyles = deEmphasisedIdentifyBtn ? 'outline' : 'solid';
-
   return (
-    <IonItemSliding disabled={identifying} {...contextMenuProps}>
+    <IonItemSliding disabled={identifying}>
       <IonItem
         detail={false}
         onClick={onClickWrap}
         className="[--inner-padding-end:0px] [--padding-start:0px]"
+        {...contextMenuProps}
       >
         <div className="flex w-full items-center gap-2 bg-warning-100/50 p-1">
           {profilePhoto}
@@ -151,15 +148,16 @@ const UnidentifiedSpeciesEntry = ({
               !identifying &&
               hasSpeciesPhoto &&
               canBeIdentified && (
-                <Button
-                  className="occurrence-identify py-1 text-xs"
-                  color="secondary"
-                  onPress={onIdentifyWrap}
-                  fill={buttonStyles}
-                  preventDefault
+                <button
+                  className="occurrence-identify flex h-fit items-center justify-center gap-4 overflow-hidden rounded-md border border-solid border-secondary-800 bg-transparent px-6 py-1 text-center text-xs text-secondary-800 shadow-sm outline-none ring-0 transition hover:border-neutral-400"
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onIdentifyWrap();
+                  }}
                 >
                   Identify
-                </Button>
+                </button>
               )}
 
             {identifying && <IonSpinner className="mr-2 size-5" />}

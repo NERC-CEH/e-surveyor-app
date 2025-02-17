@@ -119,9 +119,10 @@ const HomeController = ({ sample }: Props) => {
         photo: image,
       });
 
-      device.isOnline && newSubSample.occurrences[0].identify();
-
       sample.samples.push(newSubSample);
+
+      device.isOnline && newSubSample.occurrences[0].identify(); // must be after adding to top sample to be able to access its location
+
       sample.save();
     }
   };
