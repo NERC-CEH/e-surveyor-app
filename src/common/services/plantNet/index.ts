@@ -109,6 +109,7 @@ export default async function identify(
           srid: 4326,
           latitude: location!.latitude,
           longitude: location!.longitude,
+          accuracy: location!.accuracy || 100,
         })
       : '',
     params: JSON.stringify({
