@@ -155,7 +155,7 @@ export default function optimise(speciesFlattened: RemoteAttributes[]) {
   const optimised: any = [];
 
   const addToList = (taxa: RemoteAttributes) => {
-    if (taxa.language === 'Welsh') return;
+    if (taxa.language !== 'Latin') return;
 
     const hasOnlyGenusInTheName = taxa.taxon.split(' ').length === 1;
     if (hasOnlyGenusInTheName) {

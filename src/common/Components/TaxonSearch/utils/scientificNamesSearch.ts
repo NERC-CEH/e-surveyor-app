@@ -11,6 +11,7 @@ import {
   SPECIES_FREQUENCY_INDEX,
   SPECIES_DIFFICULTY_INDEX,
 } from 'common/data/species/constants';
+import commonNamesIndex from 'common/data/uksi_plants.names.json';
 import helpers, { Species } from './searchHelpers';
 
 /**
@@ -80,11 +81,13 @@ function search(
       if (!otherWordsRegex && speciesEntry[GENUS_TAXON_INDEX]) {
         // no need to add genus if searching for species
         // why speciesEntry[WAREHOUSE_INDEX] see 'sandDustHack' in generator
+        const scientificName = speciesEntry[GENUS_TAXON_INDEX];
         fullRes = {
           arrayId: speciesArrayIndex,
           foundInName: 'scientificName',
           warehouseId: speciesEntry[GENUS_ID_INDEX],
-          scientificName: speciesEntry[GENUS_TAXON_INDEX],
+          scientificName,
+          commonName: (commonNamesIndex as any)[scientificName],
           tvk: speciesEntry[GENUS_TVK_INDEX],
         };
         results.push(fullRes);
@@ -99,6 +102,9 @@ function search(
           speciesIndex++
         ) {
           const speciesInArray = speciesArray[speciesIndex];
+          const scientificName = `${speciesEntry[GENUS_TAXON_INDEX]} ${speciesInArray[SPECIES_TAXON_INDEX]}`;
+          const commonName = (commonNamesIndex as any)[scientificName];
+
           if (otherWordsRegex) {
             // if search through species
             // check if matches
@@ -109,7 +115,8 @@ function search(
                 speciesId: speciesIndex,
                 foundInName: 'scientificName',
                 warehouseId: speciesInArray[SPECIES_ID_INDEX],
-                scientificName: `${speciesEntry[GENUS_TAXON_INDEX]} ${speciesInArray[SPECIES_TAXON_INDEX]}`,
+                scientificName,
+                commonName,
                 tvk: speciesInArray[SPECIES_TVK_INDEX],
                 frequency: speciesInArray[SPECIES_FREQUENCY_INDEX],
                 difficulty: speciesInArray[SPECIES_DIFFICULTY_INDEX],
@@ -123,7 +130,8 @@ function search(
               speciesId: speciesIndex,
               foundInName: 'scientificName',
               warehouseId: speciesInArray[SPECIES_ID_INDEX],
-              scientificName: `${speciesEntry[GENUS_TAXON_INDEX]} ${speciesInArray[SPECIES_TAXON_INDEX]}`,
+              scientificName,
+              commonName,
               tvk: speciesInArray[SPECIES_TVK_INDEX],
               frequency: speciesInArray[SPECIES_FREQUENCY_INDEX],
               difficulty: speciesInArray[SPECIES_DIFFICULTY_INDEX],
