@@ -20,6 +20,8 @@ function turnNamesArrayIntoLangObject(array: any) {
       preferredTaxon: taxon,
       preferredTaxaTaxonListId: preferredId,
       externalKey,
+      difficulty,
+      frequency,
     } = term;
 
     if (languageCode === 'Latin') {
@@ -36,6 +38,8 @@ function turnNamesArrayIntoLangObject(array: any) {
       scientificName: taxon,
       preferredId: parseInt(preferredId, 10),
       tvk: externalKey,
+      difficulty,
+      frequency,
     };
 
     agg.push(species);

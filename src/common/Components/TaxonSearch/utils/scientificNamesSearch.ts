@@ -1,14 +1,17 @@
 /** ****************************************************************************
  * Scientific name search.
  **************************************************************************** */
-import helpers from './searchHelpers';
-
-const GENUS_WAREHOUSE_INDEX = 0;
-const GENUS_SCI_NAME_INDEX = 1; // in genera and above
-const GENUS_TVK_INDEX = 2;
-const SPECIES_WAREHOUSE_INDEX = 0;
-const SPECIES_SCI_NAME_INDEX = 1; // in species and bellow
-const SPECIES_TVK_INDEX = 2; // in species and bellow
+import {
+  GENUS_ID_INDEX,
+  GENUS_TAXON_INDEX,
+  GENUS_TVK_INDEX,
+  SPECIES_ID_INDEX,
+  SPECIES_TAXON_INDEX,
+  SPECIES_TVK_INDEX,
+  SPECIES_FREQUENCY_INDEX,
+  SPECIES_DIFFICULTY_INDEX,
+} from 'common/data/species/constants';
+import helpers, { Species } from './searchHelpers';
 
 /**
  * Search Scientific names
@@ -64,7 +67,7 @@ function search(
     const speciesEntry: any = species[speciesArrayIndex];
 
     // check if matches
-    if (firstWordRegex.test(speciesEntry[GENUS_SCI_NAME_INDEX])) {
+    if (firstWordRegex.test(speciesEntry[GENUS_TAXON_INDEX])) {
       // find species array
       let speciesArray;
       for (let j = 0, { length } = speciesEntry; j < length; j++) {
@@ -74,14 +77,14 @@ function search(
       }
 
       let fullRes: any;
-      if (!otherWordsRegex && speciesEntry[GENUS_SCI_NAME_INDEX]) {
+      if (!otherWordsRegex && speciesEntry[GENUS_TAXON_INDEX]) {
         // no need to add genus if searching for species
         // why speciesEntry[WAREHOUSE_INDEX] see 'sandDustHack' in generator
         fullRes = {
           arrayId: speciesArrayIndex,
           foundInName: 'scientificName',
-          warehouseId: speciesEntry[GENUS_WAREHOUSE_INDEX],
-          scientificName: speciesEntry[GENUS_SCI_NAME_INDEX],
+          warehouseId: speciesEntry[GENUS_ID_INDEX],
+          scientificName: speciesEntry[GENUS_TAXON_INDEX],
           tvk: speciesEntry[GENUS_TVK_INDEX],
         };
         results.push(fullRes);
@@ -99,15 +102,17 @@ function search(
           if (otherWordsRegex) {
             // if search through species
             // check if matches
-            if (otherWordsRegex.test(speciesInArray[SPECIES_SCI_NAME_INDEX])) {
+            if (otherWordsRegex.test(speciesInArray[SPECIES_TAXON_INDEX])) {
               // add full sci name
               fullRes = {
                 arrayId: speciesArrayIndex,
                 speciesId: speciesIndex,
                 foundInName: 'scientificName',
-                warehouseId: speciesInArray[SPECIES_WAREHOUSE_INDEX],
-                scientificName: `${speciesEntry[GENUS_SCI_NAME_INDEX]} ${speciesInArray[SPECIES_SCI_NAME_INDEX]}`,
+                warehouseId: speciesInArray[SPECIES_ID_INDEX],
+                scientificName: `${speciesEntry[GENUS_TAXON_INDEX]} ${speciesInArray[SPECIES_TAXON_INDEX]}`,
                 tvk: speciesInArray[SPECIES_TVK_INDEX],
+                frequency: speciesInArray[SPECIES_FREQUENCY_INDEX],
+                difficulty: speciesInArray[SPECIES_DIFFICULTY_INDEX],
               };
               results.push(fullRes);
             }
@@ -117,9 +122,11 @@ function search(
               arrayId: speciesArrayIndex,
               speciesId: speciesIndex,
               foundInName: 'scientificName',
-              warehouseId: speciesInArray[SPECIES_WAREHOUSE_INDEX],
-              scientificName: `${speciesEntry[GENUS_SCI_NAME_INDEX]} ${speciesInArray[SPECIES_SCI_NAME_INDEX]}`,
+              warehouseId: speciesInArray[SPECIES_ID_INDEX],
+              scientificName: `${speciesEntry[GENUS_TAXON_INDEX]} ${speciesInArray[SPECIES_TAXON_INDEX]}`,
               tvk: speciesInArray[SPECIES_TVK_INDEX],
+              frequency: speciesInArray[SPECIES_FREQUENCY_INDEX],
+              difficulty: speciesInArray[SPECIES_DIFFICULTY_INDEX],
             };
             results.push(fullRes);
           }
@@ -154,7 +161,7 @@ const searchScientificSpeciesName = (
 function searchMulti(
   species: any[],
   searchPhrase: string,
-  results = [],
+  results: Species[] = [],
   maxResults: number,
   hybridRun: boolean,
   informalGroups = []

@@ -3,6 +3,61 @@
  **************************************************************************** */
 import _ from 'lodash';
 
+export type Species = {
+  /**
+   * Warehouse id
+   */
+  warehouseId: number;
+  /**
+   * Which name was it found when doing search
+   */
+  foundInName: 'scientificName' | 'commonName';
+  /**
+   * Scientific name
+   */
+  scientificName: string;
+  /**
+   * Common name
+   */
+  commonName?: string;
+  /**
+   * Genus array index
+   */
+  arrayId?: number;
+  /**
+   * ?
+   */
+  preferredId?: number;
+  /**
+   * Species array index
+   */
+  speciesId?: number;
+  /**
+   * Species name index, to know where found
+   */
+  speciesNameId?: number;
+  /**
+   * Species group
+   */
+  group?: number;
+  /**
+   * Common name synonym
+   */
+  synonym?: string;
+  /**
+   * Common name synonym
+   */
+  tvk?: string;
+  /**
+   * Records with the species.
+   */
+  frequency?: number;
+  /**
+   * ID difficulty level.
+   */
+  difficulty?: number;
+};
+
 const SCI_NAME_INDEX = 1; // in genera and above
 
 const helpers: any = {

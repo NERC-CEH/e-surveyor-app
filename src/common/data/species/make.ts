@@ -1,6 +1,20 @@
 import fs from 'fs';
+import { z, object, number } from 'zod';
 import uksiPlants from '../cacheRemote/uksi_plants.json';
-import optimise from './helperOptimise';
+import optimise from './optimise';
+
+const remoteSchema = object({
+  id: z.string(),
+  taxonGroup: z.string(),
+  taxon: z.string(),
+  defaultCommonName: z.string().optional(),
+  commonName: z.string().optional(),
+  externalKey: z.string(),
+  frequency: number(),
+  difficulty: number(),
+});
+
+export type RemoteAttributes = z.infer<typeof remoteSchema>;
 
 // ideally the warehouse report should return only the latin names
 function sortAlphabetically(species: any) {

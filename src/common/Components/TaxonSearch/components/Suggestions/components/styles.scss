@@ -15,10 +15,6 @@
     background-color: #fdfdfd;
   }
 
-  &:hover {
-    background-color: var(--ion-color-light);
-  }
-
   button {
     right: 0;
     border: none;
@@ -82,9 +78,5 @@
     button {
       border-left: 1px var(--ion-color-medium) solid;
     }
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 }

@@ -9,54 +9,10 @@ import {
 import { IonSearchbar, useIonViewDidEnter } from '@ionic/react';
 import Suggestions from './components/Suggestions';
 import './styles.scss';
-import SpeciesSearchEngine from './utils/taxon_search_engine';
+import SpeciesSearchEngine from './utils/searchEngine';
+import { type Species } from './utils/searchHelpers';
 
-export type Species = {
-  /**
-   * Warehouse id
-   */
-  warehouseId: number;
-  /**
-   * Which name was it found when doing search
-   */
-  foundInName: 'scientificName' | 'commonName';
-  /**
-   * Scientific name
-   */
-  scientificName: string;
-  /**
-   * Common name
-   */
-  commonName?: string;
-  /**
-   * Genus array index
-   */
-  arrayId?: number;
-  /**
-   * ?
-   */
-  preferredId?: number;
-  /**
-   * Species array index
-   */
-  speciesId?: number;
-  /**
-   * Species name index, to know where found
-   */
-  speciesNameId?: number;
-  /**
-   * Species group
-   */
-  group?: number;
-  /**
-   * Common name synonym
-   */
-  synonym?: string;
-  /**
-   * Common name synonym
-   */
-  tvk?: string;
-};
+export { Species };
 
 const MIN_SEARCH_LENGTH = 2;
 
