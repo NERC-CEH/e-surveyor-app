@@ -8,7 +8,7 @@ import { Species } from './searchHelpers';
 
 const loading = false;
 
-const MAX = 20;
+const MAX = 300;
 
 const API = {
   async init() {
@@ -71,9 +71,7 @@ const API = {
       (Number.isFinite(t2.frequency) ? t2.frequency! : -1) -
       (Number.isFinite(t1.frequency) ? t1.frequency! : -1); // defaulting to -1 so that genera/species with no frequency value are pushed to the bottom
     results.sort(byFrequency);
-    console.log(results);
 
-    // return results in the order
     return results;
   },
 };

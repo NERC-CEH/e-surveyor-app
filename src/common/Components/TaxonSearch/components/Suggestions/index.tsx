@@ -92,7 +92,7 @@ const Suggestions = ({
       );
     };
 
-    suggestionsList = deDuped.map(speciesWrap);
+    suggestionsList = deDuped.slice(0, 50).map(speciesWrap);
   }
 
   return (
