@@ -12,6 +12,7 @@ const remoteSchema = object({
   externalKey: z.string(),
   frequency: number(),
   difficulty: number(),
+  language: z.enum(['Latin', 'English', 'Welsh']),
 });
 
 export type RemoteAttributes = z.infer<typeof remoteSchema>;

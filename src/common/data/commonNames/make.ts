@@ -24,8 +24,8 @@ function turnNamesArrayIntoLangObject(array: any) {
       frequency,
     } = term;
 
-    if (languageCode === 'Latin') {
-      // no need for latin - see data/species/index.json file
+    if (languageCode !== 'English') {
+      // no need for latin or Welsh - see data/species/index.json file
       return agg;
     }
 
