@@ -138,7 +138,8 @@ function addSpecies(optimised: any[], taxa: RemoteAttributes) {
   species[SPECIES_TAXON_INDEX] = taxonClean;
   species[SPECIES_TVK_INDEX] = taxa.externalKey;
 
-  if (taxa.frequency) {
+  const isPreferredOrEnglish = taxa.language !== 'Latin' || taxa.preferred;
+  if (isPreferredOrEnglish && taxa.frequency) {
     species[SPECIES_FREQUENCY_INDEX] = taxa.frequency;
   }
   if (taxa.difficulty) {

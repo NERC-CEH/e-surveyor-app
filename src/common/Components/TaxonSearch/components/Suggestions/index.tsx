@@ -37,8 +37,7 @@ function deDuplicateSuggestions(suggestions: any) {
 const getSearchInfo = () => (
   <InfoBackgroundMessage className="text-left">
     For quicker searching of the taxa you can use different shortcuts. For
-    example, to find
-    <i>Lopinga achine</i> you can type in the search bar :
+    example, to find <i>Lopinga achine</i> you can type in the search bar :
     <br />
     <br />
     <i>lop ach</i>
