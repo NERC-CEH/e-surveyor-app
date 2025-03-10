@@ -72,7 +72,8 @@ export const processResponse = (
     };
   };
 
-  const passes = (s: IndiciaAISuggestion) => s.record_cleaner === 'pass';
+  const passes = (s: IndiciaAISuggestion) =>
+    s.record_cleaner === 'pass' || s.record_cleaner === 'omit';
   const indiciaSuggestedSpecies = res.suggestions
     .filter(passes)
     .map((s: IndiciaAISuggestion) => s.taxon);
@@ -109,7 +110,7 @@ export default async function identify(
           srid: 4326,
           latitude: location!.latitude,
           longitude: location!.longitude,
-          accuracy: location!.accuracy || 100,
+          accuracy: 100,
         })
       : '',
     params: JSON.stringify({
