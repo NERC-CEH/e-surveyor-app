@@ -41,19 +41,18 @@ mobxConfig({ enforceActions: 'never' });
   await samples.fetch();
 
   appModel.attrs.sendAnalytics &&
-    Sentry.init(
-      {
-        ...sentryOptions,
-        dsn: config.sentryDNS,
-        environment: config.environment,
-        release: config.version,
-        dist: config.build,
-        initialScope: {
-          user: { id: userModel.id },
-          tags: { session: appModel.attrs.appSession },
-        },
+    Sentry.init({
+      ...sentryOptions,
+      dsn: config.sentryDSN,
+      environment: config.environment,
+      release: config.version,
+      dist: config.build,
+      enabled: config.environment === 'production',
+      initialScope: {
+        user: { id: userModel.id },
+        tags: { session: appModel.attrs.appSession },
       },
-    );
+    });
 
   appModel.attrs.appSession += 1;
 

@@ -23,7 +23,7 @@ const CONFIG = {
   POSSIBLE_THRESHOLD: 0.2,
 
   // error analytics
-  sentryDNS: (!isTestEnv && process.env.APP_SENTRY_KEY) as string,
+  sentryDSN: (!isTestEnv && process.env.APP_SENTRY_KEY) as string,
 
   // mapping
   map: {
