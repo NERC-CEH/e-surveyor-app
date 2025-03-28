@@ -1,17 +1,18 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { cameraOutline } from 'ionicons/icons';
 import 'swiper/css';
 import 'swiper/css/grid';
 import { Grid } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page, Main, device, useToast, captureImage, Button } from '@flumens';
-import { IonIcon, isPlatform } from '@ionic/react';
+import { IonIcon, NavContext, isPlatform } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
 import config from 'common/config';
 import rothamstedLogo from 'common/images/rothamsted-logo.png';
 import appModel from 'common/models/app';
 import ImageModel from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
+import userModel from 'common/models/user';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import SpeciesProfile from './Components/Species';
 import SurveyCard from './Components/SurveyCard';
@@ -27,6 +28,7 @@ const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
+  const context = useContext(NavContext);
 
   const { useExperiments } = appModel.attrs;
 
@@ -36,6 +38,11 @@ const LandingPage = () => {
   };
 
   const identifyPhoto = async () => {
+    if (!userModel.isLoggedIn()) {
+      context.navigate(`/user/register`);
+      return;
+    }
+
     if (!device.isOnline) {
       toast.warn('Looks like you are offline!');
       return;
