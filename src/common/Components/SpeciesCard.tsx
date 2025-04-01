@@ -126,60 +126,70 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
 
   const onSelectWrap = () => onSelect(species);
 
+  const localStatus = species.recordCleaner !== 'pass' && (
+    <div className="flex w-full items-center justify-center border-b border-neutral-300 bg-neutral-100 p-1 text-sm text-neutral-800">
+      Locally absent
+    </div>
+  );
+
   return (
     <>
       {getGallery()}
 
-      <div className="flex flex-col gap-2 rounded-md border border-solid border-neutral-200 bg-white p-3 [&:first-of-type]:border-[var(--color-primary-800)]">
-        <div className="flex justify-between gap-2">
-          <div className="flex flex-col justify-center gap-1">
-            <h3 className="font-semibold">{commonName}</h3>
-            <h3 className="italic opacity-70">{scientificName}</h3>
+      <div className="overflow-hidden rounded-md border border-solid border-neutral-300 bg-white [&:first-of-type]:border-[var(--color-primary-800)]">
+        {localStatus}
+
+        <div className="flex w-full flex-col gap-2 p-3">
+          <div className="flex justify-between gap-2">
+            <div className="flex flex-col justify-center gap-1">
+              <h3 className="font-semibold">{commonName}</h3>
+              <h3 className="italic opacity-70">{scientificName}</h3>
+            </div>
+
+            {!selectedSpeciesByUser && (
+              <div className="p-[5px]; relative h-[70px] w-[70px] self-center">
+                <Doughnut
+                  data={getDoughnutData(score)}
+                  options={options}
+                  redraw
+                />
+                <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.9em] font-medium">
+                  {getDoughnutData(score).text}
+                </div>
+              </div>
+            )}
+
+            {selectedSpeciesByUser && (
+              <IonIcon
+                icon={checkmark}
+                size="large"
+                className="my-auto"
+                color="success"
+              />
+            )}
           </div>
 
-          {!selectedSpeciesByUser && (
-            <div className="p-[5px]; relative h-[70px] w-[70px] self-center">
-              <Doughnut
-                data={getDoughnutData(score)}
-                options={options}
-                redraw
-              />
-              <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.9em] font-medium">
-                {getDoughnutData(score).text}
-              </div>
-            </div>
+          {!!images.length && isOnline && (
+            <div className="grid grid-cols-4 gap-2">{getImages()}</div>
           )}
 
-          {selectedSpeciesByUser && (
-            <IonIcon
-              icon={checkmark}
-              size="large"
-              className="my-auto"
-              color="success"
-            />
+          {onSelect && (
+            <Button
+              fill="outline"
+              className="mt-3 p-2 text-sm"
+              onPress={onSelectWrap}
+            >
+              This is My Plant
+            </Button>
+          )}
+
+          {!species.warehouseId && (
+            <InfoBackgroundMessage>
+              This plant is not a UK native
+              <IonIcon icon={earthOutline} />
+            </InfoBackgroundMessage>
           )}
         </div>
-
-        {!!images.length && isOnline && (
-          <div className="grid grid-cols-4 gap-2">{getImages()}</div>
-        )}
-
-        {onSelect && (
-          <Button
-            fill="outline"
-            className="mt-3 p-2 text-sm"
-            onPress={onSelectWrap}
-          >
-            This is My Plant
-          </Button>
-        )}
-
-        {!species.warehouseId && (
-          <InfoBackgroundMessage>
-            This plant is not a UK native
-            <IonIcon icon={earthOutline} />
-          </InfoBackgroundMessage>
-        )}
       </div>
     </>
   );

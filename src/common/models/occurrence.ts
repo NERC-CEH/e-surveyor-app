@@ -8,6 +8,7 @@ import identifyBeetleImage from 'common/services/beetles';
 import identifyPlantImage, {
   ResponseResult as PlantNetResult,
 } from 'common/services/plantNet';
+import { IndiciaAISuggestion } from 'common/services/plantNet/indiciaAIResponse';
 import { Image } from 'common/services/plantNet/plantNetResponse.d';
 import identifyMothImage from 'common/services/waarneming';
 import beetleSurveyConfig from 'Survey/Beetle/config';
@@ -33,6 +34,7 @@ type ClassifierAttributes = {
   version?: string;
   suggestions?: Suggestion[];
   machineInvolvement?: MachineInvolvement;
+  recordCleaner?: IndiciaAISuggestion['record_cleaner'];
 };
 
 export type Taxon = {
@@ -162,12 +164,6 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
 
       this.identification.identifying = false;
 
-      const byScore = (
-        sp1: Pick<PlantNetResult, 'score'>,
-        sp2: Pick<PlantNetResult, 'score'>
-      ) => sp2.score - sp1.score;
-      suggestions.sort(byScore);
-
       const attachSpecies = (media: Media) => {
         media.attrs.identified = true; // eslint-disable-line no-param-reassign
       };
@@ -188,6 +184,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         version,
         suggestions,
         tvk: topSuggestion.tvk,
+        recordCleaner: topSuggestion.recordCleaner,
 
         // plantNet-specific
         images: topSuggestion.images,

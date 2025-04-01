@@ -18,6 +18,7 @@ export type ResponseResult = {
   warehouseId: number;
   tvk: string;
   images: Result['images'];
+  recordCleaner?: IndiciaAISuggestion['record_cleaner'];
 };
 
 type Response = {
@@ -61,12 +62,15 @@ export const processResponse = (
     warehouseId: parseInt(result.taxa_taxon_list_id, 10),
     tvk: result.external_key,
     images: getPlantNetImages(result.taxon),
+    recordCleaner: result.record_cleaner,
   });
 
-  const passes = (s: IndiciaAISuggestion) =>
-    s.record_cleaner === 'pass' || s.record_cleaner === 'omit';
+  const byProbability = (sp1: IndiciaAISuggestion, sp2: IndiciaAISuggestion) =>
+    sp2.probability - sp1.probability;
 
-  const allProcessedSpecies = res.suggestions.filter(passes).map(processResult);
+  const allProcessedSpecies = res.suggestions
+    .sort(byProbability)
+    .map(processResult);
 
   return {
     version: res.classifier_version,

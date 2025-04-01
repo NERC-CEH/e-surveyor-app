@@ -43,7 +43,12 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
     const sp = occurrence.getSpecies();
     if (!sp) return null;
 
-    const setByUser = sp.machineInvolvement === MachineInvolvement.HUMAN;
+    const setByUser =
+      sp.machineInvolvement === MachineInvolvement.HUMAN ||
+      sp.machineInvolvement === MachineInvolvement.HUMAN_ACCEPTED_PREFERRED ||
+      sp.machineInvolvement ===
+        MachineInvolvement.HUMAN_ACCEPTED_LESS_PREFERRED;
+
     const selectedSpeciesByUser = !sp.images || setByUser;
 
     return (
@@ -83,12 +88,8 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
       const onSelectWrap = () => setSpeciesAsMain(sp);
 
       const suggestionAsTaxon: Taxon = {
-        score: sp.score,
-        warehouseId: sp.warehouseId,
+        ...sp,
         commonName: sp.commonNames[0],
-        scientificName: sp.scientificName,
-        images: sp.images,
-        tvk: '',
       };
 
       return (
