@@ -44,8 +44,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
     if (!sp) return null;
 
     const setByUser = sp.machineInvolvement === MachineInvolvement.HUMAN;
-    const isLegacy = !!(sp as any).scoreFromAPI; // scoreFromAPI - backwards compatible
-    const selectedSpeciesByUser = !sp.gbif?.id || setByUser || isLegacy;
+    const selectedSpeciesByUser = !sp.images || setByUser;
 
     return (
       <SpeciesCard species={sp} selectedSpeciesByUser={selectedSpeciesByUser} />

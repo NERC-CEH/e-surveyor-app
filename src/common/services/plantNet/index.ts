@@ -4,8 +4,6 @@ import { Location, dateFormat, isValidLocation } from '@flumens';
 import config from 'common/config';
 import userModel from 'common/models/user';
 import Image from 'models/image';
-import UKSIPlantsData from '../../data/uksi_plants.list.json';
-import UKPlantNamesData from '../../data/uksi_plants.names.json';
 import IndiciaAIResponse, { IndiciaAISuggestion } from './indiciaAIResponse.d';
 import PlantNetResponse, { Result, Species } from './plantNetResponse.d';
 
@@ -13,20 +11,13 @@ export type { Species };
 
 const UKSI_LIST_ID = 15;
 
-type ScientificName = string;
-type CommonName = string;
-type WarehouseId = number;
-type TVK = string;
-const UKSIPlants = UKSIPlantsData as unknown as {
-  [key: ScientificName]: [WarehouseId, TVK];
-};
-const UKPlantNames: { [key: ScientificName]: CommonName } = UKPlantNamesData;
-
-export type ResponseResult = Omit<Result, 'species'> & {
+export type ResponseResult = {
+  score: number;
   commonNames: string[];
   scientificName: string;
   warehouseId: number;
   tvk: string;
+  images: Result['images'];
 };
 
 type Response = {
@@ -55,35 +46,27 @@ export function dataURItoBlob(dataURI: any, fileType: any) {
 export const processResponse = (
   res: IndiciaAIResponse<PlantNetResponse>
 ): Response => {
-  const processResult = (result: Result) => {
-    const { species, ...restResult } = result;
-    const scientificName = species.scientificNameWithoutAuthor;
-    const speciesUKName = UKPlantNames[scientificName];
-    const commonNames = !speciesUKName ? [] : [speciesUKName]; // eslint-disable-line
-
-    const [warehouseId, tvk] = UKSIPlants[scientificName] || [];
-
-    return {
-      ...restResult,
-      scientificName,
-      commonNames,
-      warehouseId,
-      tvk,
-    };
+  const getPlantNetImages = (taxon: string) => {
+    const byTaxon = ({ species }: Result) =>
+      species.scientificNameWithoutAuthor === taxon;
+    return res.raw.results.find(byTaxon)?.images || [];
   };
+
+  const processResult = (result: IndiciaAISuggestion) => ({
+    score: result.probability,
+    scientificName: result.taxon,
+    commonNames: result.default_common_name
+      ? [result.default_common_name!]
+      : [],
+    warehouseId: parseInt(result.taxa_taxon_list_id, 10),
+    tvk: result.external_key,
+    images: getPlantNetImages(result.taxon),
+  });
 
   const passes = (s: IndiciaAISuggestion) =>
     s.record_cleaner === 'pass' || s.record_cleaner === 'omit';
-  const indiciaSuggestedSpecies = res.suggestions
-    .filter(passes)
-    .map((s: IndiciaAISuggestion) => s.taxon);
 
-  const isIndiciaSuggested = (r: Result) =>
-    indiciaSuggestedSpecies.includes(r.species.scientificNameWithoutAuthor);
-
-  const allProcessedSpecies = res.raw.results
-    .filter(isIndiciaSuggested)
-    .map(processResult);
+  const allProcessedSpecies = res.suggestions.filter(passes).map(processResult);
 
   return {
     version: res.classifier_version,
@@ -91,7 +74,6 @@ export const processResponse = (
   };
 };
 
-// TODO: use axios
 export default async function identify(
   images: Image[],
   date: string | number,

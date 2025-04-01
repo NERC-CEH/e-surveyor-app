@@ -5,11 +5,10 @@ import {
   validateRemoteModel,
 } from '@flumens';
 import identifyBeetleImage from 'common/services/beetles';
-import { filterUKSpecies } from 'common/services/helpers';
 import identifyPlantImage, {
   ResponseResult as PlantNetResult,
 } from 'common/services/plantNet';
-import { Image, Gbif } from 'common/services/plantNet/plantNetResponse.d';
+import { Image } from 'common/services/plantNet/plantNetResponse.d';
 import identifyMothImage from 'common/services/waarneming';
 import beetleSurveyConfig from 'Survey/Beetle/config';
 import mothSurveyConfig, { UNKNOWN_SPECIES } from 'Survey/Moth/config';
@@ -19,7 +18,6 @@ import Sample from './sample';
 
 type PlantNetTaxonAttrs = {
   images?: Image[];
-  gbif?: Gbif;
 };
 
 export type Suggestion = {
@@ -170,14 +168,12 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       ) => sp2.score - sp1.score;
       suggestions.sort(byScore);
 
-      const UKSuggestions = filterUKSpecies(suggestions);
-
       const attachSpecies = (media: Media) => {
         media.attrs.identified = true; // eslint-disable-line no-param-reassign
       };
       this.media.forEach(attachSpecies);
 
-      const topSuggestion = UKSuggestions[0];
+      const topSuggestion = suggestions[0];
       if (!topSuggestion) {
         this.attrs.taxon = null;
         return;
@@ -195,7 +191,6 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
 
         // plantNet-specific
         images: topSuggestion.images,
-        gbif: topSuggestion.gbif,
       };
 
       this.attrs.taxon = taxon;

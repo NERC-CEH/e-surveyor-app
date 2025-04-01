@@ -1,4 +1,6 @@
 import { processResponse } from '../plantNet';
+import IndiciaAIResponse from '../plantNet/indiciaAIResponse.d';
+import PlantNetResponse from '../plantNet/plantNetResponse.d';
 
 const fumariaSpecies = {
   images: [],
@@ -21,22 +23,36 @@ const fumariaSpecies = {
   },
 };
 
+const plantNetResponse: IndiciaAIResponse<PlantNetResponse> = {
+  suggestions: [
+    {
+      taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
+      record_cleaner: 'pass',
+      default_common_name: 'Fumitory',
+      probability: 0,
+      taxa_taxon_list_id: '17200',
+      taxon_group_id: '',
+      external_key: '',
+      organism_key: '',
+    },
+  ],
+  raw: {
+    results: [fumariaSpecies],
+    version: '',
+    language: '',
+    preferedReferential: '',
+    bestMatch: '',
+    remainingIdentificationRequests: 0,
+    query: null as any,
+  },
+  classifier_id: '',
+  classifier_version: '',
+};
+
 describe('plantNet service', () => {
   describe('processResponse', () => {
     it('should return with warehouse IDs', () => {
       // Given
-      const plantNetResponse: any = {
-        suggestions: [
-          {
-            taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
-            record_cleaner: 'pass',
-          },
-        ],
-        raw: {
-          results: [fumariaSpecies],
-          version: '',
-        },
-      };
 
       // When
       const { results } = processResponse(plantNetResponse);
@@ -47,18 +63,6 @@ describe('plantNet service', () => {
 
     it('should return results UK names', () => {
       // Given
-      const plantNetResponse: any = {
-        suggestions: [
-          {
-            taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
-            record_cleaner: 'pass',
-          },
-        ],
-        raw: {
-          results: [fumariaSpecies],
-          version: '',
-        },
-      };
 
       // When
       const { results } = processResponse(plantNetResponse);

@@ -28,33 +28,6 @@ function saveSpeciesToFile(data: any, sheetName: string) {
   });
 }
 
-function filterUKSIPlants() {
-  const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json', 'utf8');
-  const data = JSON.parse(rawData);
-
-  const extractTaxon = (
-    agg: any,
-    { taxon, id, language, preferred, externalKey }: any
-  ) => {
-    if (language !== 'Latin') return agg;
-
-    if (agg[taxon] && !preferred) return agg; // don't overwrite preferred ones
-
-    if (!id || !externalKey) throw new Error('id or externalKey is missing');
-
-    // eslint-disable-next-line no-param-reassign
-    agg[taxon] = [id, externalKey];
-    return agg;
-  };
-
-  const filteredData = data.reduce(extractTaxon, {});
-
-  fs.writeFileSync(
-    './uksi_plants.list.json',
-    JSON.stringify(filteredData, null, 2)
-  );
-}
-
 function getEnglishPlantNames() {
   const rawData = fs.readFileSync('./cacheRemote/uksi_plants.json', 'utf8');
   const data = JSON.parse(rawData);
@@ -93,7 +66,6 @@ const getData = async () => {
   await fetchAndSave('natural_enemies');
   await fetchAndSave('beetles');
 
-  await filterUKSIPlants();
   await getEnglishPlantNames();
 
   console.log('All done! 🚀');
