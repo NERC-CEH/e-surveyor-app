@@ -100,8 +100,7 @@ export default async function identify(
         })
       : '',
     params: JSON.stringify({
-      // form: { organs: ['auto'] },
-      query: { 'nb-results': 1, 'include-related-images': true },
+      query: { 'include-related-images': true },
     }),
   });
 
