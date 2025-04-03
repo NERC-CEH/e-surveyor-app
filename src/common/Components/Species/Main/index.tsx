@@ -8,7 +8,6 @@ import { IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import SpeciesCard from 'common/Components/SpeciesCard';
-import { filterUKSpecies } from 'common/services/helpers';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import { MachineInvolvement } from 'Survey/common/config';
 import './styles.scss';
@@ -105,12 +104,10 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
     const suggestions = taxon?.suggestions;
     if (!suggestions?.length) return [];
 
-    const UKSuggestions = filterUKSpecies(suggestions);
-
     const nonSelectedSpecies = (sp: Suggestion) =>
       taxon && sp.commonNames[0] !== taxon.commonName;
 
-    return UKSuggestions.filter(nonSelectedSpecies).map(getSpeciesCard);
+    return suggestions.filter(nonSelectedSpecies).map(getSpeciesCard);
   };
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);

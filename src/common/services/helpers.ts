@@ -1,6 +1,4 @@
 import { isPlatform } from '@ionic/react';
-import blackListedData from 'common/data/cacheRemote/uksi_plants_blacklist.json';
-import { Suggestion } from 'models/occurrence';
 
 /**
  * Converts DataURI object to a Blob.
@@ -67,34 +65,4 @@ export default async function appendModelToFormData(
   const name = mediaModel.cid;
 
   formData.append(key, blob, `${name}.${extension}`);
-}
-
-const blacklisted = blackListedData.map(sp => sp.taxon);
-
-export function filterUKSpecies(results: Suggestion[]): Suggestion[] {
-  let removedSpeciesScores = 0;
-
-  const isUKSpeciesOrHighScore = (result: Suggestion) => {
-    const highScore = result.score >= 0.9;
-    const ukSpecies = result.warehouseId;
-    if (ukSpecies || highScore) return true;
-
-    removedSpeciesScores += result.score;
-
-    return false;
-  };
-
-  const blacklistedUKSpecies = (result: Suggestion) =>
-    !blacklisted.includes(result.scientificName);
-
-  const changeScoreValue = (sp: Suggestion) => {
-    const newScore = sp.score / (1 - removedSpeciesScores);
-
-    return { ...sp, score: newScore };
-  };
-
-  return results
-    .filter(isUKSpeciesOrHighScore)
-    .filter(blacklistedUKSpecies)
-    .map(changeScoreValue);
 }

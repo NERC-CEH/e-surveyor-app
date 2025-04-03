@@ -126,11 +126,20 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
 
   const onSelectWrap = () => onSelect(species);
 
-  const localStatus = species.recordCleaner !== 'pass' && (
-    <div className="flex w-full items-center justify-center border-b border-neutral-300 bg-neutral-100 p-1 text-sm text-neutral-800">
-      Locally absent
-    </div>
-  );
+  let localStatus: any;
+  if (species.recordCleaner === 'pass')
+    localStatus = (
+      <div className="flex w-full items-center justify-center border-b border-neutral-400 bg-primary-400/20 p-1 text-sm font-semibold text-neutral-800">
+        Locally abundant
+      </div>
+    );
+
+  if (species.recordCleaner === 'fail')
+    localStatus = (
+      <div className="flex w-full items-center justify-center border-b border-neutral-400 bg-neutral-100 p-1 text-sm font-semibold text-neutral-800">
+        Locally absent
+      </div>
+    );
 
   return (
     <>

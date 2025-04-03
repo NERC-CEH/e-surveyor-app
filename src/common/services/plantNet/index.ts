@@ -2,10 +2,13 @@
 import axios from 'axios';
 import { Location, dateFormat, isValidLocation } from '@flumens';
 import config from 'common/config';
+import blackListedData from 'common/data/cacheRemote/uksi_plants_blacklist.json';
 import userModel from 'common/models/user';
 import Image from 'models/image';
 import IndiciaAIResponse, { IndiciaAISuggestion } from './indiciaAIResponse.d';
 import PlantNetResponse, { Result, Species } from './plantNetResponse.d';
+
+const blacklisted = blackListedData.map(sp => sp.taxon);
 
 export type { Species };
 
@@ -65,11 +68,18 @@ export const processResponse = (
     recordCleaner: result.record_cleaner,
   });
 
+  const isUKSpecies = (sp: IndiciaAISuggestion) => !!sp.taxa_taxon_list_id;
+
   const byProbability = (sp1: IndiciaAISuggestion, sp2: IndiciaAISuggestion) =>
     sp2.probability - sp1.probability;
 
+  const blacklistedUKSpecies = (sp: IndiciaAISuggestion) =>
+    !blacklisted.includes(sp.taxon);
+
   const allProcessedSpecies = res.suggestions
     .sort(byProbability)
+    .filter(isUKSpecies)
+    .filter(blacklistedUKSpecies)
     .map(processResult);
 
   return {
