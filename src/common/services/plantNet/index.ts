@@ -68,7 +68,15 @@ export const processResponse = (
     recordCleaner: result.record_cleaner,
   });
 
-  const isUKSpecies = (sp: IndiciaAISuggestion) => !!sp.taxa_taxon_list_id;
+  let nonUKSpeciesScores = 0;
+  const isUKSpecies = (sp: IndiciaAISuggestion) => {
+    const isUkSpecies = !!sp.taxa_taxon_list_id;
+    if (isUkSpecies) return true;
+
+    nonUKSpeciesScores += sp.probability;
+
+    return false;
+  };
 
   const byProbability = (sp1: IndiciaAISuggestion, sp2: IndiciaAISuggestion) =>
     sp2.probability - sp1.probability;
@@ -76,10 +84,19 @@ export const processResponse = (
   const blacklistedUKSpecies = (sp: IndiciaAISuggestion) =>
     !blacklisted.includes(sp.taxon);
 
+  const changeScoreValue = (sp: IndiciaAISuggestion) => ({
+    ...sp,
+    probability: sp.probability / (1 - nonUKSpeciesScores),
+  });
+
+  const highScore = (sp: IndiciaAISuggestion) => sp.probability > 0.2;
+
   const allProcessedSpecies = res.suggestions
     .sort(byProbability)
     .filter(isUKSpecies)
     .filter(blacklistedUKSpecies)
+    .map(changeScoreValue)
+    .filter(highScore)
     .map(processResult);
 
   return {

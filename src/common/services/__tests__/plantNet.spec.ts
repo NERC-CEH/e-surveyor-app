@@ -29,7 +29,7 @@ const plantNetResponse: IndiciaAIResponse<PlantNetResponse> = {
       taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
       record_cleaner: 'pass',
       default_common_name: 'Fumitory',
-      probability: 0,
+      probability: 0.5,
       taxa_taxon_list_id: '17200',
       taxon_group_id: '',
       external_key: '',
