@@ -1,6 +1,12 @@
 ### 1.5.0
 
 Updated app name.
+Updated and improved plant identification/classifier logic (PlantNet, Indicia AI, proxy AI).
+Enhanced species search features (frequency, difficulty, result limits, sorting, common/Latin names).
+Fixed migration and authentication issues.
+UI/UX improvements (labels, manual search, credits, app name harmonisation).
+General code clean-up and dependency updates.
+Small Beetle survey UI tweaks.
 
 ### 1.4.0
 

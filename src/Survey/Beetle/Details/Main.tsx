@@ -22,7 +22,7 @@ import { IonIcon, IonList } from '@ionic/react';
 import beetleIcon from 'common/images/beetle.svg';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
-import BeetleGuide from './BeetleGuide';
+import BeetleGuide from '../common/BeetleGuide';
 
 const clipboardIcon = <IonIcon src={clipboardOutline} className="size-6" />;
 
