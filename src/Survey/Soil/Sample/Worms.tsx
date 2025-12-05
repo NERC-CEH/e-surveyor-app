@@ -12,7 +12,7 @@ interface Props {
 
 const WormHome = ({ subSample }: Props) => {
   const recordAttrs = {
-    record: subSample.attrs,
+    record: subSample.data,
   };
 
   return (

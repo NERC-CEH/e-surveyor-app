@@ -17,7 +17,7 @@ import config from 'common/config';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import seedMixIcon from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
-import { Attrs } from 'common/models/app';
+import { Data } from 'common/models/app';
 
 function useDatabaseExportDialog(exportFn: any) {
   const alert = useAlert();
@@ -115,7 +115,7 @@ const useResetDialog = (resetApp: any) => {
 
 type Props = {
   resetApp: any;
-  onToggle: (prop: keyof Attrs, checked: boolean) => void;
+  onToggle: (prop: keyof Data, checked: boolean) => void;
   sendAnalytics: boolean;
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;

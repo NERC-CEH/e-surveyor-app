@@ -38,13 +38,13 @@ const Controller = ({ sample }: Props) => {
     sample.metadata.saved = true;
     sample.save();
 
-    appModel.attrs['draftId:transect'] = '';
+    appModel.data['draftId:transect'] = '';
 
     navigate(`${match.url}/report`);
   };
 
   const onAddNewQuadrat = () => {
-    if (sample.samples.length > sample.attrs.steps) {
+    if (sample.samples.length > sample.data.steps) {
       // in case tapped button twice
       return;
     }
@@ -57,11 +57,11 @@ const Controller = ({ sample }: Props) => {
     navigate(`${match.url}/quadrat/${quadratSample.cid}`);
   };
 
-  const isDisabled = sample.isUploaded();
+  const isDisabled = sample.isUploaded;
 
   const isInvalid = sample.validateRemote();
   const uploadButton =
-    isDisabled || sample.remote.synchronising ? null : (
+    isDisabled || sample.isSynchronising ? null : (
       <HeaderButton
         onClick={sample.metadata.saved ? onUpload : onFinish}
         isInvalid={isInvalid}
@@ -70,7 +70,7 @@ const Controller = ({ sample }: Props) => {
       </HeaderButton>
     );
 
-  const isTraining = !!sample.attrs.training;
+  const isTraining = !!sample.data.training;
   const trainingModeSubheader = isTraining && (
     <div className="bg-black p-1 text-center text-sm text-white">
       Training Mode

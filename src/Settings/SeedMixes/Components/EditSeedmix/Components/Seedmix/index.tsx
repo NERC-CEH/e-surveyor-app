@@ -169,7 +169,7 @@ const Seedmix = ({
         <Button
           color="secondary"
           onPress={() => history.push('/add')}
-          className="mx-auto my-5"
+          className="mx-auto my-5 bg-secondary-600"
         >
           Add Species
         </Button>

@@ -49,7 +49,7 @@ const getSeedMixGroups = () => {
 export const CUSTOM_SEEDMIX_NAME = 'Custom';
 
 const getSeedMix = (model: Sample) => {
-  const { seedmixgroup } = model.attrs;
+  const { seedmixgroup } = model.data;
 
   const addValueToObject = (seedMix: any) => {
     return { value: seedMix };
@@ -79,7 +79,7 @@ const getSeedMix = (model: Sample) => {
       label: seedmix.name,
     });
 
-    userCustom = appModel.attrs.seedmixes.map(getSeedmixEntry);
+    userCustom = appModel.data.seedmixes.map(getSeedmixEntry);
   }
 
   return [notRecorded, ...userCustom, ...seedMixes];
@@ -93,9 +93,9 @@ export const seedmixGroupAttr = {
       info: 'Please indicate the supplier.',
       inputProps: { options: getSeedMixGroups() },
       set: (value: any, sample: Sample) => {
-        if (sample.attrs.seedmixgroup !== value) {
-          sample.attrs.seedmixgroup = value; // eslint-disable-line
-          sample.attrs.seedmix = ''; // eslint-disable-line
+        if (sample.data.seedmixgroup !== value) {
+          sample.data.seedmixgroup = value; // eslint-disable-line
+          sample.data.seedmix = ''; // eslint-disable-line
         }
       },
     },
@@ -109,7 +109,7 @@ export const seedmixAttr = {
     attrProps: {
       input: 'radio',
       info: (smp: Sample) => {
-        if (smp.attrs.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+        if (smp.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
           return (
             <div>
               Please indicate the seed mix you have used.
@@ -124,17 +124,17 @@ export const seedmixAttr = {
       },
       inputProps: (smp: Sample) => ({ options: getSeedMix(smp) }),
       set: (value: any, sample: Sample) => {
-        if (sample.attrs.seedmix !== value) {
-          if (sample.attrs.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+        if (sample.data.seedmix !== value) {
+          if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
             const byId = (seedmix: SeedMix) => seedmix.id === value;
-            const selectedSeedmix = appModel.attrs.seedmixes.find(byId);
-            sample.attrs.seedmix = selectedSeedmix?.name; // eslint-disable-line
-            sample.attrs.customSeedmix = selectedSeedmix?.species || []; // eslint-disable-line
+            const selectedSeedmix = appModel.data.seedmixes.find(byId);
+            sample.data.seedmix = selectedSeedmix?.name; // eslint-disable-line
+            sample.data.customSeedmix = selectedSeedmix?.species || []; // eslint-disable-line
             return;
           }
 
           // eslint-disable-next-line no-param-reassign
-          sample.attrs.seedmix = value;
+          sample.data.seedmix = value;
         }
       },
     },
@@ -325,7 +325,7 @@ type OccurrenceConfig = {
   render?: any[] | ((model: Occurrence) => any[]);
   attrs: Attrs;
   create?: (options: OccurrenceCreateOptions) => Occurrence;
-  verify?: (attrs: any) => any;
+  verify?: (data: any) => any;
   modifySubmission?: (submission: any, model: any) => any;
   /**
    * Set to true if multi-species surveys shouldn't auto-increment it to 1 when adding to lists.
@@ -349,7 +349,7 @@ export type SampleConfig = {
   render?: any[] | ((model: Sample) => any[]);
   attrs?: Attrs;
   create?: (options: SampleCreateOptions) => Sample;
-  verify?: (attrs: any, model: any) => any;
+  verify?: (data: any, model: any) => any;
   modifySubmission?: (submission: any, model: any) => any;
   smp?: SampleConfig;
   occ?: OccurrenceConfig;

@@ -14,7 +14,7 @@ import {
 } from '@flumens';
 import config from 'common/config';
 import Sample from 'common/models/sample';
-import samples from 'common/models/samples';
+import samples from 'models/collections/samples';
 import surveyConfig from '../config';
 import GeolocateButton from './GeolocateButton';
 
@@ -32,31 +32,31 @@ function uuidToColor(uuid: string) {
 }
 
 type Props = {
-  sample: any;
+  sample: Sample;
 };
 
 const PastSampleMap = ({ sample: model }: Props) => {
-  const location = model.attrs.location || {};
+  const location = model.data.location || {};
 
   const [mapRef, setMapRef] = useState<any>();
   const flyToLocation = () => mapFlyToLocation(mapRef, location);
   useEffect(flyToLocation, [mapRef, location]);
 
-  const bySoilSurvey = (smp: Sample) => smp.attrs.surveyId === surveyConfig.id;
+  const bySoilSurvey = (smp: Sample) => smp.data.surveyId === surveyConfig.id;
   const soilSurveys = samples.filter(bySoilSurvey);
 
   const soilSurveyMarkers = soilSurveys.flatMap((smp: Sample) => {
     const randomColor = uuidToColor(smp.cid);
 
     return smp.samples.map((subSample: Sample) => {
-      if (!isValidLocation(subSample.attrs.location)) return null;
+      if (!isValidLocation(subSample.data.location)) return null;
 
       return (
         <LocationMarker.Circle
           key={subSample.cid}
           id={subSample.cid}
-          latitude={subSample.attrs.location.latitude}
-          longitude={subSample.attrs.location.longitude}
+          latitude={subSample.data.location.latitude}
+          longitude={subSample.data.location.longitude}
           paint={{
             'circle-color': randomColor,
             'circle-stroke-color': 'white',

@@ -10,7 +10,7 @@ import Main from './Main';
 
 const validate = (sample: Sample) => {
   try {
-    getDetailsValidationSchema().validateSync(sample.attrs);
+    getDetailsValidationSchema().validateSync(sample.data);
   } catch (attrError) {
     return attrError;
   }
@@ -59,7 +59,7 @@ const Controller = ({ sample }: Props) => {
   return (
     <Page id="transect-details">
       <Header backButtonLabel="Home" title="Transect" rightSlot={doneButton} />
-      <Main sample={sample} isDisabled={sample.isUploaded()} />
+      <Main sample={sample} isDisabled={sample.isUploaded} />
     </Page>
   );
 };

@@ -1,17 +1,23 @@
 import { ComponentProps, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
-import { captureImage, URL } from '@flumens';
+import {
+  captureImage,
+  ImageCropper,
+  InfoBackgroundMessage,
+  URL,
+} from '@flumens';
 import { IonButton, IonIcon } from '@ionic/react';
-import ImageCropper from 'common/Components/ImageCropper';
 import config from 'common/config';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import SinglePhotoPicker from './SinglePhotoPicker';
 
-interface Props
-  extends Omit<ComponentProps<typeof SinglePhotoPicker>, 'getImage'> {
+interface Props extends Omit<
+  ComponentProps<typeof SinglePhotoPicker>,
+  'getImage'
+> {
   model: Sample | Occurrence;
   maxImages?: number;
   allowToCrop?: boolean;
@@ -36,7 +42,7 @@ const AppPhotoPicker = ({
 
     const imageModel = await Media.getImageModel(image, config.dataPath);
     if (caption) {
-      imageModel.attrs.caption = caption;
+      imageModel.data.caption = caption;
     }
 
     const imageArray = Array.isArray(imageModel) ? imageModel : [imageModel];
@@ -51,7 +57,7 @@ const AppPhotoPicker = ({
     if (!editImage) return;
 
     const newImageModel = await Media.getImageModel(image, config.dataPath);
-    Object.assign(editImage?.attrs, newImageModel.attrs);
+    Object.assign(editImage?.data, newImageModel.data);
     if (editImage.isPersistent) {
       if (editImage.isPersistent()) editImage.save();
     } else {
@@ -63,7 +69,7 @@ const AppPhotoPicker = ({
 
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled = disabled || (model.parent && model.isDisabled());
+  const isDisabled = disabled || (model.parent && model.isDisabled);
   const maxPicsReached = !!maxImages && model.media.length >= maxImages;
 
   // eslint-disable-next-line react/no-unstable-nested-components
@@ -115,8 +121,11 @@ const AppPhotoPicker = ({
           image={editImage?.getURL()}
           onDone={onDoneEdit}
           onCancel={onCancelEdit}
-          message="Place your tray at the center of the frame."
-        />
+        >
+          <InfoBackgroundMessage className="z-10 mx-auto mt-[calc(var(--ion-safe-area-top,0)+10px)] w-fit max-w-[90%]">
+            Place your tray at the center of the frame.
+          </InfoBackgroundMessage>
+        </ImageCropper>
       )}
     </>
   );

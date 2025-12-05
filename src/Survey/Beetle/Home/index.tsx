@@ -4,13 +4,15 @@ import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
 import {
   captureImage,
-  getNewUUID,
   getObjectURL,
   Header,
   Page,
+  UUIDv7,
   saveFile,
   useLoader,
   useToast,
+  ImageCropper,
+  InfoBackgroundMessage,
 } from '@flumens';
 import { NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
@@ -20,7 +22,6 @@ import Occurrence from 'models/occurrence';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
-import ImageCropper from 'Components/ImageCropper';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
 import detectObjects from './objectDetection';
@@ -29,7 +30,7 @@ type URL = string;
 
 const dataURItoFile = (dataURI: string) =>
   isPlatform('hybrid')
-    ? saveFile(dataURI, `${getNewUUID()}.jpg`)
+    ? saveFile(dataURI, `${UUIDv7()}.jpg`)
     : getObjectURL(dataURI);
 
 type Props = {
@@ -62,7 +63,7 @@ const Controller = ({ sample }: Props) => {
     sample.metadata.saved = true;
     sample.save();
 
-    appModel.attrs['draftId:beetle'] = '';
+    appModel.data['draftId:beetle'] = '';
 
     navigate(`/home/surveys`, 'root');
   };
@@ -76,7 +77,12 @@ const Controller = ({ sample }: Props) => {
 
     // new subsample
     const dataDirPath = config.dataPath;
-    const image = await Media.getImageModel(photoURL, dataDirPath);
+    const image = (await Media.getImageModel(
+      photoURL,
+      dataDirPath,
+      true
+    )) as Media;
+
     const trapSample = survey.smp!.create!({
       Sample,
       photo: image,
@@ -91,7 +97,11 @@ const Controller = ({ sample }: Props) => {
     const beetlePhotos = await Promise.all(beetlePhotoURIs.map(dataURItoFile));
 
     const getOccurrence = async (beetlePhotoURL: URL) => {
-      const mediaModel = await Media.getImageModel(beetlePhotoURL, dataDirPath);
+      const mediaModel = (await Media.getImageModel(
+        beetlePhotoURL,
+        dataDirPath,
+        true
+      )) as Media;
       return survey.smp!.occ!.create!({ Occurrence, photo: mediaModel });
     };
     const occurrences = await Promise.all(beetlePhotos.map(getOccurrence));
@@ -129,11 +139,11 @@ const Controller = ({ sample }: Props) => {
   };
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled = sample.isUploaded();
+  const isDisabled = sample.isUploaded;
 
   const isInvalid = sample.validateRemote();
   const uploadButton =
-    isDisabled || sample.remote.synchronising ? null : (
+    isDisabled || sample.isSynchronising ? null : (
       <HeaderButton
         onClick={sample.metadata.saved ? onUpload : onFinish}
         isInvalid={isInvalid}
@@ -142,7 +152,7 @@ const Controller = ({ sample }: Props) => {
       </HeaderButton>
     );
 
-  const isTraining = !!sample.attrs.training;
+  const isTraining = !!sample.data.training;
   const trainingModeSubheader = isTraining && (
     <div className="bg-black p-1 text-center text-sm text-white">
       Training Mode
@@ -166,10 +176,13 @@ const Controller = ({ sample }: Props) => {
         image={editImage}
         onDone={onDoneEdit}
         onCancel={onCancelEdit}
-        message="Align the rectangle with the edges of the tray."
-        allowRotation
-        cropperProps={{ aspect: 0.7 }}
-      />
+        // allowRotation
+        // cropperProps={{ aspect: 0.7 }}
+      >
+        <InfoBackgroundMessage className="z-10 mx-auto mt-[calc(var(--ion-safe-area-top,0)+10px)] w-fit max-w-[90%]">
+          Align the rectangle with the edges of the tray.
+        </InfoBackgroundMessage>
+      </ImageCropper>
 
       <canvas id="imageCanvas" className="hidden" />
     </Page>

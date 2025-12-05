@@ -4,7 +4,7 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { Media as MediaOriginal, MediaAttrs, createImage } from '@flumens';
+import { Media as MediaOriginal, MediaAttrs } from '@flumens';
 import { isPlatform } from '@ionic/react';
 import config from 'common/config';
 import Occurrence from './occurrence';
@@ -13,80 +13,25 @@ import userModel from './user';
 
 export type URL = string;
 
-type Attrs = MediaAttrs & { identified?: boolean; species: any };
+type Data = MediaAttrs & { identified?: boolean; species: any };
 
-export default class Media extends MediaOriginal<Attrs> {
+export default class Media extends MediaOriginal<Data> {
   declare parent?: Sample | Occurrence;
-
-  /**
-   * Create new image model with a photo
-   * @param ImageModel Class representing the model.
-   * @param imageURL
-   * @param dataDirPath
-   * @returns
-   */
-  static async getImageModel(
-    imageURL: URL,
-    dataDirPath: string
-  ): Promise<Media> {
-    if (!imageURL) {
-      throw new Error('File not found while creating image model.');
-    }
-
-    let width;
-    let height;
-    let data;
-
-    if (isPlatform('hybrid')) {
-      imageURL = Capacitor.convertFileSrc(imageURL); // eslint-disable-line
-      const image = await createImage(imageURL);
-
-      width = image.width;
-      height = image.height;
-
-      data = imageURL.split('/').pop();
-    } else {
-      [data, , width, height] = await Media.getDataURI(imageURL, {
-        width: 1000,
-        height: 1000,
-      });
-    }
-
-    const imageModel: Media = new Media({
-      attrs: {
-        data,
-        type: 'jpeg',
-        width,
-        height,
-        path: dataDirPath,
-      },
-    });
-
-    return imageModel;
-  }
 
   identification = observable({ identifying: false });
 
-  attrs: Attrs = observable({
-    identified: false,
-    // eslint-disable-next-line
-    // @ts-ignore
-    ...this.attrs,
-  });
-
   constructor(options: any) {
-    super(options);
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.remote.headers = async () => ({
-      Authorization: `Bearer ${await userModel.getAccessToken()}`,
+    super({
+      ...options,
+      url: config.backend.indicia.url,
+      getAccessToken: () => userModel.getAccessToken(),
     });
 
-    this.attrs = observable(this.attrs);
+    // TODO: check if needed
+    // data = observable({
+    //   identified: false,
+    //   ...this.data,
+    // });
   }
 
   async destroy() {
@@ -104,10 +49,10 @@ export default class Media extends MediaOriginal<Attrs> {
     }
 
     try {
-      if (this.attrs.path) {
+      if (this.data.path) {
         // backwards compatible - don't delete old media
         await Filesystem.deleteFile({
-          path: this.attrs.data,
+          path: this.data.data,
           directory: FilesystemDirectory.Data,
         });
       }
@@ -125,7 +70,7 @@ export default class Media extends MediaOriginal<Attrs> {
   }
 
   getURL() {
-    const { data: name } = this.attrs;
+    const { data: name } = this.data;
 
     if (!isPlatform('hybrid') || process.env.NODE_ENV === 'test') {
       return name;

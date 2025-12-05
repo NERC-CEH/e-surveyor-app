@@ -7,7 +7,7 @@ import { labKAttr, labMgAttr, labPAttr, labPHAttr } from '../../config';
 type Props = { sample: Sample };
 
 const Lab = ({ sample }: Props) => {
-  const recordAttrs = { record: sample.attrs };
+  const recordAttrs = { record: sample.data };
 
   return (
     <Page id="survey-soil-som-lab-nutrient">

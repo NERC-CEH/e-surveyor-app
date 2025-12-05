@@ -14,9 +14,9 @@ const HeaderButton = ({ children, onClick, isInvalid, className }: Props) => {
   return (
     <Button
       onPress={onClick}
-      color={!isInvalid ? 'secondary' : 'primary'}
+      color="secondary"
       className={clsx(
-        'max-w-28 whitespace-nowrap px-4 py-1 text-base',
+        'max-w-28 whitespace-nowrap px-4 py-1 text-base bg-secondary-600',
         isInvalid && 'opacity-50',
         className
       )}

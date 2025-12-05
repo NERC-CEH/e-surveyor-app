@@ -27,7 +27,7 @@ const HomeController = ({ sample }: Props) => {
   const checkSampleStatus = useValidateCheck(sample);
   const checkUserStatus = useUserStatusCheck();
 
-  const isDisabled = sample.isDisabled();
+  const { isDisabled } = sample;
 
   const surveyConfig = sample.getSurvey();
 
@@ -43,16 +43,13 @@ const HomeController = ({ sample }: Props) => {
 
     // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
-    appModel.attrs[`draftId:${config.name}`] = '';
+    appModel.data[`draftId:${config.name}`] = '';
 
     saveAndReturn();
   };
 
   const onIdentifyOccurrence = async (occ: Occurrence) => {
-    if (
-      appModel.attrs.useWiFiDataConnection &&
-      device.connectionType !== 'wifi'
-    )
+    if (appModel.data.useWiFiDataConnection && device.connectionType !== 'wifi')
       return;
 
     const isUserOK = await checkUserStatus();
@@ -103,13 +100,13 @@ const HomeController = ({ sample }: Props) => {
 
   const isInvalid = sample.validateRemote();
 
-  const finishButton = sample.remote.synchronising ? null : (
+  const finishButton = sample.isSynchronising ? null : (
     <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
       {sample.metadata.saved ? 'Report' : 'Finish'}
     </HeaderButton>
   );
 
-  const isTraining = !!sample.attrs.training;
+  const isTraining = !!sample.data.training;
   const trainingModeSubheader = isTraining && (
     <div className="bg-black p-1 text-center text-sm text-white">
       Training Mode

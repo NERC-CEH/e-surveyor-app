@@ -10,7 +10,7 @@ import Main from './Main';
 
 const validate = (sample: Sample) => {
   try {
-    getDetailsValidationSchema.validateSync(sample.attrs);
+    getDetailsValidationSchema.validateSync(sample.data);
   } catch (attrError) {
     return attrError;
   }
@@ -60,10 +60,10 @@ const Controller = ({ sample }: Props) => {
 
   const onChangeTrapOutside = (value: number) => {
     // eslint-disable-next-line no-param-reassign
-    sample.attrs.trapDays = value;
+    sample.data.trapDays = value;
   };
 
-  const isDisabled = sample.isDisabled();
+  const { isDisabled } = sample;
 
   const origContext = useContext(TailwindContext);
   const tailwindContext = useMemo(

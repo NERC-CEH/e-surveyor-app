@@ -36,10 +36,10 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
 
   const match = useRouteMatch();
 
-  const { trapDays } = sample.attrs;
-  const isDisabled = sample.isUploaded();
+  const { trapDays } = sample.data;
+  const isDisabled = sample.isUploaded;
 
-  const prettyGridRef = sample.attrs.location && (
+  const prettyGridRef = sample.data.location && (
     <GridRefValue sample={sample} />
   );
 
@@ -88,8 +88,8 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
             <Input
               label="Farm name"
               prefix={<IonIcon src={locationOutline} className="size-6" />}
-              value={sample.attrs.farm}
-              onChange={(val: string) => (sample.attrs.farm = val)} // eslint-disable-line
+              value={sample.data.farm}
+              onChange={(val: string) => (sample.data.farm = val)} // eslint-disable-line
             />
             <CounterInput
               label="Trapping period"
@@ -106,21 +106,21 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
             <Input
               label="Name"
               prefix={<IonIcon src={clipboardOutline} className="size-6" />}
-              value={sample.attrs.fieldName}
-              onChange={(val: string) => (sample.attrs.fieldName = val)} // eslint-disable-line
+              value={sample.data.fieldName}
+              onChange={(val: string) => (sample.data.fieldName = val)} // eslint-disable-line
             />
             <MenuAttrItemFromModel attr="fieldCrop" model={sample} />
-            {sample.attrs.fieldCrop === 'Other' && (
+            {sample.data.fieldCrop === 'Other' && (
               <MenuAttrItemFromModel attr="fieldCropOther" model={sample} />
             )}
             <MenuAttrItemFromModel attr="fieldMargins" model={sample} />
             <MenuAttrItemFromModel attr="fieldMarginsHabitat" model={sample} />
             <MenuAttrItemFromModel attr="fieldTillage" model={sample} />
-            {sample.attrs.fieldTillage === 'Other' && (
+            {sample.data.fieldTillage === 'Other' && (
               <MenuAttrItemFromModel attr="fieldTillageOther" model={sample} />
             )}
             <MenuAttrItemFromModel attr="fieldNonCropHabitats" model={sample} />
-            {sample.attrs.fieldNonCropHabitats?.includes('Other') && (
+            {sample.data.fieldNonCropHabitats?.includes('Other') && (
               <MenuAttrItemFromModel
                 attr="fieldNonCropHabitatsOther"
                 model={sample}
@@ -129,37 +129,37 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
             <Toggle
               prefix={clipboardIcon}
               label="Insecticides used"
-              defaultSelected={sample.attrs.fieldInsecticides}
+              defaultSelected={sample.data.fieldInsecticides}
               onChange={
-                (val: boolean) => (sample.attrs.fieldInsecticides = val) // eslint-disable-line
+                (val: boolean) => (sample.data.fieldInsecticides = val) // eslint-disable-line
               }
             />
             <Toggle
               prefix={clipboardIcon}
               label="Herbicides used"
-              defaultSelected={sample.attrs.fieldHerbicides}
-              onChange={(val: boolean) => (sample.attrs.fieldHerbicides = val)} // eslint-disable-line
+              defaultSelected={sample.data.fieldHerbicides}
+              onChange={(val: boolean) => (sample.data.fieldHerbicides = val)} // eslint-disable-line
             />
             <Toggle
               prefix={clipboardIcon}
               label="Undersowing"
-              defaultSelected={sample.attrs.fieldUndersowing}
-              onChange={(val: boolean) => (sample.attrs.fieldUndersowing = val)} // eslint-disable-line
+              defaultSelected={sample.data.fieldUndersowing}
+              onChange={(val: boolean) => (sample.data.fieldUndersowing = val)} // eslint-disable-line
             />
             <Toggle
               prefix={clipboardIcon}
               label="Companion cropping"
-              defaultSelected={sample.attrs.fieldCompanionCropping}
+              defaultSelected={sample.data.fieldCompanionCropping}
               onChange={
-                (val: boolean) => (sample.attrs.fieldCompanionCropping = val) // eslint-disable-line
+                (val: boolean) => (sample.data.fieldCompanionCropping = val) // eslint-disable-line
               }
             />
             <Toggle
               prefix={clipboardIcon}
               label="Intercropping"
-              defaultSelected={sample.attrs.fieldIntercropping}
+              defaultSelected={sample.data.fieldIntercropping}
               onChange={
-                (val: boolean) => (sample.attrs.fieldIntercropping = val) // eslint-disable-line
+                (val: boolean) => (sample.data.fieldIntercropping = val) // eslint-disable-line
               }
             />
           </div>

@@ -140,7 +140,7 @@ const Species = ({
   const { media } = occ;
   if (media.length) {
     const photo = media[0];
-    speciesPhoto = photo.attrs ? photo.getURL() : null;
+    speciesPhoto = photo.data ? photo.getURL() : null;
   }
 
   const [showingGallery, setShowGallery] = useState(false);
@@ -234,7 +234,7 @@ const Species = ({
         onClick={onClickWrap}
       >
         <div className="flex w-full items-center justify-between gap-2 p-1">
-          <div className="flex items-center gap-3 ">
+          <div className="flex items-center gap-3">
             {profilePhoto}
 
             {getSpeciesName()}
@@ -247,7 +247,7 @@ const Species = ({
                 options={options}
                 redraw
               />
-              <div className="surveyEndTime absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.7em]">
+              <div className="surveyEndTime absolute top-0 left-0 flex h-full w-full items-center justify-center text-[0.7em]">
                 {getDoughnutData(species.score).text}
               </div>
             </div>

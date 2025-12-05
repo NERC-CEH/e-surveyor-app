@@ -34,20 +34,20 @@ const ReportController = ({ sample }: Props) => {
     navigate(`/home/surveys`, 'root');
   };
 
-  const isDisabled = sample.isUploaded();
+  const isDisabled = sample.isUploaded;
 
   const uploadButton =
-    isDisabled || sample.remote.synchronising ? null : (
+    isDisabled || sample.isSynchronising ? null : (
       <HeaderButton onClick={onUpload}>Upload</HeaderButton>
     );
 
   const occurrences = sample.samples.map(smp => smp.occurrences[0]);
 
   let seedmixSpecies = [];
-  if (sample.attrs.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
-    seedmixSpecies = sample.attrs.customSeedmix || [];
+  if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+    seedmixSpecies = sample.data.customSeedmix || [];
   } else {
-    seedmixSpecies = seedmixData[sample.attrs.seedmix] || [];
+    seedmixSpecies = seedmixData[sample.data.seedmix] || [];
   }
 
   return (
@@ -60,7 +60,7 @@ const ReportController = ({ sample }: Props) => {
       <Main
         occurrences={occurrences}
         seedmixSpecies={seedmixSpecies}
-        showHabitats={sample.attrs.seeded !== 'Yes'}
+        showHabitats={sample.data.seeded !== 'Yes'}
       />
     </Page>
   );

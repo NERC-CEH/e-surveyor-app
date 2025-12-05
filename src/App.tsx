@@ -8,7 +8,7 @@ import {
 } from '@flumens';
 import { IonApp, IonRouterOutlet, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import 'common/theme.scss';
+import 'common/theme.css';
 import Home from './Home';
 import OnboardingScreens from './Info/OnboardingScreensRequired';
 import Info from './Info/router';

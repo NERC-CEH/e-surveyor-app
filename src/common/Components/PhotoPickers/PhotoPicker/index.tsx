@@ -1,9 +1,8 @@
 import { ComponentProps, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
-import { PhotoPicker, captureImage, URL } from '@flumens';
+import { PhotoPicker, captureImage, URL, ImageCropper } from '@flumens';
 import { IonButton, IonIcon } from '@ionic/react';
-import ImageCropper from 'common/Components/ImageCropper';
 import config from 'common/config';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
@@ -12,8 +11,10 @@ import './styles.scss';
 
 export { usePromptImageSource } from '@flumens';
 
-interface Props
-  extends Omit<ComponentProps<typeof PhotoPicker>, 'getImage' | 'value'> {
+interface Props extends Omit<
+  ComponentProps<typeof PhotoPicker>,
+  'getImage' | 'value'
+> {
   model: Sample | Occurrence;
   maxImages?: number;
   allowToCrop?: boolean;
@@ -37,7 +38,12 @@ const AppPhotoPicker = ({
     });
     if (!image) return;
 
-    const imageModel = await Media.getImageModel(image, config.dataPath);
+    const imageModel = (await Media.getImageModel(
+      image,
+      config.dataPath,
+      true
+    )) as Media;
+
     model.media.push(imageModel);
 
     if (!model.isPersistent()) return;
@@ -52,8 +58,8 @@ const AppPhotoPicker = ({
     if (!editImage) return;
 
     const newImageModel = await Media.getImageModel(image, config.dataPath);
-    Object.assign(editImage?.attrs, {
-      ...newImageModel.attrs,
+    Object.assign(editImage?.data, {
+      ...newImageModel.data,
       queued: null, // in case it was uploaded
     });
 
@@ -68,7 +74,7 @@ const AppPhotoPicker = ({
 
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled = model.parent && model.isDisabled();
+  const isDisabled = model.parent && model.isDisabled;
   const maxPicsReached = !!maxImages && model.media.length >= maxImages;
 
   // eslint-disable-next-line react/no-unstable-nested-components

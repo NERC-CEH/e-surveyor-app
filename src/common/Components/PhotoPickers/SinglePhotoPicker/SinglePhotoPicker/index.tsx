@@ -125,7 +125,7 @@ const SinglePhotoPicker = ({
   Image = ImageDefault,
   caption,
 }: Props) => {
-  const byCaption = (m: any) => (caption ? m.attrs.caption === caption : true);
+  const byCaption = (m: any) => (caption ? m.data.caption === caption : true);
   const [photo] = model.media.filter(byCaption);
   const promptToDelete = useDeletePrompt();
   const promptImageSource = usePromptImageSource();

@@ -23,7 +23,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
   const loader = useLoader();
 
   const isPartOfSurvey = occurrence.parent;
-  const isDisabled = isPartOfSurvey && occurrence.isDisabled();
+  const isDisabled = isPartOfSurvey && occurrence.isDisabled;
 
   const isIdentifying = occurrence.isIdentifying();
 
@@ -76,7 +76,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
       };
 
       // eslint-disable-next-line no-param-reassign
-      occurrence.attrs.taxon = newTaxon;
+      occurrence.data.taxon = newTaxon;
       occurrence.save();
     };
 
@@ -120,7 +120,10 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
       onPress={onReidentify}
       color="secondary"
       preventDefault
-      className={clsx('mx-auto my-3 w-fit', isIdentifying ? 'opacity-30' : '')}
+      className={clsx(
+        'mx-auto my-3 w-fit bg-secondary-600',
+        isIdentifying ? 'opacity-30' : ''
+      )}
     >
       Reidentify
     </Button>

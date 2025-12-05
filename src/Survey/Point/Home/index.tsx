@@ -9,6 +9,7 @@ import {
   useAlert,
   ModelValidationMessage,
   captureImage,
+  ImageCropper,
 } from '@flumens';
 import { NavContext, isPlatform } from '@ionic/react';
 import config from 'common/config';
@@ -17,7 +18,6 @@ import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
-import ImageCropper from 'Components/ImageCropper';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
@@ -48,13 +48,13 @@ const showFirstSurveyTip = (alert: any) => {
     ],
   });
 
-  appModel.attrs.showFirstSurveyTip = false;
+  appModel.data.showFirstSurveyTip = false;
 };
 
 const showFirstPhotoTip = (alert: any) => {
-  if (!appModel.attrs.showFirstPhotoTip) return null;
+  if (!appModel.data.showFirstPhotoTip) return null;
 
-  appModel.attrs.showFirstPhotoTip = false;
+  appModel.data.showFirstPhotoTip = false;
 
   return new Promise(resolve => {
     alert({
@@ -110,7 +110,11 @@ const HomeController = ({ sample }: Props) => {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const image = await Media.getImageModel(photoURL, dataDirPath);
+      const image = (await Media.getImageModel(
+        photoURL,
+        dataDirPath,
+        true
+      )) as Media;
 
       const survey = sample.getSurvey();
       const newSubSample = survey.smp!.create!({
@@ -213,17 +217,17 @@ const HomeController = ({ sample }: Props) => {
     sample.metadata.saved = true;
     sample.save();
 
-    appModel.attrs['draftId:point'] = '';
+    appModel.data['draftId:point'] = '';
     navToReport();
   };
 
   if (!sample) return null;
 
-  const isDisabled = sample.isUploaded();
+  const isDisabled = sample.isUploaded;
 
   const isInvalid = sample.validateRemote();
 
-  const finishButton = sample.remote.synchronising ? null : (
+  const finishButton = sample.isSynchronising ? null : (
     <HeaderButton
       onClick={sample.metadata.saved ? navToReport : onFinish}
       isInvalid={isInvalid}
@@ -232,9 +236,9 @@ const HomeController = ({ sample }: Props) => {
     </HeaderButton>
   );
 
-  if (appModel.attrs.showFirstSurveyTip) showFirstSurveyTip(alert);
+  if (appModel.data.showFirstSurveyTip) showFirstSurveyTip(alert);
 
-  const isTraining = !!sample.attrs.training;
+  const isTraining = !!sample.data.training;
   const trainingModeSubheader = isTraining && (
     <div className="bg-black p-1 text-center text-sm text-white">
       Training Mode

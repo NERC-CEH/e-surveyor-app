@@ -1,12 +1,19 @@
 import { SampleCollection } from '@flumens';
+import config from 'common/config';
 import Sample from 'models/sample';
-import { samplesStore } from './store';
+import Occurrence from '../occurrence';
+import { samplesStore } from '../store';
+import userModel from '../user';
 
 console.log('SavedSamples: initializing');
-const samples = new SampleCollection({
+
+const samples: SampleCollection<Sample> = new SampleCollection({
   store: samplesStore,
   Model: Sample,
-});
+  Occurrence,
+  url: config.backend.indicia.url,
+  getAccessToken: () => userModel.getAccessToken(),
+}) as any;
 
 export async function uploadAll() {
   console.log('SavedSamples: uploading all.');
@@ -25,8 +32,8 @@ export function getPending() {
 }
 
 export function byDate(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.attrs.date);
-  const date2 = new Date(smp2.attrs.date);
+  const date1 = new Date(smp1.data.date);
+  const date2 = new Date(smp2.data.date);
   return date2.getTime() - date1.getTime();
 }
 

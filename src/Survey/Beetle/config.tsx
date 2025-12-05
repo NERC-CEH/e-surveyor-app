@@ -263,6 +263,174 @@ export const marginOptions = [
   { value: 'Centre', id: 21786 },
 ];
 
+const farmAttr = {
+  remote: { id: 'location_name' },
+};
+
+const trapDaysAttr = {
+  remote: { id: 1778 },
+};
+
+const fieldNameAttr = {
+  remote: { id: 1779 },
+};
+
+const fieldMarginsAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    skipValueTranslation: true,
+    label: 'Margins',
+  },
+  pageProps: {
+    headerProps: { title: 'Margins' },
+    attrProps: [
+      {
+        input: 'slider',
+        info: 'What is the field margin width?',
+        inputProps: { min: 1, max: 24 },
+      },
+      {
+        input: 'radio',
+        inputProps: { options: marginTypes },
+      },
+    ],
+  },
+  remote: { id: 1780 },
+};
+
+const fieldCropAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Crop',
+  },
+  pageProps: {
+    headerProps: { title: 'Crop' },
+    attrProps: {
+      input: 'radio',
+      inputProps: { options: cropTypes },
+    },
+  },
+  remote: { id: 1781, values: cropTypes },
+};
+
+const fieldCropOtherAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Crop Other',
+  },
+  pageProps: {
+    headerProps: { title: 'Crop Other' },
+    attrProps: {
+      input: 'input',
+    },
+  },
+  remote: { id: 1789 },
+};
+
+const fieldTillageAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Tillage',
+  },
+  pageProps: {
+    headerProps: { title: 'Tillage' },
+    attrProps: {
+      input: 'radio',
+      inputProps: { options: tillageTypes },
+    },
+  },
+  remote: { id: 1782, values: tillageTypes },
+};
+
+const fieldTillageOtherAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Tillage Other',
+  },
+  pageProps: {
+    headerProps: { title: 'Tillage Other' },
+    attrProps: {
+      input: 'input',
+    },
+  },
+  remote: { id: 1788 },
+};
+
+const fieldNonCropHabitatsAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Non-crop habitats',
+  },
+  pageProps: {
+    headerProps: { title: 'Non-crop habitats' },
+    attrProps: {
+      input: 'checkbox',
+      inputProps: { options: nonCropHabitatTypes },
+    },
+  },
+  remote: { id: 1793, values: nonCropHabitatTypes },
+};
+
+const fieldNonCropHabitatsOtherAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Other non-crop habitat',
+  },
+  pageProps: {
+    headerProps: { title: 'Other non-crop habitat' },
+    attrProps: {
+      input: 'input',
+    },
+  },
+  remote: { id: 1794 },
+};
+
+const fieldMarginsHabitatAttr = {
+  menuProps: {
+    icon: clipboardOutline,
+    label: 'Margins Habitat',
+  },
+  pageProps: {
+    headerProps: { title: 'Margins Habitat' },
+    attrProps: {
+      input: 'radio',
+      inputProps: { options: marginsHabitats },
+    },
+  },
+  remote: { id: 1792, values: marginsHabitats },
+};
+
+const fieldInsecticidesAttr = {
+  remote: { id: 1783 },
+};
+
+const fieldHerbicidesAttr = {
+  remote: { id: 1784 },
+};
+
+const fieldUndersowingAttr = {
+  remote: { id: 1785 },
+};
+
+const fieldCompanionCroppingAttr = {
+  remote: { id: 1790 },
+};
+
+const fieldIntercroppingAttr = {
+  remote: { id: 1791 },
+};
+
+const marginAttr = {
+  remote: { id: 1786, values: marginOptions },
+};
+
+const taxonAttr = {
+  remote: {
+    id: 'taxa_taxon_list_id',
+    values: (taxon: any) => taxon.warehouseId,
+  },
+};
+
 const survey: Survey = {
   id: 727,
   name: 'beetle',
@@ -271,183 +439,37 @@ const survey: Survey = {
 
   attrs: {
     date: dateAttr,
-
     location: locationAttr,
-
-    farm: {
-      remote: { id: 'location_name' },
-    },
-
-    trapDays: {
-      remote: { id: 1778 },
-    },
-
-    fieldName: {
-      remote: { id: 1779 },
-    },
-
-    fieldMargins: {
-      menuProps: {
-        icon: clipboardOutline,
-        skipValueTranslation: true,
-        label: 'Margins',
-      },
-      pageProps: {
-        headerProps: { title: 'Margins' },
-        attrProps: [
-          {
-            input: 'slider',
-            info: 'What is the field margin width?',
-            inputProps: { min: 1, max: 24 },
-          },
-          {
-            input: 'radio',
-            inputProps: { options: marginTypes },
-          },
-        ],
-      },
-      remote: { id: 1780 },
-    },
-
-    fieldCrop: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Crop',
-      },
-      pageProps: {
-        headerProps: { title: 'Crop' },
-        attrProps: {
-          input: 'radio',
-          inputProps: { options: cropTypes },
-        },
-      },
-      remote: { id: 1781, values: cropTypes },
-    },
-
-    fieldCropOther: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Crop Other',
-      },
-      pageProps: {
-        headerProps: { title: 'Crop Other' },
-        attrProps: {
-          input: 'input',
-        },
-      },
-      remote: { id: 1789 },
-    },
-
-    fieldTillage: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Tillage',
-      },
-      pageProps: {
-        headerProps: { title: 'Tillage' },
-        attrProps: {
-          input: 'radio',
-          inputProps: { options: tillageTypes },
-        },
-      },
-      remote: { id: 1782, values: tillageTypes },
-    },
-
-    fieldTillageOther: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Tillage Other',
-      },
-      pageProps: {
-        headerProps: { title: 'Tillage Other' },
-        attrProps: {
-          input: 'input',
-        },
-      },
-      remote: { id: 1788 },
-    },
-
-    fieldNonCropHabitats: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Non-crop habitats',
-      },
-      pageProps: {
-        headerProps: { title: 'Non-crop habitats' },
-        attrProps: {
-          input: 'checkbox',
-          inputProps: { options: nonCropHabitatTypes },
-        },
-      },
-      remote: { id: 1793, values: nonCropHabitatTypes },
-    },
-
-    fieldNonCropHabitatsOther: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Other non-crop habitat',
-      },
-      pageProps: {
-        headerProps: { title: 'Other non-crop habitat' },
-        attrProps: {
-          input: 'input',
-        },
-      },
-      remote: { id: 1794 },
-    },
-
-    fieldMarginsHabitat: {
-      menuProps: {
-        icon: clipboardOutline,
-        label: 'Margins Habitat',
-      },
-      pageProps: {
-        headerProps: { title: 'Margins Habitat' },
-        attrProps: {
-          input: 'radio',
-          inputProps: { options: marginsHabitats },
-        },
-      },
-      remote: { id: 1792, values: marginsHabitats },
-    },
-
-    fieldInsecticides: {
-      remote: { id: 1783 },
-    },
-
-    fieldHerbicides: {
-      remote: { id: 1784 },
-    },
-
-    fieldUndersowing: {
-      remote: { id: 1785 },
-    },
-
-    fieldCompanionCropping: {
-      remote: { id: 1790 },
-    },
-
-    fieldIntercropping: {
-      remote: { id: 1791 },
-    },
+    farm: farmAttr,
+    trapDays: trapDaysAttr,
+    fieldName: fieldNameAttr,
+    fieldMargins: fieldMarginsAttr,
+    fieldCrop: fieldCropAttr,
+    fieldCropOther: fieldCropOtherAttr,
+    fieldTillage: fieldTillageAttr,
+    fieldTillageOther: fieldTillageOtherAttr,
+    fieldNonCropHabitats: fieldNonCropHabitatsAttr,
+    fieldNonCropHabitatsOther: fieldNonCropHabitatsOtherAttr,
+    fieldMarginsHabitat: fieldMarginsHabitatAttr,
+    fieldInsecticides: fieldInsecticidesAttr,
+    fieldHerbicides: fieldHerbicidesAttr,
+    fieldUndersowing: fieldUndersowingAttr,
+    fieldCompanionCropping: fieldCompanionCroppingAttr,
+    fieldIntercropping: fieldIntercroppingAttr,
   },
 
   smp: {
     attrs: {
       date: dateAttr,
-
       location: locationAttr,
-
-      margin: {
-        remote: { id: 1786, values: marginOptions },
-      },
+      margin: marginAttr,
     },
 
     create({ Sample, photo, surveySample }) {
       const sample = new Sample({
-        attrs: {
+        data: {
           surveyId: survey.id,
-          date: surveySample!.attrs.date,
+          date: surveySample!.data.date,
           sample_method_id: 24, // Pitfall trap
           location: null,
           margin: 'Edge',
@@ -480,12 +502,7 @@ const survey: Survey = {
 
     occ: {
       attrs: {
-        taxon: {
-          remote: {
-            id: 'taxa_taxon_list_id',
-            values: (taxon: any) => taxon.warehouseId,
-          },
-        },
+        taxon: taxonAttr,
       },
 
       verify(attrs) {
@@ -506,7 +523,7 @@ const survey: Survey = {
 
       create({ Occurrence, photo }) {
         const occ = new Occurrence({
-          attrs: { taxon: null },
+          data: { taxon: null },
         });
 
         if (photo) {
@@ -520,9 +537,9 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      attrs: {
+      data: {
         surveyId: survey.id,
-        training: appModel.attrs.useTraining,
+        training: appModel.data.useTraining,
         date: new Date().toISOString(),
         sample_method_id: 2424, // Parent sample
         location: null,

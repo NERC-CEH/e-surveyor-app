@@ -22,11 +22,11 @@ const SurveyCard = ({ children, image, title, type, link }: Props) => (
 
       {children}
 
-      <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-white">
-        <h2 className="line-clamp-2 text-lg font-bold text-primary-900">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-white">
+        <h2 className="line-clamp-2 text-lg! font-bold! text-primary-900">
           {title}
         </h2>
-        <h3 className="text-primary-950/70">{type}</h3>
+        <h3 className="text-primary-950/70 mt-0! text-lg!">{type}</h3>
       </div>
     </div>
   </IonRouterLink>

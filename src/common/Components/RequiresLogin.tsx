@@ -7,7 +7,7 @@ type Props = {
 };
 
 const RequiresLogin = ({ userModel, children }: Props) => {
-  if (!userModel.attrs.id) {
+  if (!userModel.data.id) {
     return <Redirect to="/user/register" />;
   }
   return children;

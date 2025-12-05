@@ -1,8 +1,5 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import 'ionicons/dist/svg/checkmark-circle-outline.svg';
-import 'ionicons/dist/svg/close-circle-outline.svg';
-import 'ionicons/dist/svg/help-circle-outline.svg';
 import {
   addCircleOutline,
   bookmarkOutline,
@@ -48,7 +45,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
-  const { seeded, seedmixgroup, seedmix, name } = sample.attrs;
+  const { seeded, seedmixgroup, seedmix, name } = sample.data;
   const isSeeded = seeded === 'Yes';
 
   const prettyGridRef = <GridRefValue sample={sample} />;
@@ -62,14 +59,14 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
       if (
         score &&
         score < POSITIVE_THRESHOLD &&
-        appModel.attrs.showFirstLowScorePhotoTip
+        appModel.data.showFirstLowScorePhotoTip
       ) {
         alert({
           message:
             "The AI isn't sure about your photo, tap to check other possible species.",
           buttons: [{ text: 'OK' }],
         });
-        appModel.attrs.showFirstLowScorePhotoTip = false;
+        appModel.data.showFirstLowScorePhotoTip = false;
       }
     };
     sample.samples.some(hasSpeciesWithLowScore);
@@ -198,7 +195,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
             />
           )}
 
-          {isSeeded && sample.attrs.seedmixgroup && (
+          {isSeeded && sample.data.seedmixgroup && (
             <MenuAttrItem
               routerLink={`${baseURL}/seedmix`}
               icon={Seeds}
@@ -216,7 +213,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           onLongPress={navigateToSearch}
           onPress={photoSelect}
           prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-          className="mx-auto mb-3 mt-7"
+          className="mx-auto mt-7 mb-3 bg-secondary-600"
         >
           Species
         </Button>

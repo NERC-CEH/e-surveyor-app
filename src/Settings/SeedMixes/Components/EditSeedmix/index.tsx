@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
-import { getNewUUID } from '@flumens';
+import { UUIDv7 } from '@flumens';
 import { IonModal } from '@ionic/react';
 import { SeedmixSpecies as SeedmixSpeciesFromRemote } from 'common/data/seedmix';
 import appModel, { SeedMix as SeedMixFromRemote } from 'models/app';
@@ -22,7 +22,7 @@ const bySpeciesName = (sp1: SeedmixSpecies, sp2: SeedmixSpecies) => {
 };
 
 const getBlankSeedmix = (): SeedMix => ({
-  id: getNewUUID(),
+  id: UUIDv7(),
   name: 'My seedmix',
   species: [],
 });
@@ -45,7 +45,7 @@ const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
     }
 
     const byId = ({ id }: SeedMixFromRemote) => id === seedMixId;
-    const existingSeedmix = appModel.attrs.seedmixes.find(byId);
+    const existingSeedmix = appModel.data.seedmixes.find(byId);
     const existingSeedmixCopy = JSON.parse(JSON.stringify(existingSeedmix));
     setSeedmix(existingSeedmixCopy);
   }, [seedMixId]);

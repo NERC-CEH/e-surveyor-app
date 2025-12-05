@@ -96,8 +96,12 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>
-          <h4>{sample.attrs.type}</h4>
-          <h4>{sample.attrs.name}</h4>
+          <h4 className="flex items-center gap-1">
+            <span>{sample.data.name}</span>
+            <Badge skipTranslation className="py-[3px] text-sm">
+              {sample.data.type}
+            </Badge>
+          </h4>
         </div>
       );
     }
@@ -110,7 +114,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>
-          <h4>{getRelativeDate(sample.attrs.date)}</h4>
+          <h4>{getRelativeDate(sample.data.date)}</h4>
         </div>
       );
     }
@@ -120,16 +124,20 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
     return (
       <div className="species-info">
         <h3>{survey.label}</h3>
-        {!!showSpeciesLength && (
-          <Badge
-            skipTranslation
-            className="py-[3px] text-sm"
-            prefix={<IonIcon icon={flowerIcon} />}
-          >
-            {showSpeciesLength}
-          </Badge>
-        )}
-        <h4>{sample.attrs.name}</h4>
+
+        <h4 className="flex items-center gap-2">
+          {sample.data.name}
+
+          {!!showSpeciesLength && (
+            <Badge
+              skipTranslation
+              className="py-[3px] text-sm"
+              prefix={<IonIcon icon={flowerIcon} />}
+            >
+              {showSpeciesLength}
+            </Badge>
+          )}
+        </h4>
       </div>
     );
   }
@@ -147,7 +155,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
   };
 
   const openItem = () => {
-    if (sample.remote.synchronising) return; // fixes button onPressUp and other accidental navigation
+    if (sample.isSynchronising) return; // fixes button onPressUp and other accidental navigation
 
     let href = `/survey/${survey.name}/${sample.cid}`;
     if (!sample.isDetailsComplete()) {
@@ -159,7 +167,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
   return (
     <IonItemSliding className="survey-list-item" {...contextMenuProps}>
       <IonItem onClick={openItem} detail={false}>
-        <div className="list-avatar ml-2">
+        <div className="list-avatar">
           <IonIcon icon={survey.icon} className="bg-primary-50/80 text-3xl" />
         </div>
         <IonLabel>{getSampleInfo()}</IonLabel>

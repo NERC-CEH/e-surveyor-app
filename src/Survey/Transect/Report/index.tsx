@@ -41,8 +41,8 @@ const ReportController = ({ sample }: Props) => {
 
   const steps = getSteps();
   const stepCount = sample.samples.length;
-  const habitatList = sample.attrs.habitat
-    ? habitatsData[sample.attrs.habitat]
+  const habitatList = sample.data.habitat
+    ? habitatsData[sample.data.habitat]
     : null;
 
   return (

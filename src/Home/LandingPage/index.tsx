@@ -10,7 +10,7 @@ import '@ionic/react/css/ionic-swiper.css';
 import config from 'common/config';
 import rothamstedLogo from 'common/images/rothamsted-logo.png';
 import appModel from 'common/models/app';
-import ImageModel from 'common/models/image';
+import Media from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import userModel from 'common/models/user';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
@@ -30,7 +30,7 @@ const LandingPage = () => {
   const promptImageSource = usePromptImageSource();
   const context = useContext(NavContext);
 
-  const { useExperiments } = appModel.attrs;
+  const { useExperiments } = appModel.data;
 
   const hideSpeciesModal = () => {
     species?.media.forEach(media => media.destroy());
@@ -58,7 +58,12 @@ const LandingPage = () => {
     }
 
     const occurrence = new Occurrence({});
-    const media = await ImageModel.getImageModel(image, config.dataPath);
+    const media = (await Media.getImageModel(
+      image,
+      config.dataPath,
+      true
+    )) as Media;
+
     occurrence.media.push(media);
     setSpecies(occurrence);
 
@@ -89,7 +94,7 @@ const LandingPage = () => {
           className="absolute -mt-2 max-h-[150px] w-full bg-white px-[74px] py-[13px]"
         />
 
-        <div className="flex h-full flex-col justify-evenly gap-5 overflow-hidden px-0 pb-[120px] pt-40">
+        <div className="flex h-full flex-col justify-evenly gap-5 overflow-hidden px-0 pt-40 pb-[120px]">
           <Swiper
             centeredSlides
             centeredSlidesBounds
@@ -138,7 +143,7 @@ const LandingPage = () => {
                 type="Beetle trap survey"
                 link="/survey/beetle"
               >
-                <div className="absolute right-0 top-0 w-3/5 rounded-bl-2xl bg-white/85 md:w-1/2">
+                <div className="absolute top-0 right-0 w-3/5 rounded-bl-2xl bg-white/85 md:w-1/2">
                   <div className="px-2 pt-2 text-right text-xs text-black/80 md:text-sm">
                     In partnership with
                   </div>

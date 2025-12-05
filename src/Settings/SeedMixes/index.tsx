@@ -43,7 +43,7 @@ const Seedmixes = () => {
   const confirmDelete = useDeleteConfirmation();
 
   const getSeedmixes = () => {
-    if (!appModel.attrs.seedmixes.length)
+    if (!appModel.data.seedmixes.length)
       return (
         <InfoBackgroundMessage>
           Your custom seedmix list is empty.
@@ -74,7 +74,7 @@ const Seedmixes = () => {
       );
     };
 
-    const seedmixListItems = appModel.attrs.seedmixes.map(getSeedmixEntry);
+    const seedmixListItems = appModel.data.seedmixes.map(getSeedmixEntry);
 
     return (
       <IonList>
@@ -104,7 +104,7 @@ const Seedmixes = () => {
         <Button
           color="secondary"
           onPress={addNewSeedmix}
-          className="mx-auto my-5"
+          className="bg-secondary-600 mx-auto my-5"
         >
           Add new
         </Button>

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
-import { getPending } from 'models/samples';
+import { getPending } from 'models/collections/samples';
 
 type Props = {
   className?: string;
@@ -11,7 +11,7 @@ function PendingSurveysBadge({ className }: Props) {
 
   return (
     <svg
-      className={clsx('size-3 fill-warning-500', className)}
+      className={clsx('fill-warning-500 size-3', className)}
       viewBox="0 0 6 6"
       aria-hidden="true"
     >

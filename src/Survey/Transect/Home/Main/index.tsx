@@ -24,8 +24,8 @@ import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordIn
 import './styles.scss';
 
 function byDate(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.attrs.date);
-  const date2 = new Date(smp2.attrs.date);
+  const date1 = new Date(smp1.data.date);
+  const date2 = new Date(smp2.data.date);
   return date2.getTime() - date1.getTime();
 }
 
@@ -82,7 +82,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
       <IonList className="quadrats-list" lines="full">
         <IonItemDivider mode="ios">
           Quadrats
-          <IonLabel slot="end">{`${sample.samples.length}/${sample.attrs.steps}`}</IonLabel>
+          <IonLabel slot="end">{`${sample.samples.length}/${sample.data.steps}`}</IonLabel>
         </IonItemDivider>
 
         <div className="rounded-list">{quadrats.map(getQuadrat)}</div>
@@ -95,7 +95,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
       return null;
     }
 
-    if (sample.samples.length >= sample.attrs.steps) {
+    if (sample.samples.length >= sample.data.steps) {
       return null;
     }
 
@@ -104,14 +104,14 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
         onPress={onAddNewQuadrat}
         color="secondary"
         prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="mx-auto mb-2 mt-8"
+        className="bg-secondary-600 mx-auto mt-8 mb-2"
       >
         Add Quadrat
       </Button>
     );
   };
 
-  const isComplete = sample.metadata.saved || sample.isDisabled(); // disabled for backwards compatibility
+  const isComplete = sample.metadata.saved || sample.isDisabled; // disabled for backwards compatibility
 
   return (
     <Main>
@@ -160,7 +160,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
         {isComplete && (
           <Button
             color="secondary"
-            className="mx-auto my-5"
+            className="bg-secondary-600 mx-auto my-5"
             onPress={() => navigate(`${match.url}/report`)}
           >
             See Report
@@ -171,7 +171,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
           <MenuAttrItem
             routerLink={`${match.url}/details`}
             icon={createOutline}
-            value={sample.attrs.type}
+            value={sample.data.type}
             label="Details"
             skipValueTranslation
             disabled={isDisabled}
@@ -179,7 +179,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
           <MenuAttrItem
             routerLink={`${match.url}/name`}
             icon={bookmarkOutline}
-            value={sample.attrs.name}
+            value={sample.data.name}
             label="Name"
             skipValueTranslation
             disabled={isDisabled}

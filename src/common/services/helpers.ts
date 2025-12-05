@@ -49,7 +49,7 @@ export default async function appendModelToFormData(
   key = 'images'
 ) {
   // can provide both image/jpeg and jpeg
-  const { type } = mediaModel.attrs;
+  const { type } = mediaModel.data;
   let extension = type;
   let mediaType = type;
   if (type.match(/image.*/)) {

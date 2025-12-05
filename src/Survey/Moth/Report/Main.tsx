@@ -13,7 +13,7 @@ const ReportMain = ({ sample }: Props) => {
   const uniqueSpeciesObjCount: any = {};
 
   sample.occurrences.forEach(occ => {
-    const { scientificName } = occ.attrs.taxon;
+    const { scientificName } = occ.data.taxon;
     uniqueSpeciesObj[scientificName] = occ;
     if (!uniqueSpeciesObjCount[scientificName])
       uniqueSpeciesObjCount[scientificName] = 0;
@@ -23,7 +23,7 @@ const ReportMain = ({ sample }: Props) => {
   const getEntry = ([scientificNameKey, abundance]: any) => {
     const occ: Occurrence = uniqueSpeciesObj[scientificNameKey];
 
-    const { commonName, scientificName } = occ.attrs.taxon;
+    const { commonName, scientificName } = occ.data.taxon;
     const link = scientificName
       ? `https://ukmoths.org.uk/species/${scientificName.replaceAll(' ', '-')}`
       : 'https://ukmoths.org.uk/top-20/';
@@ -38,7 +38,7 @@ const ReportMain = ({ sample }: Props) => {
             <img src={occ.media[0]!.getURL()} alt="" />
           </div>
           <Badge
-            className="absolute -bottom-1 -right-1.5 bg-primary-50"
+            className="bg-primary-50 absolute -right-1.5 -bottom-1"
             color="primary"
           >{`${abundance}`}</Badge>
         </div>

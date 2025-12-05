@@ -150,9 +150,9 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
 
         <div className="flex w-full flex-col gap-2 p-3">
           <div className="flex justify-between gap-2">
-            <div className="flex flex-col justify-center gap-1">
-              <h3 className="font-semibold">{commonName}</h3>
-              <h3 className="italic opacity-70">{scientificName}</h3>
+            <div className="flex flex-col justify-center">
+              <h3 className="font-semibold! my-0!">{commonName}</h3>
+              <h3 className="italic opacity-70 my-0!">{scientificName}</h3>
             </div>
 
             {!selectedSpeciesByUser && (

@@ -35,7 +35,7 @@ const RegisterContainer = () => {
     try {
       await userModel.register(email, password, otherDetails);
 
-      userModel.attrs.fullName = fullName; // eslint-disable-line
+      userModel.data.fullName = fullName; // eslint-disable-line
       userModel.save();
 
       alert({

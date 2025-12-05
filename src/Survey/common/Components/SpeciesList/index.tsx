@@ -139,7 +139,7 @@ const SpeciesList = ({
 
       const occ = model instanceof Occurrence ? model : model.occurrences[0];
       await occ.media[0].destroy();
-      delete occ.attrs.taxon;
+      delete occ.data.taxon;
       occ.media.push(images[0]);
 
       await occ.identify();
@@ -227,7 +227,7 @@ const SpeciesList = ({
               <Button
                 onPress={onIdentifyAll}
                 color="secondary"
-                className="py-1 text-xs"
+                className="bg-secondary-600 py-1 text-xs"
               >
                 Identify All
               </Button>

@@ -27,7 +27,7 @@ const Report = ({ sample }: Props) => {
   };
 
   const isInvalid = sample.validateRemote();
-  const finishButton = sample.remote.synchronising ? null : (
+  const finishButton = sample.isSynchronising ? null : (
     <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
       Upload
     </HeaderButton>

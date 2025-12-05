@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
-import { Page, Header, captureImage, useAlert } from '@flumens';
+import { Page, Header, captureImage, useAlert, ImageCropper } from '@flumens';
 import { isPlatform, NavContext } from '@ionic/react';
 import config from 'common/config';
 import appModel from 'models/app';
@@ -10,7 +10,6 @@ import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
-import ImageCropper from 'Components/ImageCropper';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import Main from './Main';
 
@@ -21,9 +20,9 @@ type Props = {
 };
 
 const showFirstPhotoTip = (alert: any) => {
-  if (!appModel.attrs.showFirstPhotoTip) return null;
+  if (!appModel.data.showFirstPhotoTip) return null;
 
-  appModel.attrs.showFirstPhotoTip = false;
+  appModel.data.showFirstPhotoTip = false;
 
   return new Promise(resolve => {
     alert({
@@ -71,7 +70,7 @@ const TrapController = ({ subSample }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
 
-  const isDisabled = subSample.isUploaded();
+  const isDisabled = subSample.isUploaded;
   const promptImageSource = usePromptImageSource();
 
   const attachImages = async (photoURLs: URL[]) => {
@@ -80,7 +79,11 @@ const TrapController = ({ subSample }: Props) => {
       const dataDirPath = config.dataPath;
 
       // eslint-disable-next-line no-await-in-loop
-      const mediaModel = await Media.getImageModel(photoURL, dataDirPath);
+      const mediaModel = (await Media.getImageModel(
+        photoURL,
+        dataDirPath,
+        true
+      )) as Media;
 
       const survey = subSample.parent!.getSurvey();
       const newOccurrence = survey.smp!.occ!.create!({

@@ -18,7 +18,7 @@ interface Props {
 
 const VSA = ({ subSample }: Props) => {
   const recordAttrs = {
-    record: subSample.attrs,
+    record: subSample.data,
   };
 
   return (

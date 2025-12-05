@@ -42,7 +42,7 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
 
       model.samples.push(newSubSample);
 
-      newSubSample.occurrences[0].attrs.taxon = transformUKSIToAppTaxon(taxon);
+      newSubSample.occurrences[0].data.taxon = transformUKSIToAppTaxon(taxon);
 
       model.save();
       context.goBack();
@@ -54,7 +54,7 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
       ...occ.getSpecies(),
       ...transformUKSIToAppTaxon(taxon),
     };
-    occ.attrs.taxon = newTaxon;
+    occ.data.taxon = newTaxon;
 
     model.save();
 

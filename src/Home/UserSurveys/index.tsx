@@ -10,8 +10,8 @@ import {
   IonSegment,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import samples, { getPending, uploadAll } from 'models/collections/samples';
 import Sample from 'models/sample';
-import samples, { getPending, uploadAll } from 'models/samples';
 import Survey from './components/Survey';
 import './styles.scss';
 
@@ -163,7 +163,7 @@ const UserSurveys = () => {
       <Main className="ion-padding [--padding-top:calc(var(--ion-safe-area-top,0)_+_80px)]">
         {showingPending && showUploadAll && (
           <Button
-            className="upload-all-button"
+            className="upload-all-button bg-secondary-600"
             color="secondary"
             onPress={onUploadAll}
           >

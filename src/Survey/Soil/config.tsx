@@ -571,7 +571,7 @@ const survey: Survey = {
         metadata: {
           survey: survey.name,
         },
-        attrs: {
+        data: {
           [sampleNameAttr.id]: name,
           enteredSrefSystem: 4326,
         },
@@ -597,7 +597,7 @@ const survey: Survey = {
       metadata: {
         survey: survey.name,
       },
-      attrs: {
+      data: {
         [farmNameAttr.id]: '', // TODO: copy over previous
         [fieldNameAttr.id]: '', // TODO: copy over previous
         [SOMDiameterAttr.id]: 1.3,

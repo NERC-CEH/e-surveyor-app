@@ -27,7 +27,7 @@ const extension = (): Extension => ({
   gps: observable({ locating: null }),
 
   setLocation([longitude, latitude]: LatLng, source = 'map', accuracy: number) {
-    this.attrs.location = {
+    (this as any).data.location = {
       latitude,
       longitude,
       source,

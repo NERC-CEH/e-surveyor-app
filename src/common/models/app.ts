@@ -16,7 +16,7 @@ export type SeedMix = {
   species: SeedmixSpecies[];
 };
 
-export interface Attrs extends ModelAttrs, SurveyDraftKeys {
+export interface Data extends ModelAttrs, SurveyDraftKeys {
   language: string;
   appSession: number;
   showedWelcome: boolean;
@@ -46,7 +46,7 @@ export interface Attrs extends ModelAttrs, SurveyDraftKeys {
   seedmixes: SeedMix[];
 }
 
-const defaults: Attrs = {
+const defaults: Data = {
   language: '',
   appSession: 0,
   showedWelcome: false,
@@ -66,32 +66,32 @@ const defaults: Attrs = {
   seedmixes: [],
 };
 
-class AppModel extends Model<Attrs> {
+class AppModel extends Model<Data> {
   constructor(options: any) {
-    super({ ...options, attrs: { ...defaults, ...options.attrs } });
+    super({ ...options, data: { ...defaults, ...options.attrs } });
   }
 
   deleteSeedmix(seedmixId: string) {
     const byId = (seedmix: SeedMix) => seedmix.id === seedmixId;
-    const index = this.attrs.seedmixes.findIndex(byId);
+    const index = this.data.seedmixes.findIndex(byId);
 
-    this.attrs.seedmixes.splice(index, 1);
+    this.data.seedmixes.splice(index, 1);
   }
 
   saveSeedmix(seedmixToSave: SeedMix) {
     const byId = ({ id }: SeedMix) => id === seedmixToSave.id;
-    const existingSeedmix = this.attrs.seedmixes.find(byId);
+    const existingSeedmix = this.data.seedmixes.find(byId);
     if (existingSeedmix) {
       existingSeedmix.name = seedmixToSave.name || 'My seedmix'; // in case user deleted
       existingSeedmix.species = seedmixToSave.species;
       return;
     }
 
-    this.attrs.seedmixes.push(seedmixToSave);
+    this.data.seedmixes.push(seedmixToSave);
   }
 
-  resetDefaults() {
-    return super.resetDefaults(defaults);
+  reset() {
+    return super.reset(defaults);
   }
 }
 

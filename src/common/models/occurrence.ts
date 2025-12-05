@@ -45,54 +45,27 @@ export type Taxon = {
 } & ClassifierAttributes &
   PlantNetTaxonAttrs;
 
-type Attrs = OccurrenceAttrs & { taxon?: Taxon };
+type Data = OccurrenceAttrs & { taxon?: Taxon };
 
-export default class Occurrence extends OccurrenceOriginal<Attrs> {
-  static fromJSON(json: any) {
-    return super.fromJSON(json, Media);
-  }
-
+export default class Occurrence extends OccurrenceOriginal<Data> {
   declare media: IObservableArray<Media>;
 
   declare parent?: Sample;
 
   declare getSurvey: () => Survey;
 
-  constructor(...args: any[]) {
-    super(...args);
-
-    // backwards compatible, migrate old species suggestions
-    const oldSpecies = (this.attrs.taxon as any)?.species;
-    if (this.attrs.taxon && oldSpecies) {
-      console.log('Migrating old species suggestions');
-
-      this.attrs.taxon.commonName = oldSpecies.commonNames[0]; // eslint-disable-line
-      this.attrs.taxon.scientificName = oldSpecies.scientificNameWithoutAuthor;
-
-      if (this.attrs.taxon.suggestions) {
-        this.attrs.taxon.suggestions = this.attrs.taxon.suggestions.map(
-          (suggestion: any): any => ({
-            ...suggestion,
-            scientificName: suggestion.species.scientificNameWithoutAuthor,
-            commonNames: suggestion.species.commonNames,
-          })
-        );
-      }
-      delete (this.attrs.taxon as any)?.species;
-      this.save();
-    }
+  constructor(options: any) {
+    super({ ...options, Media });
   }
 
   identification = observable({ identifying: false });
 
-  getSpecies = (): Taxon => this.attrs.taxon;
+  getSpecies = (): Taxon => this.data.taxon;
 
   validateRemote = validateRemoteModel;
 
-  isDisabled = () => this.isUploaded();
-
   identify = () => {
-    switch (this.parent?.attrs.surveyId) {
+    switch (this.parent?.data.surveyId) {
       case beetleSurveyConfig.id:
         return this.identifyBeetle();
       case mothSurveyConfig.id:
@@ -119,7 +92,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       suggestions.sort(byScore);
 
       const attachSpecies = (media: Media) => {
-        media.attrs.identified = true; // eslint-disable-line no-param-reassign
+        media.data.identified = true; // eslint-disable-line no-param-reassign
       };
       this.media.forEach(attachSpecies);
 
@@ -137,7 +110,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         tvk: '',
       };
 
-      this.attrs.taxon = taxon;
+      this.data.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
@@ -154,7 +127,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
 
       const date = this.createdAt;
       const location =
-        this.parent?.attrs.location || this.parent?.parent?.attrs.location;
+        this.parent?.data.location || this.parent?.parent?.data.location;
 
       const { version, results: suggestions } = await identifyPlantImage(
         this.media,
@@ -165,13 +138,13 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
       this.identification.identifying = false;
 
       const attachSpecies = (media: Media) => {
-        media.attrs.identified = true; // eslint-disable-line no-param-reassign
+        media.data.identified = true; // eslint-disable-line no-param-reassign
       };
       this.media.forEach(attachSpecies);
 
       const topSuggestion = suggestions[0];
       if (!topSuggestion) {
-        this.attrs.taxon = null;
+        this.data.taxon = null;
         return;
       }
 
@@ -190,7 +163,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         images: topSuggestion.images,
       };
 
-      this.attrs.taxon = taxon;
+      this.data.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
@@ -219,12 +192,12 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         sp2.score - sp1.score;
       suggestions.sort(byScore);
 
-      this.media[0].attrs.identified = true;
+      this.media[0].data.identified = true;
 
       const topSuggestion = suggestions[0];
       const isNonUKSpecies = !Number.isFinite(topSuggestion?.warehouseId);
       if (!topSuggestion || isNonUKSpecies) {
-        this.attrs.taxon = UNKNOWN_SPECIES;
+        this.data.taxon = UNKNOWN_SPECIES;
         return;
       }
 
@@ -239,7 +212,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
         tvk: '',
       };
 
-      this.attrs.taxon = taxon;
+      this.data.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
@@ -255,7 +228,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
   canReIdentify() {
     if (!this.media.length) return false;
 
-    const wasNotIdentified = (media: Media) => !media.attrs.identified;
+    const wasNotIdentified = (media: Media) => !media.data.identified;
     return this.media.some(wasNotIdentified);
   }
 
@@ -263,7 +236,7 @@ export default class Occurrence extends OccurrenceOriginal<Attrs> {
   isIdentifying = () => this.identification.identifying;
 
   getTaxonName() {
-    const { taxon } = this.attrs;
+    const { taxon } = this.data;
     if (!taxon) return '';
 
     if (taxon.foundInName) return taxon[taxon.foundInName];

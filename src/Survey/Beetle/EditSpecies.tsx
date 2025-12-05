@@ -20,10 +20,10 @@ const EditSpecies = ({ occurrence }: Props) => {
       };
 
       // eslint-disable-next-line no-param-reassign
-      model.attrs.taxon = taxon;
+      model.data.taxon = taxon;
     },
     get() {
-      return occurrence.attrs.taxon?.warehouseId;
+      return occurrence.data.taxon?.warehouseId;
     },
   };
 

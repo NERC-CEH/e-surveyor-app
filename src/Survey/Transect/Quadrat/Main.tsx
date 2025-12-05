@@ -32,7 +32,7 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
         onLongPress={navigateToSearch}
         onPress={photoSelect}
         prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="mx-auto my-5"
+        className="bg-secondary-600 mx-auto my-5"
       >
         Species
       </Button>

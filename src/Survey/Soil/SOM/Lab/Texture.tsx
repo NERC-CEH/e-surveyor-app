@@ -16,12 +16,12 @@ import {
 type Props = { sample: Sample };
 
 const Lab = ({ sample }: Props) => {
-  const recordAttrs = { record: sample.attrs };
+  const recordAttrs = { record: sample.data };
 
   const showLabType =
-    !!sample.attrs[labSandAttr.id] ||
-    !!sample.attrs[labSiltAttr.id] ||
-    !!sample.attrs[labClayAttr.id];
+    !!sample.data[labSandAttr.id] ||
+    !!sample.data[labSiltAttr.id] ||
+    !!sample.data[labClayAttr.id];
 
   return (
     <Page id="survey-soil-som-lab-texture">

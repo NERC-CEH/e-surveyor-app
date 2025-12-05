@@ -41,7 +41,7 @@ const MenuMain = ({
   userInfo,
   deviceInfo,
 }: Props) => {
-  const lang = appModel.attrs.language;
+  const lang = appModel.data.language;
 
   const isNotVerified = user.verified === false; // verified is undefined in old versions
   const userEmail = user.email as string;

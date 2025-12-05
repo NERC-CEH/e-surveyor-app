@@ -6,31 +6,31 @@ describe('App', () => {
     it('should delete seedmix', () => {
       // Given
       const seedmixes = [{ id: '1', name: 'seedmix', species: [] }];
-      const app = new AppModel({ attrs: { seedmixes } });
+      const app = new AppModel({ data: { seedmixes } });
 
       // When
       app.deleteSeedmix('1');
 
       // Then
-      expect(app.attrs.seedmixes.length).toEqual(0);
+      expect(app.data.seedmixes.length).toEqual(0);
     });
 
     it('should save new seedmix', () => {
       // Given
-      const app = new AppModel({ attrs: { seedmixes: [] } });
+      const app = new AppModel({ data: { seedmixes: [] } });
       const newSeedmix = { id: '1', name: 'seedmix', species: [] };
 
       // When
       app.saveSeedmix(newSeedmix);
 
       // Then
-      expect(app.attrs.seedmixes[0].id).toBe(newSeedmix.id);
+      expect(app.data.seedmixes[0].id).toBe(newSeedmix.id);
     });
 
     it('should update existing seedmix', () => {
       // Given
       const seedmix = { id: '1', name: 'seedmix', species: [] };
-      const app = new AppModel({ attrs: { seedmixes: [seedmix] } });
+      const app = new AppModel({ data: { seedmixes: [seedmix] } });
 
       // When
       const updatedSeedmix = JSON.parse(JSON.stringify(seedmix));
@@ -40,8 +40,8 @@ describe('App', () => {
       app.saveSeedmix(updatedSeedmix);
 
       // Then
-      expect(app.attrs.seedmixes[0].name).toBe(updatedSeedmix.name);
-      expect(app.attrs.seedmixes[0].species.length).toBe(1);
+      expect(app.data.seedmixes[0].name).toBe(updatedSeedmix.name);
+      expect(app.data.seedmixes[0].species.length).toBe(1);
     });
   });
 });

@@ -80,7 +80,7 @@ const survey: Survey = {
 
     create({ Occurrence: AppOccurrence, taxon, photo }) {
       const occ = new AppOccurrence({
-        attrs: { taxon },
+        data: { taxon },
       });
 
       if (photo) occ.media.push(photo);
@@ -103,9 +103,9 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      attrs: {
+      data: {
         surveyId: survey.id,
-        training: appModel.attrs.useTraining,
+        training: appModel.data.useTraining,
         date: new Date().toISOString(),
         surveyEndTime: toISOTimezoneString(new Date()),
         location: null,

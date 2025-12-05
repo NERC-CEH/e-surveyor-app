@@ -21,7 +21,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
   const match = useRouteMatch();
 
   const { type, seedmixgroup, seedmix, quadratSize, steps, habitat } =
-    sample.attrs;
+    sample.data;
   const { completedDetails } = sample.metadata;
 
   const prettyGridRef = <GridRefValue sample={sample} />;

@@ -43,7 +43,7 @@ let userInfo = '';
 (async () => {
   await userModel.ready;
   userInfo = `drupal_id=${userModel.id || 'unknown'}, warehouse_id=${
-    userModel.attrs.indiciaUserId || 'unknown'
+    userModel.data.indiciaUserId || 'unknown'
   }`;
 })();
 
@@ -72,7 +72,7 @@ const Controller = () => {
     await loader.show('Please wait...');
     try {
       await userModel.checkActivation();
-      if (!userModel.attrs.verified) {
+      if (!userModel.data.verified) {
         toast.warn('The user has not been activated or is blocked.');
       }
     } catch (err: any) {
@@ -97,7 +97,7 @@ const Controller = () => {
   return (
     <Page id="info-menu">
       <Main
-        user={userModel.attrs}
+        user={userModel.data}
         appModel={appModel}
         isLoggedIn={isLoggedIn}
         logOut={logOut}

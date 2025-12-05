@@ -113,10 +113,6 @@ export type Attrs = SampleAttrs & {
 };
 
 export default class Sample extends SampleOriginal<Attrs, Metadata> {
-  static fromJSON(json: any) {
-    return super.fromJSON(json, Occurrence, Sample, Media);
-  }
-
   static getSupportedSpeciesList(plants: SpeciesNames[]) {
     const pollinators: Interaction[] = [];
 
@@ -167,19 +163,20 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   declare survey: Survey;
 
   constructor(options: SampleOptions) {
-    super({ store: samplesStore, ...options });
-
-    this.remote.url = `${config.backend.indicia.url}/index.php/services/rest`;
-    // eslint-disable-next-line
-    this.remote.headers = async () => ({
-      Authorization: `Bearer ${await userModel.getAccessToken()}`,
+    super({
+      ...options,
+      url: config.backend.indicia.url,
+      getAccessToken: () => userModel.getAccessToken(),
+      Occurrence,
+      Media,
+      store: samplesStore,
     });
 
-    this.survey = surveyConfigs[this.attrs.surveyId];
+    this.survey = surveyConfigs[this.data.surveyId];
 
     if (!this.survey) {
       // backwards compatible
-      this.survey = surveyConfigs[(this.attrs as any).survey_id];
+      this.survey = surveyConfigs[(this.data as any).survey_id];
 
       const surveyConfigsByName: any = {
         point: pointSurveyConfig,
@@ -191,7 +188,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
       this.survey =
         this.survey || surveyConfigsByName[(this.metadata as any).survey];
-      this.attrs.surveyId = this.survey.id;
+      this.data.surveyId = this.survey.id;
     }
 
     Object.assign(this, GPSExtension());
@@ -200,11 +197,11 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     const autoIdentifyIfCameOnline = (isOnline?: boolean) => {
       if (!this.occurrences[0]) return;
 
-      const { useAutoIDWhenBackOnline } = appModel.attrs;
+      const { useAutoIDWhenBackOnline } = appModel.data;
       if (!isOnline || this.isIdentifying() || !useAutoIDWhenBackOnline) return;
 
       if (
-        appModel.attrs.useWiFiDataConnection &&
+        appModel.data.useWiFiDataConnection &&
         device.connectionType !== 'wifi'
       )
         return;
@@ -239,19 +236,19 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   }
 
   getPrettyName() {
-    if (!this.parent || this.attrs.surveyId === pointSurveyConfig.id) {
+    if (!this.parent || this.data.surveyId === pointSurveyConfig.id) {
       return '';
     }
 
-    if (this.attrs.surveyId === beetleSurveyConfig.id) {
+    if (this.data.surveyId === beetleSurveyConfig.id) {
       const byId = ({ cid }: Sample) => cid === this.cid;
       const index = this.parent.samples.findIndex(byId);
 
       return `Trap #${index + 1}`;
     }
 
-    if (this.attrs.surveyId === soilSurveyConfig.id && this.parent) {
-      return this.attrs[sampleNameAttr.id];
+    if (this.data.surveyId === soilSurveyConfig.id && this.parent) {
+      return this.data[sampleNameAttr.id];
     }
 
     const byId = ({ cid }: Sample) => cid === this.cid;
@@ -262,8 +259,8 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
   isDetailsComplete() {
     const requiresDetails =
-      this.attrs.surveyId === transectSurveyConfig.id ||
-      this.attrs.surveyId === beetleSurveyConfig.id;
+      this.data.surveyId === transectSurveyConfig.id ||
+      this.data.surveyId === beetleSurveyConfig.id;
     return requiresDetails ? this.metadata.completedDetails : true;
   }
 
@@ -277,7 +274,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     try {
       return super.getSurvey() as Survey;
     } catch (error) {
-      console.error(`Survey config was missing ${this.attrs.surveyId}`);
+      console.error(`Survey config was missing ${this.data.surveyId}`);
       return {} as Survey;
     }
   }
@@ -288,7 +285,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   };
 
   async syncRemote(onError?: any) {
-    if (this.remote.synchronising || !this.requiresRemoteSync()) return true;
+    if (this.isSynchronising || !this.requiresRemoteSync()) return true;
 
     const invalids = this.validateRemote();
     if (invalids) return false;
@@ -300,7 +297,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
     this.cleanUp();
 
-    if (this.attrs.surveyId === soilSurveyConfig.id) {
+    if (this.data.surveyId === soilSurveyConfig.id) {
       onError('Uploading of a Beta survey is not enabled yet.');
       return false;
     }

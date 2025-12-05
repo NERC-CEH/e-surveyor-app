@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, Block, Button } from '@flumens';
 import { IonList, IonItem, IonIcon, IonLabel, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
-import { byDate } from 'common/models/samples';
+import { byDate } from 'models/collections/samples';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
@@ -24,7 +24,7 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
   const { url } = useRouteMatch();
 
   const recordAttrs = {
-    record: sample.attrs,
+    record: sample.data,
   };
 
   const getList = () => {
@@ -78,11 +78,12 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
         </div>
       </IonList>
 
-      <div className="mb-4 mt-8 flex items-center justify-center gap-8">
+      <div className="mt-8 mb-4 flex items-center justify-center gap-8">
         <Button
           onPress={onSampleAdd}
           color="secondary"
           prefix={<IonIcon icon={addOutline} className="size-6" />}
+          className="bg-secondary-600"
         >
           Add Sample
         </Button>

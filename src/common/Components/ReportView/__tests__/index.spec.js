@@ -18,7 +18,7 @@ describe('ReportView', () => {
       const species = seedmix[0].latinName;
 
       const sample = new SampleWithNoGPS({
-        attrs: {
+        data: {
           surveyId: config.id,
           seedmix: seedmixName,
         },
@@ -26,7 +26,7 @@ describe('ReportView', () => {
 
       const subSmp = config.smp.create({ Sample: SampleWithNoGPS, Occurrence });
 
-      subSmp.occurrences[0].attrs.taxon = {
+      subSmp.occurrences[0].data.taxon = {
         scientificName: species,
       };
 
@@ -50,7 +50,7 @@ describe('ReportView', () => {
       const species = seedmix[0].latinName;
 
       const sample = new SampleWithNoGPS({
-        attrs: {
+        data: {
           surveyId: config.id,
           seedmix: seedmixName,
         },
@@ -58,7 +58,7 @@ describe('ReportView', () => {
 
       const subSmp = config.smp.create({ Sample: SampleWithNoGPS, Occurrence });
 
-      subSmp.occurrences[0].attrs.taxon = {
+      subSmp.occurrences[0].data.taxon = {
         scientificName: species,
       };
 

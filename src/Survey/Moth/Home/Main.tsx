@@ -37,7 +37,7 @@ const HomeMain = ({
   const { url } = useRouteMatch();
 
   const hasSpecies = !!sample.occurrences.length;
-  const isOtherHabitat = sample.attrs.habitat === 'Other (please specify)';
+  const isOtherHabitat = sample.data.habitat === 'Other (please specify)';
 
   return (
     <Main>
@@ -46,7 +46,7 @@ const HomeMain = ({
           {isDisabled && <UploadedRecordInfoMessage />}
         </div>
 
-        <div className="rounded-list">
+        <div className="rounded-list mb-3">
           <Button
             href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
             prefix={<IonIcon icon={bookOutline} className="size-6" />}
@@ -72,11 +72,11 @@ const HomeMain = ({
             value={<GridRefValue sample={sample} />}
             disabled={isDisabled}
           />
-          <MenuDateAttr record={sample.attrs} isDisabled={isDisabled} />
+          <MenuDateAttr record={sample.data} isDisabled={isDisabled} />
           <Select
             options={habitatValues}
-            onChange={(habitat: any) => (sample.attrs.habitat = habitat)} // eslint-disable-line
-            value={sample.attrs.habitat}
+            onChange={(habitat: any) => (sample.data.habitat = habitat)} // eslint-disable-line
+            value={sample.data.habitat}
             label="Habitat"
             prefix={<IonIcon src={habitatIcon} className="size-6" />}
             isDisabled={isDisabled}
@@ -85,8 +85,8 @@ const HomeMain = ({
             <Input
               label="Other habitat"
               prefix={<IonIcon src={habitatIcon} className="size-6" />}
-              onChange={(habitat: any) => (sample.attrs.otherHabitat = habitat)} // eslint-disable-line
-              value={sample.attrs.otherHabitat}
+              onChange={(habitat: any) => (sample.data.otherHabitat = habitat)} // eslint-disable-line
+              value={sample.data.otherHabitat}
               isDisabled={isDisabled}
             />
           )}
@@ -105,7 +105,7 @@ const HomeMain = ({
           prefix={<IonIcon src={cameraOutline} className="size-5" />}
           onPress={photoSelect}
           onLongPress={gallerySelect}
-          className="mx-auto mb-5 mt-10"
+          className="bg-secondary-600 mx-auto mt-10 mb-5"
         >
           Add
         </Button>

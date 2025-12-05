@@ -26,15 +26,15 @@ interface Props {
 const Management = ({ sample }: Props) => {
   // const { url } = useRouteMatch();
   const hasLandUseOther =
-    !!sample.attrs?.[landUseAttr.id]?.includes(LAND_USE_OTHER_VALUE);
+    !!sample.data?.[landUseAttr.id]?.includes(LAND_USE_OTHER_VALUE);
   const hasCropOther =
-    !!sample.attrs?.[cropAttr().id]?.includes(CROP_OTHER_VALUE);
+    !!sample.data?.[cropAttr().id]?.includes(CROP_OTHER_VALUE);
   const hasCoverCropOther =
-    !!sample.attrs?.[coverCropAttr.id]?.includes(CROP_OTHER_VALUE);
+    !!sample.data?.[coverCropAttr.id]?.includes(CROP_OTHER_VALUE);
   const hasPrevCoverCropOther =
-    !!sample.attrs?.[prevCoverCropAttr.id]?.includes(CROP_OTHER_VALUE);
+    !!sample.data?.[prevCoverCropAttr.id]?.includes(CROP_OTHER_VALUE);
 
-  const recordAttrs = { record: sample.attrs };
+  const recordAttrs = { record: sample.data };
 
   return (
     <Page id="survey-soil-management">
@@ -47,11 +47,11 @@ const Management = ({ sample }: Props) => {
               <Block block={landUseOtherAttr} {...recordAttrs} />
             )}
 
-            <Block block={cropAttr(sample.attrs)} {...recordAttrs} />
+            <Block block={cropAttr(sample.data)} {...recordAttrs} />
             {hasCropOther && <Block block={cropOtherAttr} {...recordAttrs} />}
 
-            <Block block={prevCrop1Attr(sample.attrs)} {...recordAttrs} />
-            <Block block={prevCrop2Attr(sample.attrs)} {...recordAttrs} />
+            <Block block={prevCrop1Attr(sample.data)} {...recordAttrs} />
+            <Block block={prevCrop2Attr(sample.data)} {...recordAttrs} />
           </div>
 
           <div className="rounded-list">

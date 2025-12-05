@@ -14,7 +14,7 @@ import config from 'common/config';
 import migrate from 'common/models/migrate';
 import { db } from 'common/models/store';
 import appModel from 'models/app';
-import samples from 'models/samples';
+import samples from 'models/collections/samples';
 import userModel from 'models/user';
 import App from './App';
 
@@ -40,7 +40,7 @@ mobxConfig({ enforceActions: 'never' });
   await appModel.fetch();
   await samples.fetch();
 
-  appModel.attrs.sendAnalytics &&
+  appModel.data.sendAnalytics &&
     Sentry.init({
       ...sentryOptions,
       dsn: config.sentryDSN,
@@ -50,11 +50,11 @@ mobxConfig({ enforceActions: 'never' });
       enabled: config.environment === 'production',
       initialScope: {
         user: { id: userModel.id },
-        tags: { session: appModel.attrs.appSession },
+        tags: { session: appModel.data.appSession },
       },
     });
 
-  appModel.attrs.appSession += 1;
+  appModel.data.appSession += 1;
 
   const container = document.getElementById('root');
   const root = createRoot(container!);

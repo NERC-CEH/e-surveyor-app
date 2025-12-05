@@ -45,9 +45,9 @@ const survey: Survey = {
           info: 'Has the survey area been seeded?',
           inputProps: { options: seededValues },
           set: (value: any, sample: SampleModel) => {
-            sample.attrs.seeded = value; // eslint-disable-line
-            sample.attrs.seedmixgroup = ''; // eslint-disable-line
-            sample.attrs.seedmix = ''; // eslint-disable-line
+            sample.data.seeded = value; // eslint-disable-line
+            sample.data.seedmixgroup = ''; // eslint-disable-line
+            sample.data.seedmix = ''; // eslint-disable-line
           },
         },
       },
@@ -70,7 +70,7 @@ const survey: Survey = {
 
     create({ Sample, Occurrence, photo }) {
       const sample = new Sample({
-        attrs: {
+        data: {
           surveyId: survey.id,
           location: null,
           enteredSrefSystem: 4326,
@@ -121,7 +121,7 @@ const survey: Survey = {
 
       create({ Occurrence, photo }) {
         const occ = new Occurrence({
-          attrs: {
+          data: {
             taxon: null,
           },
         });
@@ -155,9 +155,9 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      attrs: {
+      data: {
         surveyId: survey.id,
-        training: appModel.attrs.useTraining,
+        training: appModel.data.useTraining,
         date: new Date().toISOString(),
         name: new Date().toLocaleDateString('en-UK'),
         seedmix: '',

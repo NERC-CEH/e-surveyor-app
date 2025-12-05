@@ -13,7 +13,7 @@ type Props = { subSample: Sample };
 
 const SampleHome = ({ subSample: sample }: Props) => {
   const { url } = useRouteMatch();
-  const worms = sample.attrs[wormCountAttr.id];
+  const worms = sample.data[wormCountAttr.id];
 
   return (
     <Page id="survey-soil-sample-home">
@@ -29,7 +29,7 @@ const SampleHome = ({ subSample: sample }: Props) => {
               skipValueTranslation
               value={<GridRefValue sample={sample} />}
             />
-            <Block block={sampleNameAttr} record={sample.attrs} />
+            <Block block={sampleNameAttr} record={sample.data} />
             <SinglePhotoPicker label="Photo" model={sample} caption="Sample" />
           </div>
 
@@ -44,7 +44,7 @@ const SampleHome = ({ subSample: sample }: Props) => {
               <IonLabel>Earthworm Survey</IonLabel>
               <IonLabel slot="end">{worms || ''}</IonLabel>
             </IonItem>
-            <Block block={somAttr} record={sample.attrs} />
+            <Block block={somAttr} record={sample.data} />
           </div>
         </IonList>
       </Main>

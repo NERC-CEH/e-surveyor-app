@@ -10,7 +10,7 @@ type Props = { sample: Sample };
 
 const Lab = ({ sample }: Props) => {
   const { url } = useRouteMatch();
-  const recordAttrs = { record: sample.attrs };
+  const recordAttrs = { record: sample.data };
 
   return (
     <Page id="survey-soil-som-lab">

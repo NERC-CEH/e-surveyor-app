@@ -28,10 +28,10 @@ const Report = ({ sample }: Props) => {
 
   const isInvalid = sample.validateRemote();
   const requiresSync = sample.requiresRemoteSync();
-  const isUploaded = sample.isUploaded();
+  const { isUploaded } = sample;
 
   const finishButton =
-    sample.remote.synchronising || !requiresSync ? null : (
+    sample.isSynchronising || !requiresSync ? null : (
       <HeaderButton onClick={onSync} isInvalid={isInvalid}>
         {isUploaded ? 'Sync' : 'Upload'}
       </HeaderButton>

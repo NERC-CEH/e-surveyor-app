@@ -1,9 +1,12 @@
 {
 	"appId": "uk.ac.ceh.esurveyor",
-	"appName": "E-Surveyor",
+	"appName": "e-Surveyor",
 	"npmClient": "npm",
 	"webDir": "build",
 	"cordova": {},
+	"android": {
+		"adjustMarginsForEdgeToEdge": "force"
+	},
 	"packageClassList": [
 		"CameraPreview",
 		"CapacitorSQLitePlugin",

@@ -72,8 +72,8 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
               <div className="bg-neutral-50/50 p-1">
                 <RadioInput
                   options={marginOptions}
-                  value={subSample.attrs.margin}
-                  onChange={(value: any) => (subSample.attrs.margin = value)} // eslint-disable-line
+                  value={subSample.data.margin}
+                  onChange={(value: any) => (subSample.data.margin = value)} // eslint-disable-line
                   icon={false}
                   size="small"
                   inline
@@ -83,15 +83,15 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
               <Select
                 label="Position"
                 options={marginOptions}
-                value={subSample.attrs.margin}
-                onChange={(value: any) => (subSample.attrs.margin = value)} // eslint-disable-line
+                value={subSample.data.margin}
+                onChange={(value: any) => (subSample.data.margin = value)} // eslint-disable-line
                 prefix={<IonIcon icon={locationOutline} className="size-6" />}
               />
               <Input
                 label="Notes"
                 labelPlacement="floating"
-                value={subSample.attrs.comment}
-                onChange={(value: any) => (subSample.attrs.comment = value)} // eslint-disable-line
+                value={subSample.data.comment}
+                onChange={(value: any) => (subSample.data.comment = value)} // eslint-disable-line
                 isMultiline
               />
             </div>
@@ -119,7 +119,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
                 onPress={onAddNewSpecies}
                 color="secondary"
                 prefix={<IonIcon icon={cameraOutline} className="size-6" />}
-                className="mx-auto"
+                className="mx-auto bg-secondary-600"
               >
                 Add species
               </Button>

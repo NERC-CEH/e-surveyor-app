@@ -8,7 +8,7 @@ interface Props {
 }
 
 const OnboardingScreensController = ({ children }: Props) => {
-  const { showedWelcome } = appModel.attrs;
+  const { showedWelcome } = appModel.data;
   if (showedWelcome) return <>{children}</>;
 
   return <OnboardingScreens appModel={appModel} />;

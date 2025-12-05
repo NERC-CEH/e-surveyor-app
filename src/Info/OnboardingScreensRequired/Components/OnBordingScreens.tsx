@@ -55,7 +55,7 @@ const OnboardingScreens = ({ appModel }: Props) => {
 
   function exit() {
     // eslint-disable-next-line no-param-reassign
-    appModel.attrs.showedWelcome = true;
+    appModel.data.showedWelcome = true;
   }
 
   const handleSlideChangeStart = async () => {
@@ -181,7 +181,7 @@ const OnboardingScreens = ({ appModel }: Props) => {
                 <Button
                   color="secondary"
                   onPress={exit}
-                  className="mx-auto mt-7"
+                  className="mx-auto mt-7 bg-secondary-600"
                   suffix={<IonIcon className="size-5" icon={arrowForward} />}
                 >
                   Let's start!

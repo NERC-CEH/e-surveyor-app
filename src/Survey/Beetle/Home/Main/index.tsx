@@ -3,7 +3,7 @@ import { createOutline, cameraOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, MenuAttrItem } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
-import { byDate } from 'common/models/samples';
+import { byDate } from 'models/collections/samples';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
@@ -18,7 +18,7 @@ type Props = {
 
 const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
   const match = useRouteMatch();
-  const isDisabled = sample.isUploaded();
+  const isDisabled = sample.isUploaded;
 
   const getList = () => {
     const traps = sample.samples.slice().sort(byDate);
@@ -68,7 +68,7 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
           onPress={onAddNewTrap}
           color="secondary"
           prefix={<IonIcon icon={cameraOutline} className="size-6" />}
-          className="mx-auto mb-3 mt-7"
+          className="bg-secondary-600 mx-auto mt-7 mb-3"
         >
           Add Trap
         </Button>

@@ -8,8 +8,8 @@ import { Page, Header, useToast, useLoader } from '@flumens';
 import { isPlatform, NavContext } from '@ionic/react';
 import CONFIG from 'common/config';
 import { db } from 'common/models/store';
-import appModel, { Attrs } from 'models/app';
-import samples from 'models/samples';
+import appModel, { Data } from 'models/app';
+import samples from 'models/collections/samples';
 import userModel from 'models/user';
 import Main from './Main';
 
@@ -37,8 +37,8 @@ const useDeleteUser = () => {
   return deleteUser;
 };
 
-function onToggle(setting: keyof Attrs, checked: boolean) {
-  (appModel.attrs as any)[setting] = checked; // eslint-disable-line
+function onToggle(setting: keyof Data, checked: boolean) {
+  (appModel.data as any)[setting] = checked; // eslint-disable-line
   appModel.save();
 
   isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
@@ -55,15 +55,15 @@ const MenuController = () => {
     useWiFiDataConnection,
     useTraining,
     useExperiments,
-  } = appModel.attrs;
+  } = appModel.data;
 
   const resetApp = async () => {
     console.log('Settings:Menu:Controller: resetting the application!', 'w');
 
     try {
       await samples.reset();
-      await appModel.resetDefaults();
-      await userModel.resetDefaults();
+      await appModel.reset();
+      await userModel.reset();
       toast.success('Done');
     } catch (e) {
       if (e instanceof Error) {

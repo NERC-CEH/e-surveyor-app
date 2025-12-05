@@ -9,15 +9,15 @@ import {
 import CONFIG from 'common/config';
 import { mainStore } from './store';
 
-export interface Attrs extends DrupalUserModelAttrs {
+export interface Data extends DrupalUserModelAttrs {
   fullName?: string;
 }
 
-const defaults: Attrs = {
+const defaults: Data = {
   fullName: '',
 };
 
-export class UserModel extends DrupalUserModel<Attrs> {
+export class UserModel extends DrupalUserModel<Data> {
   static registerSchema: any = object({
     email: z.string().email('Please fill in'),
     password: z.string().min(1, 'Please fill in'),
@@ -34,10 +34,10 @@ export class UserModel extends DrupalUserModel<Attrs> {
   });
 
   constructor(options: any) {
-    super({ ...options, attrs: { ...defaults, ...options.attrs } });
+    super({ ...options, data: { ...defaults, ...options.attrs } });
 
     const checkForValidation = () => {
-      if (this.isLoggedIn() && !this.attrs.verified) {
+      if (this.isLoggedIn() && !this.data.verified) {
         console.log('User: refreshing profile for validation');
         this.refreshProfile();
       }
@@ -48,29 +48,29 @@ export class UserModel extends DrupalUserModel<Attrs> {
   async checkActivation() {
     if (!this.isLoggedIn()) return false;
 
-    if (!this.attrs.verified) {
+    if (!this.data.verified) {
       try {
         await this.refreshProfile();
       } catch (e) {
         // do nothing
       }
 
-      if (!this.attrs.verified) return false;
+      if (!this.data.verified) return false;
     }
 
     return true;
   }
 
   async resendVerificationEmail() {
-    if (!this.isLoggedIn() || this.attrs.verified) return false;
+    if (!this.isLoggedIn() || this.data.verified) return false;
 
     await this._sendVerificationEmail();
 
     return true;
   }
 
-  resetDefaults() {
-    return super.resetDefaults(defaults);
+  reset() {
+    return super.reset(defaults);
   }
 }
 
@@ -95,7 +95,7 @@ export const useUserStatusCheck = () => {
       return false;
     }
 
-    if (!userModel.attrs.verified) {
+    if (!userModel.data.verified) {
       await loader.show('Please wait...');
       const isVerified = await userModel.checkActivation();
       loader.hide();

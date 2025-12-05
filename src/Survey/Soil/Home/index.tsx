@@ -14,7 +14,7 @@ const useDataSharingPrompt = () => {
   const alert = useAlert();
 
   useEffect(() => {
-    if (!appModel.attrs.showSoilDataSharingTip) return;
+    if (!appModel.data.showSoilDataSharingTip) return;
 
     alert({
       header: 'Data sharing',
@@ -32,7 +32,7 @@ const useDataSharingPrompt = () => {
         {
           text: 'OK',
           handler: () => {
-            appModel.attrs.showSoilDataSharingTip = false;
+            appModel.data.showSoilDataSharingTip = false;
           },
         },
       ],
@@ -65,7 +65,7 @@ const Home = ({ sample }: Props) => {
     sample.metadata.saved = true;
     sample.save();
 
-    appModel.attrs[`draftId:${config.name}`] = '';
+    appModel.data[`draftId:${config.name}`] = '';
 
     saveAndReturn();
   };
@@ -81,13 +81,13 @@ const Home = ({ sample }: Props) => {
 
   const isInvalid = sample.validateRemote();
 
-  const finishButton = sample.remote.synchronising ? null : (
+  const finishButton = sample.isSynchronising ? null : (
     <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
       {sample.metadata.saved ? 'Report' : 'Finish'}
     </HeaderButton>
   );
 
-  const isTraining = !!sample.attrs.training;
+  const isTraining = !!sample.data.training;
   const trainingModeSubheader = isTraining && (
     <div className="bg-black p-1 text-center text-sm text-white">
       Training Mode

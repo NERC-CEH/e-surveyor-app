@@ -63,22 +63,22 @@ const survey: Survey = {
           info: 'You can change your survey name here.',
           inputProps: { options: surveyTypes },
           set: (value: any, sample: SampleModel) => {
-            sample.attrs.type = value; // eslint-disable-line
+            sample.data.type = value; // eslint-disable-line
 
-            sample.attrs.steps = 10; // eslint-disable-line
-            sample.attrs.quadratSize = 1; // eslint-disable-line
+            sample.data.steps = 10; // eslint-disable-line
+            sample.data.quadratSize = 1; // eslint-disable-line
 
             if (value === 'Common Standards') {
-              sample.attrs.habitat = null; // eslint-disable-line
+              sample.data.habitat = null; // eslint-disable-line
               // eslint-disable-next-line
-              sample.attrs.steps = appModel.attrs.use10stepsForCommonStandard
+              sample.data.steps = appModel.data.use10stepsForCommonStandard
                 ? 10
                 : 20;
-              sample.attrs.quadratSize = 1; // eslint-disable-line
+              sample.data.quadratSize = 1; // eslint-disable-line
             }
 
             if (value === 'Agri-environment') {
-              sample.attrs.habitat = null; // eslint-disable-line
+              sample.data.habitat = null; // eslint-disable-line
             }
           },
         },
@@ -116,7 +116,7 @@ const survey: Survey = {
           input: 'radio',
           inputProps: (model: SampleModel) => ({
             options:
-              model.attrs.type === 'Agri-environment'
+              model.data.type === 'Agri-environment'
                 ? agriEnvironmentHabitats
                 : commonStandardsHabitats,
           }),
@@ -151,7 +151,7 @@ const survey: Survey = {
 
       create({ Sample, Occurrence, photo }) {
         const sample = new Sample({
-          attrs: {
+          data: {
             surveyId: survey.id,
             location: null,
             enteredSrefSystem: 4326,
@@ -192,7 +192,7 @@ const survey: Survey = {
 
         create({ Occurrence, photo }) {
           const occ = new Occurrence({
-            attrs: {
+            data: {
               taxon: null,
             },
           });
@@ -217,7 +217,7 @@ const survey: Survey = {
 
     create({ Sample }) {
       const sample = new Sample({
-        attrs: {
+        data: {
           surveyId: survey.id,
           location: null,
           enteredSrefSystem: 4326,
@@ -242,7 +242,7 @@ const survey: Survey = {
       return submission;
     },
 
-    verify(attrs: any, sample: SampleModel) {
+    verify(data: any, sample: SampleModel) {
       try {
         Yup.number()
           .min(1, 'Please add a quadrat photo.')
@@ -252,7 +252,7 @@ const survey: Survey = {
           location: verifyLocationSchema,
         });
 
-        transectSchema.validateSync(attrs, { abortEarly: false });
+        transectSchema.validateSync(data, { abortEarly: false });
       } catch (attrError) {
         return attrError;
       }
@@ -263,9 +263,9 @@ const survey: Survey = {
 
   create({ Sample }) {
     const sample = new Sample({
-      attrs: {
+      data: {
         surveyId: survey.id,
-        training: appModel.attrs.useTraining,
+        training: appModel.data.useTraining,
         date: new Date().toISOString(),
         name: new Date().toLocaleDateString('en-UK'),
         location: null,
@@ -278,7 +278,7 @@ const survey: Survey = {
     return sample;
   },
 
-  verify(attrs: any, sample: SampleModel) {
+  verify(data: any, sample: SampleModel) {
     try {
       const id = sample.isIdentifying();
 
@@ -287,10 +287,10 @@ const survey: Survey = {
         .validateSync(id, { abortEarly: false });
 
       Yup.number()
-        .oneOf([sample.attrs.steps], 'Please add more quadrats.')
+        .oneOf([sample.data.steps], 'Please add more quadrats.')
         .validateSync(sample.samples.length, { abortEarly: false });
 
-      getDetailsValidationSchema().validateSync(attrs, {
+      getDetailsValidationSchema().validateSync(data, {
         abortEarly: false,
       });
     } catch (attrError) {

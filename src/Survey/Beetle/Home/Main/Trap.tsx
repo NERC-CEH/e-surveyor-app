@@ -56,7 +56,7 @@ const Trap = ({ sample: trapSample, onTrapDelete }: Props) => {
   const showMenu = useMenu(showDeleteAlert);
   const { contextMenuProps } = useContextMenu({ onShow: showMenu });
 
-  const isDisabled = trapSample.isUploaded();
+  const isDisabled = trapSample.isUploaded;
 
   const getTrapPhoto = (smp: Sample) => {
     const pic = smp.media[0]?.getURL();
