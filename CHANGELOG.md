@@ -1,3 +1,7 @@
+### 1.6.0
+
+Upgraded framework.
+
 ### 1.5.0
 
 Updated app name.
