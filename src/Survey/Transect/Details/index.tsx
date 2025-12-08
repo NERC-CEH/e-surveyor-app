@@ -8,15 +8,8 @@ import HeaderButton from 'Survey/common/Components/HeaderButton';
 import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
-const validate = (sample: Sample) => {
-  try {
-    getDetailsValidationSchema().validateSync(sample.data);
-  } catch (attrError) {
-    return attrError;
-  }
-
-  return null;
-};
+const validate = (sample: Sample) =>
+  getDetailsValidationSchema().safeParse(sample.data).error;
 
 type Props = {
   sample: Sample;

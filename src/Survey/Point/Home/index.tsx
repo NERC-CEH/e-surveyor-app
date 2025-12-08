@@ -175,11 +175,10 @@ const HomeController = ({ sample }: Props) => {
   const onFinish = async () => {
     const invalids = sample.validateRemote();
     if (invalids) {
-      const hasUnidentifiedOcc = ({ model, attributes }: any) =>
-        model instanceof Occurrence && !attributes.value.taxon;
+      const hasUnidentifiedOcc = ({ attributes }: any) =>
+        attributes.errors.includes('Plant has not been identified');
 
-      const hasUnidentifiedSample = ({ model, models }: any) =>
-        model instanceof Sample &&
+      const hasUnidentifiedSample = ({ models }: any) =>
         Object.values(models).some(hasUnidentifiedOcc);
 
       const hasUnidentified = Object.values(invalids.models).some(
@@ -203,12 +202,7 @@ const HomeController = ({ sample }: Props) => {
       alert({
         header: 'Survey incomplete',
         message: <ModelValidationMessage {...invalids} />,
-        buttons: [
-          {
-            text: 'Got it',
-            role: 'cancel',
-          },
-        ],
+        buttons: [{ text: 'Got it', role: 'cancel' }],
       });
       return;
     }

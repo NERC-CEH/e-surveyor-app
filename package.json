@@ -49,7 +49,6 @@
     "@ionic/core": "^8.7.11",
     "@ionic/react": "^8.7.11",
     "@ionic/react-router": "^8.7.11",
-    "@mapbox/mapbox-gl-draw": "^1.4.3",
     "@sentry/browser": "7.114.0",
     "@sentry/integrations": "7.114.0",
     "@techstark/opencv-js": "^4.10.0-release.1",
@@ -81,9 +80,6 @@
     "react-window": "^2.2.3",
     "sql.js": "1.12.0",
     "swiper": "^12.0.3",
-    "tailwind-merge": "^3.4.0",
-    "tailwind-variants": "^3.2.2",
-    "yup": "^1.7.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import { z } from 'zod';
 import config from 'common/config';
 import icon from 'common/images/pointIcon.svg';
 import appModel from 'common/models/app';
@@ -10,10 +10,10 @@ import {
   customSeedmixAttr,
   dateAttr,
   locationAttr,
-  verifyLocationSchema,
   nameAttr,
   attachClassifierResults,
   Survey,
+  locationSchema,
 } from 'Survey/common/config';
 
 const seededValues = [
@@ -96,59 +96,40 @@ const survey: Survey = {
         taxon: {
           remote: {
             id: 'taxa_taxon_list_id',
-            values(taxon: any) {
-              return taxon.warehouseId;
-            },
+            values: (taxon: any) => taxon.warehouseId,
           },
         },
       },
 
-      verify(attrs) {
-        try {
-          Yup.object()
-            .shape({
-              taxon: Yup.object()
-                .nullable()
-                .required('Plant has not been identified'),
-            })
-            .validateSync(attrs, { abortEarly: false });
-        } catch (attrError) {
-          return attrError;
-        }
-
-        return null;
-      },
+      verify: attrs =>
+        z
+          .object({})
+          .nullable()
+          .refine(val => val !== null, {
+            message: 'Plant has not been identified',
+          })
+          .safeParse(attrs.taxon).error,
 
       create({ Occurrence, photo }) {
         const occ = new Occurrence({
-          data: {
-            taxon: null,
-          },
+          data: { taxon: null },
         });
 
-        if (photo) {
-          occ.media.push(photo);
-        }
+        if (photo) occ.media.push(photo);
 
         return occ;
       },
 
       modifySubmission(submission: any, occ: OccurrenceModel) {
         // for non-UK species
-        if (!submission.values.taxa_taxon_list_id) {
-          return null;
-        }
-
+        if (!submission.values.taxa_taxon_list_id) return null;
         return attachClassifierResults(submission, occ);
       },
     },
 
     modifySubmission(submission: any) {
       // for non-UK species
-      if (!submission.occurrences.length) {
-        return null;
-      }
-
+      if (!submission.occurrences.length) return null;
       return submission;
     },
   },
@@ -174,38 +155,21 @@ const survey: Survey = {
 
   verify(attrs, sample) {
     try {
-      const isIdentifying = sample.isIdentifying();
-
-      Yup.boolean()
-        .oneOf([false], 'Some photos are still being identified.')
-        .validateSync(isIdentifying, { abortEarly: false });
-
-      // const hasUnknownSpecies = sample.samples.some((subSample) => subSample.occure);
-
-      // Yup.boolean()
-      //   .oneOf([false], 'Some photos are still being identified.')
-      //   .validateSync(isIdentifying, { abortEarly: false });
-
+      // check if at least one species with possible score exists
       let hasValidSpecies = false;
       const showReportIfScoreHigherThanThreshold = (subSample: any) => {
         const { score } = subSample.getSpecies();
-
-        if (score > POSSIBLE_THRESHOLD) {
-          hasValidSpecies = true;
-        }
+        if (score > POSSIBLE_THRESHOLD) hasValidSpecies = true;
       };
-
       sample.samples.forEach(showReportIfScoreHigherThanThreshold);
 
-      Yup.boolean()
-        .oneOf([true], 'Please add some species.')
-        .validateSync(hasValidSpecies, { abortEarly: false });
+      z.boolean()
+        .refine(val => val === true, {
+          message: 'Please add some species.',
+        })
+        .parse(hasValidSpecies);
 
-      const transectSchema = Yup.object().shape({
-        location: verifyLocationSchema,
-      });
-
-      transectSchema.validateSync(attrs, { abortEarly: false });
+      z.object({ location: locationSchema }).parse(attrs);
     } catch (attrError) {
       return attrError;
     }

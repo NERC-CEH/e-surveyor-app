@@ -1,6 +1,6 @@
 import { calendarOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
-import * as Yup from 'yup';
+import { z } from 'zod';
 import {
   BlockT,
   dateFormat,
@@ -153,25 +153,6 @@ export const customSeedmixAttr = {
   },
 };
 
-const fixedLocationSchema = Yup.object().shape({
-  latitude: Yup.number().required(),
-  longitude: Yup.number().required(),
-});
-
-const validateLocation = (val: any) => {
-  if (!val) {
-    return false;
-  }
-  fixedLocationSchema.validateSync(val);
-  return true;
-};
-
-export const verifyLocationSchema = Yup.mixed().test(
-  'location',
-  'Please select location.',
-  validateLocation
-);
-
 export const dateAttr = {
   menuProps: {
     icon: calendarOutline,
@@ -208,6 +189,23 @@ export const nameAttr = {
   },
   remote: { id: 1531 },
 };
+
+export const locationSchema = z
+  .object(
+    {
+      latitude: z.number().nullable().optional(),
+      longitude: z.number().nullable().optional(),
+    },
+    {
+      required_error: 'Location is missing.',
+      invalid_type_error: 'Location is missing.',
+    }
+  )
+  .refine(
+    (val: any) =>
+      Number.isFinite(val.latitude) && Number.isFinite(val.longitude),
+    'Location is missing.'
+  );
 
 export enum MachineInvolvement {
   /**

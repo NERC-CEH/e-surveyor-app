@@ -23,11 +23,7 @@ const ImageDefault = observer(
             <IonIcon icon={closeOutline} />
           </IonButton>
         )}
-        <img
-          src={mediaSrc}
-          alt=""
-          onClick={onClick} // TODO: fix
-        />
+        <img src={mediaSrc} alt="" onClick={onClick} />
       </div>
     );
   }

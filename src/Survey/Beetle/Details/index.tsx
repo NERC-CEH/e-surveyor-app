@@ -5,18 +5,8 @@ import { Page, Header, useAlert, TailwindContext } from '@flumens';
 import { NavContext } from '@ionic/react';
 import Sample from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
-import { getDetailsValidationSchema } from '../config';
+import { locationSchema } from 'Survey/common/config';
 import Main from './Main';
-
-const validate = (sample: Sample) => {
-  try {
-    getDetailsValidationSchema.validateSync(sample.data);
-  } catch (attrError) {
-    return attrError;
-  }
-
-  return null;
-};
 
 type Props = {
   sample: Sample;
@@ -29,7 +19,7 @@ const Controller = ({ sample }: Props) => {
   const alert = useAlert();
 
   const onDone = () => {
-    const invalids = validate(sample);
+    const invalids = locationSchema.safeParse(sample.data.location).error;
     if (invalids) {
       alert({
         header: 'Missing',
@@ -51,7 +41,7 @@ const Controller = ({ sample }: Props) => {
 
   const { completedDetails } = sample.metadata;
 
-  const isInvalid = !!validate(sample);
+  const isInvalid = !!locationSchema.safeParse(sample.data.location).error;
   const doneButton = !completedDetails && (
     <HeaderButton onClick={onDone} isInvalid={isInvalid}>
       Next

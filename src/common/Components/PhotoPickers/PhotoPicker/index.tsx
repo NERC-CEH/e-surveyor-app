@@ -98,10 +98,7 @@ const AppPhotoPicker = ({
             <IonIcon icon={close} />
           </IonButton>
         )}
-        <img
-          src={media.getURL()}
-          onClick={onClick} // TODO: fix
-        />
+        <img src={media.getURL()} onClick={onClick} />
         {!isDisabled && (
           <IonButton className="crop-button" onClick={cropImage}>
             <IonIcon icon={cropOutline} />
@@ -120,7 +117,9 @@ const AppPhotoPicker = ({
         placeholderCount={1}
         Image={allowToCrop ? ImageWithCropping : undefined}
         isDisabled={isDisabled || maxPicsReached}
-        buttonLabel={<span className="mx-2">Add photos</span>}
+        buttonLabel={
+          <span className="mx-2 my-0.5 text-sm opacity-70">Add photos</span>
+        }
         {...restProps}
       />
       {allowToCrop && (

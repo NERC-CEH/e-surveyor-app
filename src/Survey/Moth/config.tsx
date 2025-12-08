@@ -1,5 +1,5 @@
 import { chatboxOutline } from 'ionicons/icons';
-import { z, object } from 'zod';
+import { object } from 'zod';
 import { dateFormat, toISOTimezoneString } from '@flumens';
 import icon from 'common/images/moth-inside-icon.svg';
 import appModel from 'common/models/app';
@@ -8,6 +8,7 @@ import {
   Survey,
   locationAttr,
   attachClassifierResults,
+  locationSchema,
 } from 'Survey/common/config';
 
 export const habitatValues = [
@@ -93,13 +94,7 @@ const survey: Survey = {
     },
   },
 
-  verify: attrs =>
-    object({
-      location: object(
-        { latitude: z.number(), longitude: z.number() },
-        { invalid_type_error: 'Please select location.' }
-      ),
-    }).safeParse(attrs).error,
+  verify: attrs => object({ location: locationSchema }).safeParse(attrs).error,
 
   create({ Sample }) {
     const sample = new Sample({

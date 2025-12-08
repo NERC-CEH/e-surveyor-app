@@ -93,10 +93,7 @@ const AppPhotoPicker = ({
             <IonIcon icon={close} />
           </IonButton>
         )}
-        <img
-          src={media.getURL()}
-          onClick={onClick} // TODO: fix
-        />
+        <img src={media.getURL()} onClick={onClick} />
         {!isDisabled && allowToCrop && (
           <IonButton className="crop-button" onClick={cropImage}>
             <IonIcon icon={cropOutline} />

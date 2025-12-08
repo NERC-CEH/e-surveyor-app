@@ -1,5 +1,5 @@
 import { clipboardOutline } from 'ionicons/icons';
-import * as Yup from 'yup';
+import { object, z } from 'zod';
 import { RadioOption } from '@flumens';
 import icon from 'common/images/beetle.svg';
 import appModel from 'common/models/app';
@@ -7,12 +7,8 @@ import {
   Survey,
   dateAttr,
   locationAttr,
-  verifyLocationSchema,
+  locationSchema,
 } from 'Survey/common/config';
-
-export const getDetailsValidationSchema = Yup.object().shape({
-  location: verifyLocationSchema,
-});
 
 type ExtendedOption = RadioOption & {
   label?: string;
@@ -486,40 +482,23 @@ const survey: Survey = {
       return sample;
     },
 
-    verify(attrs) {
-      try {
-        Yup.object()
-          .shape({
-            location: verifyLocationSchema,
-          })
-          .validateSync(attrs, { abortEarly: false });
-      } catch (attrError) {
-        return attrError;
-      }
-
-      return null;
-    },
+    verify: attrs =>
+      object({ location: locationSchema }).safeParse(attrs).error,
 
     occ: {
       attrs: {
         taxon: taxonAttr,
       },
 
-      verify(attrs) {
-        try {
-          Yup.object()
-            .shape({
-              taxon: Yup.object()
-                .nullable()
-                .required('Beetle has not been identified'),
-            })
-            .validateSync(attrs, { abortEarly: false });
-        } catch (attrError) {
-          return attrError;
-        }
-
-        return null;
-      },
+      verify: attrs =>
+        object({
+          taxon: z
+            .object({})
+            .nullable()
+            .refine(val => val !== null, {
+              message: 'Beetle has not been identified',
+            }),
+        }).safeParse(attrs).error,
 
       create({ Occurrence, photo }) {
         const occ = new Occurrence({
@@ -555,21 +534,19 @@ const survey: Survey = {
 
   verify(attrs, sample) {
     try {
-      const isIdentifying = sample.isIdentifying();
-
-      Yup.boolean()
-        .oneOf([false], 'Some photos are still being identified.')
-        .validateSync(isIdentifying, { abortEarly: false });
-
-      Yup.array()
-        .min(1, 'Please add at least one trap.')
-        .validateSync(sample.samples, { abortEarly: false });
-
-      Yup.object()
-        .shape({
-          location: verifyLocationSchema,
+      z.boolean()
+        .refine(val => val === false, {
+          message: 'Some photos are still being identified.',
         })
-        .validateSync(attrs, { abortEarly: false });
+        .parse(sample.isIdentifying());
+
+      z.array(z.any())
+        .min(1, 'Please add at least one trap.')
+        .parse(sample.samples);
+
+      z.object({
+        location: locationSchema,
+      }).parse(attrs);
     } catch (attrError) {
       return attrError;
     }

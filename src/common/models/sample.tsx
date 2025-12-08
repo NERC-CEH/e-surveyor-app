@@ -214,13 +214,8 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   }
 
   getSpecies() {
-    if (!this.parent) {
-      throw new Error('Parent does not exist');
-    }
-
-    const [occ] = this.occurrences;
-
-    return occ.getSpecies();
+    if (!this.parent) throw new Error('Can only use fn with sub-samples.');
+    return this.occurrences[0].getSpecies();
   }
 
   isIdentifying(): boolean {

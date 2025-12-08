@@ -27,11 +27,9 @@ export default class Media extends MediaOriginal<Data> {
       getAccessToken: () => userModel.getAccessToken(),
     });
 
-    // TODO: check if needed
-    // data = observable({
-    //   identified: false,
-    //   ...this.data,
-    // });
+    if (!Object.prototype.hasOwnProperty.call(this.data, 'identified')) {
+      this.data.identified = false;
+    }
   }
 
   async destroy() {

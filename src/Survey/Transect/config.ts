@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import { z } from 'zod';
 import { schemeHabitats } from 'common/data/habitats';
 import icon from 'common/images/transectIconBlack.svg';
 import appModel from 'models/app';
@@ -10,27 +10,23 @@ import {
   customSeedmixAttr,
   dateAttr,
   locationAttr,
-  verifyLocationSchema,
   nameAttr,
   attachClassifierResults,
   Survey,
+  locationSchema,
 } from 'Survey/common/config';
 
-export const getDetailsValidationSchema = () =>
-  Yup.object().shape({
-    location: verifyLocationSchema,
-    quadratSize: Yup.number()
-      .min(1)
-      .required('Please select your quadrat size.'),
-    steps: Yup.number()
-      .min(1)
-      .required('Please select the number of survey steps.'),
-
-    habitat: Yup.mixed().when('type', {
-      is: 'Custom',
-      // then: do nothing
-      otherwise: schema => schema.required('Please select habitat.'),
-    }),
+export const getDetailsValidationSchema = (type?: string) =>
+  z.object({
+    location: locationSchema,
+    quadratSize: z.number().min(1, 'Please select your quadrat size.'),
+    steps: z.number().min(1, 'Please select the number of survey steps.'),
+    habitat:
+      type === 'Custom'
+        ? z.any().optional()
+        : z.any().refine(val => val != null, {
+            message: 'Please select habitat.',
+          }),
   });
 
 const getHabitats = (name: any) => ({ value: name, id: name });
@@ -242,23 +238,16 @@ const survey: Survey = {
       return submission;
     },
 
-    verify(data: any, sample: SampleModel) {
-      try {
-        Yup.number()
-          .min(1, 'Please add a quadrat photo.')
-          .validateSync(sample.media.length, { abortEarly: false });
-
-        const transectSchema = Yup.object().shape({
-          location: verifyLocationSchema,
-        });
-
-        transectSchema.validateSync(data, { abortEarly: false });
-      } catch (attrError) {
-        return attrError;
-      }
-
-      return null;
-    },
+    verify: (data: any, sample: SampleModel) =>
+      z
+        .object({
+          location: locationSchema,
+          photos: z.number().min(1, 'Please add a quadrat photo.'),
+        })
+        .safeParse({
+          location: data.location,
+          photos: sample.media.length,
+        }).error,
   },
 
   create({ Sample }) {
@@ -280,19 +269,19 @@ const survey: Survey = {
 
   verify(data: any, sample: SampleModel) {
     try {
-      const id = sample.isIdentifying();
+      z.boolean()
+        .refine(val => val === false, {
+          message: 'Is still identifying',
+        })
+        .parse(sample.isIdentifying());
 
-      Yup.boolean()
-        .oneOf([false], 'Is still identifying')
-        .validateSync(id, { abortEarly: false });
+      z.number()
+        .refine(val => val === sample.data.steps, {
+          message: 'Please add more quadrats.',
+        })
+        .parse(sample.samples.length);
 
-      Yup.number()
-        .oneOf([sample.data.steps], 'Please add more quadrats.')
-        .validateSync(sample.samples.length, { abortEarly: false });
-
-      getDetailsValidationSchema().validateSync(data, {
-        abortEarly: false,
-      });
+      getDetailsValidationSchema(data.type).parse(data);
     } catch (attrError) {
       return attrError;
     }
