@@ -7,7 +7,7 @@ import {
   openOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Button, Input, Main, MenuAttrItem, Select } from '@flumens';
+import { Block, Button, Main, MenuAttrItem } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import beetleIcon from 'common/images/beetle.svg';
@@ -16,7 +16,7 @@ import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import BeetleGuide from '../common/BeetleGuide';
-import { marginOptions } from '../config';
+import { trapCommentAttr, trapMarginAttr } from '../config';
 import './styles.scss';
 
 type Props = {
@@ -30,6 +30,8 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
   const [showGuide, setShowGuide] = useState(false);
 
   const prettyGridRef = <GridRefValue sample={subSample} />;
+
+  const recordAttrs = { isDisabled, record: subSample.data };
 
   return (
     <>
@@ -68,32 +70,9 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
                 skipValueTranslation
                 disabled={isDisabled}
               />
-              {/* <div className="border-b-[0.5px] border-neutral-200 bg-white">
-              <div className="bg-neutral-50/50 p-1">
-                <RadioInput
-                  options={marginOptions}
-                  value={subSample.data.margin}
-                  onChange={(value: any) => (subSample.data.margin = value)} // eslint-disable-line
-                  icon={false}
-                  size="small"
-                  inline
-                />
-              </div>
-            </div> */}
-              <Select
-                label="Position"
-                options={marginOptions}
-                value={subSample.data.margin}
-                onChange={(value: any) => (subSample.data.margin = value)} // eslint-disable-line
-                prefix={<IonIcon icon={locationOutline} className="size-6" />}
-              />
-              <Input
-                label="Notes"
-                labelPlacement="floating"
-                value={subSample.data.comment}
-                onChange={(value: any) => (subSample.data.comment = value)} // eslint-disable-line
-                isMultiline
-              />
+
+              <Block block={trapMarginAttr} {...recordAttrs} />
+              <Block block={trapCommentAttr} {...recordAttrs} />
             </div>
           </IonList>
 

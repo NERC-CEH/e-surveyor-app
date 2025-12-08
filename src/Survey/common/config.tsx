@@ -154,11 +154,11 @@ export const customSeedmixAttr = {
 };
 
 export const dateAttr = {
+  id: 'date',
   menuProps: {
     icon: calendarOutline,
     parse: 'date',
   },
-
   pageProps: {
     attrProps: {
       input: 'date',

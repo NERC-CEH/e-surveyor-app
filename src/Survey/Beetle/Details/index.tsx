@@ -48,11 +48,6 @@ const Controller = ({ sample }: Props) => {
     </HeaderButton>
   );
 
-  const onChangeTrapOutside = (value: number) => {
-    // eslint-disable-next-line no-param-reassign
-    sample.data.trapDays = value;
-  };
-
   const { isDisabled } = sample;
 
   const origContext = useContext(TailwindContext);
@@ -65,7 +60,7 @@ const Controller = ({ sample }: Props) => {
     <Page id="beetle-details">
       <Header title="Survey details" rightSlot={doneButton} />
       <TailwindContext.Provider value={tailwindContext}>
-        <Main sample={sample} onChangeTrapOutside={onChangeTrapOutside} />
+        <Main sample={sample} />
       </TailwindContext.Provider>
     </Page>
   );

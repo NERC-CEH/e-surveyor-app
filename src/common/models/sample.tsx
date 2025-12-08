@@ -14,7 +14,11 @@ import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel from 'models/app';
 import userModel from 'models/user';
 import { SpeciesNames } from 'Components/ReportView/helpers';
-import beetleSurveyConfig from 'Survey/Beetle/config';
+import beetleSurveyConfig, {
+  fieldCropAttr,
+  fieldNonCropHabitatsAttr,
+  fieldTillageAttr,
+} from 'Survey/Beetle/config';
 import mothSurveyConfig from 'Survey/Moth/config';
 import pointSurveyConfig from 'Survey/Point/config';
 import soilSurveyConfig, {
@@ -31,7 +35,7 @@ import soilSurveyConfig, {
   wormCountAttr,
 } from 'Survey/Soil/config';
 import transectSurveyConfig from 'Survey/Transect/config';
-import { Survey } from 'Survey/common/config';
+import { dateAttr, Survey } from 'Survey/common/config';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
 import Media from './image';
 import Occurrence from './occurrence';
@@ -67,6 +71,8 @@ type Metadata = SampleMetadata & {
 const cropAttrId = cropAttr().id;
 
 export type Attrs = SampleAttrs & {
+  [dateAttr.id]?: string;
+
   surveyId: keyof typeof surveyConfigs;
   habitat?: any;
   name?: any;
@@ -81,18 +87,11 @@ export type Attrs = SampleAttrs & {
   location?: any;
 
   // beetle survey
-  farm?: string;
-  fieldName?: string;
-  trapDays?: number;
-  fieldInsecticides?: boolean;
-  fieldHerbicides?: boolean;
-  fieldUndersowing?: boolean;
-  fieldCompanionCropping?: boolean;
-  fieldIntercropping?: boolean;
-  fieldNonCropHabitats?: string[];
-  fieldCrop?: string;
-  fieldTillage?: string;
-  margin?: any;
+  [fieldTillageAttr.id]: string;
+  [fieldNonCropHabitatsAttr.id]?: ChoiceValues<
+    typeof fieldNonCropHabitatsAttr.choices
+  >[];
+  [fieldCropAttr.id]: string;
 
   // moth survey
   surveyEndTime?: any;

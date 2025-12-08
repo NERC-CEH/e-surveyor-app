@@ -6,7 +6,7 @@ import Details from './Details';
 import EditSpecies from './EditSpecies';
 import Home from './Home';
 import Trap from './Trap';
-import survey from './config';
+import survey, { fieldNonCropHabitatsAttr } from './config';
 
 const baseURL = `/survey/${survey.name}`;
 
@@ -17,8 +17,17 @@ const routes = [
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details`, Details],
-  [`${baseURL}/:smpId/details/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/details/date`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details/map`, ModelLocationMap],
+  [
+    `${baseURL}/:smpId/details/${fieldNonCropHabitatsAttr.id}`,
+    ({ sample }: any) => (
+      <AttrPage.BlockPage
+        record={sample.data}
+        block={fieldNonCropHabitatsAttr}
+      />
+    ),
+  ],
   [`${baseURL}/:smpId/trap/:subSmpId`, Trap],
   [`${baseURL}/:smpId/trap/:subSmpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationMap],

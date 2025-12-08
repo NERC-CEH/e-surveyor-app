@@ -2,46 +2,64 @@ import { useState } from 'react';
 import { observer } from 'mobx-react';
 import {
   bookOutline,
-  clipboardOutline,
   locationOutline,
   openOutline,
-  timeOutline,
   playCircleOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import {
+  Block,
   Button,
-  CounterInput,
-  Input,
   Main,
   MenuAttrItem,
   MenuAttrItemFromModel,
-  Toggle,
 } from '@flumens';
 import { IonIcon, IonList } from '@ionic/react';
 import beetleIcon from 'common/images/beetle.svg';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import BeetleGuide from '../common/BeetleGuide';
-
-const clipboardIcon = <IonIcon src={clipboardOutline} className="size-6" />;
+import {
+  fieldNameAttr,
+  farmNameAttr,
+  trapDaysAttr,
+  fieldCropAttr,
+  fieldCropOtherValue,
+  fieldCropOtherAttr,
+  fieldMarginsAttr,
+  fieldMarginsHabitatAttr,
+  fieldTillageAttr,
+  fieldTillageOtherValue,
+  fieldTillageOtherAttr,
+  fieldNonCropHabitatsAttr,
+  fieldNonCropHabitatsOtherAttr,
+  fieldInsecticidesAttr,
+  fieldHerbicidesAttr,
+  fieldUndersowingAttr,
+  fieldCompanionCroppingAttr,
+  fieldIntercroppingAttr,
+  fieldNonCropHabitatsOtherValue,
+} from '../config';
 
 type Props = {
   sample: Sample;
-  onChangeTrapOutside: any;
 };
 
-const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
+const MainComponent = ({ sample }: Props) => {
   const [showGuide, setShowGuide] = useState(false);
 
   const match = useRouteMatch();
 
-  const { trapDays } = sample.data;
   const isDisabled = sample.isUploaded;
 
   const prettyGridRef = sample.data.location && (
     <GridRefValue sample={sample} />
   );
+
+  const recordAttrs = {
+    record: sample.data,
+    isDisabled,
+  };
 
   return (
     <>
@@ -85,83 +103,37 @@ const MainComponent = ({ sample, onChangeTrapOutside }: Props) => {
               disabled={isDisabled}
               required
             />
-            <Input
-              label="Farm name"
-              prefix={<IonIcon src={locationOutline} className="size-6" />}
-              value={sample.data.farm}
-              onChange={(val: string) => (sample.data.farm = val)} // eslint-disable-line
-            />
-            <CounterInput
-              label="Trapping period"
-              onChange={onChangeTrapOutside}
-              value={trapDays}
-              prefix={<IonIcon src={timeOutline} className="size-6" />}
-              minValue={1}
-              suffix={`${trapDays}` === '1' ? 'day' : 'days'}
-            />
+
+            <Block block={farmNameAttr} {...recordAttrs} />
+            <Block block={trapDaysAttr} {...recordAttrs} />
           </div>
 
           <h3 className="list-title">Field</h3>
           <div className="rounded-list">
-            <Input
-              label="Name"
-              prefix={<IonIcon src={clipboardOutline} className="size-6" />}
-              value={sample.data.fieldName}
-              onChange={(val: string) => (sample.data.fieldName = val)} // eslint-disable-line
-            />
-            <MenuAttrItemFromModel attr="fieldCrop" model={sample} />
-            {sample.data.fieldCrop === 'Other' && (
-              <MenuAttrItemFromModel attr="fieldCropOther" model={sample} />
+            <Block block={fieldNameAttr} {...recordAttrs} />
+            <Block block={fieldCropAttr} {...recordAttrs} />
+            {sample.data[fieldCropAttr.id] === fieldCropOtherValue && (
+              <Block block={fieldCropOtherAttr} {...recordAttrs} />
             )}
-            <MenuAttrItemFromModel attr="fieldMargins" model={sample} />
-            <MenuAttrItemFromModel attr="fieldMarginsHabitat" model={sample} />
-            <MenuAttrItemFromModel attr="fieldTillage" model={sample} />
-            {sample.data.fieldTillage === 'Other' && (
-              <MenuAttrItemFromModel attr="fieldTillageOther" model={sample} />
+            <Block block={fieldMarginsAttr} {...recordAttrs} />
+            <Block block={fieldMarginsHabitatAttr} {...recordAttrs} />
+            <Block block={fieldTillageAttr} {...recordAttrs} />
+            {sample.data[fieldTillageAttr.id] === fieldTillageOtherValue && (
+              <Block block={fieldTillageOtherAttr} {...recordAttrs} />
             )}
-            <MenuAttrItemFromModel attr="fieldNonCropHabitats" model={sample} />
-            {sample.data.fieldNonCropHabitats?.includes('Other') && (
-              <MenuAttrItemFromModel
-                attr="fieldNonCropHabitatsOther"
-                model={sample}
-              />
+
+            <Block block={fieldNonCropHabitatsAttr} {...recordAttrs} />
+            {sample.data[fieldNonCropHabitatsAttr.id]?.includes(
+              fieldNonCropHabitatsOtherValue
+            ) && (
+              <Block block={fieldNonCropHabitatsOtherAttr} {...recordAttrs} />
             )}
-            <Toggle
-              prefix={clipboardIcon}
-              label="Insecticides used"
-              defaultSelected={sample.data.fieldInsecticides}
-              onChange={
-                (val: boolean) => (sample.data.fieldInsecticides = val) // eslint-disable-line
-              }
-            />
-            <Toggle
-              prefix={clipboardIcon}
-              label="Herbicides used"
-              defaultSelected={sample.data.fieldHerbicides}
-              onChange={(val: boolean) => (sample.data.fieldHerbicides = val)} // eslint-disable-line
-            />
-            <Toggle
-              prefix={clipboardIcon}
-              label="Undersowing"
-              defaultSelected={sample.data.fieldUndersowing}
-              onChange={(val: boolean) => (sample.data.fieldUndersowing = val)} // eslint-disable-line
-            />
-            <Toggle
-              prefix={clipboardIcon}
-              label="Companion cropping"
-              defaultSelected={sample.data.fieldCompanionCropping}
-              onChange={
-                (val: boolean) => (sample.data.fieldCompanionCropping = val) // eslint-disable-line
-              }
-            />
-            <Toggle
-              prefix={clipboardIcon}
-              label="Intercropping"
-              defaultSelected={sample.data.fieldIntercropping}
-              onChange={
-                (val: boolean) => (sample.data.fieldIntercropping = val) // eslint-disable-line
-              }
-            />
+
+            <Block block={fieldInsecticidesAttr} {...recordAttrs} />
+            <Block block={fieldHerbicidesAttr} {...recordAttrs} />
+            <Block block={fieldUndersowingAttr} {...recordAttrs} />
+            <Block block={fieldCompanionCroppingAttr} {...recordAttrs} />
+            <Block block={fieldIntercroppingAttr} {...recordAttrs} />
           </div>
         </IonList>
       </Main>

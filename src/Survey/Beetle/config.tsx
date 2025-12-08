@@ -1,14 +1,16 @@
-import { clipboardOutline } from 'ionicons/icons';
+import { clipboardOutline, locationOutline, timeOutline } from 'ionicons/icons';
 import { object, z } from 'zod';
 import { RadioOption } from '@flumens';
+import {
+  ChoiceInputConf,
+  NumberInputConf,
+  TextInputConf,
+  YesNoInputConf,
+} from '@flumens/tailwind/dist/Survey';
+import { IonIcon } from '@ionic/react';
 import icon from 'common/images/beetle.svg';
 import appModel from 'common/models/app';
-import {
-  Survey,
-  dateAttr,
-  locationAttr,
-  locationSchema,
-} from 'Survey/common/config';
+import { Survey, dateAttr, locationSchema } from 'Survey/common/config';
 
 type ExtendedOption = RadioOption & {
   label?: string;
@@ -191,240 +193,215 @@ export const beetleSpecies: ExtendedOption[] = [
   },
 ].map(addLabels);
 
-const tillageTypes = [
-  { value: null, isDefault: true, label: 'Not Recorded' },
-  { value: 'Zero tillage', id: 21781 },
-  { value: 'Shallow tillage', id: 21782 },
-  { value: 'Mouldboard plough', id: 21783 },
-  { value: 'Other', id: 21827 },
-];
+export const trapDaysAttr = {
+  id: 'smpAttr:1778',
+  type: 'numberInput',
+  title: 'Trapping period',
+  appearance: 'counter',
+  prefix: (<IonIcon src={timeOutline} className="size-6" />) as any,
+  suffix: 'day(s)',
+  step: 1,
+  validation: { min: 1 },
+} as const satisfies NumberInputConf;
 
-const nonCropHabitatTypes = [
-  { value: 'Bird food/cover', id: 21833 },
-  { value: 'Beetle banks', id: 21834 },
-  { value: 'In-field strips', id: 21835 },
-  { value: 'Agroforestry', id: 21836 },
-  { value: 'Herbal/grass ley', id: 21837 },
-  { value: 'Other', id: 21838 },
-];
+export const farmNameAttr = {
+  id: 'location_name',
+  type: 'textInput',
+  title: 'Farm name',
+  prefix: (<IonIcon src={locationOutline} className="size-6" />) as any,
+} as const satisfies TextInputConf;
 
-const cropTypes = [
-  { value: null, isDefault: true, label: 'Not Recorded' },
-  { value: 'Bare stubble/cultivated', id: 21825 },
-  { value: 'Barley (spring)', id: 21764 },
-  { value: 'Barley (winter)', id: 21765 },
-  { value: 'Cover crop', id: 21766 },
-  { value: 'Field beans (spring)', id: 21767 },
-  { value: 'Field beans (winter)', id: 21768 },
-  { value: 'Leafy vegetables', id: 21769 },
-  { value: 'Linseed', id: 21770 },
-  { value: 'Oats (spring)', id: 21771 },
-  { value: 'Oats (winter)', id: 21772 },
-  { value: 'Oilseed rape (spring)', id: 21773 },
-  { value: 'Oilseed rape (winter)', id: 21774 },
-  { value: 'Pasture/grassland', id: 21775 },
-  { value: 'Peas', id: 21776 },
-  { value: 'Root vegetables', id: 21777 },
-  { value: 'Sugar beet', id: 21778 },
-  { value: 'Wheat (spring)', id: 21779 },
-  { value: 'Wheat (winter)', id: 21780 },
-  { value: 'Other', id: 21826 },
-];
+export const fieldNameAttr = {
+  id: 'smpAttr:1779',
+  type: 'textInput',
+  title: 'Name',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies TextInputConf;
 
-const marginTypes = [
-  { value: 0, label: 'No margin' },
-  { value: 2 },
-  { value: 6 },
-  { value: 12 },
-  { value: 18 },
-  { value: 24 },
-];
+export const fieldMarginsAttr = {
+  id: 'smpAttr:1780',
+  type: 'choiceInput',
+  title: 'Margins',
+  appearance: 'button',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  choices: [
+    { title: 'No margin', dataName: '0' },
+    { title: '2m', dataName: '2' },
+    { title: '6m', dataName: '6' },
+    { title: '12m', dataName: '12' },
+    { title: '18m', dataName: '18' },
+    { title: '24m', dataName: '24' },
+  ],
+} as const satisfies ChoiceInputConf;
 
-const marginsHabitats = [
-  { value: 'Arable margins sown with tussocky grasses', id: 21829 },
-  {
-    value: 'Arable margins sown with wild flowers or a pollen and nectar mix',
-    id: 21830,
-  },
-  {
-    value: 'Arable margins cultivated annually with an annual flora',
-    id: 21831,
-  },
-  { value: 'Game bird mix strips and corners', id: 21832 },
-];
+export const fieldCropOtherValue = '21826';
 
-export const marginOptions = [
-  { value: 'Edge', id: 21784 },
-  { value: '5 meters in', id: 21785 },
-  { value: 'Centre', id: 21786 },
-];
+export const fieldCropAttr = {
+  id: 'smpAttr:1781',
+  type: 'choiceInput',
+  title: 'Crop',
+  appearance: 'button',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  choices: [
+    { title: 'Not Recorded', dataName: '' },
+    { title: 'Bare stubble/cultivated', dataName: '21825' },
+    { title: 'Barley (spring)', dataName: '21764' },
+    { title: 'Barley (winter)', dataName: '21765' },
+    { title: 'Cover crop', dataName: '21766' },
+    { title: 'Field beans (spring)', dataName: '21767' },
+    { title: 'Field beans (winter)', dataName: '21768' },
+    { title: 'Leafy vegetables', dataName: '21769' },
+    { title: 'Linseed', dataName: '21770' },
+    { title: 'Oats (spring)', dataName: '21771' },
+    { title: 'Oats (winter)', dataName: '21772' },
+    { title: 'Oilseed rape (spring)', dataName: '21773' },
+    { title: 'Oilseed rape (winter)', dataName: '21774' },
+    { title: 'Pasture/grassland', dataName: '21775' },
+    { title: 'Peas', dataName: '21776' },
+    { title: 'Root vegetables', dataName: '21777' },
+    { title: 'Sugar beet', dataName: '21778' },
+    { title: 'Wheat (spring)', dataName: '21779' },
+    { title: 'Wheat (winter)', dataName: '21780' },
+    { title: 'Other', dataName: fieldCropOtherValue },
+  ],
+} as const satisfies ChoiceInputConf;
 
-const farmAttr = {
-  remote: { id: 'location_name' },
-};
+export const fieldCropOtherAttr = {
+  id: 'smpAttr:1789',
+  type: 'textInput',
+  title: 'Crop Other',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies TextInputConf;
 
-const trapDaysAttr = {
-  remote: { id: 1778 },
-};
+export const fieldTillageOtherValue = '21827';
 
-const fieldNameAttr = {
-  remote: { id: 1779 },
-};
+export const fieldTillageAttr = {
+  id: 'smpAttr:1782',
+  type: 'choiceInput',
+  title: 'Tillage',
+  appearance: 'button',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  choices: [
+    { title: 'Not Recorded', dataName: '' },
+    { title: 'Zero tillage', dataName: '21781' },
+    { title: 'Shallow tillage', dataName: '21782' },
+    { title: 'Mouldboard plough', dataName: '21783' },
+    { title: 'Other', dataName: fieldTillageOtherValue },
+  ],
+} as const satisfies ChoiceInputConf;
 
-const fieldMarginsAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    skipValueTranslation: true,
-    label: 'Margins',
-  },
-  pageProps: {
-    headerProps: { title: 'Margins' },
-    attrProps: [
-      {
-        input: 'slider',
-        info: 'What is the field margin width?',
-        inputProps: { min: 1, max: 24 },
-      },
-      {
-        input: 'radio',
-        inputProps: { options: marginTypes },
-      },
-    ],
-  },
-  remote: { id: 1780 },
-};
+export const fieldTillageOtherAttr = {
+  id: 'smpAttr:1788',
+  type: 'textInput',
+  title: 'Tillage Other',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies TextInputConf;
 
-const fieldCropAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Crop',
-  },
-  pageProps: {
-    headerProps: { title: 'Crop' },
-    attrProps: {
-      input: 'radio',
-      inputProps: { options: cropTypes },
+export const fieldNonCropHabitatsOtherValue = '21838';
+
+export const fieldNonCropHabitatsAttr = {
+  id: 'smpAttr:1793',
+  type: 'choiceInput',
+  title: 'Non-crop habitats',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  container: 'page',
+  multiple: true,
+  choices: [
+    { title: 'Bird food/cover', dataName: '21833' },
+    { title: 'Beetle banks', dataName: '21834' },
+    { title: 'In-field strips', dataName: '21835' },
+    { title: 'Agroforestry', dataName: '21836' },
+    { title: 'Herbal/grass ley', dataName: '21837' },
+    { title: 'Other', dataName: fieldNonCropHabitatsOtherValue },
+  ],
+} as const satisfies ChoiceInputConf;
+
+export const fieldNonCropHabitatsOtherAttr = {
+  id: 'smpAttr:1794',
+  type: 'textInput',
+  title: 'Other non-crop habitat',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies TextInputConf;
+
+export const fieldMarginsHabitatAttr = {
+  id: 'smpAttr:1792',
+  type: 'choiceInput',
+  title: 'Margins Habitat',
+  appearance: 'button',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  choices: [
+    { title: 'Not Recorded', dataName: '' },
+    { title: 'Arable margins sown with tussocky grasses', dataName: '21829' },
+    {
+      title: 'Arable margins sown with wild flowers or a pollen and nectar mix',
+      dataName: '21830',
     },
-  },
-  remote: { id: 1781, values: cropTypes },
-};
-
-const fieldCropOtherAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Crop Other',
-  },
-  pageProps: {
-    headerProps: { title: 'Crop Other' },
-    attrProps: {
-      input: 'input',
+    {
+      title: 'Arable margins cultivated annually with an annual flora',
+      dataName: '21831',
     },
-  },
-  remote: { id: 1789 },
-};
+    { title: 'Game bird mix strips and corners', dataName: '21832' },
+  ],
+} as const satisfies ChoiceInputConf;
 
-const fieldTillageAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Tillage',
-  },
-  pageProps: {
-    headerProps: { title: 'Tillage' },
-    attrProps: {
-      input: 'radio',
-      inputProps: { options: tillageTypes },
-    },
-  },
-  remote: { id: 1782, values: tillageTypes },
-};
+export const fieldInsecticidesAttr = {
+  id: 'smpAttr:1783',
+  type: 'yesNoInput',
+  title: 'Insecticides used',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies YesNoInputConf;
 
-const fieldTillageOtherAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Tillage Other',
-  },
-  pageProps: {
-    headerProps: { title: 'Tillage Other' },
-    attrProps: {
-      input: 'input',
-    },
-  },
-  remote: { id: 1788 },
-};
+export const fieldHerbicidesAttr = {
+  id: 'smpAttr:1784',
+  type: 'yesNoInput',
+  title: 'Herbicides used',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies YesNoInputConf;
 
-const fieldNonCropHabitatsAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Non-crop habitats',
-  },
-  pageProps: {
-    headerProps: { title: 'Non-crop habitats' },
-    attrProps: {
-      input: 'checkbox',
-      inputProps: { options: nonCropHabitatTypes },
-    },
-  },
-  remote: { id: 1793, values: nonCropHabitatTypes },
-};
+export const fieldUndersowingAttr = {
+  id: 'smpAttr:1785',
+  type: 'yesNoInput',
+  title: 'Undersowing',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies YesNoInputConf;
 
-const fieldNonCropHabitatsOtherAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Other non-crop habitat',
-  },
-  pageProps: {
-    headerProps: { title: 'Other non-crop habitat' },
-    attrProps: {
-      input: 'input',
-    },
-  },
-  remote: { id: 1794 },
-};
+export const fieldCompanionCroppingAttr = {
+  id: 'smpAttr:1790',
+  type: 'yesNoInput',
+  title: 'Companion cropping',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies YesNoInputConf;
 
-const fieldMarginsHabitatAttr = {
-  menuProps: {
-    icon: clipboardOutline,
-    label: 'Margins Habitat',
-  },
-  pageProps: {
-    headerProps: { title: 'Margins Habitat' },
-    attrProps: {
-      input: 'radio',
-      inputProps: { options: marginsHabitats },
-    },
-  },
-  remote: { id: 1792, values: marginsHabitats },
-};
+export const fieldIntercroppingAttr = {
+  id: 'smpAttr:1791',
+  type: 'yesNoInput',
+  title: 'Intercropping',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies YesNoInputConf;
 
-const fieldInsecticidesAttr = {
-  remote: { id: 1783 },
-};
+const edgeMarginValue = '21784';
+export const trapMarginAttr = {
+  id: 'smpAttr:1786',
+  type: 'choiceInput',
+  title: 'Position',
+  appearance: 'button',
+  prefix: <IonIcon icon={locationOutline} className="size-6" />,
+  choices: [
+    { title: 'Edge', dataName: edgeMarginValue },
+    { title: '5 meters in', dataName: '21785' },
+    { title: 'Centre', dataName: '21786' },
+  ],
+} as const satisfies ChoiceInputConf;
 
-const fieldHerbicidesAttr = {
-  remote: { id: 1784 },
-};
+export const trapCommentAttr = {
+  id: 'comment',
+  type: 'textInput',
+  title: 'Notes',
+  appearance: 'multiline',
+} as const satisfies TextInputConf;
 
-const fieldUndersowingAttr = {
-  remote: { id: 1785 },
-};
-
-const fieldCompanionCroppingAttr = {
-  remote: { id: 1790 },
-};
-
-const fieldIntercroppingAttr = {
-  remote: { id: 1791 },
-};
-
-const marginAttr = {
-  remote: { id: 1786, values: marginOptions },
-};
-
-const taxonAttr = {
-  remote: {
-    id: 'taxa_taxon_list_id',
-    values: (taxon: any) => taxon.warehouseId,
-  },
+export const taxonAttr = {
+  id: 'taxa_taxon_list_id',
 };
 
 const survey: Survey = {
@@ -435,41 +412,40 @@ const survey: Survey = {
 
   attrs: {
     date: dateAttr,
-    location: locationAttr,
-    farm: farmAttr,
-    trapDays: trapDaysAttr,
-    fieldName: fieldNameAttr,
-    fieldMargins: fieldMarginsAttr,
-    fieldCrop: fieldCropAttr,
-    fieldCropOther: fieldCropOtherAttr,
-    fieldTillage: fieldTillageAttr,
-    fieldTillageOther: fieldTillageOtherAttr,
-    fieldNonCropHabitats: fieldNonCropHabitatsAttr,
-    fieldNonCropHabitatsOther: fieldNonCropHabitatsOtherAttr,
-    fieldMarginsHabitat: fieldMarginsHabitatAttr,
-    fieldInsecticides: fieldInsecticidesAttr,
-    fieldHerbicides: fieldHerbicidesAttr,
-    fieldUndersowing: fieldUndersowingAttr,
-    fieldCompanionCropping: fieldCompanionCroppingAttr,
-    fieldIntercropping: fieldIntercroppingAttr,
+    // location: locationAttr,
+    // farm: farmAttr,
+    // trapDays: trapDaysAttr,
+    // fieldName: fieldNameAttr,
+    // fieldMargins: fieldMarginsAttr,
+    // fieldCrop: fieldCropAttr,
+    // fieldCropOther: fieldCropOtherAttr,
+    // fieldTillage: fieldTillageAttr,
+    // fieldTillageOther: fieldTillageOtherAttr,
+    // fieldNonCropHabitats: fieldNonCropHabitatsAttr,
+    // fieldNonCropHabitatsOther: fieldNonCropHabitatsOtherAttr,
+    // fieldMarginsHabitat: fieldMarginsHabitatAttr,
+    // fieldInsecticides: fieldInsecticidesAttr,
+    // fieldHerbicides: fieldHerbicidesAttr,
+    // fieldUndersowing: fieldUndersowingAttr,
+    // fieldCompanionCropping: fieldCompanionCroppingAttr,
+    // fieldIntercropping: fieldIntercroppingAttr,
   },
 
   smp: {
     attrs: {
-      date: dateAttr,
-      location: locationAttr,
-      margin: marginAttr,
+      // date: dateAttr,
+      // location: locationAttr,
+      // margin: marginAttr,
     },
 
     create({ Sample, photo, surveySample }) {
       const sample = new Sample({
         data: {
           surveyId: survey.id,
-          date: surveySample!.data.date,
-          sample_method_id: 24, // Pitfall trap
-          location: null,
-          margin: 'Edge',
+          sampleMethodId: 24, // Pitfall trap
           enteredSrefSystem: 4326,
+          [dateAttr.id]: surveySample!.data[dateAttr.id],
+          [trapMarginAttr.id]: edgeMarginValue,
         },
       });
 
@@ -487,7 +463,7 @@ const survey: Survey = {
 
     occ: {
       attrs: {
-        taxon: taxonAttr,
+        // taxon: taxonAttr,
       },
 
       verify: attrs =>
@@ -518,12 +494,11 @@ const survey: Survey = {
     const sample = new Sample({
       data: {
         surveyId: survey.id,
-        training: appModel.data.useTraining,
-        date: new Date().toISOString(),
-        sample_method_id: 2424, // Parent sample
-        location: null,
-        trapDays: 1,
         enteredSrefSystem: 4326,
+        sampleMethodId: 2424, // Parent sample
+        training: appModel.data.useTraining,
+        [dateAttr.id]: new Date().toISOString(),
+        [trapDaysAttr.id]: 1,
       },
     });
 
