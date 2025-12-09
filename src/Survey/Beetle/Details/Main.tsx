@@ -39,6 +39,7 @@ import {
   fieldCompanionCroppingAttr,
   fieldIntercroppingAttr,
   fieldNonCropHabitatsOtherValue,
+  SBIAttr,
 } from '../config';
 
 type Props = {
@@ -105,6 +106,7 @@ const MainComponent = ({ sample }: Props) => {
             />
 
             <Block block={farmNameAttr} {...recordAttrs} />
+            <Block block={SBIAttr} {...recordAttrs} />
             <Block block={trapDaysAttr} {...recordAttrs} />
           </div>
 

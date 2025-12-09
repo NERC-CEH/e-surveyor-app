@@ -1,4 +1,9 @@
-import { clipboardOutline, locationOutline, timeOutline } from 'ionicons/icons';
+import {
+  businessOutline,
+  clipboardOutline,
+  locationOutline,
+  timeOutline,
+} from 'ionicons/icons';
 import { object, z } from 'zod';
 import { RadioOption } from '@flumens';
 import {
@@ -202,6 +207,13 @@ export const trapDaysAttr = {
   suffix: 'day(s)',
   step: 1,
   validation: { min: 1 },
+} as const satisfies NumberInputConf;
+
+export const SBIAttr = {
+  id: 'smpAttr:2018',
+  type: 'numberInput',
+  title: 'Single Business Identifier (SBI)',
+  prefix: (<IonIcon src={businessOutline} className="size-6" />) as any,
 } as const satisfies NumberInputConf;
 
 export const farmNameAttr = {
