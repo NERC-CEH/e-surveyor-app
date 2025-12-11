@@ -103,7 +103,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       images: [url],
       url: config.backend.url,
       getAccessToken: () => userModel.getAccessToken(),
-      listId: 15, // UKSI
+      listId: 280, // beetles
     });
 
     const { classifierVersion, suggestions } = res;
@@ -205,7 +205,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       images: [url],
       url: config.backend.url,
       getAccessToken: () => userModel.getAccessToken(),
-      listId: 15, // UKSI
+      listId: 61, // iRecord Moths
     });
 
     const { classifierVersion, suggestions } = res;
