@@ -12,7 +12,9 @@ import {
   Image,
   Response as PlantNetResponse,
 } from 'common/services/indiciaAI/plantNetResponse.d';
-import beetleSurveyConfig from 'Survey/Beetle/config';
+import beetleSurveyConfig, {
+  occurrenceAbundanceAttr,
+} from 'Survey/Beetle/config';
 import mothSurveyConfig, { UNKNOWN_SPECIES } from 'Survey/Moth/config';
 import { MachineInvolvement, Survey } from 'Survey/common/config';
 import Media from './image';
@@ -50,7 +52,10 @@ export type Taxon = {
 } & ClassifierAttributes &
   PlantNetTaxonAttrs;
 
-type Data = OccurrenceAttrs & { taxon?: Taxon };
+type Data = OccurrenceAttrs & {
+  taxon?: Taxon;
+  [occurrenceAbundanceAttr.id]?: number;
+};
 
 export default class Occurrence extends OccurrenceOriginal<Data> {
   declare media: IObservableArray<Media>;
@@ -130,7 +135,41 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
     };
 
     this.data.taxon = taxon;
-    this.save();
+
+    // check if same species already exists in the trap
+    const trap = this.parent;
+    if (!trap) {
+      this.save();
+      return;
+    }
+
+    const matchingSpecies = (occ: Occurrence) =>
+      occ !== this && occ.data.taxon?.warehouseId === taxon.warehouseId;
+
+    const existingOccurrence = trap.occurrences.find(matchingSpecies);
+
+    if (existingOccurrence) {
+      // merge photos
+      while (this.media.length) {
+        const photo = this.media.pop();
+        if (photo) {
+          existingOccurrence.media.push(photo);
+        }
+      }
+
+      // increment abundance
+      const abundanceAttrId = occurrenceAbundanceAttr.id;
+      const currentAbundance = existingOccurrence.data[abundanceAttrId] || 1;
+      existingOccurrence.data[abundanceAttrId] = currentAbundance + 1;
+
+      existingOccurrence.save();
+
+      // delete the new occurrence
+      this.destroy();
+      trap.save();
+    } else {
+      this.save();
+    }
   }
 
   async identifyPlant() {

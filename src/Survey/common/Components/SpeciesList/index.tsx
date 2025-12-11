@@ -52,6 +52,7 @@ type Props = {
   useDoughnut?: boolean;
   allowReidentify?: boolean;
   onOccurrenceClick?: (model: Model) => void;
+  useNumberedList?: boolean;
 };
 
 const SpeciesList = ({
@@ -64,6 +65,7 @@ const SpeciesList = ({
   useDoughnut = false,
   allowReidentify = false,
   onOccurrenceClick,
+  useNumberedList = false,
 }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
@@ -163,7 +165,7 @@ const SpeciesList = ({
   };
 
   const getSpeciesList = () => {
-    const getSpecies = (model: Model) => {
+    const getSpecies = (model: Model, index: number) => {
       const onDelete = () => model.destroy();
 
       return (
@@ -175,6 +177,7 @@ const SpeciesList = ({
           onClick={navigateToSpeciesSample}
           onReidentify={allowReidentify ? onReidentify : undefined}
           useDoughnut={useDoughnut}
+          itemNumber={useNumberedList ? index + 1 : undefined}
         />
       );
     };

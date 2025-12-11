@@ -23,6 +23,8 @@ import {
 import config from 'common/config';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
+import { occurrenceAbundanceAttr } from 'Survey/Beetle/config';
+import IncrementalButton from 'Survey/common/Components/IncrementalButton';
 
 const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
 
@@ -113,6 +115,7 @@ type Props = {
   useDoughnut?: boolean;
   onDelete?: () => void;
   onClick: (model: Sample | Occurrence) => void;
+  itemNumber?: number;
 };
 
 const Species = ({
@@ -122,6 +125,7 @@ const Species = ({
   onClick,
   useDoughnut,
   onReidentify,
+  itemNumber,
 }: Props) => {
   const showDeleteAlert = useDeleteAlert(onDelete);
   const showMenu = useMenu(showDeleteAlert);
@@ -168,7 +172,7 @@ const Species = ({
     );
   };
 
-  const probability = species.probability || (species as any).score; // score for backward compatibility
+  const probability = species.probability || (species as any).score || 0; // score for backward compatibility
 
   if (species) {
     scientificName = species.scientificName;
@@ -201,16 +205,41 @@ const Species = ({
 
   const detailsIcon = detailIcon || '';
 
-  const photo = speciesPhoto ? (
-    <img
-      src={speciesPhoto}
-      onClick={showGallery}
-      className="h-full w-full object-cover"
-    />
-  ) : (
-    <IonIcon icon={leaf} />
-  );
-  const profilePhoto = <div className="list-avatar">{photo}</div>;
+  // increment abundance for beetle occurrences
+  const incrementAbundance = () => {
+    const currentAbundance = occ.data[occurrenceAbundanceAttr.id] || 1;
+    occ.data[occurrenceAbundanceAttr.id] = currentAbundance + 1;
+    occ.save();
+  };
+
+  const getProfileContent = () => {
+    // show incremental button if itemNumber is provided
+    if (itemNumber !== undefined) {
+      const abundance = occ.data[occurrenceAbundanceAttr.id] || 1;
+
+      return (
+        <IncrementalButton
+          value={abundance}
+          onClick={incrementAbundance}
+          disabled={isDisabled}
+        />
+      );
+    }
+
+    // show photo or leaf icon
+    if (speciesPhoto)
+      return (
+        <img
+          src={speciesPhoto}
+          onClick={showGallery}
+          className="h-full w-full object-cover"
+        />
+      );
+
+    return <IonIcon icon={leaf} />;
+  };
+
+  const profilePhoto = <div className="list-avatar">{getProfileContent()}</div>;
 
   const getSpeciesName = () => {
     return (
@@ -249,7 +278,7 @@ const Species = ({
                 options={options}
                 redraw
               />
-              <div className="surveyEndTime absolute top-0 left-0 flex h-full w-full items-center justify-center text-[0.7em]">
+              <div className="absolute top-0 left-0 flex h-full w-full items-center justify-center text-[0.7em]">
                 {getDoughnutData(probability).text}
               </div>
             </div>

@@ -102,8 +102,8 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
                 sample={subSample}
                 isDisabled={isDisabled}
                 disableAI
-                disableDelete
                 onOccurrenceClick={navigateToOccurrence}
+                useNumberedList
               />
             </div>
           )}
