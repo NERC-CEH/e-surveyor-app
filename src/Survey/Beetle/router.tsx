@@ -5,6 +5,7 @@ import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Details from './Details';
 import EditSpecies from './EditSpecies';
 import Home from './Home';
+import Occurrence from './Occurrence';
 import Trap from './Trap';
 import survey, { fieldNonCropHabitatsAttr } from './config';
 
@@ -31,7 +32,12 @@ const routes = [
   [`${baseURL}/:smpId/trap/:subSmpId`, Trap],
   [`${baseURL}/:smpId/trap/:subSmpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationMap],
-  [`${baseURL}/:smpId/trap/:subSmpId/species/:occId`, EditSpecies],
+  [`${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId`, Occurrence],
+  [
+    `${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId/:attr`,
+    AttrPageFromRoute,
+  ],
+  [`${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId/species`, EditSpecies],
   // [`${baseURL}/:smpId/report`, Report],
 ];
 

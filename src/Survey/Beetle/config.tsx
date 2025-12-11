@@ -412,6 +412,24 @@ export const trapCommentAttr = {
   appearance: 'multiline',
 } as const satisfies TextInputConf;
 
+export const occurrenceAbundanceAttr = {
+  id: 'occAttr:1218',
+  type: 'numberInput',
+  title: 'Abundance',
+  appearance: 'counter',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  step: 1,
+  validation: { min: 1 },
+} as const satisfies NumberInputConf;
+
+export const occurrenceCommentAttr = {
+  id: 'comment',
+  type: 'textInput',
+  title: 'Comment',
+  appearance: 'multiline',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+} as const satisfies TextInputConf;
+
 export const taxonAttr = {
   id: 'taxa_taxon_list_id',
 };
@@ -490,7 +508,10 @@ const survey: Survey = {
 
       create({ Occurrence, photo }) {
         const occ = new Occurrence({
-          data: { taxon: null },
+          data: {
+            taxon: null,
+            [occurrenceAbundanceAttr.id]: 1,
+          },
         });
 
         if (photo) {

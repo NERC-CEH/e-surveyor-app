@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { observer } from 'mobx-react';
 import {
   bookOutline,
@@ -8,7 +8,7 @@ import {
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Block, Button, Main, MenuAttrItem } from '@flumens';
-import { IonList, IonIcon } from '@ionic/react';
+import { IonList, IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import beetleIcon from 'common/images/beetle.svg';
 import Sample from 'models/sample';
@@ -27,11 +27,17 @@ type Props = {
 
 const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
   const { url } = useRouteMatch();
+  const { navigate } = useContext(NavContext);
   const [showGuide, setShowGuide] = useState(false);
 
   const prettyGridRef = <GridRefValue sample={subSample} />;
 
   const recordAttrs = { isDisabled, record: subSample.data };
+
+  const navigateToOccurrence = (model: any) => {
+    if (isDisabled) return;
+    navigate(`${url}/occurrence/${model.cid}`);
+  };
 
   return (
     <>
@@ -97,7 +103,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
                 isDisabled={isDisabled}
                 disableAI
                 disableDelete
-                useSpeciesProfile
+                onOccurrenceClick={navigateToOccurrence}
               />
             </div>
           )}

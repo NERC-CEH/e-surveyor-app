@@ -51,6 +51,7 @@ type Props = {
   disableDelete?: boolean;
   useDoughnut?: boolean;
   allowReidentify?: boolean;
+  onOccurrenceClick?: (model: Model) => void;
 };
 
 const SpeciesList = ({
@@ -62,6 +63,7 @@ const SpeciesList = ({
   useSpeciesProfile = false,
   useDoughnut = false,
   allowReidentify = false,
+  onOccurrenceClick,
 }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
@@ -149,6 +151,12 @@ const SpeciesList = ({
   };
 
   const navigateToSpeciesSample = (model: Model) => {
+    // use custom onClick handler if provided
+    if (onOccurrenceClick) {
+      onOccurrenceClick(model);
+      return;
+    }
+
     if (!useSpeciesProfile || isDisabled) return;
 
     navigate(`${url}/species/${model.cid}`);
