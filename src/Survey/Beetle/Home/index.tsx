@@ -1,37 +1,13 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Capacitor } from '@capacitor/core';
-import {
-  captureImage,
-  getObjectURL,
-  Header,
-  Page,
-  UUIDv7,
-  saveFile,
-  useLoader,
-  useToast,
-  ImageCropper,
-  InfoBackgroundMessage,
-} from '@flumens';
-import { NavContext, isPlatform } from '@ionic/react';
-import config from 'common/config';
+import { Header, Page, useToast } from '@flumens';
+import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
-import Media from 'models/image';
-import Occurrence from 'models/occurrence';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
-import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
-import detectObjects from './objectDetection';
-
-type URL = string;
-
-const dataURItoFile = (dataURI: string) =>
-  isPlatform('hybrid')
-    ? saveFile(dataURI, `${UUIDv7()}.jpg`)
-    : getObjectURL(dataURI);
 
 type Props = {
   sample: Sample;
@@ -43,7 +19,6 @@ const Controller = ({ sample }: Props) => {
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
-  const loader = useLoader();
 
   const onUpload = async () => {
     const isUserOK = await checkUserStatus();
@@ -68,76 +43,19 @@ const Controller = ({ sample }: Props) => {
     navigate(`/home/surveys`, 'root');
   };
 
-  const [editImage, setEditImage] = useState<URL>();
-
-  const attachImages = async (photoURL: URL) => {
-    loader.show('Analysing the trap photo...');
-
+  const onAddNewTrap = async () => {
     const survey = sample.getSurvey();
-
-    // new subsample
-    const dataDirPath = config.dataPath;
-    const image = (await Media.getImageModel(
-      photoURL,
-      dataDirPath,
-      true
-    )) as Media;
 
     const trapSample = survey.smp!.create!({
       Sample,
-      photo: image,
       surveySample: sample,
     });
     sample.samples.push(trapSample);
 
     navigate(`${match.url}/trap/${trapSample.cid}`);
-
-    // detect beetles and create occurrences
-    const [beetlePhotoURIs] = await detectObjects(image.getURL());
-    const beetlePhotos = await Promise.all(beetlePhotoURIs.map(dataURItoFile));
-
-    const getOccurrence = async (beetlePhotoURL: URL) => {
-      const mediaModel = (await Media.getImageModel(
-        beetlePhotoURL,
-        dataDirPath,
-        true
-      )) as Media;
-      return survey.smp!.occ!.create!({ Occurrence, photo: mediaModel });
-    };
-    const occurrences = await Promise.all(beetlePhotos.map(getOccurrence));
-    trapSample.occurrences.push(...occurrences);
-    sample.save();
-
-    // TODO: enable once the AI is ready
-    // occurrences.forEach(occ => device.isOnline && occ.identify());
-
-    loader.hide();
-  };
-
-  const onAddNewTrap = async () => {
-    const photoURLs = await captureImage(
-      !isPlatform('hybrid')
-        ? { camera: false }
-        : { getPhoto: getPhotoFromCustomCamera }
-    );
-
-    if (!photoURLs || !photoURLs.length) return;
-
-    let imageToEdit = photoURLs[0];
-    if (isPlatform('hybrid')) {
-      imageToEdit = Capacitor.convertFileSrc(imageToEdit);
-    }
-
-    setEditImage(imageToEdit);
   };
 
   const onTrapDelete = async (trap: Sample) => trap.destroy();
-
-  const onDoneEdit = (image: URL) => {
-    attachImages(image);
-    setEditImage(undefined);
-  };
-  const onCancelEdit = () => setEditImage(undefined);
 
   const isDisabled = sample.isUploaded;
 
@@ -172,19 +90,6 @@ const Controller = ({ sample }: Props) => {
         onAddNewTrap={onAddNewTrap}
         onTrapDelete={onTrapDelete}
       />
-      <ImageCropper
-        image={editImage}
-        onDone={onDoneEdit}
-        onCancel={onCancelEdit}
-        // allowRotation
-        // cropperProps={{ aspect: 0.7 }}
-      >
-        <InfoBackgroundMessage className="z-10 mx-auto mt-[calc(var(--ion-safe-area-top,0)+10px)] w-fit max-w-[90%]">
-          Align the rectangle with the edges of the tray.
-        </InfoBackgroundMessage>
-      </ImageCropper>
-
-      <canvas id="imageCanvas" className="hidden" />
     </Page>
   );
 };

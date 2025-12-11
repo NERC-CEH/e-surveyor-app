@@ -18,32 +18,32 @@ const options = {
   animation: { animation: false, animateRotate: false },
 };
 
-const getDoughnutData = (score: number) => {
-  const scorePercent = parseInt((score * 100).toFixed(0), 10);
+const getDoughnutData = (probability: number) => {
+  const probPercent = parseInt((probability * 100).toFixed(0), 10);
 
   const color = () => {
-    if (scorePercent > 70) {
+    if (probPercent > 70) {
       return '#4b9a43'; // green
     }
 
-    if (scorePercent > 20) {
+    if (probPercent > 20) {
       return '#ffbc5e'; // yellow
     }
 
     return '#ff4e46'; // red
   };
 
-  const remainingScorePercent = 100 - scorePercent;
+  const remainingScorePercent = 100 - probPercent;
 
   return {
     datasets: [
       {
-        data: [scorePercent, remainingScorePercent],
+        data: [probPercent, remainingScorePercent],
         backgroundColor: [color(), '#f5f5f5'],
         borderWidth: [0, 0],
       },
     ],
-    text: `${scorePercent}%`,
+    text: `${probPercent}%`,
   };
 };
 
@@ -120,7 +120,8 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
     return [...firstFourImages, ...placeholderImages].map(getImage);
   };
 
-  const { commonName, scientificName, score } = species;
+  const { commonName, scientificName } = species;
+  const probability = species.probability || (species as any).score; // score for backward compatibility
   const images = species.images || [];
   const { isOnline } = device;
 
@@ -158,12 +159,12 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
             {!selectedSpeciesByUser && (
               <div className="p-[5px]; relative h-[70px] w-[70px] self-center">
                 <Doughnut
-                  data={getDoughnutData(score)}
+                  data={getDoughnutData(probability)}
                   options={options}
                   redraw
                 />
                 <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.9em] font-medium">
-                  {getDoughnutData(score).text}
+                  {getDoughnutData(probability).text}
                 </div>
               </div>
             )}

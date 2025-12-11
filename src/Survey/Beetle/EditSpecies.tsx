@@ -12,7 +12,7 @@ const EditSpecies = ({ occurrence }: Props) => {
       const byWarehouseId = (option: any) => option.value === warehouseId;
       const species = beetleSpecies.find(byWarehouseId);
       const taxon: Taxon = {
-        score: 1,
+        probability: 1,
         warehouseId,
         commonName: species?.commonName || '',
         scientificName: species?.scientificName || species?.label || '',

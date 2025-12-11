@@ -3,7 +3,7 @@ import { object } from 'zod';
 import { dateFormat, toISOTimezoneString } from '@flumens';
 import icon from 'common/images/moth-inside-icon.svg';
 import appModel from 'common/models/app';
-import Occurrence from 'models/occurrence';
+import Occurrence, { Taxon } from 'models/occurrence';
 import {
   Survey,
   locationAttr,
@@ -117,11 +117,13 @@ const survey: Survey = {
 
 export default survey;
 
-export const UNKNOWN_SPECIES = {
+export const UNKNOWN_SPECIES: Taxon = {
   warehouseId: 538737,
-  taxonGroup: 260,
+  taxonGroupId: 260,
+  tvk: '',
+  scientificName: '',
   commonName: 'Unknown',
-  preferredId: 538737,
+  preferredTaxaTaxonListId: 538737,
   foundInName: 'commonName',
-  score: 0,
+  probability: 0,
 };

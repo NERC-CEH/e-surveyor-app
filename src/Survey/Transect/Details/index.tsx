@@ -9,7 +9,7 @@ import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
 const validate = (sample: Sample) =>
-  getDetailsValidationSchema().safeParse(sample.data).error;
+  getDetailsValidationSchema(sample.data.type).safeParse(sample.data).error;
 
 type Props = {
   sample: Sample;

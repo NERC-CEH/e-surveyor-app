@@ -1,5 +1,8 @@
 import { observer } from 'mobx-react';
-import { createOutline, cameraOutline } from 'ionicons/icons';
+import {
+  createOutline,
+  addOutline,
+} from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, MenuAttrItem } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
@@ -67,7 +70,7 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
         <Button
           onPress={onAddNewTrap}
           color="secondary"
-          prefix={<IonIcon icon={cameraOutline} className="size-6" />}
+          prefix={<IonIcon icon={addOutline} className="size-6" />}
           className="bg-secondary-600 mx-auto mt-7 mb-3"
         >
           Add Trap

@@ -72,7 +72,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
         ...taxon,
         commonName: commonNames?.[0],
         machineInvolvement,
-        score: 1,
+        probability: 1,
       };
 
       // eslint-disable-next-line no-param-reassign
@@ -81,7 +81,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
     };
 
     const getSpeciesCard = (sp: Suggestion) => {
-      const lowScore = sp.score <= 0.01; // 1%
+      const lowScore = sp.probability <= 0.01; // 1%
       if (lowScore) return null;
 
       const onSelectWrap = () => setSpeciesAsMain(sp);

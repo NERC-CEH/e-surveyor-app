@@ -1,9 +1,15 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react';
-import { useRouteMatch } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
-import { Page, Header, captureImage, useAlert, ImageCropper } from '@flumens';
-import { isPlatform, NavContext } from '@ionic/react';
+import {
+  Page,
+  Header,
+  captureImage,
+  useAlert,
+  ImageCropper,
+  device,
+} from '@flumens';
+import { isPlatform } from '@ionic/react';
 import config from 'common/config';
 import appModel from 'models/app';
 import Media from 'models/image';
@@ -67,8 +73,6 @@ const showFirstPhotoTip = (alert: any) => {
 const TrapController = ({ subSample }: Props) => {
   const alert = useAlert();
   const [editImage, setEditImage] = useState<URL>();
-  const { navigate } = useContext(NavContext);
-  const { url } = useRouteMatch();
 
   const isDisabled = subSample.isUploaded;
   const promptImageSource = usePromptImageSource();
@@ -94,8 +98,7 @@ const TrapController = ({ subSample }: Props) => {
       subSample.occurrences.push(newOccurrence);
       subSample.save();
 
-      navigate(`${url}/species/${newOccurrence.cid}`);
-      // device.isOnline && newOccurrence.identify();
+      device.isOnline && newOccurrence.identify();
     }
   };
 
@@ -104,9 +107,7 @@ const TrapController = ({ subSample }: Props) => {
     const cancelled = shouldUseCamera === null;
     if (cancelled) return;
 
-    if (shouldUseCamera) {
-      await showFirstPhotoTip(alert);
-    }
+    if (shouldUseCamera) await showFirstPhotoTip(alert);
 
     const photoURLs = await captureImage(
       shouldUseCamera

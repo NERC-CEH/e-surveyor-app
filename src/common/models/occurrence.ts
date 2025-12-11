@@ -4,18 +4,20 @@ import {
   OccurrenceAttrs,
   validateRemoteModel,
 } from '@flumens';
-import identifyBeetleImage from 'common/services/beetles';
-import identifyPlantImage, {
-  ResponseResult as PlantNetResult,
-} from 'common/services/plantNet';
-import { IndiciaAISuggestion } from 'common/services/plantNet/indiciaAIResponse';
-import { Image } from 'common/services/plantNet/plantNetResponse.d';
-import identifyMothImage from 'common/services/waarneming';
+import config from 'common/config';
+import blackListedData from 'common/data/cacheRemote/uksi_plants_blacklist.json';
+import identifyImage from 'common/services/indiciaAI';
+import { IndiciaAISuggestion } from 'common/services/indiciaAI/indiciaAIResponse';
+import {
+  Image,
+  Response as PlantNetResponse,
+} from 'common/services/indiciaAI/plantNetResponse.d';
 import beetleSurveyConfig from 'Survey/Beetle/config';
 import mothSurveyConfig, { UNKNOWN_SPECIES } from 'Survey/Moth/config';
 import { MachineInvolvement, Survey } from 'Survey/common/config';
 import Media from './image';
 import Sample from './sample';
+import userModel from './user';
 
 type PlantNetTaxonAttrs = {
   images?: Image[];
@@ -23,14 +25,14 @@ type PlantNetTaxonAttrs = {
 
 export type Suggestion = {
   warehouseId: number;
-  score: number;
+  probability: number;
   commonNames: string[];
   scientificName: string;
   tvk: string;
 } & PlantNetTaxonAttrs;
 
 type ClassifierAttributes = {
-  score: number;
+  probability: number;
   version?: string;
   suggestions?: Suggestion[];
   machineInvolvement?: MachineInvolvement;
@@ -39,8 +41,11 @@ type ClassifierAttributes = {
 
 export type Taxon = {
   warehouseId: number;
+  taxonGroupId?: number;
+  preferredTaxaTaxonListId?: number;
   commonName: string;
   scientificName: string;
+  foundInName?: string;
   tvk: string;
 } & ClassifierAttributes &
   PlantNetTaxonAttrs;
@@ -64,110 +69,127 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
   validateRemote = validateRemoteModel;
 
-  identify = () => {
-    switch (this.parent?.data.surveyId) {
-      case beetleSurveyConfig.id:
-        return this.identifyBeetle();
-      case mothSurveyConfig.id:
-        return this.identifyMoth();
-      default:
-        return this.identifyPlant();
-    }
-  };
+  async identify() {
+    if (!this.media.length)
+      throw new Error('Occurrence media is missing for automatic ID.');
 
-  async identifyBeetle() {
     try {
       this.identification.identifying = true;
 
-      const { version, results: suggestions } = await identifyBeetleImage(
-        this.media
-      );
+      switch (this.parent?.data.surveyId) {
+        case beetleSurveyConfig.id:
+          await this.identifyBeetle();
+          break;
+        case mothSurveyConfig.id:
+          await this.identifyMoth();
+          break;
+        default:
+          await this.identifyPlant();
+      }
 
       this.identification.identifying = false;
-
-      const byScore = (
-        sp1: Pick<PlantNetResult, 'score'>,
-        sp2: Pick<PlantNetResult, 'score'>
-      ) => sp2.score - sp1.score;
-      suggestions.sort(byScore);
-
-      const attachSpecies = (media: Media) => {
-        media.data.identified = true; // eslint-disable-line no-param-reassign
-      };
-      this.media.forEach(attachSpecies);
-
-      const topSuggestion = suggestions[0];
-      if (!topSuggestion) return;
-
-      const taxon: Taxon = {
-        score: topSuggestion.score,
-        warehouseId: topSuggestion.warehouseId,
-        scientificName: topSuggestion.scientificName,
-        commonName: topSuggestion.commonNames[0],
-        machineInvolvement: MachineInvolvement.MACHINE,
-        version,
-        suggestions,
-        tvk: '',
-      };
-
-      this.data.taxon = taxon;
     } catch (error) {
       this.identification.identifying = false;
       throw error;
     }
+  }
 
-    if (!this.isPersistent()) return;
+  async identifyBeetle() {
+    await this.media[0].uploadFile();
+    const url = this.media[0].getRemoteURL();
 
+    const res = await identifyImage({
+      model: 'waarneming',
+      images: [url],
+      url: config.backend.url,
+      getAccessToken: () => userModel.getAccessToken(),
+      listId: 15, // UKSI
+    });
+
+    const { classifierVersion, suggestions } = res;
+
+    const byScore = (sp1: Suggestion, sp2: Suggestion) =>
+      sp2.probability - sp1.probability;
+    suggestions.sort(byScore);
+
+    this.media[0].data.identified = true;
+
+    const topSuggestion = suggestions[0];
+    const isNonUKSpecies = !Number.isFinite(topSuggestion?.warehouseId);
+    if (!topSuggestion || isNonUKSpecies) return;
+
+    const taxon: Taxon = {
+      probability: topSuggestion.probability,
+      warehouseId: topSuggestion.warehouseId,
+      scientificName: topSuggestion.scientificName,
+      commonName: topSuggestion.commonNames[0],
+      machineInvolvement: MachineInvolvement.MACHINE,
+      version: `${classifierVersion}`,
+      suggestions,
+      tvk: '',
+    };
+
+    this.data.taxon = taxon;
     this.save();
   }
 
   async identifyPlant() {
-    try {
-      this.identification.identifying = true;
+    const date = this.createdAt;
+    const location =
+      this.parent?.data.location || this.parent?.parent?.data.location;
 
-      const date = this.createdAt;
-      const location =
-        this.parent?.data.location || this.parent?.parent?.data.location;
+    const upload = (img: Media) => img.uploadFile();
+    await Promise.all(this.media.map(upload));
 
-      const { version, results: suggestions } = await identifyPlantImage(
-        this.media,
-        date,
-        location
-      );
+    const res = await identifyImage<PlantNetResponse>({
+      model: 'plantnet',
+      images: this.media.map(m => m.getRemoteURL()),
+      url: config.backend.url,
+      getAccessToken: () => userModel.getAccessToken(),
+      listId: 15, // UKSI
+      date,
+      location,
+    });
 
-      this.identification.identifying = false;
+    const { classifierVersion, suggestions, raw } = res;
 
-      const attachSpecies = (media: Media) => {
-        media.data.identified = true; // eslint-disable-line no-param-reassign
-      };
-      this.media.forEach(attachSpecies);
+    const blacklisted = blackListedData.map(sp => sp.taxon);
 
-      const topSuggestion = suggestions[0];
-      if (!topSuggestion) {
-        this.data.taxon = null;
-        return;
-      }
+    const getPlantNetImages = (taxon: string) =>
+      raw?.results?.find(
+        ({ species }) => species.scientificNameWithoutAuthor === taxon
+      )?.images || [];
 
-      const taxon: Taxon = {
-        score: topSuggestion.score,
-        warehouseId: topSuggestion.warehouseId,
-        scientificName: topSuggestion.scientificName,
-        commonName: topSuggestion.commonNames[0],
-        machineInvolvement: MachineInvolvement.MACHINE,
-        version,
-        suggestions,
-        tvk: topSuggestion.tvk,
-        recordCleaner: topSuggestion.recordCleaner,
+    const cleanSuggestions = suggestions
+      .filter(sp => !blacklisted.includes(sp.scientificName)) // blacklisted
+      .filter(sp => sp.probability > 0.2) // high score
+      .map(sp => ({ ...sp, images: getPlantNetImages(sp.scientificName) }));
 
-        // plantNet-specific
-        images: topSuggestion.images,
-      };
+    const attachSpecies = (media: Media) => {
+      media.data.identified = true; // eslint-disable-line no-param-reassign
+    };
+    this.media.forEach(attachSpecies);
 
-      this.data.taxon = taxon;
-    } catch (error) {
-      this.identification.identifying = false;
-      throw error;
+    const topSuggestion = cleanSuggestions[0];
+    if (!topSuggestion) {
+      this.data.taxon = null;
+      return;
     }
+
+    this.data.taxon = {
+      probability: topSuggestion.probability,
+      warehouseId: topSuggestion.warehouseId,
+      scientificName: topSuggestion.scientificName,
+      commonName: topSuggestion.commonNames[0],
+      machineInvolvement: MachineInvolvement.MACHINE,
+      version: classifierVersion,
+      suggestions: cleanSuggestions,
+      tvk: topSuggestion.tvk,
+      recordCleaner: topSuggestion.recordCleaner,
+
+      // plantNet-specific
+      images: topSuggestion.images,
+    } as Taxon;
 
     if (!this.isPersistent()) return;
 
@@ -175,48 +197,42 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
   }
 
   async identifyMoth() {
-    if (!this.media.length)
-      throw new Error('Occurrence media is missing for automatic ID.');
+    await this.media[0].uploadFile();
+    const url = this.media[0].getRemoteURL();
 
-    try {
-      this.identification.identifying = true;
+    const res = await identifyImage({
+      model: 'waarneming',
+      images: [url],
+      url: config.backend.url,
+      getAccessToken: () => userModel.getAccessToken(),
+      listId: 15, // UKSI
+    });
 
-      await this.media[0].uploadFile();
-      const url = this.media[0].getRemoteURL();
+    const { classifierVersion, suggestions } = res;
 
-      const { version, results: suggestions } = await identifyMothImage(url);
+    const byScore = (sp1: Suggestion, sp2: Suggestion) =>
+      sp2.probability - sp1.probability;
+    suggestions.sort(byScore);
 
-      this.identification.identifying = false;
+    this.media[0].data.identified = true;
 
-      const byScore = (sp1: Suggestion, sp2: Suggestion) =>
-        sp2.score - sp1.score;
-      suggestions.sort(byScore);
-
-      this.media[0].data.identified = true;
-
-      const topSuggestion = suggestions[0];
-      const isNonUKSpecies = !Number.isFinite(topSuggestion?.warehouseId);
-      if (!topSuggestion || isNonUKSpecies) {
-        this.data.taxon = UNKNOWN_SPECIES;
-        return;
-      }
-
-      const taxon: Taxon = {
-        score: topSuggestion.score,
-        warehouseId: topSuggestion.warehouseId,
-        scientificName: topSuggestion.scientificName,
-        commonName: topSuggestion.commonNames[0],
-        machineInvolvement: MachineInvolvement.MACHINE,
-        version: `${version}`,
-        suggestions,
-        tvk: '',
-      };
-
-      this.data.taxon = taxon;
-    } catch (error) {
-      this.identification.identifying = false;
-      throw error;
+    const topSuggestion = suggestions[0];
+    const isNonUKSpecies = !Number.isFinite(topSuggestion?.warehouseId);
+    if (!topSuggestion || isNonUKSpecies) {
+      this.data.taxon = UNKNOWN_SPECIES;
+      return;
     }
+
+    this.data.taxon = {
+      probability: topSuggestion.probability,
+      warehouseId: topSuggestion.warehouseId,
+      scientificName: topSuggestion.scientificName,
+      commonName: topSuggestion.commonNames[0],
+      machineInvolvement: MachineInvolvement.MACHINE,
+      version: `${classifierVersion}`,
+      suggestions,
+      tvk: '',
+    } as Taxon;
 
     this.save();
   }

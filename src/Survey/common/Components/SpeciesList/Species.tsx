@@ -168,6 +168,8 @@ const Species = ({
     );
   };
 
+  const probability = species.probability || (species as any).score; // score for backward compatibility
+
   if (species) {
     scientificName = species.scientificName;
     commonName = species.commonName;
@@ -175,10 +177,10 @@ const Species = ({
 
     const earthIcon = notFoundInUK ? earth : checkmarkCircle;
 
-    if (species.score > POSITIVE_THRESHOLD) {
+    if (probability > POSITIVE_THRESHOLD) {
       idClass = '[--detail-icon-color:var(--id-positive-color)]';
       detailIcon = earthIcon;
-    } else if (species.score > POSSIBLE_THRESHOLD) {
+    } else if (probability > POSSIBLE_THRESHOLD) {
       idClass = '[--detail-icon-color:var(--id-possible-color)]';
       detailIcon = helpCircle;
     } else {
@@ -186,7 +188,7 @@ const Species = ({
       detailIcon = closeCircle;
     }
 
-    const speciesDoesNotExist = species.score === 0;
+    const speciesDoesNotExist = probability === 0;
 
     if (speciesDoesNotExist) {
       scientificName = 'Not found';
@@ -219,7 +221,7 @@ const Species = ({
     );
   };
 
-  const showReidentify = onReidentify && species.score <= 0.1;
+  const showReidentify = onReidentify && probability <= 0.1;
   const onReidentifyWrap = () => onReidentify(model);
 
   return (
@@ -243,12 +245,12 @@ const Species = ({
           {useDoughnut && !showReidentify && (
             <div className="p-[5px]; relative h-[40px] w-[40px] shrink-0 self-center">
               <Doughnut
-                data={getDoughnutData(species.score)}
+                data={getDoughnutData(probability)}
                 options={options}
                 redraw
               />
               <div className="surveyEndTime absolute top-0 left-0 flex h-full w-full items-center justify-center text-[0.7em]">
-                {getDoughnutData(species.score).text}
+                {getDoughnutData(probability).text}
               </div>
             </div>
           )}

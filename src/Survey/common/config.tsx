@@ -246,19 +246,20 @@ export function attachClassifierResults(
   const mediaPaths = submission.media.map(getMediaPath);
 
   const getSuggestion = (
-    { score, scientificName, warehouseId }: Suggestion,
+    { scientificName, warehouseId, ...other }: Suggestion,
     index: number
   ) => {
+    const probability = other.probability || (other as any).score; // score for backward compatibility
     const topSpecies = index === 0;
     const classifierChosen =
-      topSpecies && score >= POSSIBLE_THRESHOLD ? 't' : 'f';
+      topSpecies && probability >= POSSIBLE_THRESHOLD ? 't' : 'f';
 
     const humanChosen = warehouseId === taxon?.warehouseId ? 't' : 'f';
 
     return {
       values: {
         taxon_name_given: scientificName,
-        probability_given: score,
+        probability_given: probability,
         taxa_taxon_list_id: warehouseId,
         classifier_chosen: classifierChosen,
         human_chosen: humanChosen,

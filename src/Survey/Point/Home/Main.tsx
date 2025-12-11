@@ -55,7 +55,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
   useEffect(() => {
     const hasSpeciesWithLowScore = (model: Sample) => {
       const [occ] = model.occurrences;
-      const score = occ.getSpecies()?.score;
+      const score = occ.getSpecies()?.probability;
       if (
         score &&
         score < POSITIVE_THRESHOLD &&

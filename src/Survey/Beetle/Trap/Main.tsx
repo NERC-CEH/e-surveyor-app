@@ -57,11 +57,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
 
             <h3 className="list-title">Details</h3>
             <div className="rounded-list">
-              <SinglePhotoPicker
-                label="Trap photo"
-                model={subSample}
-                disabled // we want to upload the original pic with the detected objects
-              />
+              <SinglePhotoPicker label="Trap photo" model={subSample} />
               <MenuAttrItem
                 routerLink={`${url}/map`}
                 value={prettyGridRef}
@@ -76,34 +72,35 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
             </div>
           </IonList>
 
-          <h3 className="list-title px-3">Species</h3>
-          <div className="flex flex-col gap-5">
-            <SpeciesList
-              sample={subSample}
-              isDisabled={isDisabled}
-              disableAI
-              disableDelete
-              useSpeciesProfile
-            />
+          {!isDisabled && (
+            <Button
+              onPress={onAddNewSpecies}
+              color="secondary"
+              prefix={<IonIcon icon={cameraOutline} className="size-6" />}
+              className="mx-auto my-10 bg-secondary-600"
+            >
+              Add species
+            </Button>
+          )}
 
-            {!subSample.occurrences.length && (
-              <InfoBackgroundMessage>
-                Your species list is empty. <br /> Tap the orange species button
-                to add your first beetle.
-              </InfoBackgroundMessage>
-            )}
+          {!subSample.occurrences.length && (
+            <InfoBackgroundMessage className="mt-4">
+              Your species list is empty. <br /> Tap the orange species button
+              to add your first beetle.
+            </InfoBackgroundMessage>
+          )}
 
-            {!isDisabled && (
-              <Button
-                onPress={onAddNewSpecies}
-                color="secondary"
-                prefix={<IonIcon icon={cameraOutline} className="size-6" />}
-                className="mx-auto bg-secondary-600"
-              >
-                Add species
-              </Button>
-            )}
-          </div>
+          {!!subSample.occurrences.length && (
+            <div className="flex flex-col gap-5">
+              <SpeciesList
+                sample={subSample}
+                isDisabled={isDisabled}
+                disableAI
+                disableDelete
+                useSpeciesProfile
+              />
+            </div>
+          )}
         </div>
       </Main>
 

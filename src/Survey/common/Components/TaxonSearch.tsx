@@ -22,7 +22,7 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
     warehouseId: taxon.warehouseId,
     machineInvolvement: MachineInvolvement.HUMAN,
     images: [],
-    score: 1,
+    probability: 1,
     tvk: taxon.tvk,
   });
 

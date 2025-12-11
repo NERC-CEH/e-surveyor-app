@@ -57,7 +57,7 @@ export interface Result {
   gbif?: Gbif;
 }
 
-export default interface Response {
+export interface Response {
   query: Query;
   language: string;
   preferedReferential: string;

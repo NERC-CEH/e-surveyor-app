@@ -1,6 +1,5 @@
-import { processResponse } from '../plantNet';
-import IndiciaAIResponse from '../plantNet/indiciaAIResponse.d';
-import PlantNetResponse from '../plantNet/plantNetResponse.d';
+import { processSuggestion } from '.';
+import IndiciaAIResponse from './indiciaAIResponse.d';
 
 const fumariaSpecies = {
   images: [],
@@ -23,7 +22,7 @@ const fumariaSpecies = {
   },
 };
 
-const plantNetResponse: IndiciaAIResponse<PlantNetResponse> = {
+const plantNetResponse: IndiciaAIResponse<any> = {
   suggestions: [
     {
       taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
@@ -55,20 +54,20 @@ describe('plantNet service', () => {
       // Given
 
       // When
-      const { results } = processResponse(plantNetResponse);
+      const suggestions = processSuggestion(plantNetResponse);
 
       // Then
-      expect(results[0].warehouseId).toBe(17200);
+      expect(suggestions[0].warehouseId).toBe(17200);
     });
 
-    it('should return results UK names', () => {
+    it('should return suggestions UK names', () => {
       // Given
 
       // When
-      const { results } = processResponse(plantNetResponse);
+      const suggestions = processSuggestion(plantNetResponse);
 
       // Then
-      expect(results[0].commonNames[0]).toBe('Fumitory');
+      expect(suggestions[0].commonNames[0]).toBe('Fumitory');
     });
   });
 });

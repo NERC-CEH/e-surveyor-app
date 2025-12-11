@@ -35,7 +35,6 @@ const CONFIG = {
     clientId: process.env.APP_BACKEND_CLIENT_ID as string,
     clientPass: process.env.APP_BACKEND_CLIENT_PASS as string,
 
-    beetlePredictUrl: 'https://connect-apps.ceh.ac.uk/carabids/api/predict',
     habitatPredictUrl: 'https://connect-apps.ceh.ac.uk/ESHAAPI',
 
     mediaUrl: `${indiciaUrl}/upload/`,
