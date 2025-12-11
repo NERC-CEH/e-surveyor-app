@@ -207,9 +207,9 @@ ion-title.md {
   --ion-toolbar-color: #fff;
   --ion-toolbar-color-activated: #fff;
 
-  --id-positive-color: var(--ion-color-primary);
-  --id-possible-color: var(--ion-color-secondary);
-  --id-rejected-color: var(--ion-color-danger);
+  --id-positive-color: var(--color-primary);
+  --id-possible-color: var(--color-secondary-600);
+  --id-rejected-color: var(--color-danger);
 
   --form-value-color: var(--color-tertiary-800);
 }
