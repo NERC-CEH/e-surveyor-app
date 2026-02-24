@@ -4,6 +4,7 @@ import { IonIcon } from '@ionic/react';
 import Occurrence from 'common/models/occurrence';
 import Sample from 'common/models/sample';
 import { NewnessMap } from '../useNewnessCheck';
+import HabitatCountBadge from './HabitatCountBadge';
 import HostPlantBadge from './HostPlantBadge';
 import LocalRarityBadge from './LocalRarityBadge';
 import NationalRarityBadge from './NationalRarityBadge';
@@ -84,6 +85,7 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
               <LocalRarityBadge tvk={tvk} grid={grid} />
               <NationalRarityBadge tvk={tvk} />
               <HostPlantBadge tvk={tvk} />
+              <HabitatCountBadge tvk={tvk} />
             </div>
           </div>
           <IonIcon src={openOutline} />
