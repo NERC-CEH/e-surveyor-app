@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 import { device } from '@flumens';
 import Sample from 'common/models/sample';
-import fetchNewness, { NewnessResult } from '../services/newnessService';
+import fetchNewness, { NewnessResult } from './newness.api';
 
-type NewnessMap = Record<string, NewnessResult>;
+export type NewnessMap = Record<string, NewnessResult>;
 
 const useNewnessCheck = (sample: Sample) => {
   // collect unique TVK keys from all occurrences

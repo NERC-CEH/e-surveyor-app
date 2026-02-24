@@ -5,6 +5,7 @@ import Sample, { useValidateCheck } from 'common/models/sample';
 import { useUserStatusCheck } from 'common/models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
+import useNewnessCheck from './useNewnessCheck';
 
 type Props = { sample: Sample };
 
@@ -13,6 +14,8 @@ const Report = ({ sample }: Props) => {
   const toast = useToast();
   const checkSampleStatus = useValidateCheck(sample);
   const checkUserStatus = useUserStatusCheck();
+
+  const { newnessMap } = useNewnessCheck(sample);
 
   const onFinish = async () => {
     const isUserOK = await checkUserStatus();
@@ -36,7 +39,7 @@ const Report = ({ sample }: Props) => {
   return (
     <Page id="survey-moth-report">
       <Header title="Report" rightSlot={finishButton} />
-      <Main sample={sample} />
+      <Main sample={sample} newnessMap={newnessMap} />
     </Page>
   );
 };

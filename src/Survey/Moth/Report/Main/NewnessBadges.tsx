@@ -1,5 +1,5 @@
 import { Badge } from '@flumens';
-import { NewnessResult } from '../services/newnessService';
+import { NewnessResult } from '../newness.api';
 
 type Props = {
   newness: NewnessResult;

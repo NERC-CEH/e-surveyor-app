@@ -1,18 +1,34 @@
 import { openOutline } from 'ionicons/icons';
-import { Badge, Main } from '@flumens';
+import { Badge, Main, locationToGrid } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import Occurrence from 'common/models/occurrence';
 import Sample from 'common/models/sample';
+import { NewnessMap } from '../useNewnessCheck';
+import LocalRarityBadge from './LocalRarityBadge';
 import NewnessBadges from './NewnessBadges';
-import useNewnessCheck from './useNewnessCheck';
 
 const byAbundance = ([, a1]: any, [, a2]: any) => a2 - a1;
 
-type Props = { sample: Sample };
+/**
+ * Extracts the grid square letters (e.g. "SU", "TQ") from a location.
+ */
+const get100kmGrid = (location?: any) => {
+  if (!location) return null;
 
-const ReportMain = ({ sample }: Props) => {
-  const { newnessMap } = useNewnessCheck(sample);
+  const gridref = location.gridref || locationToGrid(location);
+  if (!gridref) return null;
 
+  // extract letter prefix (e.g. "SU" from "SU1234" or "H" from "H1234")
+  const match = gridref.match(/^([A-Z]+)/i);
+  return match ? match[1].toUpperCase() : null;
+};
+
+type Props = {
+  sample: Sample;
+  newnessMap: NewnessMap;
+};
+
+const ReportMain = ({ sample, newnessMap }: Props) => {
   const uniqueSpeciesObj: any = {};
   const uniqueSpeciesObjCount: any = {};
 
@@ -23,6 +39,9 @@ const ReportMain = ({ sample }: Props) => {
       uniqueSpeciesObjCount[scientificName] = 0;
     uniqueSpeciesObjCount[scientificName] += 1;
   });
+
+  // compute grid square letters once for all species
+  const grid = get100kmGrid(sample.data.location);
 
   const getEntry = ([scientificNameKey, abundance]: any) => {
     const occ: Occurrence = uniqueSpeciesObj[scientificNameKey];
@@ -58,7 +77,10 @@ const ReportMain = ({ sample }: Props) => {
             {commonName && <div className="font-semibold">{commonName}</div>}
             {scientificName && <div className="italic">{scientificName}</div>}
 
-            {newness && <NewnessBadges newness={newness} />}
+            <div className="flex gap-1 flex-wrap">
+              {newness && <NewnessBadges newness={newness} />}
+              <LocalRarityBadge tvk={tvk} grid={grid} />
+            </div>
           </div>
           <IonIcon src={openOutline} />
         </a>

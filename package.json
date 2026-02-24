@@ -18,8 +18,9 @@
     "test:acceptance": "cd other && newman run postman_collection.json --bail --env-var plantnet_api_key=${PLANT_NET_API_KEY}",
     "make:all": "npm run make:data && npm run make:species:data && npm run make:species:commonNames",
     "make:data": "cd src/common/data && tsx make.ts",
-    "make:species:data": "cd src/common/data/species && tsx make.ts",
-    "make:species:commonNames": "cd src/common/data/commonNames && tsx make.ts"
+    "make:data:moths": "cd src/common/data/moths && tsx make.ts",
+    "make:data:species": "cd src/common/data/species && tsx make.ts",
+    "make:data:commonNames": "cd src/common/data/commonNames && tsx make.ts"
   },
   "dependencies": {
     "@capacitor-community/camera-preview": "^7.0.2",

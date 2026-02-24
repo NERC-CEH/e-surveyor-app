@@ -64,6 +64,8 @@ const getData = async () => {
   await fetchAndSave('plant_interactions');
   await fetchAndSave('habitats');
   await fetchAndSave('natural_enemies');
+  await fetchAndSave('moth_traits');
+  await fetchAndSave('moth_local_rarity');
   await fetchAndSave('beetles');
 
   await getEnglishPlantNames();

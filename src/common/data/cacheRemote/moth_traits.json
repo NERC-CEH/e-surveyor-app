@@ -1,0 +1,5719 @@
+[
+  {
+    "scientificName": "Xanthorhoe fluctuata",
+    "tvk": "NBNSYS0000005803",
+    "nationalRarity": "Least Concern",
+    "hostPlants": "Forbs",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cossus cossus",
+    "tvk": "NBNSYS0000005662",
+    "nationalRarity": "Least Concern",
+    "hostPlants": "Broadleaved trees, shrubs",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Tethea or",
+    "tvk": "NHMSYS0000521108",
+    "nationalRarity": "Least Concern",
+    "hostPlants": "Aspen Populus tremula",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Phragmatobia fuliginosa",
+    "tvk": "NBNSYS0000006150",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eugnorisma glareosa",
+    "tvk": "NHMSYS0000502566",
+    "nationalRarity": "Near Threatened",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Euthrix potatoria",
+    "tvk": "NBNSYS0000005712",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Mythimna impura",
+    "tvk": "NHMSYS0021144862",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hydraecia micacea",
+    "tvk": "NBNSYS0000006466",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Arctia caja",
+    "tvk": "NBNSYS0000006143",
+    "nationalRarity": "Near Threatened",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Lasiocampa quercus",
+    "tvk": "NBNSYS0000005707",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eilema griseola",
+    "tvk": "NHMSYS0021144417",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Camptogramma bilineata",
+    "tvk": "NHMSYS0000517593",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Deilephila elpenor",
+    "tvk": "NBNSYS0000006077",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Noctua interjecta",
+    "tvk": "NHMSYS0000521898",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Orthosia opima",
+    "tvk": "NHMSYS0021144794",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Selidosema brunnearia",
+    "tvk": "NBNSYS0000006030",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eulithis testata",
+    "tvk": "NBNSYS0000005835",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Cucullia verbasci",
+    "tvk": "NBNSYS0000006314",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Callimorpha dominula",
+    "tvk": "NBNSYS0000006154",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Xestia sexstrigata",
+    "tvk": "NBNSYS0000006224",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia icterata",
+    "tvk": "NBNSYS0000005926",
+    "nationalRarity": "Near Threatened",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eilema complana",
+    "tvk": "NBNSYS0000006133",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Phytometra viridaria",
+    "tvk": "NBNSYS0000006574",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Colostygia pectinataria",
+    "tvk": "NBNSYS0000005856",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Cosmorhoe ocellata",
+    "tvk": "NBNSYS0000005832",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Macrothylacia rubi",
+    "tvk": "NBNSYS0000005710",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia pulchellata",
+    "tvk": "NHMSYS0000550501",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Euclidia mi",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Oligia versicolor",
+    "tvk": "NBNSYS0000006436",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Adscita statices",
+    "tvk": "NBNSYS0000005663",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Apamea monoglypha",
+    "tvk": "NBNSYS0000006417",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Cybosia mesomella",
+    "tvk": "NBNSYS0000006126",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Rivula sericealis",
+    "tvk": "NBNSYS0000006578",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Epirrhoe alternata",
+    "tvk": "NHMSYS0000519763",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Noctua pronuba",
+    "tvk": "NBNSYS0000006193",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lampropteryx suffumata",
+    "tvk": "NHMSYS0021144007",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Amphipoea oculea",
+    "tvk": "NBNSYS0000006465",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Apamea crenata",
+    "tvk": "NBNSYS0000006425",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Plusia festucae",
+    "tvk": "NBNSYS0000006544",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Ochropleura plecta",
+    "tvk": "NBNSYS0000006188",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Ecliptopera silaceata",
+    "tvk": "NHMSYS0021143991",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Perizoma alchemillata",
+    "tvk": "NBNSYS0000005883",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xanthorhoe montanata",
+    "tvk": "NHMSYS0000520993",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xanthorhoe spadicearia",
+    "tvk": "NHMSYS0021143920",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Acronicta rumicis",
+    "tvk": "NBNSYS0000006384",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Diachrysia chrysitis",
+    "tvk": "NBNSYS0000006539",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Diarsia rubi",
+    "tvk": "NBNSYS0000006214",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hoplodrina octogenaria",
+    "tvk": "NHMSYS0021144579",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Oligia fasciuncula",
+    "tvk": "NBNSYS0000006438",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Schrankia costaestrigalis",
+    "tvk": "NBNSYS0000006586",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Denticucullus pygmina",
+    "tvk": "NHMSYS0021144641",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Photedes minima",
+    "tvk": "NBNSYS0000006445",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eupithecia satyrata",
+    "tvk": "NBNSYS0000005916",
+    "nationalRarity": "Vulnerable",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Orthonama vittata",
+    "tvk": "NBNSYS0000005792",
+    "nationalRarity": "Least Concern",
+    "habitatGeneralist": 1,
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Scopula emutaria",
+    "tvk": "NHMSYS0021143877",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Cucullia umbratica",
+    "tvk": "NBNSYS0000006309",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Litoligia literosa",
+    "tvk": "NHMSYS0021144686",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Athetis pallustris",
+    "tvk": "NHMSYS0021144588",
+    "nationalRarity": "Endangered",
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia pygmaeata",
+    "tvk": "NHMSYS0021144081",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Gortyna borelii",
+    "tvk": "NHMSYS0000520248",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Amphipyra tragopoginis",
+    "tvk": "NBNSYS0000006395",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1,
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Apamea oblonga",
+    "tvk": "NBNSYS0000006424",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Epirrhoe galiata",
+    "tvk": "NHMSYS0021143939",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Deilephila porcellus",
+    "tvk": "NBNSYS0000006078",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Zygaena filipendulae",
+    "tvk": "NBNSYS0000005670",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Euxoa tritici",
+    "tvk": "NBNSYS0000006167",
+    "nationalRarity": "Vulnerable",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Amphipoea crinanensis",
+    "tvk": "NBNSYS0000006464",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Mniotype adusta",
+    "tvk": "NBNSYS0000006343",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Xanthorhoe decoloraria",
+    "tvk": "NHMSYS0000520988",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Charissa obscurata",
+    "tvk": "NHMSYS0021144290",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Pseudoterpna pruinata",
+    "tvk": "NHMSYS0000522767",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Colostygia olivata",
+    "tvk": "NHMSYS0021143999",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Coenotephria salicata",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Lasiocampa trifolii",
+    "tvk": "NHMSYS0000503016",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Dicallomera fascelina",
+    "tvk": "NBNSYS0000006113",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Apamea furva",
+    "tvk": "NHMSYS0000501109",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Gnophos obfuscata",
+    "tvk": "NHMSYS0021144283",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Aporophyla lueneburgensis",
+    "tvk": "NBNSYS0000005281",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Dasypolia templi",
+    "tvk": "NBNSYS0000006322",
+    "nationalRarity": "Near Threatened",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Entephria flavicinctata",
+    "tvk": "NHMSYS0000519698",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Thera cognata",
+    "tvk": "NBNSYS0000005850",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Standfussiana lucernea",
+    "tvk": "NBNSYS0000006190",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Agrotis vestigialis",
+    "tvk": "NBNSYS0000006171",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia subumbrata",
+    "tvk": "NHMSYS0021144131",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Aporophyla lutulenta",
+    "tvk": "NBNSYS0000005281",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eremobia ochroleuca",
+    "tvk": "NHMSYS0021144609",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Pyrrhia umbra",
+    "tvk": "NBNSYS0000006505",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Tyria jacobaeae",
+    "tvk": "NBNSYS0000006155",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Perizoma flavofasciata",
+    "tvk": "NBNSYS0000005890",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Scopula rubiginata",
+    "tvk": "NBNSYS0000005761",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Thalpophila matura",
+    "tvk": "NBNSYS0000006399",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Tholera decimalis",
+    "tvk": "NBNSYS0000006271",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia centaureata",
+    "tvk": "NHMSYS0021144104",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Arctia villica",
+    "tvk": "NHMSYS0000517243",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Epirrhoe rivata",
+    "tvk": "NHMSYS0021143938",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia denotata",
+    "tvk": "NHMSYS0000520028",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Scopula marginepunctata",
+    "tvk": "NBNSYS0000005762",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Aspitates ochrearia",
+    "tvk": "NBNSYS0000006060",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Aporophyla australis",
+    "tvk": "NHMSYS0000517198",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Polymixis lichenea",
+    "tvk": "NHMSYS0000520013",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hadena perplexa",
+    "tvk": "NHMSYS0000520328",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Pyropteron chrysidiformis",
+    "tvk": "NHMSYS0000504018",
+    "nationalRarity": "Endangered",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Setina irrorella",
+    "tvk": "NBNSYS0000006122",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia millefoliata",
+    "tvk": "NHMSYS0000502610",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Lycia zonaria",
+    "tvk": "NHMSYS0000520883",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Perizoma albulata",
+    "tvk": "NHMSYS0000522437",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Agrotis cinerea",
+    "tvk": "NHMSYS0021144892",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Mesoligia furuncula",
+    "tvk": "NHMSYS0021144687",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Panemeria tenebrata",
+    "tvk": "NBNSYS0000006503",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Sideridis reticulata",
+    "nationalRarity": "Critically Endangered (Possibly Extinct)",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Photedes captiuncula",
+    "tvk": "NBNSYS0000006444",
+    "nationalRarity": "Endangered",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Zygaena loti",
+    "tvk": "NHMSYS0000520668",
+    "nationalRarity": "Endangered",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Catarhoe cuculata",
+    "tvk": "NBNSYS0000005814",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Catarhoe rubidata",
+    "tvk": "NHMSYS0021143929",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia distinctaria",
+    "tvk": "NHMSYS0000520033",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia venosata",
+    "tvk": "NBNSYS0000005906",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Phibalapteryx virgata",
+    "tvk": "NBNSYS0000005791",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Scotopteryx bipunctaria",
+    "tvk": "NHMSYS0000521353",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Scotopteryx chenopodiata",
+    "tvk": "NBNSYS0000005807",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Apamea sublustris",
+    "tvk": "NBNSYS0000006419",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Cucullia absinthii",
+    "tvk": "NBNSYS0000006304",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hadena confusa",
+    "tvk": "NBNSYS0000006264",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Heliothis viriplaca",
+    "tvk": "NBNSYS0000006507",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Leucania putrescens",
+    "tvk": "NHMSYS0021144873",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Mythimna l-album",
+    "tvk": "NBNSYS0000006295",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Bembecia ichneumoniformis",
+    "tvk": "NBNSYS0100001926",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Zygaena lonicerae",
+    "tvk": "NBNSYS0000005677",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Zygaena purpuralis",
+    "tvk": "NHMSYS0000520673",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Idaea dilutaria",
+    "tvk": "NHMSYS0021143845",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Tholera cespitis",
+    "tvk": "NHMSYS0021144801",
+    "nationalRarity": "Vulnerable",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Zygaena viciae",
+    "tvk": "NHMSYS0000520678",
+    "nationalRarity": "Critically Endangered",
+    "habitatGrassland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Cleorodes lichenaria",
+    "tvk": "NBNSYS0000006037",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Scopula nigropunctata",
+    "tvk": "NBNSYS0000005757",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Meganola albula",
+    "tvk": "NHMSYS0021144954",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia plumbeolata",
+    "tvk": "NBNSYS0000005896",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Macaria alternata",
+    "tvk": "NBNSYS0100003853",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Cucullia asteris",
+    "tvk": "NHMSYS0021144523",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia simpliciata",
+    "tvk": "NBNSYS0000005930",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Luperina nickerlii",
+    "tvk": "NHMSYS0000520843",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eilema caniola",
+    "tvk": "NHMSYS0021144420",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Amphipoea fucosa",
+    "tvk": "NHMSYS0000516998",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Conisania andalusica",
+    "tvk": "NHMSYS0021167189",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eilema pygmaeola",
+    "tvk": "NBNSYS0000006132",
+    "nationalRarity": "Near Threatened",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Idaea ochrata",
+    "tvk": "NHMSYS0000520553",
+    "nationalRarity": "Near Threatened",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hadena albimacula",
+    "tvk": "NBNSYS0000006265",
+    "nationalRarity": "Near Threatened",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Actebia praecox",
+    "tvk": "NBNSYS0000006185",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Lygephila craccae",
+    "tvk": "NHMSYS0021144436",
+    "nationalRarity": "Endangered",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Eupithecia extensaria",
+    "tvk": "NHMSYS0000520043",
+    "nationalRarity": "Endangered",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Thalera fimbrialis",
+    "tvk": "NBNSYS0000005745",
+    "nationalRarity": "Endangered",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hadena caesia",
+    "tvk": "NHMSYS0000520318",
+    "nationalRarity": "Endangered",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hypena obsitalis",
+    "tvk": "NHMSYS0021144367",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Idaea degeneraria",
+    "tvk": "NHMSYS0021143861",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Malacosoma castrensis",
+    "tvk": "NBNSYS0000005704",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Agrotis ripae",
+    "tvk": "NHMSYS0021144897",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Agrotis trux",
+    "tvk": "NHMSYS0000516938",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Bryophila domestica",
+    "tvk": "NHMSYS0021126913",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Calophasia lunula",
+    "tvk": "NBNSYS0000006316",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Euxoa cursoria",
+    "tvk": "NBNSYS0000006169",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Euxoa obelisca",
+    "tvk": "NHMSYS0000520123",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Lacanobia suasa",
+    "tvk": "NHMSYS0021144817",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Leucochlaena oditis",
+    "tvk": "NHMSYS0021144694",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Longalatedes elymi",
+    "tvk": "NHMSYS0021144634",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Mythimna favicolor",
+    "tvk": "NBNSYS0000006292",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Mythimna litoralis",
+    "tvk": "NBNSYS0000006294",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Nyctobrya muralis",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Polymixis flavicincta",
+    "tvk": "NHMSYS0021144778",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Polymixis xanthomista",
+    "tvk": "NHMSYS0000520008",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Sideridis turbida",
+    "tvk": "NHMSYS0021144827",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Pyropteron muscaeformis",
+    "tvk": "NHMSYS0021143410",
+    "nationalRarity": "Least Concern",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Aplasta ononaria",
+    "tvk": "NBNSYS0000005737",
+    "nationalRarity": "Near Threatened",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Idaea humiliata",
+    "nationalRarity": "Regionally Extinct",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Thetidia smaragdaria",
+    "nationalRarity": "Regionally Extinct",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Photedes morrisii",
+    "tvk": "NBNSYS0000100174",
+    "nationalRarity": "Vulnerable",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Hyles gallii",
+    "tvk": "MM0001Z10063HLV1",
+    "nationalRarity": "Vulnerable",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Chlorissa cloraria",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Nola aerugula",
+    "tvk": "NHMSYS0000503394",
+    "habitatCoastal": 1
+  },
+  {
+    "scientificName": "Diarsia florida",
+    "tvk": "NBNSYS0000006215",
+    "nationalRarity": "Data deficient",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Coenocalpe lapidata",
+    "tvk": "NHMSYS0021144042",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Epirrhoe tristata",
+    "tvk": "NBNSYS0000005815",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Plusia putnami",
+    "tvk": "NHMSYS0000522622",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Deltote uncula",
+    "tvk": "NBNSYS0000006518",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Idaea muricata",
+    "tvk": "NBNSYS0000005771",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Mythimna pudorina",
+    "tvk": "NHMSYS0021144859",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Helotropha leucostigma",
+    "tvk": "NHMSYS0021167167",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydriomena furcata",
+    "tvk": "NBNSYS0000005857",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Idaea straminata",
+    "tvk": "NBNSYS0000005788",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Perconia strigillaria",
+    "tvk": "NHMSYS0021144306",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Diarsia mendica",
+    "tvk": "NHMSYS0000519388",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Saturnia pavonia",
+    "tvk": "NBNSYS0000156325",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Ceramica pisi",
+    "tvk": "NBNSYS0000006254",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Alcis repandata",
+    "tvk": "NBNSYS0000006033",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Rheumaptera hastata",
+    "tvk": "NBNSYS0000005867",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Spilosoma lubricipeda",
+    "tvk": "NBNSYS0000006146",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Phlogophora meticulosa",
+    "tvk": "NBNSYS0000006402",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eilema depressa",
+    "tvk": "NBNSYS0100002922",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eilema lurideola",
+    "tvk": "NBNSYS0000006136",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eulithis populata",
+    "tvk": "NBNSYS0000005836",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eurois occulta",
+    "tvk": "NBNSYS0000006228",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lomaspilis marginata",
+    "tvk": "NBNSYS0000005978",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Parastichtis suspecta",
+    "tvk": "NHMSYS0021144754",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Cirrhia icteritia",
+    "tvk": "NHMSYS0021144703",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Drepana falcataria",
+    "tvk": "NBNSYS0000005720",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Geometra papilionaria",
+    "tvk": "NBNSYS0000005739",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydriomena ruberata",
+    "tvk": "NHMSYS0021143965",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xestia baja",
+    "tvk": "NHMSYS0021144934",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Notodonta ziczac",
+    "tvk": "NHMSYS0000503410",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Pterostoma palpina",
+    "tvk": "NBNSYS0000006097",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Cabera exanthemata",
+    "tvk": "NBNSYS0000006048",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Trichopteryx carpinata",
+    "tvk": "NBNSYS0000005972",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Anaplectoides prasina",
+    "tvk": "NHMSYS0021144932",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xanthia togata",
+    "tvk": "NBNSYS0000006368",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xestia ditrapezium",
+    "tvk": "NHMSYS0021144942",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Cerura vinula",
+    "tvk": "NBNSYS0000006081",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Furcula furcula",
+    "tvk": "NBNSYS0000006083",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Notodonta dromedarius",
+    "tvk": "NHMSYS0000503407",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Ptilodon capucina",
+    "tvk": "NBNSYS0000006094",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Sesia bembeciformis",
+    "tvk": "NHMSYS0021143404",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Falcaria lacertinaria",
+    "tvk": "NBNSYS0000005717",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Polia hepatica",
+    "tvk": "NBNSYS0000154404",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Orthosia gothica",
+    "tvk": "NBNSYS0000006283",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Dysstroma truncata",
+    "tvk": "NBNSYS0000146497",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xylena vetusta",
+    "tvk": "NHMSYS0021144742",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Calliteara pudibunda",
+    "tvk": "NBNSYS0000006114",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hyppa rectilinea",
+    "tvk": "NHMSYS0021144595",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Ipimorpha retusa",
+    "tvk": "NHMSYS0000502954",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lacanobia thalassina",
+    "tvk": "NBNSYS0000006249",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Orthosia cerasi",
+    "tvk": "NBNSYS0000006280",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Orthosia cruda",
+    "tvk": "NHMSYS0021144790",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Laothoe populi",
+    "tvk": "NBNSYS0000006069",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Smerinthus ocellata",
+    "tvk": "NBNSYS0000006068",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Brachylomia viminalis",
+    "tvk": "NHMSYS0021144752",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Graphiphora augur",
+    "tvk": "NBNSYS0000006200",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Clostera pigra",
+    "tvk": "NBNSYS0000006103",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Acronicta leporina",
+    "tvk": "NBNSYS0000006375",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hypenodes humidalis",
+    "tvk": "MM0001Z100DMN711",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xestia castanea",
+    "tvk": "NHMSYS0000504669",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lycophotia porphyrea",
+    "tvk": "NHMSYS0021144917",
+    "nationalRarity": "Vulnerable",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Carsia sororiata",
+    "tvk": "NHMSYS0000517633",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lycia lapponaria",
+    "tvk": "NHMSYS0000520878",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Amphipoea lucens",
+    "tvk": "NBNSYS0000006462",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Celaena haworthii",
+    "tvk": "NBNSYS0000006472",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Dyscia fagaria",
+    "tvk": "NBNSYS0000006061",
+    "nationalRarity": "Near Threatened",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Acronicta menyanthidis",
+    "tvk": "NBNSYS0000006381",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Chlorissa viridata",
+    "tvk": "NBNSYS0000005743",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Cyclophora pendularia",
+    "tvk": "NBNSYS0000005748",
+    "nationalRarity": "Near Threatened",
+    "habitatUplandHeathlandMoorland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Agrotis puta",
+    "tvk": "NBNSYS0000006178",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eupithecia trisignaria",
+    "tvk": "NHMSYS0000502623",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eupithecia valerianata",
+    "tvk": "NHMSYS0021144121",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eupithecia vulgata",
+    "tvk": "NBNSYS0000005922",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Idaea dimidiata",
+    "tvk": "NBNSYS0000005781",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Idaea emarginata",
+    "tvk": "NBNSYS0000005785",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Timandra comae",
+    "tvk": "NHMSYS0021143879",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Gortyna flavago",
+    "tvk": "NHMSYS0021144610",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Oligia strigilis",
+    "tvk": "NBNSYS0000006435",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xanthorhoe ferrugata",
+    "tvk": "NBNSYS0000005800",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eupithecia tripunctaria",
+    "tvk": "NHMSYS0000502622",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Apamea unanimis",
+    "tvk": "NHMSYS0021144672",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lateroligia ophiogramma",
+    "tvk": "NHMSYS0021144683",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Leucania comma",
+    "tvk": "NBNSYS0000150498",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Orthosia gracilis",
+    "tvk": "NHMSYS0021144793",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lygephila pastinum",
+    "tvk": "NBNSYS0000006570",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Macrochilo cribrumalis",
+    "tvk": "NHMSYS0000503145",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Spilosoma urticae",
+    "tvk": "NBNSYS0000006148",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Thumatha senex",
+    "tvk": "NHMSYS0021144411",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Larentia clavaria",
+    "tvk": "NBNSYS0000005825",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Scopula immutata",
+    "tvk": "NBNSYS0000005765",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Coenobia rufa",
+    "tvk": "NBNSYS0000006484",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Zygaena trifolii",
+    "tvk": "NBNSYS0000005673",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Deltote bankiana",
+    "tvk": "NBNSYS0000006519",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xestia c-nigrum",
+    "tvk": "NBNSYS0000006217",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Orgyia recens",
+    "tvk": "NHMSYS0021144385",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eustroma reticulata",
+    "tvk": "NHMSYS0021143986",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Catocala nupta",
+    "tvk": "NHMSYS0000501671",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Parascotia fuliginaria",
+    "tvk": "NBNSYS0000006579",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Scoliopteryx libatrix",
+    "tvk": "NBNSYS0000006573",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Anticollix sparsata",
+    "tvk": "NBNSYS0000005951",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Epione repandaria",
+    "tvk": "NBNSYS0000005998",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Euchoeca nebulata",
+    "tvk": "NBNSYS0000005965",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Eupithecia tenuiata",
+    "tvk": "NHMSYS0021144074",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydrelia flammeolaria",
+    "tvk": "NBNSYS0000005967",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydria undulata",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydriomena impluviata",
+    "tvk": "NHMSYS0021143961",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Plemyria rubiginata",
+    "tvk": "NHMSYS0000522597",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Pterapherapteryx sexalata",
+    "tvk": "NBNSYS0000005973",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xanthorhoe biriviata",
+    "tvk": "NBNSYS0000005794",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Xanthorhoe quadrifasiata",
+    "tvk": "MM0001Z100BZSUG1",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Acronicta alni",
+    "tvk": "NBNSYS0000006376",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Acronicta tridens",
+    "tvk": "NHMSYS0021144501",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Agrochola litura",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Agrochola lota",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Apterogenum ypsillon",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Diachrysia chryson",
+    "tvk": "NHMSYS0021144472",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Globia sparganii",
+    "tvk": "NHMSYS0021144656",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Mormo maura",
+    "tvk": "NBNSYS0000006396",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Naenia typica",
+    "tvk": "NBNSYS0000006227",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Photedes extrema",
+    "tvk": "NHMSYS0021144651",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Photedes fluxa",
+    "tvk": "NHMSYS0021144643",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Earias clorana",
+    "tvk": "NBNSYS0000006524",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Clostera curtula",
+    "tvk": "NBNSYS0000006105",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Synanthedon formicaeformis",
+    "tvk": "NHMSYS0021143407",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydraecia osseola",
+    "tvk": "NHMSYS0000520468",
+    "nationalRarity": "Endangered",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Sedina buettneri",
+    "tvk": "NBNSYS0000006481",
+    "nationalRarity": "Endangered",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Archanara dissoluta",
+    "tvk": "NBNSYS0000006476",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Arenostola phragmitidis",
+    "tvk": "NHMSYS0021144632",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Chilodes maritima",
+    "tvk": "NHMSYS0021144584",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Globia algae",
+    "tvk": "NHMSYS0021144657",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Hydraecia petasitis",
+    "tvk": "NBNSYS0000006467",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Lenisa geminipuncta",
+    "tvk": "NHMSYS0021144636",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Leucania obsoleta",
+    "tvk": "NHMSYS0021144872",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Mythimna straminea",
+    "tvk": "NBNSYS0000006290",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Nonagria typhae",
+    "tvk": "NBNSYS0000006474",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Rhizedra lutosa",
+    "tvk": "NHMSYS0021144629",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Senta flammea",
+    "tvk": "NBNSYS0000006302",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Simyra albovenosa",
+    "tvk": "NBNSYS0000006385",
+    "nationalRarity": "Least Concern",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Phragmataecia castaneae",
+    "tvk": "NHMSYS0000503737",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Pelosia muscerda",
+    "tvk": "NBNSYS0000006127",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Pelosia obtusa",
+    "tvk": "NHMSYS0021144412",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Gagitodes sagittata",
+    "tvk": "NHMSYS0021144066",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Archanara neurica",
+    "tvk": "NHMSYS0021144637",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Coenophila subrosea",
+    "tvk": "NHMSYS0000501811",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Protarchanara brevilinea",
+    "tvk": "NHMSYS0021144654",
+    "nationalRarity": "Near Threatened",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Laelia coenosa",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Costaconvexa polygrammata",
+    "tvk": "NBNSYS0000005819",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Acronicta strigosa",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Trachea atriplicis",
+    "tvk": "NBNSYS0000006400",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWetland": 1
+  },
+  {
+    "scientificName": "Diacrisia sannio",
+    "tvk": "NBNSYS0000006145",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Ematurga atomaria",
+    "tvk": "NBNSYS0000006044",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia absinthiata",
+    "tvk": "NBNSYS0000005918",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Korscheltellus fusconebulosa",
+    "tvk": "NHMSYS0021142344",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Aporophyla nigra",
+    "tvk": "NBNSYS0000006325",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Deltote pygarga",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Hemaris tityus",
+    "tvk": "NBNSYS0000006070",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Parasemia plantaginis",
+    "tvk": "NBNSYS0000006142",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Colostygia multistrigaria",
+    "tvk": "NBNSYS0000005855",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Idaea aversata",
+    "tvk": "NBNSYS0000005786",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Mesotype didymata",
+    "tvk": "NHMSYS0021167155",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Phymatopus hecta",
+    "tvk": "NHMSYS0021142347",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Rusina ferruginea",
+    "tvk": "NBNSYS0000006398",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Lacanobia oleracea",
+    "tvk": "NBNSYS0000006251",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Mesapamea secalis",
+    "tvk": "NBNSYS0000006442",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Luperina testacea",
+    "tvk": "NHMSYS0021144621",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Agrotis exclamationis",
+    "tvk": "NBNSYS0000006175",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Diaphora mendica",
+    "tvk": "NBNSYS0000006149",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia virgaureata",
+    "tvk": "NBNSYS0000005939",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Gandaritis pyraliata",
+    "tvk": "NHMSYS0021143990",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Hepialus humuli",
+    "tvk": "NBNSYS0000005307",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Apamea remissa",
+    "tvk": "NHMSYS0021144661",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Mythimna ferrago",
+    "tvk": "NBNSYS0000006286",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xestia xanthographa",
+    "tvk": "NHMSYS0021144939",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Triodia sylvina",
+    "tvk": "NHMSYS0021142341",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Aplocera plagiata",
+    "tvk": "NBNSYS0000005958",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Idaea fuscovenosa",
+    "tvk": "NBNSYS0000005778",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Idaea subsericeata",
+    "tvk": "NBNSYS0000005782",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Korscheltellus lupulina",
+    "tvk": "NHMSYS0021142343",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Lacanobia w-latinum",
+    "tvk": "NBNSYS0000006248",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Noctua orbona",
+    "tvk": "NBNSYS0000006194",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Mythimna turca",
+    "tvk": "NBNSYS0000006284",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Perizoma blandiata",
+    "tvk": "NHMSYS0000522442",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cerapteryx graminis",
+    "tvk": "NBNSYS0000006269",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Antitype chi",
+    "tvk": "NBNSYS0000006347",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Odezia atrata",
+    "tvk": "NBNSYS0000005961",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Perizoma minorata",
+    "tvk": "NHMSYS0000522447",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Bupalus piniaria",
+    "tvk": "NBNSYS0000006046",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Hylaea fasciaria",
+    "tvk": "NBNSYS0000006054",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Pennithera firmata",
+    "tvk": "NHMSYS0021143969",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Thera obeliscata",
+    "tvk": "NHMSYS0021143975",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Deileptenia ribeata",
+    "tvk": "NBNSYS0000006032",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia indigata",
+    "tvk": "NHMSYS0021144101",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia tantillaria",
+    "tvk": "NBNSYS0000005945",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Macaria liturata",
+    "tvk": "NBNSYS0100003856",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Thera britannica",
+    "tvk": "NHMSYS0000504489",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Panolis flammea",
+    "tvk": "NHMSYS0021144783",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia lariciata",
+    "tvk": "NHMSYS0021144095",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Dendrolimus pini",
+    "tvk": "NBNSYS0000005711",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Sphinx pinastri",
+    "tvk": "NHMSYS0021143836",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Chesias legatella",
+    "tvk": "NHMSYS0021144143",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Gymnoscelis rufifasciata",
+    "tvk": "NBNSYS0000005950",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Pasiphila debiliata",
+    "tvk": "NHMSYS0021144071",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Petrophora chlorosata",
+    "tvk": "NBNSYS0000005993",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Pseudopanthera macularia",
+    "tvk": "NBNSYS0000006000",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Euplexia lucipara",
+    "tvk": "NBNSYS0000006401",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Chesias rufata",
+    "tvk": "NBNSYS0000005954",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Operophtera brumata",
+    "tvk": "NBNSYS0000005879",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xanthorhoe designata",
+    "tvk": "NBNSYS0000005795",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Autographa bractea",
+    "tvk": "NHMSYS0021144477",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Hypena proboscidalis",
+    "tvk": "NBNSYS0000006581",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Spilosoma lutea",
+    "tvk": "NHMSYS0021144388",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Atolmis rubricollis",
+    "tvk": "NBNSYS0000006125",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Alcis jubata",
+    "tvk": "NBNSYS0000006034",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Biston betularia",
+    "tvk": "NBNSYS0000006022",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Chloroclystis v-ata",
+    "tvk": "NBNSYS0000005946",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Ectropis sp.",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Euphyia biangulata",
+    "tvk": "NBNSYS0000005873",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Idaea biselata",
+    "tvk": "NBNSYS0000005775",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Lampropteryx otregiata",
+    "tvk": "NBNSYS0000005831",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Mesoleuca albicillata",
+    "tvk": "NBNSYS0000005828",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Odontopera bidentata",
+    "tvk": "NBNSYS0000006011",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Paradarisa consonaria",
+    "tvk": "NHMSYS0021144257",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Abrostola tripartita",
+    "tvk": "NBNSYS0100001391",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Autographa jota",
+    "tvk": "NBNSYS0000006548",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Autographa pulchrina",
+    "tvk": "NBNSYS0000006547",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xylocampa areola",
+    "tvk": "NBNSYS0000006336",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia subfuscata",
+    "tvk": "NBNSYS0000005925",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xylena solidaginis",
+    "tvk": "NHMSYS0021144740",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cepphis advenaria",
+    "tvk": "NHMSYS0000501714",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Macaria brunneata",
+    "tvk": "NHMSYS0021144169",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia intricata",
+    "tvk": "NBNSYS0000005912",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Noctua comes",
+    "tvk": "NHMSYS0021144922",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Achlya flavicornis",
+    "tvk": "NBNSYS0000005732",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cyclophora albipunctata",
+    "tvk": "NBNSYS0000005750",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Epirrita autumnata",
+    "tvk": "NBNSYS0000005877",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Agrochola helvola",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Orgyia antiqua",
+    "tvk": "NBNSYS0000006112",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Abraxas grossulariata",
+    "tvk": "NBNSYS0000005975",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Agriopis marginaria",
+    "tvk": "NHMSYS0021144223",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Archiearis parthenias",
+    "tvk": "NBNSYS0000005734",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Dysstroma citrata",
+    "tvk": "NBNSYS0000146496",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Macaria notata",
+    "tvk": "NBNSYS0100003857",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Agrochola macilenta",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cerastis rubricosa",
+    "tvk": "NHMSYS0021144914",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Diarsia dahlii",
+    "tvk": "NHMSYS0021144906",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xylena exsoleta",
+    "tvk": "NBNSYS0000006335",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Synanthedon culiciformis",
+    "tvk": "NBNSYS0000005696",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Endromis versicolora",
+    "tvk": "NBNSYS0000005716",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Trichiura crataegi",
+    "tvk": "NBNSYS0000005701",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Pheosia gnoma",
+    "tvk": "NHMSYS0021144351",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Pheosia tremula",
+    "tvk": "NBNSYS0000006093",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Acronicta psi",
+    "tvk": "NBNSYS0000006379",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Noctua janthe",
+    "tvk": "NHMSYS0000503389",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Habrosyne pyritoides",
+    "tvk": "NBNSYS0000005725",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Ochropacha duplaris",
+    "tvk": "NBNSYS0000005730",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Thyatira batis",
+    "tvk": "NBNSYS0000005724",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Hypena crassalis",
+    "tvk": "NBNSYS0000006580",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Nudaria mundana",
+    "tvk": "NBNSYS0000006124",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Agriopis aurantiaria",
+    "tvk": "NHMSYS0021144222",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cabera pusaria",
+    "tvk": "NBNSYS0000006047",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Campaea margaritaria",
+    "tvk": "NHMSYS0021144278",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Chloroclysta miata",
+    "tvk": "NBNSYS0000005841",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Chloroclysta siterata",
+    "tvk": "NBNSYS0000005840",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Crocallis elinguaria",
+    "tvk": "NBNSYS0000006012",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Electrophaes corylata",
+    "tvk": "NBNSYS0000005853",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Ennomos alniaria",
+    "tvk": "NBNSYS0000006004",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Epirrita christyi",
+    "tvk": "NBNSYS0000005876",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Epirrita dilutata",
+    "tvk": "NHMSYS0021144014",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Lomographa temerata",
+    "tvk": "NHMSYS0021144269",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Martania taeniata",
+    "tvk": "NHMSYS0021144064",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Operophtera fagata",
+    "tvk": "NBNSYS0000005880",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Opisthograptis luteolata",
+    "tvk": "NBNSYS0000005997",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Selenia dentaria",
+    "tvk": "NBNSYS0000006008",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Selenia lunularia",
+    "tvk": "NHMSYS0021144200",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Selenia tetralunaria",
+    "tvk": "NBNSYS0000006010",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Venusia cambrica",
+    "tvk": "NBNSYS0000005964",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Poecilocampa populi",
+    "tvk": "NBNSYS0000005700",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Amphipyra pyramidea",
+    "tvk": "NBNSYS0000006392",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Anorthoa munda",
+    "tvk": "NHMSYS0021144798",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Colocasia coryli",
+    "tvk": "NBNSYS0000006530",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Conistra vaccinii",
+    "tvk": "NHMSYS0000501972",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cosmia trapezina",
+    "tvk": "NBNSYS0000006414",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Craniophora ligustri",
+    "tvk": "NHMSYS0021144514",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Diarsia brunnea",
+    "tvk": "NHMSYS0021144907",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Enargia paleacea",
+    "tvk": "NHMSYS0021144744",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eugnorisma depuncta",
+    "tvk": "NBNSYS0000006189",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Orthosia incerta",
+    "tvk": "NBNSYS0000006281",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Protolampra sobrina",
+    "tvk": "NHMSYS0021144951",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Subacronicta megacephala",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Odontosia carmelita",
+    "tvk": "NHMSYS0021144357",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Peridea anceps",
+    "tvk": "NBNSYS0000006091",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Phalera bucephala",
+    "tvk": "NBNSYS0000006080",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Synanthedon scoliaeformis",
+    "tvk": "NBNSYS0000005691",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Phyllodesma ilicifolia",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Erannis defoliaria",
+    "tvk": "NBNSYS0000006026",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Phigalia pilosaria",
+    "tvk": "NHMSYS0021144213",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Brachionycha nubeculosa",
+    "tvk": "NBNSYS0000006321",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Lacanobia contigua",
+    "tvk": "NHMSYS0021144816",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Aethalura punctulata",
+    "tvk": "NHMSYS0021144260",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Boudinotiana notha",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cyclophora porata",
+    "tvk": "NBNSYS0000005752",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Triphosa dubitata",
+    "tvk": "NBNSYS0000005870",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Apoda limacodes",
+    "tvk": "NBNSYS0000005683",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Elaphria venustula",
+    "tvk": "NHMSYS0000502337",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Synanthedon spheciformis",
+    "tvk": "NHMSYS0021143406",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Epione vespertaria",
+    "tvk": "NBNSYS0100003050",
+    "nationalRarity": "Endangered",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia nanata",
+    "tvk": "NHMSYS0021144098",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Scotopteryx luridata",
+    "tvk": "NHMSYS0000521358",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Anarta myrtilli",
+    "tvk": "NBNSYS0000006233",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xestia agathina",
+    "tvk": "NBNSYS0000006226",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Scotopteryx mucronata",
+    "tvk": "NBNSYS0000005809",
+    "nationalRarity": "Vulnerable",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eupithecia pusillata",
+    "tvk": "NHMSYS0021144088",
+    "nationalRarity": "Vulnerable",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Stilbia anomala",
+    "tvk": "NBNSYS0000006500",
+    "nationalRarity": "Vulnerable",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Entephria caesiata",
+    "tvk": "NHMSYS0021143952",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Epirrita filigrammaria",
+    "tvk": "NHMSYS0021144016",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Scopula ternata",
+    "tvk": "NHMSYS0021143871",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Thera juniperata",
+    "tvk": "NBNSYS0000005851",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Acronicta cinerea",
+    "tvk": "NHMSYS0021144509",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Papestra biren",
+    "tvk": "NBNSYS0000006253",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Syngrapha interrogationis",
+    "tvk": "NBNSYS0000006552",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Idaea contiguaria",
+    "tvk": "NHMSYS0000520548",
+    "nationalRarity": "Near Threatened",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Cleora cinctaria",
+    "tvk": "NHMSYS0000519018",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Macaria carbonaria",
+    "tvk": "NBNSYS0100003855",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Anarta melanopa",
+    "tvk": "NBNSYS0000006235",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Apamea exulis",
+    "tvk": "NHMSYS0021144677",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Coranarta cordigera",
+    "tvk": "NHMSYS0021144807",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xestia alpicola",
+    "tvk": "NHMSYS0000523349",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Xestia ashworthii",
+    "tvk": "NBNSYS0000006220",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Eriopygodes imbecilla",
+    "tvk": "NBNSYS0000006268",
+    "nationalRarity": "Near Threatened",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Heliothis maritima",
+    "tvk": "NBNSYS0000006508",
+    "nationalRarity": "Endangered",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Glacies coracina",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Idaea sylvestraria",
+    "tvk": "NHMSYS0021143853",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Pachycnemia hippocastanaria",
+    "tvk": "NHMSYS0021144181",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Agrochola haematidea",
+    "nationalRarity": "Least Concern",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Zygaena exulans",
+    "tvk": "NHMSYS0000520663",
+    "nationalRarity": "Near Threatened",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Scopula immorata",
+    "nationalRarity": "Regionally Extinct",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Coscinia cribraria",
+    "tvk": "NBNSYS0000006139",
+    "nationalRarity": "Critically Endangered",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Acosmetia caliginosa",
+    "tvk": "NHMSYS0021144548",
+    "nationalRarity": "Critically Endangered",
+    "habitatUplandHeathlandMoorland": 1
+  },
+  {
+    "scientificName": "Hadena irregularis",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 2,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Chiasmia clathrata",
+    "tvk": "NBNSYS0100002337",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Hadena bicruris",
+    "tvk": "NBNSYS0000006266",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Axylia putris",
+    "tvk": "NBNSYS0000006184",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Caradrina morpheus",
+    "tvk": "NBNSYS0000006492",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Apamea sordens",
+    "tvk": "NBNSYS0000027060",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Euclidia glyphica",
+    "tvk": "MM0001Z100DH5JN1",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Aplocera efformata",
+    "tvk": "NHMSYS0021144141",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Idaea trigeminata",
+    "tvk": "NBNSYS0000005784",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Perizoma affinitata",
+    "tvk": "NBNSYS0000005882",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Perizoma bifaciata",
+    "tvk": "NBNSYS0000005884",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Agrotis clavis",
+    "tvk": "NBNSYS0000006174",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Apamea lithoxylaea",
+    "tvk": "NHMSYS0021144674",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Charanyca trigrammica",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Dypterygia scabriuscula",
+    "tvk": "NBNSYS0000006397",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Hada plebeja",
+    "tvk": "NHMSYS0000502789",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Hoplodrina blanda",
+    "tvk": "NHMSYS0021144580",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Mesapamea didyma",
+    "tvk": "NBNSYS0000006443",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Mythimna conigera",
+    "tvk": "NHMSYS0021144861",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Mythimna pallens",
+    "tvk": "NBNSYS0000006292",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Oligia latruncula",
+    "tvk": "NHMSYS0021144690",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Sideridis rivularis",
+    "tvk": "NHMSYS0021144830",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Macroglossum stellatarum",
+    "tvk": "NBNSYS0000006072",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Agrochola lychnidis",
+    "tvk": "NHMSYS0021144710",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Rhyacia simulans",
+    "tvk": "NBNSYS0000006191",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Apamea anceps",
+    "tvk": "NHMSYS0021144667",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Cidaria fulvata",
+    "tvk": "NBNSYS0000005845",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Siona lineata",
+    "tvk": "NBNSYS0000006058",
+    "nationalRarity": "Critically Endangered",
+    "habitatWoodland": 1,
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Calamia tridens",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Cucullia chamomillae",
+    "tvk": "NHMSYS0021144520",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Caradrina clavipalpis",
+    "tvk": "NBNSYS0000006494",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Euxoa nigricans",
+    "tvk": "NHMSYS0000502656",
+    "nationalRarity": "Vulnerable",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Cucullia lychnitis",
+    "tvk": "NBNSYS0000006312",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Polia bombycina",
+    "tvk": "NBNSYS0000006239",
+    "nationalRarity": "Endangered",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Aspitates gilvaria",
+    "tvk": "NHMSYS0000517298",
+    "nationalRarity": "Endangered",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Eupithecia pimpinellata",
+    "tvk": "NHMSYS0021144097",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Scopula ornata",
+    "tvk": "NBNSYS0000005760",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Caradrina kadenii",
+    "tvk": "NHMSYS0021144575",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Macdunnoughia confusa",
+    "tvk": "NBNSYS0000006541",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Mythimna albipuncta",
+    "tvk": "NHMSYS0021144867",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Mythimna unipuncta",
+    "tvk": "NBNSYS0000006296",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Omphaloscelis lunosa",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Adscita geryon",
+    "tvk": "NHMSYS0000501001",
+    "nationalRarity": "Least Concern",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Eupithecia linariata",
+    "tvk": "NHMSYS0021144079",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Eupithecia succenturiata",
+    "tvk": "NBNSYS0000005927",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Hecatera bicolorata",
+    "tvk": "NBNSYS0000006255",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Jordanita globulariae",
+    "tvk": "NHMSYS0000502970",
+    "nationalRarity": "Near Threatened",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Autographa gamma",
+    "tvk": "NBNSYS0000006546",
+    "nationalRarity": "Population increasing (Long term)",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Pachetra sagittigera",
+    "nationalRarity": "Regionally Extinct",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Eublemma ostrina",
+    "tvk": "NHMSYS0021144443",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Eublemma parva",
+    "tvk": "NHMSYS0021144444",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Mythimna vitellina",
+    "tvk": "NHMSYS0021144863",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Agrotis bigramma",
+    "tvk": "NHMSYS0021144890",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Heliothis peltigera",
+    "tvk": "NHMSYS0021144540",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Leucania loreyi",
+    "tvk": "NHMSYS0021144875",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Ochropleura leucogaster",
+    "tvk": "NHMSYS0021144905",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Spodoptera cilium",
+    "tvk": "NHMSYS0021144566",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Spaelotis ravida",
+    "nationalRarity": "Critically Endangered",
+    "habitatGrassland": 1
+  },
+  {
+    "scientificName": "Lithostege griseata",
+    "tvk": "NHMSYS0021144148",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 2
+  },
+  {
+    "scientificName": "Peribatodes secundaria",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 2
+  },
+  {
+    "scientificName": "Eupithecia abietaria",
+    "tvk": "NBNSYS0000005897",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2
+  },
+  {
+    "scientificName": "Macaria signaria",
+    "tvk": "NHMSYS0021144167",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2
+  },
+  {
+    "scientificName": "Lithophane leautieri",
+    "tvk": "NHMSYS0000520793",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 2
+  },
+  {
+    "scientificName": "Eilema sororcula",
+    "tvk": "NBNSYS0000006129",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Laspeyria flexula",
+    "tvk": "NHMSYS0021144440",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lymantria monacha",
+    "tvk": "NBNSYS0000006119",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Miltochrista miniata",
+    "tvk": "NBNSYS0000006123",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Schrankia taenialis",
+    "tvk": "NHMSYS0021144432",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Colotois pennaria",
+    "tvk": "NHMSYS0000501963",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Euphyia unangulata",
+    "tvk": "NBNSYS0000005874",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia expallidata",
+    "tvk": "NBNSYS0000005921",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hemistola chrysoprasaria",
+    "tvk": "NHMSYS0021144321",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Horisme tersata",
+    "tvk": "NHMSYS0021144044",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Horisme vitalbata",
+    "tvk": "NHMSYS0021144043",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hypomecis punctinalis",
+    "tvk": "MM0001Z100758RH1",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Melanthia procellata",
+    "tvk": "NHMSYS0021144045",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Minoa murinata",
+    "tvk": "NBNSYS0000005969",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Peribatodes rhomboidaria",
+    "tvk": "NHMSYS0021144226",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Spargania luctuata",
+    "tvk": "NHMSYS0021143955",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Abrostola triplasia",
+    "tvk": "NBNSYS0000006555",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Apamea epomidion",
+    "tvk": "NBNSYS0000006426",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Apamea scolopacina",
+    "tvk": "NBNSYS0000006433",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hoplodrina ambigua",
+    "tvk": "NHMSYS0021144582",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Melanchra persicariae",
+    "tvk": "NBNSYS0000006246",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hemaris fuciformis",
+    "tvk": "NBNSYS0000006071",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eulithis mellinata",
+    "tvk": "NBNSYS0000005837",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Polia nebulosa",
+    "tvk": "NBNSYS0000006241",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Plagodis pulveraria",
+    "tvk": "NBNSYS0000005994",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Conistra rubiginosa",
+    "tvk": "NHMSYS0021144718",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Egira conspicillaris",
+    "tvk": "NBNSYS0000006274",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Conistra ligula",
+    "tvk": "NBNSYS0000006354",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cymatophorina diluta",
+    "tvk": "NHMSYS0021164634",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia inturbata",
+    "tvk": "NHMSYS0021144075",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Pareulype berberata",
+    "tvk": "NHMSYS0021144040",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Gastropacha quercifolia",
+    "tvk": "NBNSYS0000005714",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Diloba caeruleocephala",
+    "tvk": "NBNSYS0000006106",
+    "nationalRarity": "Endangered",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Zeuzera pyrina",
+    "tvk": "NBNSYS0000005661",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cilix glaucata",
+    "tvk": "NBNSYS0000005723",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Tethea ocularis",
+    "tvk": "NHMSYS0000521103",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Tetheella fluctuosa",
+    "tvk": "NHMSYS0021143797",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Watsonalla cultraria",
+    "tvk": "NBNSYS0100005988",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Catocala fraxini",
+    "tvk": "NBNSYS0000006556",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Euproctis similis",
+    "tvk": "NBNSYS0000006116",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Herminia grisealis",
+    "tvk": "NHMSYS0021144427",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Herminia tarsicrinalis",
+    "tvk": "NBNSYS0000006595",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Herminia tarsipennalis",
+    "tvk": "NHMSYS0021144426",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hypena rostralis",
+    "tvk": "NBNSYS0000006584",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Leucoma salicis",
+    "tvk": "NBNSYS0000006117",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lithosia quadra",
+    "tvk": "NBNSYS0000006137",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Trisateles emortualis",
+    "tvk": "NHMSYS0021144441",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Abraxas sylvata",
+    "tvk": "NBNSYS0000005976",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Acasis viretata",
+    "tvk": "NHMSYS0021144153",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Agriopis leucophaearia",
+    "tvk": "NHMSYS0021144221",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Alsophila aescularia",
+    "tvk": "NHMSYS0021144210",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Angerona prunaria",
+    "tvk": "NBNSYS0000006015",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Anticlea derivata",
+    "tvk": "NHMSYS0021143944",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Apeira syringaria",
+    "tvk": "NBNSYS0000006001",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Apocheima hispidaria",
+    "tvk": "NHMSYS0021144212",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Asthena albulata",
+    "tvk": "NBNSYS0000005966",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Biston strataria",
+    "tvk": "NBNSYS0000006021",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Comibaena bajularia",
+    "tvk": "NHMSYS0021144316",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cyclophora annularia",
+    "tvk": "NBNSYS0100002702",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cyclophora linearia",
+    "tvk": "NHMSYS0021143894",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cyclophora punctaria",
+    "tvk": "NBNSYS0000005753",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cyclophora puppillaria",
+    "tvk": "NHMSYS0021143890",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cyclophora ruficiliaria",
+    "tvk": "NHMSYS0020758190",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Earophila badiata",
+    "tvk": "NBNSYS0000146502",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ennomos quercinaria",
+    "tvk": "NBNSYS0000006003",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eulithis prunata",
+    "tvk": "NBNSYS0000005834",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia abbreviata",
+    "tvk": "NBNSYS0000005940",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia assimilata",
+    "tvk": "NBNSYS0000005920",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia dodoneata",
+    "tvk": "NHMSYS0021144087",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia egenaria",
+    "tvk": "NHMSYS0000502597",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia exiguata",
+    "tvk": "NHMSYS0021144124",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia haworthiata",
+    "tvk": "NHMSYS0000502600",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia innotata",
+    "tvk": "NBNSYS0000005936",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia insigniata",
+    "tvk": "NHMSYS0000502605",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupithecia irriguata",
+    "tvk": "NHMSYS0021144100",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hemithea aestivaria",
+    "tvk": "NHMSYS0021144330",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hydrelia sylvata",
+    "tvk": "NHMSYS0021144022",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Hypomecis roboraria",
+    "tvk": "NHMSYS0021144245",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Jodis lactearia",
+    "tvk": "NBNSYS0000005747",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ligdia adustata",
+    "tvk": "NHMSYS0021144163",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lobophora halterata",
+    "tvk": "NBNSYS0000005970",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lomographa bimaculata",
+    "tvk": "NBNSYS0000006049",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lycia hirtaria",
+    "tvk": "NBNSYS0000006018",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Menophra abruptaria",
+    "tvk": "NBNSYS0000006027",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ourapteryx sambucaria",
+    "tvk": "NBNSYS0000006013",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Parectropis similaria",
+    "tvk": "NBNSYS0100004476",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Pasiphila chloerata",
+    "tvk": "NHMSYS0021144070",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Pasiphila rectangulata",
+    "tvk": "NBNSYS0100004490",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Philereme transversata",
+    "tvk": "NBNSYS0000005872",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Philereme vetulata",
+    "tvk": "NHMSYS0021144029",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Plagodis dolabraria",
+    "tvk": "NBNSYS0000005995",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Scopula floslactata",
+    "tvk": "NBNSYS0000005766",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Scopula imitaria",
+    "tvk": "NHMSYS0021143870",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Trichopteryx polycommata",
+    "tvk": "NHMSYS0021144154",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Venusia blomeri",
+    "tvk": "NHMSYS0021144025",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Heterogenea asella",
+    "tvk": "NHMSYS0021143413",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Acronicta aceris",
+    "tvk": "NBNSYS0000006374",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Agrochola circellaris",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Allophyes oxyacanthae",
+    "tvk": "NBNSYS0000006338",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Amphipyra berbera",
+    "tvk": "NHMSYS0000517008",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Anarta trifolii",
+    "tvk": "NHMSYS0021144804",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Atethmia centrago",
+    "tvk": "NBNSYS0000006364",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cerastis leucographa",
+    "tvk": "NHMSYS0021144915",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cirrhia ocellaris",
+    "tvk": "NHMSYS0021144707",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Conistra rubiginea",
+    "tvk": "NHMSYS0021144720",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cosmia affinis",
+    "tvk": "NBNSYS0000006412",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cosmia diffinis",
+    "tvk": "NBNSYS0000006413",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cosmia pyralina",
+    "tvk": "NHMSYS0021144750",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cryphia algae",
+    "tvk": "NBNSYS0000006387",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Dichonioxa tenebrosa",
+    "tvk": "NHMSYS0020503121",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Dryobota labecula",
+    "tvk": "MM0001Z1Q00021ZZ",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Dryobotodes eremita",
+    "tvk": "NBNSYS0000006341",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Eupsilia transversa",
+    "tvk": "NBNSYS0000006351",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Griposia aprilina",
+    "tvk": "NBNSYS0000147940",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ipimorpha subtusa",
+    "tvk": "NHMSYS0021144745",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lithophane ornitopus",
+    "tvk": "NHMSYS0000520798",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lithophane semibrunnea",
+    "tvk": "NBNSYS0000006328",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lithophane socia",
+    "tvk": "NBNSYS0000150730",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Moma alpium",
+    "tvk": "NBNSYS0000006372",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Noctua fimbriata",
+    "tvk": "NBNSYS0000006196",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Orthosia miniosa",
+    "tvk": "NHMSYS0021144788",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Orthosia populeti",
+    "tvk": "NBNSYS0000006278",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Tiliacea aurago",
+    "tvk": "NHMSYS0021144699",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Tiliacea citrago",
+    "tvk": "NHMSYS0021144698",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Trigonophora flammea",
+    "tvk": "NBNSYS0000006344",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Xestia stigmatica",
+    "tvk": "NHMSYS0021144935",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Xestia triangulum",
+    "tvk": "NBNSYS0000006219",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Bena bicolorana",
+    "tvk": "NHMSYS0000501469",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Meganola strigula",
+    "tvk": "NHMSYS0021144953",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Nola confusalis",
+    "tvk": "NHMSYS0000503395",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Nola cucullatella",
+    "tvk": "NBNSYS0000006163",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Nycteola revayana",
+    "tvk": "NBNSYS0000011345",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Pseudoips prasinana",
+    "tvk": "NHMSYS0000517403",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Drymonia dodonaea",
+    "tvk": "NHMSYS0021144344",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Drymonia ruficornis",
+    "tvk": "NHMSYS0000502225",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Furcula bicuspis",
+    "tvk": "NBNSYS0000006082",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Furcula bifida",
+    "tvk": "NBNSYS0000006084",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ptilodon cucullina",
+    "tvk": "NHMSYS0021144355",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ptilophora plumigera",
+    "tvk": "NHMSYS0021144358",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Stauropus fagi",
+    "tvk": "NBNSYS0000006085",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Sesia apiformis",
+    "tvk": "NBNSYS0000005685",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Synanthedon andrenaeformis",
+    "tvk": "NBNSYS0000005693",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Synanthedon flaviventris",
+    "tvk": "NBNSYS0000005692",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Synanthedon myopaeformis",
+    "tvk": "NBNSYS0000005694",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Synanthedon vespiformis",
+    "tvk": "NBNSYS0000005689",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Mimas tiliae",
+    "tvk": "NBNSYS0000006067",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Sphinx ligustri",
+    "tvk": "NHMSYS0021143835",
+    "nationalRarity": "Least Concern",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Lymantria dispar",
+    "tvk": "NBNSYS0000006120",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Thaumetopoea processionea",
+    "tvk": "NBNSYS0000006108",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Polyploca ridens",
+    "tvk": "NBNSYS0000005733",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Sabra harpagula",
+    "tvk": "NBNSYS0000005722",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Catocala promissa",
+    "tvk": "NHMSYS0021144450",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Catocala sponsa",
+    "tvk": "NHMSYS0000501673",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Paracolax tristalis",
+    "tvk": "NBNSYS0000006598",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Pechipogo strigilata",
+    "tvk": "NHMSYS0000503655",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ennomos autumnaria",
+    "tvk": "NBNSYS0000006002",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ennomos erosaria",
+    "tvk": "NHMSYS0021144194",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Ennomos fuscantaria",
+    "tvk": "NBNSYS0000006005",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cirrhia gilvago",
+    "tvk": "NHMSYS0021144705",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Dicycla oo",
+    "tvk": "NBNSYS0000006411",
+    "nationalRarity": "Near Threatened",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Colobochyla salicalis",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Minucia lunaris",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Fagivorina arenaria",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Acronicta auricoma",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Cucullia gnaphalii",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Leucodonta bicoloria",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Paranthrene tabaniformis",
+    "nationalRarity": "Regionally Extinct",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Watsonalla binaria",
+    "tvk": "NBNSYS0100005987",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Theria primaria",
+    "tvk": "NBNSYS0000006052",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Malacosoma neustria",
+    "tvk": "NBNSYS0000005703",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Asteroscopus sphinx",
+    "tvk": "NHMSYS0000501413",
+    "nationalRarity": "Vulnerable",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Stegania cararia",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Jodia croceago",
+    "nationalRarity": "Critically Endangered (Possibly Extinct)",
+    "habitatWoodland": 1
+  },
+  {
+    "scientificName": "Pseudocoremia suavis",
+    "tvk": "NHMSYS0020531231"
+  },
+  {
+    "scientificName": "Eupithecia sinuosaria"
+  },
+  {
+    "scientificName": "Mamestra brassicae",
+    "tvk": "NBNSYS0000006245",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Gnophos dumetata"
+  },
+  {
+    "scientificName": "Pennisetia hylaeiformis",
+    "tvk": "NHMSYS0020695694",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Synanthedon tipuliformis",
+    "tvk": "NBNSYS0000005688",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Aleucis distinctata",
+    "tvk": "NHMSYS0021144272",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Oria musculosa",
+    "nationalRarity": "Critically Endangered (Possibly Extinct)"
+  },
+  {
+    "scientificName": "Agrotis segetum",
+    "tvk": "NHMSYS0021144895",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Macaria wauaria",
+    "tvk": "NBNSYS0100003859",
+    "nationalRarity": "Endangered"
+  },
+  {
+    "scientificName": "Polychrysia moneta",
+    "tvk": "NBNSYS0000006542",
+    "nationalRarity": "Endangered"
+  },
+  {
+    "scientificName": "Euplagia quadripunctaria",
+    "tvk": "NBNSYS0000006153",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Euproctis chrysorrhoea",
+    "tvk": "NBNSYS0000006115",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Pechipogo plumigeralis",
+    "tvk": "NHMSYS0021144430",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Eupithecia phoeniceata",
+    "tvk": "NBNSYS0000005943",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Eupithecia ultimaria",
+    "tvk": "NBNSYS0000033137",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Hydria cervinalis",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Idaea rusticata",
+    "tvk": "NHMSYS0021143842",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Idaea seriata",
+    "tvk": "NBNSYS0000005780",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Thera cupressata",
+    "tvk": "NHMSYS0021143981",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Eriogaster lanestris",
+    "tvk": "NBNSYS0000005702",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Hadena compta",
+    "tvk": "NHMSYS0021144848",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Hecatera dysodea",
+    "tvk": "NHMSYS0021144844",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Noctua janthina",
+    "tvk": "NHMSYS0021144926",
+    "nationalRarity": "Least Concern"
+  },
+  {
+    "scientificName": "Tyta luctuosa",
+    "tvk": "NHMSYS0021144495",
+    "nationalRarity": "Near Threatened"
+  },
+  {
+    "scientificName": "Peridroma saucia",
+    "tvk": "NHMSYS0021144878",
+    "nationalRarity": "Population decreasing (Long term)"
+  },
+  {
+    "scientificName": "Rhodometra sacraria",
+    "tvk": "NBNSYS0000005789",
+    "nationalRarity": "Population decreasinig (Long term)"
+  },
+  {
+    "scientificName": "Nycterosea obstipata",
+    "tvk": "NHMSYS0021143912",
+    "nationalRarity": "Population increasing (Long term)"
+  },
+  {
+    "scientificName": "Arctornis l-nigrum",
+    "nationalRarity": "Regionally Extinct"
+  },
+  {
+    "scientificName": "Isturgia limbaria",
+    "nationalRarity": "Regionally Extinct"
+  },
+  {
+    "scientificName": "Acontia trabealis",
+    "nationalRarity": "Regionally Extinct"
+  },
+  {
+    "scientificName": "Conistra erythrocephala",
+    "tvk": "NHMSYS0021144721",
+    "nationalRarity": "Regionally Extinct"
+  },
+  {
+    "scientificName": "Lithophane furcifera",
+    "nationalRarity": "Regionally Extinct"
+  },
+  {
+    "scientificName": "Pabulatrix pabulatricula",
+    "nationalRarity": "Regionally Extinct"
+  },
+  {
+    "scientificName": "Pelurga comitata",
+    "tvk": "NBNSYS0000005829",
+    "nationalRarity": "Vulnerable"
+  },
+  {
+    "scientificName": "Clostera anachoreta",
+    "tvk": "NHMSYS0021144362",
+    "nationalRarity": "Vulnerable"
+  },
+  {
+    "scientificName": "Drepana curvatula",
+    "tvk": "NBNSYS0000005721"
+  },
+  {
+    "scientificName": "Catephia alchymista"
+  },
+  {
+    "scientificName": "Catocala conjuncta"
+  },
+  {
+    "scientificName": "Catocala electa",
+    "tvk": "NBNSYS0000006558"
+  },
+  {
+    "scientificName": "Catocala elocata"
+  },
+  {
+    "scientificName": "Catocala nymphagoga"
+  },
+  {
+    "scientificName": "Coscinia striata"
+  },
+  {
+    "scientificName": "Dysgonia algira",
+    "tvk": "NBNSYS0000006565"
+  },
+  {
+    "scientificName": "Eublemma minutata"
+  },
+  {
+    "scientificName": "Eublemma purpurina",
+    "tvk": "NHMSYS0001703670"
+  },
+  {
+    "scientificName": "Grammodes stolida"
+  },
+  {
+    "scientificName": "Hypena lividalis"
+  },
+  {
+    "scientificName": "Hypena obesalis"
+  },
+  {
+    "scientificName": "Hyphantria cunea"
+  },
+  {
+    "scientificName": "Hyphoraia testudinaria"
+  },
+  {
+    "scientificName": "Tathorhynchus exsiccata",
+    "tvk": "NBNSYS0000006391"
+  },
+  {
+    "scientificName": "Utetheisa pulchella",
+    "tvk": "NBNSYS0000006140"
+  },
+  {
+    "scientificName": "Zanclognatha lunalis"
+  },
+  {
+    "scientificName": "Zanclognatha zelleralis"
+  },
+  {
+    "scientificName": "Aplocera praeformata"
+  },
+  {
+    "scientificName": "Chiasmia aestimaria"
+  },
+  {
+    "scientificName": "Crocallis dardoinaria"
+  },
+  {
+    "scientificName": "Horisme radicaria",
+    "tvk": "NHMSYS0021297304"
+  },
+  {
+    "scientificName": "Idaea serpentata"
+  },
+  {
+    "scientificName": "Peribatodes ilicaria"
+  },
+  {
+    "scientificName": "Peribatodes umbraria"
+  },
+  {
+    "scientificName": "Pseudoterpna coronillaria"
+  },
+  {
+    "scientificName": "Pungelaria capreolaria"
+  },
+  {
+    "scientificName": "Scotopteryx moeniata"
+  },
+  {
+    "scientificName": "Scotopteryx peribolata"
+  },
+  {
+    "scientificName": "Stegania trimaculata"
+  },
+  {
+    "scientificName": "Thera vetustata"
+  },
+  {
+    "scientificName": "Helicoverpa armigera",
+    "tvk": "NHMSYS0021144542"
+  },
+  {
+    "scientificName": "Agrotis ipsilon",
+    "tvk": "NBNSYS0000006177"
+  },
+  {
+    "scientificName": "Acontia lucida",
+    "tvk": "NBNSYS0000006521"
+  },
+  {
+    "scientificName": "Actebia fennica"
+  },
+  {
+    "scientificName": "Actinotia polyodon"
+  },
+  {
+    "scientificName": "Aedia funesta",
+    "tvk": "NHMSYS0021126078"
+  },
+  {
+    "scientificName": "Aedia leucomelas"
+  },
+  {
+    "scientificName": "Agrotis catalaunensis"
+  },
+  {
+    "scientificName": "Agrotis graslini"
+  },
+  {
+    "scientificName": "Agrotis herzogi"
+  },
+  {
+    "scientificName": "Apamea lateritia",
+    "tvk": "NBNSYS0000006427"
+  },
+  {
+    "scientificName": "Athetis hospes",
+    "tvk": "NHMSYS0021144590"
+  },
+  {
+    "scientificName": "Bryophila raptricula"
+  },
+  {
+    "scientificName": "Callopistria juventina"
+  },
+  {
+    "scientificName": "Callopistria latreillei"
+  },
+  {
+    "scientificName": "Calophasia platyptera"
+  },
+  {
+    "scientificName": "Caradrina flavirena"
+  },
+  {
+    "scientificName": "Chloantha hyperici",
+    "tvk": "NHMSYS0021144597"
+  },
+  {
+    "scientificName": "Chrysodeixis acuta",
+    "tvk": "NHMSYS0021144469"
+  },
+  {
+    "scientificName": "Chrysodeixis chalcites",
+    "tvk": "NHMSYS0021144468"
+  },
+  {
+    "scientificName": "Cornutiplusia circumflexa"
+  },
+  {
+    "scientificName": "Crypsedra gemmea"
+  },
+  {
+    "scientificName": "Ctenoplusia accentifera"
+  },
+  {
+    "scientificName": "Ctenoplusia limbirena",
+    "tvk": "NHMSYS0000502035"
+  },
+  {
+    "scientificName": "Cucullia artemisiae"
+  },
+  {
+    "scientificName": "Cucullia calendulae"
+  },
+  {
+    "scientificName": "Cucullia scrophulariae"
+  },
+  {
+    "scientificName": "Deltote deceptoria"
+  },
+  {
+    "scientificName": "Dichagyris flammatra"
+  },
+  {
+    "scientificName": "Dryobotodes roboris"
+  },
+  {
+    "scientificName": "Eucarta virgo"
+  },
+  {
+    "scientificName": "Euchalcia variabilis"
+  },
+  {
+    "scientificName": "Fabula zollikoferi"
+  },
+  {
+    "scientificName": "Galgula partita"
+  },
+  {
+    "scientificName": "Heliothis nubigera",
+    "tvk": "NHMSYS0021144541"
+  },
+  {
+    "scientificName": "Hoplodrina superstes"
+  },
+  {
+    "scientificName": "Lacanobia blenna"
+  },
+  {
+    "scientificName": "Lacanobia splendens",
+    "tvk": "NHMSYS0001703672"
+  },
+  {
+    "scientificName": "Lithophane consocia"
+  },
+  {
+    "scientificName": "Lithophane lamda"
+  },
+  {
+    "scientificName": "Luperina dumerilii"
+  },
+  {
+    "scientificName": "Megalographa biloba"
+  },
+  {
+    "scientificName": "Meganephria bimaculosa"
+  },
+  {
+    "scientificName": "Mesogona acetosellae"
+  },
+  {
+    "scientificName": "Mniotype satura"
+  },
+  {
+    "scientificName": "Mniotype solieri"
+  },
+  {
+    "scientificName": "Periphanes delphinii"
+  },
+  {
+    "scientificName": "Polyphaenis sericata"
+  },
+  {
+    "scientificName": "Protoschinia scutosa"
+  },
+  {
+    "scientificName": "Pseudenargia ulicis"
+  },
+  {
+    "scientificName": "Pseudeustrotia candidula"
+  },
+  {
+    "scientificName": "Rhyacia lucipeta"
+  },
+  {
+    "scientificName": "Sesamia nonagrioides"
+  },
+  {
+    "scientificName": "Spodoptera exigua",
+    "tvk": "NHMSYS0021144565"
+  },
+  {
+    "scientificName": "Spodoptera littoralis"
+  },
+  {
+    "scientificName": "Synthymia fixa"
+  },
+  {
+    "scientificName": "Thysanoplusia daubei"
+  },
+  {
+    "scientificName": "Thysanoplusia orichalcea",
+    "tvk": "MM0001Z100B1FMS1"
+  },
+  {
+    "scientificName": "Trichoplusia ni",
+    "tvk": "NHMSYS0021144463"
+  },
+  {
+    "scientificName": "Vittaplusia vittata"
+  },
+  {
+    "scientificName": "Earias insulana"
+  },
+  {
+    "scientificName": "Nola chlamitulalis"
+  },
+  {
+    "scientificName": "Nycteola asiatica"
+  },
+  {
+    "scientificName": "Nycteola siculana"
+  },
+  {
+    "scientificName": "Cerura erminea"
+  },
+  {
+    "scientificName": "Gluphisia crenata"
+  },
+  {
+    "scientificName": "Harpyia milhauseri"
+  },
+  {
+    "scientificName": "Notodonta torva"
+  },
+  {
+    "scientificName": "Notodonta tritophus"
+  },
+  {
+    "scientificName": "Thaumetopoea pityocampa"
+  },
+  {
+    "scientificName": "Agrius convolvuli",
+    "tvk": "NBNSYS0000006063"
+  },
+  {
+    "scientificName": "Acherontia atropos",
+    "tvk": "NBNSYS0000006064"
+  },
+  {
+    "scientificName": "Daphnis nerii",
+    "tvk": "NBNSYS0000006073"
+  },
+  {
+    "scientificName": "Hippotion celerio",
+    "tvk": "NBNSYS0000006079"
+  },
+  {
+    "scientificName": "Hyles euphorbiae",
+    "tvk": "NBNSYS0000006074"
+  },
+  {
+    "scientificName": "Hyles livornica",
+    "tvk": "NHMSYS0021143839"
+  },
+  {
+    "scientificName": "Proserpinus proserpina"
+  }
+]
