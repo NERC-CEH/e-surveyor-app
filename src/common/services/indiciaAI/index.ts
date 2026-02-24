@@ -8,7 +8,7 @@ const suggestionSchema = object({
   probability: z.number(),
   commonNames: z.array(z.string()),
   scientificName: z.string(),
-  group: z.number().int(),
+  taxonGroupId: z.number().int(),
   warehouseId: z.number().int(),
   tvk: z.string(),
   recordCleaner: z
@@ -25,7 +25,7 @@ export const processSuggestion = (
   const processResult = (result: IndiciaAISuggestion): Suggestion => ({
     probability: result.probability,
     scientificName: result.taxon,
-    group: parseInt(result.taxon_group_id, 10),
+    taxonGroupId: parseInt(result.taxon_group_id, 10),
     commonNames: result.default_common_name
       ? [result.default_common_name!]
       : [],
@@ -67,6 +67,7 @@ type Params = {
   model?: 'plantnet' | 'waarneming';
   date?: string | number;
   location?: Location;
+  taxonGroupId?: number;
 };
 
 export default async function identify<T>({
@@ -77,6 +78,7 @@ export default async function identify<T>({
   model,
   date,
   location,
+  taxonGroupId,
 }: Params) {
   const dateParam = date ? dateFormat.format(new Date(date)) : '';
   const srefParam = isValidLocation(location)
@@ -114,10 +116,17 @@ export default async function identify<T>({
   try {
     const res = await axios<IndiciaAIResponse<T>>(options);
 
+    const allSuggestions = processSuggestion(res.data);
+
+    // filter by species group if provided
+    const filteredSuggestions = taxonGroupId
+      ? allSuggestions.filter(s => s.taxonGroupId === taxonGroupId)
+      : allSuggestions;
+
     return {
       classifierId: res.data.classifier_id,
       classifierVersion: res.data.classifier_version,
-      suggestions: processSuggestion(res.data),
+      suggestions: filteredSuggestions,
       raw: res.data.raw as T,
     };
   } catch (error: any) {

@@ -244,7 +244,8 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       images: [url],
       url: config.backend.url,
       getAccessToken: () => userModel.getAccessToken(),
-      listId: 61, // iRecord Moths
+      listId: 15, // UKSI
+      taxonGroupId: 114, // moths
     });
 
     const { classifierVersion, suggestions } = res;
