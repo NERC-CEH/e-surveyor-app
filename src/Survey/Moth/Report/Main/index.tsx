@@ -5,6 +5,7 @@ import Occurrence from 'common/models/occurrence';
 import Sample from 'common/models/sample';
 import { NewnessMap } from '../useNewnessCheck';
 import LocalRarityBadge from './LocalRarityBadge';
+import NationalRarityBadge from './NationalRarityBadge';
 import NewnessBadges from './NewnessBadges';
 
 const byAbundance = ([, a1]: any, [, a2]: any) => a2 - a1;
@@ -80,6 +81,7 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
             <div className="flex gap-1 flex-wrap">
               {newness && <NewnessBadges newness={newness} />}
               <LocalRarityBadge tvk={tvk} grid={grid} />
+              <NationalRarityBadge tvk={tvk} />
             </div>
           </div>
           <IonIcon src={openOutline} />
