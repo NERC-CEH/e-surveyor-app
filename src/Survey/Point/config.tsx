@@ -157,9 +157,9 @@ const survey: Survey = {
     try {
       // check if at least one species with possible score exists
       let hasValidSpecies = false;
-      const showReportIfScoreHigherThanThreshold = (subSample: any) => {
-        const { score } = subSample.getSpecies();
-        if (score > POSSIBLE_THRESHOLD) hasValidSpecies = true;
+      const showReportIfScoreHigherThanThreshold = (subSample: SampleModel) => {
+        const { probability } = subSample.getSpecies();
+        if (probability > POSSIBLE_THRESHOLD) hasValidSpecies = true;
       };
       sample.samples.forEach(showReportIfScoreHigherThanThreshold);
 
