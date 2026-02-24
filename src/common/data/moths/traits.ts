@@ -4,6 +4,7 @@ export type SpeciesTraits = {
   scientificName: string;
   tvk: string;
   nationalRarity: string;
+  hostPlants?: string;
   habitatGeneralist?: 1;
   habitatWoodland?: 1 | 2;
   habitatGrassland?: 1;
