@@ -3,7 +3,7 @@ import { openOutline } from 'ionicons/icons';
 import { IonItem, IonIcon } from '@ionic/react';
 import FullScreenPhotoViewer from 'common/Components/FullScreenPhotoViewer';
 import flowerIcon from 'common/images/flowerIcon.svg';
-import { TypicalSpecies } from 'common/services/habitats';
+import { TypicalSpecies } from './service';
 
 type Props = { species: TypicalSpecies };
 

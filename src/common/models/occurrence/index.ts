@@ -6,20 +6,20 @@ import {
 } from '@flumens';
 import config from 'common/config';
 import blackListedData from 'common/data/cacheRemote/uksi_plants_blacklist.json';
-import identifyImage from 'common/services/indiciaAI';
-import { IndiciaAISuggestion } from 'common/services/indiciaAI/indiciaAIResponse';
-import {
-  Image,
-  Response as PlantNetResponse,
-} from 'common/services/indiciaAI/plantNetResponse.d';
 import beetleSurveyConfig, {
   occurrenceAbundanceAttr,
 } from 'Survey/Beetle/config';
 import mothSurveyConfig, { UNKNOWN_SPECIES } from 'Survey/Moth/config';
 import { MachineInvolvement, Survey } from 'Survey/common/config';
-import Media from './image';
-import Sample from './sample';
-import userModel from './user';
+import Media from '../image';
+import Sample from '../sample';
+import userModel from '../user';
+import identifyImage from './services/indiciaAI';
+import { IndiciaAISuggestion } from './services/indiciaAI/indiciaAIResponse.d';
+import {
+  Image,
+  Response as PlantNetResponse,
+} from './services/indiciaAI/plantNetResponse.d';
 
 type PlantNetTaxonAttrs = {
   images?: Image[];

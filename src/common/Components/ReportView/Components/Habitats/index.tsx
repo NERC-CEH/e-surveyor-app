@@ -9,16 +9,16 @@ import {
 } from '@flumens';
 import { IonItem, IonList, IonModal, IonSkeletonText } from '@ionic/react';
 import ExpandableList from 'common/Components/ExpandableList';
+import InfoButtonPopover from 'Components/InfoButton';
+import { SpeciesNames } from '../../helpers';
+import BroadHabitatMain from './BroadHabitat';
+import NVCHabitatsMain from './NVCHabitats';
 import {
   identifyBroad,
   identifyNVC,
   BroadHabitat,
   NVCHabitat,
-} from 'common/services/habitats';
-import InfoButtonPopover from 'Components/InfoButton';
-import { SpeciesNames } from '../../helpers';
-import BroadHabitatMain from './BroadHabitat';
-import NVCHabitatsMain from './NVCHabitats';
+} from './service';
 
 type Props = {
   uniqueSpecies: SpeciesNames[];

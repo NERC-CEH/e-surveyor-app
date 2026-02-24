@@ -1,7 +1,7 @@
 import { Badge, Main } from 'common/flumens';
-import { BroadHabitat } from 'common/services/habitats';
 import InfoButtonPopover from 'Components/InfoButton';
 import TypicalSpecies from './TypicalSpecies';
+import { BroadHabitat } from './service';
 
 type Props = { habitat: BroadHabitat };
 

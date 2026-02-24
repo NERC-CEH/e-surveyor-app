@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IonItem, IonList, IonModal } from '@ionic/react';
 import { Main, ModalHeader } from 'common/flumens';
-import { NVCHabitat } from 'common/services/habitats';
+import { NVCHabitat } from '../service';
 import NVCHabitatMain from './NVCHabitat';
 
 type Props = { habitats: NVCHabitat[] };

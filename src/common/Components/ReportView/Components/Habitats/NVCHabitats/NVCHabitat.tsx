@@ -1,7 +1,7 @@
 import { Badge, Main } from 'common/flumens';
-import { NVCHabitat } from 'common/services/habitats';
 import InfoButtonPopover from 'Components/InfoButton';
 import TypicalSpecies from '../TypicalSpecies';
+import { NVCHabitat } from '../service';
 
 type Props = { habitat: NVCHabitat };
 
