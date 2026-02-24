@@ -42,7 +42,7 @@
     "@flumens/ionic": "2.0.0-alpha.83",
     "@flumens/models": "0.17.1",
     "@flumens/tailwind": "0.36.5",
-    "@flumens/utils": "^0.6.0",
+    "@flumens/utils": "^0.9.0",
     "@hookform/resolvers": "^5.2.2",
     "@ionic-native/core": "5.36.0",
     "@ionic-native/launch-review": "^5.36.0",
@@ -80,6 +80,7 @@
     "react-window": "^2.2.3",
     "sql.js": "1.12.0",
     "swiper": "^12.0.3",
+    "swr": "^2.4.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

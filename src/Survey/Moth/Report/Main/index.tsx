@@ -3,12 +3,16 @@ import { Badge, Main } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import Occurrence from 'common/models/occurrence';
 import Sample from 'common/models/sample';
+import NewnessBadges from './NewnessBadges';
+import useNewnessCheck from './useNewnessCheck';
 
 const byAbundance = ([, a1]: any, [, a2]: any) => a2 - a1;
 
 type Props = { sample: Sample };
 
 const ReportMain = ({ sample }: Props) => {
+  const { newnessMap } = useNewnessCheck(sample);
+
   const uniqueSpeciesObj: any = {};
   const uniqueSpeciesObjCount: any = {};
 
@@ -23,10 +27,13 @@ const ReportMain = ({ sample }: Props) => {
   const getEntry = ([scientificNameKey, abundance]: any) => {
     const occ: Occurrence = uniqueSpeciesObj[scientificNameKey];
 
-    const { commonName, scientificName } = occ.data.taxon;
+    const { commonName, scientificName, tvk } = occ.data.taxon;
     const link = scientificName
       ? `https://ukmoths.org.uk/species/${scientificName.replaceAll(' ', '-')}`
       : 'https://ukmoths.org.uk/top-20/';
+
+    // look up newness status for this species
+    const newness = tvk ? newnessMap[tvk] : undefined;
 
     return (
       <div
@@ -50,6 +57,8 @@ const ReportMain = ({ sample }: Props) => {
           <div>
             {commonName && <div className="font-semibold">{commonName}</div>}
             {scientificName && <div className="italic">{scientificName}</div>}
+
+            {newness && <NewnessBadges newness={newness} />}
           </div>
           <IonIcon src={openOutline} />
         </a>

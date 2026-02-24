@@ -270,8 +270,8 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       commonName: topSuggestion.commonNames[0],
       machineInvolvement: MachineInvolvement.MACHINE,
       version: `${classifierVersion}`,
+      tvk: topSuggestion.tvk,
       suggestions,
-      tvk: '',
     } as Taxon;
 
     this.save();
