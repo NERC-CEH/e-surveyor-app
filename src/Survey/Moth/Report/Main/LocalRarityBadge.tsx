@@ -1,4 +1,3 @@
-import { Badge } from '@flumens';
 import localRarityData from 'common/data/moths/local_rarity.json';
 
 // values: 1 = common, 2 = uncommon, null = rare,
@@ -19,6 +18,7 @@ const LocalRarityBadge = ({ tvk, grid: gridSquareLetters }: Props) => {
 
   const data = localRarityData as RarityData;
   let label = 'No data';
+  const icon = '';
 
   const speciesData = data[tvk];
   if (speciesData) {
@@ -31,9 +31,9 @@ const LocalRarityBadge = ({ tvk, grid: gridSquareLetters }: Props) => {
   }
 
   return (
-    <Badge color="warning" className="bg-amber-100 text-[0.6rem]">
-      {label}
-    </Badge>
+    <span className="text-sm">
+      Your area: {icon} {label}
+    </span>
   );
 };
 

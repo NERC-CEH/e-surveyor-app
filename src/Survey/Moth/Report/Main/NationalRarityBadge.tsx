@@ -1,4 +1,3 @@
-import { Badge } from '@flumens';
 import mothTraits, { SpeciesTraits } from 'common/data/moths/traits';
 
 // index traits by TVK for fast lookup
@@ -12,13 +11,15 @@ type Props = {
 };
 
 const NationalRarityBadge = ({ tvk }: Props) => {
-  const status = traitsByTvk[tvk!]?.nationalRarity;
-  if (!status) return null;
+  const icon = '';
+
+  const label = traitsByTvk[tvk!]?.nationalRarity;
+  if (!label) return null;
 
   return (
-    <Badge color="danger" className="bg-red-100 text-[0.6rem]">
-      {status}
-    </Badge>
+    <span className="text-sm">
+      GB: {icon} {label}
+    </span>
   );
 };
 

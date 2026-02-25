@@ -3,12 +3,12 @@
 @import '@ionic/core/css/typography.css';
 /* @import '@ionic/core/css/normalize.css'; not adding because messes up tailwind buttons */
 
-@import '@flumens/ionic/dist/themes/rounded.css';
-
 @import 'tailwindcss';
 
 @source "../../node_modules/@flumens/tailwind";
 @source "../../node_modules/@flumens/ionic";
+
+@import '@flumens/ionic/dist/themes/rounded.css';
 
 @theme {
   /* https://www.shadecolr.com/#colors=Y29sb3I6OTkuNzgyNjA4Njk1NjUyMTYsMzkuMzE2MjM5MzE2MjM5MzEsNDUuODgyMzUyOTQxMTc2NDd8c3RlcC11cDo5fHN0ZXAtZG93bjoxMnxodWUtc2hpZnQ6MHxiYXNlLXN0b3A6NnxuYW1lOmdyZWVufGxvY2tlZDow&active=color-1&v=2 */
@@ -105,7 +105,7 @@
     margin: revert-layer;
   }
 
-  a {
+  a:not([role='button']) {
     /* change link colours */
     color: var(--ion-color-primary);
   }
@@ -331,9 +331,12 @@ ion-toolbar {
 }
 
 /* change link colours */
-a {
+a:not([role='button']) {
   color: var(--color-primary-700);
   font-weight: 600;
+}
+a[role='button'] {
+  color: black;
 }
 
 /* info messages */
