@@ -9,9 +9,14 @@ const GRID_SQUARE_SIZE = '1km';
 
 const newnessResultSchema = z.object({
   externalKey: z.string(),
+  // True if the species has not been recorded before (always included)
   isNewForWebsite: z.boolean().optional(),
+  // True if the species has not been recorded in the specified year (only if year parameter provided)
   isNewForYear: z.boolean().optional(),
+  // True if the species has not been recorded in the specified grid square (only if grid_square_size and lat/lon provided)
   isNewForGrid: z.boolean().optional(),
+  // True if the species has not been recorded in the specified group (only if group_id provided)
+  isNewForGroup: z.boolean().optional(),
 });
 
 export type NewnessResult = z.infer<typeof newnessResultSchema>;
@@ -38,11 +43,18 @@ const fetchNewness = async ({
   const year = new Date().getFullYear();
 
   const params = {
+    // (required): The accepted taxon IDs (taxon.accepted_taxon_id) for the species being recorded.
     external_keys: externalKeys.join(','),
+    // (optional): Latitude of the record location in WGS84 (decimal degrees). Must be provided if grid_square_size is specified, otherwise must not be provided.
     lat: String(lat),
+    // (optional): Longitude of the record location in WGS84 (decimal degrees). Must be provided if grid_square_size is specified, otherwise must not be provided.
     lon: String(lon),
+    // (optional): Size of the grid square for location-based newness checks. One of: '1km', '2km', or '10km'. Must be provided if lat/lon are specified, otherwise must not be provided.
     grid_square_size: GRID_SQUARE_SIZE,
+    // (optional): Year to check for annual newness. If provided, response includes is_new_for_year badge.
     year: String(year),
+    // (optional): Group ID to filter by, which corresponds to an activity ID or project ID depending on the terminology used on the client website. If provided, response includes is_new_for_group badge.
+    // group_id
   };
 
   try {
