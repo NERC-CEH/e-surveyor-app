@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax, guard-for-in */
 import axios from 'axios';
 import { z, object, ZodError } from 'zod';
 import { HandledError, isAxiosNetworkError } from '@flumens';
@@ -33,6 +32,7 @@ export async function identifyBroad(species: TVK[]): Promise<BroadHabitat[]> {
   const options = {
     url: `${backend.habitatPredictUrl}/broadhabitat`,
     method: 'post',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     data: { input_tvks: species },
   };
 
@@ -84,6 +84,7 @@ export async function identifyNVC(species: TVK[]): Promise<NVCHabitat[]> {
   const options = {
     url: `${backend.habitatPredictUrl}/nvc`,
     method: 'post',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     data: { input_tvks: species },
   };
 

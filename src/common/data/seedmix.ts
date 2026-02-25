@@ -10,9 +10,7 @@ export type SeedmixSpecies = {
   pnLatinName?: string;
 };
 
-export type SeedmixMap = {
-  [key: string]: SeedmixSpecies[];
-};
+export type SeedmixMap = Record<string, SeedmixSpecies[]>;
 
 const aggregateBySeedmixName = (agg: SeedmixMap, item: SeedmixSpecies) => {
   const mix = item.mixName;

@@ -1,6 +1,4 @@
 /* eslint-disable no-bitwise */
-
-/* eslint-disable no-restricted-syntax */
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import {

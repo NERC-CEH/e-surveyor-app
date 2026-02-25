@@ -23,6 +23,7 @@ const RegisterContainer = () => {
     const { password, fullName } = details;
 
     const otherDetails = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       field_full_name: [{ value: fullName?.trim() }],
     };
 
@@ -35,7 +36,7 @@ const RegisterContainer = () => {
     try {
       await userModel.register(email, password, otherDetails);
 
-      userModel.data.fullName = fullName; // eslint-disable-line
+      userModel.data.fullName = fullName;
       userModel.save();
 
       alert({

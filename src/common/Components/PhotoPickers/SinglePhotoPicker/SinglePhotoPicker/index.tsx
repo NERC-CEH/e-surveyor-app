@@ -23,6 +23,7 @@ const ImageDefault = observer(
             <IonIcon icon={closeOutline} />
           </IonButton>
         )}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <img src={mediaSrc} alt="" onClick={onClick} />
       </div>
     );

@@ -3,6 +3,7 @@ import { z, object, number } from 'zod';
 import uksiPlants from '../cacheRemote/uksi_plants.json';
 import optimise from './optimise';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const remoteSchema = object({
   id: z.string(),
   taxonGroup: z.string(),

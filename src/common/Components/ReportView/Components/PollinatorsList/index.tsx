@@ -13,10 +13,10 @@ const { getUniqueSupportedSpecies, getSupportedSpeciesList } = Sample;
 
 const SPECIES_GROUPS = ['Bee', 'Butterfly', 'Hoverfly'];
 
-interface Pollinator {
+type Pollinator = {
   pollinator: string;
   pollinatorCommonName: string;
-}
+};
 
 const byName = ([taxon, name]: SpeciesNames, [taxon2, name2]: SpeciesNames) => {
   const selectedName = name || taxon;
@@ -30,12 +30,12 @@ const byPollinatorName = (s1: Pollinator, s2: Pollinator) => {
   return selectedName.localeCompare(selectedName2);
 };
 
-interface Species {
+type Species = {
   pollinator: string;
   plant: string;
   group: string;
   pollinatorCommonName: string;
-}
+};
 
 type Props = {
   uniqueSpecies: SpeciesNames[];
@@ -79,7 +79,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
           <div className="flex w-full justify-between py-4">
             <div className="">{selectedName}</div>
             <div className="pollinator-class flex h-fit min-w-12 shrink-0 justify-center">
-              <Badge className={`${pollinatorClass}`} skipTranslation>
+              <Badge className={pollinatorClass} skipTranslation>
                 {pollinatorCount}
               </Badge>
             </div>
@@ -131,13 +131,11 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
     const getPollinatorsEntries = ({
       pollinator: taxon,
       pollinatorCommonName: commonName,
-    }: Pollinator) => {
-      return (
-        <IonItem key={commonName || taxon}>
-          <IonLabel>{commonName || taxon}</IonLabel>
-        </IonItem>
-      );
-    };
+    }: Pollinator) => (
+      <IonItem key={commonName || taxon}>
+        <IonLabel>{commonName || taxon}</IonLabel>
+      </IonItem>
+    );
     const byGroupName = ({ group }: { group: string }) => group === groupName;
 
     const species = getUniqueSupportedSpecies(uniqueSpecies)

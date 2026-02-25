@@ -12,7 +12,7 @@ function turnNamesArrayIntoLangObject(array: any) {
   const capitalize = (str: any) =>
     str.toLowerCase().split(' ').map(transformToUpperCase).join(' ');
 
-  const result = array.reduce(function getResult(agg: any, term: any) {
+  const result = array.reduce((agg: any, term: any) => {
     const {
       language: languageCode,
       id,

@@ -10,9 +10,9 @@ import { IonSearchbar, useIonViewDidEnter } from '@ionic/react';
 import Suggestions from './components/Suggestions';
 import './styles.scss';
 import SpeciesSearchEngine from './utils/searchEngine';
-import { type Species } from './utils/searchHelpers';
+import type { Species } from './utils/searchHelpers';
 
-export { Species };
+export type { Species };
 
 const MIN_SEARCH_LENGTH = 2;
 

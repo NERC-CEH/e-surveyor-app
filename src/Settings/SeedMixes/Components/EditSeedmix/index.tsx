@@ -27,11 +27,11 @@ const getBlankSeedmix = (): SeedMix => ({
   species: [],
 });
 
-interface Props {
+type Props = {
   seedMixId: string;
   onCancelSeedmix: () => void;
   onSaveSeedmix: (seedmix: SeedMix) => void;
-}
+};
 
 const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
   const [seedmix, setSeedmix] = useState<SeedMix>(getBlankSeedmix());

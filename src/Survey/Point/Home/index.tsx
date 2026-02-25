@@ -146,7 +146,7 @@ const HomeController = ({ sample }: Props) => {
         : { multiple: true }
     );
 
-    if (!photoURLs || !photoURLs.length) return;
+    if (!photoURLs?.length) return;
 
     const canEdit = photoURLs.length === 1;
     if (canEdit) {
@@ -188,7 +188,8 @@ const HomeController = ({ sample }: Props) => {
       if (hasUnidentified) {
         alert({
           header: "Some of photos you have taken haven't been identified",
-          message: `You can identify them yourself by tapping the species photo and searching for the known species, or wait until you have phone signal, when the AI will identify them for you.`,
+          message:
+            'You can identify them yourself by tapping the species photo and searching for the known species, or wait until you have phone signal, when the AI will identify them for you.',
           buttons: [
             {
               text: 'Got it',

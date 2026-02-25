@@ -27,13 +27,11 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
       agg[item.cropGroup] = [item.beneficialInsectCommonName];
       return agg;
     }
-
-    // eslint-disable-next-line no-param-reassign
     agg[item.cropGroup].push(item.beneficialInsectCommonName);
     return agg;
   };
 
-  const groups: { [key: string]: string[] } = crops.reduce(groupItems, {});
+  const groups: Record<string, string[]> = crops.reduce(groupItems, {});
 
   const groupsWithUniqueSpeciesCount: [string, number][] = Object.entries(
     groups

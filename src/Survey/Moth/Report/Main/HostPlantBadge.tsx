@@ -12,7 +12,7 @@ type Props = {
 };
 
 const HostPlantBadge = ({ tvk }: Props) => {
-  const hostPlants = traitsByTvk[tvk!]?.hostPlants;
+  const hostPlants = traitsByTvk[tvk]?.hostPlants;
   if (!hostPlants) return null;
 
   return (

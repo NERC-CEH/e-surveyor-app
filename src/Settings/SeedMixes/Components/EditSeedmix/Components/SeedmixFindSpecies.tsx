@@ -9,12 +9,12 @@ import {
   IonHeader,
 } from '@ionic/react';
 import TaxonSearch, { Species } from 'common/Components/TaxonSearch';
-import { SeedmixSpecies } from '../index';
+import { SeedmixSpecies } from '..';
 
-interface Props {
+type Props = {
   onSpeciesSelected: (species: SeedmixSpecies) => void;
   selectedSpecies: number[];
-}
+};
 
 const SeedmixFindSpecies = ({ onSpeciesSelected, selectedSpecies }: Props) => {
   const history = useHistory();

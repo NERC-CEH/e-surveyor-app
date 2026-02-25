@@ -23,7 +23,9 @@ const aggregateBySurveyId = ({ species: name, survey }) => {
     pollinators: 0,
   });
 
-  surveys[surveyId] || (surveys[surveyId] = getNewSurveyObject());
+  if (!surveys[surveyId]) {
+    surveys[surveyId] = getNewSurveyObject();
+  }
 
   const normalisedName = normalizeSpeciesName(name);
   if (normalisedName) {

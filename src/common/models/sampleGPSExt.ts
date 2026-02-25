@@ -26,7 +26,7 @@ type Extension = {
 const extension = (): Extension => ({
   gps: observable({ locating: null }),
 
-  setLocation([longitude, latitude]: LatLng, source = 'map', accuracy: number) {
+  setLocation([longitude, latitude]: LatLng, source = 'map', accuracy = 0) {
     (this as any).data.location = {
       latitude,
       longitude,
@@ -84,4 +84,4 @@ const extension = (): Extension => ({
   },
 });
 
-export { extension as default };
+export default extension;

@@ -23,10 +23,10 @@ import helpers, { Species } from './searchHelpers';
 function search(
   species: any[],
   searchPhrase: string,
-  results: any = [],
+  results: any,
   maxResults: number,
   hybridRun: boolean,
-  informalGroups = []
+  informalGroups: any[] = []
 ) {
   const searchWords = searchPhrase.split(' ');
 
@@ -169,10 +169,10 @@ const searchScientificSpeciesName = (
 function searchMulti(
   species: any[],
   searchPhrase: string,
-  results: Species[] = [],
+  results: Species[],
   maxResults: number,
   hybridRun: boolean,
-  informalGroups = []
+  informalGroups: any[] = []
 ) {
   search(species, searchPhrase, results, maxResults, hybridRun, informalGroups);
 
@@ -205,4 +205,4 @@ function searchMulti(
   }
 }
 
-export { searchMulti as default };
+export default searchMulti;

@@ -18,15 +18,13 @@ const NaturalEnemies = ({ crops, group }: Props) => {
       agg[item.cropCommonName] = [item.beneficialInsectCommonName];
       return agg;
     }
-
-    // eslint-disable-next-line no-param-reassign
     agg[item.cropCommonName].push(item.beneficialInsectCommonName);
     return agg;
   };
 
   const bySelectedGroup = (crop: EnemyInteraction) => crop.cropGroup === group;
 
-  const groups: { [key: string]: string[] } = crops
+  const groups: Record<string, string[]> = crops
     .filter(bySelectedGroup)
     .reduce(groupItems, {});
 

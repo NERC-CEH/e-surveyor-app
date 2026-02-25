@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { observer } from 'mobx-react';
 import { Page, Header, Main, Block } from '@flumens';
 import { IonList } from '@ionic/react';
@@ -12,9 +11,9 @@ import {
   soilTypeAttr,
 } from '../config';
 
-interface Props {
+type Props = {
   subSample: Sample;
-}
+};
 
 const VSA = ({ subSample }: Props) => {
   const recordAttrs = {

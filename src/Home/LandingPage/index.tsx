@@ -39,7 +39,7 @@ const LandingPage = () => {
 
   const identifyPhoto = async () => {
     if (!userModel.isLoggedIn()) {
-      context.navigate(`/user/register`);
+      context.navigate('/user/register');
       return;
     }
 

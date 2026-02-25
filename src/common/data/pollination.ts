@@ -15,4 +15,4 @@ const getRecalculatedPollinator = (sp: Pollinator): Pollinator => {
   return { ...sp, pollinatorCount };
 };
 
-export default pollination.map(getRecalculatedPollinator) as Pollinator[];
+export default pollination.map(getRecalculatedPollinator);

@@ -15,9 +15,9 @@ import HeaderButton from 'Survey/common/Components/HeaderButton';
 import config from '../config';
 import Main from './Main';
 
-interface Props {
+type Props = {
   sample: Sample;
-}
+};
 
 const HomeController = ({ sample }: Props) => {
   const match = useRouteMatch();
@@ -41,7 +41,6 @@ const HomeController = ({ sample }: Props) => {
       navigate(`${match.url}/report`);
     };
 
-    // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
     appModel.data[`draftId:${config.name}`] = '';
 
@@ -62,7 +61,7 @@ const HomeController = ({ sample }: Props) => {
     }
   };
 
-  const photoSelect = async (shouldUseCamera: boolean = true) => {
+  const photoSelect = async (shouldUseCamera = true) => {
     async function getImage() {
       const images = await captureImage(
         shouldUseCamera ? { camera: true } : { multiple: true }

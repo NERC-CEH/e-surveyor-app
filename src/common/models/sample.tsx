@@ -146,9 +146,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     const uniquePollinatorsNameList = Array.from(new Set(pollinatorsNameList));
 
     const nonEmpty = (interaction: Interaction | undefined) => !!interaction;
-    return uniquePollinatorsNameList
-      .map(getPollinatorProfile)
-      .filter(nonEmpty) as Interaction[];
+    return uniquePollinatorsNameList.map(getPollinatorProfile).filter(nonEmpty);
   }
 
   declare occurrences: IObservableArray<Occurrence>;
@@ -160,6 +158,14 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   declare parent?: Sample;
 
   declare survey: Survey;
+
+  startGPS: any;
+
+  stopGPS: any;
+
+  isGPSRunning: any;
+
+  gpsExtensionInit: any;
 
   constructor(options: SampleOptions) {
     super({
@@ -224,7 +230,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     }
 
     const [occ] = this.occurrences;
-    if (!occ || !occ.media[0]) return false;
+    if (!occ?.media[0]) return false;
 
     return occ.isIdentifying();
   }
@@ -308,14 +314,6 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
   isPersistent() {
     return true;
   }
-
-  startGPS: any;
-
-  stopGPS: any;
-
-  isGPSRunning: any;
-
-  gpsExtensionInit: any;
 }
 
 export const useValidateCheck = (sample: Sample) => {

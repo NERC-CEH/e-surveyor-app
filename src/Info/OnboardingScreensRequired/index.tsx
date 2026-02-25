@@ -3,9 +3,9 @@ import { observer } from 'mobx-react';
 import appModel from 'models/app';
 import OnboardingScreens from './Components/OnBordingScreens';
 
-interface Props {
+type Props = {
   children: ReactNode;
-}
+};
 
 const OnboardingScreensController = ({ children }: Props) => {
   const { showedWelcome } = appModel.data;

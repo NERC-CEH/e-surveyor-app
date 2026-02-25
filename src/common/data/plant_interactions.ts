@@ -17,11 +17,8 @@ const getUnique = (sp: Partial<Interaction>) => {
   return true;
 };
 
-const getComplete = (sp: Partial<Interaction>) => {
-  return (
-    !!sp.group && !!sp.plant && !!sp.pollinator && !!sp.pollinatorCommonName
-  );
-};
+const getComplete = (sp: Partial<Interaction>) =>
+  !!sp.group && !!sp.plant && !!sp.pollinator && !!sp.pollinatorCommonName;
 
 export default plantInteractions
   .filter(getComplete)

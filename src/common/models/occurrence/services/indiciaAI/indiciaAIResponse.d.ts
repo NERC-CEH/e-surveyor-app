@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export type IndiciaAISuggestion = {
   probability: number;
   taxon: string;
@@ -9,16 +10,17 @@ export type IndiciaAISuggestion = {
     | 'fail' /** A test performed by the service failed, e.g. the location is outside the known range of the taxon. */
     | 'omit' /** Input parameters have been omitted. */
     | 'error' /** A fault communicating with the service, e.g. if the service is down or the password is incorrect. */
-    | 'invalid' /** A fault in the input parameters, e.g. a number where a string is expected. */;
+    | 'invalid';
   external_key: string;
   organism_key: string;
   default_common_name?: string;
   identification_difficulty?: number;
 };
 
-export default interface IndiciaAIResponse<T> {
+type IndiciaAIResponse<T> = {
   classifier_id: string;
   classifier_version: string;
   suggestions: IndiciaAISuggestion[];
   raw: T;
-}
+};
+export default IndiciaAIResponse;

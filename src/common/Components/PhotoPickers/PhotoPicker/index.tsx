@@ -11,14 +11,11 @@ import './styles.scss';
 
 export { usePromptImageSource } from '@flumens';
 
-interface Props extends Omit<
-  ComponentProps<typeof PhotoPicker>,
-  'getImage' | 'value'
-> {
+type Props = {
   model: Sample | Occurrence;
   maxImages?: number;
   allowToCrop?: boolean;
-}
+} & Omit<ComponentProps<typeof PhotoPicker>, 'getImage' | 'value'>;
 
 const AppPhotoPicker = ({
   model,
@@ -98,6 +95,7 @@ const AppPhotoPicker = ({
             <IonIcon icon={close} />
           </IonButton>
         )}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <img src={media.getURL()} onClick={onClick} />
         {!isDisabled && (
           <IonButton className="crop-button" onClick={cropImage}>

@@ -26,7 +26,7 @@ import Sample from 'models/sample';
 import { occurrenceAbundanceAttr } from 'Survey/Beetle/config';
 import IncrementalButton from 'Survey/common/Components/IncrementalButton';
 
-const { POSITIVE_THRESHOLD, POSSIBLE_THRESHOLD } = config;
+const { positiveThreshold, possibleThreshold } = config;
 
 const options = {
   cutout: '80%',
@@ -41,11 +41,11 @@ const getDoughnutData = (score: number) => {
   const scorePercent = parseInt((score * 100).toFixed(0), 10);
 
   const color = () => {
-    if (scorePercent > POSITIVE_THRESHOLD * 100) {
+    if (scorePercent > positiveThreshold * 100) {
       return '#4b9a43'; // green
     }
 
-    if (scorePercent > POSSIBLE_THRESHOLD * 100) {
+    if (scorePercent > possibleThreshold * 100) {
       return '#ffbc5e'; // yellow
     }
 
@@ -147,20 +147,20 @@ const Species = ({
     speciesPhoto = photo.data ? photo.getURL() : null;
   }
 
-  const [showingGallery, setShowGallery] = useState(false);
+  const [isShowingGallery, setIsShowingGallery] = useState(false);
   const showGallery = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    setShowGallery(true);
+    setIsShowingGallery(true);
   };
-  const hideGallery = () => setShowGallery(false);
+  const hideGallery = () => setIsShowingGallery(false);
 
   const getGallery = () => {
     if (!speciesPhoto) return null;
 
     return (
       <Gallery
-        isOpen={showingGallery}
+        isOpen={isShowingGallery}
         items={[
           {
             src: speciesPhoto,
@@ -181,10 +181,10 @@ const Species = ({
 
     const earthIcon = notFoundInUK ? earth : checkmarkCircle;
 
-    if (probability > POSITIVE_THRESHOLD) {
+    if (probability > positiveThreshold) {
       idClass = '[--detail-icon-color:var(--id-positive-color)]';
       detailIcon = earthIcon;
-    } else if (probability > POSSIBLE_THRESHOLD) {
+    } else if (probability > possibleThreshold) {
       idClass = '[--detail-icon-color:var(--id-possible-color)]';
       detailIcon = helpCircle;
     } else {
@@ -229,6 +229,7 @@ const Species = ({
     // show photo or leaf icon
     if (speciesPhoto)
       return (
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
         <img
           src={speciesPhoto}
           onClick={showGallery}
@@ -241,14 +242,12 @@ const Species = ({
 
   const profilePhoto = <div className="list-avatar">{getProfileContent()}</div>;
 
-  const getSpeciesName = () => {
-    return (
-      <div className="flex flex-col">
-        {commonName && <div className="font-semibold">{commonName}</div>}
-        <div className="italic">{scientificName}</div>
-      </div>
-    );
-  };
+  const getSpeciesName = () => (
+    <div className="flex flex-col">
+      {commonName && <div className="font-semibold">{commonName}</div>}
+      <div className="italic">{scientificName}</div>
+    </div>
+  );
 
   const showReidentify = onReidentify && probability <= 0.1;
   const onReidentifyWrap = () => onReidentify(model);

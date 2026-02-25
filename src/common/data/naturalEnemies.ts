@@ -1,6 +1,6 @@
 import enemies from './cacheRemote/natural_enemies.json';
 
-export interface Interaction {
+export type Interaction = {
   id: number;
   plantLatinName: string;
   plantFamily: string;
@@ -12,6 +12,6 @@ export interface Interaction {
   cropCommonName: string;
   cropLevelDescriptor: string;
   cropGroup: string;
-}
+};
 
 export default enemies as Interaction[];

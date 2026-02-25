@@ -76,7 +76,7 @@ function StartNewSurvey({ survey }: Props): null {
   const pickDraftOrCreateSampleWrap = () => {
     const pickDraftOrCreateSample = async () => {
       if (!userModel.isLoggedIn()) {
-        context.navigate(`/user/register`, 'forward', 'replace');
+        context.navigate('/user/register', 'forward', 'replace');
         return;
       }
 
@@ -103,7 +103,6 @@ function StartNewSurvey({ survey }: Props): null {
   return null;
 }
 
-// eslint-disable-next-line @getify/proper-arrows/name
 StartNewSurvey.with = (survey: Survey) => {
   const StartNewSurveyWithRouter = (params: any) => (
     <StartNewSurvey survey={survey} {...params} />

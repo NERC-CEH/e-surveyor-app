@@ -19,10 +19,10 @@ import {
 const seededValues = [
   { value: 'Yes', id: 22177 },
   { value: 'No', id: 22178 },
-  { value: `Don't know`, id: 22179 },
+  { value: "Don't know", id: 22179 },
 ];
 
-const { POSSIBLE_THRESHOLD } = config;
+const { possibleThreshold } = config;
 
 const survey: Survey = {
   id: 626,
@@ -159,12 +159,12 @@ const survey: Survey = {
       let hasValidSpecies = false;
       const showReportIfScoreHigherThanThreshold = (subSample: SampleModel) => {
         const { probability } = subSample.getSpecies();
-        if (probability > POSSIBLE_THRESHOLD) hasValidSpecies = true;
+        if (probability > possibleThreshold) hasValidSpecies = true;
       };
       sample.samples.forEach(showReportIfScoreHigherThanThreshold);
 
       z.boolean()
-        .refine(val => val === true, {
+        .refine(val => val, {
           message: 'Please add some species.',
         })
         .parse(hasValidSpecies);

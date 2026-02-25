@@ -45,9 +45,9 @@ const WaveShape = () => (
   </div>
 );
 
-interface Props {
+type Props = {
   appModel: typeof AppModelType;
-}
+};
 
 const OnboardingScreens = ({ appModel }: Props) => {
   const [moreSlidesExist, setMoreSlidesExist] = useState(true);
@@ -59,11 +59,11 @@ const OnboardingScreens = ({ appModel }: Props) => {
   }
 
   const handleSlideChangeStart = async () => {
-    const isEnd = controlledSwiper && controlledSwiper.isEnd;
+    const isEnd = controlledSwiper?.isEnd;
     setMoreSlidesExist(!isEnd);
   };
 
-  const slideNext = () => controlledSwiper && controlledSwiper.slideNext();
+  const slideNext = () => controlledSwiper?.slideNext();
 
   return (
     <Page id="welcome-page">

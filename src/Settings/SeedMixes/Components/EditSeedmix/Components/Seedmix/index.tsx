@@ -16,14 +16,14 @@ import {
   IonInput,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
-import { SeedmixSpecies, SeedMix } from '../../index';
+import { SeedmixSpecies, SeedMix } from '../..';
 import './styles.scss';
 
 const useCancelConfirmation = () => {
   const alert = useAlert();
 
-  return () => {
-    return new Promise(resolve => {
+  return () =>
+    new Promise(resolve => {
       alert({
         header: 'Discard seedmix changes',
         message: 'Are you sure you want to discard the changes?',
@@ -41,14 +41,13 @@ const useCancelConfirmation = () => {
         ],
       });
     });
-  };
 };
 
 const useDeleteConfirmation = () => {
   const alert = useAlert();
 
-  return () => {
-    return new Promise(resolve => {
+  return () =>
+    new Promise(resolve => {
       alert({
         header: 'Delete species',
         message: 'Are you sure you want to delete this species?',
@@ -66,16 +65,15 @@ const useDeleteConfirmation = () => {
         ],
       });
     });
-  };
 };
 
-interface Props {
+type Props = {
   seedmix: SeedMix;
   onCancel: () => void;
   onSave: () => void;
   onSpeciesDelete: (warehouseId: number) => void;
   onNameChange: (e: any) => void;
-}
+};
 
 const Seedmix = ({
   seedmix,

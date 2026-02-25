@@ -256,22 +256,13 @@ const Menu = ({
           <>
             <h3 className="list-title">Account</h3>
             <div className="destructive-item rounded-list">
-              <>
-                <IonItem
-                  onClick={showUserDeleteDialog}
-                  className="!text-danger"
-                >
-                  <IonIcon
-                    icon={personRemoveOutline}
-                    size="small"
-                    slot="start"
-                  />
-                  <IonLabel>Delete account</IonLabel>
-                </IonItem>
-                <InfoMessage inline>
-                  You can delete your user account from the system.
-                </InfoMessage>
-              </>
+              <IonItem onClick={showUserDeleteDialog} className="!text-danger">
+                <IonIcon icon={personRemoveOutline} size="small" slot="start" />
+                <IonLabel>Delete account</IonLabel>
+              </IonItem>
+              <InfoMessage inline>
+                You can delete your user account from the system.
+              </InfoMessage>
             </div>
           </>
         )}

@@ -27,7 +27,7 @@ const Controller = ({ sample }: Props) => {
     const isUploading = await sample.syncRemote(toast.error);
     if (!isUploading) return;
 
-    navigate(`/home/surveys`, 'root');
+    navigate('/home/surveys', 'root');
   };
 
   const onFinish = async () => {
@@ -40,7 +40,7 @@ const Controller = ({ sample }: Props) => {
 
     appModel.data['draftId:beetle'] = '';
 
-    navigate(`/home/surveys`, 'root');
+    navigate('/home/surveys', 'root');
   };
 
   const onAddNewTrap = async () => {

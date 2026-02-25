@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { observer } from 'mobx-react';
 import { flaskOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
@@ -7,9 +6,9 @@ import { IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
 import Sample from 'models/sample';
 import { SOMDepthAttr, SOMDiameterAttr, SOMPatternAttr } from '../config';
 
-interface Props {
+type Props = {
   sample: Sample;
-}
+};
 
 const SOMHome = ({ sample }: Props) => {
   const { url } = useRouteMatch();

@@ -270,7 +270,7 @@ const survey: Survey = {
   verify(data: any, sample: SampleModel) {
     try {
       z.boolean()
-        .refine(val => val === false, {
+        .refine(val => !val, {
           message: 'Is still identifying',
         })
         .parse(sample.isIdentifying());

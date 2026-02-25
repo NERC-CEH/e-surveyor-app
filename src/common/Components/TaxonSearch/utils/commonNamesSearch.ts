@@ -10,7 +10,6 @@ export default (normSearchPhrase: any, results: any) => {
 
   let commonNames: any = [];
   languageSpeciesNames.forEach(
-    // eslint-disable-next-line
     ({
       warehouseId,
       scientificName,

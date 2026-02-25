@@ -47,11 +47,11 @@ const getDoughnutData = (probability: number) => {
   };
 };
 
-interface Props {
+type Props = {
   species: Taxon;
   onSelect?: any;
   selectedSpeciesByUser?: any;
-}
+};
 
 const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
   const [showGallery, setShowGallery] = useState(false);
@@ -63,14 +63,12 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
   };
 
   const getGallery = () => {
-    const showSpImages = (img: any) => {
-      return {
-        src: img.url.m,
-        w: 800,
-        h: 800,
-        author: img.author || '',
-      };
-    };
+    const showSpImages = (img: any) => ({
+      src: img.url.m,
+      w: 800,
+      h: 800,
+      author: img.author || '',
+    });
     const items = species.images?.map(showSpImages) || [];
 
     return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-array-sort-compare */
 import useSWR from 'swr';
 import { device } from '@flumens';
 import Sample from 'common/models/sample';

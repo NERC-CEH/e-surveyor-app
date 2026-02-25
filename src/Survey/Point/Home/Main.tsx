@@ -26,11 +26,11 @@ import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 
-const { POSITIVE_THRESHOLD } = config;
+const { positiveThreshold } = config;
 
-interface MatchParams {
+type MatchParams = {
   url: string;
-}
+};
 
 type Props = {
   sample: Sample;
@@ -58,7 +58,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
       const score = occ.getSpecies()?.probability;
       if (
         score &&
-        score < POSITIVE_THRESHOLD &&
+        score < positiveThreshold &&
         appModel.data.showFirstLowScorePhotoTip
       ) {
         alert({

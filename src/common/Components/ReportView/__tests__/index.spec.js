@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-classes-per-file
 import seedmixData from 'common/data/seedmix';
 import config from 'Survey/Point/config';
 import Occurrence from '../../../models/occurrence';

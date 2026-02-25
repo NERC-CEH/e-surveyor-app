@@ -8,13 +8,9 @@ export type Habitat = {
   positive: number | string; // string = 'NA';
 };
 
-export type HabitatsByScheme = {
-  [key: string]: string[];
-};
+export type HabitatsByScheme = Record<string, string[]>;
 
-export type HabitatMap = {
-  [key: string]: Habitat[];
-};
+export type HabitatMap = Record<string, Habitat[]>;
 
 const normalisedHabitats: HabitatMap = {};
 

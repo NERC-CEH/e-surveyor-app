@@ -1,5 +1,5 @@
 import { IonItem } from '@ionic/react';
-import { Species } from '../../../index';
+import { Species } from '../../..';
 import Difficulty from './Difficulty';
 import './styles.scss';
 

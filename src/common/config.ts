@@ -19,8 +19,8 @@ const CONFIG = {
 
   // AI classifier
   classifierID: 20099,
-  POSITIVE_THRESHOLD: 0.7,
-  POSSIBLE_THRESHOLD: 0.2,
+  positiveThreshold: 0.7,
+  possibleThreshold: 0.2,
 
   // error analytics
   sentryDSN: (!isTestEnv && process.env.APP_SENTRY_KEY) as string,

@@ -51,7 +51,7 @@ const HomeMain = ({
             href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
             prefix={<IonIcon icon={bookOutline} className="size-6" />}
             suffix={<IonIcon icon={openOutline} />}
-            className="border-none text-left"
+            className="border-none text-left bg-white!"
           >
             Project information
           </Button>

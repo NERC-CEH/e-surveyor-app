@@ -1,7 +1,6 @@
 import { useAlert } from '@flumens';
 
-// eslint-disable-next-line import/prefer-default-export
-export const useEntryDeleteConfirmation = () => {
+const useEntryDeleteConfirmation = () => {
   const alert = useAlert();
 
   const confirmDeletion = () =>
@@ -28,3 +27,5 @@ export const useEntryDeleteConfirmation = () => {
 
   return confirmDeletion;
 };
+
+export default useEntryDeleteConfirmation;

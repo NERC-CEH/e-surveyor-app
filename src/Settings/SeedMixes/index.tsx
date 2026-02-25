@@ -16,8 +16,8 @@ import EditSeedmix from './Components/EditSeedmix';
 const useDeleteConfirmation = () => {
   const alert = useAlert();
 
-  return () => {
-    return new Promise(resolve => {
+  return () =>
+    new Promise(resolve => {
       alert({
         header: 'Delete seedmix',
         message: 'Are you sure you want to delete this seedmix?',
@@ -35,7 +35,6 @@ const useDeleteConfirmation = () => {
         ],
       });
     });
-  };
 };
 
 const Seedmixes = () => {

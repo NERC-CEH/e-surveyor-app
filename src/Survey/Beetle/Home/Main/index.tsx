@@ -1,8 +1,5 @@
 import { observer } from 'mobx-react';
-import {
-  createOutline,
-  addOutline,
-} from 'ionicons/icons';
+import { createOutline, addOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Button, Main, MenuAttrItem } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
@@ -42,7 +39,7 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
             <div>{sample.samples.length}</div>
           </div>
           {traps.map((smp: Sample) => (
-            <Trap sample={smp} onTrapDelete={onTrapDelete} />
+            <Trap key={smp.cid} sample={smp} onTrapDelete={onTrapDelete} />
           ))}
         </div>
       </IonList>

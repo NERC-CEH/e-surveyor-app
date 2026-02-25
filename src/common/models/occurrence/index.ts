@@ -64,15 +64,15 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
   declare getSurvey: () => Survey;
 
+  identification = observable({ identifying: false });
+
+  validateRemote = validateRemoteModel;
+
   constructor(options: any) {
     super({ ...options, Media });
   }
 
-  identification = observable({ identifying: false });
-
   getSpecies = (): Taxon => this.data.taxon;
-
-  validateRemote = validateRemoteModel;
 
   async identify() {
     if (!this.media.length)
@@ -129,7 +129,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       scientificName: topSuggestion.scientificName,
       commonName: topSuggestion.commonNames[0],
       machineInvolvement: MachineInvolvement.MACHINE,
-      version: `${classifierVersion}`,
+      version: classifierVersion,
       suggestions,
       tvk: '',
     };
@@ -269,7 +269,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       scientificName: topSuggestion.scientificName,
       commonName: topSuggestion.commonNames[0],
       machineInvolvement: MachineInvolvement.MACHINE,
-      version: `${classifierVersion}`,
+      version: classifierVersion,
       tvk: topSuggestion.tvk,
       suggestions,
     } as Taxon;

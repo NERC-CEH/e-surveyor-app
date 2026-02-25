@@ -103,14 +103,12 @@ const SeedmixBadge = ({ occurrences, seedmixSpecies }: Props) => {
     );
   };
 
-  const getSpeciesSeedmixModalList = () => {
-    return (
-      <>
-        {getSelectedSeedmixSpeciesList()}
-        {getMissingSeedmixSpeciesList()}
-      </>
-    );
-  };
+  const getSpeciesSeedmixModalList = () => (
+    <>
+      {getSelectedSeedmixSpeciesList()}
+      {getMissingSeedmixSpeciesList()}
+    </>
+  );
 
   return (
     <>

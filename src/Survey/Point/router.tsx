@@ -13,7 +13,7 @@ const baseURL = '/survey/point';
 const { AttrPageFromRoute } = AttrPage;
 
 const routes = [
-  [`${baseURL}`, StartNewSurvey.with(survey), true],
+  [baseURL, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/map`, ModelLocationMap],

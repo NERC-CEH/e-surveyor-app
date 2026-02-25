@@ -31,7 +31,7 @@ const ReportController = ({ sample }: Props) => {
     const isUploading = await sample.syncRemote(toast.error);
     if (!isUploading) return;
 
-    navigate(`/home/surveys`, 'root');
+    navigate('/home/surveys', 'root');
   };
 
   const isDisabled = sample.isUploaded;

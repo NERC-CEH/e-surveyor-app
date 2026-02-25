@@ -1,9 +1,9 @@
-/* eslint-disable no-restricted-syntax, guard-for-in */
 import axios from 'axios';
 import z, { object } from 'zod';
 import { Location, dateFormat, isValidLocation } from '@flumens';
 import IndiciaAIResponse, { IndiciaAISuggestion } from './indiciaAIResponse.d';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const suggestionSchema = object({
   probability: z.number(),
   commonNames: z.array(z.string()),
@@ -26,9 +26,7 @@ export const processSuggestion = (
     probability: result.probability,
     scientificName: result.taxon,
     taxonGroupId: parseInt(result.taxon_group_id, 10),
-    commonNames: result.default_common_name
-      ? [result.default_common_name!]
-      : [],
+    commonNames: result.default_common_name ? [result.default_common_name] : [],
     warehouseId: parseInt(result.taxa_taxon_list_id, 10),
     tvk: result.external_key,
     recordCleaner: result.record_cleaner,
@@ -104,6 +102,7 @@ export default async function identify<T>({
   const options: any = {
     method: 'post',
     url: `${url}/api-proxy/indicia`,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     params: { _api_proxy_uri: model },
     headers: {
       Authorization: `Bearer ${await getAccessToken()}`,
@@ -127,7 +126,7 @@ export default async function identify<T>({
       classifierId: res.data.classifier_id,
       classifierVersion: res.data.classifier_version,
       suggestions: filteredSuggestions,
-      raw: res.data.raw as T,
+      raw: res.data.raw,
     };
   } catch (error: any) {
     if (error.message === 'Not Found')

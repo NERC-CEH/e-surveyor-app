@@ -27,7 +27,7 @@ export default class Media extends MediaOriginal<Data> {
       getAccessToken: () => userModel.getAccessToken(),
     });
 
-    if (!Object.prototype.hasOwnProperty.call(this.data, 'identified')) {
+    if (!Object.hasOwn(this.data, 'identified')) {
       this.data.identified = false;
     }
   }
@@ -77,11 +77,10 @@ export default class Media extends MediaOriginal<Data> {
     return Capacitor.convertFileSrc(`${config.dataPath}/${name}`);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   validateRemote = () => null;
 
   isPersistent() {
-    return this.parent && this.parent?.isPersistent();
+    return this.parent?.isPersistent();
   }
 
   async save() {

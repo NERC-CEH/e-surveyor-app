@@ -13,7 +13,7 @@ type Props = {
 const NationalRarityBadge = ({ tvk }: Props) => {
   const icon = '';
 
-  const label = traitsByTvk[tvk!]?.nationalRarity;
+  const label = traitsByTvk[tvk]?.nationalRarity;
   if (!label) return null;
 
   return (

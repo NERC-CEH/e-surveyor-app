@@ -42,50 +42,48 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
   const prettyGridRef = <GridRefValue sample={subSample} />;
 
   return (
-    <>
-      <Main>
-        <IonList lines="full">
-          <br />
-          <div className="rounded-list">
-            <MenuAttrItem
-              routerLink={`${url}/map`}
-              value={prettyGridRef}
-              icon={locationOutline}
-              label="Location"
-              skipValueTranslation
-              disabled={isDisabled}
-            />
-          </div>
+    <Main>
+      <IonList lines="full">
+        <br />
+        <div className="rounded-list">
+          <MenuAttrItem
+            routerLink={`${url}/map`}
+            value={prettyGridRef}
+            icon={locationOutline}
+            label="Location"
+            skipValueTranslation
+            disabled={isDisabled}
+          />
+        </div>
 
-          <h3 className="list-title">Quadrat photo</h3>
-          <div className="rounded-list">
-            <PhotoPicker
-              model={subSample}
-              maxImages={1}
-              allowToCrop
-              placeholderCount={0}
-            />
-          </div>
-        </IonList>
+        <h3 className="list-title">Quadrat photo</h3>
+        <div className="rounded-list">
+          <PhotoPicker
+            model={subSample}
+            maxImages={1}
+            allowToCrop
+            placeholderCount={0}
+          />
+        </div>
+      </IonList>
 
-        {getNewImageButton()}
+      {getNewImageButton()}
 
-        <SpeciesList
-          sample={subSample}
-          isDisabled={isDisabled}
-          useSpeciesProfile
-          useSubSamples
-        />
+      <SpeciesList
+        sample={subSample}
+        isDisabled={isDisabled}
+        useSpeciesProfile
+        useSubSamples
+      />
 
-        {!subSample.samples.length && (
-          <InfoBackgroundMessage>
-            Your species list is empty. <br /> Hold down the orange species
-            button to list plant species yourself, or tap to take a photo for
-            the AI to identify.
-          </InfoBackgroundMessage>
-        )}
-      </Main>
-    </>
+      {!subSample.samples.length && (
+        <InfoBackgroundMessage>
+          Your species list is empty. <br /> Hold down the orange species button
+          to list plant species yourself, or tap to take a photo for the AI to
+          identify.
+        </InfoBackgroundMessage>
+      )}
+    </Main>
   );
 };
 

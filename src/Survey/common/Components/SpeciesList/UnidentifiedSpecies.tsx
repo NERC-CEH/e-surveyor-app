@@ -60,14 +60,14 @@ const useMenu = (deleteSurvey: any) => {
 
 type Model = Sample | Occurrence;
 
-interface Props {
+type Props = {
   model: Model;
   isDisabled: boolean;
   onIdentify: (model: Model) => void;
   onDelete?: () => void;
   onClick: (model: Model) => void;
   disableAI?: boolean;
-}
+};
 
 const UnidentifiedSpeciesEntry = ({
   model,
@@ -88,20 +88,20 @@ const UnidentifiedSpeciesEntry = ({
 
   const canBeIdentified = !occ.getSpecies() && occ.canReIdentify();
 
-  const [showingGallery, setShowGallery] = useState(false);
+  const [isShowingGallery, setIsShowingGallery] = useState(false);
   const showGallery = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    setShowGallery(true);
+    setIsShowingGallery(true);
   };
-  const hideGallery = () => setShowGallery(false);
+  const hideGallery = () => setIsShowingGallery(false);
 
   const getGallery = () => {
     if (!hasSpeciesPhoto) return null;
 
     return (
       <Gallery
-        isOpen={showingGallery}
+        isOpen={isShowingGallery}
         items={[
           {
             src: hasSpeciesPhoto.getURL(),
@@ -114,6 +114,7 @@ const UnidentifiedSpeciesEntry = ({
   };
 
   const photo = hasSpeciesPhoto ? (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <img src={hasSpeciesPhoto.getURL()} onClick={showGallery} />
   ) : (
     <IonIcon icon={flowerIcon} />

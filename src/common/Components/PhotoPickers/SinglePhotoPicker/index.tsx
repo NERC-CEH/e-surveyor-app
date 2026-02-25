@@ -14,16 +14,13 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import SinglePhotoPicker from './SinglePhotoPicker';
 
-interface Props extends Omit<
-  ComponentProps<typeof SinglePhotoPicker>,
-  'getImage'
-> {
+type Props = {
   model: Sample | Occurrence;
   maxImages?: number;
   allowToCrop?: boolean;
   disabled?: boolean;
   caption?: string;
-}
+} & Omit<ComponentProps<typeof SinglePhotoPicker>, 'getImage'>;
 
 const AppPhotoPicker = ({
   model,
@@ -93,6 +90,7 @@ const AppPhotoPicker = ({
             <IonIcon icon={close} />
           </IonButton>
         )}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <img src={media.getURL()} onClick={onClick} />
         {!isDisabled && allowToCrop && (
           <IonButton className="crop-button" onClick={cropImage}>

@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { AppModel } from '../app';
 
 describe('App', () => {

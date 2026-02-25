@@ -12,7 +12,7 @@ const Difficulty = ({ difficulty }: Props) => {
     'border-b-red-600',
   ][difficulty || 0];
 
-  const [infoState, setShowInfo] = useState<any>({
+  const [infoState, setInfoState] = useState<any>({
     showInfo: false,
     event: undefined,
   });
@@ -20,10 +20,10 @@ const Difficulty = ({ difficulty }: Props) => {
   const showInfo = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    setShowInfo({ showInfo: true, event: e });
+    setInfoState({ showInfo: true, event: e });
   };
 
-  const hideInfo = () => setShowInfo({ showInfo: false, event: undefined });
+  const hideInfo = () => setInfoState({ showInfo: false, event: undefined });
 
   return (
     <>

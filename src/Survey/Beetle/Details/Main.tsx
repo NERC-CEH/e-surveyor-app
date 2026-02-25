@@ -70,7 +70,7 @@ const MainComponent = ({ sample }: Props) => {
             href="https://www.youtube.com/watch?v=UVC_VykDy2o"
             prefix={<IonIcon icon={playCircleOutline} className="size-6" />}
             suffix={<IonIcon icon={openOutline} />}
-            className="mx-3 text-left"
+            className="mx-3 text-left bg-white!"
           >
             Pitfall trap setup video
           </Button>
@@ -78,7 +78,7 @@ const MainComponent = ({ sample }: Props) => {
             href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
             prefix={<IonIcon icon={bookOutline} className="size-6" />}
             suffix={<IonIcon icon={openOutline} />}
-            className="mx-3 text-left"
+            className="mx-3 text-left bg-white!"
           >
             Guidance documents
           </Button>

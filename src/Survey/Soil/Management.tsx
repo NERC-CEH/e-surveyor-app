@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { observer } from 'mobx-react';
 import { Page, Header, Main, Block } from '@flumens';
 import { IonList } from '@ionic/react';
@@ -19,9 +18,9 @@ import {
   tillageAttr,
 } from './config';
 
-interface Props {
+type Props = {
   sample: Sample;
-}
+};
 
 const Management = ({ sample }: Props) => {
   // const { url } = useRouteMatch();

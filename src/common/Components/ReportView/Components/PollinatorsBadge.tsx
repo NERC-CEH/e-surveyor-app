@@ -9,10 +9,10 @@ import { SpeciesNames } from '../helpers';
 
 const { getUniqueSupportedSpecies } = Sample;
 
-interface Pollinator {
+type Pollinator = {
   pollinator: string;
   pollinatorCommonName: string;
-}
+};
 
 type Props = {
   uniqueSpecies: SpeciesNames[];

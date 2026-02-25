@@ -16,7 +16,7 @@ export type SeedMix = {
   species: SeedmixSpecies[];
 };
 
-export interface Data extends ModelAttrs, SurveyDraftKeys {
+export type Data = {
   language: string;
   appSession: number;
   showedWelcome: boolean;
@@ -44,7 +44,8 @@ export interface Data extends ModelAttrs, SurveyDraftKeys {
   useTraining: boolean;
   transects?: any[];
   seedmixes: SeedMix[];
-}
+} & ModelAttrs &
+  SurveyDraftKeys;
 
 const defaults: Data = {
   language: '',
@@ -66,7 +67,7 @@ const defaults: Data = {
   seedmixes: [],
 };
 
-class AppModel extends Model<Data> {
+export class AppModel extends Model<Data> {
   constructor(options: any) {
     super({ ...options, data: { ...defaults, ...options.attrs } });
   }
@@ -97,4 +98,4 @@ class AppModel extends Model<Data> {
 
 const appModel = new AppModel({ cid: 'app', store: mainStore });
 
-export { appModel as default, AppModel };
+export default appModel;

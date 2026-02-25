@@ -16,14 +16,13 @@ import Media from 'models/image';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 
-const { POSSIBLE_THRESHOLD } = config;
+const { possibleThreshold } = config;
 
 const getSeedMixGroups = () => {
   const addValueToObject = (seedMixGroup: any) => ({ value: seedMixGroup });
 
-  const getUniqueValues = (unique: any, item: any) => {
-    return unique.includes(item.mixGroup) ? unique : [...unique, item.mixGroup];
-  };
+  const getUniqueValues = (unique: any, item: any) =>
+    unique.includes(item.mixGroup) ? unique : [...unique, item.mixGroup];
 
   const alphabetically = (v1: any, v2: any) => v1.value.localeCompare(v2.value);
 
@@ -51,15 +50,12 @@ export const CUSTOM_SEEDMIX_NAME = 'Custom';
 const getSeedMix = (model: Sample) => {
   const { seedmixgroup } = model.data;
 
-  const addValueToObject = (seedMix: any) => {
-    return { value: seedMix };
-  };
+  const addValueToObject = (seedMix: any) => ({ value: seedMix });
 
   const bySeedmixGroups = (seedmix: any) => seedmix.mixGroup === seedmixgroup;
 
-  const getUniqueValues = (unique: any, item: any) => {
-    return unique.includes(item.mixName) ? unique : [...unique, item.mixName];
-  };
+  const getUniqueValues = (unique: any, item: any) =>
+    unique.includes(item.mixName) ? unique : [...unique, item.mixName];
 
   const seedMixes = seedmixData
     .filter(bySeedmixGroups)
@@ -148,7 +144,7 @@ export const customSeedmixAttr = {
     values: (values: SeedmixSpecies[]) => {
       const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
 
-      return values.map(getWarehouseId).join(','); // eslint-disable-line
+      return values.map(getWarehouseId).join(',');
     },
   },
 };
@@ -196,10 +192,7 @@ export const locationSchema = z
       latitude: z.number().nullable().optional(),
       longitude: z.number().nullable().optional(),
     },
-    {
-      required_error: 'Location is missing.',
-      invalid_type_error: 'Location is missing.',
-    }
+    { error: 'Location is missing.' }
   )
   .refine(
     (val: any) =>
@@ -252,17 +245,19 @@ export function attachClassifierResults(
     const probability = other.probability || (other as any).score; // score for backward compatibility
     const topSpecies = index === 0;
     const classifierChosen =
-      topSpecies && probability >= POSSIBLE_THRESHOLD ? 't' : 'f';
+      topSpecies && probability >= possibleThreshold ? 't' : 'f';
 
     const humanChosen = warehouseId === taxon?.warehouseId ? 't' : 'f';
 
     return {
       values: {
+        /* eslint-disable @typescript-eslint/naming-convention */
         taxon_name_given: scientificName,
         probability_given: probability,
         taxa_taxon_list_id: warehouseId,
         classifier_chosen: classifierChosen,
         human_chosen: humanChosen,
+        /* eslint-enable @typescript-eslint/naming-convention */
       },
     };
   };
@@ -285,6 +280,7 @@ export function attachClassifierResults(
   return {
     ...submission,
 
+    /* eslint-disable @typescript-eslint/naming-convention */
     classification_event: {
       values: { created_by_id: null },
       classification_results: [
@@ -298,6 +294,7 @@ export function attachClassifierResults(
         },
       ],
     },
+    /* eslint-enable @typescript-eslint/naming-convention */
   };
 }
 
@@ -310,9 +307,7 @@ export type AttrConfig = {
   remote?: RemoteConfig;
 };
 
-interface Attrs {
-  [key: string]: AttrConfig;
-}
+type Attrs = Record<string, AttrConfig>;
 
 type OccurrenceCreateOptions = {
   Occurrence: typeof Occurrence;
@@ -356,13 +351,13 @@ export type SampleConfig = {
 
 export type BlockOrFn = BlockT | ((record?: any) => BlockT);
 
-type AttrType = { [x: string]: { block: BlockT | ((record?: any) => BlockT) } };
+type AttrType = Record<string, { block: BlockT | ((record?: any) => BlockT) }>;
 export const blockToAttr = (blockOrFn: BlockOrFn): AttrType =>
   typeof blockOrFn === 'function'
     ? { [blockOrFn().id]: { block: blockOrFn } }
     : { [blockOrFn.id]: { block: blockOrFn } };
 
-export interface Survey extends SampleConfig {
+export type Survey = {
   /**
    * Remote warehouse survey ID.
    */
@@ -385,4 +380,4 @@ export interface Survey extends SampleConfig {
    * The icon of the survey.
    */
   icon?: string;
-}
+} & SampleConfig;

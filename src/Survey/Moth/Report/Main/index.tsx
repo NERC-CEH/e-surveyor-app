@@ -64,7 +64,7 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
       >
         <div className="relative">
           <div className="list-avatar">
-            <img src={occ.media[0]!.getURL()} alt="" />
+            <img src={occ.media[0].getURL()} alt="" />
           </div>
           <Badge
             className="bg-primary-50 absolute -right-1.5 -bottom-1"

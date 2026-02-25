@@ -543,7 +543,7 @@ const survey: Survey = {
   verify(attrs, sample) {
     try {
       z.boolean()
-        .refine(val => val === false, {
+        .refine(val => !val, {
           message: 'Some photos are still being identified.',
         })
         .parse(sample.isIdentifying());

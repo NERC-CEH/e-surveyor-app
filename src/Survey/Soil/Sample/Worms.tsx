@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { observer } from 'mobx-react';
 import { Page, Header, Main, Block } from '@flumens';
 import { IonList } from '@ionic/react';
@@ -6,9 +5,9 @@ import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker'
 import Sample from 'models/sample';
 import { wormCountAttr } from '../config';
 
-interface Props {
+type Props = {
   subSample: Sample;
-}
+};
 
 const WormHome = ({ subSample }: Props) => {
   const recordAttrs = {

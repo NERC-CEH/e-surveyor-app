@@ -40,9 +40,9 @@ const useDataSharingPrompt = () => {
   }, []);
 };
 
-interface Props {
+type Props = {
   sample: Sample;
-}
+};
 
 const Home = ({ sample }: Props) => {
   const { url } = useRouteMatch();
@@ -61,7 +61,6 @@ const Home = ({ sample }: Props) => {
       navigate(`${url}/report`);
     };
 
-    // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
     sample.save();
 

@@ -67,7 +67,7 @@ const MenuController = () => {
       toast.success('Done');
     } catch (e) {
       if (e instanceof Error) {
-        toast.error(`${e.message}`);
+        toast.error(e.message);
       }
     }
   };
@@ -85,7 +85,7 @@ const MenuController = () => {
 
     await writeBlob({ path, directory, blob });
     const { uri: url } = await Filesystem.getUri({ directory, path });
-    await Share.share({ title: `App database`, files: [url] });
+    await Share.share({ title: 'App database', files: [url] });
     await Filesystem.deleteFile({ directory, path });
   };
 
@@ -94,7 +94,7 @@ const MenuController = () => {
     const blob = await new Promise<Blob>(resolve => {
       const input = document.createElement('input');
       input.type = 'file';
-      input.addEventListener('change', function () {
+      input.addEventListener('change', () => {
         const fileReader = new FileReader();
         fileReader.onloadend = async (e: any) =>
           resolve(

@@ -18,10 +18,10 @@ import ReportView from 'Components/ReportView';
 import Profile from 'Components/Species/Main';
 import './styles.scss';
 
-interface Props {
+type Props = {
   occurrence?: Occurrence;
   onClose: any;
-}
+};
 
 const SpeciesProfile = ({ occurrence, onClose }: Props) => {
   const [segment, setSegment] = useState('species');

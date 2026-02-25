@@ -76,7 +76,7 @@ const survey: Survey = {
 
     verify: attrs =>
       object({
-        taxon: object({}, { required_error: 'Moth has not been identified.' }),
+        taxon: object({}, { error: 'Moth has not been identified.' }),
       }).safeParse(attrs).error,
 
     create({ Occurrence: AppOccurrence, taxon, photo }) {

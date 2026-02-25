@@ -9,7 +9,7 @@ import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { sentryOptions } from '@flumens';
 import { loadingController } from '@ionic/core';
 import { setupIonicReact, isPlatform } from '@ionic/react';
-import * as Sentry from '@sentry/browser';
+import { init } from '@sentry/browser';
 import config from 'common/config';
 import migrate from 'common/models/migrate';
 import { db } from 'common/models/store';
@@ -41,7 +41,7 @@ mobxConfig({ enforceActions: 'never' });
   await samples.fetch();
 
   appModel.data.sendAnalytics &&
-    Sentry.init({
+    init({
       ...sentryOptions,
       dsn: config.sentryDSN,
       environment: config.environment,

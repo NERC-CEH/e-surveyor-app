@@ -39,9 +39,7 @@ const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
 
-  const getQuadratsList = () => {
-    return sample.samples.slice().sort(byDate);
-  };
+  const getQuadratsList = () => sample.samples.slice().sort(byDate);
 
   const getQuadratPhoto = (smp: Sample) => {
     const pic = smp.media.length && smp.media[0].getURL();

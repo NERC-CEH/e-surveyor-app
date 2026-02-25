@@ -55,7 +55,6 @@ export const landUseAttr = {
     { title: 'Other', dataName: LAND_USE_OTHER_VALUE },
   ],
   onChange(newValue: any, _: any, { record }: any) {
-    // eslint-disable-next-line no-param-reassign
     record[landUseAttr.id] = newValue;
     delete record[cropAttr().id];
     delete record[prevCrop1Attr().id];

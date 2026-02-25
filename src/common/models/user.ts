@@ -9,9 +9,9 @@ import {
 import CONFIG from 'common/config';
 import { mainStore } from './store';
 
-export interface Data extends DrupalUserModelAttrs {
+export type Data = {
   fullName?: string;
-}
+} & DrupalUserModelAttrs;
 
 const defaults: Data = {
   fullName: '',

@@ -25,7 +25,7 @@ function normalizeValue(value: any) {
 function isGenusDuplicate(
   optimised: string | any[],
   taxa: RemoteAttributes,
-  index?: number | undefined
+  index?: number
 ) {
   const lastEntry = index || optimised.length - 1;
   if (lastEntry < 0) {

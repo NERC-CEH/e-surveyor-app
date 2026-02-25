@@ -156,11 +156,8 @@ const ReportMain = ({ stepCount, steps, habitatList }: Props) => {
     );
   };
 
-  const getSpecies = () => {
-    return habitatList
-      ? getSpeciesCountRowsForHabitat()
-      : getSpeciesCountRows();
-  };
+  const getSpecies = () =>
+    habitatList ? getSpeciesCountRowsForHabitat() : getSpeciesCountRows();
 
   return (
     <Main>

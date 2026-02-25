@@ -21,6 +21,7 @@ const newnessResultSchema = z.object({
 
 export type NewnessResult = z.infer<typeof newnessResultSchema>;
 
+/* eslint-disable @typescript-eslint/naming-convention */
 // raw API response uses snake_case
 type RawNewnessResult = {
   external_key: string;
@@ -28,6 +29,7 @@ type RawNewnessResult = {
   is_new_for_year: boolean;
   is_new_for_grid: boolean;
 };
+/* eslint-enable @typescript-eslint/naming-convention */
 
 type Params = {
   externalKeys: string[];
@@ -42,6 +44,7 @@ const fetchNewness = async ({
 }: Params): Promise<NewnessResult[]> => {
   const year = new Date().getFullYear();
 
+  /* eslint-disable @typescript-eslint/naming-convention */
   const params = {
     // (required): The accepted taxon IDs (taxon.accepted_taxon_id) for the species being recorded.
     external_keys: externalKeys.join(','),
@@ -56,6 +59,7 @@ const fetchNewness = async ({
     // (optional): Group ID to filter by, which corresponds to an activity ID or project ID depending on the terminology used on the client website. If provided, response includes is_new_for_group badge.
     // group_id
   };
+  /* eslint-enable @typescript-eslint/naming-convention */
 
   try {
     const { data } = await axios<RawNewnessResult[]>({

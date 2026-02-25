@@ -31,7 +31,7 @@ export { default as SampleCollection } from '@flumens/models/dist/Indicia/Sample
 export * from '@flumens/utils/dist/uuid';
 export * from '@flumens/utils/dist/image';
 export * from '@flumens/utils/dist/errors';
-export * from '@flumens/utils/dist/type';
+export type * from '@flumens/utils/dist/type';
 export * from '@flumens/utils/dist/date';
 export { options as sentryOptions } from '@flumens/utils/dist/sentry';
 export { default as device } from '@flumens/utils/dist/device';

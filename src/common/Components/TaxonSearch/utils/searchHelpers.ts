@@ -223,4 +223,4 @@ const helpers: any = {
   },
 };
 
-export { helpers as default };
+export default helpers;

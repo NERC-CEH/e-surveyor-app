@@ -11,9 +11,9 @@ function getValue(sample: Sample) {
   return prettyPrintLocation(sample.data.location);
 }
 
-interface Props {
+type Props = {
   sample: Sample;
-}
+};
 
 const GridRefValue = ({ sample }: Props) => {
   const value = getValue(sample);

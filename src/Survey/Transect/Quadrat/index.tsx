@@ -119,7 +119,7 @@ const QuadratController = ({ subSample }: Props) => {
         : { multiple: true }
     );
 
-    if (!photoURLs || !photoURLs.length) return;
+    if (!photoURLs?.length) return;
 
     const canEdit = photoURLs.length === 1;
     if (canEdit) {
