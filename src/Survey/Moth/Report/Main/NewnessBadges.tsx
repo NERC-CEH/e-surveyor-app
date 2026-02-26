@@ -12,21 +12,33 @@ const NewnessBadges = ({ newness }: Props) => {
   if (!isNewForWebsite && !isNewForYear && !isNewForGrid) return null;
 
   return (
-    <div className="flex gap-1">
+    <div className="flex flex-col gap-1">
       {isNewForWebsite && (
-        <Badge color="secondary" className="bg-orange-100 text-[0.6rem]">
+        <Badge
+          color="secondary"
+          className="bg-secondary-100 text-secondary-800 w-full text-center"
+          size="small"
+        >
           New species
         </Badge>
       )}
 
       {isNewForYear && (
-        <Badge color="tertiary" className="bg-blue-100 text-[0.6rem]">
+        <Badge
+          color="tertiary"
+          className="text-tertiary-800 w-full text-center"
+          size="small"
+        >
           New this year
         </Badge>
       )}
 
       {isNewForGrid && (
-        <Badge color="success" className="bg-green-100 text-[0.6rem]">
+        <Badge
+          color="success"
+          className="text-success-800 w-full text-center"
+          size="small"
+        >
           New for area
         </Badge>
       )}

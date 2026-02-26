@@ -1,6 +1,4 @@
-import { openOutline } from 'ionicons/icons';
 import { Badge, Main, locationToGrid } from '@flumens';
-import { IonIcon } from '@ionic/react';
 import Occurrence from 'common/models/occurrence';
 import Sample from 'common/models/sample';
 import { NewnessMap } from '../useNewnessCheck';
@@ -59,37 +57,40 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
 
     return (
       <div
-        className="flex justify-between gap-5 border-b-[0.5px] border-solid border-neutral-200 bg-white p-2"
+        className="flex overflow-hidden rounded-md flex-col justify-center items-start gap-2 border border-neutral-200 bg-white p-2"
         key={link}
       >
-        <div className="relative">
-          <div className="list-avatar">
-            <img src={occ.media[0].getURL()} alt="" />
+        <div className="flex gap-5">
+          <div className="relative">
+            <div className="list-avatar">
+              <img
+                src={occ.media[0].getURL()}
+                alt=""
+                className="w-full h-full"
+              />
+            </div>
+            <Badge className="bg-neutral-50 font-semibold text-neutral-800 absolute -right-1.5 -bottom-1">{`${abundance}`}</Badge>
           </div>
-          <Badge
-            className="bg-primary-50 absolute -right-1.5 -bottom-1"
-            color="primary"
-          >{`${abundance}`}</Badge>
-        </div>
-        <a
-          href={link}
-          className="flex w-full items-center justify-between gap-2"
-          role="button"
-        >
-          <div>
+
+          <div className="w-full flex flex-col justify-center">
             {commonName && <div className="font-semibold">{commonName}</div>}
             {scientificName && <div className="italic">{scientificName}</div>}
-
-            <div className="flex gap-1 flex-wrap">
-              {newness && <NewnessBadges newness={newness} />}
-              <LocalRarityBadge tvk={tvk} grid={grid} />
-              <NationalRarityBadge tvk={tvk} />
-              <HostPlantBadge tvk={tvk} />
-              <HabitatCountBadge tvk={tvk} />
-            </div>
           </div>
-          <IonIcon src={openOutline} />
-        </a>
+        </div>
+
+        <div className="flex gap-1 flex-wrap mt-1 border border-neutral-200 p-2 w-full bg-neutral-50 rounded-md justify-between items-center">
+          <div className="flex flex-col">
+            <LocalRarityBadge tvk={tvk} grid={grid} />
+            <NationalRarityBadge tvk={tvk} />
+          </div>
+          <div className="border-l border-neutral-200 h-full pl-4">
+            {newness && <NewnessBadges newness={newness} />}
+          </div>
+        </div>
+        <div className="flex gap-1 flex-wrap mt-1 border border-neutral-200 p-2 w-full bg-neutral-50 rounded-md">
+          <HostPlantBadge tvk={tvk} />
+          <HabitatCountBadge tvk={tvk} />
+        </div>
       </div>
     );
   };
@@ -102,13 +103,13 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
           <Badge className="text-lg">{`${sample.occurrences.length}`}</Badge>
         </div>
 
-        <h3 className="list-title">Your species</h3>
-        <div className="overflow-hidden rounded-md bg-white">
-          <div className="list-divider">
-            <div>Species</div>
-            <div>{Object.values(uniqueSpeciesObj).length}</div>
-          </div>
+        <div className="flex items-center justify-between rounded-md bg-white px-4 py-2">
+          <span>Number of species</span>
+          <Badge className="text-lg">{`${Object.values(uniqueSpeciesObj).length}`}</Badge>
+        </div>
 
+        <h3 className="list-title">Your species:</h3>
+        <div className="flex flex-col gap-2">
           {Object.entries(uniqueSpeciesObjCount)
             .sort(byAbundance)
             .map(getEntry)}

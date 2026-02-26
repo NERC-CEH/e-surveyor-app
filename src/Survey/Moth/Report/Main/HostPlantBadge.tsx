@@ -1,4 +1,3 @@
-import { Badge } from '@flumens';
 import mothTraits, { SpeciesTraits } from 'common/data/moths/traits';
 
 // index traits by TVK for fast lookup
@@ -16,9 +15,12 @@ const HostPlantBadge = ({ tvk }: Props) => {
   if (!hostPlants) return null;
 
   return (
-    <Badge color="success" className="bg-emerald-100 text-[0.6rem]">
-      Caterpillars eat: {hostPlants}
-    </Badge>
+    <div className="inline-flex items-center gap-1 text-sm w-full">
+      <span className="text-nowrap mr-2 font-medium min-w-25">
+        Caterpillars eat:
+      </span>{' '}
+      {hostPlants}
+    </div>
   );
 };
 

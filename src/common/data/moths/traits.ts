@@ -6,10 +6,13 @@ export type SpeciesTraits = {
   nationalRarity: string;
   hostPlants?: string;
   habitatGeneralist?: 1;
-  habitatWoodland?: 1 | 2;
+  habitatCoastal?: 1;
+  habitatWoodland?: 1;
   habitatGrassland?: 1;
-  habitatUplandHeathlandMoorland?: 1;
+  habitatHeathlandMoorland?: 1;
+  habitatMontaneUpland?: 1;
   habitatWetland?: 1;
+  habitatOther?: 1;
 };
 
 export default mothTraits as SpeciesTraits[];

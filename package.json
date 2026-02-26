@@ -50,7 +50,6 @@
     "@ionic/react": "^8.7.17",
     "@ionic/react-router": "^8.7.17",
     "@sentry/browser": "10.40.0",
-    "@sentry/integrations": "7.114.0",
     "@techstark/opencv-js": "^4.10.0-release.1",
     "@types/deep-diff": "^1.0.5",
     "axios": "^1.13.5",
