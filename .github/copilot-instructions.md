@@ -4,7 +4,7 @@
 - Keep components small, focused, and reusable.
 - Lift state up only when necessary.
 - Use Context API or state management libraries for global state.
-- Memoize expensive computations and components with `useMemo` and `React.memo`.
+- Don't use useMemo or useCallback.
 - Avoid prop drilling by using context or composition.
 - Write unit and integration tests for components.
 - Use PropTypes or TypeScript for type checking.
@@ -34,7 +34,7 @@
 - Write meaningful commit messages.
 - Use Conventional Commits Specification v1.0.0
 - Commit messages must be under 50 characters long.
-
+- Don't use SASS or SCSS files for styles unless absolutely necessary, use tailwind instead.
 - Use Prettier and ESLint for consistent code formatting.
 - Always run `npm run check` locally before proposing changes.
 - Do not introduce ESLint warnings or TS errors.
