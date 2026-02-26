@@ -19,7 +19,7 @@ const NewnessBadges = ({ newness }: Props) => {
           className="bg-secondary-100 text-secondary-800 w-full text-center"
           size="small"
         >
-          New species
+          New to app
         </Badge>
       )}
 
@@ -39,7 +39,7 @@ const NewnessBadges = ({ newness }: Props) => {
           className="text-success-800 w-full text-center"
           size="small"
         >
-          New for area
+          New for site
         </Badge>
       )}
     </div>
