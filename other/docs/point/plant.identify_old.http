@@ -1,5 +1,3 @@
-###
-# @name Identify
 POST https://esurveyor.ceh.ac.uk/api/plantnet
   ?images=
   &include-related-images=true

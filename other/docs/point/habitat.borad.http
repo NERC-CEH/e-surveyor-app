@@ -1,7 +1,6 @@
 ###
 # @name broad
 POST https://connect-apps.ceh.ac.uk/ESHAAPI/broadhabitat
-Authorization: Bearer {{access_token}}
 Content-Type: application/json
 
 {

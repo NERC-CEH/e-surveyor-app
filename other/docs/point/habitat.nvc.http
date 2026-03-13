@@ -1,9 +1,4 @@
-
-###
-# @name nvc
 POST https://connect-apps.ceh.ac.uk/ESHAAPI/nvc
-Authorization: Bearer {{access_token}}
-Content-Type: application/json
 
 {
   "input_tvks": [
