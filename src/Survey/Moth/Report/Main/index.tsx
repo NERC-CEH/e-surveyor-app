@@ -78,7 +78,7 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
           </div>
         </div>
 
-        <div className="flex gap-1 flex-wrap mt-1 border border-neutral-200 p-2 w-full bg-neutral-50 rounded-md justify-between items-center">
+        <div className="flex gap-1 flex-nowrap mt-1 border border-neutral-200 p-2 w-full bg-neutral-50 rounded-md justify-between items-center">
           <div className="flex flex-col">
             <LocalRarityBadge tvk={tvk} grid={grid} />
             <NationalRarityBadge tvk={tvk} />
