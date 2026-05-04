@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page, Main, device, useToast, captureImage, Button } from '@flumens';
 import { IonIcon, NavContext, isPlatform } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
+import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import config from 'common/config';
 import rothamstedLogo from 'common/images/rothamsted-logo.png';
 import appModel from 'common/models/app';
@@ -23,6 +24,10 @@ import survey2 from './ricardo-gomez.jpg';
 import survey5 from './soilSurvey.jpg';
 import './styles.scss';
 import survey1 from './viateur-hwang.jpg';
+
+// hide the terms updated message after this date
+const TERMS_MESSAGE_EXPIRY = new Date('2027-06-01');
+const showTermsMessage = new Date() < TERMS_MESSAGE_EXPIRY;
 
 const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
@@ -152,6 +157,17 @@ const LandingPage = () => {
               </SurveyCard>
             </SwiperSlide>
           </Swiper>
+
+          {showTermsMessage && (
+            <InfoBackgroundMessage
+              name="showTermsUpdatedMessage"
+              className="mb-6 max-w-2/3 w-full text-center"
+            >
+              We’ve updated our{' '}
+              <a href={`${config.backend.url}/terms-of-use`}>Terms of Use</a>.
+              Please take a moment to review them before continuing.
+            </InfoBackgroundMessage>
+          )}
 
           <Button
             className="mx-auto w-fit px-5 text-lg shadow-2xl"

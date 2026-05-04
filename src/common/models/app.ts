@@ -29,6 +29,7 @@ export type Data = {
   showSoilDataSharingTip: boolean;
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;
+  showTermsUpdatedMessage: boolean;
   sendAnalytics: boolean;
   /**
    * Enable un-released features.
@@ -55,6 +56,7 @@ const defaults: Data = {
   showSurveyUploadTip: true,
   showSurveysDeleteTip: true,
   showFirstPhotoTip: true,
+  showTermsUpdatedMessage: true,
   showFirstLowScorePhotoTip: true,
   showWiFiSettingTip: true,
   showSoilDataSharingTip: true,
