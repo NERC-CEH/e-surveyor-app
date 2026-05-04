@@ -1,5 +1,15 @@
 ### 1.6.0
 
+Added moth host plant display.
+Added moth habitat display.
+Added habitat badges and additional report icons.
+Added local rarity information for moths.
+Added national rarity information for moths.
+Added moth trap newness functions.
+Updated species lists to support numbered items.
+Updated moth traits data and how traits are displayed.
+Fixed a species list issue in the moth survey.
+Fixed a small habitat survey bug.
 Upgraded framework.
 
 ### 1.5.0
