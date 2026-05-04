@@ -23,7 +23,7 @@ const OccurrenceMain = ({ occurrence, isDisabled }: Props) => {
           <div className="rounded-list">
             <IonItem className="[--padding-start:2px]">
               <div className="list-avatar m-1 mr-5">
-                <img src={image} alt="" />
+                <img src={image} alt="" className="size-full object-cover" />
               </div>
               <div>Species</div>
               <div slot="end">

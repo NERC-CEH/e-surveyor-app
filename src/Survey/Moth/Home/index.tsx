@@ -13,6 +13,7 @@ import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import config from '../config';
+import IntroAlert from './IntroAlert';
 import Main from './Main';
 
 type Props = {
@@ -125,6 +126,7 @@ const HomeController = ({ sample }: Props) => {
         photoSelect={photoSelect}
         gallerySelect={gallerySelect}
       />
+      <IntroAlert />
     </Page>
   );
 };
