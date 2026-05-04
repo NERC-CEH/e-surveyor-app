@@ -1,5 +1,5 @@
 import { chatboxOutline } from 'ionicons/icons';
-import { object } from 'zod';
+import { object, string } from 'zod';
 import { dateFormat, toISOTimezoneString } from '@flumens';
 import icon from 'common/images/moth-inside-icon.svg';
 import appModel from 'common/models/app';
@@ -98,14 +98,17 @@ const survey: Survey = {
     },
   },
 
-  verify: attrs => object({ location: locationSchema }).safeParse(attrs).error,
+  verify: attrs =>
+    object({
+      location: locationSchema,
+      date: string({ error: 'Date is missing.' }).nullable(),
+    }).safeParse(attrs).error,
 
   create({ Sample }) {
     const sample = new Sample({
       data: {
         surveyId: survey.id,
         training: appModel.data.useTraining,
-        date: new Date().toISOString(),
         surveyEndTime: toISOTimezoneString(new Date()),
         location: null,
         comment: null,

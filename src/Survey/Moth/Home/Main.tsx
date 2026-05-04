@@ -9,6 +9,7 @@ import {
   MenuAttrItemFromModel,
   Select,
   Input,
+  InfoMessage,
 } from '@flumens';
 import { IonList, IonIcon, NavContext } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
@@ -81,7 +82,20 @@ const HomeMain = ({
             value={<GridRefValue sample={sample} />}
             disabled={isDisabled}
           />
-          <MenuDateAttr record={sample.data} isDisabled={isDisabled} />
+          <MenuDateAttr
+            isDisabled={isDisabled}
+            value={sample.data.date}
+            onChange={(e: any) => {
+              // eslint-disable-next-line
+              sample.data.date = e.detail.value.split('T')[0];
+            }}
+          />
+          {!sample.data.date && (
+            <InfoMessage inline>
+              If trapping overnight please enter the date for the evening on
+              which the trap was put out.
+            </InfoMessage>
+          )}
           <Select
             options={habitatValues}
             onChange={(habitat: any) => (sample.data.habitat = habitat)} // eslint-disable-line

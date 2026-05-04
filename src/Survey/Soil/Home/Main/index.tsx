@@ -57,7 +57,13 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
       <IonList lines="full">
         <div className="list-title">Details</div>
         <div className="rounded-list">
-          <MenuDateAttr {...recordAttrs} />
+          <MenuDateAttr
+            value={sample.data.date}
+            onChange={(e: any) => {
+              // eslint-disable-next-line
+              sample.data.date = e.detail.value.split('T')[0];
+            }}
+          />
           <MenuAttrItem
             routerLink={`${url}/location`}
             icon={locationOutline}
