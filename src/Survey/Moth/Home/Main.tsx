@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { bookOutline, cameraOutline, openOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
@@ -9,10 +10,11 @@ import {
   Select,
   Input,
 } from '@flumens';
-import { IonList, IonIcon } from '@ionic/react';
+import { IonList, IonIcon, NavContext } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import habitatIcon from 'common/images/habitats.svg';
 import mothInsideBoxIcon from 'common/images/moth-inside-icon.svg';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -35,9 +37,16 @@ const HomeMain = ({
   gallerySelect,
 }: Props) => {
   const { url } = useRouteMatch();
+  const { navigate } = useContext(NavContext);
 
   const hasSpecies = !!sample.occurrences.length;
   const isOtherHabitat = sample.data.habitat === 'Other (please specify)';
+
+  const navigateToOccurrence = (model: Sample | Occurrence) => {
+    if (isDisabled || !(model instanceof Occurrence)) return;
+
+    navigate(`${url}/occurrence/${model.cid}`);
+  };
 
   return (
     <Main>
@@ -122,7 +131,10 @@ const HomeMain = ({
         sample={sample}
         isDisabled={isDisabled}
         useDoughnut
+        showPhoto
         allowReidentify
+        onOccurrenceClick={navigateToOccurrence}
+        useNumberedList
       />
 
       {!isDisabled && hasSpecies && (

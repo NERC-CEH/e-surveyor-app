@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useState } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
@@ -6,7 +7,7 @@ import {
   helpCircle,
   closeCircle,
   earth,
-  leaf,
+  imageOutline,
 } from 'ionicons/icons';
 import { Doughnut } from 'react-chartjs-2';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
@@ -23,8 +24,8 @@ import {
 import config from 'common/config';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
-import { occurrenceAbundanceAttr } from 'Survey/Beetle/config';
 import IncrementalButton from 'Survey/common/Components/IncrementalButton';
+import { occurrenceAbundanceAttr } from 'Survey/common/config';
 
 const { positiveThreshold, possibleThreshold } = config;
 
@@ -113,6 +114,7 @@ type Props = {
   isDisabled: boolean;
   onReidentify?: any;
   useDoughnut?: boolean;
+  showPhoto?: boolean;
   onDelete?: () => void;
   onClick: (model: Sample | Occurrence) => void;
   itemNumber?: number;
@@ -124,6 +126,7 @@ const Species = ({
   onDelete,
   onClick,
   useDoughnut,
+  showPhoto,
   onReidentify,
   itemNumber,
 }: Props) => {
@@ -161,11 +164,7 @@ const Species = ({
     return (
       <Gallery
         isOpen={isShowingGallery}
-        items={[
-          {
-            src: speciesPhoto,
-          },
-        ]}
+        items={[{ src: speciesPhoto }]}
         initialSlide={0}
         onClose={hideGallery}
       />
@@ -212,40 +211,52 @@ const Species = ({
     occ.save();
   };
 
-  const getProfileContent = () => {
-    // show incremental button if itemNumber is provided
-    if (itemNumber !== undefined) {
-      const abundance = occ.data[occurrenceAbundanceAttr.id] || 1;
+  const useIncrementalButton = itemNumber === undefined;
 
-      return (
+  const getIncrementalButton = () => {
+    // show incremental button if itemNumber is provided
+    if (useIncrementalButton) return null;
+
+    const abundance = occ.data[occurrenceAbundanceAttr.id] || 1;
+
+    return (
+      <div className="list-avatar">
         <IncrementalButton
           value={abundance}
           onClick={incrementAbundance}
           disabled={isDisabled}
         />
-      );
-    }
-
-    // show photo or leaf icon
-    if (speciesPhoto)
-      return (
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-        <img
-          src={speciesPhoto}
-          onClick={showGallery}
-          className="h-full w-full object-cover"
-        />
-      );
-
-    return <IonIcon icon={leaf} />;
+      </div>
+    );
   };
 
-  const profilePhoto = <div className="list-avatar">{getProfileContent()}</div>;
+  const getPhoto = () => {
+    if (useIncrementalButton && !showPhoto) return null;
+
+    if (speciesPhoto)
+      return (
+        <div className="list-avatar">
+          <img
+            src={speciesPhoto}
+            onClick={showGallery}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      );
+
+    return (
+      <div className="list-avatar">
+        <IonIcon icon={imageOutline} />
+      </div>
+    );
+  };
 
   const getSpeciesName = () => (
     <div className="flex flex-col">
-      {commonName && <div className="font-semibold">{commonName}</div>}
-      <div className="italic">{scientificName}</div>
+      {commonName && (
+        <div className="font-semibold line-clamp-1">{commonName}</div>
+      )}
+      <div className="italic line-clamp-1">{scientificName}</div>
     </div>
   );
 
@@ -265,8 +276,8 @@ const Species = ({
       >
         <div className="flex w-full items-center justify-between gap-2 p-1">
           <div className="flex items-center gap-3">
-            {profilePhoto}
-
+            {getIncrementalButton()}
+            {getPhoto()}
             {getSpeciesName()}
           </div>
 
@@ -287,7 +298,7 @@ const Species = ({
             <Button
               onPress={onReidentifyWrap}
               preventDefault
-              className="px-2 py-1 text-sm"
+              className="px-2 py-1 text-sm shrink-0"
             >
               Reidentify
             </Button>

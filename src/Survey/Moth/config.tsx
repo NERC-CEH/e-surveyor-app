@@ -9,6 +9,7 @@ import {
   locationAttr,
   attachClassifierResults,
   locationSchema,
+  occurrenceAbundanceAttr,
 } from 'Survey/common/config';
 
 export const habitatValues = [
@@ -81,7 +82,10 @@ const survey: Survey = {
 
     create({ Occurrence: AppOccurrence, taxon, photo }) {
       const occ = new AppOccurrence({
-        data: { taxon },
+        data: {
+          taxon,
+          [occurrenceAbundanceAttr.id]: 1,
+        },
       });
 
       if (photo) occ.media.push(photo);

@@ -15,7 +15,12 @@ import {
 import { IonIcon } from '@ionic/react';
 import icon from 'common/images/beetle.svg';
 import appModel from 'common/models/app';
-import { Survey, dateAttr, locationSchema } from 'Survey/common/config';
+import {
+  Survey,
+  dateAttr,
+  locationSchema,
+  occurrenceAbundanceAttr,
+} from 'Survey/common/config';
 
 type ExtendedOption = RadioOption & {
   label?: string;
@@ -411,16 +416,6 @@ export const trapCommentAttr = {
   title: 'Notes',
   appearance: 'multiline',
 } as const satisfies TextInputConf;
-
-export const occurrenceAbundanceAttr = {
-  id: 'occAttr:1218',
-  type: 'numberInput',
-  title: 'Abundance',
-  appearance: 'counter',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
-  step: 1,
-  validation: { min: 1 },
-} as const satisfies NumberInputConf;
 
 export const occurrenceCommentAttr = {
   id: 'comment',

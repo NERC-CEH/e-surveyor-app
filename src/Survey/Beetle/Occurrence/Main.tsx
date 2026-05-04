@@ -5,7 +5,8 @@ import { IonList } from '@ionic/react';
 import beetleIcon from 'common/images/beetle.svg';
 import Occurrence from 'models/occurrence';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
-import { occurrenceCommentAttr, occurrenceAbundanceAttr } from '../config';
+import { occurrenceAbundanceAttr } from 'Survey/common/config';
+import { occurrenceCommentAttr } from '../config';
 
 type Props = {
   occurrence: Occurrence;

@@ -1,4 +1,4 @@
-import { calendarOutline } from 'ionicons/icons';
+import { calendarOutline, clipboardOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import {
@@ -8,6 +8,8 @@ import {
   PageProps,
   RemoteConfig,
 } from '@flumens';
+import { NumberInputConf } from '@flumens/tailwind/dist/Survey';
+import { IonIcon } from '@ionic/react';
 import config from 'common/config';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
 import { SeedmixSpecies } from 'common/data/seedmix';
@@ -185,6 +187,16 @@ export const nameAttr = {
   },
   remote: { id: 1531 },
 };
+
+export const occurrenceAbundanceAttr = {
+  id: 'occAttr:1218',
+  type: 'numberInput',
+  title: 'Abundance',
+  appearance: 'counter',
+  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  step: 1,
+  validation: { min: 1 },
+} as const satisfies NumberInputConf;
 
 export const locationSchema = z
   .object(
