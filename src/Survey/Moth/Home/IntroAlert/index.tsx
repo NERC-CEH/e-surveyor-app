@@ -33,13 +33,18 @@ const IntroAlert = () => {
       </div>
 
       <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
-        Submit 1 photo per moth. Photograph each individual or choose to add
-        count where you have multiples of the same species.
+        Press to take. Long press to add from gallery.
+        <img src={addImage} className="mx-auto max-w-3/5" />
       </div>
 
       <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
-        Press to take. Long press to add from gallery.
-        <img src={addImage} className="mx-auto max-w-3/5" />
+        <h3>Not sure if they’re the same species?</h3>
+        Take 1 photo of each moth individually. Each photo is counted as 1 moth.
+      </div>
+
+      <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
+        <h3>Sure they’re the same species?</h3>
+        Take 1 photo, then tap the number to add a count.
       </div>
 
       <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
