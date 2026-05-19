@@ -50,7 +50,7 @@ const HomeMain = ({
   };
 
   return (
-    <Main>
+    <Main className="[--padding-bottom:50px]">
       <IonList lines="full" className="mb-2 flex flex-col gap-4">
         <div className="rounded-list">
           {isDisabled && <UploadedRecordInfoMessage />}
@@ -149,6 +149,13 @@ const HomeMain = ({
         onOccurrenceClick={navigateToOccurrence}
         useNumberedList
       />
+
+      {!isDisabled && hasSpecies && (
+        <InfoBackgroundMessage name="showMothSpeciesListTip">
+          Swipe left on a species to delete it. Tap the species name to open its
+          profile.
+        </InfoBackgroundMessage>
+      )}
 
       {!isDisabled && hasSpecies && (
         <InfoBackgroundMessage name="showWiFiSettingTip">

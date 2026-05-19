@@ -3,49 +3,11 @@ import { useState } from 'react';
 import { observer } from 'mobx-react';
 import 'chart.js/auto';
 import { earthOutline, checkmark } from 'ionicons/icons';
-import { Doughnut } from 'react-chartjs-2';
 import { Gallery, device, Button } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import { Taxon } from 'models/occurrence';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
-
-const options = {
-  cutout: '80%',
-  layout: {
-    padding: { top: -9 }, // for some reason the chart is moved down
-  },
-  tooltip: { enabled: false }, // Disable the on-canvas tooltip
-  animation: { animation: false, animateRotate: false },
-};
-
-const getDoughnutData = (probability: number) => {
-  const probPercent = parseInt((probability * 100).toFixed(0), 10);
-
-  const color = () => {
-    if (probPercent > 70) {
-      return '#4b9a43'; // green
-    }
-
-    if (probPercent > 20) {
-      return '#ffbc5e'; // yellow
-    }
-
-    return '#ff4e46'; // red
-  };
-
-  const remainingScorePercent = 100 - probPercent;
-
-  return {
-    datasets: [
-      {
-        data: [probPercent, remainingScorePercent],
-        backgroundColor: [color(), '#f5f5f5'],
-        borderWidth: [0, 0],
-      },
-    ],
-    text: `${probPercent}%`,
-  };
-};
+import Doughnut from './Doughnut';
 
 type Props = {
   species: Taxon;
@@ -154,18 +116,7 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
               <h3 className="italic opacity-70 my-0!">{scientificName}</h3>
             </div>
 
-            {!selectedSpeciesByUser && (
-              <div className="p-[5px]; relative h-[70px] w-[70px] self-center">
-                <Doughnut
-                  data={getDoughnutData(probability)}
-                  options={options}
-                  redraw
-                />
-                <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-[0.9em] font-medium">
-                  {getDoughnutData(probability).text}
-                </div>
-              </div>
-            )}
+            {!selectedSpeciesByUser && <Doughnut probability={probability} />}
 
             {selectedSpeciesByUser && (
               <IonIcon

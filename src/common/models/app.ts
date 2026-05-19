@@ -27,6 +27,7 @@ export type Data = {
   showFirstLowScorePhotoTip: boolean;
   showWiFiSettingTip: boolean;
   showSoilDataSharingTip: boolean;
+  showMothSpeciesListTip: boolean;
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;
   showTermsUpdatedMessage: boolean;
@@ -56,6 +57,7 @@ const defaults: Data = {
   showSurveyUploadTip: true,
   showSurveysDeleteTip: true,
   showFirstPhotoTip: true,
+  showMothSpeciesListTip: true,
   showTermsUpdatedMessage: true,
   showFirstLowScorePhotoTip: true,
   showWiFiSettingTip: true,

@@ -50,9 +50,9 @@ const IntroAlert = () => {
       <Button
         color="secondary"
         onPress={handleContinue}
-        className="mx-auto bg-secondary-600 my-10"
+        className="mx-auto bg-secondary-600 my-10 shadow-md"
       >
-        Let's go
+        Make records
       </Button>
     </CustomAlert>
   );
