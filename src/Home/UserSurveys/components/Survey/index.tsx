@@ -114,7 +114,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>
-          <h4>{getRelativeDate(sample.data.date)}</h4>
+          <h4>{!!sample.data.date && getRelativeDate(sample.data.date)}</h4>
         </div>
       );
     }
