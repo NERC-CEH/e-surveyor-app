@@ -74,6 +74,7 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
         isDisabled={isDisabled}
         useSpeciesProfile
         useSubSamples
+        showPhoto
       />
 
       {!subSample.samples.length && (

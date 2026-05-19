@@ -52,7 +52,7 @@ const HomeMain = ({
   return (
     <Main className="[--padding-bottom:50px]">
       <IonList lines="full" className="mb-2 flex flex-col gap-4">
-        <div className="rounded-list">
+        <div className="rounded-list my-2">
           {isDisabled && <UploadedRecordInfoMessage />}
         </div>
 
@@ -145,6 +145,7 @@ const HomeMain = ({
         isDisabled={isDisabled}
         useDoughnut
         showPhoto
+        showGallery={false}
         allowReidentify
         onOccurrenceClick={navigateToOccurrence}
         useNumberedList

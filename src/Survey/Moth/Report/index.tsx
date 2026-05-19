@@ -30,11 +30,12 @@ const Report = ({ sample }: Props) => {
   };
 
   const isInvalid = sample.validateRemote();
-  const finishButton = sample.isSynchronising ? null : (
-    <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
-      Upload
-    </HeaderButton>
-  );
+  const finishButton =
+    sample.isSynchronising || sample.isDisabled ? null : (
+      <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
+        Upload
+      </HeaderButton>
+    );
 
   return (
     <Page id="survey-moth-report">

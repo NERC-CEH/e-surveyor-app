@@ -49,7 +49,7 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
   return (
     <Main>
       <IonList lines="full" className="mb-2 flex flex-col gap-4">
-        <div className="rounded-list">
+        <div className="rounded-list my-2">
           {isDisabled && <UploadedRecordInfoMessage />}
         </div>
 

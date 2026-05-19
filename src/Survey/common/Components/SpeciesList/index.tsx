@@ -50,6 +50,7 @@ type Props = {
   disableAI?: boolean;
   disableDelete?: boolean;
   showPhoto?: boolean;
+  showGallery?: boolean;
   useDoughnut?: boolean;
   allowReidentify?: boolean;
   onOccurrenceClick?: (model: Model) => void;
@@ -66,6 +67,7 @@ const SpeciesList = ({
   useDoughnut = false,
   allowReidentify = false,
   showPhoto = false,
+  showGallery = true,
   onOccurrenceClick,
   useNumberedList = false,
 }: Props) => {
@@ -180,6 +182,7 @@ const SpeciesList = ({
           onReidentify={allowReidentify ? onReidentify : undefined}
           useDoughnut={useDoughnut}
           showPhoto={showPhoto}
+          showGallery={showGallery}
           itemNumber={useNumberedList ? index + 1 : undefined}
         />
       );

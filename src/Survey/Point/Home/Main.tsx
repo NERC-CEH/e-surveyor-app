@@ -141,7 +141,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           </InfoMessage>
         )}
 
-        <div className="rounded-list">
+        <div className="rounded-list my-2">
           {isDisabled && <UploadedRecordInfoMessage />}
         </div>
 
@@ -226,6 +226,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
         isDisabled={isDisabled}
         useSubSamples
         useSpeciesProfile
+        showPhoto
       />
 
       {!sample.samples.length && (

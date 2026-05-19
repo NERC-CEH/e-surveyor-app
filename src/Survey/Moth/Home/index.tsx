@@ -126,7 +126,7 @@ const HomeController = ({ sample }: Props) => {
         photoSelect={photoSelect}
         gallerySelect={gallerySelect}
       />
-      <IntroAlert />
+      {!isDisabled && <IntroAlert />}
     </Page>
   );
 };

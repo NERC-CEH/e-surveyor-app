@@ -76,6 +76,7 @@ type Props = {
   isDisabled: boolean;
   onReidentify?: any;
   useDoughnut?: boolean;
+  showGallery?: boolean;
   showPhoto?: boolean;
   onDelete?: () => void;
   onClick: (model: Sample | Occurrence) => void;
@@ -89,6 +90,7 @@ const Species = ({
   onClick,
   useDoughnut,
   showPhoto,
+  showGallery = true,
   onReidentify,
   itemNumber,
 }: Props) => {
@@ -113,7 +115,8 @@ const Species = ({
   }
 
   const [isShowingGallery, setIsShowingGallery] = useState(false);
-  const showGallery = (e: any) => {
+  const onPhotoPress = (e: any) => {
+    if (!showGallery) return;
     e.preventDefault();
     e.stopPropagation();
     setIsShowingGallery(true);
@@ -200,7 +203,7 @@ const Species = ({
         <div className="list-avatar">
           <img
             src={speciesPhoto}
-            onClick={showGallery}
+            onClick={onPhotoPress}
             className="h-full w-full object-cover"
           />
         </div>
