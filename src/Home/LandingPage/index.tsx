@@ -99,11 +99,11 @@ const LandingPage = () => {
           className="absolute -mt-2 max-h-[150px] w-full bg-white px-[74px] py-[13px]"
         />
 
-        <div className="flex h-full flex-col justify-evenly gap-5 overflow-hidden px-0 pt-40 pb-[120px]">
+        <div className="flex h-full flex-col justify-evenly gap-5 overflow-scroll px-0 pt-40 pb-[120px]">
           <Swiper
             centeredSlides
             centeredSlidesBounds
-            className="w-[100vw]"
+            className="w-screen min-h-50"
             slidesPerView={1.3}
             {...tabletLayout}
           >

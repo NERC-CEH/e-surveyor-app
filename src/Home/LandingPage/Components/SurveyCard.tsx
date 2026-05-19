@@ -15,14 +15,11 @@ const SurveyCard = ({ children, image, title, type, link }: Props) => (
     className="m-3 h-full max-h-[85vw] w-full overflow-hidden rounded-md bg-white"
   >
     <div className="relative flex h-full w-full flex-col">
-      <img
-        src={image}
-        className="max-h-[66%] min-h-[66%] w-full flex-1 object-cover"
-      />
+      <img src={image} className="min-h-0 flex-1 w-full object-cover" />
 
       {children}
 
-      <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-white">
+      <div className="flex w-full flex-col items-center justify-center gap-1 bg-white shrink-0 p-3">
         <h2 className="line-clamp-2 text-lg! font-bold! text-primary-900">
           {title}
         </h2>
