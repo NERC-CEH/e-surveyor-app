@@ -66,6 +66,10 @@ export { default as MapSettingsPanel } from '@flumens/ionic/dist/components/Map/
 export { useToast, useAlert, useLoader } from '@flumens/ionic/dist/hooks';
 export { useOnHideModal } from '@flumens/ionic/dist/hooks/navigation';
 export { default as ImageCropper } from '@flumens/ionic/dist/components/ImageCropper';
+export {
+  default as DatetimeButton,
+  type Props as DatetimeButtonProps,
+} from '@flumens/ionic/dist/components/DatetimeButton';
 
 // TAILWIND
 export {

@@ -58,11 +58,10 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
         <div className="list-title">Details</div>
         <div className="rounded-list">
           <MenuDateAttr
+            label="Date"
             value={sample.data.date}
-            onChange={(e: any) => {
-              // eslint-disable-next-line
-              sample.data.date = e.detail.value.split('T')[0];
-            }}
+            // eslint-disable-next-line no-return-assign, no-param-reassign
+            onChange={(val: any) => (sample.data.date = val)}
           />
           <MenuAttrItem
             routerLink={`${url}/location`}
