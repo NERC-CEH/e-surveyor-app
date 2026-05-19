@@ -2,7 +2,7 @@ import { Header, Page, Main, Section } from '@flumens';
 import flumensLogo from 'common/images/flumens.svg';
 import rothamstedLogo from 'common/images/rothamsted-logo.png';
 import plantNetLogo from './Pl@ntNet_logo.png';
-import UKCEHLogo from './UKCEHLogo.png';
+import UKCEHLogo from './UKCEHLogo.svg';
 
 const { P, H } = Section;
 
@@ -12,7 +12,7 @@ const Credits = () => (
     <Main>
       <Section>
         <H>Developed by UKCEH</H>
-        <img src={UKCEHLogo} className="mx-auto my-10 block max-w-[70%]" />
+        <img src={UKCEHLogo} className="mx-auto block max-w-[70%]" />
       </Section>
 
       <Section>
