@@ -153,8 +153,8 @@ const HomeMain = ({
 
       {!isDisabled && hasSpecies && (
         <InfoBackgroundMessage name="showMothSpeciesListTip">
-          Swipe left on a species to delete it. Tap the species name to open its
-          profile.
+          Swipe left on a species to delete it. Tap the number to increase the
+          count, and tap the species name to edit.
         </InfoBackgroundMessage>
       )}
 
