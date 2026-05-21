@@ -1,8 +1,8 @@
-import beetleRoutes from './Beetle/router';
-import mothRoutes from './Moth/router';
-import pointRoutes from './Point/router';
-import soilRoutes from './Soil/router';
-import transectRoutes from './Transect/router';
+import beetleRoutes from './Ecosystem/Beetle/router';
+import mothRoutes from './Ecosystem/Moth/router';
+import pointRoutes from './Habitat/Point/router';
+import transectRoutes from './Habitat/Transect/router';
+import soilRoutes from './Soil/Generic/router';
 
 export default [
   ...pointRoutes,

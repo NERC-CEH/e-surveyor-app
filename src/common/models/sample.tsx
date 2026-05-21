@@ -18,9 +18,10 @@ import beetleSurveyConfig, {
   fieldCropAttr,
   fieldNonCropHabitatsAttr,
   fieldTillageAttr,
-} from 'Survey/Beetle/config';
-import mothSurveyConfig from 'Survey/Moth/config';
-import pointSurveyConfig from 'Survey/Point/config';
+} from 'Survey/Ecosystem/Beetle/config';
+import mothSurveyConfig from 'Survey/Ecosystem/Moth/config';
+import pointSurveyConfig from 'Survey/Habitat/Point/config';
+import transectSurveyConfig from 'Survey/Habitat/Transect/config';
 import soilSurveyConfig, {
   SOMIDAttr,
   coverCropAttr,
@@ -33,8 +34,7 @@ import soilSurveyConfig, {
   prevCoverCropAttr,
   sampleNameAttr,
   wormCountAttr,
-} from 'Survey/Soil/config';
-import transectSurveyConfig from 'Survey/Transect/config';
+} from 'Survey/Soil/Generic/config';
 import { dateAttr, Survey } from 'Survey/common/config';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
 import Media from './image';

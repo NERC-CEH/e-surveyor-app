@@ -1,5 +1,5 @@
 import seedmixData from 'common/data/seedmix';
-import config from 'Survey/Point/config';
+import config from 'Survey/Habitat/Point/config';
 import Occurrence from '../../../models/occurrence';
 import Sample from '../../../models/sample';
 import { getMissingSeedmixSpecies, getSeedmixUse } from '../helpers';

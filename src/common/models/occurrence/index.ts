@@ -6,8 +6,10 @@ import {
 } from '@flumens';
 import config from 'common/config';
 import blackListedData from 'common/data/cacheRemote/uksi_plants_blacklist.json';
-import beetleSurveyConfig from 'Survey/Beetle/config';
-import mothSurveyConfig, { UNKNOWN_SPECIES } from 'Survey/Moth/config';
+import beetleSurveyConfig from 'Survey/Ecosystem/Beetle/config';
+import mothSurveyConfig, {
+  UNKNOWN_SPECIES,
+} from 'Survey/Ecosystem/Moth/config';
 import {
   MachineInvolvement,
   occurrenceAbundanceAttr,
