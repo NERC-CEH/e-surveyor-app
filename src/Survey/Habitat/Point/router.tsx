@@ -8,7 +8,7 @@ import Home from './Home';
 import Report from './Report';
 import survey from './config';
 
-const baseURL = '/survey/point';
+const { baseURL } = survey;
 
 const { AttrPageFromRoute } = AttrPage;
 

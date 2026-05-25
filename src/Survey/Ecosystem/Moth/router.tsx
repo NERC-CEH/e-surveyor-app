@@ -8,7 +8,7 @@ import Report from './Report';
 import survey from './config';
 
 const { AttrPageFromRoute } = AttrPage;
-const baseURL = `/survey/${survey.name}`;
+const { baseURL } = survey;
 
 const routes = [
   [baseURL, StartNewSurvey.with(survey), true],

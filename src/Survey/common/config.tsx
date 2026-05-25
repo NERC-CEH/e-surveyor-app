@@ -384,6 +384,11 @@ export type Survey = {
   label?: string;
   deprecated?: boolean;
   /**
+   * Base URL path for this survey's routes.
+   */
+  baseURL?: string;
+
+  /**
    * Remote website survey edit page path.
    */
   webForm?: string;

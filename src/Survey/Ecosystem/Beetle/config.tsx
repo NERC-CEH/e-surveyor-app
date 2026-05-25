@@ -433,6 +433,7 @@ const survey: Survey = {
   id: 727,
   name: 'beetle',
   label: 'Beetle trap',
+  baseURL: '/survey/ecosystem/beetle',
   icon,
 
   attrs: {

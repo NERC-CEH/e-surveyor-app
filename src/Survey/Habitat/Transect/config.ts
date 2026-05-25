@@ -43,6 +43,7 @@ const survey: Survey = {
   id: 627,
   name: 'transect',
   label: 'Transect',
+  baseURL: '/survey/habitat/transect',
   icon,
 
   attrs: {

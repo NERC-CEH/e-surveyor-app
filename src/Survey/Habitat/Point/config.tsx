@@ -28,6 +28,7 @@ const survey: Survey = {
   id: 626,
   name: 'point',
   label: 'Habitat',
+  baseURL: '/survey/habitat/point',
   icon,
 
   attrs: {

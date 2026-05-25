@@ -44,6 +44,7 @@ const survey: Survey = {
   id: 763,
   name: 'moth',
   label: 'Moth recording',
+  baseURL: '/survey/ecosystem/moth',
   icon,
 
   attrs: {

@@ -12,7 +12,7 @@ import Quadrat from './Quadrat';
 import Report from './Report';
 import survey from './config';
 
-const baseURL = '/survey/transect';
+const { baseURL } = survey;
 
 const { AttrPageFromRoute } = AttrPage;
 

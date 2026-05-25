@@ -1,4 +1,5 @@
 import { useEffect, useContext } from 'react';
+import { useRouteMatch } from 'react-router';
 import { useAlert } from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel, { SurveyDraftKeys } from 'models/app';
@@ -68,9 +69,11 @@ type Props = {
 
 function StartNewSurvey({ survey }: Props): null {
   const context = useContext(NavContext);
+  const match = useRouteMatch();
+
   const alert = useAlert();
 
-  const baseURL = `/survey/${survey.name}`;
+  const baseURL = match.url;
   const draftIdKey: any = `draftId:${survey.name}`;
 
   const pickDraftOrCreateSampleWrap = () => {

@@ -9,7 +9,7 @@ import Occurrence from './Occurrence';
 import Trap from './Trap';
 import survey, { fieldNonCropHabitatsAttr } from './config';
 
-const baseURL = `/survey/${survey.name}`;
+const { baseURL } = survey;
 
 const { AttrPageFromRoute } = AttrPage;
 

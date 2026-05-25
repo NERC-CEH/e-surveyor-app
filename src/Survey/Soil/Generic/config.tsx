@@ -546,6 +546,7 @@ const survey: Survey = {
   id: -1,
   name: 'soil',
   label: 'Soil survey',
+  baseURL: '/survey/soil/soil',
   icon: soil,
 
   attrs: {
