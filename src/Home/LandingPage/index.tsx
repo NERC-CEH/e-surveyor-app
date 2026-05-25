@@ -1,29 +1,27 @@
-import { useContext, useState } from 'react';
-import { cameraOutline } from 'ionicons/icons';
+import { useContext, useRef, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/grid';
-import { Grid } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Page, Main, device, useToast, captureImage, Button } from '@flumens';
-import { IonIcon, NavContext, isPlatform } from '@ionic/react';
-import '@ionic/react/css/ionic-swiper.css';
+import { Page, Main, device, useToast, captureImage } from '@flumens';
+import { NavContext, isPlatform, IonRouterLink } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import config from 'common/config';
-import rothamstedLogo from 'common/images/rothamsted-logo.png';
-import appModel from 'common/models/app';
 import Media from 'common/models/image';
 import Occurrence from 'common/models/occurrence';
 import userModel from 'common/models/user';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
+import { baseURL as ecosystemURL } from 'Survey/Ecosystem/router';
+import { baseURL as habitatURL } from 'Survey/Habitat/router';
+import { baseURL as soilURL } from 'Survey/Soil/router';
+import Card from './Components/Card';
 import SpeciesProfile from './Components/Species';
-import SurveyCard from './Components/SurveyCard';
-import survey3 from './beetleSurvey.jpg';
+import background from './background.png';
+import ecosystem from './ecosystem.png';
+import habitat from './habitat.png';
+import habitatID from './habitatID.png';
 import logo from './logo.svg';
-import survey4 from './mothSurvey.jpg';
-import survey2 from './ricardo-gomez.jpg';
-import survey5 from './soilSurvey.jpg';
-import './styles.scss';
-import survey1 from './viateur-hwang.jpg';
+import plantID from './plantID.png';
+import soil from './soil.png';
 
 // hide the terms updated message after this date
 const TERMS_MESSAGE_EXPIRY = new Date('2027-06-01');
@@ -34,8 +32,6 @@ const LandingPage = () => {
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
   const context = useContext(NavContext);
-
-  const { useExperiments } = appModel.data;
 
   const hideSpeciesModal = () => {
     species?.media.forEach(media => media.destroy());
@@ -81,80 +77,79 @@ const LandingPage = () => {
 
   const tabletLayout = isPlatform('tablet')
     ? {
-        modules: [Grid],
-        // slidesPerView: 2.3, // uncomment when more than 4 surveys
-        slidesPerView: 2,
-        centeredSlides: false,
-        centeredSlidesBounds: false,
-        grid: { rows: 2 }, // for when more than 2 surveys
-        spaceBetween: 30,
+        slidesPerView: 3,
       }
     : {};
 
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+
+    // max opacity at full scroll
+    const maxOpacity = 0.7;
+    const progress = scrollTop / (scrollHeight - clientHeight);
+    const opacity = progress * maxOpacity;
+
+    if (overlayRef.current) overlayRef.current.style.opacity = String(opacity);
+  };
+
   return (
     <Page id="home-landing">
-      <Main>
-        <img
-          src={logo}
-          className="absolute -mt-2 max-h-[150px] w-full bg-white px-[74px] py-[13px]"
+      <Main scrollY={false}>
+        <div
+          style={{ backgroundImage: `url(${background})` }}
+          className="absolute w-full top-0 bg-cover text-white p-10 pb-40"
+        >
+          <img src={logo} className="max-w-3/4 w-full" />
+
+          <div className="mt-6">
+            What is e-Surveyor? Read more about it{' '}
+            <IonRouterLink href="/info/about" className="text-white font-bold">
+              here
+            </IonRouterLink>
+            .
+          </div>
+        </div>
+
+        {/* darkening overlay that increases with scroll */}
+        <div
+          ref={overlayRef}
+          className="absolute size-full z-30 bg-black opacity-0 pointer-events-none"
         />
 
-        <div className="flex h-full flex-col justify-evenly gap-5 overflow-scroll px-0 pt-40 pb-[120px]">
+        <div
+          className="absolute h-full z-50 pt-[35vh] pb-25 overflow-scroll"
+          onScroll={onScroll}
+        >
           <Swiper
-            centeredSlides
-            centeredSlidesBounds
-            className="w-screen min-h-50"
-            slidesPerView={1.3}
+            className="w-screen py-5! [&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:h-auto! [&_.swiper-slide]:flex [&_.swiper-slide]:flex-col"
+            slidesPerView={2.3}
             {...tabletLayout}
           >
-            {useExperiments && (
-              <SwiperSlide>
-                <SurveyCard
-                  image={survey5}
-                  title="Soil survey"
-                  type="SOM, VSA and worm count"
-                  link="/survey/soil"
-                />
-              </SwiperSlide>
-            )}
             <SwiperSlide>
-              <SurveyCard
-                image={survey1}
-                title="Record a habitat"
-                type="Survey"
-                link="/survey/point"
+              <Card
+                image={habitat}
+                title="Habitat"
+                type="Recording habitat type, structure and vegetation"
+                link={habitatURL}
               />
             </SwiperSlide>
             <SwiperSlide>
-              <SurveyCard
-                image={survey2}
-                title="Structured recording"
-                type="Transect survey"
-                link="/survey/transect"
+              <Card
+                image={ecosystem}
+                title="Ecosystem Function"
+                type="Habitats, Moths, Carabids and Day-time pollinators"
+                link={ecosystemURL}
               />
             </SwiperSlide>
             <SwiperSlide>
-              <SurveyCard
-                image={survey4}
-                title="Moth recording"
-                type="Survey"
-                link="/survey/moth"
+              <Card
+                image={soil}
+                title="Soil"
+                type="Assessing below-ground condition and resilience"
+                link={soilURL}
               />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SurveyCard
-                image={survey3}
-                title="Farmland Carabids"
-                type="Beetle trap survey"
-                link="/survey/beetle"
-              >
-                <div className="absolute top-0 right-0 w-3/5 rounded-bl-2xl bg-white/85 md:w-1/2">
-                  <div className="px-2 pt-2 text-right text-xs text-black/80 md:text-sm">
-                    In partnership with
-                  </div>
-                  <img src={rothamstedLogo} className="mr-1 !w-full p-1" />
-                </div>
-              </SurveyCard>
             </SwiperSlide>
           </Swiper>
 
@@ -169,13 +164,30 @@ const LandingPage = () => {
             </InfoBackgroundMessage>
           )}
 
-          <Button
-            className="mx-auto w-fit px-5 text-lg shadow-2xl"
-            onPress={identifyPhoto}
-            prefix={<IonIcon src={cameraOutline} className="size-6" />}
+          <Swiper
+            centeredSlides
+            centeredSlidesBounds
+            className="w-full min-h-50 py-5! [&>div]:justify-center [&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:h-auto! [&_.swiper-slide]:flex [&_.swiper-slide]:flex-col border-t border-black/10 bg-black/5"
+            slidesPerView={2.3}
+            // {...tabletLayout}
           >
-            Identify plant
-          </Button>
+            <SwiperSlide>
+              <Card
+                image={plantID}
+                title="Identify plant"
+                type="Identify a plant from a photo"
+                onClick={identifyPhoto}
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Card
+                image={habitatID}
+                title="Identify habitat"
+                type="Coming soon"
+                onClick={() => toast.warn('Work in progress.')}
+              />
+            </SwiperSlide>
+          </Swiper>
         </div>
       </Main>
 
