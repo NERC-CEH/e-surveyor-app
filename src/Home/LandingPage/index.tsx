@@ -14,6 +14,7 @@ import { baseURL as ecosystemURL } from 'Survey/Ecosystem/router';
 import { baseURL as habitatURL } from 'Survey/Habitat/router';
 import { baseURL as soilURL } from 'Survey/Soil/router';
 import Card from './Components/Card';
+import FancyButton from './Components/FancyButton';
 import SpeciesProfile from './Components/Species';
 import background from './background.png';
 import ecosystem from './ecosystem.png';
@@ -131,7 +132,7 @@ const LandingPage = () => {
               <Card
                 image={habitat}
                 title="Habitat"
-                type="Recording habitat type, structure and vegetation"
+                description="Recording habitat type, structure and vegetation"
                 link={habitatURL}
               />
             </SwiperSlide>
@@ -139,7 +140,7 @@ const LandingPage = () => {
               <Card
                 image={ecosystem}
                 title="Ecosystem Function"
-                type="Habitats, Moths, Carabids and Day-time pollinators"
+                description="Habitats, Moths, Carabids and Day-time pollinators"
                 link={ecosystemURL}
               />
             </SwiperSlide>
@@ -147,7 +148,7 @@ const LandingPage = () => {
               <Card
                 image={soil}
                 title="Soil"
-                type="Assessing below-ground condition and resilience"
+                description="Assessing below-ground condition and resilience"
                 link={soilURL}
               />
             </SwiperSlide>
@@ -164,30 +165,22 @@ const LandingPage = () => {
             </InfoBackgroundMessage>
           )}
 
-          <Swiper
-            centeredSlides
-            centeredSlidesBounds
-            className="w-full min-h-50 py-5! [&>div]:justify-center [&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:h-auto! [&_.swiper-slide]:flex [&_.swiper-slide]:flex-col border-t border-black/10 bg-black/5"
-            slidesPerView={2.3}
-            // {...tabletLayout}
-          >
-            <SwiperSlide>
-              <Card
-                image={plantID}
-                title="Identify plant"
-                type="Identify a plant from a photo"
+          <div className="border-y border-black/10 bg-black/5">
+            <div className="flex flex-col gap-2 max-w-lg mx-auto px-3 w-full py-[3vh]">
+              <FancyButton
+                icon={plantID}
+                label="Identify plant"
                 onClick={identifyPhoto}
+                description="Identify a plant from a photo"
               />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card
-                image={habitatID}
-                title="Identify habitat"
-                type="Coming soon"
+              <FancyButton
+                icon={habitatID}
+                label="Identify habitat"
                 onClick={() => toast.warn('Work in progress.')}
+                description="Get habitat suggestions"
               />
-            </SwiperSlide>
-          </Swiper>
+            </div>
+          </div>
         </div>
       </Main>
 

@@ -22,20 +22,23 @@ const HomeController = () => (
       <Route path="/home/menu" component={Menu} exact />
     </IonRouterOutlet>
 
-    <IonTabBar slot="bottom">
-      <IonTabButton tab="home/landing" href="/home/landing">
-        <IonIcon icon={homeOutline} />
-      </IonTabButton>
+    <div className="absolute bottom-0 left-0 w-full">
+      <div className="pointer-events-none absolute -top-12 left-0 w-full h-[calc(100%+3rem)] backdrop-blur-xl bg-white/10 [mask-image:linear-gradient(to_top,black_50%,transparent_100%)]" />
+      <IonTabBar slot="bottom" className="relative">
+        <IonTabButton tab="home/landing" href="/home/landing">
+          <IonIcon icon={homeOutline} />
+        </IonTabButton>
 
-      <IonTabButton tab="home/surveys" href="/home/surveys">
-        <IonIcon icon={personOutline} />
-        <PendingSurveysBadge className="absolute bottom-1/4 left-2/4" />
-      </IonTabButton>
+        <IonTabButton tab="home/surveys" href="/home/surveys">
+          <IonIcon icon={personOutline} />
+          <PendingSurveysBadge className="absolute bottom-1/4 left-2/4" />
+        </IonTabButton>
 
-      <IonTabButton tab="home/menu" href="/home/menu">
-        <IonIcon icon={menuOutline} />
-      </IonTabButton>
-    </IonTabBar>
+        <IonTabButton tab="home/menu" href="/home/menu">
+          <IonIcon icon={menuOutline} />
+        </IonTabButton>
+      </IonTabBar>
+    </div>
   </IonTabs>
 );
 
