@@ -1,16 +1,5 @@
-import { useState } from 'react';
 import { observer } from 'mobx-react';
-import { Capacitor } from '@capacitor/core';
-import {
-  Page,
-  Header,
-  captureImage,
-  useAlert,
-  ImageCropper,
-  device,
-} from '@flumens';
-import { isPlatform } from '@ionic/react';
-import config from 'common/config';
+import { Page, Header, captureImage, useAlert, device } from '@flumens';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
@@ -72,7 +61,6 @@ const showFirstPhotoTip = (alert: any) => {
 
 const TrapController = ({ subSample }: Props) => {
   const alert = useAlert();
-  const [editImage, setEditImage] = useState<URL>();
 
   const isDisabled = subSample.isUploaded;
   const promptImageSource = usePromptImageSource();
@@ -80,14 +68,8 @@ const TrapController = ({ subSample }: Props) => {
   const attachImages = async (photoURLs: URL[]) => {
     // eslint-disable-next-line no-restricted-syntax
     for (const photoURL of photoURLs) {
-      const dataDirPath = config.dataPath;
-
       // eslint-disable-next-line no-await-in-loop
-      const mediaModel = (await Media.getImageModel(
-        photoURL,
-        dataDirPath,
-        true
-      )) as Media;
+      const mediaModel = await Media.getImageModel(photoURL);
 
       const survey = subSample.parent!.getSurvey();
       const newOccurrence = survey.smp!.occ!.create!({
@@ -117,25 +99,8 @@ const TrapController = ({ subSample }: Props) => {
 
     if (!photoURLs?.length) return;
 
-    const canEdit = photoURLs.length === 1;
-    if (canEdit) {
-      let imageToEdit = photoURLs[0];
-      if (isPlatform('hybrid')) {
-        imageToEdit = Capacitor.convertFileSrc(imageToEdit);
-      }
-
-      setEditImage(imageToEdit);
-      return;
-    }
-
     attachImages(photoURLs);
   };
-
-  const onDoneEdit = (image: URL) => {
-    attachImages([image]);
-    setEditImage(undefined);
-  };
-  const onCancelEdit = () => setEditImage(undefined);
 
   return (
     <Page id="transect-trap">
@@ -144,11 +109,6 @@ const TrapController = ({ subSample }: Props) => {
         subSample={subSample}
         isDisabled={isDisabled}
         onAddNewSpecies={onAddNewSpecies}
-      />
-      <ImageCropper
-        image={editImage}
-        onDone={onDoneEdit}
-        onCancel={onCancelEdit}
       />
     </Page>
   );

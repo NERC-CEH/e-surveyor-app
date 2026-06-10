@@ -1,16 +1,5 @@
-import { useState } from 'react';
 import { observer } from 'mobx-react';
-import { Capacitor } from '@capacitor/core';
-import {
-  Page,
-  Header,
-  device,
-  captureImage,
-  useAlert,
-  ImageCropper,
-} from '@flumens';
-import { isPlatform } from '@ionic/react';
-import config from 'common/config';
+import { Page, Header, device, captureImage, useAlert } from '@flumens';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
@@ -72,7 +61,6 @@ const showFirstPhotoTip = (alert: any) => {
 
 const QuadratController = ({ subSample }: Props) => {
   const alert = useAlert();
-  const [editImage, setEditImage] = useState<URL>();
 
   const isDisabled = subSample.isUploaded;
   const promptImageSource = usePromptImageSource();
@@ -80,14 +68,8 @@ const QuadratController = ({ subSample }: Props) => {
   const attachImages = async (photoURLs: URL[]) => {
     // eslint-disable-next-line no-restricted-syntax
     for (const photoURL of photoURLs) {
-      const dataDirPath = config.dataPath;
-
       // eslint-disable-next-line no-await-in-loop
-      const image = (await Media.getImageModel(
-        photoURL,
-        dataDirPath,
-        true
-      )) as Media;
+      const image = await Media.getImageModel(photoURL);
 
       const survey = subSample.getSurvey();
       const newSubSample = survey.smp!.create!({
@@ -121,25 +103,8 @@ const QuadratController = ({ subSample }: Props) => {
 
     if (!photoURLs?.length) return;
 
-    const canEdit = photoURLs.length === 1;
-    if (canEdit) {
-      let imageToEdit = photoURLs[0];
-      if (isPlatform('hybrid')) {
-        imageToEdit = Capacitor.convertFileSrc(imageToEdit);
-      }
-
-      setEditImage(imageToEdit);
-      return;
-    }
-
     attachImages(photoURLs);
   };
-
-  const onDoneEdit = (image: URL) => {
-    attachImages([image]);
-    setEditImage(undefined);
-  };
-  const onCancelEdit = () => setEditImage(undefined);
 
   return (
     <Page id="transect-quadrat">
@@ -148,11 +113,6 @@ const QuadratController = ({ subSample }: Props) => {
         subSample={subSample}
         isDisabled={isDisabled}
         photoSelect={photoSelect}
-      />
-      <ImageCropper
-        image={editImage}
-        onDone={onDoneEdit}
-        onCancel={onCancelEdit}
       />
     </Page>
   );

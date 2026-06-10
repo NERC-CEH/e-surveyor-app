@@ -3,12 +3,13 @@ import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
 import {
   captureImage,
+  deleteFile,
   ImageCropper,
   InfoBackgroundMessage,
+  saveFile,
   URL,
 } from '@flumens';
 import { IonButton, IonIcon } from '@ionic/react';
-import config from 'common/config';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
@@ -37,7 +38,7 @@ const AppPhotoPicker = ({
 
     if (!image) return;
 
-    const imageModel = await Media.getImageModel(image, config.dataPath);
+    const imageModel = await Media.getImageModel(image);
     if (caption) {
       imageModel.data.caption = caption;
     }
@@ -53,7 +54,14 @@ const AppPhotoPicker = ({
   const onDoneEdit = async (image: URL) => {
     if (!editImage) return;
 
-    const newImageModel = await Media.getImageModel(image, config.dataPath);
+    // save the new image and delete the old one
+    const oldFileName = editImage.getURL().split('/').pop() as string;
+    const extension = oldFileName.split('.').pop() as string;
+    const newFileName = `${Date.now()}.${extension}`;
+    await deleteFile(oldFileName);
+    image = await saveFile(image, newFileName); // eslint-disable-line no-param-reassign
+
+    const newImageModel = await Media.getImageModel(image);
     Object.assign(editImage?.data, newImageModel.data);
     if (editImage.isPersistent) {
       if (editImage.isPersistent()) editImage.save();

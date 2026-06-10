@@ -63,11 +63,7 @@ const LandingPage = () => {
     }
 
     const occurrence = new Occurrence({});
-    const media = (await Media.getImageModel(
-      image,
-      config.dataPath,
-      true
-    )) as Media;
+    const media = await Media.getImageModel(image);
 
     occurrence.media.push(media);
     setSpecies(occurrence);

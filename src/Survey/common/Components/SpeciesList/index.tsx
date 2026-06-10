@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
-import { Capacitor } from '@capacitor/core';
 import {
   InfoMessage,
   useToast,
@@ -10,8 +9,7 @@ import {
   usePromptImageSource,
   captureImage,
 } from '@flumens';
-import { IonList, isPlatform, NavContext } from '@ionic/react';
-import CONFIG from 'common/config';
+import { IonList, NavContext } from '@ionic/react';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
@@ -130,11 +128,7 @@ const SpeciesList = ({
       );
       if (!images.length) return [];
 
-      const getImageModel = (image: any) =>
-        Media.getImageModel(
-          isPlatform('hybrid') ? Capacitor.convertFileSrc(image) : image,
-          CONFIG.dataPath
-        ) as Promise<Media>;
+      const getImageModel = (image: any) => Media.getImageModel(image);
 
       const imageModels = images.map(getImageModel);
 

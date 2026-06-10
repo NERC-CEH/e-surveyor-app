@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Capacitor } from '@capacitor/core';
 import {
   Page,
   Header,
@@ -9,10 +8,8 @@ import {
   useAlert,
   ModelValidationMessage,
   captureImage,
-  ImageCropper,
 } from '@flumens';
-import { NavContext, isPlatform } from '@ionic/react';
-import config from 'common/config';
+import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
@@ -102,25 +99,17 @@ const HomeController = ({ sample }: Props) => {
   const alert = useAlert();
   const promptImageSource = usePromptImageSource();
 
-  const [editImage, setEditImage] = useState<URL>();
-
   const attachImages = async (photoURLs: URL[]) => {
     // eslint-disable-next-line no-restricted-syntax
     for (const photoURL of photoURLs) {
-      const dataDirPath = config.dataPath;
-
       // eslint-disable-next-line no-await-in-loop
-      const image = (await Media.getImageModel(
-        photoURL,
-        dataDirPath,
-        true
-      )) as Media;
+      const mediaModel = await Media.getImageModel(photoURL);
 
       const survey = sample.getSurvey();
       const newSubSample = survey.smp!.create!({
         Sample,
         Occurrence,
-        photo: image,
+        photo: mediaModel,
       });
 
       sample.samples.push(newSubSample);
@@ -148,29 +137,12 @@ const HomeController = ({ sample }: Props) => {
 
     if (!photoURLs?.length) return;
 
-    const canEdit = photoURLs.length === 1;
-    if (canEdit) {
-      let imageToEdit = photoURLs[0];
-      if (isPlatform('hybrid')) {
-        imageToEdit = Capacitor.convertFileSrc(imageToEdit);
-      }
-
-      setEditImage(imageToEdit);
-      return;
-    }
-
     attachImages(photoURLs);
   };
 
   const navToReport = async () => {
     navigate(`${match.url}/report`);
   };
-
-  const onDoneEdit = (image: URL) => {
-    attachImages([image]);
-    setEditImage(undefined);
-  };
-  const onCancelEdit = () => setEditImage(undefined);
 
   const onFinish = async () => {
     const invalids = sample.validateRemote();
@@ -253,11 +225,6 @@ const HomeController = ({ sample }: Props) => {
         sample={sample}
         photoSelect={photoSelect}
         isDisabled={isDisabled}
-      />
-      <ImageCropper
-        image={editImage}
-        onDone={onDoneEdit}
-        onCancel={onCancelEdit}
       />
     </Page>
   );

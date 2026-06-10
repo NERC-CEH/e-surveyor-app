@@ -4,7 +4,7 @@ import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { Media as MediaOriginal, MediaAttrs } from '@flumens';
+import { Media as MediaOriginal, MediaAttrs, isDataURL } from '@flumens';
 import { isPlatform } from '@ionic/react';
 import config from 'common/config';
 import Occurrence from './occurrence';
@@ -16,6 +16,21 @@ export type URL = string;
 type Data = MediaAttrs & { identified?: boolean; species: any };
 
 export default class Media extends MediaOriginal<Data> {
+  static getImageModel(image: any) {
+    let convertedImage = image;
+
+    if (isPlatform('hybrid') && !isDataURL(image)) {
+      convertedImage = Capacitor.convertFileSrc(image);
+    }
+
+    return MediaOriginal.getImageModel.call(
+      Media,
+      convertedImage,
+      config.dataPath,
+      true
+    ) as Promise<Media>;
+  }
+
   declare parent?: Sample | Occurrence;
 
   identification = observable({ identifying: false });
@@ -70,7 +85,11 @@ export default class Media extends MediaOriginal<Data> {
   getURL() {
     const { data: name } = this.data;
 
-    if (!isPlatform('hybrid') || process.env.NODE_ENV === 'test') {
+    if (
+      !isPlatform('hybrid') ||
+      process.env.NODE_ENV === 'test' ||
+      name?.includes('http')
+    ) {
       return name;
     }
 

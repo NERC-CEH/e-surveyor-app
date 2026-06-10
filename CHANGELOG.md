@@ -1,3 +1,7 @@
+### 1.6.1
+
+Fixed image picker.
+
 ### 1.6.0
 
 Added moth host plant display.
