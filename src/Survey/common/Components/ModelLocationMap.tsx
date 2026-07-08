@@ -14,20 +14,23 @@ import {
   mapFlyToLocation,
 } from '@flumens';
 import config from 'common/config';
+import Location from 'models/location';
+import Sample from 'models/sample';
 
 type Props = {
-  subSample?: any;
-  sample: any;
+  subSample?: Sample;
+  sample: Sample;
+  location: Location;
 };
 
-const ModelLocationMap = ({ subSample, sample }: Props) => {
-  const model = subSample || sample;
-  const location = model.data.location || {};
+const ModelLocationMap = ({ subSample, sample, location }: Props) => {
+  const model = subSample || sample || location;
+  const loc = model.data.location || {};
   const parentLocation = model.parent?.data.location;
 
   const setLocation = async (newLocation: any) => {
     if (!newLocation) return;
-    if (model.isGPSRunning()) model.stopGPS();
+    if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
 
     model.data.location = { ...model.data.location, ...newLocation };
   };
@@ -49,14 +52,16 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
   const onGPSClick = () => toggleGPS(model);
 
   const [mapRef, setMapRef] = useState<any>();
-  const flyToLocation = () => mapFlyToLocation(mapRef, location);
-  useEffect(flyToLocation, [mapRef, location]);
+  const flyToLocation = () => mapFlyToLocation(mapRef, loc);
+  useEffect(flyToLocation, [mapRef, loc]);
+
+  const isLocating = 'isGPSRunning' in model ? model.isGPSRunning() : false;
 
   return (
     <Page id="model-location">
       <MapHeader>
         <MapHeader.Location
-          location={location}
+          location={loc}
           onChange={onManuallyTypedLocationChange}
           useGridRef
         />
@@ -68,10 +73,10 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
           accessToken={config.map.mapboxApiKey}
           mapStyle={currentStyle}
           maxPitch={0}
-          initialViewState={location}
+          initialViewState={loc}
         >
           <MapContainer.Control.Geolocate
-            isLocating={model.gps.locating}
+            isLocating={isLocating}
             onClick={onGPSClick}
           />
 
@@ -90,7 +95,7 @@ const ModelLocationMap = ({ subSample, sample }: Props) => {
 
           <MapContainer.Marker
             parentGridref={parentLocation?.gridref}
-            {...location}
+            {...loc}
           />
         </MapContainer>
       </Main>

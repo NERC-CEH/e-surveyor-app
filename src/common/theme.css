@@ -12,18 +12,18 @@
 
 @theme {
   /* https://www.shadecolr.com/#colors=Y29sb3I6OTkuNzgyNjA4Njk1NjUyMTYsMzkuMzE2MjM5MzE2MjM5MzEsNDUuODgyMzUyOTQxMTc2NDd8c3RlcC11cDo5fHN0ZXAtZG93bjoxMnxodWUtc2hpZnQ6MHxiYXNlLXN0b3A6NnxuYW1lOmdyZWVufGxvY2tlZDow&active=color-1&v=2 */
-  --color-primary: oklch(65.297% 0.14046 136.29);
-  --color-primary-50: oklch(97.213% 0.01344 134.9);
-  --color-primary-100: oklch(94.425% 0.02705 134.97);
-  --color-primary-200: oklch(88.854% 0.0547 135.15);
-  --color-primary-300: oklch(83.305% 0.08269 135.37);
-  --color-primary-400: oklch(77.8% 0.11047 135.66);
-  --color-primary-500: oklch(72.375% 0.13695 136.08);
-  --color-primary-600: oklch(65.297% 0.14046 136.29);
-  --color-primary-700: oklch(52.358% 0.11012 136.2);
-  --color-primary-800: oklch(38.923% 0.07739 135.98);
-  --color-primary-900: oklch(23.778% 0.04043 135.41);
-  --color-primary-950: oklch(15.507% 0.01933 132.9);
+  --color-primary: oklch(65.314% 0.1371 103.69);
+  --color-primary-50: oklch(99.863% 0.00656 106.52);
+  --color-primary-100: oklch(98.778% 0.03517 105.29);
+  --color-primary-200: oklch(96.979% 0.08855 104.48);
+  --color-primary-300: oklch(95.343% 0.13623 105.11);
+  --color-primary-400: oklch(93.765% 0.1704 104.91);
+  --color-primary-500: oklch(92.61% 0.19016 104.69);
+  --color-primary-600: oklch(83.418% 0.17581 104.21);
+  --color-primary-700: oklch(65.314% 0.1371 103.69);
+  --color-primary-800: oklch(45.973% 0.09635 104.26);
+  --color-primary-900: oklch(24.231% 0.05019 106.17);
+  --color-primary-950: oklch(10.561% 0.0221 101.83);
 
   /* https://www.shadecolr.com/#colors=Y29sb3I6MzcuMDIxMjc2NTk1NzQ0NjcsMTAwLDUzLjkyMTU2ODYyNzQ1MDk4fHN0ZXAtdXA6OXxzdGVwLWRvd246MTF8aHVlLXNoaWZ0OjB8YmFzZS1zdG9wOjV8bmFtZTpvcmFuZ2V8bG9ja2VkOjA%3D&active=color-1&v=2  --color-secondary: oklch(79.304% 0.16846 69.901); */
   --color-secondary: oklch(55.997% 0.12313 67.715);
@@ -161,7 +161,7 @@
   --id-possible-color: var(--color-secondary-600);
   --id-rejected-color: var(--color-danger);
 
-  --form-value-color: var(--color-tertiary-800);
+  --form-value-color: #090d14;
   --ion-font-family: 'Quicksand';
 }
 
@@ -247,9 +247,20 @@ body {
 ion-toolbar {
   --ion-toolbar-background: linear-gradient(
     90deg,
-    rgba(102, 163, 71, 1) 0%,
-    rgba(131, 163, 71, 1) 100%
+    rgb(9, 13, 20) 0%,
+    rgb(33, 40, 52) 100%
   );
+}
+/* fix map toolbar background for location input */
+ion-toolbar.location-input-attr {
+  --ion-toolbar-background: linear-gradient(
+    90deg,
+    rgb(9, 13, 20) 0%,
+    rgb(33, 40, 52) 100%
+  ) !important;
+}
+ion-toolbar.location-input-attr ion-back-button {
+  background-color: transparent !important;
 }
 
 /* info messages */
@@ -259,6 +270,25 @@ ion-toolbar {
 }
 
 /* pull the menu input values to the right */
-.text-input-block input {
+.text-input-block:not(.web) input {
   text-align: right;
+}
+
+/* for surveys with a stars background */
+.stars-background-header {
+  @apply [&>ion-toolbar]:absolute [&>ion-toolbar]:top-0 [&>ion-toolbar]:[--background:transparent];
+}
+.stars-background-header.header-scrolled {
+  @apply [&>ion-toolbar]:[--background:var(--ion-toolbar-background)];
+}
+
+/* Set geometry link map fixed height */
+#geometry-link-map {
+  height: 200px;
+}
+
+/* Selected radio and checkbox input default theming */
+.radio-input > div > label[data-selected='true'],
+.checkbox-input > div > label[data-selected='true'] {
+  @apply border-primary-800 bg-primary-100/30;
 }

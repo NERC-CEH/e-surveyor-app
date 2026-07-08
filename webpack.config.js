@@ -8,6 +8,7 @@ const required = [
   'APP_BACKEND_CLIENT_PASS',
   'APP_MAPBOX_MAP_KEY',
   'APP_SENTRY_KEY',
+  'HABITAT_ACCESS_TOKEN',
 ];
 
 const development = {

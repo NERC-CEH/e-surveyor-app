@@ -15,7 +15,7 @@ const WormHome = ({ subSample }: Props) => {
   };
 
   return (
-    <Page id="survey-soil-worm">
+    <Page id="survey-soil-worm" className="theme-soil">
       <Header title="Earthworm" />
       <Main>
         <IonList lines="full">

@@ -74,8 +74,6 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
         machineInvolvement,
         probability: 1,
       };
-
-      // eslint-disable-next-line no-param-reassign
       occurrence.data.taxon = newTaxon;
       occurrence.save();
     };

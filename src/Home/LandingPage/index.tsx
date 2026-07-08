@@ -6,17 +6,20 @@ import { Page, Main, device, useToast, captureImage } from '@flumens';
 import { NavContext, isPlatform, IonRouterLink } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import config from 'common/config';
+import background from 'common/images/branches.jpg';
 import Media from 'common/models/image';
+import Location from 'common/models/location';
 import Occurrence from 'common/models/occurrence';
 import userModel from 'common/models/user';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import { baseURL as ecosystemURL } from 'Survey/Ecosystem/router';
+import { Data } from 'Survey/Habitat/Location/config';
 import { baseURL as habitatURL } from 'Survey/Habitat/router';
 import { baseURL as soilURL } from 'Survey/Soil/router';
 import Card from './Components/Card';
 import FancyButton from './Components/FancyButton';
+import HabitatProfile from './Components/Habitat';
 import SpeciesProfile from './Components/Species';
-import background from './background.png';
 import ecosystem from './ecosystem.png';
 import habitat from './habitat.png';
 import habitatID from './habitatID.png';
@@ -30,6 +33,7 @@ const showTermsMessage = new Date() < TERMS_MESSAGE_EXPIRY;
 
 const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
+  const [habitatLocation, setHabitatLocation] = useState<Location<Data>>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
   const context = useContext(NavContext);
@@ -37,6 +41,43 @@ const LandingPage = () => {
   const hideSpeciesModal = () => {
     species?.media.forEach(media => media.destroy());
     setSpecies(undefined);
+  };
+
+  const hideHabitatModal = () => setHabitatLocation(undefined);
+
+  const identifyHabitat = async () => {
+    if (!userModel.isLoggedIn()) {
+      context.navigate('/user/register');
+      return;
+    }
+
+    if (!device.isOnline) {
+      toast.warn('Looks like you are offline!');
+      return;
+    }
+
+    const shouldUseCamera = await promptImageSource();
+    const cancelled = shouldUseCamera === null;
+    if (cancelled) return;
+
+    const photoURLs = await captureImage(
+      shouldUseCamera ? { camera: true } : { multiple: true }
+    );
+
+    if (!photoURLs?.length) return;
+
+    const location = new Location<Data>({ skipStore: true }); // create a non-persistent location to hold the photos and suggestions
+
+    // attach selected photos before opening the modal so it auto-fetches
+    const attach = async (photoURL: string) => {
+      const media = await Media.getImageModel(photoURL);
+
+      location.media.push(media);
+    };
+
+    await Promise.all(photoURLs.map(attach));
+
+    setHabitatLocation(location);
   };
 
   const identifyPhoto = async () => {
@@ -55,16 +96,10 @@ const LandingPage = () => {
     if (cancelled) return;
 
     const [image] = await captureImage({ camera: shouldUseCamera });
-    if (!image) {
-      return;
-    }
+    if (!image) return;
 
     const occurrence = new Occurrence({});
-    const media = (await Media.getImageModel(
-      image,
-      config.dataPath,
-      true
-    )) as Media;
+    const media = await Media.getImageModel(image);
 
     occurrence.media.push(media);
     setSpecies(occurrence);
@@ -97,10 +132,10 @@ const LandingPage = () => {
 
   return (
     <Page id="home-landing">
-      <Main scrollY={false}>
+      <Main scrollY={false} className="[--background:#848484]!">
         <div
           style={{ backgroundImage: `url(${background})` }}
-          className="absolute w-full top-0 bg-cover text-white p-10 pb-40"
+          className="absolute w-full top-0 bg-cover bg-center text-white p-10 pb-40"
         >
           <img src={logo} className="max-w-3/4 w-full" />
 
@@ -176,7 +211,7 @@ const LandingPage = () => {
               <FancyButton
                 icon={habitatID}
                 label="Identify habitat"
-                onClick={() => toast.warn('Work in progress.')}
+                onClick={identifyHabitat}
                 description="Get habitat suggestions"
               />
             </div>
@@ -185,6 +220,7 @@ const LandingPage = () => {
       </Main>
 
       <SpeciesProfile occurrence={species} onClose={hideSpeciesModal} />
+      <HabitatProfile location={habitatLocation} onClose={hideHabitatModal} />
     </Page>
   );
 };

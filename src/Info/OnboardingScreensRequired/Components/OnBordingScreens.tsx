@@ -54,7 +54,6 @@ const OnboardingScreens = ({ appModel }: Props) => {
   const [controlledSwiper, setControlledSwiper] = useState<SwiperCore>();
 
   function exit() {
-    // eslint-disable-next-line no-param-reassign
     appModel.data.showedWelcome = true;
   }
 

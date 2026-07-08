@@ -1,11 +1,10 @@
-import { ReactNode } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Button, InfoMessage } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import config from 'common/config';
 
-type Props = { children?: ReactNode };
+type Props = { children?: any };
 
 const UploadedRecordInfoMessage = ({ children: childrenProp }: Props) => {
   const children = childrenProp || (

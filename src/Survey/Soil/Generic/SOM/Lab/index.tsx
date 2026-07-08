@@ -13,7 +13,7 @@ const Lab = ({ sample }: Props) => {
   const recordAttrs = { record: sample.data };
 
   return (
-    <Page id="survey-soil-som-lab">
+    <Page id="survey-soil-som-lab" className="theme-soil">
       <Header title="Lab results" />
       <Main>
         <IonList lines="full" className="flex flex-col gap-2">

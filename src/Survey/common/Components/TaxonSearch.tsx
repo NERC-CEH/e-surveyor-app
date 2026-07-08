@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { Page, Main, Header } from '@flumens';
 import { NavContext } from '@ionic/react';
 import TaxonSearch from 'common/Components/TaxonSearch';
-import Occurrence, { Taxon } from 'models/occurrence';
+import { Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 import { MachineInvolvement } from 'Survey/common/config';
 
@@ -35,10 +35,7 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
 
     if (!subModel) {
       const modelSurvey = model.getSurvey();
-      const newSubSample: Sample = modelSurvey.smp!.create!({
-        Sample,
-        Occurrence,
-      });
+      const newSubSample: Sample = modelSurvey.smp!.create!({});
 
       model.samples.push(newSubSample);
 

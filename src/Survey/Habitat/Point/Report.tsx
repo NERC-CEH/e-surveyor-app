@@ -51,7 +51,7 @@ const ReportController = ({ sample }: Props) => {
   }
 
   return (
-    <Page id="survey-report">
+    <Page id="survey-report" className="theme-habitat">
       <Header
         title="Report"
         rightSlot={uploadButton}

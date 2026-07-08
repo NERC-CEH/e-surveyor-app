@@ -1,8 +1,9 @@
 import { chatboxOutline } from 'ionicons/icons';
 import { object, string } from 'zod';
 import { dateFormat, toISOTimezoneString } from '@flumens';
-import icon from 'common/images/moth-inside-icon.svg';
+import icon from 'common/images/moth-icon.svg';
 import appModel from 'common/models/app';
+import Sample from 'common/models/sample';
 import Occurrence, { Taxon } from 'models/occurrence';
 import {
   Survey,
@@ -81,8 +82,8 @@ const survey: Survey = {
         taxon: object({}, { error: 'Moth has not been identified.' }),
       }).safeParse(attrs).error,
 
-    create({ Occurrence: AppOccurrence, taxon, photo }) {
-      const occ = new AppOccurrence({
+    create({ taxon, photo }) {
+      const occ = new Occurrence({
         data: {
           taxon,
           [occurrenceAbundanceAttr.id]: 1,
@@ -105,7 +106,7 @@ const survey: Survey = {
       date: string({ error: 'Date is missing.' }).nullable(),
     }).safeParse(attrs).error,
 
-  create({ Sample }) {
+  create() {
     const sample = new Sample({
       data: {
         surveyId: survey.id,

@@ -38,7 +38,7 @@ const Report = ({ sample }: Props) => {
     );
 
   return (
-    <Page id="survey-soil-report">
+    <Page id="survey-soil-report" className="theme-soil">
       <Header title="Report" rightSlot={finishButton} />
       <Main />
     </Page>

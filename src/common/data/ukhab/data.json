@@ -1,0 +1,1177 @@
+{
+  "g": {
+    "id": "g",
+    "level": 2,
+    "name": "Grassland",
+    "definition": "Total vegetation cover variable from 25–100% – not on waterlogged soils. Vegetation is ≥75% herbaceous (grasses, sedges, rushes, ferns and forbs) rather than woody, with halophytic species absent or occasional.",
+    "children": ["g1", "g2", "g3", "g4"],
+    "inclusions": [
+      "Pastures and (semi-)natural grasslands that are not on waterlogged soils.",
+      "Vegetation dominated by Bracken Pteridium aquilinum (see g1c).",
+      "Scattered scrub (see 10) in herbaceous vegetation with scrub (not trees or dwarf shrubs) <75%."
+    ],
+    "exclusions": [
+      "Crops (see c~).",
+      "Reedbeds (see f2e).",
+      "Calaminarian grasslands (see s1c).",
+      "Vegetation dominated by a combination of Molinia and Juncus species on waterlogged soils."
+    ]
+  },
+  "w": {
+    "id": "w",
+    "level": 2,
+    "name": "Woodland and forest",
+    "definition": "Land with ≥25% cover of trees that are ≥5 m in height.",
+    "children": ["w1", "w2"],
+    "inclusions": [
+      "Recently felled woodland (but not clear-felled forestry plantations, unless re-planted).",
+      "Coppice.",
+      "Coppice-with-standards.",
+      "Lines of trees (but not hedgerows).",
+      "Wet woodland.",
+      "Bog woodland."
+    ],
+    "exclusions": [
+      "Hedgerows (see h2~).",
+      "Scrub (see h3~ or 10).",
+      "Clear-felled forestry plantations (see w2~), unless replanted."
+    ]
+  },
+  "h": {
+    "id": "h",
+    "level": 2,
+    "name": "Heathland and shrub",
+    "definition": "Vegetation with a >25% cover of dwarf shrub species that are <1.5 m high or woody species ≤5 m high.",
+    "children": ["h1", "h2", "h3"],
+    "inclusions": ["Hedgerows (see h2~) of any height."],
+    "exclusions": ["Lines of trees (see 33, 34).", "Scattered scrub (see 10)."]
+  },
+  "f": {
+    "id": "f",
+    "level": 2,
+    "name": "Wetland",
+    "definition": "A vegetated habitat that is waterlogged (see 504) or inundated (see 505).",
+    "children": ["f1", "f2"],
+    "exclusions": [
+      "Wet woodland (see w1d~).",
+      "Wet habitats where the water table is always within 40 cm of the surface and the soil contains free water for most of the year (see g~ or h~).",
+      "Seasonally wet habitats, inundated for part of the year but becoming mesic in the summer (see 502)."
+    ]
+  },
+  "c": {
+    "id": "c",
+    "level": 2,
+    "name": "Cropland",
+    "definition": "Agricultural or horticultural land that has been cultivated or cropped within the current or previous year or left as fallow as part of an active arable rotation.",
+    "children": ["c1"],
+    "inclusions": [
+      "Ploughed land.",
+      "Intensive orchards.",
+      "Short rotation coppice Christmas tree and other tree nurseries"
+    ]
+  },
+  "u": {
+    "id": "u",
+    "level": 2,
+    "name": "Urban",
+    "definition": "Constructed, industrial and other artificial habitats.",
+    "children": ["u1"],
+    "inclusions": [
+      "Constructed, industrial and other artificial features in rural areas."
+    ],
+    "exclusions": [
+      "Other ecosystems within cities, towns and villages, including grasslands, woodlands, heathlands, wetlands, rivers, lakes, sparsely vegetated land and urban common land."
+    ]
+  },
+  "s": {
+    "id": "s",
+    "level": 2,
+    "name": "Sparsely vegetated land",
+    "definition": "Unvegetated, disturbed (regularly or drastically periodically) or sparsely vegetated habitats (permanently or periodically naturally unvegetated areas) that are inhabited by stress-tolerating vegetation with cover <50%.",
+    "children": ["s1", "s2", "s3"],
+    "inclusions": [
+      "Sparsely vegetated natural or extracted rock or soil surfaces. Includes inland rock, supralittoral rock (sea-cliffs) supralittoral sediment (mud, sand and shingle) and coastal habitats (including dunes)."
+    ],
+    "exclusions": ["Sparsely vegetated constructed surfaces (see u1f)."]
+  },
+  "r": {
+    "id": "r",
+    "level": 2,
+    "name": "Rivers and lakes",
+    "definition": "Inland surface waters (freshwater ecosystems).",
+    "children": ["r1", "r2"]
+  },
+  "t": {
+    "id": "t",
+    "level": 2,
+    "name": "Marine inlets and transitional waters",
+    "definition": "Intertidal habitats on various substrates and with water of variable salinity between Mean High Water Mark and Mean Low Water Mark around the UK coast.",
+    "children": ["t1", "t2"],
+    "exclusions": [
+      "The sublittoral. The EUNIS category 'Marine inlets and transitional waters' extends into the sublittoral but UKHab V2.0 does not."
+    ]
+  },
+  "g1": {
+    "id": "g1",
+    "level": 3,
+    "name": "Acid grassland",
+    "definition": "Vegetation dominated by grasses and herbs on a range of lime-deficient soils that have been derived from acidic bedrock or from superficial deposits such as sands and gravels. Such soils usually have a low base-status, with a pH of <5.5.",
+    "children": ["g1a", "g1b", "g1c", "g1d"],
+    "landscape_and_ecological_context": "Includes a range of types, from open communities of very dry sandy soils in the lowlands, which may contain many annual species, through closed pastures on red-brown earths, to damp acidic grasslands that are typically found on gleys and shallow peats.",
+    "synonyms": "Calcifugous swards.",
+    "inclusions": [
+      "Montane types. Vegetation with Bracken Pteridium aquilinum, except where the grassland type is clearly not acidic (use g~ and 'scattered bracken' - see 12)."
+    ],
+    "exclusions": ["Acid grassland types on shingle habitats."],
+    "species": "The plant species assemblages that develop on acid soils are different from those that develop on neutral soils (neutral or mesotrophic grassland) and calcareous soils (calcareous or calcicolous grassland) and are characterised by the presence of a combination of calcifuge species."
+  },
+  "g2": {
+    "id": "g2",
+    "level": 3,
+    "name": "Calcareous grassland",
+    "definition": "Vegetation dominated by grasses and herbs on shallow, well-drained soils that are rich in bases (principally calcium carbonate) formed by the weathering of chalk and other types of limestone or base-rich rock.",
+    "children": ["g2a", "g2b", "g2c"],
+    "landscape_and_ecological_context": "Although the base-status of such soils is usually high, with a pH of ≥6, it may also be more moderate, and calcareous grassland communities can occur on soils with a pH as low as 5.",
+    "synonyms": "Calcicolous grasslands. Chalk grasslands. Limestone grasslands.",
+    "species": "On dry ground examples include: Lady's Bedstraw Galium verum, Quaking Grass Briza media, Carline Thistle Carlina vulgaris, Stemless Thistle Cirsium acaule, Salad Burnet Poterium sanguisorba, Blue Moor-grass Sesleria caerulea, Rock-rose Helianthemum nummularium, Meadow Thistle Cirsium dissectum, Flea Sedge Carex pulicaris, Glaucous Sedge Carex flacca, Carnation Sedge Carex panicea, Broad-leaved Cottongrass Eriophorum latifolium, Fragrant Orchid Gymnadenia conopsea. On wetter ground Bottle Sedge Carex rostrata, Dioecious Sedge Carex dioica, Black Bog Rush Schoenus nigricans may be present. In montane areas Mountain Avens Dryas octopetala is typical."
+  },
+  "g3": {
+    "id": "g3",
+    "level": 3,
+    "name": "Neutral grassland",
+    "definition": "Vegetation dominated by grasses and herbs on a range of neutral soils, usually with a pH of 4.5 – 6.5.",
+    "children": ["g3a", "g3b", "g3c"],
+    "landscape_and_ecological_context": "This habitat includes enclosed mesic hay meadows and pastures, together with a range of grasslands that are periodically inundated with water or permanently moist.",
+    "synonyms": "Mesotrophic grasslands.",
+    "species": "These communities have few diagnostic indicator species but lack strong calcicoles or calcifuges that are characteristic of base-rich and acid soils, respectively. They differ from modified grassland (see g4) by having a less lush sward, a greater range and higher cover of herbs, and usually <25% cover of Perennial Rye-grass Lolium perenne."
+  },
+  "g4": {
+    "id": "g4",
+    "level": 3,
+    "name": "Modified grassland",
+    "definition": "Species-poor vegetation (<9 species per m²) dominated by a few fast-growing grasses on fertile, neutral soils. It is frequently characterised by an abundance of Rye-grasses Lolium spp. and White Clover Trifolium repens. Most broadleaved species present will be associated with high fertility.",
+    "landscape_and_ecological_context": "This habitat is found in pastures that are used for intensive agricultural production. It is also found in amenity grassland in public parks, on sports pitches and on intensively managed verges. The vegetation normally covers almost 100% of the ground, but in over-grazed or poached pastures bare ground can occur, followed by more abundant broadleaf species such as Creeping Thistle Cirsium arvense and Dock Rumex spp..",
+    "inclusions": [
+      "Hard-wearing mixtures of grasses on sports pitches and golf courses. Species-poor grasslands that have occurred through natural succession, where cover of rye-grasses Lolium spp. is less than 'abundant' on the DAFOR scale (see g3c)."
+    ],
+    "species": "Palatable, productive grasses dominate, mainly Rye-grasses Lolium spp., Timothy Phleum pratense, Cock's-foot Dactylis glomerata, Crested Dog's-tail Cynosurus cristatus and Yorkshire Fog Holcus lanatus. Grass cover is usually >75%. Broadleaved species are restricted mainly to White Clover Trifolium repens, Creeping Buttercup Ranunculus repens, Greater Plantain Plantago major, Dandelion Taraxacum officinale agg., Broad-leaved Dock Rumex obtusifolius and Chickweed Stellaria media. Fertile but wetter situations may support occasional Soft Rush Juncus effusus or Hard Rush Juncus inflexus, Floating Sweet Grass Glyceria fluitans, Creeping Bent Agrostis stolonifera and Rough Meadow-grass Poa trivialis."
+  },
+  "w1": {
+    "id": "w1",
+    "level": 3,
+    "name": "Broadleaved and mixed woodland",
+    "definition": "Vegetation dominated by trees that are >5 m high when mature, which form a distinct, although sometimes open, canopy with a canopy cover of >25%. It includes stands of both native and non-native broadleaved tree species and Yew Taxus baccata where the percentage cover of these trees in the stand is >20% of the total cover of the trees present.",
+    "children": ["w1a", "w1b", "w1c", "w1d", "w1e", "w1f", "w1g", "w1h"],
+    "inclusions": [
+      "Ancient or recent woodland. Semi-natural or planted woodland. Recently felled Broadleaved and mixed woodland where there is a clear indication that it will return to woodland. Carr (woody vegetation on fens and bog margins). Yew Taxus baccata, a native coniferous species, is treated by convention as a broadleaved species for the purposes of habitat classification."
+    ],
+    "exclusions": [
+      "Hedgerows (see h2~).",
+      "Scrub (see h3~ or 10).",
+      "Woodlands that are dominated by conifer trees with <20% of the total cover provided by broadleaved or Yew Taxus baccata trees (see w2~)."
+    ]
+  },
+  "w2": {
+    "id": "w2",
+    "level": 3,
+    "name": "Coniferous woodland",
+    "definition": "Vegetation dominated by trees that are >5 m high when mature, which form a distinct, although sometimes open, canopy that has a cover of >25%. It includes stands of both native and non-native coniferous trees species (with the exception of Yew Taxus baccata) where the percentage cover of these trees in the stand is >80% of the total cover of the trees present.",
+    "children": ["w2a", "w2b", "w2c"],
+    "landscape_and_ecological_context": "Scots Pine Pinus sylvestris is the only pine that is native to the UK, and forms native woodland only in Scotland (see w2a~). The majority of coniferous woodlands in the UK are plantations (see 29) of species that are either not native to the UK (see w2c) or to the sites on which they occur (see w2b~).",
+    "inclusions": [
+      "Recently felled coniferous woodland where there is a clear indication that it will return to woodland."
+    ],
+    "exclusions": [
+      "Woodlands with <80% of the total cover provided by coniferous trees (excluding Yew Taxus baccata)."
+    ]
+  },
+  "h1": {
+    "id": "h1",
+    "level": 3,
+    "name": "Dwarf shrub heath",
+    "definition": "Vegetation that has a >25% cover of plant species from the heath family (ericoids), Dwarf Gorse Ulex minor or Western Gorse Ulex gallii.",
+    "children": ["h1a", "h1b", "h1c"],
+    "landscape_and_ecological_context": "Generally occurs on well-drained, nutrient-poor, acid soils. Heaths do occur on more basic soils, but these are more limited in extent and can be recognised by the presence of herbs characteristic of calcareous grassland (see g2~). This habitat occurs in both the lowlands and the uplands.",
+    "inclusions": [
+      "Both dry and wet heath types. Dwarf-shrub-dominated vegetation in the montane zone."
+    ],
+    "exclusions": [
+      "Dwarf-shrub-dominated vegetation in which species characteristic of peat-forming vegetation, such as Cotton-grass Eriophorum spp., and peat-building Bog-mosses Sphagnum spp. are abundant, AND that occurs on deep peat (see f1~)."
+    ],
+    "species": "Ericoids include Heather Calluna vulgaris, Bell Heather Erica cinerea and Cross-leaved Heath Erica tetralix. Includes Dwarf Gorse Ulex minor, Western Gorse Ulex gallii, Bilberry Vaccinium spp., Crowberry Empetrum spp. and Bearberry Arctostaphylos spp.."
+  },
+  "h2": {
+    "id": "h2",
+    "level": 3,
+    "name": "Hedgerows",
+    "definition": "Lines of shrubs that have the base of their leafy canopies ≤2 m in height from the ground, so that the woody linear feature as a whole appears as a 'shrubby' hedgerow, even though some of the woody species in it are capable of growing into trees. Hedges in good condition have the base of their leafy canopies ≤0.5 m from the ground.",
+    "children": ["h2a", "h2b"],
+    "landscape_and_ecological_context": "In rural areas, hedgerows were primarily used as stock-proof boundaries around fields, although many now also have wire fencing. In urban areas, hedgerows mainly perform a landscaping or garden boundary function.",
+    "inclusions": [
+      "An earth bank or wall, only where such a feature occurs in association with the hedgerow. Any bank, wall, ditch, tree or herbaceaous vegetation that is <2 m from the hedgerow centre. Gaps between trees and shrubs that are <20 m. Tall lines of connected shrubs that remain in a management cycle and allowed to grow tall before being laid."
+    ],
+    "exclusions": [
+      "Shrubby components that are >5 m wide at the base (see h3~).",
+      "Woody linear features comprising trees without a shrub layer, even where showing signs of historic management (see 33 or 34).",
+      "Habitat features of trees that are collectively >5 m wide at the base (see w~)."
+    ],
+    "species": "Range from those dominated by two or three woody species through to rich mixtures of shrubs, trees and ground flora of ancient hedgerows."
+  },
+  "h3": {
+    "id": "h3",
+    "level": 3,
+    "name": "Dense scrub",
+    "definition": "Patches of shrubs that are <5 m in height with continuous (>75%) cover.",
+    "children": [
+      "h3a",
+      "h3b",
+      "h3c",
+      "h3d",
+      "h3e",
+      "h3f",
+      "h3g",
+      "h3h",
+      "h3j",
+      "h3k"
+    ],
+    "inclusions": [
+      "Patches with occasional trees that are >5 m in height (see 32).",
+      "Tree species that are <5 m in height.",
+      "Coastal scrub.",
+      "Scattered Sea-buckthorn Hippophae rhamnoides scrub on dunes (see h3c~)."
+    ],
+    "exclusions": [
+      "Patches with shrub cover <75% (see 10).",
+      "Hedgerows (see h2~).",
+      "Coppice (see 210).",
+      "Coppice-with-standards (see 211).",
+      "Recently felled woodland (see 206).",
+      "Natural box scrub (see w1c8).",
+      "Carr (see w1d).",
+      "Mountain Willow Salix spp. scrub (see h1c6).",
+      "See also 17, s3a4 and t2a8."
+    ],
+    "species": "Relevant shrubs include amongst others Blackthorn Prunus spinosa, Hazel Corylus avellana, Sea-buckthorn Hippophae rhamnoides, Bramble Rubus fruticosus agg., Gorse Ulex spp., Hawthorn Crataegus monogyna, Willow Salix spp. and Rhododendron Rhododendron spp.."
+  },
+  "f1": {
+    "id": "f1",
+    "level": 3,
+    "name": "Bog",
+    "definition": "Rain-fed (ombrotrophic) inundated or waterlogged habitats where peat has formed.",
+    "children": ["f1a", "f1b"],
+    "inclusions": ["Peat bogs that have been cut."],
+    "exclusions": [
+      "Minerotrophic (groundwater-fed) wetlands (see f2~).",
+      "Peatlands drained for agriculture, such as large parts of the Fens and Somerset Levels and Moors."
+    ],
+    "species": "Key indicators for this habitat include peat-forming Bog-mosses (Sphagnum papillosum and Sphagnum magellanicum)."
+  },
+  "f2": {
+    "id": "f2",
+    "level": 3,
+    "name": "Fen marsh and swamp",
+    "definition": "Characterised by a variety of vegetation types that are found on minerotrophic (groundwater-fed), permanently, seasonally or periodically waterlogged peat, peaty soils or mineral soils. Fens are peatlands which receive water and nutrients from groundwater and surface run-off, as well as from rainfall. Flushes are associated with lateral water movement, and springs with localised upwelling of water. Marsh is a general term usually used to imply waterlogged soil; it is used more specifically here to refer to fen meadows and rush-pasture communities on mineral soils and shallow peats. Swamps are characterised by tall emergent vegetation. Reedbeds (i.e. swamps dominated by stands of Common Reed Phragmites australis) are also included.",
+    "children": ["f2a", "f2b", "f2c", "f2d", "f2e", "f2f"],
+    "landscape_and_ecological_context": "Often associated with valleys or hollows and include a wide range of vegetation types from tall broadleaved wetland herb formations, vegetation dominated by small sedge fens, tall wetland sedge or herb or grass fens; fen meadows and rush-dominated vegetation; acid-poor fens and reedbeds to bryophyte springs and flushes.",
+    "inclusions": [
+      "Re-created wetlands with water fed from rivers and streams (use f2~ 61)"
+    ],
+    "exclusions": [
+      "Ombrotrophic (rainfall-fed) wetlands (see f1~).",
+      "Wet and seasonally wet grasslands (see g~, 503, 502).",
+      "Waterlogged woodland (see w1d~).",
+      "'The Fens' of East Anglia and Lincolnshire refer to a geographic area rather than a habitat category."
+    ],
+    "species": "A wide range of wetland species depend on this type of wetland. They include Common Reed Phragmites australis, Bulrush Typha latifolia, Purple Moor-grass Molinia caerulea, Great Fen-sedge Cladium mariscus, other sedges Carex spp., rushes Juncus spp., Marsh Bedstraw Galium palustre, Meadowsweet Filipendula ulmaria and Wild Angelica Angelica sylvestris."
+  },
+  "c1": {
+    "id": "c1",
+    "level": 3,
+    "name": "Arable and horticulture",
+    "definition": "Arable cropland (including perennial woody crops and intensively managed commercial orchards), commercial horticultural land (such as nurseries, commercial vegetable plots and commercial flower-growing areas), freshly ploughed land, leys, rotational set-aside and fallow.",
+    "children": ["c1a", "c1b", "c1c", "c1d", "c1e", "c1f"],
+    "inclusions": ["Cereal field margins.", "Temporary grass and clover leys."],
+    "exclusions": [
+      "Permanent agricultural grassland (see g~).",
+      "Domestic gardens (see u1, 831, 832, 833).",
+      "Vertical crop production in buildings (see u1~).",
+      "Cropped green roofs (see u1)."
+    ]
+  },
+  "u1": {
+    "id": "u1",
+    "level": 3,
+    "name": "Built-up areas and gardens",
+    "definition": "Urban and rural settlements, farm buildings, caravan parks and other human-made built structures such as industrial estates, retail parks, waste and derelict ground, urban parkland and urban transport infrastructure.",
+    "children": ["u1b", "u1c", "u1d", "u1e", "u1f"],
+    "inclusions": [
+      "Allotments (see 616).",
+      "Most gardens (see 827, 828, 829, 830).",
+      "Vertical crop production in buildings.",
+      "Cropped green roofs."
+    ],
+    "exclusions": [
+      "Mappable patches of other ecosystems that fall within built-up areas."
+    ]
+  },
+  "s1": {
+    "id": "s1",
+    "level": 3,
+    "name": "Inland rock",
+    "definition": "Natural and artificial exposed rock surfaces that are mappable, such as inland cliffs, caves, screes and limestone pavements, as well as various forms of excavations and waste tips, such as quarries and quarry waste.",
+    "children": ["s1a", "s1b", "s1c", "s1d"],
+    "inclusions": [
+      "Plant communities that colonise the cracks and fissures of rock faces.",
+      "Certain types of tall herb and fern vegetation that, as a result of grazing, are much reduced in extent and confined to areas inaccessible to grazing, such as cliff faces and ledges."
+    ]
+  },
+  "s2": {
+    "id": "s2",
+    "level": 3,
+    "name": "Supralittoral Rock",
+    "definition": "The region of rocky shore, including cliffs and slopes, that is immediately above the highest water level and subject to wetting by spray or wave splash (also called the 'splash zone'). Features that may be present include vertical rock, boulders, gullies, ledges and pools, depending on the wave exposure of the site and its geology.",
+    "children": ["s2a"],
+    "landscape_and_ecological_context": "Widespread around the UK coastline.",
+    "species": "The habitat supports salt-tolerant species, characterised by green algae Enteromorpha spp. and Cladophora spp., yellow and grey lichens. e.g. Caloplaca marina, Xanthoria parietina and Lecanora spp, littorinid molluscs and acarid mites."
+  },
+  "s3": {
+    "id": "s3",
+    "level": 3,
+    "name": "Supralittoral Sediment",
+    "definition": "Sand and shingle coastal habitats that are above the highest water level and subject to wetting by regular or occasional spray or wave splash.",
+    "children": ["s3a", "s3b"],
+    "inclusions": ["Shingles.", "Pebbles.", "Sand dunes."],
+    "species": "Salt-tolerant species are the characteristic colonisers of this habitat, and the species present are strongly influenced by sediment size as well as the shore's degree of wave exposure."
+  },
+  "r1": {
+    "id": "r1",
+    "level": 3,
+    "name": "Standing open water and canals",
+    "definition": "Natural systems such as lakes, meres and pools, as well as human-made waters such as reservoirs, canals, drainage ditches, ponds and gravel pits.",
+    "children": ["r1a", "r1b", "r1c", "r1d", "r1e", "r1f", "r1g"],
+    "landscape_and_ecological_context": "Usually classified according to their nutrient status, and this can change naturally over time or as a result of pollution. There are three main types of standing waters: oligotrophic (nutrient-poor), eutrophic (nutrient-rich) and mesotrophic (intermediate). These types exist along an environmental gradient and intermediate types occur. Other types of standing water include dystrophic (highly acidic, peat-stained water), marl lakes, brackish-water lakes, turloughs and other temporary water bodies.",
+    "inclusions": [
+      "The open water zone (which may contain submerged, free-floating or floating-leaved vegetation).",
+      "Water-fringe inundation vegetation.",
+      "Ditches with open water for at least the majority of the year with limited flow, often with water control structures such as sluices."
+    ],
+    "exclusions": [
+      "Coastal saline lagoons (see t2g5).",
+      "Marginal emergent vegetation that is >5 m wide.",
+      "Mappable adjacent wetland or wet woodland habitat."
+    ]
+  },
+  "r2": {
+    "id": "r2",
+    "level": 3,
+    "name": "Rivers and streams",
+    "definition": "Rivers and streams from bank top to bank top. Where there are no distinctive banks or banks are never overtopped, it includes the extent of the mean annual flood.",
+    "children": ["r2a", "r2b"],
+    "inclusions": [
+      "The open channel (which may contain submerged, free-floating or floating-leaved vegetation).",
+      "Inundated water fringe vegetation.",
+      "Exposed sediments and shingle banks."
+    ],
+    "exclusions": ["Adjacent wetland habitats."]
+  },
+  "t1": {
+    "id": "t1",
+    "level": 3,
+    "name": "Littoral Rock",
+    "definition": "The geology and wave exposure of the shore influence the form, which can be as varied as vertical rock, shore platforms, boulder shores or rocky reefs surrounded by areas of sediment. These two factors are also major influences on the associated marine communities. Relatively soft rock, such as chalk and limestone, can support boring species whereas colonisation of basalt and granite is limited to the rock surfaces. In all cases, there is a distinct zonation of species down the shore, which principally reflects the degree of immersion and emersion by the tide.",
+    "children": ["t1a", "t1b", "t1c", "t1d", "t1e", "t1f"],
+    "species": "The littoral fringe is encrusted with the lichen Verrucaria maura, the red alga Porphyra umbilicalis or by sparsely distributed barnacles. If there are pools present, these are likely to be colonised by coralline crusts and the red alga Corallina officinalis. The eulittoral (mid-shore) zone is usually dominated by mussels Mytilus edulis and barnacles, while the lower shore may have a dense red algal turf. Deep pools in this zone can contain fucoids and kelps. At the sublittoral fringe, where conditions can be severe, a typical coloniser is the kelp Alaria esculenta, amongst a dense band of small mussels."
+  },
+  "t2": {
+    "id": "t2",
+    "level": 3,
+    "name": "Littoral Sediment",
+    "definition": "Areas of littoral sediment are widespread around the UK, forming features such as beaches, sand banks and intertidal mudflats. A large proportion of this habitat occurs in estuaries and inlets, where it can cover extensive areas. Significant but smaller areas of littoral sediment also occur at the head of inlets and sea lochs. Beaches, which tend to be composed of sandier material, develop in more exposed situations and are also widely distributed. Sandflats are more common in northern and westerns parts of the country, and finer-grained flats are more common in southern and eastern areas. Muddy sediments usually occur in sheltered areas, especially estuaries.",
+    "children": ["t2a", "t2b", "t2c", "t2d", "t2e", "t2f", "t2g", "t2h"],
+    "landscape_and_ecological_context": "The marine communities found in these areas vary depending on the sediment type, sediment mobility and salinity of the overlying water. Mobile gravels and sands, for example, tend to be highly impoverished, whereas sheltered areas with mixed sediments can support very rich communities. There is also zonation of species down the shore, which principally reflects the degree of immersion and emersion by the tide. In general, tidal flats are low in species diversity, but they often support very dense populations of invertebrates, so the overall biomass of the area can be extremely high."
+  },
+  "g1c": {
+    "id": "g1c",
+    "level": 4,
+    "name": "Bracken",
+    "definition": "Land with Bracken Pteridium aquilinum at >95% canopy cover at the height of the growing season.",
+    "exclusions": [
+      "Scattered patches of Bracken or Bracken patches of <0.04 ha, which are included in the broad habitat type with which they are associated (see 12).",
+      "Bracken under forest or woodland canopy, which are included in w1 or w2 (see 12)."
+    ],
+    "species": "Bracken Pteridium aquilinum is always dominant. Heath Bedstraw Galium saxatile, Common Bent Agrostis capillaris, Sweet Vernal-grass Anthoxanthum odoratum, Bilberry Vaccinium myrtillus and the bryophytes Dicranum scoparium, Pleurozium schreberi, Pseudoscleropodium purum and Rhytidiadelphus squarrosus may also be frequent under the bracken."
+  },
+  "g1a": {
+    "id": "g1a",
+    "level": 4,
+    "name": "Lowland dry acid grassland",
+    "definition": "A grassland that meets at least two of these three criteria: 1. >12 species per m² (including grasses and excluding bryophytes); 2. >30% cover of broadleaved herbs and sedges (excluding White Clover Trifolium repens, Creeping Buttercup Ranunculus repens and injurious weeds); 3. <10% cover of rye grasses and White Clover Trifolium repens. AND ≥4 of these indicators are classed as ‘present’ on the DAFOR scale. AND ≥1 of these indicators are classed as ‘frequent’ on the DAFOR scale. AND ≥3 of these indicators are classed as ‘occasional’ on the DAFOR scale.",
+    "inclusions": [
+      "All acid grassland meeting the qualifying thresholds that is managed in functional enclosures.",
+      "Acid grassland meeting the qualifying thresholds on road verges (see 801).",
+      "Dry calcareous grasslands of the Breckland, north to the Norfolk coast, where Vulpia ciliata ssp. ambigua is a key component."
+    ],
+    "exclusions": [
+      "Acidic grassland in old and non-functional enclosures in the upland fringes, which are managed as free-range rough grazing in association with unenclosed tracts of upland (see g1b).",
+      "Acidic grassland in functional enclosures that do not meet the qualifying thresholds (see g1d)."
+    ],
+    "species": "As well as the indicator species listed in the core definition, typical grasses include Red Fescue Festuca rubra, Sand Sedge Carex arenaria, Bristle Bent Agrostis curtisii, Soft Brome Bromus hordeaceus, Bearded Fescue Vulpia ciliata, Early Hair-grass Aira praecox and Wavy Hair-grass Avenella flexuosa. These do not contribute to the indicator score. The habitat can have a high cover of bryophytes, and parched acid grassland can be rich in lichens. It is very variable in terms of species richness and stands can range from relatively species-poor (<5 species per 4 m²) to species-rich (>25 species per 4 m2²). The habitat often forms a mosaic with dwarf shrub heath (see h1a)."
+  },
+  "g1b": {
+    "id": "g1b",
+    "level": 4,
+    "name": "Upland acid grassland",
+    "definition": "Acid grassland on uneclosed land in the uplands, normally above approximately 300 m in altitude.",
+    "inclusions": [
+      "Montane acid grassland.",
+      "Acid grassland in old and non-functional enclosures in the upland fringes, that are managed as free-range rough grazing in association with unenclosed tracts of upland."
+    ],
+    "species": "The typical constituents of this habitat are Matgrass Nardus stricta, Wavy Hair-grass Avenella flexuosa, Common Bent Agrostis capillaris, Sweet Vernal Grass Anthoxanthum odoratum, Common Wood-rush Luzula multiflora, Heath Bedstraw Galium saxatile, Tormentil Potentilla erecta and the mosses Springy Turf-moss Rhytidiadelphus squarrosus and Broom Moss Dicranum scoparium. The actual grassland type is defined by the dominant species. The abundant ‘white moors’ of the uplands are dominated by Mat-grass Nardus stricta. On wetter ground, Heath Rush Juncus squarrosus is the dominant species, although Hard Rush Juncus inflexus and Soft Rush Juncus effusus are also common."
+  },
+  "g1d": {
+    "id": "g1d",
+    "level": 4,
+    "name": "Other lowland acid grassland",
+    "definition": "Lowland acid grassland that does not meet the definitions of g1a, g1b or g1c.",
+    "inclusions": [
+      "Lowland acid grassland that meets the criteria for waxcap grassland (see 130)."
+    ],
+    "species": "Rushes Juncus spp. may be abundant or dominant (see 15) in wet (but not waterlogged) situations."
+  },
+  "g2a": {
+    "id": "g2a",
+    "level": 4,
+    "name": "Lowland calcareous grassland",
+    "definition": "A grassland that meets at least two of these three criteria: 1. >15 species per m² (including grasses and excluding bryophytes); 2. >30% cover of broadleaved herbs and sedges (excluding White Clover Trifolium repens, Creeping Buttercup Ranunculus repens and injurious weeds); 3. <10% cover of rye grasses and White Clover Trifolium repens. AND ≥2 of these indicators are classed as ‘frequent’ on the DAFOR scale. AND ≥3 of these indicators are classed as ‘occasional’ on the DAFOR scale. g2a Indicator species list Common name Scientific name Agrimony Agrimonia eupatoria Betony Betonica officinalis Bird’s-foot-trefoil Lotus corniculatus Burnet saxifrage Pimpinella saxifraga Carline thistle Carlina vulgaris Clustered bellflower Campanula glomerata Common rock-rose Helianthemum nummularium Common knapweed Centaurea nigra Cowslip Primula veris g2a Indicator species list (cont) Common name Scientific name Dropwort Filipendula vulgaris Devil’s-bit scabious Succisa pratensis Eyebright Euphrasia officinalis Fairy flax Linum catharticum Field scabious Knautia arvensis Spring gentian Gentiana verna Autumn gentian Gentianella amarella Chlitern gentian Gentianella germanica Greater knapweed Centaurea scabiosa Hairy violet Viola hirta Harebell Campanula rotundifolia Hoary plantain Plantago media Hoary rock-rose Helianthemum oelandicum Horseshoe vetch Hippocrepis comosa Kidney vetch Anthyllis vulneraria Lady’s bedstraw Galium verum Wild marjoram Origanum vulgare Common milkwort Polygala vulgaris Chalk milkwort Polygala calcarea Dwarf milkwort Polygala amarella Mouse-ear hawkweed Pilosella officinarum Orchids Various Ox-eye daisy Leucanthemum vulgare Purple milk-vetch Astragalus danicus Common restharrow Ononis repens Rough hawkbit Leontodon hispidus Lesser hawkbit Leontodon saxatilis Salad burnet Poterium sanguisorba subsp. minor Saw-wort Serratula tinctoria Small scabious Scabiosa columbaria Squinancywort Asperula cynanchica Dwarf thistle Cirsium acaule Thyme-leaved sandwort Arenaria serpyllifolia Wild basil Clinopodium vulgare Wild thyme Thymus drucei Yellow-wort Blackstonia perfoliata 25 UKHab g2a Lowland calcareous grassland (continued)",
+    "inclusions": [
+      "Calcareous grassland that meets the qualifying thresholds around Morecambe Bay in Cumbria or on roadside verges."
+    ],
+    "exclusions": [
+      "Calcareous grassland in functional enclosures that do not meet the qualifying thresholds (see g2c).",
+      "Calcareous grassland in the unenclosed uplands (see g2b).",
+      "Calcareous grassland on the Pennines (see g2b).",
+      "Heath false-brome Brachypodium pinnatum dominated grassland is unlikely to meet the criteria above unless there has been a long history of heavy grazing."
+    ],
+    "species": "As well as the indicator species listed in the core definition, typical grasses include Common Bent Agrostis capillaris, Crested Hair-grass Koeleria macrantha, Blue Moor-grass Sesleria caerulea, Hairy Oat-grass Avenula pubescens, Quaking-grass Briza media, Sheep’s Fescue Festuca ovina, Cock’s Foot Dactylis glomerata, Upright Brome Bromopsis erecta, Tor-grass Brachypodium pinnatum and Yellow Oat-grass Trisetum flavescens. These do not contribute to the indicator score."
+  },
+  "g2b": {
+    "id": "g2b",
+    "level": 4,
+    "name": "Upland calcareous grassland",
+    "definition": "A grassland that meets at least two of these three criteria: 1. >15 species per m² (including grasses and excluding bryophytes); 2. >30% cover of broadleaved herbs and sedges (excluding White Clover Trifolium repens, Creeping Buttercup Ranunculus repens and injurious weeds); 3. <10% cover of rye grasses and White Clover Trifolium repens. AND ≥1 of these indicators are classed as at least ‘frequent’ on the DAFOR scale. AND ≥3 of these indicators are classed as at least ‘occasional’ on the DAFOR scale.",
+    "species": "Often species poor. Characteristic constants are Blue Moor-grass Sesleria caerulea, Sheep’s Fescue Festuca ovina, Wild Thyme Thymus drucei, Limestone Bedstraw Galium sterneri and Common Bent Agrostis capillaris. 29 UKHab g2b Indicator species list Common name Scientific Name Autumn gentian Gentianella amarella Bird’s-eye primrose Primula farinosa Bird’s-foot-trefoil Lotus corniculatus Carline thistle Carlina vulgaris Carnation sedge Carex panicea Common butterwort Pinguicula vulgaris Common rock-rose Helianthemum nummularium Devil’s-bit scabious Succisa pratensis Dropwort Filipendula vulgaris Eyebright Euphrasia officinalis Fairy flax Linum catharticum Flea sedge Carex pulicaris Glaucous sedge Carex flacca Grass of Parnassus Parnassia palustris Harebell Campanula rotundifolia Hoary rock-rose Helianthemum oelandicum Hoary whitlowgrass Draba incana Horseshoe vetch Hippocrepis comosa Lesser club-moss Selaginella selaginoides Mossy saxifrage Saxifraga hypnoides Mountain everlasting Antennaria dioica Mouse-ear hawkweed Pilosella officinarum Rough hawkbit Leontodon hispidus Salad burnet Poterium sanguisorba subsp. minor Small scabious Scabiosa columbaria Spring gentian Gentiana verna Spring-sedge Carex caryophyllea Squinancywort Asperula cynanchica Wild thyme Thymus drucei Yellow saxifrage Saxifraga aizoides"
+  },
+  "g2c": {
+    "id": "g2c",
+    "level": 4,
+    "name": "Other calcareous grassland",
+    "definition": "A grassland with ≥2 indicators of calcareous grassland that does not meet the definition of either g2a or g2b AND that meets at least two of these three criteria: 1. 9–15 species per m² (including grasses and excluding bryophytes); 2. >20% cover of broadleaved herbs and sedges (excluding White Clover Trifolium repens, Creeping Buttercup Ranunculus repens and injurious weeds); 3. <30% cover of rye grasses and White Clover Trifolium repens. Separately from the criteria above, a grassland with ≥2 indicators of calcareous grassland and that meets the criteria for waxcap grassland (see 130).",
+    "species": "The indicators referred to in the definition are those listed in the definition of g2a and g2b. Typical grasses include Common Bent Agrostis capillaris, Crested Hair-grass Koeleria macrantha, Blue Moor-grass Sesleria caerulea, Hairy Oat-grass Avenula pubescens, Quaking-grass Briza media, Sheep’s Fescue Festuca ovina, Cock’s Foot Dactylis glomerata, Upright Brome Bromopsis erecta, Torgrass Brachypodium pinnatum and Yellow Oatgrass Trisetum flavescens. These are not counted as indicators."
+  },
+  "g3a": {
+    "id": "g3a",
+    "level": 4,
+    "name": "Lowland meadows",
+    "definition": "A neutral grassland that meets at least two of these three criteria: 1. >15 species m² (including grasses and excluding bryophytes); 2. >30% cover of broadleaved herbs and sedges (excluding White Clover Trifolium repens, Creeping Buttercup Ranunculus repens and injurious weeds); 3. <10% cover of rye grasses and White Clover Trifolium repens. AND EITHER ≥4 of these indicators at least ‘present’ on the DAFOR scale. OR ≥3 of these indicators at least ‘occasional’ on the DAFOR scale (but not limited to field corners or edges). g3a Indicator species list Common name Scientific name Agrimony Agrimonia eupatoria Autumn hawkbit Scorzoneroides autumnalis Betony Betonica officinalis Bird’s foot trefoil Lotus corniculatus Bitter vetch Lathyrus linifolius Black knapweed Centaurea nigra Bugle Ajuga reptans Burnet saxifrage Pimpinella saxifraga Carnation sedge Carex panicea Chalk milkwort Polygala calcarea Common bistort Bistorta officinalis g3a Indicator species list (cont) Common name Scientific name Common milkwort Polygala vulgaris Common meadow-rue Thalictrum flavum Common sedge Carex nigra Cowslip Primula veris Devil’s bit scabious Succisa pratensis Dropwort Filipendula vulgaris Dyer’s greenweed Genista tinctoria Eyebright Euphrasia officinalis Fen bedstraw Galium uliginosum Field scabious Knautia arvensis Glaucous sedge Carex flacca Goat’s beard Tragopogon pratensis Great burnet Sanguisorba officinalis Greater bird’s foot trefoil Lotus pedunculatus Lady’s bedstraw Galium verum Lady’s mantles Alchemilla spp. Marsh bedstraw Galium palustre Marsh marigold Caltha palustris Marsh valerian Valeriana dioica Meadow vetchling Lathyrus pratensis Meadowsweet Filipendula ulmaria Heath milkwort Polygala serpyllifolia Narrow-leaved water dropwort Oenanthe silaifolia Orchids (Various) Ox-eye daisy Leucanthemum vulgare Pepper saxifrage Silaum silaus Pignut Conopodium majus Ragged robin Silene flos-cuculi Rough hawkbit Leontodon hispidus Salad burnet Poterium sanguisorba Saw-wort Serratula tinctoria Sneezewort Achillea ptarmica Tormentil Potentilla erecta Water avens Geum rivale Water mint Mentha aquatica Wood anemone Anemone nemorosa Yellow rattle Rhinanthus minor 36 UKHab g3a Lowland meadows (continued)",
+    "inclusions": [
+      "On floodplains, may overlap with the Priority Habitat coastal floodplain and grazing marsh (see 19)"
+    ],
+    "exclusions": [
+      "Maritime grassland communities confined to coastal habitats (see s2a, 70).",
+      "Anthoxanthum odoratum – Geranium sylvaticum grasslands (see g3b) and Molinia – Juncus pastures on waterlogged soils (see f2b)."
+    ],
+    "species": "As well as the indicator species listed in the core definition, typical grassesinclude Sweet Vernal Grass Anthoxanthum oderatum, Crested Dog’s-tail Cynosurus cristatus, Red Fescue Festuca rubra, Common Bent Agrostis capillaris, Cock’s Foot Dactylis glomerata, Yorkshire Fog Holcus lanatus, Yellow Oat-grass Tristeum flavescens and Meadow Fescue Schedonorus pratensis."
+  },
+  "g3b": {
+    "id": "g3b",
+    "level": 4,
+    "name": "Upland hay meadows",
+    "definition": "Record as mountain hay meadows (H6520)’ (see g3b5).",
+    "species": "No single grass species is consistently dominant. The most striking feature of the vegetation is generally the variety and abundance of dicotyledons, including Wood Crane’s-bill Geranium sylvaticum, Pignut Conopodium majus, Great Burnet Sanguisorba officinalis and Lady’s Mantles Alchemilla spp.."
+  },
+  "g3c": {
+    "id": "g3c",
+    "level": 4,
+    "name": "Other neutral grassland",
+    "definition": "A neutral grassland that does not meet the definition of either g3a or g3b AND that meets at least three of these four criteria: 1. >20% cover of broadleaved herbs and sedges; 2. >8 species per m² (including forbs, grasses, sedges and rushes, and excluding bryophytes); 3. ≥1 grass species that is not generally sown for intensive agricultural production (ie. Ryegrasses Lolium spp., Timothy Phleum pratense, Cock’s-foot Dactylis glomerata, Meadow fescue Festuca pratensis) is at least abundant; 4. Cover of Rye-grasses Lolium spp. and White Clover Trifolium repens, where present, is <30%. Separately from the criteria above, a neutral grassland that meets the criteria for waxcap grassland (see 130).",
+    "inclusions": [
+      "Many of the more species-rich swards that in previous classifications were included within ‘semiimproved neutral grassland’. Species-rich swards can be characterised using 18 – Species-rich grassland).",
+      "Unmanaged swards on neutral soils, where species richness may be lower.",
+      "Surveyors may wish to add detail to this category.",
+      "(e.g. 60 - long-continuity habitat, 519 – ‘abandoned’, 521 – ‘unmanaged’, 501 – ‘mesic’, 502 – ‘seasonally wet’, 503 – ‘wet’, 128 – ‘sward type mosaic’, 129 – ‘tall or tussocky sward’)."
+    ],
+    "exclusions": [
+      "Species-poor swards that in previous classifications were included within ‘semi-improved neutral grassland’ (see g4).",
+      "Grasslands <2 years old on land formerly cropped (see c~)."
+    ],
+    "species": "Grasses may include Common Bent Agrostis capillaris, False Oat-grass Arrhenatherum elatius, Yorkshire-fog Holcus lanatus, Perennial Rye-grass Lolium perenne, Common Bent Agrostis capillaris, Crested Dog’s-tail Cynosurus cristatus, Rough Meadow-grass Poa trivialis and Cock’s-foot Dactylis glomerata. On wetter sites, Velvet Bent Agrostis canina, Creeping Bent Agrostis stolonifera and Marsh Foxtail Alopecurus geniculatus may be frequent, and rushes such as Soft Rush Juncus effusus and Hard Rush Juncus inflexus are likely to be present. Herbs commonly found include Yarrow Achillea millefolium, Ribwort Plantain Plantago lanceolata, Creeping Thistle Cirsium arvense, White Clover Trifolium repens, Red Clover Trifolium pratense, Meadow Buttercup Ranunculus acris, Creeping Buttercup Ranunculus repens, Common Nettle Urtica dioica, Hogweed Heracleum sphondylium and Daisy Bellis perennis. On wetter sites, herbs commonly found including Silverweed Potentilla anserina, Wild Angelica Angelica sylvestris and Fleabane Pulicaria dysenterica."
+  },
+  "w1a": {
+    "id": "w1a",
+    "level": 4,
+    "name": "Upland oakwood",
+    "definition": "Acidophilous Sessile Oak Quercus petraea woods, with low-branched trees and many ferns, mosses, lichens and evergreen bushes. Record as ‘western acidic oak woodland (H91A0)’ (see w1a5).",
+    "inclusions": [
+      "Consider potential use of Temperate rainforest (see 25) as part of a combined code."
+    ],
+    "species": "Ash Fraxinus excelsior does not predominate (see w1b~). The amount of Birch Betula spp. in the woods tends to increase in northwest Scotland. The range of plants found in the ground layer varies according to the underlying soil type and degree of grazing, from bluebell-bramble-fern communities through grass- and brackendominated ones to heathy moss-dominated areas. Most oakwoods also contain areas of more alkaline soils, often along streams or towards the base of slopes, where much richer communities occur, with Ash Fraxinus excelsior and Elm Ulmus spp. in the canopy, more Hazel Corylus avellana in the understorey and ground plants such as Dog’s Mercury Mercurialis perennis, False Brome Brachypodium sylvaticum, Ramsons Allium ursinum, Enchanter’s Nightshade Circaea lutetiana and Tufted Hair-grass Deschampsia cespitosa. Elsewhere, small Alder Alnus glutinosa stands may occur or peaty hollows covered by Bog-mosseses Sphagnum spp.."
+  },
+  "w1b": {
+    "id": "w1b",
+    "level": 4,
+    "name": "Upland mixed ashwoods",
+    "definition": "Woods on base-rich soils in the north and west, in most of which Ash Fraxinus excelsior is a major species, although locally Oak Quercus spp., Birch Betula spp., Elm Ulmus spp., Small-leaved Lime Tilia cordata and even Hazel Corylus avellana may be the most abundant species.",
+    "exclusions": [
+      "Ash Fraxinus excelsior woodlands on limestone pavements (see s1b~)."
+    ],
+    "species": "Yew Taxus baccata may form small groves in intimate mosaics with the other major tree species, and Alder Alnus glutinosa may occur where there are transitions to wet woodland. Despite variations in canopy composition, the ground flora remains broadly similar."
+  },
+  "w1c": {
+    "id": "w1c",
+    "level": 4,
+    "name": "Lowland beech and yew woodland",
+    "definition": "Woodland dominated by Beech Fagus sylvatica in the lowlands. Spans a variety of distinctive vegetation types, reflecting differences in soil and topographical conditions. Beech can grow on both acidic and calcareous soils, although its association with Yew Taxus baccata tends to be most abundant on the calcareous sites. These woods are often found as intricate mosaics with other woodland communities. Promotion of high quality Beech for silviculture has often led to an artificial dominance of Beech.",
+    "species": "The canopy can include mixtures of Beech Fagus sylvatica, Ash Fraxinus excelsior, Sycamore Acer pseudoplatanus, Oak Quercus spp., Yew Taxus baccata and Whitebeam Sorbus spp.. Bramble Rubus fruticosus forms a characteristic ground layer on neutral to slightly-acidic soils. Holly Ilex aquifolium and sometimes Yew Taxus baccata are the main understorey species on acidic soils. Rhododendron ponticum now forms extensive stands under Beech woods on acidic soils. Distinctive communities can be seen in Beech and Yew woodlands on calcareous, acidic and neutral to slightly-acidic soils."
+  },
+  "w1d": {
+    "id": "w1d",
+    "level": 4,
+    "name": "Wet woodland",
+    "definition": "Occurs on poorly drained or seasonally wet soils, usually with Alder Alnus glutinosa, Birch Betula spp. and Willows Salix spp. as the predominant tree species, but sometimes including Ash Fraxinus excelsior, Oak Quercus spp., Scots Pine Pinus sylvestris and Beech Fagus sylvatica on the drier riparian areas.",
+    "species": "Dominant trees are Alder Alnus glutinosa or Willow Salix spp., often with Birch Betula spp.. The field layer is likely to include some of the following species: Soft-rush Juncus effusus, Water Mint Mentha aquatica, Meadowsweet Filipendula ulmaria, Cuckooflower Cardamine pratensis, Marsh Marigold Caltha palustris, Water Horsetail Equisetum fluviatile, Marsh Horsetail Equisetum palustre, Common Valerian Valeriana officinalis, Marsh Cinquefoil Comarum palustre, Greater Tussock-sedge Carex paniculata, Nettle Urtica dioica and Yellow Pimpernel Lysimachia nemorum. On fertile soils a very dense understorey of grasses, such as Cocksfoot Dactylis glomerata, can form."
+  },
+  "w1e": {
+    "id": "w1e",
+    "level": 4,
+    "name": "Upland birchwoods",
+    "definition": "Woodlands with abundant Birch Betula spp., with constituents such as Rowan Sorbus aucuparia, Willow Salix spp., Juniper Juniperus spp. and Aspen Populus tremula. These woodlands differ from successional Birch stands found within oakwoods and Dwarf Birch scrub.",
+    "species": "On more acidic soils, Rowan Sorbus aucuparia is a prominent component, and Juniper Juniperus communis can form the underwood in the eastern Highlands. Aspen Populus tremula grows on a variety of site types where mineral soil is present and occurs frequently within upland birchwoods as small groups and rarely as extensive stands. Only 12 stands of Aspen >5 ha are known to exist within Scotland. On all but the most acidic sites, Birch Betula spp. influences the soil to allow development of a grassherb flora on sites previously dominated by dwarf shrub heath."
+  },
+  "w1f": {
+    "id": "w1f",
+    "level": 4,
+    "name": "Lowland mixed deciduous woodland",
+    "definition": "Includes woodland growing on the full range of soil conditions, from very acidic to base-rich. It occurs largely within enclosed landscapes, usually on sites with well-defined boundaries, at relatively low altitudes, although altitude is not a defining feature.",
+    "inclusions": [
+      "Monospecific stands of native species such as Elm Ulmus spp., Field maple Acer campestre, Ash Fraxinus excelsior or Hazel Corylus avellana in the drier non-Atlantic lowlands."
+    ],
+    "exclusions": [
+      "Mixed woodland, as in ‘a mixture of broadleaved and coniferous species’ (see w1h~)."
+    ],
+    "species": "There is great variety in the species composition of the canopy layer and the ground flora. Pedunculate Oak Quercus robur is generally the more frequent oak (although Sessile Oak Quercus petraea may be abundant locally), and it may occur with virtually all combinations of other locally native tree species."
+  },
+  "w1g": {
+    "id": "w1g",
+    "level": 4,
+    "name": "Other broadleaved woodland",
+    "definition": "Broadleaved and mixed woodland (see w1) that does not meet the definition of w1a–w1f.",
+    "inclusions": [
+      "Stands of non-native broadleaved tree species.",
+      "Woodlands of non-native species or Sycamore Acer pseudoplatanus that have developed through recent succession, typically on verges or alongside railway lines."
+    ]
+  },
+  "w1h": {
+    "id": "w1h",
+    "level": 4,
+    "name": "Other woodland; mixed",
+    "definition": "A mixture of broadleaved and coniferous trees in which neither make up >80% of the tree cover.",
+    "inclusions": [
+      "Yew Taxus baccata, a native coniferous species, is treated as a broadleaved species in habitat classification by convention."
+    ]
+  },
+  "w2a": {
+    "id": "w2a",
+    "level": 4,
+    "name": "Native pine woodlands",
+    "definition": "Relict indigenous forests, dominated by self-sown Scots Pine Pinus sylvestris.",
+    "inclusions": [
+      "Some Birch Betula spp. and Juniper Juniperus spp. woodlands of northern character within and adjoining the relict, indigenous pine forests."
+    ],
+    "species": "This habitat does not support a large diversity of flora and fauna compared with some, more fertile, habitats. However, there is a characteristic plant and animal community that includes many rare and uncommon species. The main tree species is Scots pine Pinus sylvestris, although Birches Betula spp., Rowan Sorbus aucuparia, Alder Alnus glutinosa, Willows Salix spp. and Bird Cherry Prunus padus are also found. Sessile Oak Quercus petraea also occurs infrequently, mainly in the northeast of Scotland. A shrub understorey, where browsing levels are low, includes Juniper Juniperus communis, Aspen Populus tremula, Holly Ilex aquifolium and Hazel Corylus avellana. Old or dead trees and rotting wood supports significant beetle and bryophyte communities. The field layer is characterised by acid-tolerant plants such as Bell Heather Erica cinerea, Bilberry Vaccinium myrtillus and Crowberry Empetrum nigrum."
+  },
+  "w2b": {
+    "id": "w2b",
+    "level": 4,
+    "name": "Other Scot's Pine woodland",
+    "definition": "Scot’s Pine Pinus sylvestris woodland that does not meet the definition of w2a."
+  },
+  "w2c": {
+    "id": "w2c",
+    "level": 4,
+    "name": "Other coniferous woodland",
+    "definition": "Coniferous woodland that does not meet the definition of w2a or w2b, i.e. it is not dominated by Scots Pine Pinus sylvestris.",
+    "inclusions": [
+      "Includes plantations and self-sown conifers, such as those on heathland."
+    ],
+    "exclusions": ["Christmas tree nurseries (see c1f6)."]
+  },
+  "h1a": {
+    "id": "h1a",
+    "level": 4,
+    "name": "Lowland heathland",
+    "definition": "A broadly open landscape on impoverished, acidic mineral and shallow peat soil, which is characterised by the presence of plants such as heathers and dwarf gorses, Crowberry Empetrum nigrum and grass species such as Bristle Bent Agrostis curtisii and Sheep’s Fescue Festuca ovina.",
+    "inclusions": [
+      "Small scale mosaic of patches dominated by dwarf shrubs and patches dominated by acid grassland (use 13 in combination with h1a or g1)."
+    ],
+    "exclusions": [
+      "Grass-dominated areas with <25% dwarf shrub cover (see g1~)."
+    ],
+    "species": "Areas in good condition should consist of an ericaceous layer of varying heights and structures, plus some or all of the following additional features, depending on environmental and-or management conditions: scattered and clumped trees and scrub; Bracken Pteridium aquilinum; areas of bare ground; areas of acid grassland; lichens; Gorse Ulex spp.; wet heaths, bogs and open waters. These elements often co-occur on a site. The presence and numbers of characteristic vascular plants, bryophytes and lichens are important indicators of habitat quality."
+  },
+  "h1b": {
+    "id": "h1b",
+    "level": 4,
+    "name": "Upland heathland",
+    "definition": "Heathland vegetation that occurs widely on mineral soils and thin peats throughout the uplands and moorlands of the UK. It is characterised by the presence of dwarf shrubs at a cover of ≥25%. Defined as lying below the alpine or montane zone (at about 600–750 m) and usually above the upper edge of enclosed agricultural land (generally at around 250–400 m, but descending to near sea level in northern Scotland).",
+    "inclusions": ["Thin peat is defined as <30 cm in depth in England."],
+    "exclusions": [
+      "Dwarf-shrub vegetation >25% cover on deep peat (see f1a~).",
+      "Heathland below the limit of agricultural enclosure (see h1a~)."
+    ],
+    "species": "Ericoid species, with either Bilberry Vaccinium myrtillus and Crowberry Empetrum spp. (see h1b5) or Cross-leaved Heath Erica tetralix, Deergrass Trichophorum cespitosum and Bog-mosses Sphagnum spp. (see h1b6)."
+  },
+  "h1c": {
+    "id": "h1c",
+    "level": 4,
+    "name": "Mountain heaths and willow scrub",
+    "definition": "Encompasses a range of natural or near-natural vegetation that occurrs in the montane zone, above the natural treeline.",
+    "inclusions": [
+      "Dwarf shrub heaths, grass heaths, dwarf herb communities, willow scrub and snow bed communities."
+    ]
+  },
+  "h2a": {
+    "id": "h2a",
+    "level": 4,
+    "name": "Native hedgerow",
+    "definition": "A hedgerow with >80% canopy cover of UK native or archaeophyte woody species.",
+    "inclusions": [
+      "Archaeophytes are species that have been recorded as naturalised in the wild before 1500 CE.",
+      "The status of Sycamore Acer pseudoplatanus is unclear, but it should be treated as an archaeophyte.",
+      "Roses Rosa spp. are included as woody species."
+    ],
+    "exclusions": [
+      "Climbers such as Honeysuckle Lonicera periclymenum and Bramble Rubus fruticosus agg. are recognised as integral to many hedgerows; however they require other woody plants to be present to form a distinct woody boundary feature, and as such they are not included in the definition of woody species."
+    ],
+    "species": "Often a mix of shrub and tree species such as Hawthorn Crataegus monogyna, Blackthorn Prunus spinosa, Hazel Corylus avellana, Field Maple Acer campestre, Elm Ulmus spp., Ash Fraxinus excelsior and Oak Quercus spp., interwoven with climbers like Traveller’s-joy Clematis vitalba and Honeysuckle Lonicera periclymenum. The ground flora is often very similar to local woodlands."
+  },
+  "h2b": {
+    "id": "h2b",
+    "level": 4,
+    "name": "Non-native and ornamental hedgerow",
+    "definition": "A hedgerow with >20% canopy cover of UK nonnative woody species.",
+    "inclusions": [
+      "Ornamental beech hedgerows.",
+      "Recently introduced species or ‘neophytes’ are species that have been introduced to the UK after 1500 CE.",
+      "Garden varieties of ornamental native species, such as Yew Taxus baccata, Box Buxus sempervirens and Privet Ligustrum sp.."
+    ]
+  },
+  "h3a": {
+    "id": "h3a",
+    "level": 4,
+    "name": "Blackthorn scrub",
+    "definition": "Dense scrub with Blackthorn Prunus spinosa dominant."
+  },
+  "h3b": {
+    "id": "h3b",
+    "level": 4,
+    "name": "Hazel scrub",
+    "definition": "Dense scrub with Hazel Corylus avellana dominant."
+  },
+  "h3c": {
+    "id": "h3c",
+    "level": 4,
+    "name": "Sea buckthorn scrub",
+    "definition": "Dense scrub with Sea-buckthorn Hippophae rhamnoides dominant."
+  },
+  "h3d": {
+    "id": "h3d",
+    "level": 4,
+    "name": "Bramble scrub",
+    "definition": "Dense scrub with Bramble Rubus fruticosus agg. dominant."
+  },
+  "h3e": {
+    "id": "h3e",
+    "level": 4,
+    "name": "Gorse scrub",
+    "definition": "Dense scrub with European Gorse Ulex europaeus dominant.",
+    "exclusions": [
+      "Stands of Dwarf Gorse Ulex minor or Western Gorse Ulex gallii."
+    ]
+  },
+  "h3f": {
+    "id": "h3f",
+    "level": 4,
+    "name": "Hawthorn scrub",
+    "definition": "Dense scrub with Hawthorn Crataegus monogyna dominant."
+  },
+  "h3g": {
+    "id": "h3g",
+    "level": 4,
+    "name": "Rhododendron scrub",
+    "definition": "Dense scrub with Rhododendron Rhododendron ponticum dominant as the canopy layer, but not in the understorey.",
+    "inclusions": ["Dense stands of Cherry Laurel Prunus laurocerasus."]
+  },
+  "h3h": {
+    "id": "h3h",
+    "level": 4,
+    "name": "Mixed scrub",
+    "definition": "Dense scrub comprising a mixture of species without a single species dominant or stands with a dominant species not listed in h3a-h3k."
+  },
+  "h3j": {
+    "id": "h3j",
+    "level": 4,
+    "name": "Willow scrub",
+    "definition": "Dense scrub with Willow Salix spp. dominant."
+  },
+  "h3k": {
+    "id": "h3k",
+    "level": 4,
+    "name": "Juniper scrub",
+    "definition": "Dense scrub with Juniper Juniperus communis dominant.",
+    "inclusions": [
+      "Juniper Juniperus communis stands that could be regarded as woodland, based on height."
+    ],
+    "exclusions": ["Juniper Juniperus communis on sand dunes (see s3a4)."]
+  },
+  "f1a": {
+    "id": "f1a",
+    "level": 4,
+    "name": "Blanket bog",
+    "definition": "Blanket bogs are characterised by the presence of a deep peat deposit, formed from Bog-mosses Sphagnum spp. and other peat-forming species, which is draped across large expanses of the landscape like a blanket. All but the steepest slopes are permanently waterlogged.",
+    "inclusions": [
+      "In England, deep peat is defined as >30 cm, i.e. with the measured peat depth greater than an average of 30 cm.",
+      "Intermediate habitats around the margins of the blanket bog, where the major part of the bog morphology is determined by the underlying mineral terrain."
+    ],
+    "exclusions": [
+      "May be part of a habitat mosaic that includes upland flushes, fens and swamps (see f2c), which are fed by groundwater (minerotrophic).",
+      "Intermediate habitats around the margins where the raised dome(s) of the system predominates (see f1b)."
+    ],
+    "species": "Typically include the important peat-forming species, such as Bog-mosses Sphagnum spp. and Cottongrasses Eriophorum spp., or Purple Moorgrass Molinia caerulea in certain circumstances, together with Heather Calluna vulgaris and other ericaceous species, such as Cross-leaved Heath Erica tetralix. Deergrass Trichophorum cespitosum may be prominent."
+  },
+  "f1b": {
+    "id": "f1b",
+    "level": 4,
+    "name": "Lowland raised bog",
+    "definition": "Characterised by the formation of a gently-curving dome, which forms above groundwater level, hence making it a ‘raised’ bog (reliant upon rainfall). The bog surface may show fine-scale variation with drier hummocks and wetter hollows. The thickness of the peat mantle varies considerably but can be >12 m.",
+    "exclusions": [
+      "In areas where peatlands may have developed as raised bog but then been swallowed up in the continuous expanse of blanket bog, they should be classed as units of blanket bog (see f1a~)."
+    ],
+    "species": "The vegetation is dominated by Sphagnum species, including Sphagnum balticum and Sphagnum skyense, Cottongrass Eriophorum spp. such as Hare’s-tail Eriophorum vaginatum, Heather Calluna vulgaris and, more rarely, Great Sundew Drosera anglica and Cranberry Vaccinium oxycoccos."
+  },
+  "f2a": {
+    "id": "f2a",
+    "level": 4,
+    "name": "Lowland fens",
+    "definition": "Fens are wetlands that receive water and nutrients from the soil, rock and groundwater, as well as from rainfall. Fens are also often associated with the accumulation of undecomposed, waterlogged plant litter in the form of peat, but not all fens form peat as vegetative matter may be decomposed.",
+    "inclusions": [
+      "Re-created lowland fens with water fed from rivers and streams (use f2a 61)"
+    ]
+  },
+  "f2b": {
+    "id": "f2b",
+    "level": 4,
+    "name": "Purple moor-grass and rush pastures",
+    "definition": "The vegetation has a distinct character and consists of various species-rich types of fen meadow and rush pasture. It is dominated by Rush Juncus spp. and-or Purple Moor-grass Molinia caerulea, usually on peaty-gley soils, with Sharpflowered Rush Juncus acutiflorus or Soft Rush Juncus effusus abundant to dominant.",
+    "exclusions": [
+      "Species-poor Purple Moor-grass Molinia caerulea pastures that lack any of the indicator herb species."
+    ],
+    "species": "Purple Moor-grass Molinia caerulea and rushes, especially Sharp-flowered Rush Juncus acutiflorus, are usually abundant. More basic examples of the habitat may include herbs such as Marsh Bedstraw Galium palustre, Marsh Thistle Cirsium palustre, Meadowsweet Filipendula ulmaria and Wild Angelica Angelica sylvestris. Acidic examples include Tormentil Potentilla erecta, Marsh Violet Viola palustris, Devil’s-bit Scabious Succisa pratensis and Cross-leaved Heath Erica tetralix."
+  },
+  "f2c": {
+    "id": "f2c",
+    "level": 4,
+    "name": "Upland flushes, fens and swamps",
+    "definition": "Includes a number of wetland communities in the uplands, from swamp vegetation at the margins of lochs or in the waters of sluggish streams, through tall fens with mixtures of herbs and rushes, to sedge-dominated mires and bryophyte springs.",
+    "species": "In the tall fens and swamps the dominant plants are large sedges Carex spp., rushes Juncus spp. and, on neutral soils, herbs. On more acid soils, mosses and herbs are more common. The sedge mires can consist of any of many species either alone or in combination. Small herbs are common in these mires, depending on the base-status of the water. Bryophyte springs vary from the almost pure mats of a few specific mosses to intricate, brightlycoloured mixtures of species, dotted with small herbs. Horsetails Equisetum spp. can be abundant or dominant in swamp communities at the edges of lakes, lochs and lochans. Wetland communities of all types are host to large numbers of invertebrates, especially flies and spiders, and so are valuable feeding grounds for many insectivorous birds, including waders."
+  },
+  "f2d": {
+    "id": "f2d",
+    "level": 4,
+    "name": "Aquatic marginal vegetation",
+    "definition": "Vegetation fringing open water that is often developed as a narrow (<0.5 m wide or <0.25 ha in extent) part of a hydrosere between standing water and upslope vegetation.",
+    "inclusions": [
+      "Inundated, vegetation-filled ditches (see 50) with little or no open water. Common Reed Phragmites australis is often dominant."
+    ],
+    "species": "Include Valerian Valeriana officinalis, Great Willowherb Epilobium hirsutum, Meadowsweet Filipendula ulmaria, Hemlock Water Dropwort Oenanthe crocata, Marsh Woundwort Stachys palustris and Purple Loosestrife Lythrum salicaria."
+  },
+  "f2e": {
+    "id": "f2e",
+    "level": 4,
+    "name": "Reedbeds",
+    "definition": "Wetlands that are dominated by >5 m wide stands of the Common Reed Phragmites australis and where the water table is at or above ground level for most of the year.",
+    "inclusions": [
+      "Parcels that meet the size threshold in the definition and that include both a reed-filled ditch and reed-dominated vegetation extending onto dry land.",
+      "Parcels where Common Club-rush Schoenoplectus lacustris and Reed Canary-grass Phalaris arundinacea are prominent.",
+      "Reedbeds with a saline influence (see 702) that include saline-tolerant species such as Atriplex spp.."
+    ],
+    "exclusions": [
+      "Parcels of Common Reed Phragmites australis that are <5 m wide (see f2d, f2f).",
+      "Common Reedmace Typha latifolia swamp (see f2d, f2f)."
+    ]
+  },
+  "f2f": {
+    "id": "f2f",
+    "level": 4,
+    "name": "Other wetlands",
+    "definition": "Wetlands that are not included in f2a, f2b, f2c, f2d or f2e, including swamps other than reedbeds (see f2e).",
+    "exclusions": [
+      "Parcels dominated by Common Reed Phragmites australis where no part is inundated for most of the year (see g3~ 16)."
+    ],
+    "species": "Reed Canary-grass Phalaris arundinacea is likely to be constant, as is Great Willowherb Epilobium hirsutum, Nettle Urtica dioica, Common Couch Elymus repens and Yorkshire Fog Holcus lanatus."
+  },
+  "c1a": {
+    "id": "c1a",
+    "level": 4,
+    "name": "Arable field margins",
+    "definition": "Herbaceous strips or blocks around arable fields that are managed specifically to provide benefits for wildlife. The arable field must be in a crop rotation that includes an arable crop, even if in certain years the field is in temporary grass, setaside or fallow.",
+    "exclusions": [
+      "Whole field applications of similar treatments (see c1c~)."
+    ],
+    "species": "Grasses are likely to include Sweet Vernal Grass Anthoxanthum odoratum, Smooth Meadow Grass Poa pratensis, Red Fescue Festuca rubra, Crested Dog’s-tail Cynosurus cristatus and Yellow Oat-grass Trisetum flavescens, but some sites may have a high cover of sown mixtures of legumes such as Red Clover Trifolium pratense, Alsike Clover Trifolium hybridum and Bird’s-foot Trefoil Lotus corniculatus."
+  },
+  "c1b": {
+    "id": "c1b",
+    "level": 4,
+    "name": "Temporary grass and clover leys",
+    "definition": "Temporary grass or legumes in rotation with grain or tilled crops, usually as a soil conservation measure.",
+    "inclusions": ["Short-term leys.", "Medium-term leys."],
+    "exclusions": ["Long-term leys (see g4)."],
+    "species": "Likely dominants include Perennial Rye-grass Lolium perenne, White Clover Trifolium repens and Red Clover Trifolium pratense."
+  },
+  "c1c": {
+    "id": "c1c",
+    "level": 4,
+    "name": "Cereal crops",
+    "definition": "Crops in the cereal group of domesticated grasses: wheat, barley, oats, maize.",
+    "species": "Flora other than the cereal crop is dependent on the herbicide applied, but it may include Common Field-speedwell Veronica persica, Knotgrass Polygonum aviculare, Night-flowering Catchfly Silene noctiflora, Common Poppy Papaver rhoeas, Fat-hen Chenopodium album, Grey Fieldspeedwell Veronica polita, Creeping Bent Agrostis stolonifera and Cleavers Galium aparine. Ruderal grass species are likely to include Blackgrass Alopecurus myosuroides, Sterile Brome Anisantha sterilis and Common Couch Elymus repens."
+  },
+  "c1d": {
+    "id": "c1d",
+    "level": 4,
+    "name": "Non-cereal crops",
+    "definition": "Crops other than those defined in c1c."
+  },
+  "c1e": {
+    "id": "c1e",
+    "level": 4,
+    "name": "Intensive orchards",
+    "definition": "Orchards with a ground cover that is intensively managed (treated with herbicide and heavily mown) – usually Modified grassland (see g4), and often with young tree stock and dwarf varieties.",
+    "inclusions": ["The number of trees is ≥5.", "Nut and Hop plantations."],
+    "exclusions": ["Traditonal orchards (see 27)."],
+    "species": "Between the bare ground strips controlled by herbicides, species typically include Perennial Ryegrass Lolium perenne, Dandelion Taraxacum spp., Buttercup Ranunculus spp., Nettle Urtica dioica, Cut-leaved Crane’s-bill Geranium dissectum, Field Forget-me-not Myosotis arvensis, Germander Speedwell Veronica chamaedrys and Lesser Burdock Arctium minus."
+  },
+  "c1f": {
+    "id": "c1f",
+    "level": 4,
+    "name": "Horticulture",
+    "definition": "Commercial horticultural land such as nurseries, soft-fruit, vegetable plots and flower beds.",
+    "inclusions": ["Field vegetables, such as leeks, broccoli and cabbage."]
+  },
+  "u1b": {
+    "id": "u1b",
+    "level": 4,
+    "name": "Developed land; sealed surface",
+    "definition": "Soil surface sealed with impervious materials as a result of urban development and infrastructure construction.",
+    "inclusions": [
+      "Sealed surfaces with vegetation cover of <10% or any cover in the case of green roofs."
+    ]
+  },
+  "u1c": {
+    "id": "u1c",
+    "level": 4,
+    "name": "Artificial unvegetated, unsealed surface",
+    "definition": "Land that has no or very low (<10%) cover of vegetation through direct or indirect human activity, and the soil surface is not sealed with impervious materials.",
+    "inclusions": [
+      "Unsealed surfaces with vegetation cover <10%.",
+      "Tracks (see 839) that are mappable as area features with vegetation cover <10%."
+    ]
+  },
+  "u1d": {
+    "id": "u1d",
+    "level": 4,
+    "name": "Suburban mosaic of developed and natural surface",
+    "definition": "Small-scale mosaic of developed and natural surfaces, as in housing and gardens in suburban areas."
+  },
+  "u1e": {
+    "id": "u1e",
+    "level": 4,
+    "name": "Built linear features",
+    "definition": "Walls, fences and surfaced paths.",
+    "inclusions": [
+      "Narrow railways, tracks or roads that are mappable as linear features because minimum mappable area is relatively large."
+    ]
+  },
+  "u1f": {
+    "id": "u1f",
+    "level": 4,
+    "name": "Sparsely vegetated urban land",
+    "definition": "Urban land with vegetation cover 10–50%.",
+    "inclusions": [
+      "Abandoned or derelict land, usually constructed permeable but can be impermeable where succession is taking place.",
+      "Open Mosaic Habitats of Previously Developed Land (see 80) will normally have some areas of this habitat."
+    ]
+  },
+  "s1a": {
+    "id": "s1a",
+    "level": 4,
+    "name": "Inland rock outcrop and scree habitats",
+    "definition": "Natural cliffs and screes on a wide range of rock types, varying from acidic to highly calcareous.",
+    "inclusions": ["Mountain summit boulder fields (see 513)."],
+    "exclusions": [
+      "Coastal cliff and ledge habitats (see s2a).",
+      "Active and disused quarries (see 85, 836, 837, 838)."
+    ],
+    "species": "Natural rock exposures support a wide range of communities. Screes are typically dominated by Parsley Fern Cryptogramma crispa and other ferns, lichens and bryophytes. On cliff ledges, tall herbs such as Roseroot Rhodiola rosea and Wild Angelica Angelica sylvestris are generally abundant. Chasmophytic vegetation (in rock crevices) is usually dominated by ferns such as Green Spleenwort Asplenium viride and small herbs such as Wild Thyme Thymus drucei and Saxifrages Saxifraga spp.. Bryophytes and lichens also occur in crevices but are able to flourish on the open rock surfaces where there is a lack of competition from vascular plants."
+  },
+  "s1b": {
+    "id": "s1b",
+    "level": 4,
+    "name": "Limestone pavement",
+    "definition": "Outcrops of rock that are typically horizontal or gently inclined, although a few are steeply inclined. The surface has been dissolved by water over millions of years into ‘paving blocks’, known as clints, with a complex reticulate pattern of crevices, known as grikes, between them. Record as ‘Limestone pavements (H8240)’ (see s1b5).",
+    "species": "Complex and rich vegetation mosaic of different communities. The fissures contain shade-tolerant vascular plants such as Herb Robert Geranium robertianum and Rustyback Ceterach officinarum as well as herbaceous species typical of calcareous woodland such as Hart’s Tongue Asplenium scolopendrium. The small pockets of soil are occupied by grassland or heath and shrub vegetation."
+  },
+  "s1c": {
+    "id": "s1c",
+    "level": 4,
+    "name": "Calaminarian grasslands",
+    "definition": "Include a range of semi-natural and anthropogenic, sparsely vegetated habitats on substrates characterised by high levels of heavy metals such as lead, chromium and copper, or other unusual minerals.",
+    "species": "Open-structured ruderal or metallophyte species of lichens, bryophytes and vascular plants, such as Spring Sandwort Sabulina verna, Alpine Pennycress Thlaspi arvense and genetically adapted races of species such as Thrift Armeria maritima and Bladder Campion Silene vulgaris. Notable species include Forked Spleenwort Asplenium septentrionale, Ditrichum cornubicum, Marsupella profunda, Cephaloziella nicholsonii and Ditrichum plumbicola. In northern parts of the UK, there are local populations of boreal species that characterise these habitat conditions in Scandinavia, such as Scottish Sandwort Arenaria norvegica and the endemic Shetland Mouse-ear Cerastium nigrescens."
+  },
+  "s1d": {
+    "id": "s1d",
+    "level": 4,
+    "name": "Other inland rock",
+    "definition": "Inland rock habitats not meeting the definition of s1a, s1b or s1c, such as active or disused quarries and mineral extraction sites with low vegetation cover.",
+    "exclusions": [
+      "Unsealed surfaces, disturbed by humans or machines, with no or very low (<10%) vegetation cover (see u1c, u1e).",
+      "Sparsely vegetated constructed surfaces such as concrete or ballast (see u1f)."
+    ]
+  },
+  "s2a": {
+    "id": "s2a",
+    "level": 4,
+    "name": "Maritime cliff and slopes",
+    "definition": "The junction between land and sea where a break in slope is formed by slippage or erosion by the sea. On the seaward side, the habitat extends to the limit of the supralittoral zone and so includes the splash zone lichens. On the landward side, the habitat extends to the limit of saltspray influence.",
+    "inclusions": ["Dense scrub within the maritime cliffs and slopes zone."],
+    "exclusions": [
+      "Heathland on maritime cliffs and slopes (see 71).",
+      "Soft cliff slopes that erode quickly, such as many coastline stretches between the Thames and Humber estuaries."
+    ],
+    "species": "Exposure to wind and salt spray is a key determinant of vegetation type, as is the geology of the cliff or slope. Vegetated cliff species include Sea Campion Silene uniflora, Thrift Armeria maritima, Rock Samphire Crithmum maritimum, Buck’s Horn Plantain Plantago maritima, a high frequency of Red Fescue Festuca rubra ssp. pruinosa (the densely salttolerant ecotype), and Creeping Bent Agrostis stolonifera – perhaps also Maidenhair Fern Adiantum capillus-veneris. Lichen-dominated cliffs support yellow and grey lichens. The habitat also provides an important breeding ground for a range of seabirds."
+  },
+  "s3a": {
+    "id": "s3a",
+    "level": 4,
+    "name": "Sand dunes",
+    "definition": "Sand covered shorelines created by the action of wind and often colonised and stabilised by communities of coarse maritime grasses.",
+    "exclusions": ["Inland dunes (see g1a5)."],
+    "species": "Marram Ammophila arenaria is the characteristic maritime grass. Characteristic vascular plants include Sea Sandwort Honckenya peploides, Saltwort Salsola kali and Sea Beet Beta vulgaris."
+  },
+  "s3b": {
+    "id": "s3b",
+    "level": 4,
+    "name": "Coastal vegetated shingle",
+    "definition": "Vegetated shingle beaches above the reach of storm waves.",
+    "species": "Halophytes and species tolerant of maritime exposure, as well as other more wide-ranging species, such as Curled Dock Rumex crispus, Seakale Crambe maritima, Sea-poppy Glaucium flavum, Sea-campion Silene uniflora, Sea-beet Beta vulgaris, Sea-pea Lathyrus japonicus and Bristly Oxtongue Helminthotheca echioides."
+  },
+  "r1a": {
+    "id": "r1a",
+    "level": 4,
+    "name": "Eutrophic standing waters",
+    "definition": "Water bodies ≥2 ha that are highly productive because plant nutrients are plentiful, either naturally or as a result of artificial enrichment. They are characterised by algal blooms and dark anaerobic mud and are rich in organic matter.",
+    "inclusions": [
+      "Natural and artificial lakes (see 43).",
+      "Reservoirs (see 45).",
+      "Flooded gravel pits."
+    ],
+    "exclusions": ["Ponds (see 40, 41, 42).", "Brackish waters."],
+    "species": "In naturally enriched water bodies, typically include Common Reed Phragmites australis or Bulrush Typha spp., and beds of floating-leaved species such as Yellow Water-lily Nuphar lutea. Submerged species may include Fennel-leaved Pondweed Potamogeton pectinatus and Spiked Water-milfoil Myriophyllum spicatum. Plants indicative of artificially enriched eutrophic habitats include species of Pondweeds Potamogeton spp. (e.g. Potamogeton crispus), Stoneworts Chara spp., Duckweeds Lemna spp. and Water Starworts Callitriche spp.. In their natural state, eutrophic waters have high biodiversity. Planktonic algae and zooplankton are abundant in the water column, submerged vegetation is diverse and numerous species of invertebrate and fish are present. Plant assemblages differ according to geographical area and nutrient concentration, but Fennel-leaved Pondweed Potamogeton pectinatus and Spiked Water-milfoil Myriophyllum spicatum are characteristic throughout the UK."
+  },
+  "r1b": {
+    "id": "r1b",
+    "level": 4,
+    "name": "Mesotrophic lakes",
+    "definition": "Lakes in the middle of the trophic range that are characterised by having a narrow range of nutrients, the main indicative ones being inorganic nitrogen (N) and total phosphorus (P)."
+  },
+  "r1c": {
+    "id": "r1c",
+    "level": 4,
+    "name": "Oligotrophic and dystrophic lakes",
+    "definition": "Water bodies that are mainly >2 ha in size and characterised by their low nutrient levels and low productivity.",
+    "species": "Characteristic plankton, zoobenthos, macrophyte and fish communities occur, including several restricted species and species of economic importance. Fish communities, generally dominated by salmonids, may include Arctic Charr Salvelinus alpinus and Salmon Coregonus spp.. A number of benthic and planktonic invertebrates, found only in oligotrophic lakes, are possibly glacial relicts. Macrophytes are typically sparse, with species such as Shoreweed Littorella uniflora and Quillwort Isoetes spp. Shores are typically stony, and emergent vegetation is generally restricted to sheltered bays, where species such as Bottle Sedge Carex rostrata and Common Club-rush Schoenoplectus lacustris may be found."
+  },
+  "r1d": {
+    "id": "r1d",
+    "level": 4,
+    "name": "Aquifer-fed naturally fluctuating water bodies",
+    "definition": "Natural water bodies that have an intrinsic regime of extreme fluctuation in water level, with periods of complete or almost-complete drying out as part of the natural cycle. They have no inflow or outflow streams at the surface, except at times of very high water level, when temporary out-flows may develop. Instead, they are directly connected to the underlying groundwater system, and periodically empty and are recharged via swallow holes or smaller openings in their beds."
+  },
+  "r1e": {
+    "id": "r1e",
+    "level": 4,
+    "name": "Canals",
+    "definition": "An artificial watercourse for inland navigation or irrigation.",
+    "exclusions": [
+      "Towpaths.",
+      "Other land between the canalside and the nearest field boundary."
+    ],
+    "species": "Pondweeds Potamogeton spp., Unbranched Burreed Sparganium emersum, Arrowhead Sagittaria sagittifolia, Canadian Waterweed Elodea canadensis, Nutall’s Waterweed Elodea nuttallii, Rigid Hornwort Ceratophyllum demersum, Common Duckweed Lemna minor and Ivy-leaved Duckweed Lemna trisulca are all widespread."
+  },
+  "r1f": {
+    "id": "r1f",
+    "level": 4,
+    "name": "Temporary water bodies",
+    "definition": "Water bodies containing water normally for <6 months each year.",
+    "exclusions": [
+      "Aquifer-fed, naturally fluctuating water bodies (see r1d~).",
+      "Ditches (see r1g, 50)."
+    ]
+  },
+  "r1g": {
+    "id": "r1g",
+    "level": 4,
+    "name": "Other standing water",
+    "definition": "Standing water that is not r1a, r1b, r1c, r1d, r1e or r1f. See Inclusions and Exclusions sections for details.",
+    "inclusions": [
+      "and Exclusions sections for details.",
+      "Inclusions Lakes (see 43, 44) that are not Priority Habitat (see r1a, r1b, r1c).",
+      "Most ponds (see 40, 41, 42) that may or may not be Priority Habitat.",
+      "Drainage ditches that are likely to retain water for >4 months a year in fenland or on levels (see 50)."
+    ],
+    "exclusions": [
+      "sections for details.",
+      "Inclusions Lakes (see 43, 44) that are not Priority Habitat (see r1a, r1b, r1c).",
+      "Most ponds (see 40, 41, 42) that may or may not be Priority Habitat.",
+      "Drainage ditches that are likely to retain water for >4 months a year in fenland or on levels (see 50).",
+      "Exclusions Water bodies <2 ha that are therefore technically ponds, rather than lakes, but otherwise fit the definition of mesotrophic lakes (see r1b) or oligotrophic and dystrophic lakes (see r1c).",
+      "Dry ditches (see 50).",
+      "Ditches that are part of the structure of a hedgerow or line of trees and within 2 m of it (see 50)."
+    ]
+  },
+  "r2a": {
+    "id": "r2a",
+    "level": 4,
+    "name": "Rivers (priority habitat)",
+    "definition": "To qualify as a Priority Habitat River, one or more of these criteria must be met (Maddock et al., 2011): 1. Riverine water bodies of high hydromorphological or ecological status. 2. Headwaters (see 306). A watercourse within 2.5 km of its furthest source, as marked with a blue line on Ordnance Survey (OS) maps at a scale of 1:50,000. Note that each tributary of a river will have its own headwater, so there will be >1 per catchment. Headwaters that have been significantly altered from their natural state are, however, not included. 3. Occurrence of rivers with floating vegetation (H3260) (see r2a5). The definition will include, but not be confined to, all river Special Areas of Conservation (SACs) designated for the feature. 4. Chalk rivers (see 51). 5. Active shingle rivers (see 308). 6. A/SSSIs (Areas/Sites of Special Scientific Interest) designated for river species, riverine features or fluvial geomorphology. 7. Contains species including: i. Habitats Directive Annex 2 species; ii. Biodiversity Action Plan (BAP) priority species; iii. Invertebrate species that are strongly indicative of river shingle.",
+    "inclusions": [
+      "In England, the statutory agencies (Mainstone, Hall and Diack, 2016) have defined naturally functioning freshwater habitats as those with: 1. water chemistry that is not impacted by pollution;",
+      "2. natural morphology and dynamic physical processes shaping habitat mosaics;",
+      "3. a natural hydrological regime not impacted by abstraction, diversion, effluent discharge, drainage and impoundments;",
+      "4. natural biological assemblages with a lack of invasive non-native species or other direct biological manipulations such as fish species removals and stocking.",
+      "The relationship between online England Priority Habitat Rivers maps, including some evaluated on this basis and those of chalk rivers, and the definition of Priority Habitat Rivers (Maddock et al, 2011) is currently unclear.",
+      "In Scotland, the statutory agency approach remains based on the original Priority Habitat Rivers definition (Maddock et al, 2011)."
+    ],
+    "exclusions": [
+      "Headwaters that have been significantly altered from their natural state.",
+      "Canals.",
+      "Drainage rivers (see r2b) and ditches (see 50)."
+    ],
+    "species": "Presence of one or more of the following vascular plant species confirms the river as a Priority Habitat River: Coral-necklace Illecebrum verticillatum, Floating Water-plantain Luronium natans, Grass-wrack Pondweed Potamogeton compressus and Triangular Club-rush Schoenoplectus triqueter. Twelve bryophytes and four lichens also each act as individual qualifying species. Presence of Tubular Water-dropwort Oenanthe fistulosa, Greater Water Parsnip Sium latifolium and Marsh Stitchwort Stellaria palustris can contribute to a mixed flora and fauna score. The full list of qualifying species for criterion 7 can be found in Maddock et al. (2011)."
+  },
+  "r2b": {
+    "id": "r2b",
+    "level": 4,
+    "name": "Other rivers and streams",
+    "definition": "Rivers and streams that do not meet the criteria for r2a."
+  },
+  "t1a": {
+    "id": "t1a",
+    "level": 4,
+    "name": "Intertidal chalk",
+    "definition": "The erosion of chalk exposures on the coast has resulted in the formation of vertical cliffs and gently-sloping intertidal platforms with a range of microhabitats of biological importance.",
+    "species": "Supralittoral and littoral fringe chalk cliffs and sea caves support various algal communities that are unique to this soft rock type. Orange, brownish or blackish gelatinous bands of algae, composed of an assemblage of Haptophyceae species such as Apistonema spp., Pleurochrysis carterae and the orange Chrysotila lamellosa, but other genera and species of Chrysophyceae, Haptophyceae and Prasinophyceae are likely to be present as well. The lower littoral fringe may be characterised by a dense mat of green algae Enteromorpha spp. and Sea Lettuce Ulva lactuca. Lower down the shore, in the eulittoral, the generally soft nature of the chalk results in the presence of characteristic flora and fauna, notably ‘rock-boring’ invertebrates such as piddocks, overlain by mostly algal-dominated communities (fucoids and red algal turfs)."
+  },
+  "t1b": {
+    "id": "t1b",
+    "level": 4,
+    "name": "Sabellaria alveolata reefs",
+    "definition": "Formed by the Honeycomb Worm Sabellaria alveolata, a polychaete that constructs tubes in tightly-packed masses with a distinctive honeycomb-like appearance. These reefs can be up to 30 cm – or even 50 cm – thick and take the form of hummocks, sheets or more massive formations."
+  },
+  "t1c": {
+    "id": "t1c",
+    "level": 4,
+    "name": "Intertidal underboulder communities",
+    "definition": "Areas of intertidal boulders (>256 mm in diameter) that support a diverse underboulder community.",
+    "exclusions": [
+      "Boulders with a limited underboulder community (as may occur, for example, where boulders are embedded in sediment, in low salinity conditions, or where boulders experience high levels of mobility and scour)."
+    ]
+  },
+  "t1d": {
+    "id": "t1d",
+    "level": 4,
+    "name": "Estuarine rocky habitats",
+    "definition": "Encompasses rocky habitats in estuaries, extending from supralittoral lichens down to the subtidal circalittoral. Estuarine rocky habitats incorporate substrata types such as bedrock and stable boulders. Generally rias, fjords and fjards are the most relevant types of inlet for rocky estuarine habitats.",
+    "species": "Depending on the extent and heterogeneity of the substrate, there can be a wide variety of community types associated with this type of habitat. The extent of rocky habitat in estuaries can range from a narrow strip restricted to the top of the shore to littoral reef structures extending to the subtidal, particularly in rias. Similarly, the topography of estuarine rocky shores varies from flat and gently sloping to rugged reefs and large boulders with many microhabitats."
+  },
+  "t1e": {
+    "id": "t1e",
+    "level": 4,
+    "name": "Splash zone with lichens",
+    "definition": "Cliffs and rocks of the supralittoral spray zone, mostly occupied by lichens such as Caloplaca spp. and Verrucaria spp."
+  },
+  "t1f": {
+    "id": "t1f",
+    "level": 4,
+    "name": "Other littoral rock",
+    "definition": "Littoral rock that does not meet the definition of t1a, t1b, t1c, t1d or t1e."
+  },
+  "t2a": {
+    "id": "t2a",
+    "level": 4,
+    "name": "Coastal saltmarsh",
+    "definition": "Comprise the upper, vegetated portions of intertidal mudflats, lying approximately between mean high-water neap tides and mean high-water spring tides. The lower saltmarsh limit is defined as the lower limit of pioneer saltmarsh vegetation (but excluding Sea-grass Zostera beds) and the upper limit as 1 m above the level of highest astronomical tides, to take in transitional zones.",
+    "species": "Vegetation consists of a limited number of halophytic (salt-tolerant) species that are adapted to regular immersion by the tides. A natural saltmarsh system shows a clear zonation, according to the frequency of inundation. At the lowest level, the pioneer Glassworts Salicornia spp. can withstand immersion by as many as 600 tides per year, while transitional species of the upper marsh can only withstand occasional inundation. The communities of stabilised saltmarsh can be divided into species-poor low-mid marsh, and the more diverse communities of the mid-upper marsh. On traditionally grazed sites, saltmarsh vegetation is shorter and dominated by grasses. At the upper-tidal limits, true saltmarsh communities are replaced by driftline, swamp or transitional communities, which can only withstand occasional inundation."
+  },
+  "t2b": {
+    "id": "t2b",
+    "level": 4,
+    "name": "Intertidal seagrass beds",
+    "definition": "Includes intertidal and subtidal beds of Blue Mussel Mytilus edulis on a variety of sediment types and in a range of conditions, from open coasts to estuaries, marine inlets and deeper offshore habitats."
+  },
+  "t2c": {
+    "id": "t2c",
+    "level": 4,
+    "name": "Intertidal mud",
+    "definition": "Mid- and upper-shore, wave-sheltered, muddy fine sand or sandy mud, with Dwarf Eelgrass Zostera noltei at an abundance of frequent or above.",
+    "exclusions": [
+      "Seagrass beds in the sublittoral that are usually dominated by Eelgrass Zostera marina."
+    ]
+  },
+  "t2d": {
+    "id": "t2d",
+    "level": 4,
+    "name": "Intertidal mixed sediments",
+    "definition": "Sedimentary intertidal habitats created by deposition in low-energy coastal environments, particularly estuaries and other sheltered areas.",
+    "species": "The surface of the sediment is often apparently devoid of vegetation, although mats of benthic microalgae diatoms and euglenoids are common. Under nutrient-rich conditions, there may be mats of the macroalgae Enteromorpha spp. or Ulva spp. In areas of lowered salinity, characteristic macroinvertebrate fauna species are Common Cockle Cerastoderma edule, Sand-hopper Corophium volutator, Laver Spire Shell Hydrobia ulvae, Ragworm Hediste diversicolor and large numbers of oligochaete annelids, principally Tubificoides spp. With a slight increase in the proportion of sand, the polychaetes Catworm Nephtys hombergii and Lugworm Arenicola marina occur. In slightly coarser areas, Seagrass Zostera spp. beds may develop. Where stones and shells provide an initial attachment for byssus threads, beds of Blue Mussel Mytilus edulis occur and accrete material through faecal deposition. Occasional stones or shells may also provide suitable attachment for stands of fucoid macroalgae such as Fucus vesiculosus or Fucus spiralis."
+  },
+  "t2e": {
+    "id": "t2e",
+    "level": 4,
+    "name": "Intertidal sand and muddy sand",
+    "definition": "Occur principally in estuaries, rias and sea lochs in areas protected from wave action and strong tidal streams.",
+    "species": "In fully marine conditions on the lower shore, this habitat can be extremely species-rich because the complex nature of the substratum supports a high diversity of both infauna and epifauna. However, good quality examples of this habitat are very scarce. Polychaetes and bivalve molluscs are normally dominant and the most varied, but representatives of most marine phyla can be present. The fauna is often characterised by a large range in body size. As one moves into an estuary, with a consequent reduction in salinity, there is a marked reduction in species richness. Low salinity (mid- to upper-estuarine) muddy gravels have a lower, but distinctive, species diversity."
+  },
+  "t2f": {
+    "id": "t2f",
+    "level": 4,
+    "name": "Intertidal coarse sediment",
+    "definition": "Littoral or sublittoral peat and/or clay exposures that are soft enough to be bored by a variety of piddocks, particularly Pholas dactylus, Barnea candida and Barnea parva."
+  },
+  "t2g": {
+    "id": "t2g",
+    "level": 4,
+    "name": "Coastal lagoons",
+    "definition": "Record as ‘coastal saline lagoons (H1150)’ (see t2g5).",
+    "species": "The flora and invertebrate fauna present can be divided into three main components: those that are essentially freshwater in origin, those that are marine/brackish species and those that are more specialist lagoonal species. The presence of certain indigenous and specialist plants and animals make this habitat important to the UK’s overall biodiversity."
+  },
+  "t2h": {
+    "id": "t2h",
+    "level": 4,
+    "name": "Other littoral sediment",
+    "definition": "Sand or pebble intertidal sediment.",
+    "exclusions": [
+      "Boulder beaches, where individual rocks are typically >256mm in size and are not moved by regular tidal flows should be classified as littoral rock (see t1~).",
+      "Beaches comprising silt, clay and mud-sized particles, (see t2d and t2e)."
+    ]
+  }
+}

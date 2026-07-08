@@ -64,7 +64,7 @@ type Params = {
   listId: string | number;
   model?: 'plantnet' | 'waarneming';
   date?: string | number;
-  location?: Location;
+  location?: (typeof Location)['prototype']['data'];
   taxonGroupId?: number;
 };
 

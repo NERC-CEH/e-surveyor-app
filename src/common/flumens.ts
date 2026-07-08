@@ -12,6 +12,13 @@ export {
   type RemoteConfig,
 } from '@flumens/models/dist/Indicia/Sample';
 export {
+  default as Location,
+  type Data as LocationData,
+  type Metadata as LocationMetadata,
+  type Options as LocationOptions,
+  LocationType,
+} from '@flumens/models/dist/Indicia/Location';
+export {
   default as Media,
   type Data as MediaAttrs,
 } from '@flumens/models/dist/Indicia/Media';
@@ -26,6 +33,7 @@ export {
 } from '@flumens/models/dist/Drupal/User';
 export { default as Collection } from '@flumens/models/dist/Collection';
 export { default as SampleCollection } from '@flumens/models/dist/Indicia/SampleCollection';
+export { default as LocationCollection } from '@flumens/models/dist/Indicia/LocationCollection';
 
 // UTILS
 export * from '@flumens/utils/dist/uuid';
@@ -39,7 +47,8 @@ export * from '@flumens/utils/dist/location';
 
 // IONIC
 export { default as Page } from '@flumens/ionic/dist/components/Page';
-export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
+// export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
+export { default as RouteWithModels } from './RouteWithModels';
 export { default as Main } from '@flumens/ionic/dist/components/Main';
 export { default as Header } from '@flumens/ionic/dist/components/Header';
 export { default as Collapse } from '@flumens/ionic/dist/components/Collapse';
@@ -110,3 +119,9 @@ export {
 export { default as Block } from '@flumens/tailwind/dist/components/Block';
 export { default as useContextMenu } from '@flumens/tailwind/dist/hooks/useContextMenu';
 export * from '@flumens/tailwind/dist/components/Map/utils';
+export {
+  type ChoiceInputConf,
+  type TextInputConf,
+  type NumberInputConf,
+} from '@flumens/tailwind/dist/Survey';
+export { type inferBlockType } from '@flumens/tailwind/dist/components/types';

@@ -1,0 +1,7 @@
+###
+# @name Predict
+POST https://aihab-uk-api.hf.space/predict
+Authorization: Bearer {{$dotenv HABITAT_ACCESS_TOKEN}}
+Content-Type: application/x-www-form-urlencoded
+
+image_urls=https://inaturalist-open-data.s3.amazonaws.com/photos/683265976/original.jpg&https://inaturalist-open-data.s3.amazonaws.com/photos/683265976/original.jpg

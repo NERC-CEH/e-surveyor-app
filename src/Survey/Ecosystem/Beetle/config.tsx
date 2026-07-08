@@ -15,6 +15,8 @@ import {
 import { IonIcon } from '@ionic/react';
 import icon from 'common/images/beetle.svg';
 import appModel from 'common/models/app';
+import Occurrence from 'common/models/occurrence';
+import Sample from 'common/models/sample';
 import {
   Survey,
   dateAttr,
@@ -32,17 +34,15 @@ const addLabels = (option: any) => {
   if (option.label || option.isPlaceholder) return option;
 
   if (option.commonName) {
-    option.label = // eslint-disable-line no-param-reassign
-      (
-        <div className="flex flex-col">
-          <div className="font-semibold">{option.commonName}</div>
-          <div className="italic">{option.scientificName}</div>
-        </div>
-      );
+    option.label = (
+      <div className="flex flex-col">
+        <div className="font-semibold">{option.commonName}</div>
+        <div className="italic">{option.scientificName}</div>
+      </div>
+    );
     return option;
   }
 
-  // eslint-disable-next-line no-param-reassign
   option.label = <i>{option.scientificName}</i>;
   return option;
 };
@@ -464,7 +464,7 @@ const survey: Survey = {
       // margin: marginAttr,
     },
 
-    create({ Sample, photo, surveySample }) {
+    create({ photo, surveySample }) {
       const sample = new Sample({
         data: {
           surveyId: survey.id,
@@ -502,7 +502,7 @@ const survey: Survey = {
             }),
         }).safeParse(attrs).error,
 
-      create({ Occurrence, photo }) {
+      create({ photo }) {
         const occ = new Occurrence({
           data: {
             taxon: null,
@@ -519,7 +519,7 @@ const survey: Survey = {
     },
   },
 
-  create({ Sample }) {
+  create() {
     const sample = new Sample({
       data: {
         surveyId: survey.id,

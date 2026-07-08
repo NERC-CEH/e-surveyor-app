@@ -7,6 +7,7 @@ export default defineConfig([
     extends: [config],
     rules: {
       'import/extensions': 'off',
+      'no-param-reassign': 'off',
       '@typescript-eslint/naming-convention': [
         'error',
         {

@@ -33,8 +33,6 @@ const Controller = ({ sample }: Props) => {
   const onFinish = async () => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
-
-    // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
     sample.save();
 
@@ -46,10 +44,7 @@ const Controller = ({ sample }: Props) => {
   const onAddNewTrap = async () => {
     const survey = sample.getSurvey();
 
-    const trapSample = survey.smp!.create!({
-      Sample,
-      surveySample: sample,
-    });
+    const trapSample = survey.smp!.create!({ surveySample: sample });
     sample.samples.push(trapSample);
 
     navigate(`${match.url}/trap/${trapSample.cid}`);
@@ -78,7 +73,7 @@ const Controller = ({ sample }: Props) => {
   );
 
   return (
-    <Page id="beetle-home">
+    <Page id="beetle-home" className="theme-ecosystem">
       <Header
         backButtonLabel="Home"
         title="Trap survey"

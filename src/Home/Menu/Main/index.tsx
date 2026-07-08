@@ -6,6 +6,7 @@ import {
   personAddOutline,
   lockClosedOutline,
   heartOutline,
+  locationOutline,
   cameraOutline,
   informationCircleOutline,
   openOutline,
@@ -104,6 +105,10 @@ const MenuMain = ({
           <IonItem routerLink="/settings/menu" detail>
             <IonIcon icon={settingsOutline} size="small" slot="start" />
             <T>App</T>
+          </IonItem>
+          <IonItem routerLink="/settings/locations" detail>
+            <IonIcon icon={locationOutline} size="small" slot="start" />
+            <T>Locations</T>
           </IonItem>
         </div>
 

@@ -1,3 +1,7 @@
+### 2.0.0
+
+Major upgrade.
+
 ### 1.6.0
 
 Added moth host plant display.

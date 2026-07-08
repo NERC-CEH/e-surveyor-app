@@ -24,7 +24,7 @@ const Lab = ({ sample }: Props) => {
     !!sample.data[labClayAttr.id];
 
   return (
-    <Page id="survey-soil-som-lab-texture">
+    <Page id="survey-soil-som-lab-texture" className="theme-soil">
       <Header title="Texture analyses" />
       <Main>
         <IonList lines="full">

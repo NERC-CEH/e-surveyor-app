@@ -14,7 +14,7 @@ export type SeedmixMap = Record<string, SeedmixSpecies[]>;
 
 const aggregateBySeedmixName = (agg: SeedmixMap, item: SeedmixSpecies) => {
   const mix = item.mixName;
-  // eslint-disable-next-line no-param-reassign
+
   agg[mix] || (agg[mix] = []);
   agg[mix].push(item);
 

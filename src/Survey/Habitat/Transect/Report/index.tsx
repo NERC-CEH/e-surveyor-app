@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import { Page, Header } from '@flumens';
-import habitats from 'common/data/habitats';
+import habitats from 'common/data/speciesHabitats';
 import Sample from 'models/sample';
 import { getUniqueSpecies } from 'Components/ReportView/helpers';
 import Main from './Main';
@@ -46,7 +46,7 @@ const ReportController = ({ sample }: Props) => {
     : null;
 
   return (
-    <Page id="transect-survey-report">
+    <Page id="transect-survey-report" className="theme-habitat">
       <Header title="Report" />
       <Main stepCount={stepCount} steps={steps} habitatList={habitatList} />
     </Page>

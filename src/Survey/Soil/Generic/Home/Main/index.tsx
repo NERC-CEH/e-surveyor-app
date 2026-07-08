@@ -4,11 +4,11 @@ import { useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, Block, Button } from '@flumens';
 import { IonList, IonItem, IonIcon, IonLabel, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import soil from 'common/images/soil.svg';
 import { byDate } from 'models/collections/samples';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
-import soil from '../../common/soil.svg';
 import tractor from '../../common/tractor.svg';
 import { farmNameAttr, fieldNameAttr } from '../../config';
 import SampleEntry from './Sample';
@@ -60,7 +60,7 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
           <MenuDateAttr
             label="Date"
             value={sample.data.date}
-            // eslint-disable-next-line no-return-assign, no-param-reassign
+            // eslint-disable-next-line no-return-assign
             onChange={(val: any) => (sample.data.date = val)}
           />
           <MenuAttrItem

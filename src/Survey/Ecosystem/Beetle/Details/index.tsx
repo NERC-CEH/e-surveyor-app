@@ -30,8 +30,6 @@ const Controller = ({ sample }: Props) => {
 
       return;
     }
-
-    // eslint-disable-next-line no-param-reassign
     sample.metadata.completedDetails = true;
     sample.save();
 
@@ -50,14 +48,14 @@ const Controller = ({ sample }: Props) => {
 
   const { isDisabled } = sample;
 
-  const origContext = useContext(TailwindContext);
+  const origContext: any = useContext(TailwindContext as any);
   const tailwindContext = useMemo(
     () => ({ ...origContext, isDisabled }),
     [origContext, isDisabled]
   );
 
   return (
-    <Page id="beetle-details">
+    <Page id="beetle-details" className="theme-ecosystem">
       <Header title="Survey details" rightSlot={doneButton} />
       <TailwindContext.Provider value={tailwindContext}>
         <Main sample={sample} />

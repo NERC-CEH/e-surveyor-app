@@ -12,7 +12,7 @@ const OccurrenceController = ({ occurrence }: Props) => {
   const isDisabled = sample?.isUploaded || false;
 
   return (
-    <Page id="beetle-occurrence">
+    <Page id="beetle-occurrence" className="theme-ecosystem">
       <Header title="Beetle" />
       <Main occurrence={occurrence} isDisabled={isDisabled} />
     </Page>

@@ -2,8 +2,10 @@ import { useEffect, useContext } from 'react';
 import { useRouteMatch } from 'react-router';
 import { useAlert } from '@flumens';
 import { NavContext } from '@ionic/react';
+import locations from 'common/models/collections/locations';
 import appModel, { SurveyDraftKeys } from 'models/app';
 import samples from 'models/collections/samples';
+import Location from 'models/location';
 import Sample from 'models/sample';
 import userModel from 'models/user';
 import { Survey } from '../config';
@@ -53,14 +55,17 @@ async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
 }
 
 async function getNewSample(survey: Survey, draftIdKey: keyof SurveyDraftKeys) {
-  const sample = await survey.create!({ Sample });
-  await sample.save();
+  const model = await survey.create!({});
+  await model.save();
+  if (model instanceof Sample) {
+    samples.push(model);
+  } else {
+    locations.push(model);
+  }
 
-  samples.push(sample);
+  appModel.data[draftIdKey] = model.cid;
 
-  appModel.data[draftIdKey] = sample.cid;
-
-  return sample;
+  return model;
 }
 
 type Props = {
@@ -76,32 +81,39 @@ function StartNewSurvey({ survey }: Props): null {
   const baseURL = match.url;
   const draftIdKey: any = `draftId:${survey.name}`;
 
-  const pickDraftOrCreateSampleWrap = () => {
-    const pickDraftOrCreateSample = async () => {
+  const pickDraftOrCreateModelWrap = () => {
+    const pickDraftOrCreateModel = async () => {
       if (!userModel.isLoggedIn()) {
         context.navigate('/user/register', 'forward', 'replace');
         return;
       }
 
-      let sample;
+      let model;
 
       const isMothSurvey = survey.name === 'moth';
       if (!isMothSurvey) {
-        sample = await getDraft(draftIdKey, alert);
+        model = await getDraft(draftIdKey, alert);
       }
 
-      if (!sample) {
-        sample = await getNewSample(survey, draftIdKey);
+      if (!model) {
+        model = await getNewSample(survey, draftIdKey);
       }
 
-      const path = sample.isDetailsComplete() ? '' : '/details';
+      let path = '';
+      if ('isDetailsComplete' in model) {
+        path = model.isDetailsComplete() ? '' : '/details';
+      }
 
-      context.navigate(`${baseURL}/${sample.cid}${path}`, 'forward', 'replace');
+      if (model instanceof Location) {
+        path = '/location';
+      }
+
+      context.navigate(`${baseURL}/${model.cid}${path}`, 'forward', 'replace');
     };
 
-    pickDraftOrCreateSample();
+    pickDraftOrCreateModel();
   };
-  useEffect(pickDraftOrCreateSampleWrap, []);
+  useEffect(pickDraftOrCreateModelWrap, []);
 
   return null;
 }

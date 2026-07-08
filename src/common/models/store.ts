@@ -11,7 +11,8 @@ export const db = new SQLiteDatabase({
 });
 export const mainStore = new Store({ name: 'main', db });
 export const samplesStore = new Store({ name: 'samples', db });
+export const locationsStore = new Store({ name: 'locations', db });
 
 if (web) {
-  Object.assign(window, { mainStore, samplesStore, db });
+  Object.assign(window, { mainStore, samplesStore, locationsStore, db });
 }

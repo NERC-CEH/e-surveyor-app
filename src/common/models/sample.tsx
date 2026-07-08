@@ -37,18 +37,10 @@ import soilSurveyConfig, {
 } from 'Survey/Soil/Generic/config';
 import { dateAttr, Survey } from 'Survey/common/config';
 import plantInteractions, { Interaction } from '../data/plant_interactions';
+import GPSExtension from './GPSExt';
 import Media from './image';
 import Occurrence from './occurrence';
-import GPSExtension from './sampleGPSExt';
 import { samplesStore } from './store';
-
-const surveyConfigs = {
-  [pointSurveyConfig.id]: pointSurveyConfig,
-  [transectSurveyConfig.id]: transectSurveyConfig,
-  [beetleSurveyConfig.id]: beetleSurveyConfig,
-  [mothSurveyConfig.id]: mothSurveyConfig,
-  [soilSurveyConfig.id]: soilSurveyConfig,
-};
 
 export type SoilSubSampleType = 'worms' | 'som' | 'vsa';
 
@@ -73,7 +65,7 @@ const cropAttrId = cropAttr().id;
 export type Attrs = SampleAttrs & {
   [dateAttr.id]?: string;
 
-  surveyId: keyof typeof surveyConfigs;
+  surveyId: any;
   habitat?: any;
   name?: any;
   type?: any;
@@ -165,8 +157,6 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
   isGPSRunning: any;
 
-  gpsExtensionInit: any;
-
   constructor(options: SampleOptions) {
     super({
       ...options,
@@ -176,6 +166,14 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
       Media,
       store: samplesStore,
     });
+
+    const surveyConfigs = {
+      [pointSurveyConfig.id]: pointSurveyConfig,
+      [transectSurveyConfig.id]: transectSurveyConfig,
+      [beetleSurveyConfig.id]: beetleSurveyConfig,
+      [mothSurveyConfig.id]: mothSurveyConfig,
+      [soilSurveyConfig.id]: soilSurveyConfig,
+    };
 
     this.survey = surveyConfigs[this.data.surveyId];
 

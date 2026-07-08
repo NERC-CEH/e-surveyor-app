@@ -86,7 +86,7 @@ const HomeMain = ({
             label="Date"
             isDisabled={isDisabled}
             value={sample.data.date}
-            // eslint-disable-next-line no-return-assign, no-param-reassign
+            // eslint-disable-next-line no-return-assign
             onChange={(val: any) => (sample.data.date = val)}
           />
           {!sample.data.date && (

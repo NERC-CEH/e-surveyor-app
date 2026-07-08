@@ -1,10 +1,17 @@
 import { ComponentProps, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
-import { PhotoPicker, captureImage, URL, ImageCropper } from '@flumens';
+import {
+  PhotoPicker,
+  captureImage,
+  URL,
+  ImageCropper,
+  saveFile,
+  deleteFile,
+} from '@flumens';
 import { IonButton, IonIcon } from '@ionic/react';
-import config from 'common/config';
 import Media from 'models/image';
+import Location from 'models/location';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import './styles.scss';
@@ -12,15 +19,17 @@ import './styles.scss';
 export { usePromptImageSource } from '@flumens';
 
 type Props = {
-  model: Sample | Occurrence;
+  model: Sample | Occurrence | Location;
   maxImages?: number;
   allowToCrop?: boolean;
+  onChange?: (media: Media[]) => void;
 } & Omit<ComponentProps<typeof PhotoPicker>, 'getImage' | 'value'>;
 
 const AppPhotoPicker = ({
   model,
   allowToCrop,
   maxImages,
+  onChange,
   ...restProps
 }: Props) => {
   const onAdd = async (shouldUseCamera: boolean) => {
@@ -30,31 +39,41 @@ const AppPhotoPicker = ({
     )
       return;
 
-    const [image] = await captureImage({
-      camera: shouldUseCamera,
-    });
-    if (!image) return;
+    const images = await captureImage(
+      shouldUseCamera ? { camera: true } : { multiple: true }
+    );
+    if (!images?.length) return;
 
-    const imageModel = (await Media.getImageModel(
-      image,
-      config.dataPath,
-      true
-    )) as Media;
+    const imageModels = await Promise.all(
+      images.map(image => Media.getImageModel(image))
+    );
 
-    model.media.push(imageModel);
+    model.media.push(...imageModels);
+
+    onChange?.(imageModels);
 
     if (!model.isPersistent()) return;
     model.save();
   };
 
-  const onRemove = async (media: any) => media.destroy();
+  const onRemove = async (media: any) => {
+    await media.destroy();
+    onChange?.(model.media);
+  };
 
   const [editImage, setEditImage] = useState<Media>();
 
   const onDoneEdit = async (image: URL) => {
     if (!editImage) return;
 
-    const newImageModel = await Media.getImageModel(image, config.dataPath);
+    // save the new image and delete the old one
+    const oldFileName = editImage.getURL().split('/').pop() as string;
+    const extension = oldFileName.split('.').pop() as string;
+    const newFileName = `${Date.now()}.${extension}`;
+    await deleteFile(oldFileName);
+    image = await saveFile(image, newFileName);
+
+    const newImageModel = await Media.getImageModel(image);
     Object.assign(editImage?.data, {
       ...newImageModel.data,
       queued: null, // in case it was uploaded
@@ -71,7 +90,7 @@ const AppPhotoPicker = ({
 
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled = model.parent && model.isDisabled;
+  const isDisabled = (model as any).parent && model.isDisabled;
   const maxPicsReached = !!maxImages && model.media.length >= maxImages;
 
   // eslint-disable-next-line react/no-unstable-nested-components
@@ -115,9 +134,6 @@ const AppPhotoPicker = ({
         placeholderCount={1}
         Image={allowToCrop ? ImageWithCropping : undefined}
         isDisabled={isDisabled || maxPicsReached}
-        buttonLabel={
-          <span className="mx-2 my-0.5 text-sm opacity-70">Add photos</span>
-        }
         {...restProps}
       />
       {allowToCrop && (

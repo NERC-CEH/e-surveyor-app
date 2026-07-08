@@ -33,8 +33,6 @@ const Controller = ({ sample }: Props) => {
   const onFinish = async () => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
-
-    // eslint-disable-next-line no-param-reassign
     sample.metadata.saved = true;
     sample.save();
 
@@ -50,7 +48,7 @@ const Controller = ({ sample }: Props) => {
     }
 
     const survey = sample.getSurvey();
-    const quadratSample = survey.smp!.create!({ Sample });
+    const quadratSample = survey.smp!.create!({});
     sample.samples.push(quadratSample);
     sample.save();
 
@@ -78,7 +76,7 @@ const Controller = ({ sample }: Props) => {
   );
 
   return (
-    <Page id="transect-home">
+    <Page id="transect-home" className="theme-habitat">
       <Header
         backButtonLabel="Home"
         title="Transect"

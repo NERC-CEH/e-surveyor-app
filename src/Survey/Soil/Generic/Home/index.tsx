@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
@@ -72,7 +71,7 @@ const Home = ({ sample }: Props) => {
   const onSampleDelete = (smp: Sample) => smp.destroy();
   const onSampleAdd = () => {
     const name = `Sample #${sample.samples.length + 1}`;
-    const smp = config.smp?.create!({ Sample, name });
+    const smp = config.smp?.create!({ name });
     sample.samples.push(smp!);
     sample.save();
     navigate(`${url}/sample/${smp!.cid}`);
@@ -94,7 +93,7 @@ const Home = ({ sample }: Props) => {
   );
 
   return (
-    <Page id="survey-soil-home">
+    <Page id="survey-soil-home" className="theme-soil">
       <Header
         title="Survey"
         rightSlot={finishButton}

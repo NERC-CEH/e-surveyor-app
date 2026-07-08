@@ -10,7 +10,7 @@ const Lab = ({ sample }: Props) => {
   const recordAttrs = { record: sample.data };
 
   return (
-    <Page id="survey-soil-som-lab-nutrient">
+    <Page id="survey-soil-som-lab-nutrient" className="theme-soil">
       <Header title="pH and nutrients" />
       <Main>
         <IonList lines="full">

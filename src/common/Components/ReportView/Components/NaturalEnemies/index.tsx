@@ -23,7 +23,6 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
   const groupItems = (agg: any, item: EnemyInteraction) => {
     if (!agg[item.cropGroup]) {
-      // eslint-disable-next-line no-param-reassign
       agg[item.cropGroup] = [item.beneficialInsectCommonName];
       return agg;
     }

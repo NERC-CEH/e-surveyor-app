@@ -1,11 +1,8 @@
-/* eslint-disable no-param-reassign */
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
-import { Capacitor } from '@capacitor/core';
 import { Page, useToast, captureImage, device, Header } from '@flumens';
-import { NavContext, isPlatform } from '@ionic/react';
-import CONFIG from 'common/config';
+import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Occurrence from 'models/occurrence';
@@ -69,11 +66,7 @@ const HomeController = ({ sample }: Props) => {
       );
       if (!images.length) return [];
 
-      const getImageModel = (image: any) =>
-        Media.getImageModel(
-          isPlatform('hybrid') ? Capacitor.convertFileSrc(image) : image,
-          CONFIG.dataPath
-        ) as Promise<Media>;
+      const getImageModel = (image: any) => Media.getImageModel(image);
 
       const imageModels = images.map(getImageModel);
 
@@ -84,11 +77,7 @@ const HomeController = ({ sample }: Props) => {
     if (!images.length) return;
 
     images.forEach((photo: Media) => {
-      const newOccurrence = surveyConfig.occ!.create!({
-        Occurrence,
-        photo,
-      });
-
+      const newOccurrence = surveyConfig.occ!.create!({ photo });
       sample.occurrences.push(newOccurrence);
       sample.save();
 
@@ -114,7 +103,7 @@ const HomeController = ({ sample }: Props) => {
   );
 
   return (
-    <Page id="survey-moth-home">
+    <Page id="survey-moth-home" className="theme-ecosystem">
       <Header
         title="Moth recording"
         rightSlot={finishButton}

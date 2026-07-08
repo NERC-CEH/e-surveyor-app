@@ -31,8 +31,6 @@ const Controller = ({ sample }: Props) => {
       });
       return;
     }
-
-    // eslint-disable-next-line no-param-reassign
     sample.metadata.completedDetails = true;
     sample.save();
 
@@ -50,7 +48,7 @@ const Controller = ({ sample }: Props) => {
   );
 
   return (
-    <Page id="transect-details">
+    <Page id="transect-details" className="theme-habitat">
       <Header backButtonLabel="Home" title="Transect" rightSlot={doneButton} />
       <Main sample={sample} isDisabled={sample.isUploaded} />
     </Page>

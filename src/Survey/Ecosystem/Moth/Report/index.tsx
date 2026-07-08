@@ -38,7 +38,7 @@ const Report = ({ sample }: Props) => {
     );
 
   return (
-    <Page id="survey-moth-report">
+    <Page id="survey-moth-report" className="theme-ecosystem">
       <Header title="Report" rightSlot={finishButton} />
       <Main sample={sample} newnessMap={newnessMap} />
     </Page>

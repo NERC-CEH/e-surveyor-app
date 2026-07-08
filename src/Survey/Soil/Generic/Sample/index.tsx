@@ -16,7 +16,7 @@ const SampleHome = ({ subSample: sample }: Props) => {
   const worms = sample.data[wormCountAttr.id];
 
   return (
-    <Page id="survey-soil-sample-home">
+    <Page id="survey-soil-sample-home" className="theme-soil">
       <Header title="Sample" />
       <Main>
         <IonList lines="full">

@@ -15,7 +15,7 @@ const SOMHome = ({ sample }: Props) => {
   const recordAttrs = { record: sample.data };
 
   return (
-    <Page id="survey-soil-som">
+    <Page id="survey-soil-som" className="theme-soil">
       <Header title="SOM" />
       <Main>
         <IonList lines="full">

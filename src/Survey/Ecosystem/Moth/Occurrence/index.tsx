@@ -21,7 +21,7 @@ const OccurrenceController = ({ occurrence }: Props) => {
   };
 
   return (
-    <Page id="survey-moth-occurrence">
+    <Page id="survey-moth-occurrence" className="theme-ecosystem">
       <Header title="Occurrence" />
       <Main
         occurrence={occurrence}

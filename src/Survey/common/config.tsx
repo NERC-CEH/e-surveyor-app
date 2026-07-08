@@ -92,8 +92,8 @@ export const seedmixGroupAttr = {
       inputProps: { options: getSeedMixGroups() },
       set: (value: any, sample: Sample) => {
         if (sample.data.seedmixgroup !== value) {
-          sample.data.seedmixgroup = value; // eslint-disable-line
-          sample.data.seedmix = ''; // eslint-disable-line
+          sample.data.seedmixgroup = value;
+          sample.data.seedmix = '';
         }
       },
     },
@@ -126,12 +126,11 @@ export const seedmixAttr = {
           if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
             const byId = (seedmix: SeedMix) => seedmix.id === value;
             const selectedSeedmix = appModel.data.seedmixes.find(byId);
-            sample.data.seedmix = selectedSeedmix?.name; // eslint-disable-line
-            sample.data.customSeedmix = selectedSeedmix?.species || []; // eslint-disable-line
+            sample.data.seedmix = selectedSeedmix?.name;
+            sample.data.customSeedmix = selectedSeedmix?.species || [];
             return;
           }
 
-          // eslint-disable-next-line no-param-reassign
           sample.data.seedmix = value;
         }
       },
@@ -285,7 +284,6 @@ export function attachClassifierResults(
   }
 
   if (Number.isFinite(taxon?.machineInvolvement)) {
-    // eslint-disable-next-line no-param-reassign
     submission.values.machine_involvement = taxon?.machineInvolvement;
   }
 
@@ -322,7 +320,6 @@ export type AttrConfig = {
 type Attrs = Record<string, AttrConfig>;
 
 type OccurrenceCreateOptions = {
-  Occurrence: typeof Occurrence;
   taxon?: Taxon;
   photo?: Media;
 };
@@ -340,8 +337,6 @@ type OccurrenceConfig = {
 };
 
 type SampleCreateOptions = {
-  Sample: typeof Sample;
-  Occurrence?: typeof Occurrence;
   taxon?: Taxon;
   surveySample?: Sample;
   photo?: Media;

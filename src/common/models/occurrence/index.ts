@@ -209,7 +209,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       .map(sp => ({ ...sp, images: getPlantNetImages(sp.scientificName) }));
 
     const attachSpecies = (media: Media) => {
-      media.data.identified = true; // eslint-disable-line no-param-reassign
+      media.data.identified = true;
     };
     this.media.forEach(attachSpecies);
 

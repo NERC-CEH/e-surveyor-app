@@ -65,7 +65,7 @@ const PastSampleMap = ({ sample: model }: Props) => {
   });
 
   return (
-    <Page id="model-location">
+    <Page id="model-location" className="theme-soil">
       <Header title="Previous samples" />
 
       <Main className="[--padding-bottom:0px] [--padding-top:0px]">

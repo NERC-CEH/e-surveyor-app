@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-
-/* eslint-disable no-param-reassign */
 import { listOutline, locationOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
+import soil from 'common/images/soil.svg';
+import Sample from 'common/models/sample';
 import { Survey, blockToAttr, locationAttr } from 'Survey/common/config';
 import field from './common/field.svg';
-import soil from './common/soil.svg';
 
 const fieldIcon = (<IonIcon src={field} className="size-6" />) as any;
 const soilIcon = (<IonIcon src={soil} className="size-6" />) as any;
@@ -566,7 +565,7 @@ const survey: Survey = {
       ...blockToAttr(soilStrengthAttr),
     },
 
-    create({ Sample, name }) {
+    create({ name }) {
       const sample = new Sample({
         metadata: {
           survey: survey.name,
@@ -592,7 +591,7 @@ const survey: Survey = {
   //     // @ts-expect-error ignore
   //   }).safeParse(attrs).error,
 
-  create({ Sample }) {
+  create() {
     const sample = new Sample({
       metadata: {
         survey: survey.name,

@@ -11,10 +11,11 @@ import { loadingController } from '@ionic/core';
 import { setupIonicReact, isPlatform } from '@ionic/react';
 import { init } from '@sentry/browser';
 import config from 'common/config';
-import migrate from 'common/models/migrate';
-import { db } from 'common/models/store';
 import appModel from 'models/app';
+import locations from 'models/collections/locations';
 import samples from 'models/collections/samples';
+import migrate from 'models/migrate';
+import { db } from 'models/store';
 import userModel from 'models/user';
 import App from './App';
 
@@ -39,6 +40,7 @@ mobxConfig({ enforceActions: 'never' });
   await userModel.fetch();
   await appModel.fetch();
   await samples.fetch();
+  await locations.fetch();
 
   appModel.data.sendAnalytics &&
     init({

@@ -36,7 +36,7 @@ const Management = ({ sample }: Props) => {
   const recordAttrs = { record: sample.data };
 
   return (
-    <Page id="survey-soil-management">
+    <Page id="survey-soil-management" className="theme-soil">
       <Header title="Management" />
       <Main>
         <IonList lines="full" className="flex flex-col gap-2">

@@ -8,7 +8,9 @@ import {
 } from '@flumens';
 import { IonApp, IonRouterOutlet, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import locations from 'common/models/collections/locations';
 import 'common/theme.css';
+import { LocationsContext } from 'Survey/Habitat/Location/useLocation';
 import Home from './Home';
 import OnboardingScreens from './Info/OnboardingScreensRequired';
 import Info from './Info/router';
@@ -24,6 +26,8 @@ const tailwindBlockContext = {
   basePath: '',
 };
 
+const locationsContext = { locations };
+
 const HomeRedirect = () => <Redirect to="home/landing" />;
 
 const App = () => (
@@ -32,14 +36,16 @@ const App = () => (
       <OnboardingScreens>
         <TailwindContext.Provider value={tailwindContext}>
           <TailwindBlockContext.Provider value={tailwindBlockContext}>
-            <IonRouterOutlet id="main">
-              <Route path="/home" component={Home} />
-              {Info}
-              {User}
-              {Survey}
-              {Settings}
-              <Route exact path="/" component={HomeRedirect} />
-            </IonRouterOutlet>
+            <LocationsContext.Provider value={locationsContext}>
+              <IonRouterOutlet id="main">
+                <Route path="/home" component={Home} />
+                {Info}
+                {User}
+                {Survey}
+                {Settings}
+                <Route exact path="/" component={HomeRedirect} />
+              </IonRouterOutlet>
+            </LocationsContext.Provider>
           </TailwindBlockContext.Provider>
         </TailwindContext.Provider>
       </OnboardingScreens>

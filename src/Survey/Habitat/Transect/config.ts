@@ -1,9 +1,9 @@
+import { layersOutline } from 'ionicons/icons';
 import { z } from 'zod';
-import { schemeHabitats } from 'common/data/habitats';
-import icon from 'common/images/transectIconBlack.svg';
+import { schemeHabitats } from 'common/data/speciesHabitats';
 import appModel from 'models/app';
-import OccurrenceModel from 'models/occurrence';
-import SampleModel from 'models/sample';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import {
   seedmixGroupAttr,
   seedmixAttr,
@@ -44,7 +44,7 @@ const survey: Survey = {
   name: 'transect',
   label: 'Transect',
   baseURL: '/survey/habitat/transect',
-  icon,
+  icon: layersOutline,
 
   attrs: {
     date: dateAttr,
@@ -59,23 +59,23 @@ const survey: Survey = {
           input: 'radio',
           info: 'You can change your survey name here.',
           inputProps: { options: surveyTypes },
-          set: (value: any, sample: SampleModel) => {
-            sample.data.type = value; // eslint-disable-line
+          set: (value: any, sample: Sample) => {
+            sample.data.type = value;
 
-            sample.data.steps = 10; // eslint-disable-line
-            sample.data.quadratSize = 1; // eslint-disable-line
+            sample.data.steps = 10;
+            sample.data.quadratSize = 1;
 
             if (value === 'Common Standards') {
-              sample.data.habitat = null; // eslint-disable-line
-              // eslint-disable-next-line
+              sample.data.habitat = null;
+
               sample.data.steps = appModel.data.use10stepsForCommonStandard
                 ? 10
                 : 20;
-              sample.data.quadratSize = 1; // eslint-disable-line
+              sample.data.quadratSize = 1;
             }
 
             if (value === 'Agri-environment') {
-              sample.data.habitat = null; // eslint-disable-line
+              sample.data.habitat = null;
             }
           },
         },
@@ -111,7 +111,7 @@ const survey: Survey = {
       pageProps: {
         attrProps: {
           input: 'radio',
-          inputProps: (model: SampleModel) => ({
+          inputProps: (model: Sample) => ({
             options:
               model.data.type === 'Agri-environment'
                 ? agriEnvironmentHabitats
@@ -146,7 +146,7 @@ const survey: Survey = {
         location: locationAttr,
       },
 
-      create({ Sample, Occurrence, photo }) {
+      create({ photo }) {
         const sample = new Sample({
           data: {
             surveyId: survey.id,
@@ -157,10 +157,7 @@ const survey: Survey = {
 
         sample.startGPS();
 
-        if (!Occurrence)
-          throw new Error('Occurrence class is missing in subSubSample create');
-
-        const occurrence = survey.smp!.smp!.occ!.create!({ Occurrence, photo });
+        const occurrence = survey.smp!.smp!.occ!.create!({ photo });
         sample.occurrences.push(occurrence);
 
         return sample;
@@ -187,7 +184,7 @@ const survey: Survey = {
           },
         },
 
-        create({ Occurrence, photo }) {
+        create({ photo }) {
           const occ = new Occurrence({
             data: {
               taxon: null,
@@ -201,7 +198,7 @@ const survey: Survey = {
           return occ;
         },
 
-        modifySubmission(submission: any, occ: OccurrenceModel) {
+        modifySubmission(submission: any, occ: Occurrence) {
           // for non-UK species
           if (!submission.values.taxa_taxon_list_id) {
             return null;
@@ -212,7 +209,7 @@ const survey: Survey = {
       },
     },
 
-    create({ Sample }) {
+    create() {
       const sample = new Sample({
         data: {
           surveyId: survey.id,
@@ -230,7 +227,7 @@ const survey: Survey = {
       const setSubSampleLocationIfMissing = (subSample: any) => {
         const locationIsMissing = !subSample.values.entered_sref;
         if (locationIsMissing) {
-          subSample.values.entered_sref = submission.values.entered_sref; // eslint-disable-line no-param-reassign
+          subSample.values.entered_sref = submission.values.entered_sref;
         }
       };
 
@@ -239,7 +236,7 @@ const survey: Survey = {
       return submission;
     },
 
-    verify: (data: any, sample: SampleModel) =>
+    verify: (data: any, sample: Sample) =>
       z
         .object({
           location: locationSchema,
@@ -251,7 +248,7 @@ const survey: Survey = {
         }).error,
   },
 
-  create({ Sample }) {
+  create() {
     const sample = new Sample({
       data: {
         surveyId: survey.id,
@@ -268,7 +265,7 @@ const survey: Survey = {
     return sample;
   },
 
-  verify(data: any, sample: SampleModel) {
+  verify(data: any, sample: Sample) {
     try {
       z.boolean()
         .refine(val => !val, {

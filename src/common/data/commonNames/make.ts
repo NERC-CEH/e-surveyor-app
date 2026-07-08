@@ -30,7 +30,7 @@ function turnNamesArrayIntoLangObject(array: any) {
     }
 
     const language = LANGUAGE_ISO_MAPPING[languageCode];
-    agg[language] || (agg[language] = []); // eslint-disable-line
+    agg[language] || (agg[language] = []);
 
     const species = {
       warehouseId: parseInt(id, 10),

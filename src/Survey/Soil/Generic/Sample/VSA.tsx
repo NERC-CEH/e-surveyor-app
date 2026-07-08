@@ -21,7 +21,7 @@ const VSA = ({ subSample }: Props) => {
   };
 
   return (
-    <Page id="survey-soil-vsa">
+    <Page id="survey-soil-vsa" className="theme-soil">
       <Header title="VSA" />
       <Main>
         <IonList lines="full">

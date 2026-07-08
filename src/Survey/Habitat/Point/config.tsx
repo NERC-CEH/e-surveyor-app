@@ -1,9 +1,9 @@
+import { leafOutline } from 'ionicons/icons';
 import { z } from 'zod';
 import config from 'common/config';
-import icon from 'common/images/pointIcon.svg';
 import appModel from 'common/models/app';
-import SampleModel from 'common/models/sample';
-import OccurrenceModel from 'models/occurrence';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import {
   seedmixGroupAttr,
   seedmixAttr,
@@ -29,7 +29,7 @@ const survey: Survey = {
   name: 'point',
   label: 'Habitat',
   baseURL: '/survey/habitat/point',
-  icon,
+  icon: leafOutline,
 
   attrs: {
     date: dateAttr,
@@ -45,10 +45,10 @@ const survey: Survey = {
           input: 'radio',
           info: 'Has the survey area been seeded?',
           inputProps: { options: seededValues },
-          set: (value: any, sample: SampleModel) => {
-            sample.data.seeded = value; // eslint-disable-line
-            sample.data.seedmixgroup = ''; // eslint-disable-line
-            sample.data.seedmix = ''; // eslint-disable-line
+          set: (value: any, sample: Sample) => {
+            sample.data.seeded = value;
+            sample.data.seedmixgroup = '';
+            sample.data.seedmix = '';
           },
         },
       },
@@ -69,7 +69,7 @@ const survey: Survey = {
       location: locationAttr,
     },
 
-    create({ Sample, Occurrence, photo }) {
+    create({ photo }) {
       const sample = new Sample({
         data: {
           surveyId: survey.id,
@@ -80,11 +80,7 @@ const survey: Survey = {
 
       sample.startGPS();
 
-      if (!Occurrence)
-        throw new Error('Occurrence class is missing in subSample create');
-
       const occurrence = survey.smp!.occ!.create!({
-        Occurrence,
         photo,
       });
       sample.occurrences.push(occurrence);
@@ -111,7 +107,7 @@ const survey: Survey = {
           })
           .safeParse(attrs.taxon).error,
 
-      create({ Occurrence, photo }) {
+      create({ photo }) {
         const occ = new Occurrence({
           data: { taxon: null },
         });
@@ -121,7 +117,7 @@ const survey: Survey = {
         return occ;
       },
 
-      modifySubmission(submission: any, occ: OccurrenceModel) {
+      modifySubmission(submission: any, occ: Occurrence) {
         // for non-UK species
         if (!submission.values.taxa_taxon_list_id) return null;
         return attachClassifierResults(submission, occ);
@@ -135,7 +131,7 @@ const survey: Survey = {
     },
   },
 
-  create({ Sample }) {
+  create() {
     const sample = new Sample({
       data: {
         surveyId: survey.id,
@@ -158,7 +154,7 @@ const survey: Survey = {
     try {
       // check if at least one species with possible score exists
       let hasValidSpecies = false;
-      const showReportIfScoreHigherThanThreshold = (subSample: SampleModel) => {
+      const showReportIfScoreHigherThanThreshold = (subSample: Sample) => {
         const { probability } = subSample.getSpecies();
         if (probability > possibleThreshold) hasValidSpecies = true;
       };
@@ -182,7 +178,7 @@ const survey: Survey = {
     const setSubSampleLocationIfMissing = (subSample: any) => {
       const locationIsMissing = !subSample.values.entered_sref;
       if (locationIsMissing) {
-        subSample.values.entered_sref = submission.values.entered_sref; // eslint-disable-line no-param-reassign
+        subSample.values.entered_sref = submission.values.entered_sref;
       }
     };
 

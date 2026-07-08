@@ -18,8 +18,6 @@ const EditSpecies = ({ occurrence }: Props) => {
         scientificName: species?.scientificName || species?.label || '',
         tvk: '',
       };
-
-      // eslint-disable-next-line no-param-reassign
       model.data.taxon = taxon;
     },
     get() {
