@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import 'chart.js/auto';
 import clsx from 'clsx';
@@ -15,11 +16,19 @@ import meadow from './meadow.png';
 type Props = {
   location: Location<Data>;
   onChange?: (suggestion: Habitat) => void;
+  /**
+   * If true, the component will automatically fetch habitat suggestions when it mounts. Good for modals, but not for transit pages.
+   */
+  fetchOnLoad?: boolean;
 };
 
 type HabitatWithScore = Habitat & { score: number | null };
 
-const HabitatIdentification = ({ location, onChange }: Props) => {
+const HabitatIdentification = ({
+  location,
+  onChange,
+  fetchOnLoad = false,
+}: Props) => {
   const toast = useToast();
   const loader = useLoader();
 
@@ -56,6 +65,11 @@ const HabitatIdentification = ({ location, onChange }: Props) => {
       loader.hide();
     }
   };
+
+  useEffect(() => {
+    if (!fetchOnLoad) return;
+    fetchSuggestions();
+  }, [location]);
 
   const onSuggestionChange = (suggestion: Habitat) => {
     if (!onChange) return;

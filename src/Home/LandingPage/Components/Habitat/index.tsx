@@ -35,7 +35,7 @@ const HabitatProfile = ({ location, onClose }: Props) => (
     {!!location && (
       <IonContent>
         <div className="p-3">
-          <HabitatIdentification location={location} />
+          <HabitatIdentification location={location} fetchOnLoad />
         </div>
       </IonContent>
     )}
