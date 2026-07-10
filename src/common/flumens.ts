@@ -12,7 +12,7 @@ export {
   type RemoteConfig,
 } from '@flumens/models/dist/Indicia/Sample';
 export {
-  default as Location,
+  default as LocationModel,
   type Data as LocationData,
   type Metadata as LocationMetadata,
   type Options as LocationOptions,
@@ -107,7 +107,9 @@ export {
   default as MapContainer,
   useMapStyles,
 } from '@flumens/tailwind/dist/components/Map/Container';
+export { default as MapDraw } from '@flumens/tailwind/dist/components/Map/Draw';
 export { default as LocationMarker } from '@flumens/tailwind/dist/components/Map/Container/LocationMarker';
+export { default as MarkerShape } from './MarkerShape';
 export {
   type BlockConf as BlockT,
   type ChoiceValues,

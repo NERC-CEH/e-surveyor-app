@@ -19,7 +19,7 @@ const routes = [
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details`, Details],
   [`${baseURL}/:smpId/details/date`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/details/map`, ModelLocationMap],
+  [`${baseURL}/:smpId/details/map`, ModelLocationMap.SampleFromRoute],
   [
     `${baseURL}/:smpId/details/${fieldNonCropHabitatsAttr.id}`,
     ({ sample }: any) => (
@@ -31,7 +31,7 @@ const routes = [
   ],
   [`${baseURL}/:smpId/trap/:subSmpId`, Trap],
   [`${baseURL}/:smpId/trap/:subSmpId/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationMap],
+  [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId`, Occurrence],
   [
     `${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId/:attr`,

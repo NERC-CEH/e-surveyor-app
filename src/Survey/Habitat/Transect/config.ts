@@ -1,6 +1,7 @@
 import { layersOutline } from 'ionicons/icons';
 import { z } from 'zod';
 import { schemeHabitats } from 'common/data/speciesHabitats';
+import { updateModelLocation } from 'common/flumens';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
@@ -155,7 +156,7 @@ const survey: Survey = {
           },
         });
 
-        sample.startGPS();
+        sample.startGPS(loc => updateModelLocation(sample, loc));
 
         const occurrence = survey.smp!.smp!.occ!.create!({ photo });
         sample.occurrences.push(occurrence);
@@ -218,7 +219,7 @@ const survey: Survey = {
         },
       });
 
-      sample.startGPS();
+      sample.startGPS(loc => updateModelLocation(sample, loc));
 
       return sample;
     },
@@ -260,7 +261,7 @@ const survey: Survey = {
       },
     });
 
-    sample.startGPS();
+    sample.startGPS(loc => updateModelLocation(sample, loc));
 
     return sample;
   },

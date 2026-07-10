@@ -1,6 +1,6 @@
 import { IObservableArray, observable, toJS } from 'mobx';
 import {
-  Location as IndiciaLocation,
+  LocationModel as IndiciaLocation,
   LocationOptions,
   LocationData,
   LocationMetadata,
@@ -42,7 +42,14 @@ export default class Location<
 
   identification = observable({ identifying: false });
 
-  startGPS: any;
+  startGPS!: (
+    newLocation: (loc: {
+      latitude: number;
+      longitude: number;
+      accuracy?: number;
+    }) => void,
+    accuracyLimit?: number
+  ) => Promise<void>;
 
   stopGPS: any;
 

@@ -1,5 +1,4 @@
 import { observable } from 'mobx';
-import { updateModelLocation } from '@flumens';
 import GPS from 'helpers/GPS';
 
 const DEFAULT_ACCURACY_LIMIT = 50; // meters
@@ -12,41 +11,13 @@ export type Location = {
   accuracy: number;
 };
 
-type Extension = {
-  gps: { locating: null | string };
-  setLocation: any;
-  toggleGPStracking: any;
-  startGPS: any;
-  stopGPS: any;
-  isGPSRunning: any;
-  attrs?: any;
-  save?: any;
-};
+const extension = () => ({
+  gps: observable({ locating: '' }),
 
-const extension = (): Extension => ({
-  gps: observable({ locating: null }),
-
-  setLocation([longitude, latitude]: LatLng, source = 'map', accuracy = 0) {
-    (this as any).data.location = {
-      latitude,
-      longitude,
-      source,
-      accuracy,
-    };
-
-    return this.save();
-  },
-
-  toggleGPStracking(state?: boolean) {
-    if (this.isGPSRunning() || state === false) {
-      this.stopGPS();
-      return;
-    }
-
-    this.startGPS();
-  },
-
-  async startGPS(accuracyLimit = DEFAULT_ACCURACY_LIMIT) {
+  async startGPS(
+    setLocation: (newLocation: Location) => void,
+    accuracyLimit = DEFAULT_ACCURACY_LIMIT
+  ) {
     const that = this;
     const options = {
       accuracyLimit,
@@ -63,7 +34,7 @@ const extension = (): Extension => ({
           that.stopGPS();
         }
 
-        updateModelLocation(that, location);
+        setLocation(location);
       },
     };
 
@@ -71,12 +42,10 @@ const extension = (): Extension => ({
   },
 
   stopGPS() {
-    if (!this.gps.locating) {
-      return;
-    }
+    if (!this.gps.locating) return;
 
     GPS.stop(this.gps.locating);
-    this.gps.locating = null;
+    this.gps.locating = '';
   },
 
   isGPSRunning() {

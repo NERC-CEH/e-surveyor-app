@@ -1,6 +1,6 @@
 import { chatboxOutline } from 'ionicons/icons';
 import { object, string } from 'zod';
-import { dateFormat, toISOTimezoneString } from '@flumens';
+import { dateFormat, toISOTimezoneString, updateModelLocation } from '@flumens';
 import icon from 'common/images/moth-icon.svg';
 import appModel from 'common/models/app';
 import Sample from 'common/models/sample';
@@ -118,7 +118,7 @@ const survey: Survey = {
       },
     });
 
-    sample.startGPS();
+    sample.startGPS(loc => updateModelLocation(sample, loc));
 
     return sample;
   },

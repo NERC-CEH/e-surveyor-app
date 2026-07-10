@@ -1,6 +1,6 @@
 import axios from 'axios';
 import z, { object } from 'zod';
-import { Location, dateFormat, isValidLocation } from '@flumens';
+import { LocationModel, dateFormat, isValidLocation } from '@flumens';
 import IndiciaAIResponse, { IndiciaAISuggestion } from './indiciaAIResponse.d';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -64,7 +64,7 @@ type Params = {
   listId: string | number;
   model?: 'plantnet' | 'waarneming';
   date?: string | number;
-  location?: (typeof Location)['prototype']['data'];
+  location?: (typeof LocationModel)['prototype']['data'];
   taxonGroupId?: number;
 };
 

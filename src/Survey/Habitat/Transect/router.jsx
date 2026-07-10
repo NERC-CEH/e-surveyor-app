@@ -26,9 +26,9 @@ const routes = [
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details`, Details],
   [`${baseURL}/:smpId/details/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/details/map`, ModelLocationMap],
+  [`${baseURL}/:smpId/details/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/quadrat/:subSmpId`, Quadrat],
-  [`${baseURL}/:smpId/quadrat/:subSmpId/map`, ModelLocationMap],
+  [`${baseURL}/:smpId/quadrat/:subSmpId/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/quadrat/:subSmpId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/quadrat/:subSmpId/species/:subSubSmpId`, EditSpecies],
   [

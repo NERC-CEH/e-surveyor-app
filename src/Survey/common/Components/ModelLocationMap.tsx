@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
+import { LineString, MultiPolygon, Polygon } from 'geojson';
+import wkt from 'wellknown';
 import {
   MapContainer,
   MapHeader,
@@ -10,33 +12,106 @@ import {
   useMapStyles,
   textToLocation,
   mapEventToLocation,
-  toggleGPS,
   mapFlyToLocation,
+  Location,
+  MapDraw,
+  getGeomMetersToLatLon,
+  getGeomCenter,
+  getGeomWKT,
+  Header,
+  MarkerShape,
+  updateModelLocation,
 } from '@flumens';
+import { bbox } from '@turf/bbox';
 import config from 'common/config';
-import Location from 'models/location';
 import Sample from 'models/sample';
 
-type Props = {
-  subSample?: Sample;
-  sample: Sample;
-  location: Location;
+export type Shape = Polygon;
+
+export const getShapeFromGeom = (geom?: string | null) => {
+  if (!geom) return undefined;
+
+  const geomParsed = wkt.parse(geom) as Polygon | LineString | MultiPolygon;
+  if (!geomParsed) return undefined;
+
+  return getGeomMetersToLatLon(geomParsed) as
+    | Polygon
+    | LineString
+    | MultiPolygon;
 };
 
-const ModelLocationMap = ({ subSample, sample, location }: Props) => {
-  const model = subSample || sample || location;
-  const loc = model.data.location || {};
-  const parentLocation = model.parent?.data.location;
+export const getLocationAttrsFromShape = (shape?: Shape) => ({
+  boundaryGeom: shape ? getGeomWKT(shape) : '',
+  lat: shape ? `${getGeomCenter(shape)[1]}` : '',
+  lon: shape ? `${getGeomCenter(shape)[0]}` : '',
+  centroidSrefSystem: '4326',
+  centroidSref: shape
+    ? `${getGeomCenter(shape)[1]} ${getGeomCenter(shape)[0]}`
+    : '',
+});
 
-  const setLocation = async (newLocation: any) => {
-    if (!newLocation) return;
-    if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
+export const getLocationAttrsFromLocation = (location?: Location) => ({
+  boundaryGeom: undefined,
+  lat: location ? `${location.latitude}` : '',
+  lon: location ? `${location.longitude}` : '',
+  centroidSrefSystem: '4326',
+  centroidSref: location ? `${location.latitude} ${location.longitude}` : '',
+});
 
-    model.data.location = { ...model.data.location, ...newLocation };
-  };
+export const getLocationFromSref = (sref?: string) => {
+  if (!sref) return undefined;
+
+  const [latitude, longitude] = sref.split(' ').map(Number);
+  return { latitude, longitude };
+};
+
+export const getShapeCentroid = (shape?: Shape) => {
+  if (!shape) return null;
+  const [firstRing] = shape.coordinates as any;
+  const [firstPoint] = firstRing;
+  return { longitude: firstPoint[0], latitude: firstPoint[1] };
+};
+
+export const getShapeBounds = (shape?: Shape) => {
+  if (!shape) return null;
+  const [minLng, minLat, maxLng, maxLat] = bbox(shape);
+  return [
+    [minLng, minLat],
+    [maxLng, maxLat],
+  ];
+};
+
+type Props = {
+  useShape?: boolean;
+  location?: Location;
+  shape?: Shape;
+  isLocating?: boolean;
+  setLocation: (newLocation: Location | Shape) => Promise<void>;
+  stopGPS: () => void;
+  startGPS: () => void;
+};
+
+const ModelLocationMap = ({
+  location,
+  shape,
+  setLocation,
+  isLocating,
+  stopGPS,
+  startGPS,
+  useShape,
+}: Props) => {
+  let initialViewState: any = {};
+  if (useShape) {
+    initialViewState = {
+      bounds: getShapeBounds(shape as Polygon),
+      fitBoundsOptions: { padding: 100 },
+    };
+  } else {
+    initialViewState = location;
+  }
 
   const onManuallyTypedLocationChange = (e: any) =>
-    setLocation(textToLocation(e?.target?.value));
+    setLocation(textToLocation(e?.target?.value)!);
 
   const [showSettings, setShowSettings] = useState(false);
   const onCloseSettings = () => setShowSettings(false);
@@ -49,22 +124,26 @@ const ModelLocationMap = ({ subSample, sample, location }: Props) => {
   };
 
   const onMapClick = (e: any) => setLocation(mapEventToLocation(e));
-  const onGPSClick = () => toggleGPS(model);
+  const onGPSClick = () => (isLocating ? stopGPS() : startGPS());
 
   const [mapRef, setMapRef] = useState<any>();
-  const flyToLocation = () => mapFlyToLocation(mapRef, loc);
-  useEffect(flyToLocation, [mapRef, loc]);
-
-  const isLocating = 'isGPSRunning' in model ? model.isGPSRunning() : false;
+  const flyToLocation = () => {
+    if (useShape) return;
+    mapFlyToLocation(mapRef, location);
+  };
+  useEffect(flyToLocation, [mapRef, location, useShape]);
 
   return (
     <Page id="model-location">
       <MapHeader>
-        <MapHeader.Location
-          location={loc}
-          onChange={onManuallyTypedLocationChange}
-          useGridRef
-        />
+        {!useShape && (
+          <MapHeader.Location
+            location={location || ({} as any)}
+            onChange={onManuallyTypedLocationChange}
+            useGridRef
+          />
+        )}
+        {useShape && <Header title="Area" />}
       </MapHeader>
       <Main className="[--padding-bottom:0px] [--padding-top:0px]">
         <MapContainer
@@ -73,12 +152,21 @@ const ModelLocationMap = ({ subSample, sample, location }: Props) => {
           accessToken={config.map.mapboxApiKey}
           mapStyle={currentStyle}
           maxPitch={0}
-          initialViewState={loc}
+          initialViewState={initialViewState}
         >
-          <MapContainer.Control.Geolocate
-            isLocating={isLocating}
-            onClick={onGPSClick}
-          />
+          {!useShape && (
+            <MapContainer.Control.Geolocate
+              isLocating={isLocating}
+              onClick={onGPSClick}
+            />
+          )}
+
+          {useShape && <MarkerShape shape={shape} />}
+          {useShape && (
+            <MapDraw shape={shape} onChange={setLocation} isEditing="polygon">
+              <MapDraw.Control polygon />
+            </MapDraw>
+          )}
 
           <MapContainer.Control.Layers onClick={onLayersClick} />
           <MapSettingsPanel isOpen={showSettings} onClose={onCloseSettings}>
@@ -91,16 +179,36 @@ const ModelLocationMap = ({ subSample, sample, location }: Props) => {
             />
           </MapSettingsPanel>
 
-          <MapContainer.OSGBGrid />
-
-          <MapContainer.Marker
-            parentGridref={parentLocation?.gridref}
-            {...loc}
-          />
+          {!useShape && location && <MapContainer.Marker {...location} />}
         </MapContainer>
       </Main>
     </Page>
   );
 };
+
+ModelLocationMap.SampleFromRoute = observer(
+  (props: { subSample?: Sample; sample: Sample }) => {
+    const model = props.subSample || props.sample;
+
+    const setLocation = async (newLocation: any) => {
+      if (!newLocation) return;
+      if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
+
+      model.data.location = { ...model.data.location, ...newLocation };
+    };
+
+    const location = model.data.location || {};
+
+    return (
+      <ModelLocationMap
+        location={location}
+        setLocation={setLocation}
+        isLocating={model.isGPSRunning()}
+        stopGPS={() => model.stopGPS()}
+        startGPS={() => model.startGPS(loc => updateModelLocation(model, loc))}
+      />
+    );
+  }
+);
 
 export default observer(ModelLocationMap);

@@ -99,14 +99,15 @@ const survey = {
       data: {
         locationTypeId: LocationType.Site,
         name: '',
-        lat: '0',
-        lon: '0',
-        centroidSref: '0,0',
+        boundaryGeom: '',
+        lat: '',
+        lon: '',
+        centroidSref: '',
         centroidSrefSystem: '4326',
       },
     });
 
-    location.startGPS();
+    // location.startGPS(); we allow the user to draw boundary by default, so we don't start GPS automatically
 
     return location;
   },

@@ -5,7 +5,7 @@ import {
   timeOutline,
 } from 'ionicons/icons';
 import { object, z } from 'zod';
-import { RadioOption } from '@flumens';
+import { RadioOption, updateModelLocation } from '@flumens';
 import {
   ChoiceInputConf,
   NumberInputConf,
@@ -479,7 +479,7 @@ const survey: Survey = {
         sample.media.push(photo);
       }
 
-      sample.startGPS();
+      sample.startGPS(loc => updateModelLocation(sample, loc));
 
       return sample;
     },
@@ -531,7 +531,7 @@ const survey: Survey = {
       },
     });
 
-    sample.startGPS();
+    sample.startGPS(loc => updateModelLocation(sample, loc));
 
     return sample;
   },

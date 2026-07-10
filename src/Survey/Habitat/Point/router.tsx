@@ -16,7 +16,7 @@ const routes = [
   [baseURL, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/map`, ModelLocationMap],
+  [`${baseURL}/:smpId/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/species/:subSmpId`, EditSpecies],
   [`${baseURL}/:smpId/species/:subSmpId/taxon`, TaxonSearch],

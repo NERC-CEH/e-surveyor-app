@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { observer } from 'mobx-react';
 import { NavContext } from '@ionic/react';
-import { Header, Main, Page } from 'common/flumens';
+import { Header, Main, Page, useToast } from 'common/flumens';
 import Location from 'models/location';
 import Footer from 'Survey/Habitat/common/Footer';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
@@ -30,6 +30,7 @@ const SummaryRow = ({ label, value }: Props) => (
 
 const LocationSummary = () => {
   const { navigate } = useContext(NavContext);
+  const toast = useToast();
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -39,8 +40,12 @@ const LocationSummary = () => {
   const onConfirm = async () => {
     location.metadata.saved = true;
     await location.save();
-    await location.saveRemote();
-    navigate('/', 'root');
+    try {
+      await location.saveRemote();
+      navigate('/', 'root');
+    } catch (error: unknown) {
+      toast.error(error as Error);
+    }
   };
 
   const { data } = location;

@@ -1,6 +1,7 @@
 import { leafOutline } from 'ionicons/icons';
 import { z } from 'zod';
 import config from 'common/config';
+import { updateModelLocation } from 'common/flumens';
 import appModel from 'common/models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
@@ -78,7 +79,7 @@ const survey: Survey = {
         },
       });
 
-      sample.startGPS();
+      sample.startGPS(loc => updateModelLocation(sample, loc));
 
       const occurrence = survey.smp!.occ!.create!({
         photo,
@@ -145,7 +146,7 @@ const survey: Survey = {
       },
     });
 
-    sample.startGPS();
+    sample.startGPS(loc => updateModelLocation(sample, loc));
 
     return sample;
   },

@@ -1,6 +1,14 @@
+import { observer } from 'mobx-react';
+import { Polygon } from 'geojson';
 import { Route } from 'react-router-dom';
-import { AttrPage } from '@flumens';
-import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
+import { AttrPage, updateModelLocation } from '@flumens';
+import LocationModel from 'common/models/location';
+import ModelLocationMap, {
+  getLocationAttrsFromLocation,
+  getLocationAttrsFromShape,
+  getLocationFromSref,
+  getShapeFromGeom,
+} from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Details from './Details';
 import Habitat from './Habitat';
@@ -22,6 +30,46 @@ const withLocationAndBlock = (Component: any, block: any) => {
   return WithLocationAndBlock;
 };
 
+const ModelLocationMapWrap = observer(() => {
+  const { location: model } = useLocation<LocationModel>();
+  if (!model) return null;
+
+  const useShape = model.data.boundaryGeom !== undefined;
+
+  const setLocation = async (newLocation: any) => {
+    if (!newLocation) {
+      if (useShape) {
+        Object.assign(model.data, getLocationAttrsFromShape());
+        return;
+      }
+
+      Object.assign(model.data, getLocationAttrsFromLocation());
+      return;
+    }
+    if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
+
+    const newLocationAttributes = useShape
+      ? getLocationAttrsFromShape(newLocation)
+      : getLocationAttrsFromLocation(newLocation);
+    Object.assign(model.data, newLocationAttributes);
+  };
+
+  const location = getLocationFromSref(model.data.centroidSref);
+  const shape = getShapeFromGeom(model?.data.boundaryGeom) as Polygon;
+
+  return (
+    <ModelLocationMap
+      useShape={useShape}
+      location={location}
+      shape={shape}
+      setLocation={setLocation}
+      isLocating={model.isGPSRunning()}
+      stopGPS={() => model.stopGPS()}
+      startGPS={() => model.startGPS(loc => updateModelLocation(model, loc))}
+    />
+  );
+});
+
 const routes = [
   [baseURL, StartNewSurvey.with(survey as any), true],
   [`${baseURL}/:locId`, Summary],
@@ -30,7 +78,7 @@ const routes = [
     withLocationAndBlock(AttrPage.BlockPage, habitatAttr),
   ],
   [`${baseURL}/:locId/location`, Location],
-  [`${baseURL}/:locId/location/map`, ModelLocationMap],
+  [`${baseURL}/:locId/location/map`, ModelLocationMapWrap],
   [`${baseURL}/:locId/details`, Details],
   [`${baseURL}/:locId/habitat`, Habitat],
 ].map(([route, component]: any) => (

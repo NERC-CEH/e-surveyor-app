@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { listOutline, locationOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
+import { updateModelLocation } from 'common/flumens';
 import soil from 'common/images/soil.svg';
 import Sample from 'common/models/sample';
 import { Survey, blockToAttr, locationAttr } from 'Survey/common/config';
@@ -576,7 +577,7 @@ const survey: Survey = {
         },
       });
 
-      sample.startGPS();
+      sample.startGPS(loc => updateModelLocation(sample, loc));
 
       return sample;
     },
@@ -606,7 +607,7 @@ const survey: Survey = {
       },
     });
 
-    sample.startGPS();
+    sample.startGPS(loc => updateModelLocation(sample, loc));
 
     return sample;
   },

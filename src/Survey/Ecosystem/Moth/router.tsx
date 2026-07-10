@@ -15,7 +15,7 @@ const routes = [
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/occurrence/:occId`, Occurrence],
-  [`${baseURL}/:smpId/location`, ModelLocationMap],
+  [`${baseURL}/:smpId/location`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/report`, Report],
 ];
 

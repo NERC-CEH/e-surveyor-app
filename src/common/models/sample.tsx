@@ -151,7 +151,14 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
   declare survey: Survey;
 
-  startGPS: any;
+  startGPS!: (
+    newLocation: (loc: {
+      latitude: number;
+      longitude: number;
+      accuracy?: number;
+    }) => void,
+    accuracyLimit?: number
+  ) => Promise<void>;
 
   stopGPS: any;
 
