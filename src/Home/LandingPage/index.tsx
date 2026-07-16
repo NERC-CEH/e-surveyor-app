@@ -20,12 +20,12 @@ import Card from './Components/Card';
 import FancyButton from './Components/FancyButton';
 import HabitatProfile from './Components/Habitat';
 import SpeciesProfile from './Components/Species';
-import ecosystem from './ecosystem.png';
-import habitat from './habitat.png';
+import ecosystem from './ecosystem.jpg';
+import habitat from './habitat.jpg';
 import habitatID from './habitatID.png';
 import logo from './logo.svg';
 import plantID from './plantID.png';
-import soil from './soil.png';
+import soil from './soil.jpg';
 
 // hide the terms updated message after this date
 const TERMS_MESSAGE_EXPIRY = new Date('2027-06-01');
