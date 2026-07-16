@@ -3,7 +3,16 @@ import { observer } from 'mobx-react';
 import { locationOutline, mapOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { IonIcon } from '@ionic/react';
-import { Block, device, Header, Main, Page, RadioInput } from 'common/flumens';
+import {
+  Block,
+  Button,
+  device,
+  Header,
+  InfoMessage,
+  Main,
+  Page,
+  RadioInput,
+} from 'common/flumens';
 import Location from 'models/location';
 import Footer from 'Survey/Habitat/common/Footer';
 import {
@@ -34,6 +43,12 @@ const LocationLocation = () => {
 
   const currentLocation = getLocationFromSref(location.data.centroidSref);
   const currentShape = getShapeFromGeom(location?.data.boundaryGeom);
+
+  const locate = () => {
+    location.startGPS(loc => {
+      Object.assign(location.data, getLocationAttrsFromLocation(loc));
+    });
+  };
 
   return (
     <Page id="location-location" className="theme-habitat">
@@ -103,7 +118,16 @@ const LocationLocation = () => {
               />
             )}
 
-            {!device.isOnline && <div>You are offline.</div>}
+            {!device.isOnline && (
+              <InfoMessage className="my-5">
+                You are offline. You can use the GPS to locate your current
+                location. My current location:
+                <div className="my-2 font-semibold">
+                  {location.data.centroidSref || 'Location missing'}
+                </div>
+                <Button onPress={locate}>Locate me</Button>
+              </InfoMessage>
+            )}
           </div>
         </div>
       </Main>
