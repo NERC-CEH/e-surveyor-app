@@ -36,7 +36,7 @@ const Controller = ({ sample }: Props) => {
     sample.metadata.saved = true;
     sample.save();
 
-    appModel.data['draftId:transect'] = '';
+    appModel.data['draftId:habitat-structured'] = '';
 
     navigate(`${match.url}/report`);
   };

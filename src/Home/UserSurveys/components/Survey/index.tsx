@@ -92,7 +92,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
   const survey = sample.getSurvey();
 
   function getSampleInfo() {
-    if (survey.name === 'transect') {
+    if (survey.name === 'habitat-structured') {
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>

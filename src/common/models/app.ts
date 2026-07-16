@@ -3,8 +3,8 @@ import { SeedmixSpecies } from 'common/data/seedmix';
 import { mainStore } from './store';
 
 export type SurveyDraftKeys = {
-  'draftId:point'?: string;
-  'draftId:transect'?: string;
+  'draftId:habitat-free'?: string;
+  'draftId:habitat-structured'?: string;
   'draftId:beetle'?: string;
   'draftId:moth'?: string;
   'draftId:soil'?: string;

@@ -42,9 +42,9 @@ const surveyTypes = [
 
 const survey: Survey = {
   id: 627,
-  name: 'transect',
-  label: 'Transect',
-  baseURL: '/survey/habitat/transect',
+  name: 'habitat-structured',
+  label: 'Habitat Structured',
+  baseURL: '/survey/habitat/structured',
   icon: layersOutline,
 
   attrs: {

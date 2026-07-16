@@ -372,7 +372,7 @@ export type Survey = {
   /**
    * In-App survey code name.
    */
-  name: 'soil' | 'beetle' | 'transect' | 'moth' | 'point';
+  name: 'soil' | 'beetle' | 'moth' | 'habitat-structured' | 'habitat-free';
   /**
    * Pretty survey name to show in the UI.
    */

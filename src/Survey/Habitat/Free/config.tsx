@@ -27,9 +27,9 @@ const { possibleThreshold } = config;
 
 const survey: Survey = {
   id: 626,
-  name: 'point',
-  label: 'Habitat',
-  baseURL: '/survey/habitat/point',
+  name: 'habitat-free',
+  label: 'Habitat Free',
+  baseURL: '/survey/habitat/free',
   icon: leafOutline,
 
   attrs: {

@@ -30,8 +30,8 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
     const survey = sample.getSurvey();
 
     const model: Sample =
-      survey.name === 'point' ? sample : (subSample as Sample);
-    const subModel = survey.name === 'point' ? subSample : subSubSample;
+      survey.name === 'habitat-free' ? sample : (subSample as Sample);
+    const subModel = survey.name === 'habitat-free' ? subSample : subSubSample;
 
     if (!subModel) {
       const modelSurvey = model.getSurvey();

@@ -4,9 +4,9 @@ import { IonIcon } from '@ionic/react';
 import { Header, Main, Page } from 'common/flumens';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import SurveyCard from 'Survey/common/Components/SurveyCard';
+import pointSurvey from './Free/config';
 import locationSurvey from './Location/config';
-import pointSurvey from './Point/config';
-import transectSurvey from './Transect/config';
+import transectSurvey from './Structured/config';
 
 const HabitatHome = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,15 +62,33 @@ const HabitatHome = () => {
           />
 
           <SurveyCard
-            header="Habitat Composition"
-            description="Record plant species present and describe the make-up of the habitat."
+            header="Free Sampling"
+            description={
+              <>
+                Record your habitat freely and record any plant species you
+                find.
+                <div className="border-t border-neutral-100 mt-3 pt-3">
+                  <b>Best for:</b> general biodiversity, learning about your
+                  land, spotting interesting plants.
+                </div>
+              </>
+            }
             link={pointSurvey.baseURL}
             icon={pointSurvey.icon}
           />
 
           <SurveyCard
-            header="Habitat Structure"
-            description="Record structural features, such as height, layers and physical complexity."
+            header="Structured Sampling"
+            description={
+              <>
+                Follow a set layout using quadrats along a transect to record
+                plants systematically.
+                <div className="border-t border-neutral-100 mt-3 pt-3">
+                  <b>Best for:</b> repeat monitoring, tracking change over time,
+                  projects and agri-environment schemes.
+                </div>
+              </>
+            }
             link={transectSurvey.baseURL}
             icon={transectSurvey.icon}
           />

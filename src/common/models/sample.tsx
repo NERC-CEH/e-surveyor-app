@@ -20,8 +20,8 @@ import beetleSurveyConfig, {
   fieldTillageAttr,
 } from 'Survey/Ecosystem/Beetle/config';
 import mothSurveyConfig from 'Survey/Ecosystem/Moth/config';
-import pointSurveyConfig from 'Survey/Habitat/Point/config';
-import transectSurveyConfig from 'Survey/Habitat/Transect/config';
+import pointSurveyConfig from 'Survey/Habitat/Free/config';
+import transectSurveyConfig from 'Survey/Habitat/Structured/config';
 import soilSurveyConfig, {
   SOMIDAttr,
   coverCropAttr,

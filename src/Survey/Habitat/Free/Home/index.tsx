@@ -177,7 +177,7 @@ const HomeController = ({ sample }: Props) => {
     sample.metadata.saved = true;
     sample.save();
 
-    appModel.data['draftId:point'] = '';
+    appModel.data['draftId:habitat-free'] = '';
     navToReport();
   };
 
