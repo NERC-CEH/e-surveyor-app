@@ -13,6 +13,7 @@ const required = [
 
 const development = {
   APP_DATABASE_NAME: '',
+  APP_MANUAL_TESTING: '',
   APP_BACKEND_INDICIA_URL: '',
   APP_BACKEND_URL: '',
 };
