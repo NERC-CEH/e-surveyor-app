@@ -22,7 +22,8 @@ const LocationHabitat = () => {
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
-  const hasSuggestions = !!location.metadata.habitatSuggestions?.length;
+  const hasHabitatAndPhoto =
+    !!location.data[habitatAttr.id] && !!location.media.length;
 
   const selectHabitat = (suggestion: Habitat) => {
     location.data[habitatAttr.id] = suggestion.id;
@@ -58,7 +59,7 @@ const LocationHabitat = () => {
         </Button>
       </Main>
 
-      {hasSuggestions && <Footer link={baseUrl} />}
+      {hasHabitatAndPhoto && <Footer link={baseUrl} />}
     </Page>
   );
 };

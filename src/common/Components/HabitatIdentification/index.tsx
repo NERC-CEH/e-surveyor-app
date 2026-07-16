@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import 'chart.js/auto';
 import clsx from 'clsx';
 import { checkmarkOutline } from 'ionicons/icons';
-import { Button, useToast, useLoader } from '@flumens';
+import { Button, useToast, useLoader, device } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import Doughnut from 'common/Components/Doughnut';
 import ExpandableText from 'common/Components/ExpandableText';
@@ -54,6 +54,8 @@ const HabitatIdentification = ({
   const currentCode = location.data[habitatAttr.id];
 
   const fetchSuggestions = async () => {
+    if (!device.isOnline) return;
+
     try {
       loader.show('Analysing habitat photos…');
       const results = await location.identifyHabitat();
@@ -177,6 +179,7 @@ const HabitatIdentification = ({
           <Button
             onClick={fetchSuggestions}
             className="py-1 px-2 text-sm mx-auto mt-2"
+            isDisabled={!device.isOnline}
           >
             Re-analyse photos
           </Button>
