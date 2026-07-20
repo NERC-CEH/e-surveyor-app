@@ -1,30 +1,24 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import {
-  addCircleOutline,
-  bookmarkOutline,
-  locationOutline,
-} from 'ionicons/icons';
-import {
-  Main,
-  MenuAttrItem,
-  InfoMessage,
-  InfoButton,
-  Button,
-  useAlert,
-} from '@flumens';
+import { addCircleOutline } from 'ionicons/icons';
+import { Link } from 'react-router-dom';
+import { Main, InfoMessage, Button, useAlert, Block } from '@flumens';
 import { IonIcon, IonList, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import config from 'common/config';
-import cameraButton from 'common/images/cameraButton.png';
-import mapPicker from 'common/images/mapPicker.png';
-import Seeds from 'common/images/seeds.svg';
-import appModel from 'common/models/app';
+import { SeedmixSpecies } from 'common/data/seedmix';
+import appModel, { SeedMix } from 'common/models/app';
 import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
-import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
+import {
+  CUSTOM_SEEDMIX_GROUP_VALUE,
+  customSeedmixAttr,
+  SEEDMIX_ATTR_ID,
+  seedmixAttr,
+} from 'Survey/common/config';
+import { seededAttr, seedmixGroupAttr } from '../config';
 
 const { positiveThreshold } = config;
 
@@ -44,13 +38,6 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
   const { navigate } = useContext(NavContext);
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
-
-  const { seeded, seedmixgroup, seedmix, name } = sample.data;
-  const isSeeded = seeded === 'Yes';
-
-  const prettyGridRef = <GridRefValue sample={sample} />;
-
-  const baseURL = match.url;
 
   useEffect(() => {
     const hasSpeciesWithLowScore = (model: Sample) => {
@@ -72,97 +59,16 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
     sample.samples.some(hasSpeciesWithLowScore);
   }, [sample.samples]);
 
+  const recordAttrs = {
+    record: sample.data,
+    isDisabled: sample.isDisabled,
+  };
+
   return (
     <Main className="[--padding-bottom:20px]">
       <IonList lines="full">
-        {!isDisabled && (
-          <InfoMessage
-            color="tertiary"
-            className="mt-2"
-            suffix={
-              <InfoButton color="dark" label="READ MORE" header="Tips">
-                <div className="[&>*]:my-2">
-                  <p>
-                    Start by giving your survey a name (such as the name of the
-                    place you are surveying) and location. The app can pick up
-                    on your current location, but if you want to survey
-                    somewhere else, you can do this by clicking on the right
-                    arrow and using the map to choose your location.
-                  </p>
-
-                  <p>
-                    Choose an area to survey where the vegetation is uniform
-                    (homogenous) i.e. the plants present and their structure
-                    looks similar. If your survey area is not uniform, for
-                    example, you may have grassland and hedgerow patches
-                    present, record the plants associated with these areas in
-                    separate surveys.
-                  </p>
-
-                  <img src={mapPicker} />
-
-                  <p>
-                    If the survey area has been seeded select yes and then
-                    choose your seed supplier from the drop down menu, and the
-                    name of your seed mix. This will allow the app to compare
-                    the plant species you sowed to the plants you see in the
-                    survey.
-                  </p>
-
-                  <p>You can now begin to add plants to your survey. </p>
-                  <img src={cameraButton} />
-                  <p>
-                    If you have identified the plants yourself, hold down the
-                    orange species button and write the name of your plant
-                    species into the text box.
-                  </p>
-                  <p>
-                    If you would like the AI to identify your plants, tap on the
-                    camera button and take a photo of the plant you would like
-                    to identify. If the AI isn't sure what your plant is, it
-                    will put an [orange question mark] or [red cross] next to
-                    the photo and species name. You can tap to see images of
-                    different possible plant species, and choose which you think
-                    is correct by clicking "This is my plant".
-                  </p>
-                  <p>
-                    Click here to find out how to take an AI-friendly image.
-                  </p>
-                  <p>
-                    Keep going until you have a list of all of your plants, and
-                    then click the finish button in the top right corner to view
-                    your report.
-                  </p>
-                </div>
-              </InfoButton>
-            }
-          >
-            How to complete a survey?
-          </InfoMessage>
-        )}
-
         <div className="rounded-list my-2">
           {isDisabled && <UploadedRecordInfoMessage />}
-        </div>
-
-        <h3 className="list-title">Details</h3>
-        <div className="rounded-list">
-          <MenuAttrItem
-            routerLink={`${baseURL}/name`}
-            icon={bookmarkOutline}
-            label="Survey name"
-            value={name || ''}
-            disabled={isDisabled}
-          />
-
-          <MenuAttrItem
-            routerLink={`${baseURL}/map`}
-            value={prettyGridRef}
-            icon={locationOutline}
-            label="Location"
-            skipValueTranslation
-            disabled={isDisabled}
-          />
         </div>
 
         <h3 className="list-title">
@@ -178,33 +84,65 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           </InfoButtonPopover>
         </h3>
         <div className="rounded-list">
-          <MenuAttrItem
-            routerLink={`${baseURL}/seeded`}
-            icon={Seeds}
-            label="Seeded"
-            value={seeded || ''}
-            disabled={isDisabled}
+          <Block
+            block={seededAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[seededAttr.id] = value;
+              delete sample.data[seedmixGroupAttr.id];
+              delete sample.data[SEEDMIX_ATTR_ID];
+              delete sample.data[customSeedmixAttr.id];
+              return null;
+            }}
           />
-          {isSeeded && (
-            <MenuAttrItem
-              routerLink={`${baseURL}/seedmixgroup`}
-              icon={Seeds}
-              label="Supplier"
-              value={seedmixgroup || ''}
-              disabled={isDisabled}
-            />
-          )}
+          <Block
+            block={seedmixGroupAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[seedmixGroupAttr.id] = value;
+              delete sample.data[SEEDMIX_ATTR_ID];
+              delete sample.data[customSeedmixAttr.id];
+              return null;
+            }}
+          />
+          <Block
+            block={seedmixAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[SEEDMIX_ATTR_ID] = value;
+              delete sample.data[customSeedmixAttr.id];
 
-          {isSeeded && sample.data.seedmixgroup && (
-            <MenuAttrItem
-              routerLink={`${baseURL}/seedmix`}
-              icon={Seeds}
-              label="Mix"
-              value={seedmix || ''}
-              disabled={!seedmixgroup || isDisabled}
-            />
+              const isCustom =
+                sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE;
+              if (isCustom) {
+                const byId = ({ id }: SeedMix): boolean => id === value;
+                const selectedSeedmix = appModel.data.seedmixes.find(byId);
+
+                sample.data[SEEDMIX_ATTR_ID] = selectedSeedmix?.name;
+
+                const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
+                const species = (selectedSeedmix?.species || [])
+                  .map(getWarehouseId)
+                  .join(',');
+                sample.data[customSeedmixAttr.id] = species;
+              }
+            }}
+          />
+          {sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE && (
+            <InfoMessage inline>
+              You can define your own seedmixes{' '}
+              <Link to="/settings/seedmixes">here</Link>.
+            </InfoMessage>
           )}
         </div>
+
+        <InfoMessage color="tertiary" className="mt-2">
+          Why ask about seed mix?
+          <div>
+            It helps us interpret your plant records and show you which species
+            may be expected to appear.
+          </div>
+        </InfoMessage>
       </IonList>
 
       {!isDisabled ? (

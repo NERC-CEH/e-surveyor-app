@@ -8,6 +8,7 @@ import {
   useAlert,
   ModelValidationMessage,
   captureImage,
+  useSample,
 } from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
@@ -16,13 +17,10 @@ import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
 import Main from './Main';
 
 type URL = string;
-
-type Props = {
-  sample: Sample;
-};
 
 const showFirstSurveyTip = (alert: any) => {
   alert({
@@ -92,11 +90,18 @@ const showFirstPhotoTip = (alert: any) => {
   });
 };
 
-const HomeController = ({ sample }: Props) => {
+const HomeController = () => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
   const promptImageSource = usePromptImageSource();
+
+  const navToReport = async () => {
+    navigate(`${match.url}/report`);
+  };
+
+  const { sample } = useSample<Sample>();
+  if (!sample) return null;
 
   const attachImages = async (photoURLs: URL[]) => {
     // eslint-disable-next-line no-restricted-syntax
@@ -133,10 +138,6 @@ const HomeController = ({ sample }: Props) => {
     if (!photoURLs?.length) return;
 
     attachImages(photoURLs);
-  };
-
-  const navToReport = async () => {
-    navigate(`${match.url}/report`);
   };
 
   const onFinish = async () => {
@@ -181,8 +182,6 @@ const HomeController = ({ sample }: Props) => {
     navToReport();
   };
 
-  if (!sample) return null;
-
   const isDisabled = sample.isUploaded;
 
   const isInvalid = sample.validateRemote();
@@ -199,11 +198,6 @@ const HomeController = ({ sample }: Props) => {
   if (appModel.data.showFirstSurveyTip) showFirstSurveyTip(alert);
 
   const isTraining = !!sample.data.training;
-  const trainingModeSubheader = isTraining && (
-    <div className="bg-black p-1 text-center text-sm text-white">
-      Training Mode
-    </div>
-  );
 
   return (
     <Page id="survey-default-edit" className="theme-habitat">
@@ -211,7 +205,7 @@ const HomeController = ({ sample }: Props) => {
         title="Survey"
         rightSlot={finishButton}
         defaultHref="/home/surveys"
-        subheader={trainingModeSubheader}
+        subheader={isTraining && <TrainingModeBanner />}
       />
       <Main
         match={match}

@@ -1,12 +1,11 @@
 import { locationOutline } from 'ionicons/icons';
 import {
-  BlockT,
   ChoiceInputConf,
-  inferBlockType,
   LocationData,
   TextInputConf,
   NumberInputConf,
   LocationType,
+  inferAttrConfigTypes,
 } from '@flumens';
 import { Location as LocationOld } from '@flumens/utils/dist/location';
 import habitats from 'common/data/ukhab';
@@ -112,25 +111,6 @@ const survey = {
     return location;
   },
 } as const;
-
-/**
- * utility type that transforms a record of block configurations
- * into a record of their corresponding value types
- *
- * @example
- * type Config = {
- *   'smpAttr:123': { block: NumberInputConf };
- *   'smpAttr:456': { block: TextInputConf };
- *   'other': { something: string }; // returns unknown
- * };
- * type Result = inferAttrConfigTypes<Config>;
- * // Result = { 'smpAttr:123': number; 'smpAttr:456': string; 'other': unknown }
- */
-type inferAttrConfigTypes<T extends Record<string, unknown>> = {
-  -readonly [K in keyof T]: T[K] extends { block: infer B extends BlockT }
-    ? inferBlockType<B>
-    : unknown;
-};
 
 export type Data = LocationData &
   inferAttrConfigTypes<typeof attrs> & { location?: LocationOld };

@@ -3,14 +3,13 @@ import {
   device,
   ModelValidationMessage,
   useAlert,
-  Sample as SampleOriginal,
-  SampleAttrs,
+  SampleModel,
+  SampleData,
   SampleOptions,
   SampleMetadata,
   ChoiceValues,
 } from '@flumens';
 import config from 'common/config';
-import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel from 'models/app';
 import userModel from 'models/user';
 import { SpeciesNames } from 'Components/ReportView/helpers';
@@ -62,7 +61,7 @@ type Metadata = SampleMetadata & {
 
 const cropAttrId = cropAttr().id;
 
-export type Attrs = SampleAttrs & {
+export type Data = SampleData & {
   [dateAttr.id]?: string;
 
   surveyId: any;
@@ -71,11 +70,7 @@ export type Attrs = SampleAttrs & {
   type?: any;
   steps?: any;
   date?: any;
-  seeded?: any;
-  seedmix?: any;
   quadratSize?: any;
-  seedmixgroup?: any;
-  customSeedmix?: SeedmixSpecies[];
   location?: any;
 
   // beetle survey
@@ -103,7 +98,10 @@ export type Attrs = SampleAttrs & {
   [labClayAttr.id]: number;
 };
 
-export default class Sample extends SampleOriginal<Attrs, Metadata> {
+export default class Sample<T extends SampleData = Data> extends SampleModel<
+  T,
+  Metadata
+> {
   static getSupportedSpeciesList(plants: SpeciesNames[]) {
     const pollinators: Interaction[] = [];
 
@@ -143,11 +141,11 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
 
   declare occurrences: IObservableArray<Occurrence>;
 
-  declare samples: IObservableArray<Sample>;
+  declare samples: IObservableArray<Sample<any>>;
 
   declare media: IObservableArray<Media>;
 
-  declare parent?: Sample;
+  declare parent?: Sample<any>;
 
   declare survey: Survey;
 
@@ -182,7 +180,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
       [soilSurveyConfig.id]: soilSurveyConfig,
     };
 
-    this.survey = surveyConfigs[this.data.surveyId];
+    this.survey = surveyConfigs[this.data.surveyId as any];
 
     if (!this.survey) {
       // backwards compatible
@@ -253,7 +251,7 @@ export default class Sample extends SampleOriginal<Attrs, Metadata> {
     }
 
     if (this.data.surveyId === soilSurveyConfig.id && this.parent) {
-      return this.data[sampleNameAttr.id];
+      return this.data.locationName;
     }
 
     const byId = ({ cid }: Sample) => cid === this.cid;

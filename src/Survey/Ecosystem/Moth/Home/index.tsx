@@ -9,6 +9,7 @@ import Occurrence from 'models/occurrence';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
 import config from '../config';
 import IntroAlert from './IntroAlert';
 import Main from './Main';
@@ -96,18 +97,13 @@ const HomeController = ({ sample }: Props) => {
   );
 
   const isTraining = !!sample.data.training;
-  const trainingModeSubheader = isTraining && (
-    <div className="bg-black p-1 text-center text-sm text-white">
-      Training Mode
-    </div>
-  );
 
   return (
     <Page id="survey-moth-home" className="theme-ecosystem">
       <Header
         title="Moth recording"
         rightSlot={finishButton}
-        subheader={trainingModeSubheader}
+        subheader={isTraining && <TrainingModeBanner />}
       />
       <Main
         sample={sample}

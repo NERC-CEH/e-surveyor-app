@@ -236,7 +236,8 @@
       "^.+.(css|style|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
       "ionic-native": "jest-transform-stub",
       "ionicons/components/ion-icon.js": "@ionic/core/components/ion-icon.js",
-      "swiper": "jest-transform-stub"
+      "swiper": "jest-transform-stub",
+      "\\?react$": "jest-transform-stub"
     },
     "moduleDirectories": [
       "node_modules",

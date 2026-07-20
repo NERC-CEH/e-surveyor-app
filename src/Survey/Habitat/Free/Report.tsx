@@ -2,12 +2,10 @@ import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, useToast } from '@flumens';
 import { NavContext } from '@ionic/react';
-import seedmixData from 'common/data/seedmix';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import Main from 'Components/ReportView';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
-import { CUSTOM_SEEDMIX_NAME } from 'Survey/common/config';
 
 type Props = {
   sample: Sample;
@@ -43,12 +41,12 @@ const ReportController = ({ sample }: Props) => {
 
   const occurrences = sample.samples.map(smp => smp.occurrences[0]);
 
-  let seedmixSpecies = [];
-  if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
-    seedmixSpecies = sample.data.customSeedmix || [];
-  } else {
-    seedmixSpecies = seedmixData[sample.data.seedmix] || [];
-  }
+  const seedmixSpecies: any = []; // TODO:
+  // if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_GROUP_VALUE) {
+  //   seedmixSpecies = sample.data[customSeedmixAttr.id] || []; // TODO: stores species ids as string now
+  // } else {
+  //   seedmixSpecies = seedmixData[sample.data.seedmix] || []; // TODO: uses different ID
+  // }
 
   return (
     <Page id="survey-report" className="theme-habitat">

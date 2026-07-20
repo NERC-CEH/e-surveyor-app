@@ -6,6 +6,7 @@ import { NavContext } from '@ionic/react';
 import appModel from 'common/models/app';
 import Sample, { useValidateCheck } from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
 import config from '../config';
 import Main from './Main';
 
@@ -86,18 +87,13 @@ const Home = ({ sample }: Props) => {
   );
 
   const isTraining = !!sample.data.training;
-  const trainingModeSubheader = isTraining && (
-    <div className="bg-black p-1 text-center text-sm text-white">
-      Training Mode
-    </div>
-  );
 
   return (
     <Page id="survey-soil-home" className="theme-soil">
       <Header
         title="Survey"
         rightSlot={finishButton}
-        subheader={trainingModeSubheader}
+        subheader={isTraining && <TrainingModeBanner />}
       />
       <Main
         sample={sample}

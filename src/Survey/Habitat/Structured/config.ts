@@ -6,9 +6,6 @@ import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import {
-  seedmixGroupAttr,
-  seedmixAttr,
-  customSeedmixAttr,
   dateAttr,
   locationAttr,
   nameAttr,
@@ -125,12 +122,6 @@ const survey: Survey = {
         values: [...agriEnvironmentHabitats, ...commonStandardsHabitats],
       },
     },
-
-    seedmixgroup: seedmixGroupAttr,
-
-    seedmix: seedmixAttr,
-
-    customSeedmix: customSeedmixAttr,
   },
 
   smp: {

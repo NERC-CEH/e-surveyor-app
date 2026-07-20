@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
 import { Route, Redirect } from 'react-router-dom';
 import {
+  SamplesContext,
   TailwindBlockContext,
   TailwindContext,
   TailwindContextValue,
@@ -9,6 +10,7 @@ import {
 import { IonApp, IonRouterOutlet, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import locations from 'common/models/collections/locations';
+import samples from 'common/models/collections/samples';
 import 'common/theme.css';
 import { LocationsContext } from 'Survey/Habitat/Location/useLocation';
 import Home from './Home';
@@ -26,6 +28,7 @@ const tailwindBlockContext = {
   basePath: '',
 };
 
+const samplesContext = { samples };
 const locationsContext = { locations };
 
 const HomeRedirect = () => <Redirect to="home/landing" />;
@@ -37,14 +40,16 @@ const App = () => (
         <TailwindContext.Provider value={tailwindContext}>
           <TailwindBlockContext.Provider value={tailwindBlockContext}>
             <LocationsContext.Provider value={locationsContext}>
-              <IonRouterOutlet id="main">
-                <Route path="/home" component={Home} />
-                {Info}
-                {User}
-                {Survey}
-                {Settings}
-                <Route exact path="/" component={HomeRedirect} />
-              </IonRouterOutlet>
+              <SamplesContext.Provider value={samplesContext}>
+                <IonRouterOutlet id="main">
+                  <Route path="/home" component={Home} />
+                  {Info}
+                  {User}
+                  {Survey}
+                  {Settings}
+                  <Route exact path="/" component={HomeRedirect} />
+                </IonRouterOutlet>
+              </SamplesContext.Provider>
             </LocationsContext.Provider>
           </TailwindBlockContext.Provider>
         </TailwindContext.Provider>

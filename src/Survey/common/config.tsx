@@ -1,5 +1,4 @@
 import { calendarOutline, clipboardOutline } from 'ionicons/icons';
-import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import {
   BlockT,
@@ -8,11 +7,14 @@ import {
   PageProps,
   RemoteConfig,
 } from '@flumens';
-import { NumberInputConf } from '@flumens/tailwind/dist/Survey';
+import {
+  ChoiceInputConf,
+  NumberInputConf,
+} from '@flumens/tailwind/dist/Survey';
 import { IonIcon } from '@ionic/react';
 import config from 'common/config';
 import seedmixData from 'common/data/cacheRemote/seedmix.json';
-import { SeedmixSpecies } from 'common/data/seedmix';
+import SeedsIcon from 'common/images/seeds.svg?react';
 import appModel, { SeedMix } from 'models/app';
 import Media from 'models/image';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
@@ -20,135 +22,95 @@ import Sample from 'models/sample';
 
 const { possibleThreshold } = config;
 
-const getSeedMixGroups = () => {
-  const addValueToObject = (seedMixGroup: any) => ({ value: seedMixGroup });
+const seedMixGroups = seedmixData
+  .reduce(
+    (a: any, m: any) => (a.includes(m.mixGroup) ? a : [...a, m.mixGroup]),
+    []
+  )
+  .map((seedMixGroup: any) => ({ dataName: seedMixGroup }))
+  .sort((v1: any, v2: any) => v1.dataName.localeCompare(v2.dataName));
 
-  const getUniqueValues = (unique: any, item: any) =>
-    unique.includes(item.mixGroup) ? unique : [...unique, item.mixGroup];
+export const CUSTOM_SEEDMIX_GROUP_VALUE = 'Custom';
 
-  const alphabetically = (v1: any, v2: any) => v1.value.localeCompare(v2.value);
-
-  const seedMixGroups = seedmixData
-    .reduce(getUniqueValues, [])
-    .map(addValueToObject)
-    .sort(alphabetically);
-
-  const notRecorded = {
-    value: '',
-    isDefault: true,
-    label: 'Not recorded',
-  };
-
-  const userCustom = {
-    value: 'Custom',
-    label: 'My Custom Seedmix',
-  };
-
-  return [notRecorded, userCustom, ...seedMixGroups];
-};
-
-export const CUSTOM_SEEDMIX_NAME = 'Custom';
-
-const getSeedMix = (model: Sample) => {
-  const { seedmixgroup } = model.data;
-
-  const addValueToObject = (seedMix: any) => ({ value: seedMix });
-
-  const bySeedmixGroups = (seedmix: any) => seedmix.mixGroup === seedmixgroup;
-
-  const getUniqueValues = (unique: any, item: any) =>
-    unique.includes(item.mixName) ? unique : [...unique, item.mixName];
-
-  const seedMixes = seedmixData
-    .filter(bySeedmixGroups)
-    .reduce(getUniqueValues, [])
-    .map(addValueToObject);
-
-  const notRecorded = {
-    value: '',
-    isDefault: true,
-    label: 'Not recorded',
-  };
-
-  let userCustom: any = [];
-  if (seedmixgroup === CUSTOM_SEEDMIX_NAME) {
+const getSeedMixes = (seedmixgroup: any) => {
+  if (seedmixgroup === CUSTOM_SEEDMIX_GROUP_VALUE) {
     const getSeedmixEntry = (seedmix: SeedMix) => ({
-      value: seedmix.id,
-      label: seedmix.name,
+      dataName: seedmix.id,
+      title: seedmix.name,
     });
 
-    userCustom = appModel.data.seedmixes.map(getSeedmixEntry);
+    return appModel.data.seedmixes.map(getSeedmixEntry);
   }
 
-  return [notRecorded, ...userCustom, ...seedMixes];
+  return seedmixData
+    .filter((seedmix: any) => seedmix.mixGroup === seedmixgroup)
+    .reduce(
+      (a: any, m: any) => (a.includes(m.mixName) ? a : [...a, m.mixName]),
+      []
+    )
+    .map((seedMixGroup: any) => ({ dataName: seedMixGroup }));
 };
+
+// export const seedmixGroupAttr = {
+//   pageProps: {
+//     headerProps: { title: 'Supplier' },
+//     attrProps: {
+//       input: 'radio',
+//       info: 'Please indicate the supplier.',
+//       inputProps: { options: getSeedMixGroups() },
+//     },
+//   },
+// };
+
+export const SEEDED_YES_VALUE = '22177';
+
+export const seededAttr = {
+  id: 'smpAttr:1868',
+  type: 'choiceInput',
+  title: 'Seeded',
+  appearance: 'button',
+  prefix: <SeedsIcon className="size-6" />,
+  choices: [
+    { title: 'Yes', dataName: SEEDED_YES_VALUE },
+    { title: 'No', dataName: '22178' },
+    { title: "Don't know", dataName: '22179' },
+  ],
+} as const satisfies ChoiceInputConf;
 
 export const seedmixGroupAttr = {
-  pageProps: {
-    headerProps: { title: 'Supplier' },
-    attrProps: {
-      input: 'radio',
-      info: 'Please indicate the supplier.',
-      inputProps: { options: getSeedMixGroups() },
-      set: (value: any, sample: Sample) => {
-        if (sample.data.seedmixgroup !== value) {
-          sample.data.seedmixgroup = value;
-          sample.data.seedmix = '';
-        }
-      },
-    },
-  },
-  remote: { id: 1529 },
-};
+  id: 'smpAttr:1529',
+  type: 'choiceInput',
+  title: 'Supplier',
+  appearance: 'button',
+  prefix: <SeedsIcon className="size-6" />,
+  choices: [
+    { dataName: '', title: 'Not recorded' },
+    { dataName: CUSTOM_SEEDMIX_GROUP_VALUE, title: 'My Custom Seedmix' },
+    ...seedMixGroups,
+  ],
+  visibility: [{ target: seededAttr.id, op: 'eq', value: SEEDED_YES_VALUE }],
+} as const satisfies ChoiceInputConf;
 
-export const seedmixAttr = {
-  pageProps: {
-    headerProps: { title: 'Seed mix' },
-    attrProps: {
-      input: 'radio',
-      info: (smp: Sample) => {
-        if (smp.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
-          return (
-            <div>
-              Please indicate the seed mix you have used.
-              <p>
-                You can define your own seedmixes{' '}
-                <Link to="/settings/seedmixes">here</Link>.
-              </p>
-            </div>
-          );
-        }
-        return <div>Please indicate the seed mix you have used.</div>;
-      },
-      inputProps: (smp: Sample) => ({ options: getSeedMix(smp) }),
-      set: (value: any, sample: Sample) => {
-        if (sample.data.seedmix !== value) {
-          if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_NAME) {
-            const byId = (seedmix: SeedMix) => seedmix.id === value;
-            const selectedSeedmix = appModel.data.seedmixes.find(byId);
-            sample.data.seedmix = selectedSeedmix?.name;
-            sample.data.customSeedmix = selectedSeedmix?.species || [];
-            return;
-          }
+export const SEEDMIX_ATTR_ID = 'smpAttr:1530';
 
-          sample.data.seedmix = value;
-        }
-      },
-    },
-  },
-  remote: { id: 1530 },
-};
+export const seedmixAttr = (data: any) =>
+  ({
+    id: SEEDMIX_ATTR_ID,
+    type: 'choiceInput',
+    title: 'Mix',
+    appearance: 'button',
+    prefix: <SeedsIcon className="size-6" />,
+    choices: [
+      { dataName: '', title: 'Not recorded' },
+      ...getSeedMixes(data[seedmixGroupAttr.id]),
+    ],
+    visibility: [
+      { target: seedmixGroupAttr.id, op: 'ne', value: '' },
+      { target: seedmixGroupAttr.id, op: 'ne', value: undefined as any },
+    ],
+  }) as const satisfies ChoiceInputConf;
 
-export const customSeedmixAttr = {
-  remote: {
-    id: 1647,
-    values: (values: SeedmixSpecies[]) => {
-      const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
-
-      return values.map(getWarehouseId).join(',');
-    },
-  },
-};
+export const customSeedmixAttr = { id: 'smpAttr:1647' } as const;
 
 export const dateAttr = {
   id: 'date',

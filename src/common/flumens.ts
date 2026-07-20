@@ -1,3 +1,6 @@
+import { BlockConf } from '@flumens/tailwind/dist/Survey';
+import { inferBlockType } from '@flumens/tailwind/dist/components/types';
+
 // MODELS
 export {
   default as Model,
@@ -5,8 +8,8 @@ export {
   type Data as ModelAttrs,
 } from '@flumens/models/dist/Model';
 export {
-  default as Sample,
-  type Data as SampleAttrs,
+  default as SampleModel,
+  type Data as SampleData,
   type Options as SampleOptions,
   type Metadata as SampleMetadata,
   type RemoteConfig,
@@ -79,6 +82,11 @@ export {
   default as DatetimeButton,
   type Props as DatetimeButtonProps,
 } from '@flumens/ionic/dist/components/DatetimeButton';
+export {
+  default as useSample,
+  withSample,
+  SamplesContext,
+} from '@flumens/ionic/dist/hooks/useSample';
 
 // TAILWIND
 export {
@@ -127,3 +135,22 @@ export {
   type NumberInputConf,
 } from '@flumens/tailwind/dist/Survey';
 export { type inferBlockType } from '@flumens/tailwind/dist/components/types';
+
+/**
+ * utility type that transforms a record of block configurations
+ * into a record of their corresponding value types
+ *
+ * @example
+ * type Config = {
+ *   'smpAttr:123': { block: NumberInputConf };
+ *   'smpAttr:456': { block: TextInputConf };
+ *   'other': { something: string }; // returns unknown
+ * };
+ * type Result = inferAttrConfigTypes<Config>;
+ * // Result = { 'smpAttr:123': number; 'smpAttr:456': string; 'other': unknown }
+ */
+export type inferAttrConfigTypes<T extends Record<string, unknown>> = {
+  -readonly [K in keyof T]: T[K] extends { block: infer B extends BlockConf }
+    ? inferBlockType<B>
+    : unknown;
+};

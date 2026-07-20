@@ -1,89 +1,60 @@
 import { leafOutline } from 'ionicons/icons';
 import { z } from 'zod';
 import config from 'common/config';
-import { updateModelLocation } from 'common/flumens';
+import {
+  dateFormatISO,
+  inferAttrConfigTypes,
+  SampleData,
+  updateModelLocation,
+} from 'common/flumens';
 import appModel from 'common/models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import {
-  seedmixGroupAttr,
-  seedmixAttr,
-  customSeedmixAttr,
-  dateAttr,
-  locationAttr,
-  nameAttr,
   attachClassifierResults,
   Survey,
   locationSchema,
+  seedmixGroupAttr,
+  SEEDMIX_ATTR_ID,
 } from 'Survey/common/config';
 
-const seededValues = [
-  { value: 'Yes', id: 22177 },
-  { value: 'No', id: 22178 },
-  { value: "Don't know", id: 22179 },
-];
+export {
+  seedmixGroupAttr,
+  SEEDED_YES_VALUE,
+  seededAttr,
+} from 'Survey/common/config';
 
 const { possibleThreshold } = config;
 
-const survey: Survey = {
-  id: 626,
+const attrs = {
+  seedmixGroup: { block: seedmixGroupAttr },
+} as const;
+
+const SURVEY_ID = 626;
+
+const survey = {
+  id: SURVEY_ID,
   name: 'habitat-free',
   label: 'Habitat Free',
   baseURL: '/survey/habitat/free',
   icon: leafOutline,
 
-  attrs: {
-    date: dateAttr,
-
-    location: locationAttr,
-
-    name: nameAttr,
-
-    seeded: {
-      pageProps: {
-        headerProps: { title: 'Seeded' },
-        attrProps: {
-          input: 'radio',
-          info: 'Has the survey area been seeded?',
-          inputProps: { options: seededValues },
-          set: (value: any, sample: Sample) => {
-            sample.data.seeded = value;
-            sample.data.seedmixgroup = '';
-            sample.data.seedmix = '';
-          },
-        },
-      },
-      remote: { id: 1868, values: seededValues },
-    },
-
-    seedmixgroup: seedmixGroupAttr,
-
-    seedmix: seedmixAttr,
-
-    customSeedmix: customSeedmixAttr,
-  },
+  attrs,
 
   smp: {
-    attrs: {
-      date: dateAttr,
-
-      location: locationAttr,
-    },
+    attrs: {},
 
     create({ photo }) {
       const sample = new Sample({
         data: {
-          surveyId: survey.id,
-          location: null,
+          surveyId: SURVEY_ID,
           enteredSrefSystem: 4326,
         },
       });
 
       sample.startGPS(loc => updateModelLocation(sample, loc));
 
-      const occurrence = survey.smp!.occ!.create!({
-        photo,
-      });
+      const occurrence = survey.smp.occ.create({ photo });
       sample.occurrences.push(occurrence);
 
       return sample;
@@ -99,14 +70,14 @@ const survey: Survey = {
         },
       },
 
-      verify: attrs =>
+      verify: data =>
         z
           .object({})
           .nullable()
           .refine(val => val !== null, {
             message: 'Plant has not been identified',
           })
-          .safeParse(attrs.taxon).error,
+          .safeParse(data.taxon).error,
 
       create({ photo }) {
         const occ = new Occurrence({
@@ -135,13 +106,9 @@ const survey: Survey = {
   create() {
     const sample = new Sample({
       data: {
-        surveyId: survey.id,
+        surveyId: SURVEY_ID,
         training: appModel.data.useTraining,
-        date: new Date().toISOString(),
-        name: new Date().toLocaleDateString('en-UK'),
-        seedmix: '',
-        seedmixgroup: '',
-        location: null,
+        date: dateFormatISO.format(new Date()),
         enteredSrefSystem: 4326,
       },
     });
@@ -151,7 +118,7 @@ const survey: Survey = {
     return sample;
   },
 
-  verify(attrs, sample) {
+  verify(data, sample) {
     try {
       // check if at least one species with possible score exists
       let hasValidSpecies = false;
@@ -167,7 +134,7 @@ const survey: Survey = {
         })
         .parse(hasValidSpecies);
 
-      z.object({ location: locationSchema }).parse(attrs);
+      z.object({ location: locationSchema }).parse(data);
     } catch (attrError) {
       return attrError;
     }
@@ -187,6 +154,11 @@ const survey: Survey = {
 
     return submission;
   },
-};
+} as const satisfies Survey;
+
+export type Data = SampleData &
+  inferAttrConfigTypes<typeof attrs> & {
+    [SEEDMIX_ATTR_ID]: any;
+  };
 
 export default survey;

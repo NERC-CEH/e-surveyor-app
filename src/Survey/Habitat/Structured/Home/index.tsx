@@ -7,6 +7,7 @@ import appModel from 'models/app';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
 import Main from './Main';
 
 type Props = {
@@ -69,11 +70,6 @@ const Controller = ({ sample }: Props) => {
     );
 
   const isTraining = !!sample.data.training;
-  const trainingModeSubheader = isTraining && (
-    <div className="bg-black p-1 text-center text-sm text-white">
-      Training Mode
-    </div>
-  );
 
   return (
     <Page id="transect-home" className="theme-habitat">
@@ -81,7 +77,7 @@ const Controller = ({ sample }: Props) => {
         backButtonLabel="Home"
         title="Transect"
         rightSlot={uploadButton}
-        subheader={trainingModeSubheader}
+        subheader={isTraining && <TrainingModeBanner />}
       />
       <Main
         sample={sample}
