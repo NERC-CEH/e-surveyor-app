@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { locationOutline, stopwatchOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import { Header, Main, Page } from 'common/flumens';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import SurveyCard from 'Survey/common/Components/SurveyCard';
 import pointSurvey from './Free/config';
@@ -9,7 +9,7 @@ import locationSurvey from './Location/config';
 import transectSurvey from './Structured/config';
 
 const HabitatHome = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, ...mainProps } = useHeaderScroll();
 
   return (
     <Page id="habitat-home" className="theme-habitat">
@@ -17,13 +17,7 @@ const HabitatHome = () => {
         title="Habitat"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        fullscreen
-        scrollEvents
-        onIonScroll={event => {
-          setIsScrolled(event.detail.scrollTop > 70);
-        }}
-      >
+      <Main {...mainProps}>
         <StarsBackground>
           Record habitat type, composition and structure to describe what is
           present on site.

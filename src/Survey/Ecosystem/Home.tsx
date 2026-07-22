@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import { Header, Main, Page } from 'common/flumens';
 import beeIcon from 'common/images/bee.svg';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import SurveyCard from 'Survey/common/Components/SurveyCard';
 import beetleSurvey from './Beetle/config';
 import mothSurvey from './Moth/config';
 
 const EcosystemHome = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, ...mainProps } = useHeaderScroll();
 
   return (
     <Page id="ecosystem-home" className="theme-ecosystem">
@@ -15,13 +15,7 @@ const EcosystemHome = () => {
         title="Ecosystem Function"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        fullscreen
-        scrollEvents
-        onIonScroll={event => {
-          setIsScrolled(event.detail.scrollTop > 70);
-        }}
-      >
+      <Main {...mainProps}>
         <StarsBackground>
           Measure biodiversity within habitats by recording moths, beetles and
           day-time pollinators.

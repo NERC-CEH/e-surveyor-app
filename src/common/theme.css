@@ -292,3 +292,22 @@ ion-toolbar.location-input-attr ion-back-button {
 .checkbox-input > div > label[data-selected='true'] {
   @apply border-primary-800 bg-primary-100/30;
 }
+
+.list-title {
+  margin: 0;
+  padding-bottom: 0.3rem;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.list {
+  @apply mx-3 flex flex-col gap-5;
+}
+
+.list > .card {
+  @apply bg-white rounded-lg p-4 shadow-xl;
+}
+
+.list > .card.top {
+  @apply -mt-4;
+}

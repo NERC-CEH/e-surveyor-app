@@ -7,7 +7,7 @@ type Props = {
 const StarsBackground = ({ children }: Props) => (
   <div
     style={{ backgroundImage: `url(${background})` }}
-    className="w-full bg-cover text-white p-10"
+    className="w-full bg-cover text-white px-3 py-10"
   >
     <div className="mt-10">{children}</div>
   </div>

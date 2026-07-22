@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-// eslint-disable-next-line import-x/no-extraneous-dependencies
 import {
   FeatureCollection,
   LineString,

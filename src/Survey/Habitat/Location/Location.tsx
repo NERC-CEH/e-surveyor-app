@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { observer } from 'mobx-react';
 import { locationOutline, mapOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
@@ -14,6 +13,7 @@ import {
   RadioInput,
 } from 'common/flumens';
 import Location from 'models/location';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import Footer from 'Survey/Habitat/common/Footer';
 import {
   getLocationAttrsFromLocation,
@@ -29,7 +29,7 @@ const LocationLocation = () => {
   const { url } = useRouteMatch();
   const baseUrl = url.split('/').slice(0, -1).join('/');
 
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, ...mainProps } = useHeaderScroll();
 
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
@@ -56,20 +56,15 @@ const LocationLocation = () => {
         title="Location"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        fullscreen
-        scrollEvents
-        onIonScroll={e => setIsScrolled(e.detail.scrollTop > 70)}
-        className="[--padding-bottom:100px]"
-      >
+      <Main {...mainProps} className="[--padding-bottom:100px]">
         <StarsBackground>Set up this survey location.</StarsBackground>
 
-        <div className="mx-3">
-          <div className="bg-white rounded-lg p-4 shadow-xl -mt-4">
+        <div className="list">
+          <div className="card top">
             <Block block={siteNameAttr} {...recordAttrs} platform="web" />
           </div>
 
-          <div className="bg-white rounded-lg p-4 shadow-xl mt-4">
+          <div className="card">
             <RadioInput
               platform="web"
               label="How would you like to record this location?"

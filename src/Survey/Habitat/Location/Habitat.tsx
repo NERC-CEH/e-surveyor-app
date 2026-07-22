@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
 import { NavContext } from '@ionic/react';
@@ -6,6 +6,7 @@ import HabitatIdentification from 'common/Components/HabitatIdentification';
 import { Habitat } from 'common/data/ukhab';
 import { Button, Header, Main, Page } from 'common/flumens';
 import Location from 'models/location';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import Footer from 'Survey/Habitat/common/Footer';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import { Data, habitatAttr } from './config';
@@ -17,7 +18,7 @@ const LocationHabitat = () => {
 
   const baseUrl = url.split('/').slice(0, -1).join('/');
 
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, ...mainProps } = useHeaderScroll();
 
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
@@ -39,12 +40,7 @@ const LocationHabitat = () => {
         title="Habitat Type"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        fullscreen
-        scrollEvents
-        onIonScroll={e => setIsScrolled(e.detail.scrollTop > 70)}
-        className="[--padding-bottom:100px]"
-      >
+      <Main {...mainProps} className="[--padding-bottom:100px]">
         <StarsBackground>Capture photos of this habitat.</StarsBackground>
 
         <div className="-mt-4 mx-3">

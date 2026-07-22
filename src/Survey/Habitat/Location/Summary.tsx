@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { NavContext } from '@ionic/react';
 import { Header, Main, Page, useToast } from 'common/flumens';
 import Location from 'models/location';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import Footer from 'Survey/Habitat/common/Footer';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
@@ -32,7 +33,7 @@ const LocationSummary = () => {
   const { navigate } = useContext(NavContext);
   const toast = useToast();
 
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, ...mainProps } = useHeaderScroll();
 
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
@@ -106,12 +107,7 @@ const LocationSummary = () => {
         title="Summary"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        fullscreen
-        scrollEvents
-        onIonScroll={e => setIsScrolled(e.detail.scrollTop > 70)}
-        className="[--padding-bottom:100px]"
-      >
+      <Main {...mainProps} className="[--padding-bottom:100px]">
         <StarsBackground>Do you wish to confirm?</StarsBackground>
 
         <div className="mx-3 -mt-4 rounded-lg bg-white p-4 shadow-xl">

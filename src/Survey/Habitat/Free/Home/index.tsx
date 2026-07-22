@@ -15,6 +15,7 @@ import appModel from 'models/app';
 import Media from 'models/image';
 import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
@@ -95,6 +96,7 @@ const HomeController = () => {
   const { navigate } = useContext(NavContext);
   const alert = useAlert();
   const promptImageSource = usePromptImageSource();
+  const { isScrolled } = useHeaderScroll();
 
   const navToReport = async () => {
     navigate(`${match.url}/report`);
@@ -206,6 +208,7 @@ const HomeController = () => {
         rightSlot={finishButton}
         defaultHref="/home/surveys"
         subheader={isTraining && <TrainingModeBanner />}
+        className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
       <Main
         match={match}

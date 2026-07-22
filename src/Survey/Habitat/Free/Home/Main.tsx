@@ -3,14 +3,16 @@ import { observer } from 'mobx-react';
 import { addCircleOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import { Main, InfoMessage, Button, useAlert, Block } from '@flumens';
-import { IonIcon, IonList, NavContext } from '@ionic/react';
+import { IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import config from 'common/config';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import appModel, { SeedMix } from 'common/models/app';
 import Sample from 'models/sample';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import InfoButtonPopover from 'Components/InfoButton';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
+import StarsBackground from 'Survey/common/Components/StarsBackground';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import {
   CUSTOM_SEEDMIX_GROUP_VALUE,
@@ -36,6 +38,7 @@ type Props = {
 const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
   const alert = useAlert();
   const { navigate } = useContext(NavContext);
+  const mainProps = useHeaderScroll();
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
@@ -65,85 +68,93 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
   };
 
   return (
-    <Main className="[--padding-bottom:20px]">
-      <IonList lines="full">
-        <div className="rounded-list my-2">
-          {isDisabled && <UploadedRecordInfoMessage />}
-        </div>
+    <Main {...mainProps} className="[--padding-bottom:100px]">
+      <StarsBackground>
+        {isDisabled && <UploadedRecordInfoMessage />}
 
-        <h3 className="list-title">
-          Seed mix
-          <InfoButtonPopover>
-            <div className="font-light">
-              Has your survey area been seeded? If yes, you will have the option
-              to choose your seed supplier from the drop down menu, and then
-              choose the name of your seed mix. This will allow the app to
-              compare the plant species you sowed to the plants you see in the
-              survey.
+        {!isDisabled && (
+          <div className="px-3">
+            <b>Free Sampling</b>
+            <div>
+              Explore freely and record any plants you find. There's no set
+              route or quadrats - just record what you see.
             </div>
-          </InfoButtonPopover>
-        </h3>
-        <div className="rounded-list">
-          <Block
-            block={seededAttr}
-            {...recordAttrs}
-            onChange={(value: any) => {
-              sample.data[seededAttr.id] = value;
-              delete sample.data[seedmixGroupAttr.id];
-              delete sample.data[SEEDMIX_ATTR_ID];
-              delete sample.data[customSeedmixAttr.id];
-              return null;
-            }}
-          />
-          <Block
-            block={seedmixGroupAttr}
-            {...recordAttrs}
-            onChange={(value: any) => {
-              sample.data[seedmixGroupAttr.id] = value;
-              delete sample.data[SEEDMIX_ATTR_ID];
-              delete sample.data[customSeedmixAttr.id];
-              return null;
-            }}
-          />
-          <Block
-            block={seedmixAttr}
-            {...recordAttrs}
-            onChange={(value: any) => {
-              sample.data[SEEDMIX_ATTR_ID] = value;
-              delete sample.data[customSeedmixAttr.id];
-
-              const isCustom =
-                sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE;
-              if (isCustom) {
-                const byId = ({ id }: SeedMix): boolean => id === value;
-                const selectedSeedmix = appModel.data.seedmixes.find(byId);
-
-                sample.data[SEEDMIX_ATTR_ID] = selectedSeedmix?.name;
-
-                const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
-                const species = (selectedSeedmix?.species || [])
-                  .map(getWarehouseId)
-                  .join(',');
-                sample.data[customSeedmixAttr.id] = species;
-              }
-            }}
-          />
-          {sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE && (
-            <InfoMessage inline>
-              You can define your own seedmixes{' '}
-              <Link to="/settings/seedmixes">here</Link>.
-            </InfoMessage>
-          )}
-        </div>
-
-        <InfoMessage color="tertiary" className="mt-2">
-          Why ask about seed mix?
-          <div>
-            It helps us interpret your plant records and show you which species
-            may be expected to appear.
           </div>
-        </InfoMessage>
-      </IonList>
+        )}
+      </StarsBackground>
+
+      <div className="list">
+        <div className="card top">
+          <div className="list-title">
+            Seed mix
+            <InfoButtonPopover>
+              <div className="font-light">
+                <b>Why ask about seed mix?</b>
+                <div>
+                  It helps us interpret your plant records and show you which
+                  species may be expected to appear.
+                </div>
+              </div>
+            </InfoButtonPopover>
+          </div>
+
+          <div className="rounded-list">
+            <Block
+              block={seededAttr}
+              {...recordAttrs}
+              onChange={(value: any) => {
+                sample.data[seededAttr.id] = value;
+                delete sample.data[seedmixGroupAttr.id];
+                delete sample.data[SEEDMIX_ATTR_ID];
+                delete sample.data[customSeedmixAttr.id];
+                return null;
+              }}
+            />
+            <Block
+              block={seedmixGroupAttr}
+              {...recordAttrs}
+              onChange={(value: any) => {
+                sample.data[seedmixGroupAttr.id] = value;
+                delete sample.data[SEEDMIX_ATTR_ID];
+                delete sample.data[customSeedmixAttr.id];
+                return null;
+              }}
+            />
+            <Block
+              block={seedmixAttr}
+              {...recordAttrs}
+              onChange={(value: any) => {
+                sample.data[SEEDMIX_ATTR_ID] = value;
+                delete sample.data[customSeedmixAttr.id];
+
+                const isCustom =
+                  sample.data[seedmixGroupAttr.id] ===
+                  CUSTOM_SEEDMIX_GROUP_VALUE;
+                if (isCustom) {
+                  const byId = ({ id }: SeedMix): boolean => id === value;
+                  const selectedSeedmix = appModel.data.seedmixes.find(byId);
+
+                  sample.data[SEEDMIX_ATTR_ID] = selectedSeedmix?.name;
+
+                  const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
+                  const species = (selectedSeedmix?.species || [])
+                    .map(getWarehouseId)
+                    .join(',');
+                  sample.data[customSeedmixAttr.id] = species;
+                }
+              }}
+            />
+
+            {sample.data[seedmixGroupAttr.id] ===
+              CUSTOM_SEEDMIX_GROUP_VALUE && (
+              <InfoMessage inline>
+                You can define your own seedmixes{' '}
+                <Link to="/settings/seedmixes">here</Link>.
+              </InfoMessage>
+            )}
+          </div>
+        </div>
+      </div>
 
       {!isDisabled ? (
         <Button

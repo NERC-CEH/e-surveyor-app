@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { Header, Main, Page } from 'common/flumens';
 import soilIcon from 'common/images/soil.svg';
+import useHeaderScroll from 'helpers/useHeaderScroll';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import SurveyCard from 'Survey/common/Components/SurveyCard';
 
 const SoilHome = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, ...mainProps } = useHeaderScroll();
 
   return (
     <Page id="soil-home" className="theme-soil">
@@ -13,13 +13,7 @@ const SoilHome = () => {
         title="Soil"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        fullscreen
-        scrollEvents
-        onIonScroll={event => {
-          setIsScrolled(event.detail.scrollTop > 70);
-        }}
-      >
+      <Main {...mainProps} className="[--padding-bottom:100px]">
         <StarsBackground>
           Assess below-ground condition and resilience.
         </StarsBackground>
