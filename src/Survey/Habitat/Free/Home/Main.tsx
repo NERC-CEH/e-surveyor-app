@@ -20,7 +20,7 @@ import {
   SEEDMIX_ATTR_ID,
   seedmixAttr,
 } from 'Survey/common/config';
-import { seededAttr, seedmixGroupAttr } from '../config';
+import { seededAttr, seedmixGroupAttr, yearSownAttr } from '../config';
 
 const { positiveThreshold } = config;
 
@@ -86,7 +86,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
       <div className="list">
         <div className="card top">
           <div className="list-title">
-            Seed mix
+            Seed mix (optional)
             <InfoButtonPopover>
               <div className="font-light">
                 <b>Why ask about seed mix?</b>
@@ -107,6 +107,7 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
                 delete sample.data[seedmixGroupAttr.id];
                 delete sample.data[SEEDMIX_ATTR_ID];
                 delete sample.data[customSeedmixAttr.id];
+                delete sample.data[yearSownAttr.id];
                 return null;
               }}
             />
@@ -152,6 +153,8 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
                 <Link to="/settings/seedmixes">here</Link>.
               </InfoMessage>
             )}
+
+            <Block block={yearSownAttr} {...recordAttrs} />
           </div>
         </div>
       </div>

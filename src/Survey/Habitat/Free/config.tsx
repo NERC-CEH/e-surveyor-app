@@ -1,5 +1,6 @@
-import { leafOutline } from 'ionicons/icons';
+import { calendarOutline, leafOutline } from 'ionicons/icons';
 import { z } from 'zod';
+import { IonIcon } from '@ionic/react';
 import config from 'common/config';
 import {
   dateFormatISO,
@@ -12,8 +13,10 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import {
   attachClassifierResults,
+  SEEDED_YES_VALUE,
   Survey,
   locationSchema,
+  seededAttr,
   seedmixGroupAttr,
   SEEDMIX_ATTR_ID,
 } from 'Survey/common/config';
@@ -23,6 +26,21 @@ export {
   SEEDED_YES_VALUE,
   seededAttr,
 } from 'Survey/common/config';
+
+const currentYear = new Date().getFullYear();
+const last8Years = Array.from({ length: 8 }, (_, index) => ({
+  dataName: String(currentYear - index),
+  title: String(currentYear - index),
+}));
+export const yearSownAttr = {
+  id: 'smpAttr:-10',
+  type: 'choiceInput',
+  title: 'Year sown',
+  appearance: 'button',
+  prefix: (<IonIcon src={calendarOutline} className="size-6" />) as any,
+  choices: last8Years,
+  visibility: [{ target: seededAttr.id, op: 'eq', value: SEEDED_YES_VALUE }],
+} as const;
 
 const { possibleThreshold } = config;
 
