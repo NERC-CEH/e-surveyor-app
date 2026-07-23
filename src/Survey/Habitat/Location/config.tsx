@@ -23,21 +23,21 @@ export const siteNameAttr = {
 } as const satisfies TextInputConf;
 
 export const siteLengthAttr = {
-  id: 'smpAttr:length',
+  id: 'locAttr:439',
   type: 'numberInput',
   placeholder: 'Length',
   suffix: 'm',
 } as const satisfies NumberInputConf;
 
 export const siteWidthAttr = {
-  id: 'smpAttr:width',
+  id: 'locAttr:440',
   type: 'numberInput',
   placeholder: 'Width',
   suffix: 'm',
 } as const satisfies NumberInputConf;
 
 export const siteSizeAttr = {
-  id: 'smpAttr:size',
+  id: 'locAttr:441',
   type: 'numberInput',
   placeholder: 'Area size',
   suffix: 'ha',
@@ -46,26 +46,26 @@ export const siteSizeAttr = {
 } as const satisfies NumberInputConf;
 
 export const activitiesAttr = {
-  id: 'smpAttr:activities',
+  id: 'locAttr:442',
   type: 'choiceInput',
   multiple: true,
   choices: [
-    { title: 'Reseeded', dataName: '-1' },
-    { title: 'Fertilised', dataName: '-2' },
-    { title: 'Mown / cut', dataName: '-3' },
-    { title: 'Herbicide / Pesticide', dataName: '-4' },
-    { title: 'Scrub clearance', dataName: '-5' },
-    { title: 'No known management', dataName: '-6' },
-    { title: 'Unknown', dataName: '-7' },
+    { title: 'Reseeded', dataName: '24806' },
+    { title: 'Fertilised', dataName: '24807' },
+    { title: 'Mown / cut', dataName: '24808' },
+    { title: 'Herbicide / Pesticide', dataName: '24809' },
+    { title: 'Scrub clearance', dataName: '24810' },
+    { title: 'No known management', dataName: '24811' },
+    { title: 'Unknown', dataName: '24812' },
   ],
 } as const satisfies ChoiceInputConf;
 
 export const habitatAttr = {
-  id: 'smpAttr:habitat',
+  id: 'locAttr:443',
   type: 'choiceInput',
-  choices: levelThreeHabitats.map(({ name, id }) => ({
+  choices: levelThreeHabitats.map(({ name, warehouseId }) => ({
     title: name,
-    dataName: id,
+    dataName: warehouseId,
   })),
 } as const satisfies ChoiceInputConf;
 

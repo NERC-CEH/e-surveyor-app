@@ -26,7 +26,7 @@ const LocationDetails = () => {
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
-  const isValueValid = !!location.data[activitiesAttr.id];
+  const isValid = !!location.data[activitiesAttr.id];
   const showHectaresInput = location.data[siteSizeAttr.id] !== undefined;
 
   const recordAttrs = {
@@ -109,7 +109,9 @@ const LocationDetails = () => {
         </div>
       </Main>
 
-      {isValueValid && <Footer link={`${baseUrl}/habitat`} />}
+      {(location.isDisabled || isValid) && (
+        <Footer link={`${baseUrl}/habitat`} />
+      )}
     </Page>
   );
 };

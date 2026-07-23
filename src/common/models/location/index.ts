@@ -15,6 +15,8 @@ import { locationsStore } from '../store';
 import userModel from '../user';
 import { predictUkhabHabitats as predictUKHabHabitats } from './services/habitat';
 
+export { locationDtoSchema as dtoSchema, LocationType } from '@flumens';
+
 type Data = LocationData;
 type Metadata = LocationMetadata & {
   habitatSuggestions?: HabitatSuggestion[];

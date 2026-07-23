@@ -23,11 +23,10 @@ const LocationHabitat = () => {
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
-  const hasHabitatAndPhoto =
-    !!location.data[habitatAttr.id] && !!location.media.length;
+  const isValid = !!location.data[habitatAttr.id] && !!location.media.length;
 
   const selectHabitat = (suggestion: Habitat) => {
-    location.data[habitatAttr.id] = suggestion.id;
+    location.data[habitatAttr.id] = suggestion.warehouseId;
   };
 
   const manualSelection = () => {
@@ -57,7 +56,7 @@ const LocationHabitat = () => {
         )}
       </Main>
 
-      {hasHabitatAndPhoto && <Footer link={baseUrl} />}
+      {(location.isDisabled || isValid) && <Footer link={baseUrl} />}
     </Page>
   );
 };

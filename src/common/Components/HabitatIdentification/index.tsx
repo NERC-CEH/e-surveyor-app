@@ -39,7 +39,8 @@ const HabitatIdentification = ({
       s => s.code === h.id
     );
 
-    if (!suggestion && selectedHabitat === h.id) return { ...h, score: 1 };
+    if (!suggestion && selectedHabitat === h.warehouseId)
+      return { ...h, score: 1 };
 
     return suggestion ? { ...h, score: suggestion.confidence } : null;
   };
@@ -79,13 +80,13 @@ const HabitatIdentification = ({
   };
 
   const getSuggestionItem = (suggestion: HabitatWithScore) => {
-    const inputId = `habitat-suggestion-${location.cid}-${suggestion.id}`;
+    const inputId = `habitat-suggestion-${location.cid}-${suggestion.warehouseId}`;
 
-    const isSelected = currentCode === suggestion.id;
+    const isSelected = currentCode === suggestion.warehouseId;
 
     return (
       <label
-        key={suggestion.id}
+        key={suggestion.warehouseId}
         htmlFor={inputId}
         className={clsx(
           'block overflow-hidden rounded-md border ',
@@ -112,7 +113,7 @@ const HabitatIdentification = ({
                 id={inputId}
                 type="radio"
                 name={`habitat-suggestion-${location.cid}`}
-                value={suggestion.id}
+                value={suggestion.warehouseId}
                 checked={isSelected}
                 onChange={() =>
                   !location.isDisabled && onSuggestionChange(suggestion)

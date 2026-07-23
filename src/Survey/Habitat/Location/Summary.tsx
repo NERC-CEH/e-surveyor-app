@@ -55,17 +55,8 @@ const LocationSummary = () => {
   };
 
   const { data } = location;
-  const dataRecord = data as unknown as Record<string, unknown>;
-
-  const latitude = Number(dataRecord.latitude);
-  const longitude = Number(dataRecord.longitude);
 
   const siteName = data[siteNameAttr.id] || 'Not provided';
-
-  const coordinates =
-    Number.isFinite(latitude) && Number.isFinite(longitude)
-      ? `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
-      : 'Not available';
 
   const areaValue = data[siteSizeAttr.id];
   const lengthValue = data[siteLengthAttr.id];
@@ -121,7 +112,7 @@ const LocationSummary = () => {
 
         <div className="mx-3 -mt-4 rounded-lg bg-white p-4 shadow-xl">
           <SummaryRow label="Site name" value={siteName} />
-          <SummaryRow label="Site location coords" value={coordinates} />
+          <SummaryRow label="Site location coords" value={data.centroidSref} />
           <SummaryRow
             label="Site area size or length/width"
             value={areaOrDimensions}

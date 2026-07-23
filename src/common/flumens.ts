@@ -19,6 +19,7 @@ export {
   type Data as LocationData,
   type Metadata as LocationMetadata,
   type Options as LocationOptions,
+  dtoSchema as locationDtoSchema,
   LocationType,
 } from '@flumens/models/dist/Indicia/Location';
 export {

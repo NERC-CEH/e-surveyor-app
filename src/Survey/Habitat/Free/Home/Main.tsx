@@ -86,7 +86,7 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
         </div>
 
         <div className="card">
-          <div className="list-title justify-between">
+          <div className="list-title justify-between pb-2">
             Seed mix (optional)
             <InfoButtonPopover className="px-2">
               <div className="font-light">

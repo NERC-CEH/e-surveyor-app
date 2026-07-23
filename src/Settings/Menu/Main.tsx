@@ -12,7 +12,7 @@ import {
 } from 'ionicons/icons';
 import { Main, useAlert, Toggle, InfoMessage } from '@flumens';
 import { isPlatform } from '@ionic/core';
-import { IonIcon, IonList, IonItem, IonLabel } from '@ionic/react';
+import { IonIcon, IonItem, IonLabel } from '@ionic/react';
 import config from 'common/config';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import seedMixIcon from 'common/images/seeds.svg';
@@ -162,7 +162,7 @@ const Menu = ({
 
   return (
     <Main className="app-settings">
-      <IonList lines="full">
+      <div className="flex flex-col gap-4 p-3">
         <h3 className="list-title">Surveying</h3>
         <div className="rounded-list">
           <Toggle
@@ -266,7 +266,7 @@ const Menu = ({
             </div>
           </>
         )}
-      </IonList>
+      </div>
 
       <p className="m-0 mx-auto w-full max-w-2xl p-2.5 text-right opacity-60">{`v${config.version} (${config.build})`}</p>
     </Main>

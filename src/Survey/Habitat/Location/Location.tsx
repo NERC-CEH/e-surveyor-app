@@ -34,7 +34,7 @@ const LocationLocation = () => {
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
-  const isValueValid = !!location.data.name && !!location.data.centroidSref;
+  const isValid = !!location.data.name && !!location.data.centroidSref;
 
   const recordAttrs = {
     record: location.data,
@@ -129,7 +129,9 @@ const LocationLocation = () => {
         </div>
       </Main>
 
-      {isValueValid && <Footer link={`${baseUrl}/details`} />}
+      {(location.isDisabled || isValid) && (
+        <Footer link={`${baseUrl}/details`} />
+      )}
     </Page>
   );
 };
