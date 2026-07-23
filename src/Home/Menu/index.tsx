@@ -24,16 +24,8 @@ const useConfirmationDialog = () => {
         </T>
       ),
       buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-        },
-        {
-          text: 'Logout',
-          cssClass: 'primary',
-          handler: () => callback(),
-        },
+        { text: 'Cancel', role: 'cancel' },
+        { text: 'Logout', handler: () => callback() },
       ],
     });
   };

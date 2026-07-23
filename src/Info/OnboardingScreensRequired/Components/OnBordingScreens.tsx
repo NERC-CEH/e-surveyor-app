@@ -178,9 +178,9 @@ const OnboardingScreens = ({ appModel }: Props) => {
                 </p>
 
                 <Button
-                  color="secondary"
+                  color="primary"
                   onPress={exit}
-                  className="mx-auto mt-7 bg-secondary-600"
+                  className="mx-auto mt-7 bg-primary-600"
                   suffix={<IonIcon className="size-5" icon={arrowForward} />}
                 >
                   Let's start!

@@ -2,18 +2,12 @@ import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { IonPage, NavContext } from '@ionic/react';
 import MainLocations from 'common/Components/MapList';
-import {
-  Button,
-  device,
-  Header,
-  useLoader,
-  useSample,
-  useToast,
-} from 'common/flumens';
+import { device, Header, useLoader, useSample, useToast } from 'common/flumens';
 import Sample from 'common/models/sample';
 import { useUserStatusCheck } from 'common/models/user';
 import locations from 'models/collections/locations';
 import Location from 'models/location';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 
 const LocationsController = () => {
   const { navigate, goBack } = useContext(NavContext);
@@ -32,13 +26,7 @@ const LocationsController = () => {
   const onCreateLocation = () => navigate('/survey/habitat/location');
 
   const addButton = !isPartOfSurvey && (
-    <Button
-      onPress={onCreateLocation}
-      color="secondary"
-      className="max-w-28 whitespace-nowrap px-4 py-1 text-sm"
-    >
-      Add
-    </Button>
+    <HeaderButton onClick={onCreateLocation}>Add</HeaderButton>
   );
 
   const onSelectLocation = (loc?: Location) => {

@@ -28,16 +28,8 @@ const useCancelConfirmation = () => {
         header: 'Discard seedmix changes',
         message: 'Are you sure you want to discard the changes?',
         buttons: [
-          {
-            text: 'Cancel',
-            cssClass: 'secondary',
-            handler: () => resolve(false),
-          },
-          {
-            text: 'Discard',
-            cssClass: 'primary',
-            handler: () => resolve(true),
-          },
+          { text: 'Cancel', handler: () => resolve(false) },
+          { text: 'Discard', handler: () => resolve(true) },
         ],
       });
     });
@@ -52,16 +44,8 @@ const useDeleteConfirmation = () => {
         header: 'Delete species',
         message: 'Are you sure you want to delete this species?',
         buttons: [
-          {
-            text: 'Cancel',
-            cssClass: 'secondary',
-            handler: () => resolve(false),
-          },
-          {
-            text: 'Delete',
-            cssClass: 'primary',
-            handler: () => resolve(true),
-          },
+          { text: 'Cancel', handler: () => resolve(false) },
+          { text: 'Delete', handler: () => resolve(true) },
         ],
       });
     });

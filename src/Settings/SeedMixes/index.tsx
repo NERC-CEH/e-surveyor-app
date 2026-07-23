@@ -22,16 +22,8 @@ const useDeleteConfirmation = () => {
         header: 'Delete seedmix',
         message: 'Are you sure you want to delete this seedmix?',
         buttons: [
-          {
-            text: 'Cancel',
-            cssClass: 'secondary',
-            handler: () => resolve(false),
-          },
-          {
-            text: 'Delete',
-            cssClass: 'primary',
-            handler: () => resolve(true),
-          },
+          { text: 'Cancel', handler: () => resolve(false) },
+          { text: 'Delete', handler: () => resolve(true) },
         ],
       });
     });
