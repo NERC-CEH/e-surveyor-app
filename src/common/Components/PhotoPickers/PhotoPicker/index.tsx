@@ -90,9 +90,9 @@ const AppPhotoPicker = ({
 
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled = (model as any).parent && model.isDisabled;
+  const isDisabled =
+    model instanceof Occurrence ? model.parent?.isUploaded : model.isUploaded;
   const maxPicsReached = !!maxImages && model.media.length >= maxImages;
-
   // eslint-disable-next-line react/no-unstable-nested-components
   const ImageWithCropping = ({
     media,

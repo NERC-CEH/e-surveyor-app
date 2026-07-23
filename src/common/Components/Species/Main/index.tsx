@@ -119,7 +119,7 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
       color="secondary"
       preventDefault
       className={clsx(
-        'mx-auto my-3 w-fit bg-secondary-600',
+        'px-2 py-1 text-sm mx-auto my-3 w-fit bg-secondary-600',
         isIdentifying ? 'opacity-30' : ''
       )}
     >

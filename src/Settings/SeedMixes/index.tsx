@@ -101,9 +101,9 @@ const Seedmixes = () => {
 
       <Main>
         <Button
-          color="secondary"
+          color="primary"
           onPress={addNewSeedmix}
-          className="bg-secondary-600 mx-auto my-5"
+          className="bg-primary-600 mx-auto my-5"
         >
           Add new
         </Button>

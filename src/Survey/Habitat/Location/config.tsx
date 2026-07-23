@@ -96,6 +96,7 @@ const survey = {
   create() {
     const location = new Location({
       data: {
+        surveyId: '626', // Hardcoded, so that we bypass any site-wide mandatory location attributes. Discussed on 23/07/2026 with John.
         locationTypeId: LocationType.Site,
         name: '',
         boundaryGeom: '',

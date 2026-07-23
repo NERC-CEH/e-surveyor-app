@@ -168,7 +168,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
     <IonItemSliding className="survey-list-item" {...contextMenuProps}>
       <IonItem onClick={openItem} detail={false}>
         <div className="list-avatar">
-          <IonIcon icon={survey.icon} className="bg-primary-50/80 text-3xl" />
+          <IonIcon icon={survey.icon} className="text-3xl" />
         </div>
         <IonLabel>{getSampleInfo()}</IonLabel>
         <OnlineStatus

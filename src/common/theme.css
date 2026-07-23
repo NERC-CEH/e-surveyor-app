@@ -11,33 +11,34 @@
 @import '@flumens/ionic/dist/themes/rounded.css';
 
 @theme {
-  /* https://www.shadecolr.com/#colors=Y29sb3I6OTkuNzgyNjA4Njk1NjUyMTYsMzkuMzE2MjM5MzE2MjM5MzEsNDUuODgyMzUyOTQxMTc2NDd8c3RlcC11cDo5fHN0ZXAtZG93bjoxMnxodWUtc2hpZnQ6MHxiYXNlLXN0b3A6NnxuYW1lOmdyZWVufGxvY2tlZDow&active=color-1&v=2 */
-  --color-primary: oklch(65.314% 0.1371 103.69);
-  --color-primary-50: oklch(99.863% 0.00656 106.52);
-  --color-primary-100: oklch(98.778% 0.03517 105.29);
-  --color-primary-200: oklch(96.979% 0.08855 104.48);
-  --color-primary-300: oklch(95.343% 0.13623 105.11);
-  --color-primary-400: oklch(93.765% 0.1704 104.91);
-  --color-primary-500: oklch(92.61% 0.19016 104.69);
-  --color-primary-600: oklch(83.418% 0.17581 104.21);
-  --color-primary-700: oklch(65.314% 0.1371 103.69);
-  --color-primary-800: oklch(45.973% 0.09635 104.26);
-  --color-primary-900: oklch(24.231% 0.05019 106.17);
-  --color-primary-950: oklch(10.561% 0.0221 101.83);
+  /* For primary actions */
+  /* https://www.shadecolr.com/#colors=Y29sb3I6MzcuMDIxMjc2NTk1NzQ0NjcsMTAwLDUzLjkyMTU2ODYyNzQ1MDk4fHN0ZXAtdXA6MTAuMXxzdGVwLWRvd246MTEuOHxodWUtc2hpZnQ6MHxiYXNlLXN0b3A6NXxuYW1lOm9yYW5nZXxsb2NrZWQ6MA%3D%3D&active=color-1&v=2 */
+  --color-primary: oklch(79.304% 0.16846 69.901);
+  --color-primary-50: oklch(99.723% 0.00285 84.559);
+  --color-primary-100: oklch(97.097% 0.02649 80.254);
+  --color-primary-200: oklch(92.066% 0.07185 79.017);
+  --color-primary-300: oklch(87.335% 0.1147 77.943);
+  --color-primary-400: oklch(83.194% 0.1484 75.659);
+  --color-primary-500: oklch(79.304% 0.16846 69.901);
+  --color-primary-600: oklch(68.721% 0.15142 67.419);
+  --color-primary-700: oklch(53.992% 0.11862 67.84);
+  --color-primary-800: oklch(38.232% 0.0824 70.849);
+  --color-primary-900: oklch(20.756% 0.04304 79.589);
+  --color-primary-950: oklch(9.6644% 0.02005 99.316);
 
-  /* https://www.shadecolr.com/#colors=Y29sb3I6MzcuMDIxMjc2NTk1NzQ0NjcsMTAwLDUzLjkyMTU2ODYyNzQ1MDk4fHN0ZXAtdXA6OXxzdGVwLWRvd246MTF8aHVlLXNoaWZ0OjB8YmFzZS1zdG9wOjV8bmFtZTpvcmFuZ2V8bG9ja2VkOjA%3D&active=color-1&v=2  --color-secondary: oklch(79.304% 0.16846 69.901); */
-  --color-secondary: oklch(55.997% 0.12313 67.715);
-  --color-secondary-50: oklch(97.123% 0.02534 78.921);
-  --color-secondary-100: oklch(94.821% 0.04605 78.85);
-  --color-secondary-200: oklch(90.584% 0.08671 79.369);
-  --color-secondary-300: oklch(86.426% 0.12293 77.714);
-  --color-secondary-400: oklch(82.777% 0.15155 75.361);
-  --color-secondary-500: oklch(79.304% 0.16846 69.901);
-  --color-secondary-600: oklch(69.578% 0.15367 67.085);
-  --color-secondary-700: oklch(55.997% 0.12313 67.715);
-  --color-secondary-800: oklch(41.732% 0.09036 70.081);
-  --color-secondary-900: oklch(25.868% 0.05471 74.441);
-  --color-secondary-950: oklch(17.141% 0.03522 83.376);
+  /* For secondary actions and module theming */
+  --color-secondary: var(--color-neutral);
+  --color-secondary-50: var(--color-neutral-50);
+  --color-secondary-100: var(--color-neutral-100);
+  --color-secondary-200: var(--color-neutral-200);
+  --color-secondary-300: var(--color-neutral-300);
+  --color-secondary-400: var(--color-neutral-400);
+  --color-secondary-500: var(--color-neutral-500);
+  --color-secondary-600: var(--color-neutral-600);
+  --color-secondary-700: var(--color-neutral-700);
+  --color-secondary-800: var(--color-neutral-800);
+  --color-secondary-900: var(--color-neutral-900);
+  --color-secondary-950: var(--color-neutral-950);
 
   /* https://www.shadecolr.com/#colors=Y29sb3I6MjAzLjg5ODMwNTA4NDc0NTc3LDEwMCw0Ni4yNzQ1MDk4MDM5MjE1N3xzdGVwLXVwOjl8c3RlcC1kb3duOjEyfGh1ZS1zaGlmdDowfGJhc2Utc3RvcDo2fG5hbWU6c2t5fGxvY2tlZDow&active=color-1&v=2 */
   --color-tertiary: oklch(63.276% 0.17242 248.5);
@@ -94,9 +95,100 @@
   --color-warning-800: var(--color-secondary-800);
   --color-warning-900: var(--color-secondary-900);
   --color-warning-950: var(--color-secondary-950);
+
+  /* Habitat theme */
+  --color-habitat-50: var(--color-lime-50);
+  --color-habitat-100: var(--color-lime-100);
+  --color-habitat-200: var(--color-lime-200);
+  --color-habitat-300: var(--color-lime-300);
+  --color-habitat-400: var(--color-lime-400);
+  --color-habitat-500: var(--color-lime-500);
+  --color-habitat-600: var(--color-lime-600);
+  --color-habitat-700: var(--color-lime-700);
+  --color-habitat-800: var(--color-lime-800);
+  --color-habitat-900: var(--color-lime-900);
+  --color-habitat-950: var(--color-lime-950);
+  --color-habitat: var(--color-lime-600);
+
+  /* Ecosystem theme */
+  --color-ecosystem-50: var(--color-sky-50);
+  --color-ecosystem-100: var(--color-sky-100);
+  --color-ecosystem-200: var(--color-sky-200);
+  --color-ecosystem-300: var(--color-sky-300);
+  --color-ecosystem-400: var(--color-sky-400);
+  --color-ecosystem-500: var(--color-sky-500);
+  --color-ecosystem-600: var(--color-sky-600);
+  --color-ecosystem-700: var(--color-sky-700);
+  --color-ecosystem-800: var(--color-sky-800);
+  --color-ecosystem-900: var(--color-sky-900);
+  --color-ecosystem-950: var(--color-sky-950);
+  --color-ecosystem: var(--color-sky-600);
+
+  /* Soil theme */
+  --color-soil-50: var(--color-amber-50);
+  --color-soil-100: var(--color-amber-100);
+  --color-soil-200: var(--color-amber-200);
+  --color-soil-300: var(--color-amber-300);
+  --color-soil-400: var(--color-amber-400);
+  --color-soil-500: var(--color-amber-500);
+  --color-soil-600: var(--color-amber-600);
+  --color-soil-700: var(--color-amber-700);
+  --color-soil-800: var(--color-amber-800);
+  --color-soil-900: var(--color-amber-900);
+  --color-soil-950: var(--color-amber-950);
+  --color-soil: var(--color-amber-700);
+}
+
+.theme-habitat {
+  --color-secondary-50: var(--color-habitat-50);
+  --color-secondary-100: var(--color-habitat-100);
+  --color-secondary-200: var(--color-habitat-200);
+  --color-secondary-300: var(--color-habitat-300);
+  --color-secondary-400: var(--color-habitat-400);
+  --color-secondary-500: var(--color-habitat-500);
+  --color-secondary-600: var(--color-habitat-600);
+  --color-secondary-700: var(--color-habitat-700);
+  --color-secondary-800: var(--color-habitat-800);
+  --color-secondary-900: var(--color-habitat-900);
+  --color-secondary-950: var(--color-habitat-950);
+  --color-secondary: var(--color-habitat);
+  --form-value-color: var(--color-secondary-900);
+}
+
+.theme-ecosystem {
+  --color-secondary-50: var(--color-ecosystem-50);
+  --color-secondary-100: var(--color-ecosystem-100);
+  --color-secondary-200: var(--color-ecosystem-200);
+  --color-secondary-300: var(--color-ecosystem-300);
+  --color-secondary-400: var(--color-ecosystem-400);
+  --color-secondary-500: var(--color-ecosystem-500);
+  --color-secondary-600: var(--color-ecosystem-600);
+  --color-secondary-700: var(--color-ecosystem-700);
+  --color-secondary-800: var(--color-ecosystem-800);
+  --color-secondary-900: var(--color-ecosystem-900);
+  --color-secondary-950: var(--color-ecosystem-950);
+  --color-secondary: var(--color-ecosystem);
+  --form-value-color: var(--color-secondary-900);
+}
+
+.theme-soil {
+  --color-secondary-50: var(--color-soil-50);
+  --color-secondary-100: var(--color-soil-100);
+  --color-secondary-200: var(--color-soil-200);
+  --color-secondary-300: var(--color-soil-300);
+  --color-secondary-400: var(--color-soil-400);
+  --color-secondary-500: var(--color-soil-500);
+  --color-secondary-600: var(--color-soil-600);
+  --color-secondary-700: var(--color-soil-700);
+  --color-secondary-800: var(--color-soil-800);
+  --color-secondary-900: var(--color-soil-900);
+  --color-secondary-950: var(--color-soil-950);
+  --color-secondary: var(--color-soil);
+  --form-value-color: var(--color-secondary-900);
 }
 
 :root {
+  --form-value-color: var(--color-secondary-900);
   --ion-color-primary: var(--color-primary);
   --ion-color-primary-contrast: var(--color-primary-50);
   --ion-color-primary-shade: var(--color-primary-800);
@@ -161,7 +253,6 @@
   --id-possible-color: var(--color-secondary-600);
   --id-rejected-color: var(--color-danger);
 
-  --form-value-color: #090d14;
   --ion-font-family: 'Quicksand';
 }
 
@@ -290,7 +381,7 @@ ion-toolbar.location-input-attr ion-back-button {
 /* Selected radio and checkbox input default theming */
 .radio-input > div > label[data-selected='true'],
 .checkbox-input > div > label[data-selected='true'] {
-  @apply border-primary-800 bg-primary-100/30;
+  @apply border-secondary-800 bg-secondary-100/30;
 }
 
 .list-title {
@@ -300,14 +391,35 @@ ion-toolbar.location-input-attr ion-back-button {
   font-size: 1rem;
 }
 
+/* survey list helper class */
 .list {
   @apply mx-3 flex flex-col gap-5;
 }
-
+/* survey list helper class */
 .list > .card {
-  @apply bg-white rounded-lg p-4 shadow-xl;
+  @apply bg-white rounded-lg px-4 py-3 shadow-xl;
 }
-
+/* survey list helper class */
 .list > .card.top {
   @apply -mt-4;
+}
+
+/* Generic helper class */
+.ion-no-border {
+  --border-style: none;
+}
+
+/* Normalise alert button colours */
+.action-sheet-container button span,
+.alert-button span {
+  color: black;
+}
+
+/* make list dividers theme focused */
+.list-divider {
+  background-color: color-mix(
+    in oklab,
+    var(--color-secondary-700) 10%,
+    transparent
+  );
 }

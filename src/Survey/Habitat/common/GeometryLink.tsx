@@ -24,9 +24,16 @@ type Props = {
   shape?: Polygon | LineString | MultiPolygon;
   link: string;
   className?: string;
+  isDisabled?: boolean;
 };
 
-const GeometryLink = ({ location, shape, link, className }: Props) => {
+const GeometryLink = ({
+  location,
+  shape,
+  link,
+  className,
+  isDisabled,
+}: Props) => {
   const { navigate } = useContext(NavContext);
   const [mapRef, setMapRef] = useState<MapRef>();
 
@@ -67,7 +74,7 @@ const GeometryLink = ({ location, shape, link, className }: Props) => {
   return (
     <div
       className={clsx('map-wrapper h-60 w-full', className)}
-      onClick={() => navigate(link)}
+      onClick={() => !isDisabled && navigate(link)}
     >
       <MapContainer
         onReady={setMapRef as any}

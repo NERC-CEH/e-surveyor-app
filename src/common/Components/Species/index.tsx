@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import clsx from 'clsx';
 import { Page, Header, useToast, device } from '@flumens';
 import Sample from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
@@ -31,7 +32,8 @@ const EditSpecies = ({ subSample, subSubSample }: Props) => {
   const identifyButton = !!occ.media.length && (
     <HeaderButton
       onClick={identifySpecies}
-      className={isIdentifying ? 'opacity-30' : ''}
+      className={clsx('bg-secondary-600', isIdentifying ? 'opacity-30' : '')}
+      color="secondary"
     >
       Reidentify
     </HeaderButton>

@@ -33,7 +33,7 @@ const getDoughnutData = (score: number) => {
     datasets: [
       {
         data: [scorePercent, remainingScorePercent],
-        backgroundColor: [color(), '#f5f5f5'],
+        backgroundColor: [color(), '#e2e2e2'],
         borderWidth: [0, 0],
       },
     ],

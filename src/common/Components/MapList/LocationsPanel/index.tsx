@@ -21,18 +21,16 @@ const DEFAULT_SNAP_POSITION = 0.3;
 const DEFAULT_SNAP_POSITION_IF_NO_CONNECTION = 1;
 
 type Props = {
-  isPartOfSurvey?: boolean;
   centroid: number[];
   selectedLocationId?: string | number;
   onSelectLocation?: (loc?: Location) => void;
   onDeleteLocation?: (loc: Location) => void;
   showEmptyOption?: boolean;
-  pendingLocations: Location[];
+  pendingLocations?: Location[];
   uploadedLocations: Location[];
 };
 
 const LocationsPanel = ({
-  isPartOfSurvey = false,
   centroid,
   onSelectLocation,
   onDeleteLocation,
@@ -43,7 +41,11 @@ const LocationsPanel = ({
 }: Props) => {
   const [isMounted, setIsMounted] = useState(true);
 
-  const [segment, setSegment] = useState<'pending' | 'uploaded'>('pending');
+  const isPartOfSurvey = !pendingLocations;
+
+  const [segment, setSegment] = useState<'pending' | 'uploaded'>(
+    isPartOfSurvey ? 'uploaded' : 'pending'
+  );
 
   const onSegmentClick = (e: any) => setSegment(e.detail.value);
 
@@ -77,7 +79,7 @@ const LocationsPanel = ({
                   </IonLabel>
                 </IonSegmentButton>
 
-                <IonSegmentButton value="all">
+                <IonSegmentButton value="uploaded">
                   <IonLabel className="ion-text-wrap">
                     <T>Uploaded</T>
                   </IonLabel>
@@ -88,7 +90,7 @@ const LocationsPanel = ({
         )}
 
         <IonContent className="[--padding-top:20px]">
-          {segment === 'pending' && (
+          {segment === 'pending' && !isPartOfSurvey && (
             <LocationsList
               centroid={centroid}
               locations={pendingLocations}

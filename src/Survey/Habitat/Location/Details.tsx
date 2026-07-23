@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react';
 import { informationCircle } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { IonIcon, IonToggle } from '@ionic/react';
-import { Block, Header, Main, Page } from 'common/flumens';
+import { IonIcon } from '@ionic/react';
+import { Block, Header, Main, Page, Toggle } from 'common/flumens';
 import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import Footer from 'Survey/Habitat/common/Footer';
@@ -34,8 +34,7 @@ const LocationDetails = () => {
     isDisabled: location.isDisabled,
   };
 
-  const onInputModeToggle = (event: CustomEvent<{ checked: boolean }>) => {
-    const isAreaMode = event.detail.checked;
+  const onInputModeToggle = (isAreaMode: boolean) => {
     delete location.data[siteLengthAttr.id];
     delete location.data[siteWidthAttr.id];
 
@@ -78,17 +77,18 @@ const LocationDetails = () => {
               )}
 
               {showHectaresInput && (
-                <Block block={siteSizeAttr} {...recordAttrs} platform="web" />
+                <div className="mb-2">
+                  <Block block={siteSizeAttr} {...recordAttrs} platform="web" />
+                </div>
               )}
 
-              <div className="mt-3 flex items-center justify-between">
-                <div className="text-sm">Enter area in hectares</div>
-                <IonToggle
-                  checked={showHectaresInput}
-                  disabled={location.isDisabled}
-                  onIonChange={onInputModeToggle}
-                />
-              </div>
+              <Toggle
+                isSelected={showHectaresInput}
+                label="Enter area in hectares"
+                onChange={onInputModeToggle}
+                isDisabled={location.isDisabled}
+                className="[&>div>div]:px-0"
+              />
 
               <div className="opacity-70 text-sm mt-4">
                 <IonIcon icon={informationCircle} className="-mb-0.5 mr-2" />

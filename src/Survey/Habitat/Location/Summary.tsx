@@ -39,6 +39,11 @@ const LocationSummary = () => {
   if (!location) return null;
 
   const onConfirm = async () => {
+    if (location.isDisabled) {
+      navigate('/', 'root');
+      return;
+    }
+
     location.metadata.saved = true;
     await location.save();
     try {
@@ -101,6 +106,10 @@ const LocationSummary = () => {
     habitatAttr.choices.find(choice => choice.dataName === selectedHabitat)
       ?.title || 'Not selected';
 
+  const headerText = location.isDisabled
+    ? 'This location is disabled. You can review the information below.'
+    : 'Do you wish to confirm?';
+
   return (
     <Page id="location-summary" className="theme-habitat">
       <Header
@@ -108,7 +117,7 @@ const LocationSummary = () => {
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
       <Main {...mainProps} className="[--padding-bottom:100px]">
-        <StarsBackground>Do you wish to confirm?</StarsBackground>
+        <StarsBackground>{headerText}</StarsBackground>
 
         <div className="mx-3 -mt-4 rounded-lg bg-white p-4 shadow-xl">
           <SummaryRow label="Site name" value={siteName} />
@@ -122,7 +131,10 @@ const LocationSummary = () => {
         </div>
       </Main>
 
-      <Footer onClick={onConfirm} title="Confirm" />
+      <Footer
+        onClick={onConfirm}
+        title={!location.isDisabled ? 'Confirm' : 'Finish'}
+      />
     </Page>
   );
 };

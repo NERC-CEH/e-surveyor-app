@@ -15,7 +15,6 @@ import {
   attachClassifierResults,
   SEEDED_YES_VALUE,
   Survey,
-  locationSchema,
   seededAttr,
   seedmixGroupAttr,
   SEEDMIX_ATTR_ID,
@@ -131,8 +130,6 @@ const survey = {
       },
     });
 
-    sample.startGPS(loc => updateModelLocation(sample, loc));
-
     return sample;
   },
 
@@ -147,12 +144,12 @@ const survey = {
       sample.samples.forEach(showReportIfScoreHigherThanThreshold);
 
       z.boolean()
-        .refine(val => val, {
-          message: 'Please add some species.',
-        })
+        .refine(val => val, { message: 'Please add some species.' })
         .parse(hasValidSpecies);
 
-      z.object({ location: locationSchema }).parse(data);
+      z.object({
+        locationId: z.string({ error: 'Location is missing' }),
+      }).parse(data);
     } catch (attrError) {
       return attrError;
     }

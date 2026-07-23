@@ -90,10 +90,10 @@ const HabitatIdentification = ({
         className={clsx(
           'block overflow-hidden rounded-md border ',
           isSelected
-            ? 'border-primary-800 bg-primary-100/30'
+            ? 'border-secondary-800 bg-secondary-100/30'
             : 'border-neutral-300 bg-white',
           !onChange &&
-            'first-of-type:border-primary-800 first-of-type:bg-primary-100/30'
+            'first-of-type:border-secondary-800 first-of-type:bg-secondary-100/30'
         )}
       >
         <div className="flex items-center justify-between p-3 gap-3">
@@ -101,7 +101,7 @@ const HabitatIdentification = ({
             <span
               className={clsx(
                 'flex size-5 shrink-0 items-center justify-center rounded border border-neutral-200',
-                isSelected && 'border-primary-800 bg-primary-100'
+                isSelected && 'border-secondary-800 bg-secondary-100'
               )}
             >
               {isSelected && (
@@ -114,7 +114,9 @@ const HabitatIdentification = ({
                 name={`habitat-suggestion-${location.cid}`}
                 value={suggestion.id}
                 checked={isSelected}
-                onChange={() => onSuggestionChange(suggestion)}
+                onChange={() =>
+                  !location.isDisabled && onSuggestionChange(suggestion)
+                }
                 disabled={!onChange}
                 className="sr-only"
               />
@@ -128,7 +130,7 @@ const HabitatIdentification = ({
               <ExpandableText
                 text={suggestion.definition}
                 textClassName="text-sm italic opacity-80 my-0!"
-                buttonClassName="mt-1 text-xs font-semibold text-primary-700 hover:text-primary-800"
+                buttonClassName="mt-1 text-xs font-semibold text-secondary-700 hover:text-secondary-800"
               />
             )}
           </div>
@@ -171,11 +173,11 @@ const HabitatIdentification = ({
             model={location}
             onChange={fetchSuggestions}
             placeholderCount={2}
-            className="[--border-style:none]"
+            className="ion-no-border"
           />
         </div>
 
-        {!!location.media.length && (
+        {!location.isDisabled && !!location.media.length && (
           <Button
             onClick={fetchSuggestions}
             className="py-1 px-2 text-sm mx-auto mt-2"

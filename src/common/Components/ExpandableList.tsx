@@ -21,10 +21,7 @@ const ExpandableList: FC<any> = ({
       {items}
 
       {hidingMoreThanTwo && !showMore && (
-        <IonItem
-          className="[--border-style:none]"
-          onClick={() => setShowMore(true)}
-        >
+        <IonItem className="ion-no-border" onClick={() => setShowMore(true)}>
           <IonLabel className="!m-0 text-center opacity-80">
             <T>Show more</T>
           </IonLabel>
@@ -36,10 +33,7 @@ const ExpandableList: FC<any> = ({
       {showMore && restItems}
 
       {hidingMoreThanTwo && showMore && (
-        <IonItem
-          className="[--border-style:none]"
-          onClick={() => setShowMore(false)}
-        >
+        <IonItem className="ion-no-border" onClick={() => setShowMore(false)}>
           <IonLabel className="!m-0 text-center opacity-80">
             <T>Show less</T>
           </IonLabel>

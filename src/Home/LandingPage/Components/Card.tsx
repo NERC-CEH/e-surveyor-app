@@ -1,49 +1,56 @@
-import { ReactNode } from 'react';
 import clsx from 'clsx';
 import { IonRouterLink } from '@ionic/react';
 
 type Props = {
-  children?: ReactNode;
   image: string;
   title: string;
   description?: string;
   link?: string;
   onClick?: () => void;
   className?: string;
+  theme?: 'light' | 'soil' | 'habitat' | 'ecosystem';
 };
 
 const Card = ({
-  children,
   image,
   title,
   description,
   link,
   onClick,
+  theme = 'light',
   className,
 }: Props) => (
   <IonRouterLink
     routerLink={link}
     className={clsx(
-      'm-1 flex-1 flex flex-col overflow-hidden rounded-md bg-white shadow-md',
+      'm-1 h-full overflow-hidden rounded-md shadow-md bg-white',
+      theme === 'soil' &&
+        'bg-soil-200/10 text-soil-950 border border-soil-800/50',
+      theme === 'habitat' &&
+        'bg-habitat-200/10 text-habitat-950 border border-habitat-800/50',
+      theme === 'ecosystem' &&
+        'bg-ecosystem-200/10 text-ecosystem-950 border border-ecosystem-800/50',
       className
     )}
     onClick={onClick}
   >
-    <div className="relative flex h-full w-full flex-col">
+    <div
+      className={clsx(
+        'flex size-full flex-col',
+        theme === 'light' && 'bg-white',
+        theme === 'soil' && 'bg-soil-200/10 text-soil-950',
+        theme === 'habitat' && 'bg-habitat-200/10 text-habitat-950 ',
+        theme === 'ecosystem' && 'bg-ecosystem-200/10 text-ecosystem-950 '
+      )}
+    >
       <img
         src={image}
-        className="min-h-0 flex-1 w-full object-cover max-h-32! m-1 rounded border border-neutral-200"
+        className="shrink-0 flex-1 w-full object-cover h-3/7! m-1 rounded border border-neutral-200"
       />
 
-      {children}
-
-      <div className="flex w-full flex-col items-center justify-center gap-1 bg-white shrink-0 p-3 pt-0">
-        <h2 className="line-clamp-2 font-bold! text-primary-900">{title}</h2>
-        {!!description && (
-          <h3 className="text-primary-950/70 mt-0! text-sm! m-0!">
-            {description}
-          </h3>
-        )}
+      <div className="flex size-full flex-col items-center justify-evenly gap-1  p-3 pt-0">
+        <div className="line-clamp-2 text-base font-bold!">{title}</div>
+        {!!description && <div className="text-sm! m-0!">{description}</div>}
       </div>
     </div>
   </IonRouterLink>

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { addCircleOutline } from 'ionicons/icons';
-import { Link } from 'react-router-dom';
+import { addCircleOutline, informationCircleOutline } from 'ionicons/icons';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { Main, InfoMessage, Button, useAlert, Block } from '@flumens';
 import { IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
@@ -21,24 +21,21 @@ import {
   seedmixAttr,
 } from 'Survey/common/config';
 import { seededAttr, seedmixGroupAttr, yearSownAttr } from '../config';
+import LocationCard from './LocationCard';
 
 const { positiveThreshold } = config;
-
-type MatchParams = {
-  url: string;
-};
 
 type Props = {
   sample: Sample;
   photoSelect: () => void;
-  match: MatchParams;
-  isDisabled: boolean;
 };
 
-const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
+const HomeMain = ({ sample, photoSelect }: Props) => {
+  const match = useRouteMatch();
   const alert = useAlert();
   const { navigate } = useContext(NavContext);
   const mainProps = useHeaderScroll();
+  const { isDisabled } = sample;
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
@@ -84,10 +81,14 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
       </StarsBackground>
 
       <div className="list">
-        <div className="card top">
-          <div className="list-title">
+        <div className="card top px-0! overflow-hidden">
+          <LocationCard locationId={sample.data.locationId} />
+        </div>
+
+        <div className="card">
+          <div className="list-title justify-between">
             Seed mix (optional)
-            <InfoButtonPopover>
+            <InfoButtonPopover className="px-2">
               <div className="font-light">
                 <b>Why ask about seed mix?</b>
                 <div>
@@ -165,9 +166,9 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           onLongPress={navigateToSearch}
           onPress={photoSelect}
           prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-          className="mx-auto mt-7 mb-3 bg-secondary-600"
+          className="mx-auto mt-7 mb-3"
         >
-          Species
+          Plant Species
         </Button>
       ) : (
         <br />
@@ -187,6 +188,18 @@ const HomeMain = ({ sample, photoSelect, match, isDisabled }: Props) => {
           to list plant species yourself, or tap to take a photo for the AI to
           identify.
         </InfoBackgroundMessage>
+      )}
+
+      {!!sample.samples.length && (
+        <InfoMessage
+          color="secondary"
+          className="mt-7 mx-3"
+          prefix={
+            <IonIcon icon={informationCircleOutline} className="size-6" />
+          }
+        >
+          Keep recording to capture all the plants you see.
+        </InfoMessage>
       )}
     </Main>
   );

@@ -169,6 +169,7 @@ const LandingPage = () => {
                 title="Habitat"
                 description="Recording habitat type, structure and vegetation"
                 link={habitatURL}
+                theme="habitat"
               />
             </SwiperSlide>
             <SwiperSlide>
@@ -177,6 +178,7 @@ const LandingPage = () => {
                 title="Ecosystem Function"
                 description="Habitats, Moths, Carabids and Day-time pollinators"
                 link={ecosystemURL}
+                theme="ecosystem"
               />
             </SwiperSlide>
             <SwiperSlide>
@@ -185,6 +187,7 @@ const LandingPage = () => {
                 title="Soil"
                 description="Assessing below-ground condition and resilience"
                 link={soilURL}
+                theme="soil"
               />
             </SwiperSlide>
           </Swiper>

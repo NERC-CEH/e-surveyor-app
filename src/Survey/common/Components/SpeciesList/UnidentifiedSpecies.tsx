@@ -115,7 +115,11 @@ const UnidentifiedSpeciesEntry = ({
 
   const photo = hasSpeciesPhoto ? (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <img src={hasSpeciesPhoto.getURL()} onClick={showGallery} />
+    <img
+      src={hasSpeciesPhoto.getURL()}
+      onClick={showGallery}
+      className="size-full object-cover"
+    />
   ) : (
     <IonIcon icon={flowerIcon} />
   );

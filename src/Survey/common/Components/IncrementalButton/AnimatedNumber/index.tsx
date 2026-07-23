@@ -30,12 +30,12 @@ const AnimatedNumber = ({ value }: Props) => {
       fromTo={[
         {
           property: 'color',
-          fromValue: 'var(--color-primary-950)',
-          toValue: 'var(--color-primary-800)',
+          fromValue: 'var(--color-secondary-950)',
+          toValue: 'var(--color-secondary-800)',
         },
         {
           property: 'background',
-          fromValue: 'var(--color-primary-100)',
+          fromValue: 'var(--color-secondary-50)',
           toValue: '',
         },
       ]}

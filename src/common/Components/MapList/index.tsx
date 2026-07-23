@@ -13,7 +13,7 @@ import LocationsPanel from './LocationsPanel';
 type Props = {
   isFetchingLocations: boolean;
   showEmptyOption?: boolean;
-  pendingLocations: Location[];
+  pendingLocations?: Location[];
   uploadedLocations: Location[];
   onSelectLocation?: (location?: Location) => void;
   onDeleteLocation?: (location: Location) => void;
@@ -50,7 +50,7 @@ const MainLocations = ({
   const updateMapCenter = ({ viewState }: ViewStateChangeEvent) =>
     setCurrentMapCenter([viewState.latitude, viewState.longitude]);
 
-  const locations = [...pendingLocations, ...uploadedLocations];
+  const locations = [...(pendingLocations || []), ...uploadedLocations];
 
   return (
     <Main className="[--padding-bottom:0] [--padding-top:0]">

@@ -7,14 +7,21 @@ type Props = {
   onClick: any;
   isInvalid?: boolean;
   className?: string;
+  color?: 'primary' | 'secondary';
 };
 
-const HeaderButton = ({ children, onClick, isInvalid, className }: Props) => (
+const HeaderButton = ({
+  children,
+  onClick,
+  isInvalid,
+  className,
+  color,
+}: Props) => (
   <Button
     onPress={onClick}
-    color="secondary"
+    color={color || 'primary'}
     className={clsx(
-      'max-w-28 whitespace-nowrap px-4 py-1 text-base bg-secondary-600',
+      'max-w-28 whitespace-nowrap px-4 py-1 text-base bg-primary-600',
       isInvalid && 'opacity-50',
       className
     )}

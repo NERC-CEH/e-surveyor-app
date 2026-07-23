@@ -184,8 +184,6 @@ const HomeController = () => {
     navToReport();
   };
 
-  const isDisabled = sample.isUploaded;
-
   const isInvalid = sample.validateRemote();
 
   const finishButton = sample.isSynchronising ? null : (
@@ -210,12 +208,7 @@ const HomeController = () => {
         subheader={isTraining && <TrainingModeBanner />}
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main
-        match={match}
-        sample={sample}
-        photoSelect={photoSelect}
-        isDisabled={isDisabled}
-      />
+      <Main sample={sample} photoSelect={photoSelect} />
     </Page>
   );
 };

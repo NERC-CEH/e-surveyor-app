@@ -18,7 +18,7 @@ const IntroAlert = () => {
 
   return (
     <CustomAlert>
-      <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
+      <div className="my-2 bg-secondary-200/10 border border-neutral-300 rounded-lg p-3">
         For best results photograph:
         <div className="flex flex-col gap-3 my-2">
           <div className="flex gap-2 flex-nowrap justify-between items-center">
@@ -32,30 +32,30 @@ const IntroAlert = () => {
         </div>
       </div>
 
-      <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
+      <div className="my-2 bg-secondary-200/10 border border-neutral-300 rounded-lg p-3">
         Press to take. Long press to add from gallery.
         <img src={addImage} className="mx-auto max-w-3/5" />
       </div>
 
-      <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
+      <div className="my-2 bg-secondary-200/10 border border-neutral-300 rounded-lg p-3">
         <h3>Not sure if they’re the same species?</h3>
         Take 1 photo of each moth individually. Each photo is counted as 1 moth.
       </div>
 
-      <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
+      <div className="my-2 bg-secondary-200/10 border border-neutral-300 rounded-lg p-3">
         <h3>Sure they’re the same species?</h3>
         Take 1 photo, then tap the number to add a count.
       </div>
 
-      <div className="my-2 bg-neutral-100 border border-neutral-300 rounded-lg p-3">
+      <div className="my-2 bg-secondary-200/10 border border-neutral-300 rounded-lg p-3">
         Swipe left to delete the record.
         <img src={deleteImage} className="mx-auto" />
       </div>
 
       <Button
-        color="secondary"
+        color="primary"
         onPress={handleContinue}
-        className="mx-auto bg-secondary-600 my-10 shadow-md"
+        className="mx-auto bg-primary-600 my-10 shadow-md"
       >
         Make records
       </Button>

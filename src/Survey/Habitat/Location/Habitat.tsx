@@ -47,12 +47,14 @@ const LocationHabitat = () => {
           <HabitatIdentification location={location} onChange={selectHabitat} />
         </div>
 
-        <Button
-          onClick={manualSelection}
-          className="py-1 px-2 text-sm mx-auto mt-4"
-        >
-          Select from all habitats
-        </Button>
+        {!location.isDisabled && (
+          <Button
+            onClick={manualSelection}
+            className="py-1 px-2 text-sm mx-auto mt-4"
+          >
+            Select from all habitats
+          </Button>
+        )}
       </Main>
 
       {hasHabitatAndPhoto && <Footer link={baseUrl} />}

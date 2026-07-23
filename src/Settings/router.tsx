@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import LocationsController from './Locations';
+import LocationsController from 'Components/Locations';
 import Menu from './Menu';
 import SeedMixes from './SeedMixes';
 

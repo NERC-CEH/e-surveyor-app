@@ -85,6 +85,7 @@ const LocationLocation = () => {
                   location.data.boundaryGeom = ''; // Set to empty string to indicate that the user wants to draw a boundary
                 }
               }}
+              isDisabled={location.isDisabled}
             >
               <RadioInput.Option
                 value="boundary"
@@ -110,6 +111,7 @@ const LocationLocation = () => {
                 location={currentLocation}
                 shape={currentShape}
                 className="mt-4 rounded-lg overflow-hidden"
+                isDisabled={location.isDisabled}
               />
             )}
 

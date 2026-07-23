@@ -47,7 +47,7 @@ const Site = ({
       <IonItem
         onClick={onClick}
         className={twMerge(
-          'relative flex h-16 rounded-md border border-solid bg-white px-4 py-2 [--border-style:none]',
+          'relative flex h-16 rounded-md border border-solid bg-white px-4 py-2 ion-no-border',
           isSelected
             ? 'border-(--form-value-color) text-(--form-value-color)'
             : 'border-neutral-200',
