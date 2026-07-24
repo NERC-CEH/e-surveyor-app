@@ -26,7 +26,11 @@ const LocationDetails = () => {
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
-  const isValid = !!location.data[activitiesAttr.id];
+  const isValid =
+    !!location.data[activitiesAttr.id] &&
+    (!!location.data[siteSizeAttr.id] ||
+      (!!location.data[siteLengthAttr.id] &&
+        !!location.data[siteWidthAttr.id]));
   const showHectaresInput = location.data[siteSizeAttr.id] !== undefined;
 
   const recordAttrs = {
