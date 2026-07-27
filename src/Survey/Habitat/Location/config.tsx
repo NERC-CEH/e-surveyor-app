@@ -88,7 +88,7 @@ const attrs = {
 };
 
 const survey = {
-  label: 'Habitat',
+  label: 'Habitat Type',
   baseURL: '/survey/habitat/location',
   icon: locationOutline,
 

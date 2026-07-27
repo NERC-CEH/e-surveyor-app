@@ -24,7 +24,7 @@ const HabitatHome = () => {
         </StarsBackground>
         <div className="p-3 flex flex-col gap-4">
           <SurveyCard
-            header="Location"
+            header="Habitat Type"
             description={
               <>
                 This survey captures the location of your monitoring site,

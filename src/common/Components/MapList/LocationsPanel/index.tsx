@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
+import { informationCircleOutline } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { device } from '@flumens/utils';
 import {
@@ -12,7 +13,9 @@ import {
   IonSegmentButton,
   useIonViewWillLeave,
   useIonViewWillEnter,
+  IonIcon,
 } from '@ionic/react';
+import { InfoMessage } from 'common/flumens';
 import Location from 'models/location';
 import LocationsList from './LocationsList';
 
@@ -100,13 +103,24 @@ const LocationsPanel = ({
               showEmptyOption={showEmptyOption}
             />
           )}
+
           {segment === 'uploaded' && (
-            <LocationsList
-              centroid={centroid}
-              locations={uploadedLocations}
-              onSelect={onSelectLocation}
-              selectedLocationId={selectedLocationId}
-            />
+            <>
+              <InfoMessage
+                className="mx-3"
+                prefix={<IonIcon icon={informationCircleOutline} />}
+                color="primary"
+              >
+                Your sites come from the Habitat Type survey.
+              </InfoMessage>
+
+              <LocationsList
+                centroid={centroid}
+                locations={uploadedLocations}
+                onSelect={onSelectLocation}
+                selectedLocationId={selectedLocationId}
+              />
+            </>
           )}
         </IonContent>
       </IonModal>
