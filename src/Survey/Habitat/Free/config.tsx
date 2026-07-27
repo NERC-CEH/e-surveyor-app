@@ -156,19 +156,6 @@ const survey = {
 
     return null;
   },
-
-  modifySubmission(submission: any) {
-    const setSubSampleLocationIfMissing = (subSample: any) => {
-      const locationIsMissing = !subSample.values.entered_sref;
-      if (locationIsMissing) {
-        subSample.values.entered_sref = submission.values.entered_sref;
-      }
-    };
-
-    submission.samples.forEach(setSubSampleLocationIfMissing);
-
-    return submission;
-  },
 } as const satisfies Survey;
 
 export type Data = SampleData &

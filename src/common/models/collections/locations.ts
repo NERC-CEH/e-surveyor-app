@@ -225,4 +225,6 @@ const collection = new LocationsCollection<Location>({
   getAccessToken: () => userModel.getAccessToken(),
 });
 
+// (window as any).locationsCollection = collection;
+
 export default collection;

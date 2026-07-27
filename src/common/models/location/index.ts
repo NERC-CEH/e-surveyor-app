@@ -1,4 +1,5 @@
 import { IObservableArray, observable, toJS } from 'mobx';
+import axios from 'axios';
 import {
   LocationModel as IndiciaLocation,
   LocationOptions,
@@ -7,8 +8,9 @@ import {
 } from '@flumens';
 import { copyObject } from '@flumens/models/dist/Model';
 import config from 'common/config';
-import survey from 'Survey/Habitat/Location/config';
+import survey, { HABITAT_ID } from 'Survey/Habitat/Location/config';
 import ukhabData from '../../data/ukhab/data.json';
+import warehouseIDs from '../../data/ukhab/warehouseIDs.json';
 import GPSExtension from '../GPSExt';
 import Media from '../image';
 import { locationsStore } from '../store';
@@ -139,5 +141,70 @@ export default class Location<
       data: { data, metadata, media },
     };
     await this.store.save(jsonWithDataWrapper);
+  }
+
+  async saveRemote() {
+    await super.saveRemote();
+    await this.saveClassifierResults();
+    return this;
+  }
+
+  private async saveClassifierResults() {
+    try {
+      console.log('Location classifier uploading');
+      this.remote.synchronising = true;
+
+      const url = `${this.remote.url}/index.php/services/rest/classification-events`;
+
+      const accessToken = await this.remote.getAccessToken!();
+
+      const mediaPaths = this.media.map(media => media.data.queued);
+
+      /* eslint-disable @typescript-eslint/naming-convention */
+
+      const { habitatSuggestions } = this.metadata as any;
+      const suggestions = habitatSuggestions.map(
+        (suggestion: HabitatSuggestion) => ({
+          values: {
+            location_attribute_id: HABITAT_ID,
+            termlists_term_id: (warehouseIDs as any)[suggestion.code],
+            term_given: suggestion.code,
+            probability_given: suggestion.confidence,
+          },
+        })
+      );
+
+      const submission = {
+        values: { created_by_id: null },
+        classification_results: [
+          {
+            values: { classifier_id: 1, classifier_version: '1' },
+            classification_lookup_suggestions: suggestions,
+            metaFields: { mediaPaths },
+          },
+        ],
+      };
+      /* eslint-enable @typescript-eslint/naming-convention */
+
+      const options: any = {
+        url,
+        method: 'post',
+        headers: { Authorization: `Bearer ${accessToken}` },
+        timeout: 80000,
+        data: submission,
+      };
+
+      await axios(options);
+
+      this.remote.synchronising = false;
+
+      console.log('Location classifier uploading done');
+      return this;
+    } catch (e: any) {
+      this.remote.synchronising = false;
+
+      // throw e; // silently fail for now, we don't want to block the user from continuing
+      return this;
+    }
   }
 }

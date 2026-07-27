@@ -60,8 +60,9 @@ export const activitiesAttr = {
   ],
 } as const satisfies ChoiceInputConf;
 
+export const HABITAT_ID = 443;
 export const habitatAttr = {
-  id: 'locAttr:443',
+  id: `locAttr:${HABITAT_ID}`,
   type: 'choiceInput',
   choices: levelThreeHabitats.map(({ name, warehouseId }) => ({
     title: name,
