@@ -1,24 +1,25 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Page, Header, useAlert } from '@flumens';
+import { Page, Header, useAlert, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
+import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import Sample from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
 const validate = (sample: Sample) =>
-  getDetailsValidationSchema(sample.data.type).safeParse(sample.data).error;
+  getDetailsValidationSchema().safeParse(sample.data).error;
 
-type Props = {
-  sample: Sample;
-};
-
-const Controller = ({ sample }: Props) => {
+const Controller = () => {
   const match = useRouteMatch();
   const alert = useAlert();
   const { navigate } = useContext(NavContext);
+  const { isScrolled } = useHeaderScroll();
+
+  const { sample } = useSample<Sample>();
+  if (!sample) return null;
 
   const onDone = () => {
     const invalids = validate(sample);
@@ -49,7 +50,12 @@ const Controller = ({ sample }: Props) => {
 
   return (
     <Page id="transect-details" className="theme-habitat">
-      <Header backButtonLabel="Home" title="Transect" rightSlot={doneButton} />
+      <Header
+        backButtonLabel="Home"
+        title="Survey setup"
+        rightSlot={doneButton}
+        className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
+      />
       <Main sample={sample} isDisabled={sample.isUploaded} />
     </Page>
   );

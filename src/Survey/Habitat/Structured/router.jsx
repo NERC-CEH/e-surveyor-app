@@ -2,6 +2,7 @@ import { RouteWithModels, AttrPage } from '@flumens';
 import appModel from 'models/app';
 import samples from 'models/collections/samples';
 import userModel from 'models/user';
+import Locations from 'Components/Locations';
 import EditSpecies from 'Components/Species';
 import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
@@ -26,6 +27,7 @@ const routes = [
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/details`, Details],
   [`${baseURL}/:smpId/details/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/details/location`, Locations],
   [`${baseURL}/:smpId/details/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/quadrat/:subSmpId`, Quadrat],
   [`${baseURL}/:smpId/quadrat/:subSmpId/map`, ModelLocationMap.SampleFromRoute],

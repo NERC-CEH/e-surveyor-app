@@ -14,17 +14,11 @@ import {
   locationSchema,
 } from 'Survey/common/config';
 
-export const getDetailsValidationSchema = (type?: string) =>
+export const getDetailsValidationSchema = () =>
   z.object({
-    location: locationSchema,
+    locationId: z.string({ error: 'Location is missing' }),
     quadratSize: z.number().min(1, 'Please select your quadrat size.'),
     steps: z.number().min(1, 'Please select the number of survey steps.'),
-    habitat:
-      type === 'Custom'
-        ? z.any().optional()
-        : z.any().refine(val => val != null, {
-            message: 'Please select habitat.',
-          }),
   });
 
 const getHabitats = (name: any) => ({ value: name, id: name });
@@ -271,7 +265,7 @@ const survey: Survey = {
         })
         .parse(sample.samples.length);
 
-      getDetailsValidationSchema(data.type).parse(data);
+      getDetailsValidationSchema().parse(data);
     } catch (attrError) {
       return attrError;
     }

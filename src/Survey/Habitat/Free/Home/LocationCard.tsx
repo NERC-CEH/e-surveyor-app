@@ -50,7 +50,10 @@ const LocationCard = ({ locationId }: Props) => {
   );
 
   return (
-    <IonItem routerLink={`${match.url}/location`} className="ion-no-border">
+    <IonItem
+      routerLink={`${match.url}/location`}
+      className="ion-no-border p-2 [--padding-start:0px] [--inner-padding-end:0px]"
+    >
       <div className="flex w-full items-center gap-3">
         {locationPhoto}
 
@@ -62,7 +65,9 @@ const LocationCard = ({ locationId }: Props) => {
           {!!location && (
             <div className="mt-1">
               <Badge size="small">{habitatType}</Badge>
-              <Badge size="small">{areaOrDimensions}</Badge>
+              {!!areaOrDimensions && (
+                <Badge size="small">{areaOrDimensions}</Badge>
+              )}
             </div>
           )}
         </div>

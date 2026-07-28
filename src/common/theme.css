@@ -11,6 +11,48 @@
 @import '@flumens/ionic/dist/themes/rounded.css';
 
 @theme {
+  /* Habitat theme */
+  --color-habitat-50: var(--color-lime-50);
+  --color-habitat-100: var(--color-lime-100);
+  --color-habitat-200: var(--color-lime-200);
+  --color-habitat-300: var(--color-lime-300);
+  --color-habitat-400: var(--color-lime-400);
+  --color-habitat-500: var(--color-lime-500);
+  --color-habitat-600: var(--color-lime-600);
+  --color-habitat-700: var(--color-lime-700);
+  --color-habitat-800: var(--color-lime-800);
+  --color-habitat-900: var(--color-lime-900);
+  --color-habitat-950: var(--color-lime-950);
+  --color-habitat: var(--color-lime-600);
+
+  /* Ecosystem theme */
+  --color-ecosystem-50: var(--color-sky-50);
+  --color-ecosystem-100: var(--color-sky-100);
+  --color-ecosystem-200: var(--color-sky-200);
+  --color-ecosystem-300: var(--color-sky-300);
+  --color-ecosystem-400: var(--color-sky-400);
+  --color-ecosystem-500: var(--color-sky-500);
+  --color-ecosystem-600: var(--color-sky-600);
+  --color-ecosystem-700: var(--color-sky-700);
+  --color-ecosystem-800: var(--color-sky-800);
+  --color-ecosystem-900: var(--color-sky-900);
+  --color-ecosystem-950: var(--color-sky-950);
+  --color-ecosystem: var(--color-sky-600);
+
+  /* Soil theme */
+  --color-soil-50: var(--color-amber-50);
+  --color-soil-100: var(--color-amber-100);
+  --color-soil-200: var(--color-amber-200);
+  --color-soil-300: var(--color-amber-300);
+  --color-soil-400: var(--color-amber-400);
+  --color-soil-500: var(--color-amber-500);
+  --color-soil-600: var(--color-amber-600);
+  --color-soil-700: var(--color-amber-700);
+  --color-soil-800: var(--color-amber-800);
+  --color-soil-900: var(--color-amber-900);
+  --color-soil-950: var(--color-amber-950);
+  --color-soil: var(--color-amber-700);
+
   /* For primary actions */
   /* https://www.shadecolr.com/#colors=Y29sb3I6MzcuMDIxMjc2NTk1NzQ0NjcsMTAwLDUzLjkyMTU2ODYyNzQ1MDk4fHN0ZXAtdXA6MTAuMXxzdGVwLWRvd246MTEuOHxodWUtc2hpZnQ6MHxiYXNlLXN0b3A6NXxuYW1lOm9yYW5nZXxsb2NrZWQ6MA%3D%3D&active=color-1&v=2 */
   --color-primary: oklch(79.304% 0.16846 69.901);
@@ -68,19 +110,18 @@
   --color-danger-900: oklch(26.604% 0.0996 27.398);
   --color-danger-950: oklch(20.442% 0.07305 26.62);
 
-  /* https://www.shadecolr.com/#colors=Y29sb3I6MTI4LjI1Mzk2ODI1Mzk2ODI1LDEwMCwzMnxzdGVwLXVwOjh8c3RlcC1kb3duOjExfGh1ZS1zaGlmdDowfGJhc2Utc3RvcDo3fG5hbWU6Z3JlZW58bG9ja2VkOjA%3D&active=color-1&v=2  --color-success: oklch(62.054% 0.20566 143.3); */
-  --color-success: oklch(73.299% 0.24371 143.2);
-  --color-success-50: oklch(92.955% 0.12398 148.22);
-  --color-success-100: oklch(91.596% 0.15321 147.42);
-  --color-success-200: oklch(89.364% 0.20593 146.3);
-  --color-success-300: oklch(87.839% 0.24825 145.08);
-  --color-success-400: oklch(86.989% 0.27729 143.81);
-  --color-success-500: oklch(84.126% 0.28028 143.14);
-  --color-success-600: oklch(73.299% 0.24371 143.2);
-  --color-success-700: oklch(62.054% 0.20566 143.3);
-  --color-success-800: oklch(45.799% 0.1499 143.7);
-  --color-success-900: oklch(27.903% 0.08802 144.9);
-  --color-success-950: oklch(17.817% 0.0536 146.56);
+  --color-success: var(--color-habitat);
+  --color-success-50: var(--color-habitat-50);
+  --color-success-100: var(--color-habitat-100);
+  --color-success-200: var(--color-habitat-200);
+  --color-success-300: var(--color-habitat-300);
+  --color-success-400: var(--color-habitat-400);
+  --color-success-500: var(--color-habitat-500);
+  --color-success-600: var(--color-habitat-600);
+  --color-success-700: var(--color-habitat-700);
+  --color-success-800: var(--color-habitat-800);
+  --color-success-900: var(--color-habitat-900);
+  --color-success-950: var(--color-habitat-950);
 
   /* Warning */
   --color-warning: var(--color-primary);
@@ -95,48 +136,6 @@
   --color-warning-800: var(--color-primary-800);
   --color-warning-900: var(--color-primary-900);
   --color-warning-950: var(--color-primary-950);
-
-  /* Habitat theme */
-  --color-habitat-50: var(--color-lime-50);
-  --color-habitat-100: var(--color-lime-100);
-  --color-habitat-200: var(--color-lime-200);
-  --color-habitat-300: var(--color-lime-300);
-  --color-habitat-400: var(--color-lime-400);
-  --color-habitat-500: var(--color-lime-500);
-  --color-habitat-600: var(--color-lime-600);
-  --color-habitat-700: var(--color-lime-700);
-  --color-habitat-800: var(--color-lime-800);
-  --color-habitat-900: var(--color-lime-900);
-  --color-habitat-950: var(--color-lime-950);
-  --color-habitat: var(--color-lime-600);
-
-  /* Ecosystem theme */
-  --color-ecosystem-50: var(--color-sky-50);
-  --color-ecosystem-100: var(--color-sky-100);
-  --color-ecosystem-200: var(--color-sky-200);
-  --color-ecosystem-300: var(--color-sky-300);
-  --color-ecosystem-400: var(--color-sky-400);
-  --color-ecosystem-500: var(--color-sky-500);
-  --color-ecosystem-600: var(--color-sky-600);
-  --color-ecosystem-700: var(--color-sky-700);
-  --color-ecosystem-800: var(--color-sky-800);
-  --color-ecosystem-900: var(--color-sky-900);
-  --color-ecosystem-950: var(--color-sky-950);
-  --color-ecosystem: var(--color-sky-600);
-
-  /* Soil theme */
-  --color-soil-50: var(--color-amber-50);
-  --color-soil-100: var(--color-amber-100);
-  --color-soil-200: var(--color-amber-200);
-  --color-soil-300: var(--color-amber-300);
-  --color-soil-400: var(--color-amber-400);
-  --color-soil-500: var(--color-amber-500);
-  --color-soil-600: var(--color-amber-600);
-  --color-soil-700: var(--color-amber-700);
-  --color-soil-800: var(--color-amber-800);
-  --color-soil-900: var(--color-amber-900);
-  --color-soil-950: var(--color-amber-950);
-  --color-soil: var(--color-amber-700);
 }
 
 .theme-habitat {
@@ -249,8 +248,8 @@
   --ion-toolbar-color: #fff;
   --ion-toolbar-color-activated: #fff;
 
-  --id-positive-color: var(--color-primary);
-  --id-possible-color: var(--color-secondary-600);
+  --id-positive-color: var(--color-success-700);
+  --id-possible-color: var(--color-warning-600);
   --id-rejected-color: var(--color-danger);
 
   --ion-font-family: 'Quicksand';
@@ -341,6 +340,7 @@ ion-toolbar {
     rgb(9, 13, 20) 0%,
     rgb(33, 40, 52) 100%
   );
+  --border-width: 0 !important;
 }
 /* fix map toolbar background for location input */
 ion-toolbar.location-input-attr {
@@ -390,13 +390,23 @@ ion-toolbar.location-input-attr ion-back-button {
   font-size: 1rem;
 }
 
+.rounded-list {
+  @apply bg-white;
+}
+
 /* survey list helper class */
 .list {
-  @apply mx-3 flex flex-col gap-5;
+  @apply mx-2.5 flex flex-col gap-5;
 }
 /* survey list helper class */
 .list > .card {
-  @apply bg-white rounded-lg px-4 py-3 shadow-xl;
+  @apply bg-white rounded-lg px-4 py-3 shadow-lg;
+}
+.list > .rounded-list {
+  @apply shadow-lg;
+}
+.list > .rounded-list > .list-title {
+  @apply bg-secondary-800/10 text-secondary-900 border-b border-neutral-200;
 }
 /* survey list helper class */
 .list > .card.top {
@@ -416,9 +426,6 @@ ion-toolbar.location-input-attr ion-back-button {
 
 /* make list dividers theme focused */
 .list-divider {
-  background-color: color-mix(
-    in oklab,
-    var(--color-secondary-700) 10%,
-    transparent
-  );
+  @apply bg-secondary-800/10 text-secondary-900 border-b border-neutral-200 font-semibold!;
+  font-weight: 500;
 }

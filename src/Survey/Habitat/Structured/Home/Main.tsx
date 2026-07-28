@@ -21,7 +21,6 @@ import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
-import './styles.scss';
 
 function byDate(smp1: Sample, smp2: Sample) {
   const date1 = new Date(smp1.data.date);

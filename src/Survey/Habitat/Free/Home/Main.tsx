@@ -64,6 +64,9 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
     isDisabled: sample.isDisabled,
   };
 
+  const isCustom =
+    sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE;
+
   return (
     <Main {...mainProps} className="[--padding-bottom:100px]">
       <StarsBackground>
@@ -81,13 +84,20 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
       </StarsBackground>
 
       <div className="list">
-        <div className="card top px-0! overflow-hidden">
+        <div className="card top p-0! overflow-hidden">
+          <div className="list-divider justify-between p-2">
+            <div>
+              <span className="mr-2">1.</span> Site
+            </div>
+          </div>
           <LocationCard locationId={sample.data.locationId} />
         </div>
 
-        <div className="card">
-          <div className="list-title justify-between pb-2">
-            Seed mix (optional)
+        <div className="rounded-list">
+          <div className="list-divider justify-between p-2">
+            <div>
+              <span className="mr-2">2.</span> Seed mix (optional)
+            </div>
             <InfoButtonPopover className="px-2">
               <div className="font-light">
                 <b>Why ask about seed mix?</b>
@@ -99,64 +109,58 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
             </InfoButtonPopover>
           </div>
 
-          <div className="rounded-list">
-            <Block
-              block={seededAttr}
-              {...recordAttrs}
-              onChange={(value: any) => {
-                sample.data[seededAttr.id] = value;
-                delete sample.data[seedmixGroupAttr.id];
-                delete sample.data[SEEDMIX_ATTR_ID];
-                delete sample.data[customSeedmixAttr.id];
-                delete sample.data[yearSownAttr.id];
-                return null;
-              }}
-            />
-            <Block
-              block={seedmixGroupAttr}
-              {...recordAttrs}
-              onChange={(value: any) => {
-                sample.data[seedmixGroupAttr.id] = value;
-                delete sample.data[SEEDMIX_ATTR_ID];
-                delete sample.data[customSeedmixAttr.id];
-                return null;
-              }}
-            />
-            <Block
-              block={seedmixAttr}
-              {...recordAttrs}
-              onChange={(value: any) => {
-                sample.data[SEEDMIX_ATTR_ID] = value;
-                delete sample.data[customSeedmixAttr.id];
+          <Block
+            block={seededAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[seededAttr.id] = value;
+              delete sample.data[seedmixGroupAttr.id];
+              delete sample.data[SEEDMIX_ATTR_ID];
+              delete sample.data[customSeedmixAttr.id];
+              delete sample.data[yearSownAttr.id];
+              return null;
+            }}
+          />
+          <Block
+            block={seedmixGroupAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[seedmixGroupAttr.id] = value;
+              delete sample.data[SEEDMIX_ATTR_ID];
+              delete sample.data[customSeedmixAttr.id];
+              return null;
+            }}
+          />
+          <Block
+            block={seedmixAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[SEEDMIX_ATTR_ID] = value;
+              delete sample.data[customSeedmixAttr.id];
 
-                const isCustom =
-                  sample.data[seedmixGroupAttr.id] ===
-                  CUSTOM_SEEDMIX_GROUP_VALUE;
-                if (isCustom) {
-                  const byId = ({ id }: SeedMix): boolean => id === value;
-                  const selectedSeedmix = appModel.data.seedmixes.find(byId);
+              if (isCustom) {
+                const byId = ({ id }: SeedMix): boolean => id === value;
+                const selectedSeedmix = appModel.data.seedmixes.find(byId);
 
-                  sample.data[SEEDMIX_ATTR_ID] = selectedSeedmix?.name;
+                sample.data[SEEDMIX_ATTR_ID] = selectedSeedmix?.name;
 
-                  const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
-                  const species = (selectedSeedmix?.species || [])
-                    .map(getWarehouseId)
-                    .join(',');
-                  sample.data[customSeedmixAttr.id] = species;
-                }
-              }}
-            />
+                const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
+                const species = (selectedSeedmix?.species || [])
+                  .map(getWarehouseId)
+                  .join(',');
+                sample.data[customSeedmixAttr.id] = species;
+              }
+            }}
+          />
 
-            {sample.data[seedmixGroupAttr.id] ===
-              CUSTOM_SEEDMIX_GROUP_VALUE && (
-              <InfoMessage inline>
-                You can define your own seedmixes{' '}
-                <Link to="/settings/seedmixes">here</Link>.
-              </InfoMessage>
-            )}
+          {sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE && (
+            <InfoMessage inline>
+              You can define your own seedmixes{' '}
+              <Link to="/settings/seedmixes">here</Link>.
+            </InfoMessage>
+          )}
 
-            <Block block={yearSownAttr} {...recordAttrs} />
-          </div>
+          <Block block={yearSownAttr} {...recordAttrs} />
         </div>
       </div>
 
@@ -180,7 +184,23 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
         useSubSamples
         useSpeciesProfile
         showPhoto
-      />
+        label={
+          <div>
+            <span className="mr-2">3.</span> Species
+          </div>
+        }
+      >
+        {!!sample.samples.length && (
+          <InfoMessage
+            color="secondary"
+            prefix={
+              <IonIcon icon={informationCircleOutline} className="size-6" />
+            }
+          >
+            Keep recording to capture all the plants you see.
+          </InfoMessage>
+        )}
+      </SpeciesList>
 
       {!sample.samples.length && (
         <InfoBackgroundMessage>
@@ -188,18 +208,6 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
           to list plant species yourself, or tap to take a photo for the AI to
           identify.
         </InfoBackgroundMessage>
-      )}
-
-      {!!sample.samples.length && (
-        <InfoMessage
-          color="secondary"
-          className="mt-7 mx-3"
-          prefix={
-            <IonIcon icon={informationCircleOutline} className="size-6" />
-          }
-        >
-          Keep recording to capture all the plants you see.
-        </InfoMessage>
       )}
     </Main>
   );

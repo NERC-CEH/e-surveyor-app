@@ -53,6 +53,8 @@ type Props = {
   allowReidentify?: boolean;
   onOccurrenceClick?: (model: Model) => void;
   useNumberedList?: boolean;
+  children?: React.ReactNode;
+  label?: React.ReactNode;
 };
 
 const SpeciesList = ({
@@ -68,6 +70,8 @@ const SpeciesList = ({
   showGallery = true,
   onOccurrenceClick,
   useNumberedList = false,
+  children,
+  label,
 }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
@@ -190,11 +194,12 @@ const SpeciesList = ({
       <IonList id="list" lines="full">
         <div className="rounded-list">
           <div className="list-divider">
-            <div>Species</div>
+            {label || <div>Species</div>}
             <div>{speciesEntries.length}</div>
           </div>
 
           {speciesEntries}
+          {children}
         </div>
       </IonList>
     );
