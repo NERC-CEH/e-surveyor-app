@@ -1,13 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Header, Page, useToast } from '@flumens';
+import { Page, Header, useAlert, TailwindContext } from '@flumens';
 import { NavContext } from '@ionic/react';
-import appModel from 'models/app';
-import Sample, { useValidateCheck } from 'models/sample';
-import { useUserStatusCheck } from 'models/user';
+import Sample from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
-import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
+import { locationSchema } from 'Survey/common/config';
 import Main from './Main';
 
 type Props = {
@@ -17,70 +15,48 @@ type Props = {
 const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
-  const toast = useToast();
-  const checkUserStatus = useUserStatusCheck();
-  const checkSampleStatus = useValidateCheck(sample);
 
-  const onUpload = async () => {
-    const isUserOK = await checkUserStatus();
-    if (!isUserOK) return;
+  const alert = useAlert();
 
-    const isUploading = await sample.syncRemote(toast.error);
-    if (!isUploading) return;
+  const onDone = () => {
+    const invalids = locationSchema.safeParse(sample.data.location).error;
+    if (invalids) {
+      alert({
+        header: 'Missing',
+        message:
+          'Please fill in all the details in this page before navigating next.',
+        buttons: [{ text: 'Got it', role: 'cancel' }],
+      });
 
-    navigate('/home/surveys', 'root');
-  };
-
-  const onFinish = async () => {
-    const isValid = checkSampleStatus();
-    if (!isValid) return;
-    sample.metadata.saved = true;
+      return;
+    }
+    sample.metadata.completedDetails = true;
     sample.save();
 
-    appModel.data['draftId:beetle'] = '';
-
-    navigate('/home/surveys', 'root');
+    navigate(`${match.url}/traps`);
   };
 
-  const onAddNewTrap = async () => {
-    const survey = sample.getSurvey();
+  const isInvalid = !!locationSchema.safeParse(sample.data.location).error;
+  const doneButton = (
+    <HeaderButton onClick={onDone} isInvalid={isInvalid}>
+      Next
+    </HeaderButton>
+  );
 
-    const trapSample = survey.smp!.create!({ surveySample: sample });
-    sample.samples.push(trapSample);
+  const { isDisabled } = sample;
 
-    navigate(`${match.url}/trap/${trapSample.cid}`);
-  };
-
-  const onTrapDelete = async (trap: Sample) => trap.destroy();
-
-  const isDisabled = sample.isUploaded;
-
-  const isInvalid = sample.validateRemote();
-  const uploadButton =
-    isDisabled || sample.isSynchronising ? null : (
-      <HeaderButton
-        onClick={sample.metadata.saved ? onUpload : onFinish}
-        isInvalid={isInvalid}
-      >
-        {sample.metadata.saved ? 'Upload' : 'Finish'}
-      </HeaderButton>
-    );
-
-  const isTraining = !!sample.data.training;
+  const origContext: any = useContext(TailwindContext as any);
+  const tailwindContext = useMemo(
+    () => ({ ...origContext, isDisabled }),
+    [origContext, isDisabled]
+  );
 
   return (
-    <Page id="beetle-home" className="theme-ecosystem">
-      <Header
-        backButtonLabel="Home"
-        title="Trap survey"
-        rightSlot={uploadButton}
-        subheader={isTraining && <TrainingModeBanner />}
-      />
-      <Main
-        sample={sample}
-        onAddNewTrap={onAddNewTrap}
-        onTrapDelete={onTrapDelete}
-      />
+    <Page id="beetle-details" className="theme-ecosystem">
+      <Header title="Survey details" rightSlot={doneButton} />
+      <TailwindContext.Provider value={tailwindContext}>
+        <Main sample={sample} />
+      </TailwindContext.Provider>
     </Page>
   );
 };

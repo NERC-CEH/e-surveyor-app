@@ -156,12 +156,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
 
   const openItem = () => {
     if (sample.isSynchronising) return; // fixes button onPressUp and other accidental navigation
-
-    let href = `${survey.baseURL}/${sample.cid}`;
-    if (!sample.isDetailsComplete()) {
-      href += '/details';
-    }
-    navigate(href);
+    navigate(`${survey.baseURL}/${sample.cid}`);
   };
 
   return (

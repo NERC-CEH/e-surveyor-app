@@ -260,13 +260,6 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
     return `Quadrat #${index + 1}`;
   }
 
-  isDetailsComplete() {
-    const requiresDetails =
-      this.data.surveyId === transectSurveyConfig.id ||
-      this.data.surveyId === beetleSurveyConfig.id;
-    return requiresDetails ? this.metadata.completedDetails : true;
-  }
-
   cleanUp = () => {
     this.stopGPS();
     const stopGPS = (smp: Sample) => smp.stopGPS();

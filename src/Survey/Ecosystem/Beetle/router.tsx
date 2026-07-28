@@ -2,11 +2,11 @@ import { RouteWithModels, AttrPage } from '@flumens';
 import samples from 'models/collections/samples';
 import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
-import Details from './Details';
 import EditSpecies from './EditSpecies';
 import Home from './Home';
 import Occurrence from './Occurrence';
 import Trap from './Trap';
+import Traps from './Traps';
 import survey, { fieldNonCropHabitatsAttr } from './config';
 
 const { baseURL } = survey;
@@ -17,11 +17,11 @@ const routes = [
   [baseURL, StartNewSurvey.with(survey), true],
   [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/details`, Details],
-  [`${baseURL}/:smpId/details/date`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/details/map`, ModelLocationMap.SampleFromRoute],
+  [`${baseURL}/:smpId/traps`, Traps],
+  [`${baseURL}/:smpId/traps/date`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/traps/map`, ModelLocationMap.SampleFromRoute],
   [
-    `${baseURL}/:smpId/details/${fieldNonCropHabitatsAttr.id}`,
+    `${baseURL}/:smpId/traps/${fieldNonCropHabitatsAttr.id}`,
     ({ sample }: any) => (
       <AttrPage.BlockPage
         record={sample.data}

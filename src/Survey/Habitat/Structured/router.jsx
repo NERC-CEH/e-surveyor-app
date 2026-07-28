@@ -1,15 +1,13 @@
 import { RouteWithModels, AttrPage } from '@flumens';
-import appModel from 'models/app';
 import samples from 'models/collections/samples';
-import userModel from 'models/user';
 import Locations from 'Components/Locations';
 import EditSpecies from 'Components/Species';
 import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
-import Details from './Details';
 import Home from './Home';
 import Quadrat from './Quadrat';
+import Quadrats from './Quadrats';
 import Report from './Report';
 import survey from './config';
 
@@ -17,18 +15,14 @@ const { baseURL } = survey;
 
 const { AttrPageFromRoute } = AttrPage;
 
-const HomeWrap = props => (
-  <Home appModel={appModel} userModel={userModel} {...props} />
-);
-
 const routes = [
   [`${baseURL}`, StartNewSurvey.with(survey), true],
-  [`${baseURL}/:smpId`, HomeWrap],
+  [`${baseURL}/:smpId`, Home],
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/details`, Details],
-  [`${baseURL}/:smpId/details/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/details/location`, Locations],
-  [`${baseURL}/:smpId/details/map`, ModelLocationMap.SampleFromRoute],
+  [`${baseURL}/:smpId/quadrats`, Quadrats],
+  [`${baseURL}/:smpId/quadrats/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/quadrats/location`, Locations],
+  [`${baseURL}/:smpId/quadrats/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/quadrat/:subSmpId`, Quadrat],
   [`${baseURL}/:smpId/quadrat/:subSmpId/map`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/quadrat/:subSmpId/taxon`, TaxonSearch],

@@ -1,192 +1,180 @@
-import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import {
-  createOutline,
-  leaf,
-  bookmarkOutline,
-  informationCircleOutline,
-  addCircleOutline,
-} from 'ionicons/icons';
-import { useRouteMatch } from 'react-router-dom';
-import { Main, MenuAttrItem, InfoMessage, InfoButton, Button } from '@flumens';
-import {
-  IonList,
-  IonItem,
-  IonLabel,
-  IonIcon,
-  IonItemDivider,
-  NavContext,
-} from '@ionic/react';
-import personTakingPhoto from 'common/images/personTakingPhoto.jpg';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { Main, MenuAttrItem, InfoMessage, Block } from '@flumens';
+import { SeedmixSpecies } from 'common/data/seedmix';
+import useHeaderScroll from 'common/helpers/useHeaderScroll';
+import transectIcon from 'common/images/transectIconBlack.svg';
+import appModel, { SeedMix } from 'common/models/app';
 import Sample from 'models/sample';
-import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
-import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
-
-function byDate(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.data.date);
-  const date2 = new Date(smp2.data.date);
-  return date2.getTime() - date1.getTime();
-}
+import InfoButtonPopover from 'Components/InfoButton';
+import LocationCard from 'Survey/Habitat/Free/Home/LocationCard';
+import { yearSownAttr } from 'Survey/Habitat/Free/config';
+import StarsBackground from 'Survey/common/Components/StarsBackground';
+import {
+  CUSTOM_SEEDMIX_GROUP_VALUE,
+  customSeedmixAttr,
+  seededAttr,
+  SEEDMIX_ATTR_ID,
+  seedmixAttr,
+  seedmixGroupAttr,
+} from 'Survey/common/config';
+import squareIcon from './square.svg';
+import stepsIcon from './steps.svg';
 
 type Props = {
   sample: Sample;
-  onAddNewQuadrat: () => void;
   isDisabled?: boolean;
 };
 
-const MainComponent = ({ sample, isDisabled, onAddNewQuadrat }: Props) => {
+const MainComponent = ({ sample, isDisabled }: Props) => {
   const match = useRouteMatch();
-  const { navigate } = useContext(NavContext);
+  const mainProps = useHeaderScroll();
 
-  const getQuadratsList = () => sample.samples.slice().sort(byDate);
+  const { type, quadratSize, steps } = sample.data;
+  const { completedDetails } = sample.metadata;
 
-  const getQuadratPhoto = (smp: Sample) => {
-    const pic = smp.media.length && smp.media[0].getURL();
-
-    const photo = pic ? <img src={pic} /> : <IonIcon icon={leaf} />;
-
-    return <div className="photo">{photo}</div>;
+  const recordAttrs = {
+    record: sample.data,
+    isDisabled: sample.isDisabled,
   };
 
-  const getList = () => {
-    const quadrats = getQuadratsList();
-
-    if (!quadrats.length) {
-      return (
-        <InfoBackgroundMessage>
-          You have not added any quadrats yet.
-        </InfoBackgroundMessage>
-      );
-    }
-
-    const getQuadrat = (quadratSample: Sample) => (
-      <IonItem
-        key={quadratSample.cid}
-        routerLink={`${match.url}/quadrat/${quadratSample.cid}`}
-        detail
-      >
-        {getQuadratPhoto(quadratSample)}
-
-        <IonLabel text-wrap>
-          <IonLabel>
-            <b>{quadratSample.getPrettyName()}</b>
-          </IonLabel>
-        </IonLabel>
-      </IonItem>
-    );
-
-    return (
-      <IonList className="quadrats-list" lines="full">
-        <IonItemDivider mode="ios">
-          Quadrats
-          <IonLabel slot="end">{`${sample.samples.length}/${sample.data.steps}`}</IonLabel>
-        </IonItemDivider>
-
-        <div className="rounded-list">{quadrats.map(getQuadrat)}</div>
-      </IonList>
-    );
-  };
-
-  const getAddButton = () => {
-    if (isDisabled) {
-      return null;
-    }
-
-    if (sample.samples.length >= sample.data.steps) {
-      return null;
-    }
-
-    return (
-      <Button
-        onPress={onAddNewQuadrat}
-        color="secondary"
-        prefix={<IonIcon icon={addCircleOutline} className="size-6" />}
-        className="bg-secondary-600 mx-auto mt-8 mb-2"
-      >
-        Add Quadrat
-      </Button>
-    );
-  };
-
-  const isComplete = sample.metadata.saved || sample.isDisabled; // disabled for backwards compatibility
+  const isCustom =
+    sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE;
 
   return (
-    <Main>
-      {!isDisabled && (
-        <InfoMessage
-          prefix={<IonIcon src={informationCircleOutline} className="size-6" />}
-          color="tertiary"
-          className="m-2"
-        >
-          How to complete a transect?
-          <InfoButton color="dark" label="READ MORE" header="Tips">
+    <Main {...mainProps} className="[--padding-bottom:100px]">
+      <StarsBackground />
+
+      <div className="list">
+        <div className="card top p-0! overflow-hidden">
+          <div className="list-divider justify-between p-2">
             <div>
-              <img src={personTakingPhoto} />
-              <p>
-                Give your survey a name (such as the name of the place you are
-                surveying).
-              </p>
-              <p>
-                Place your quadrat down in the first spot (or measure out the
-                area you will survey), and tap on the "Add quadrat" button.
-              </p>
-              <p> Take a photo of the entire quadrat.</p>
-              <p>
-                Then, hold down the orange camera button to start listing plants
-                within the quadrat, or tap to take a photo for the AI to
-                identify.
-              </p>
-              <p>
-                Keep adding plants until you have listed all of the plants
-                within the quadrat, then move on to your next location.
-              </p>
-              <p>
-                Once you have completed all of your quadrats, tap finish to see
-                your report.
-              </p>
+              <span className="mr-2">1.</span> Site
             </div>
-          </InfoButton>
-        </InfoMessage>
-      )}
-
-      <IonList lines="full">
-        <div className="rounded-list my-2">
-          {isDisabled && <UploadedRecordInfoMessage />}
+          </div>
+          <LocationCard locationId={sample.data.locationId} />
         </div>
-
-        {isComplete && (
-          <Button
-            color="secondary"
-            className="bg-secondary-600 mx-auto my-5"
-            onPress={() => navigate(`${match.url}/report`)}
-          >
-            See Report
-          </Button>
-        )}
 
         <div className="rounded-list">
+          <div className="list-divider justify-between p-2">
+            <div>
+              <span className="mr-2">2.</span> Survey
+            </div>
+          </div>
           <MenuAttrItem
-            routerLink={`${match.url}/details`}
-            icon={createOutline}
-            value={sample.data.type}
-            label="Details"
+            routerLink={`${match.url}/type`}
+            value={type || ''}
+            icon={transectIcon}
+            label="Type"
             skipValueTranslation
-            disabled={isDisabled}
+            disabled={isDisabled || completedDetails}
+            lines="full"
           />
           <MenuAttrItem
-            routerLink={`${match.url}/name`}
-            icon={bookmarkOutline}
-            value={sample.data.name}
-            label="Name"
+            routerLink={`${match.url}/steps`}
+            value={steps || ''}
+            icon={stepsIcon}
+            label="Steps"
             skipValueTranslation
-            disabled={isDisabled}
+            disabled={isDisabled || !isCustom || completedDetails}
+            lines="full"
           />
+          {isDisabled ||
+            (!isCustom && !!steps && (
+              <InfoMessage inline>
+                This is the number of times that you will stop and search for
+                plants on your transect.
+              </InfoMessage>
+            ))}
+
+          <MenuAttrItem
+            routerLink={`${match.url}/quadratSize`}
+            value={!!quadratSize && `${quadratSize}m`}
+            icon={squareIcon}
+            label="Quadrat size"
+            skipValueTranslation
+            disabled={isDisabled || !isCustom || completedDetails}
+            lines="full"
+          />
+          {isDisabled ||
+            (!isCustom && !!quadratSize && (
+              <InfoMessage inline>
+                This is the size of the area that you will search for plants in
+                each step.
+              </InfoMessage>
+            ))}
         </div>
-      </IonList>
 
-      {getAddButton()}
+        <div className="rounded-list">
+          <div className="list-divider justify-between p-2">
+            <div>
+              <span className="mr-2">3.</span> Seed mix (optional)
+            </div>
+            <InfoButtonPopover className="px-2">
+              <div className="font-light">
+                <b>Why ask about seed mix?</b>
+                <div>
+                  It helps us interpret your plant records and show you which
+                  species may be expected to appear.
+                </div>
+              </div>
+            </InfoButtonPopover>
+          </div>
 
-      {getList()}
+          <Block
+            block={seededAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[seededAttr.id] = value;
+              delete sample.data[seedmixGroupAttr.id];
+              delete sample.data[SEEDMIX_ATTR_ID];
+              delete sample.data[customSeedmixAttr.id];
+              delete sample.data[yearSownAttr.id];
+              return null;
+            }}
+          />
+          <Block
+            block={seedmixGroupAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[seedmixGroupAttr.id] = value;
+              delete sample.data[SEEDMIX_ATTR_ID];
+              delete sample.data[customSeedmixAttr.id];
+              return null;
+            }}
+          />
+          <Block
+            block={seedmixAttr}
+            {...recordAttrs}
+            onChange={(value: any) => {
+              sample.data[SEEDMIX_ATTR_ID] = value;
+              delete sample.data[customSeedmixAttr.id];
+
+              if (isCustom) {
+                const byId = ({ id }: SeedMix): boolean => id === value;
+                const selectedSeedmix = appModel.data.seedmixes.find(byId);
+
+                sample.data[SEEDMIX_ATTR_ID] = selectedSeedmix?.name;
+
+                const getWarehouseId = (sp: SeedmixSpecies) => sp.warehouseId;
+                const species = (selectedSeedmix?.species || [])
+                  .map(getWarehouseId)
+                  .join(',');
+                sample.data[customSeedmixAttr.id] = species;
+              }
+            }}
+          />
+
+          {sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE && (
+            <InfoMessage inline>
+              You can define your own seedmixes{' '}
+              <Link to="/settings/seedmixes">here</Link>.
+            </InfoMessage>
+          )}
+
+          <Block block={yearSownAttr} {...recordAttrs} />
+        </div>
+      </div>
     </Main>
   );
 };

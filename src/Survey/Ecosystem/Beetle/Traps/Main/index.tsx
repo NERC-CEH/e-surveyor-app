@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
-import { createOutline, addOutline } from 'ionicons/icons';
-import { useRouteMatch } from 'react-router-dom';
-import { Button, Main, MenuAttrItem } from '@flumens';
+import { addOutline } from 'ionicons/icons';
+import { Button, Main } from '@flumens';
 import { IonList, IonIcon } from '@ionic/react';
 import { byDate } from 'models/collections/samples';
 import Sample from 'models/sample';
@@ -17,7 +16,6 @@ type Props = {
 };
 
 const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
-  const match = useRouteMatch();
   const isDisabled = sample.isUploaded;
 
   const getList = () => {
@@ -51,15 +49,6 @@ const MainComponent = ({ sample, onAddNewTrap, onTrapDelete }: Props) => {
       <IonList lines="full" className="mb-2 flex flex-col gap-4">
         <div className="rounded-list my-2">
           {isDisabled && <UploadedRecordInfoMessage />}
-        </div>
-
-        <div className="rounded-list">
-          <MenuAttrItem
-            routerLink={`${match.url}/details`}
-            icon={createOutline}
-            label="Details"
-            skipValueTranslation
-          />
         </div>
       </IonList>
 

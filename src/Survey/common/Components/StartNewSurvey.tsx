@@ -100,10 +100,6 @@ function StartNewSurvey({ survey }: Props): null {
       }
 
       let path = '';
-      if ('isDetailsComplete' in model) {
-        path = model.isDetailsComplete() ? '' : '/details';
-      }
-
       if (model instanceof Location) {
         path = '/location';
       }
