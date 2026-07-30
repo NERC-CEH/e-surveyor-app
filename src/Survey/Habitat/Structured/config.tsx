@@ -1,12 +1,10 @@
-import { layersOutline, readerOutline } from 'ionicons/icons';
+import { appsOutline, layersOutline, readerOutline } from 'ionicons/icons';
 import { z } from 'zod';
 import { IonIcon } from '@ionic/react';
 import { schemeHabitats } from 'common/data/speciesHabitats';
-import {
-  ChoiceInputConf,
-  NumberInputConf,
-  updateModelLocation,
-} from 'common/flumens';
+import { ChoiceInputConf, NumberInputConf } from 'common/flumens';
+import squareIcon from 'common/images/square.svg';
+import transectIcon from 'common/images/transect.svg';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
@@ -16,13 +14,6 @@ import {
   Survey,
   locationSchema,
 } from 'Survey/common/config';
-
-export const getDetailsValidationSchema = () =>
-  z.object({
-    locationId: z.string({ error: 'Location is missing' }),
-    quadratSize: z.number().min(1, 'Please select your quadrat size.'),
-    quadrats: z.number().min(1, 'Please select the number of survey quadrats.'),
-  });
 
 const getHabitats = (name: any) => ({ value: name, id: name });
 const agriEnvironmentHabitats = schemeHabitats.AES.sort().map(getHabitats);
@@ -43,20 +34,10 @@ export const surveyProtocolAttr = {
   ],
 } as const satisfies ChoiceInputConf;
 
-// export const quadratsAttr = {
-//   id: 'smpAttr:347',
-//   type: 'numberInput',
-//   title: 'Arable fallow',
-//   appearance: 'counter',
-//   placeholder: '0',
-//   validation: { min: 0, max: 100 },
-// } as const satisfies NumberInputConf;
-
 export const vegetationCompAttr = {
   id: 'smpAttr:-1',
   type: 'numberInput',
   appearance: 'slider',
-  title: 'Vegetation (live plants)',
   suffix: '%',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
@@ -65,7 +46,6 @@ export const bareGroundAttr = {
   id: 'smpAttr:-2',
   type: 'numberInput',
   appearance: 'slider',
-  title: 'Bare ground',
   suffix: '%',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
@@ -74,7 +54,6 @@ export const litterThatchAttr = {
   id: 'smpAttr:-3',
   type: 'numberInput',
   appearance: 'slider',
-  title: 'Litter / thatch',
   suffix: '%',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
@@ -83,7 +62,6 @@ export const mossLiverwortAttr = {
   id: 'smpAttr:-4',
   type: 'numberInput',
   appearance: 'slider',
-  title: 'Moss / liverwort',
   suffix: '%',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
@@ -92,7 +70,6 @@ export const deadWoodAttr = {
   id: 'smpAttr:-5',
   type: 'numberInput',
   appearance: 'slider',
-  title: 'Dead wood',
   suffix: '%',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
@@ -101,10 +78,55 @@ export const standingWaterAttr = {
   id: 'smpAttr:-6',
   type: 'numberInput',
   appearance: 'slider',
-  title: 'Standing water',
   suffix: '%',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
+
+export const quadratSizeAttr = {
+  id: 'smpAttr:1534',
+  type: 'numberInput',
+  title: 'Quadrat Size',
+  appearance: 'counter',
+  placeholder: '0',
+  prefix: <IonIcon icon={squareIcon} className="size-6" />,
+  suffix: 'm²',
+  validation: { min: 1, max: 30 },
+} as const satisfies NumberInputConf;
+
+export const transectLengthAttr = {
+  id: 'smpAttr:-1242',
+  type: 'numberInput',
+  title: 'Transect Length',
+  appearance: 'counter',
+  placeholder: '0',
+  prefix: <IonIcon icon={transectIcon} className="size-6" />,
+  suffix: 'm',
+  validation: { min: 1, max: 200 },
+} as const satisfies NumberInputConf;
+
+export const PLACEMENT_RANDOM_VALUE = '-1';
+export const quadratPlacementAttr = {
+  id: 'smpAttr:-1212',
+  type: 'choiceInput',
+  title: 'Quadrat Placement',
+  appearance: 'button',
+  prefix: <IonIcon icon={appsOutline} className="size-6" />,
+  choices: [
+    { title: 'Randomly', dataName: PLACEMENT_RANDOM_VALUE },
+    { title: 'Evenly spaced', dataName: '-2' },
+    { title: 'Existing permanent quadrats', dataName: '-3' },
+  ],
+} as const satisfies ChoiceInputConf;
+
+export const getDetailsValidationSchema = () =>
+  z.object({
+    locationId: z.string({ error: 'Location is missing' }),
+    [surveyProtocolAttr.id]: z.string({ error: 'Survey protocol.' }),
+    quadrats: z.number({ error: 'Survey quadrats.' }).min(1),
+    [quadratSizeAttr.id]: z.number({ error: 'Quadrat size.' }).min(1),
+    [transectLengthAttr.id]: z.number({ error: 'Transect length.' }).min(1),
+    [quadratPlacementAttr.id]: z.string({ error: 'Quadrat placement.' }),
+  });
 
 const SURVEY_ID = 627;
 
@@ -123,20 +145,6 @@ const survey = {
           info: ' This is the number of times that you will stop and search for plants on your transect. Please specify the number of quadrats you would like to survey.',
           inputProps: { min: 1 },
         },
-      },
-    },
-
-    quadratSize: {
-      pageProps: {
-        headerProps: { title: 'Quadrat Size' },
-        attrProps: {
-          input: 'slider',
-          info: 'This is the size of the area that you will search for plants in each step. Please specify the quadrat size in m².',
-          inputProps: { min: 1 },
-        },
-      },
-      remote: {
-        id: 1534,
       },
     },
 
@@ -164,67 +172,39 @@ const survey = {
       location: locationAttr,
     },
 
-    smp: {
+    occ: {
       attrs: {
-        location: locationAttr,
+        taxon: {
+          remote: {
+            id: 'taxa_taxon_list_id',
+            values(taxon: any) {
+              return taxon.warehouseId;
+            },
+          },
+        },
       },
 
       create({ photo }) {
-        const sample = new Sample({
+        const occ = new Occurrence({
           data: {
-            surveyId: SURVEY_ID,
-            enteredSrefSystem: 4326,
+            taxon: null,
           },
         });
 
-        sample.startGPS(loc => updateModelLocation(sample, loc));
+        if (photo) {
+          occ.media.push(photo);
+        }
 
-        const occurrence = survey.smp.smp.occ.create({ photo });
-        sample.occurrences.push(occurrence);
-
-        return sample;
+        return occ;
       },
 
-      modifySubmission(submission: any) {
+      modifySubmission(submission: any, occ: Occurrence) {
         // for non-UK species
-        if (!submission.occurrences.length) return null;
-        return submission;
-      },
+        if (!submission.values.taxa_taxon_list_id) {
+          return null;
+        }
 
-      occ: {
-        attrs: {
-          taxon: {
-            remote: {
-              id: 'taxa_taxon_list_id',
-              values(taxon: any) {
-                return taxon.warehouseId;
-              },
-            },
-          },
-        },
-
-        create({ photo }) {
-          const occ = new Occurrence({
-            data: {
-              taxon: null,
-            },
-          });
-
-          if (photo) {
-            occ.media.push(photo);
-          }
-
-          return occ;
-        },
-
-        modifySubmission(submission: any, occ: Occurrence) {
-          // for non-UK species
-          if (!submission.values.taxa_taxon_list_id) {
-            return null;
-          }
-
-          return attachClassifierResults(submission, occ);
-        },
+        return attachClassifierResults(submission, occ);
       },
     },
 
@@ -269,9 +249,7 @@ const survey = {
   verify(data: any, sample: Sample) {
     try {
       z.boolean()
-        .refine(val => !val, {
-          message: 'Is still identifying',
-        })
+        .refine(val => !val, { message: 'Is still identifying' })
         .parse(sample.isIdentifying());
 
       z.number()

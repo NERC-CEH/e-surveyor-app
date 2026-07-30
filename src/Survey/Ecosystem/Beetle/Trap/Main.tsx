@@ -99,7 +99,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
           {!!subSample.occurrences.length && (
             <div className="flex flex-col gap-5">
               <SpeciesList
-                sample={subSample}
+                occurrences={subSample.occurrences}
                 isDisabled={isDisabled}
                 disableAI
                 onOccurrenceClick={navigateToOccurrence}

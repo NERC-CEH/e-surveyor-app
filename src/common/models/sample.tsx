@@ -320,12 +320,7 @@ export const useValidateCheck = (sample: Sample) => {
         header: 'Survey incomplete',
         skipTranslation: true,
         message: <ModelValidationMessage {...invalids} />,
-        buttons: [
-          {
-            text: 'Got it',
-            role: 'cancel',
-          },
-        ],
+        buttons: [{ text: 'Got it', role: 'cancel' }],
       });
       return false;
     }

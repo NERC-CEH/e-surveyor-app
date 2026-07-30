@@ -179,9 +179,8 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
       )}
 
       <SpeciesList
-        sample={sample}
+        occurrences={sample.occurrences}
         isDisabled={isDisabled}
-        useSubSamples
         useSpeciesProfile
         showPhoto
         label={

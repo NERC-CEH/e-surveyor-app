@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
+import clsx from 'clsx';
 import { addCircleOutline, locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Main, MenuAttrItem, Button, Block } from '@flumens';
 import { IonIcon, NavContext } from '@ionic/react';
+import CircleIcon from 'common/Components/CircleIcon';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import { useDisableSwipeBack } from 'common/helpers/hooks';
 import Sample from 'models/sample';
@@ -66,8 +68,15 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
     (subSample.data[deadWoodAttr.id] || 0) +
     (subSample.data[standingWaterAttr.id] || 0);
 
+  const sliderClasses =
+    'mx-5 mt-1 text-sm font-semibold w-full flex items-center justify-start gap-2';
+
+  const selectedClasses =
+    'bg-secondary-100/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-secondary-900)_20%,transparent)]';
+  const isSelected = (block: any) => subSample.data[block.id] > 0;
+
   return (
-    <Main className="pb-ion-main">
+    <Main className="pb-ion-10">
       <div className="flex flex-col gap-4 m-3">
         <div className="rounded-list">
           <MenuAttrItem
@@ -96,14 +105,65 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
               </div>
             </InfoButtonPopover>
           </div>
-          <div className="[&>_.group]:border-x-0! [&>_.group]:border-t-0! [&>_.group]:rounded-none! my-2 [&>div>div>div>label]:text-sm! [&>div>div>div>label]:font-semibold! flex flex-col gap-1">
-            <Block block={vegetationCompAttr} {...recordAttrs} />
-            <Block block={bareGroundAttr} {...recordAttrs} />
-            <Block block={litterThatchAttr} {...recordAttrs} />
-            <Block block={mossLiverwortAttr} {...recordAttrs} />
-            <Block block={deadWoodAttr} {...recordAttrs} />
-            <Block block={standingWaterAttr} {...recordAttrs} />
-            <div className="w-full flex justify-between px-4 font-bold">
+          <div className="[&>*>_.group]:border-x-0! [&>*>_.group]:bg-transparent [&>*>_.group]:border-t-0! [&>*>_.group]:rounded-none! flex flex-col">
+            <div
+              className={clsx(
+                isSelected(vegetationCompAttr) && selectedClasses
+              )}
+            >
+              <div className={sliderClasses}>
+                <CircleIcon size={10} className="fill-green-800" /> Vegetation
+                (live plants)
+              </div>
+              <Block block={vegetationCompAttr} {...recordAttrs} />
+            </div>
+
+            <div
+              className={clsx(isSelected(bareGroundAttr) && selectedClasses)}
+            >
+              <div className={sliderClasses}>
+                <CircleIcon size={10} className="fill-yellow-800" /> Bare ground
+              </div>
+              <Block block={bareGroundAttr} {...recordAttrs} />
+            </div>
+
+            <div
+              className={clsx(isSelected(litterThatchAttr) && selectedClasses)}
+            >
+              <div className={sliderClasses}>
+                <CircleIcon size={10} className="fill-neutral-800" /> Litter /
+                thatch
+              </div>
+              <Block block={litterThatchAttr} {...recordAttrs} />
+            </div>
+
+            <div
+              className={clsx(isSelected(mossLiverwortAttr) && selectedClasses)}
+            >
+              <div className={sliderClasses}>
+                <CircleIcon size={10} className="fill-lime-600" /> Moss /
+                liverwort
+              </div>
+              <Block block={mossLiverwortAttr} {...recordAttrs} />
+            </div>
+
+            <div className={clsx(isSelected(deadWoodAttr) && selectedClasses)}>
+              <div className={sliderClasses}>
+                <CircleIcon size={10} className="fill-neutral-500" /> Dead wood
+              </div>
+              <Block block={deadWoodAttr} {...recordAttrs} />
+            </div>
+
+            <div
+              className={clsx(isSelected(standingWaterAttr) && selectedClasses)}
+            >
+              <div className={sliderClasses}>
+                <CircleIcon size={10} className="fill-sky-600" /> Standing water
+              </div>
+              <Block block={standingWaterAttr} {...recordAttrs} />
+            </div>
+
+            <div className="w-full flex justify-between px-4 py-2 font-bold">
               <span>TOTAL:</span> <span>{totalComposition} %</span>
             </div>
           </div>
@@ -113,10 +173,9 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
       {getNewImageButton()}
 
       <SpeciesList
-        sample={subSample}
+        occurrences={subSample.occurrences}
         isDisabled={isDisabled}
         useSpeciesProfile
-        useSubSamples
         showPhoto
       />
 

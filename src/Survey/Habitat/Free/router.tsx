@@ -18,8 +18,8 @@ const routes = [
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/location`, Locations],
   [`${baseURL}/:smpId/taxon`, TaxonSearch],
-  [`${baseURL}/:smpId/species/:subSmpId`, EditSpecies],
-  [`${baseURL}/:smpId/species/:subSmpId/taxon`, TaxonSearch],
+  [`${baseURL}/:smpId/species/:occId`, EditSpecies],
+  [`${baseURL}/:smpId/species/:occId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/report`, Report],
 ];
 

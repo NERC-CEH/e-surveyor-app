@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { ellipsisHorizontalOutline } from 'ionicons/icons';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, Block } from '@flumens';
 import { SeedmixSpecies } from 'common/data/seedmix';
@@ -20,10 +21,12 @@ import {
 import {
   COMMON_STANDARDS_PROTOCOL_VALUE,
   CUSTOM_PROTOCOL_VALUE,
+  PLACEMENT_RANDOM_VALUE,
+  quadratPlacementAttr,
+  quadratSizeAttr,
   surveyProtocolAttr,
+  transectLengthAttr,
 } from '../config';
-import squareIcon from './square.svg';
-import stepsIcon from './steps.svg';
 
 type Props = {
   sample: Sample;
@@ -34,7 +37,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
   const match = useRouteMatch();
   const mainProps = useHeaderScroll();
 
-  const { quadratSize, quadrats } = sample.data;
+  const { quadrats } = sample.data;
   const { completedDetails } = sample.metadata;
 
   const recordAttrs = {
@@ -42,7 +45,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
     isDisabled: sample.isDisabled,
   };
 
-  const type = sample.data[surveyProtocolAttr.id];
+  const protocol = sample.data[surveyProtocolAttr.id];
   const isCustom = sample.data[surveyProtocolAttr.id] === CUSTOM_PROTOCOL_VALUE;
 
   const isCustomSeedmix =
@@ -76,7 +79,9 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
             onChange={(value: any) => {
               sample.data[surveyProtocolAttr.id] = value;
               sample.data.quadrats = 10;
-              sample.data.quadratSize = 1;
+              sample.data[quadratSizeAttr.id] = 1;
+              sample.data[transectLengthAttr.id] = 100;
+              sample.data[quadratPlacementAttr.id] = PLACEMENT_RANDOM_VALUE;
 
               if (
                 value === COMMON_STANDARDS_PROTOCOL_VALUE &&
@@ -89,65 +94,45 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
           <InfoMessage inline>
             Use a recommended survey setup or pick a custom one.
           </InfoMessage>
-          {!!type && (
-            <MenuAttrItem
-              routerLink={`${match.url}/quadrats`}
-              value={quadrats || ''}
-              icon={stepsIcon}
-              label="Number of quadrats"
-              skipValueTranslation
-              disabled={isDisabled || !isCustom || completedDetails}
-              lines="full"
-            />
-          )}
-          {isDisabled ||
-            (!isCustom && !!quadrats && (
+          {!!protocol && (
+            <>
+              <MenuAttrItem
+                routerLink={`${match.url}/quadrats`}
+                value={quadrats || ''}
+                icon={ellipsisHorizontalOutline}
+                label="Number of quadrats"
+                skipValueTranslation
+                disabled={isDisabled || !isCustom || completedDetails}
+                lines="full"
+              />
+
               <InfoMessage inline>
                 This is the number of times that you will stop and search for
                 plants on your transect.
               </InfoMessage>
-            ))}
 
-          {!!type && (
-            <MenuAttrItem
-              routerLink={`${match.url}/quadratSize`}
-              value={!!quadratSize && `${quadratSize} m²`}
-              icon={squareIcon}
-              label="Quadrat size"
-              skipValueTranslation
-              disabled={isDisabled || !isCustom || completedDetails}
-              lines="full"
-            />
-          )}
-          {isDisabled ||
-            (!isCustom && !!quadratSize && (
+              <Block
+                block={quadratSizeAttr}
+                record={sample.data}
+                isDisabled={isDisabled || !isCustom || completedDetails}
+              />
               <InfoMessage inline>
                 This is the size of the area that you will search for plants in
                 each step.
               </InfoMessage>
-            ))}
-          {!!type && (
-            <MenuAttrItem
-              routerLink={`${match.url}/quadrats`}
-              value={quadrats || ''}
-              icon={stepsIcon}
-              label="Transect length"
-              skipValueTranslation
-              disabled
-              lines="full"
-            />
-          )}
 
-          {!!type && (
-            <MenuAttrItem
-              routerLink={`${match.url}/quadrats`}
-              value={quadrats || ''}
-              icon={stepsIcon}
-              label="Quadrat placement"
-              skipValueTranslation
-              disabled
-              lines="full"
-            />
+              <Block
+                block={transectLengthAttr}
+                record={sample.data}
+                isDisabled={isDisabled || !isCustom || completedDetails}
+              />
+
+              <Block
+                block={quadratPlacementAttr}
+                record={sample.data}
+                isDisabled={isDisabled || !isCustom || completedDetails}
+              />
+            </>
           )}
         </div>
 

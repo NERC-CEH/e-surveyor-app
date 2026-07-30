@@ -10,10 +10,9 @@ import { MachineInvolvement } from 'Survey/common/config';
 type Props = {
   sample: Sample;
   subSample?: Sample;
-  subSubSample?: Sample;
 };
 
-const Controller = ({ sample, subSample, subSubSample }: Props) => {
+const Controller = ({ sample, subSample }: Props) => {
   const context = useContext(NavContext);
 
   const transformUKSIToAppTaxon = (taxon: Taxon): Taxon => ({
@@ -27,26 +26,21 @@ const Controller = ({ sample, subSample, subSubSample }: Props) => {
   });
 
   const onSpeciesSelected = async (taxon: Taxon) => {
-    const survey = sample.getSurvey();
-
-    const model: Sample =
-      survey.name === 'habitat-free' ? sample : (subSample as Sample);
-    const subModel = survey.name === 'habitat-free' ? subSample : subSubSample;
-
-    if (!subModel) {
+    const model = subSample || sample;
+    const [occ] = model.occurrences;
+    if (!occ) {
       const modelSurvey = model.getSurvey();
-      const newSubSample: Sample = modelSurvey.smp!.create!({});
 
-      model.samples.push(newSubSample);
-
-      newSubSample.occurrences[0].data.taxon = transformUKSIToAppTaxon(taxon);
+      const newOccurrence = modelSurvey.occ!.create!({
+        taxon: transformUKSIToAppTaxon(taxon),
+      });
+      model.occurrences.push(newOccurrence);
 
       model.save();
       context.goBack();
       return;
     }
 
-    const [occ] = subModel.occurrences;
     const newTaxon = {
       ...occ.getSpecies(),
       ...transformUKSIToAppTaxon(taxon),

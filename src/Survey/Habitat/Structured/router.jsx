@@ -29,12 +29,9 @@ const routes = [
     ModelLocationMap.SampleFromRoute,
   ],
   [`${baseURL}/:smpId/quadrats/quadrat/:subSmpId/taxon`, TaxonSearch],
+  [`${baseURL}/:smpId/quadrats/quadrat/:subSmpId/species/:occId`, Occurrence],
   [
-    `${baseURL}/:smpId/quadrats/quadrat/:subSmpId/species/:subSubSmpId`,
-    Occurrence,
-  ],
-  [
-    `${baseURL}/:smpId/quadrats/quadrat/:subSmpId/species/:subSubSmpId/taxon`,
+    `${baseURL}/:smpId/quadrats/quadrat/:subSmpId/species/:occId/taxon`,
     TaxonSearch,
   ],
   [`${baseURL}/:smpId/report`, Report],

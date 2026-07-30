@@ -23,7 +23,6 @@ import {
 import Doughnut from 'common/Components/Doughnut';
 import config from 'common/config';
 import Occurrence from 'models/occurrence';
-import Sample from 'models/sample';
 import IncrementalButton from 'Survey/common/Components/IncrementalButton';
 import { occurrenceAbundanceAttr } from 'Survey/common/config';
 
@@ -38,14 +37,10 @@ const useDeleteAlert = (onDelete: any) => {
       skipTranslation: true,
       message: 'Are you sure you want to remove it from your device?',
       buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'primary',
-        },
+        { text: 'Cancel' },
         {
           text: 'Delete',
-          cssClass: 'danger',
+          role: 'destructive',
           handler: onDelete,
         },
       ],
@@ -72,19 +67,19 @@ const useMenu = (deleteSurvey: any) => {
 };
 
 type Props = {
-  model: Sample | Occurrence;
+  occurrence: Occurrence;
   isDisabled: boolean;
   onReidentify?: any;
   useDoughnut?: boolean;
   showGallery?: boolean;
   showPhoto?: boolean;
   onDelete?: () => void;
-  onClick: (model: Sample | Occurrence) => void;
+  onClick: (model: Occurrence) => void;
   itemNumber?: number;
 };
 
 const Species = ({
-  model,
+  occurrence,
   isDisabled,
   onDelete,
   onClick,
@@ -98,8 +93,7 @@ const Species = ({
   const showMenu = useMenu(showDeleteAlert);
   const { contextMenuProps } = useContextMenu({ onShow: showMenu });
 
-  const species = model.getSpecies();
-  const occ = model instanceof Occurrence ? model : model.occurrences[0];
+  const species = occurrence.getSpecies();
 
   let commonName: string;
   let scientificName: string;
@@ -108,7 +102,7 @@ const Species = ({
   let notFoundInUK;
   let speciesPhoto: any;
 
-  const { media } = occ;
+  const { media } = occurrence;
   if (media.length) {
     const photo = media[0];
     speciesPhoto = photo.data ? photo.getURL() : null;
@@ -165,15 +159,15 @@ const Species = ({
     }
   }
 
-  const onClickWrap = () => onClick(model);
+  const onClickWrap = () => onClick(occurrence);
 
   const detailsIcon = detailIcon || '';
 
   // increment abundance for beetle occurrences
   const incrementAbundance = () => {
-    const currentAbundance = occ.data[occurrenceAbundanceAttr.id] || 1;
-    occ.data[occurrenceAbundanceAttr.id] = currentAbundance + 1;
-    occ.save();
+    const currentAbundance = occurrence.data[occurrenceAbundanceAttr.id] || 1;
+    occurrence.data[occurrenceAbundanceAttr.id] = currentAbundance + 1;
+    occurrence.save();
   };
 
   const useIncrementalButton = itemNumber === undefined;
@@ -182,7 +176,7 @@ const Species = ({
     // show incremental button if itemNumber is provided
     if (useIncrementalButton) return null;
 
-    const abundance = occ.data[occurrenceAbundanceAttr.id] || 1;
+    const abundance = occurrence.data[occurrenceAbundanceAttr.id] || 1;
 
     return (
       <div className="list-avatar">
@@ -226,10 +220,10 @@ const Species = ({
   );
 
   const showReidentify = onReidentify && probability <= 0.1;
-  const onReidentifyWrap = () => onReidentify(model);
+  const onReidentifyWrap = () => onReidentify(occurrence);
 
   return (
-    <IonItemSliding key={model.cid} {...contextMenuProps}>
+    <IonItemSliding key={occurrence.cid} {...contextMenuProps}>
       <IonItem
         detail={!useDoughnut && !showReidentify}
         detailIcon={detailsIcon}

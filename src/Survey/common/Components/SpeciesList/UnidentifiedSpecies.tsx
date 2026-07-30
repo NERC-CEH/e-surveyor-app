@@ -14,7 +14,6 @@ import {
 } from '@ionic/react';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Occurrence from 'models/occurrence';
-import Sample from 'models/sample';
 
 const useDeleteAlert = (onDelete: any) => {
   const alert = useAlert();
@@ -58,19 +57,17 @@ const useMenu = (deleteSurvey: any) => {
   return showMenu;
 };
 
-type Model = Sample | Occurrence;
-
 type Props = {
-  model: Model;
+  occurrence: Occurrence;
   isDisabled: boolean;
-  onIdentify: (model: Model) => void;
+  onIdentify: (model: Occurrence) => void;
   onDelete?: () => void;
-  onClick: (model: Model) => void;
+  onClick: (model: Occurrence) => void;
   disableAI?: boolean;
 };
 
 const UnidentifiedSpeciesEntry = ({
-  model,
+  occurrence,
   isDisabled,
   onIdentify,
   onDelete,
@@ -81,12 +78,12 @@ const UnidentifiedSpeciesEntry = ({
   const showMenu = useMenu(showDeleteAlert);
   const { contextMenuProps } = useContextMenu({ onShow: showMenu });
 
-  const occ = model instanceof Occurrence ? model : model.occurrences[0];
-  const [hasSpeciesPhoto] = occ.media;
+  const [hasSpeciesPhoto] = occurrence.media;
 
-  const { isIdentifying } = occ;
+  const { isIdentifying } = occurrence;
 
-  const canBeIdentified = !occ.getSpecies() && occ.canReIdentify();
+  const canBeIdentified =
+    !occurrence.getSpecies() && occurrence.canReIdentify();
 
   const [isShowingGallery, setIsShowingGallery] = useState(false);
   const showGallery = (e: any) => {
@@ -125,9 +122,9 @@ const UnidentifiedSpeciesEntry = ({
   );
   const profilePhoto = <div className="list-avatar">{photo}</div>;
 
-  const onClickWrap = () => !isIdentifying && onClick(model);
+  const onClickWrap = () => !isIdentifying && onClick(occurrence);
 
-  const onIdentifyWrap = () => onIdentify(model);
+  const onIdentifyWrap = () => onIdentify(occurrence);
 
   return (
     <IonItemSliding disabled={isIdentifying}>

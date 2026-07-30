@@ -22,6 +22,7 @@ import {
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
+import { surveyProtocolAttr } from 'Survey/Habitat/Structured/config';
 import OnlineStatus from './OnlineStatus';
 import './styles.scss';
 
@@ -93,15 +94,19 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
 
   function getSampleInfo() {
     if (survey.name === 'habitat-structured') {
+      const protocol = surveyProtocolAttr.choices.find(
+        choice => choice.dataName === sample.data[surveyProtocolAttr.id]
+      );
+
       return (
         <div className="species-info">
           <h3>{survey.label}</h3>
-          <h4 className="flex items-center gap-1">
-            <span>{sample.data.name}</span>
-            <Badge skipTranslation className="py-[3px] text-sm">
-              {sample.data.type}
+
+          {!!protocol?.title && (
+            <Badge skipTranslation className="py-0.75 text-sm">
+              {protocol?.title}
             </Badge>
-          </h4>
+          )}
         </div>
       );
     }

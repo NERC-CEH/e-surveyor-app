@@ -1,19 +1,16 @@
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { Page, Header, useToast, device } from '@flumens';
-import Sample from 'models/sample';
+import Occurrence from 'models/occurrence';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
 
 type Props = {
-  subSample: Sample;
-  subSubSample: Sample;
+  occurrence: Occurrence;
 };
 
-const EditSpecies = ({ subSample, subSubSample }: Props) => {
+const EditSpecies = ({ occurrence }: Props) => {
   const toast = useToast();
-  const sample = subSubSample || subSample;
-  const [occ] = sample.occurrences;
 
   const identifySpecies = async () => {
     if (!device.isOnline) {
@@ -22,14 +19,14 @@ const EditSpecies = ({ subSample, subSubSample }: Props) => {
     }
 
     try {
-      await occ.identify();
+      await occurrence.identify();
     } catch (e: any) {
       toast.error(e.message, { position: 'bottom' });
     }
   };
 
-  const { isIdentifying } = occ;
-  const identifyButton = !!occ.media.length && (
+  const { isIdentifying } = occurrence;
+  const identifyButton = !!occurrence.media.length && (
     <HeaderButton
       onClick={identifySpecies}
       className={clsx('bg-secondary-600', isIdentifying ? 'opacity-30' : '')}
@@ -42,7 +39,7 @@ const EditSpecies = ({ subSample, subSubSample }: Props) => {
   return (
     <Page id="species-profile">
       <Header title="Species" rightSlot={identifyButton} />
-      <Main occurrence={occ} />
+      <Main occurrence={occurrence} />
     </Page>
   );
 };

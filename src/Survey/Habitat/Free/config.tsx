@@ -6,7 +6,6 @@ import {
   dateFormatISO,
   inferAttrConfigTypes,
   SampleData,
-  updateModelLocation,
 } from 'common/flumens';
 import appModel from 'common/models/app';
 import Occurrence from 'models/occurrence';
@@ -58,65 +57,39 @@ const survey = {
 
   attrs,
 
-  smp: {
-    attrs: {},
+  occ: {
+    attrs: {
+      taxon: {
+        remote: {
+          id: 'taxa_taxon_list_id',
+          values: (taxon: any) => taxon.warehouseId,
+        },
+      },
+    },
+
+    verify: data =>
+      z
+        .object({})
+        .nullable()
+        .refine(val => val !== null, {
+          message: 'Plant has not been identified',
+        })
+        .safeParse(data.taxon).error,
 
     create({ photo }) {
-      const sample = new Sample({
-        data: {
-          surveyId: SURVEY_ID,
-          enteredSrefSystem: 4326,
-        },
+      const occ = new Occurrence({
+        data: { taxon: null },
       });
 
-      sample.startGPS(loc => updateModelLocation(sample, loc));
+      if (photo) occ.media.push(photo);
 
-      const occurrence = survey.smp.occ.create({ photo });
-      sample.occurrences.push(occurrence);
-
-      return sample;
+      return occ;
     },
 
-    occ: {
-      attrs: {
-        taxon: {
-          remote: {
-            id: 'taxa_taxon_list_id',
-            values: (taxon: any) => taxon.warehouseId,
-          },
-        },
-      },
-
-      verify: data =>
-        z
-          .object({})
-          .nullable()
-          .refine(val => val !== null, {
-            message: 'Plant has not been identified',
-          })
-          .safeParse(data.taxon).error,
-
-      create({ photo }) {
-        const occ = new Occurrence({
-          data: { taxon: null },
-        });
-
-        if (photo) occ.media.push(photo);
-
-        return occ;
-      },
-
-      modifySubmission(submission: any, occ: Occurrence) {
-        // for non-UK species
-        if (!submission.values.taxa_taxon_list_id) return null;
-        return attachClassifierResults(submission, occ);
-      },
-    },
-
-    modifySubmission(submission: any) {
+    modifySubmission(submission: any, occ: Occurrence) {
       // for non-UK species
-      if (!submission.occurrences.length) return null;
-      return submission;
+      if (!submission.values.taxa_taxon_list_id) return null;
+      return attachClassifierResults(submission, occ);
     },
   },
 

@@ -9,8 +9,8 @@ import HeaderButton from 'Survey/common/Components/HeaderButton';
 import surveyConfig, { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
-const validate = (sample: Sample) =>
-  getDetailsValidationSchema().safeParse(sample.data).error;
+const validate = (data: any) =>
+  getDetailsValidationSchema().safeParse(data).error;
 
 const Controller = () => {
   const match = useRouteMatch();
@@ -22,12 +22,14 @@ const Controller = () => {
   if (!sample) return null;
 
   const onDone = () => {
-    const invalids = validate(sample);
+    const invalids = validate(sample.data);
     if (invalids) {
       alert({
         header: 'Missing',
-        message:
-          'Please fill in all the details in this page before navigating next.',
+        skipTranslation: true,
+        message: invalids.issues.map(i => (
+          <div key={i.path.join('.')}>{i.message}</div>
+        )) as any,
         buttons: [{ text: 'Got it', role: 'cancel' }],
       });
       return;
@@ -47,7 +49,7 @@ const Controller = () => {
     navigate(`${match.url}/quadrats`);
   };
 
-  const isInvalid = !!validate(sample);
+  const isInvalid = !!validate(sample.data);
   const doneButton = (
     <HeaderButton onClick={onDone} isInvalid={isInvalid}>
       Next

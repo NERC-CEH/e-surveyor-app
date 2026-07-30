@@ -57,7 +57,7 @@ const LocationsController = () => {
     await loader.show('Please wait...');
 
     try {
-      // await locations.fetchRemote(); // TODO:
+      await locations.fetchRemote();
     } catch (err: any) {
       toast.error(err);
     }

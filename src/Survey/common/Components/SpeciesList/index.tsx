@@ -27,23 +27,18 @@ function byCreateTime(m1: Model, m2: Model) {
   return date2.getTime() - date1.getTime();
 }
 
-const hasOver5UnidentifiedSpecies = (
-  sample: Sample,
-  useSubSamples: boolean
-) => {
+const hasOver5UnidentifiedSpecies = (occurrences: Occurrence[]) => {
   const unIdentifiedSpecies = (model: Model) => {
     const occ = model instanceof Occurrence ? model : model.occurrences[0];
     return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying;
   };
 
-  const list: any = useSubSamples ? sample.samples : sample.occurrences;
-  return list.filter(unIdentifiedSpecies).length >= 5;
+  return occurrences.filter(unIdentifiedSpecies).length >= 5;
 };
 
 type Props = {
-  sample: Sample;
+  occurrences: Occurrence[];
   isDisabled: boolean;
-  useSubSamples?: boolean;
   useSpeciesProfile?: boolean;
   disableAI?: boolean;
   disableDelete?: boolean;
@@ -58,11 +53,10 @@ type Props = {
 };
 
 const SpeciesList = ({
-  sample,
+  occurrences,
   isDisabled,
   disableAI = false,
   disableDelete = false,
-  useSubSamples = false,
   useSpeciesProfile = false,
   useDoughnut = false,
   allowReidentify = false,
@@ -78,8 +72,7 @@ const SpeciesList = ({
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
 
-  const rawList = !useSubSamples ? sample.occurrences : sample.samples;
-  const list = [...rawList].sort(byCreateTime);
+  const list = [...occurrences].sort(byCreateTime);
 
   if (!list.length) return null;
 
@@ -89,10 +82,7 @@ const SpeciesList = ({
       return;
     }
 
-    const identify = (model: Model) =>
-      model instanceof Occurrence
-        ? model.identify()
-        : model.occurrences[0].identify();
+    const identify = (model: Occurrence) => model.identify();
 
     try {
       await Promise.all(list.map(identify));
@@ -101,16 +91,14 @@ const SpeciesList = ({
     }
   };
 
-  const onIdentify = async (model: Model) => {
+  const onIdentify = async (model: Occurrence) => {
     if (!device.isOnline) {
       toast.warn("Sorry, looks like you're offline.");
       return;
     }
 
     try {
-      await (model instanceof Occurrence
-        ? model.identify()
-        : model.occurrences[0].identify());
+      await model.identify();
     } catch (e: any) {
       toast.error(e.message, { position: 'bottom' });
     }
@@ -167,13 +155,13 @@ const SpeciesList = ({
   };
 
   const getSpeciesList = () => {
-    const getSpecies = (model: Model, index: number) => {
-      const onDelete = () => model.destroy();
+    const getSpecies = (occ: Occurrence, index: number) => {
+      const onDelete = () => occ.destroy();
 
       return (
         <Species
-          key={model.cid}
-          model={model}
+          key={occ.cid}
+          occurrence={occ}
           isDisabled={isDisabled}
           onDelete={!disableDelete ? onDelete : undefined}
           onClick={navigateToSpeciesSample}
@@ -207,15 +195,15 @@ const SpeciesList = ({
 
   const getUnidentifiedSpeciesList = () => {
     const showIdentifyAllBtn =
-      !disableAI && hasOver5UnidentifiedSpecies(sample, useSubSamples);
+      !disableAI && hasOver5UnidentifiedSpecies(occurrences);
 
-    const getSpecies = (model: Model) => {
-      const onDelete = () => model.destroy();
+    const getSpecies = (occ: Occurrence) => {
+      const onDelete = () => occ.destroy();
 
       return (
         <UnidentifiedSpecies
-          key={model.cid}
-          model={model}
+          key={occ.cid}
+          occurrence={occ}
           isDisabled={isDisabled}
           onIdentify={onIdentify}
           onDelete={!disableDelete ? onDelete : undefined}

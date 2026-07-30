@@ -314,7 +314,7 @@ export type SampleConfig = {
   create?: (options: SampleCreateOptions) => Sample;
   verify?: (data: any, model: any) => any;
   modifySubmission?: (submission: any, model: any) => any;
-  smp?: SampleConfig;
+  smp?: Omit<SampleConfig, 'smp'>;
   occ?: OccurrenceConfig;
 };
 

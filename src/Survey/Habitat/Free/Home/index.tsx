@@ -112,11 +112,11 @@ const HomeController = () => {
       const mediaModel = await Media.getImageModel(photoURL);
 
       const survey = sample.getSurvey();
-      const newSubSample = survey.smp!.create!({ photo: mediaModel });
+      const newOccurrence = survey.occ!.create!({ photo: mediaModel });
 
-      sample.samples.push(newSubSample);
+      sample.occurrences.push(newOccurrence);
 
-      device.isOnline && newSubSample.occurrences[0].identify(); // must be after adding to top sample to be able to access its location
+      device.isOnline && newOccurrence.identify(); // must be after adding to top sample to be able to access its location
 
       sample.save();
     }

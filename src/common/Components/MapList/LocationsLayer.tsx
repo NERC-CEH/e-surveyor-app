@@ -6,7 +6,7 @@ import {
   Point,
   Polygon,
 } from 'geojson';
-import { Layer, Source } from 'react-map-gl/mapbox';
+import { Layer, Source, useMap } from 'react-map-gl/mapbox';
 import wkt from 'wellknown';
 import { MapContainer, getGeomMetersToLatLon } from '@flumens';
 import Location from 'models/location';
@@ -91,11 +91,16 @@ const LocationsLayer = ({
   locations,
   selectedLocationId,
 }: Props) => {
+  const { current: mapRef } = useMap();
+
   const data = useMemo(
     () => getGeoJSONfromRecords(locations, selectedLocationId),
     [locations, selectedLocationId]
   );
+
   const areasData = useMemo(() => getAreasGeoJSON(locations), [locations]);
+
+  const isMapReady = !!mapRef?.getMap?.();
 
   const onClick = (feature: SiteMarkerFeature) => {
     if (!feature.properties) return;
@@ -109,20 +114,22 @@ const LocationsLayer = ({
 
   return (
     <>
-      <Source id="areas-source" type="geojson" data={areasData}>
-        <Layer
-          id="areas-fill-layer"
-          type="fill"
-          minzoom={13}
-          paint={{ 'fill-color': '#008EEC', 'fill-opacity': 0.3 }}
-        />
-        <Layer
-          id="areas-line-layer"
-          type="line"
-          minzoom={13}
-          paint={{ 'line-color': '#008EEC', 'line-width': 2 }}
-        />
-      </Source>
+      {isMapReady && (
+        <Source id="areas-source" type="geojson" data={areasData}>
+          <Layer
+            id="areas-fill-layer"
+            type="fill"
+            minzoom={13}
+            paint={{ 'fill-color': '#008EEC', 'fill-opacity': 0.3 }}
+          />
+          <Layer
+            id="areas-line-layer"
+            type="line"
+            minzoom={13}
+            paint={{ 'line-color': '#008EEC', 'line-width': 2 }}
+          />
+        </Source>
+      )}
 
       <MapContainer.Cluster data={data} id="sites">
         <MapContainer.Cluster.Clusters id="sites-clusters" />

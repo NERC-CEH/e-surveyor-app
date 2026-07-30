@@ -141,7 +141,7 @@ const HomeMain = ({
       )}
 
       <SpeciesList
-        sample={sample}
+        occurrences={sample.occurrences}
         isDisabled={isDisabled}
         useDoughnut
         showPhoto

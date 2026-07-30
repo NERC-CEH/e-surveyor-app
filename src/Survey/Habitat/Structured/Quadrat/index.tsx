@@ -71,11 +71,11 @@ const QuadratController = ({ subSample }: Props) => {
       const image = await Media.getImageModel(photoURL);
 
       const survey = subSample.getSurvey();
-      const newSubSample = survey.smp!.create!({ photo: image });
+      const newOccurrence = survey.occ!.create!({ photo: image });
 
-      subSample.samples.push(newSubSample);
+      subSample.occurrences.push(newOccurrence);
 
-      device.isOnline && newSubSample.occurrences[0].identify(); // must be after adding to top sample to be able to access its location
+      device.isOnline && newOccurrence.identify(); // must be after adding to top sample to be able to access its location
 
       subSample.save();
     }

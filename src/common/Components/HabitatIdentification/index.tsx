@@ -11,6 +11,7 @@ import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import allHabitats, { Habitat } from 'common/data/ukhab';
 import Location from 'common/models/location';
 import { Data, habitatAttr } from 'Survey/Habitat/Location/config';
+import CircleIcon from '../CircleIcon';
 import meadow from './meadow.png';
 
 type Props = {
@@ -156,7 +157,9 @@ const HabitatIdentification = ({
 
         <div className="max-w-xl text-sm bg-neutral-50 rounded-md overflow-hidden border border-neutral-200 flex gap-2 p-2 flex-nowrap">
           <div className="w-2/3 border-r border-neutral-200 pr-2 flex flex-col items-center gap-2">
-            <div>⏺ Wide view of vegetation</div>
+            <div className="flex items-center gap-2">
+              <CircleIcon size={7} /> Wide view of vegetation
+            </div>
             <img
               src={meadow}
               alt="Wide view of vegetation"
@@ -164,8 +167,12 @@ const HabitatIdentification = ({
             />
           </div>
           <div className="w-1/2 px-2 flex flex-col justify-center gap-2">
-            <div>⏺ Show boundaries if visible</div>
-            <div>⏺ Avoid close-ups of single plants</div>
+            <div className="flex items-center gap-2">
+              <CircleIcon size={7} /> Show boundaries if visible
+            </div>
+            <div className="flex items-center gap-2">
+              <CircleIcon size={7} /> Avoid close-ups of single plants
+            </div>
           </div>
         </div>
 
