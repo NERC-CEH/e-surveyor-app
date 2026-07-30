@@ -1,10 +1,13 @@
 import { LineString, MultiPolygon, Polygon } from 'geojson';
-import { Layer, Source } from 'react-map-gl/mapbox';
+import { Layer, Source, useMap } from 'react-map-gl/mapbox';
 
 type Props = { shape?: Polygon | LineString | MultiPolygon };
 
 const MarkerShape = ({ shape }: Props) => {
-  if (!shape) return null;
+  const { current: mapRef } = useMap();
+  const isMapReady = !!mapRef?.getMap?.();
+
+  if (!shape || !isMapReady) return null;
 
   return (
     <Source id="site-boundary-source" type="geojson" data={shape}>

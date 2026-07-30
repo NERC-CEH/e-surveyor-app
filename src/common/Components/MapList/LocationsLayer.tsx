@@ -92,6 +92,7 @@ const LocationsLayer = ({
   selectedLocationId,
 }: Props) => {
   const { current: mapRef } = useMap();
+  const isMapReady = !!mapRef?.getMap?.();
 
   const data = useMemo(
     () => getGeoJSONfromRecords(locations, selectedLocationId),
@@ -99,8 +100,6 @@ const LocationsLayer = ({
   );
 
   const areasData = useMemo(() => getAreasGeoJSON(locations), [locations]);
-
-  const isMapReady = !!mapRef?.getMap?.();
 
   const onClick = (feature: SiteMarkerFeature) => {
     if (!feature.properties) return;

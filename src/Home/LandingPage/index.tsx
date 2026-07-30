@@ -135,7 +135,7 @@ const LandingPage = () => {
       <Main scrollY={false} className="bg-ion-neutral-500!">
         <div
           style={{ backgroundImage: `url(${background})` }}
-          className="absolute w-full top-0 bg-cover bg-center text-white p-10 pb-40"
+          className="absolute w-full top-[env(safe-area-inset-top)] bg-cover bg-center text-white p-10 pb-40"
         >
           <img src={logo} className="max-w-3/4 w-full" />
 

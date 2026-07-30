@@ -139,6 +139,11 @@
   --color-warning-950: var(--color-primary-950);
 }
 
+/* status bar */
+html.ios.plt-hybrid #status-bar-background {
+  background: black;
+}
+
 .theme-habitat {
   --color-secondary-50: var(--color-habitat-50);
   --color-secondary-100: var(--color-habitat-100);
@@ -337,18 +342,18 @@ body {
 /* nice page header */
 ion-toolbar {
   --ion-toolbar-background: linear-gradient(
-    90deg,
-    rgb(9, 13, 20) 0%,
-    rgb(33, 40, 52) 100%
+    0deg,
+    rgb(39, 39, 39) 0%,
+    rgb(0, 0, 0) 60%
   );
   --border-width: 0 !important;
 }
 /* fix map toolbar background for location input */
 ion-toolbar.location-input-attr {
   --ion-toolbar-background: linear-gradient(
-    90deg,
-    rgb(9, 13, 20) 0%,
-    rgb(33, 40, 52) 100%
+    0deg,
+    rgb(39, 39, 39) 0%,
+    rgb(0, 0, 0) 60%
   ) !important;
 }
 ion-toolbar.location-input-attr ion-back-button {
