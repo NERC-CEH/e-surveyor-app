@@ -68,7 +68,7 @@ const PastSampleMap = ({ sample: model }: Props) => {
     <Page id="model-location" className="theme-soil">
       <Header title="Previous samples" />
 
-      <Main className="[--padding-bottom:0px] [--padding-top:0px]">
+      <Main className="pb-ion-0 pt-ion-0">
         <MapContainer
           onReady={setMapRef}
           accessToken={config.map.mapboxApiKey}

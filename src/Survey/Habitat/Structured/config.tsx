@@ -1,14 +1,17 @@
-import { layersOutline } from 'ionicons/icons';
+import { layersOutline, readerOutline } from 'ionicons/icons';
 import { z } from 'zod';
+import { IonIcon } from '@ionic/react';
 import { schemeHabitats } from 'common/data/speciesHabitats';
-import { updateModelLocation } from 'common/flumens';
+import {
+  ChoiceInputConf,
+  NumberInputConf,
+  updateModelLocation,
+} from 'common/flumens';
 import appModel from 'models/app';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import {
-  dateAttr,
   locationAttr,
-  nameAttr,
   attachClassifierResults,
   Survey,
   locationSchema,
@@ -18,64 +21,102 @@ export const getDetailsValidationSchema = () =>
   z.object({
     locationId: z.string({ error: 'Location is missing' }),
     quadratSize: z.number().min(1, 'Please select your quadrat size.'),
-    steps: z.number().min(1, 'Please select the number of survey steps.'),
+    quadrats: z.number().min(1, 'Please select the number of survey quadrats.'),
   });
 
 const getHabitats = (name: any) => ({ value: name, id: name });
 const agriEnvironmentHabitats = schemeHabitats.AES.sort().map(getHabitats);
 const commonStandardsHabitats = schemeHabitats.CSM.sort().map(getHabitats);
 
-const surveyTypes = [
-  { value: 'Agri-environment', id: 17955 },
-  { value: 'Common Standards', id: 17956 },
-  { value: 'Custom', id: 17957 },
-];
+export const CUSTOM_PROTOCOL_VALUE = '17957';
+export const COMMON_STANDARDS_PROTOCOL_VALUE = '17956';
+export const surveyProtocolAttr = {
+  id: 'smpAttr:1533',
+  type: 'choiceInput',
+  title: 'Protocol',
+  appearance: 'button',
+  prefix: <IonIcon icon={readerOutline} className="size-6" />,
+  choices: [
+    { title: 'Agri-environment', dataName: '17955' },
+    { title: 'Common Standards', dataName: COMMON_STANDARDS_PROTOCOL_VALUE },
+    { title: 'Custom', dataName: CUSTOM_PROTOCOL_VALUE },
+  ],
+} as const satisfies ChoiceInputConf;
 
-const survey: Survey = {
-  id: 627,
+// export const quadratsAttr = {
+//   id: 'smpAttr:347',
+//   type: 'numberInput',
+//   title: 'Arable fallow',
+//   appearance: 'counter',
+//   placeholder: '0',
+//   validation: { min: 0, max: 100 },
+// } as const satisfies NumberInputConf;
+
+export const vegetationCompAttr = {
+  id: 'smpAttr:-1',
+  type: 'numberInput',
+  appearance: 'slider',
+  title: 'Vegetation (live plants)',
+  suffix: '%',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
+export const bareGroundAttr = {
+  id: 'smpAttr:-2',
+  type: 'numberInput',
+  appearance: 'slider',
+  title: 'Bare ground',
+  suffix: '%',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
+export const litterThatchAttr = {
+  id: 'smpAttr:-3',
+  type: 'numberInput',
+  appearance: 'slider',
+  title: 'Litter / thatch',
+  suffix: '%',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
+export const mossLiverwortAttr = {
+  id: 'smpAttr:-4',
+  type: 'numberInput',
+  appearance: 'slider',
+  title: 'Moss / liverwort',
+  suffix: '%',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
+export const deadWoodAttr = {
+  id: 'smpAttr:-5',
+  type: 'numberInput',
+  appearance: 'slider',
+  title: 'Dead wood',
+  suffix: '%',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
+export const standingWaterAttr = {
+  id: 'smpAttr:-6',
+  type: 'numberInput',
+  appearance: 'slider',
+  title: 'Standing water',
+  suffix: '%',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
+const SURVEY_ID = 627;
+
+const survey = {
+  id: SURVEY_ID,
   name: 'habitat-structured',
   label: 'Habitat Structured',
   baseURL: '/survey/habitat/structured',
   icon: layersOutline,
 
   attrs: {
-    date: dateAttr,
-
-    location: locationAttr,
-
-    name: nameAttr,
-
-    type: {
-      pageProps: {
-        attrProps: {
-          input: 'radio',
-          info: 'You can change your survey name here.',
-          inputProps: { options: surveyTypes },
-          set: (value: any, sample: Sample) => {
-            sample.data.type = value;
-
-            sample.data.steps = 10;
-            sample.data.quadratSize = 1;
-
-            if (value === 'Common Standards') {
-              sample.data.habitat = null;
-
-              sample.data.steps = appModel.data.use10stepsForCommonStandard
-                ? 10
-                : 20;
-              sample.data.quadratSize = 1;
-            }
-
-            if (value === 'Agri-environment') {
-              sample.data.habitat = null;
-            }
-          },
-        },
-      },
-      remote: { id: 1533, values: surveyTypes },
-    },
-
-    steps: {
+    quadrats: {
       pageProps: {
         attrProps: {
           input: 'slider',
@@ -90,7 +131,7 @@ const survey: Survey = {
         headerProps: { title: 'Quadrat Size' },
         attrProps: {
           input: 'slider',
-          info: 'This is the size of the area that you will search for plants in each step. Please specify the quadrat size in meters.',
+          info: 'This is the size of the area that you will search for plants in each step. Please specify the quadrat size in m².',
           inputProps: { min: 1 },
         },
       },
@@ -120,30 +161,25 @@ const survey: Survey = {
 
   smp: {
     attrs: {
-      date: dateAttr,
-
       location: locationAttr,
     },
 
     smp: {
       attrs: {
-        date: dateAttr,
-
         location: locationAttr,
       },
 
       create({ photo }) {
         const sample = new Sample({
           data: {
-            surveyId: survey.id,
-            location: null,
+            surveyId: SURVEY_ID,
             enteredSrefSystem: 4326,
           },
         });
 
         sample.startGPS(loc => updateModelLocation(sample, loc));
 
-        const occurrence = survey.smp!.smp!.occ!.create!({ photo });
+        const occurrence = survey.smp.smp.occ.create({ photo });
         sample.occurrences.push(occurrence);
 
         return sample;
@@ -151,10 +187,7 @@ const survey: Survey = {
 
       modifySubmission(submission: any) {
         // for non-UK species
-        if (!submission.occurrences.length) {
-          return null;
-        }
-
+        if (!submission.occurrences.length) return null;
         return submission;
       },
 
@@ -198,28 +231,14 @@ const survey: Survey = {
     create() {
       const sample = new Sample({
         data: {
-          surveyId: survey.id,
-          location: null,
+          surveyId: SURVEY_ID,
           enteredSrefSystem: 4326,
         },
       });
 
-      sample.startGPS(loc => updateModelLocation(sample, loc));
+      // sample.startGPS(loc => updateModelLocation(sample, loc));
 
       return sample;
-    },
-
-    modifySubmission(submission: any) {
-      const setSubSampleLocationIfMissing = (subSample: any) => {
-        const locationIsMissing = !subSample.values.entered_sref;
-        if (locationIsMissing) {
-          subSample.values.entered_sref = submission.values.entered_sref;
-        }
-      };
-
-      submission.samples.forEach(setSubSampleLocationIfMissing);
-
-      return submission;
     },
 
     verify: (data: any, sample: Sample) =>
@@ -237,16 +256,12 @@ const survey: Survey = {
   create() {
     const sample = new Sample({
       data: {
-        surveyId: survey.id,
+        surveyId: SURVEY_ID,
         training: appModel.data.useTraining,
         date: new Date().toISOString(),
-        name: new Date().toLocaleDateString('en-UK'),
-        location: null,
         enteredSrefSystem: 4326,
       },
     });
-
-    sample.startGPS(loc => updateModelLocation(sample, loc));
 
     return sample;
   },
@@ -260,7 +275,7 @@ const survey: Survey = {
         .parse(sample.isIdentifying());
 
       z.number()
-        .refine(val => val === sample.data.steps, {
+        .refine(val => val === sample.data.quadrats, {
           message: 'Please add more quadrats.',
         })
         .parse(sample.samples.length);
@@ -272,6 +287,6 @@ const survey: Survey = {
 
     return null;
   },
-};
+} as const satisfies Survey;
 
 export default survey;

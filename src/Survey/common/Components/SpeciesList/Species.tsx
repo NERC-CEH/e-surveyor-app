@@ -234,8 +234,8 @@ const Species = ({
         detail={!useDoughnut && !showReidentify}
         detailIcon={detailsIcon}
         className={clsx(
-          `[--detail-icon-opacity:1] [--padding-start:0px] ${idClass}`,
-          useDoughnut && '[--inner-padding-end:0]'
+          `[--detail-icon-opacity:1] ps-ion-0 ${idClass}`,
+          useDoughnut && 'pe-ion-i-0'
         )}
         onClick={onClickWrap}
       >

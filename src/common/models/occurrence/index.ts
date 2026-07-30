@@ -293,7 +293,9 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
   }
 
   // 'filter' instead of 'some' to trigger mobx listeners to all media objects
-  isIdentifying = () => this.identification.identifying;
+  get isIdentifying() {
+    return this.identification.identifying;
+  }
 
   getTaxonName() {
     const { taxon } = this.data;

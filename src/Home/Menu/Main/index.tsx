@@ -48,7 +48,7 @@ const MenuMain = ({
   const userEmail = user.email as string;
 
   return (
-    <Main className="app-menu [--padding-bottom:100px] [--padding-top:var(--ion-safe-area-top)]">
+    <Main className="app-menu pb-ion-25 pt-ion-s-0">
       <h1>
         <T>Menu</T>
       </h1>

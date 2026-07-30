@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { locationOutline, mapOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { IonIcon } from '@ionic/react';
+import { IonIcon, NavContext } from '@ionic/react';
 import {
   Block,
   Button,
@@ -14,7 +15,7 @@ import {
 } from 'common/flumens';
 import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
-import Footer from 'Survey/Habitat/common/Footer';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import {
   getLocationAttrsFromLocation,
   getLocationFromSref,
@@ -28,13 +29,16 @@ import useLocation from './useLocation';
 const LocationLocation = () => {
   const { url } = useRouteMatch();
   const baseUrl = url.split('/').slice(0, -1).join('/');
+  const { navigate } = useContext(NavContext);
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
 
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
-  const isValid = !!location.data.name && !!location.data.centroidSref;
+  const isValid =
+    location.isDisabled ||
+    (!!location.data.name && !!location.data.centroidSref);
 
   const recordAttrs = {
     record: location.data,
@@ -50,13 +54,23 @@ const LocationLocation = () => {
     });
   };
 
+  const nextButton = (
+    <HeaderButton
+      onClick={() => isValid && navigate(`${baseUrl}/details`)}
+      isInvalid={!isValid}
+    >
+      Next
+    </HeaderButton>
+  );
+
   return (
     <Page id="location-location" className="theme-habitat">
       <Header
         title="Location"
+        rightSlot={nextButton}
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main {...mainProps} className="[--padding-bottom:100px]">
+      <Main {...mainProps} className="pb-ion-25">
         <StarsBackground>Set up this survey location.</StarsBackground>
 
         <div className="list">
@@ -128,10 +142,6 @@ const LocationLocation = () => {
           </div>
         </div>
       </Main>
-
-      {(location.isDisabled || isValid) && (
-        <Footer link={`${baseUrl}/details`} />
-      )}
     </Page>
   );
 };

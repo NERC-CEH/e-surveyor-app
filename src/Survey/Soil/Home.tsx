@@ -13,7 +13,7 @@ const SoilHome = () => {
         title="Soil"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main {...mainProps} className="[--padding-bottom:100px]">
+      <Main {...mainProps} className="pb-ion-25">
         <StarsBackground>
           Assess below-ground condition and resilience.
         </StarsBackground>

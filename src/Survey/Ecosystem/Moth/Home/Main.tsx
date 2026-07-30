@@ -50,7 +50,7 @@ const HomeMain = ({
   };
 
   return (
-    <Main className="[--padding-bottom:50px]">
+    <Main className="pb-ion-25">
       <IonList lines="full" className="mb-2 flex flex-col gap-4">
         <div className="rounded-list my-2">
           {isDisabled && <UploadedRecordInfoMessage />}

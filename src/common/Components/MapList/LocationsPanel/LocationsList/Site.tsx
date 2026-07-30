@@ -47,7 +47,7 @@ const Site = ({
       <IonItem
         onClick={onClick}
         className={twMerge(
-          'relative flex h-16 rounded-md border border-solid bg-white px-4 py-2 ion-no-border [--padding-start:0px] [--inner-padding-end:0px]',
+          'relative flex h-16 rounded-md border border-solid bg-white px-4 py-2 ion-no-border ps-ion-0 pe-ion-i-0',
           isSelected
             ? 'border-(--form-value-color) text-(--form-value-color)'
             : 'border-neutral-200',
@@ -87,10 +87,7 @@ const Site = ({
           )}
 
           {isSelected && (
-            <IonIcon
-              icon={checkmarkOutline}
-              className="size-10 [--ionicon-stroke-width:20px]"
-            />
+            <IonIcon icon={checkmarkOutline} className="size-10 stroke-ion-5" />
           )}
         </div>
       </IonItem>

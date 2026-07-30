@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { NavContext } from '@ionic/react';
-import { Header, Main, Page, useToast } from 'common/flumens';
+import { Header, Main, Page, useLoader, useToast } from 'common/flumens';
 import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
-import Footer from 'Survey/Habitat/common/Footer';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   activitiesAttr,
@@ -32,6 +32,7 @@ const SummaryRow = ({ label, value }: Props) => (
 const LocationSummary = () => {
   const { navigate } = useContext(NavContext);
   const toast = useToast();
+  const loader = useLoader();
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
 
@@ -47,9 +48,12 @@ const LocationSummary = () => {
     location.metadata.saved = true;
     await location.save();
     try {
+      loader.show('Uploading data.');
       await location.saveRemote();
+      loader.hide();
       navigate('/', 'root');
     } catch (error: unknown) {
+      loader.hide();
       toast.error(error as Error);
     }
   };
@@ -101,13 +105,20 @@ const LocationSummary = () => {
     ? 'This location is disabled. You can review the information below.'
     : 'Do you wish to confirm?';
 
+  const nextButton = (
+    <HeaderButton onClick={onConfirm}>
+      {!location.isDisabled ? 'Confirm' : 'Finish'}
+    </HeaderButton>
+  );
+
   return (
     <Page id="location-summary" className="theme-habitat">
       <Header
         title="Summary"
+        rightSlot={nextButton}
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main {...mainProps} className="[--padding-bottom:100px]">
+      <Main {...mainProps} className="pb-ion-25">
         <StarsBackground>{headerText}</StarsBackground>
 
         <div className="mx-3 -mt-4 rounded-lg bg-white p-4 shadow-xl">
@@ -121,11 +132,6 @@ const LocationSummary = () => {
           <SummaryRow label="Selected habitat type" value={habitatType} />
         </div>
       </Main>
-
-      <Footer
-        onClick={onConfirm}
-        title={!location.isDisabled ? 'Confirm' : 'Finish'}
-      />
     </Page>
   );
 };

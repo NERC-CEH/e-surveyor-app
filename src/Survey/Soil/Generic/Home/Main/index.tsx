@@ -53,7 +53,7 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
   };
 
   return (
-    <Main className="[--padding-bottom:50px]">
+    <Main className="pb-ion-25">
       <IonList lines="full">
         <div className="list-title">Details</div>
         <div className="rounded-list">

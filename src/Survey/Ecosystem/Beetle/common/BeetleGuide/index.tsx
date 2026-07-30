@@ -106,7 +106,7 @@ const BeetleGuide = ({ isOpen, onClose }: Props) => {
         className="beetle-guide"
       >
         <ModalHeader title="Guide" onClose={onClose} />
-        <Main className="[--padding-bottom:0px] [--padding-top:0px]">
+        <Main className="pb-ion-0 pt-ion-0">
           <div className="grid grid-cols-2">{beetles.map(getEntry)}</div>
         </Main>
       </IonModal>
@@ -129,7 +129,7 @@ const BeetleGuide = ({ isOpen, onClose }: Props) => {
           title={showSpecies?.commonName || ''}
           onClose={() => setShowSpecies(undefined)}
         />
-        <Main className="[--padding-bottom:0px] [--padding-top:0px]">
+        <Main className="pb-ion-0 pt-ion-0">
           {getSlides()}
 
           {showAnnotations && !!showSpecies?.annotations && (

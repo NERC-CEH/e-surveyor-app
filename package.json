@@ -23,95 +23,97 @@
     "make:data:commonNames": "cd src/common/data/commonNames && tsx make.ts"
   },
   "dependencies": {
-    "@capacitor-community/camera-preview": "7.0.5",
+    "@babel/runtime-corejs3": "8.0.0",
+    "@capacitor-community/camera-preview": "8.0.1",
     "@capacitor-community/sqlite": "8.1.0",
-    "@capacitor/android": "8.3.3",
-    "@capacitor/app": "8.1.0",
-    "@capacitor/camera": "8.2.0",
-    "@capacitor/core": "8.3.3",
-    "@capacitor/device": "8.0.2",
+    "@capacitor/android": "8.4.2",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/camera": "8.2.1",
+    "@capacitor/core": "8.4.2",
+    "@capacitor/device": "8.0.3",
     "@capacitor/filesystem": "8.1.2",
     "@capacitor/geolocation": "8.2.0",
     "@capacitor/haptics": "8.0.2",
-    "@capacitor/ios": "8.3.3",
-    "@capacitor/keyboard": "8.0.3",
+    "@capacitor/ios": "8.4.2",
+    "@capacitor/keyboard": "8.0.5",
     "@capacitor/network": "8.0.1",
     "@capacitor/share": "8.0.1",
-    "@capacitor/splash-screen": "8.0.1",
-    "@capacitor/status-bar": "8.0.2",
+    "@capacitor/splash-screen": "8.0.2",
+    "@capacitor/status-bar": "8.0.3",
     "@flumens/bigu": "0.4.1",
-    "@flumens/ionic": "2.0.0-alpha.100",
+    "@flumens/ionic": "2.0.0-alpha.105",
     "@flumens/models": "0.28.0",
     "@flumens/tailwind": "0.42.0",
     "@flumens/utils": "0.12.0",
-    "@hookform/resolvers": "5.2.2",
+    "@hookform/resolvers": "5.4.0",
     "@ionic-native/core": "5.36.0",
-    "@ionic/core": "8.8.6",
-    "@ionic/react": "8.8.6",
-    "@ionic/react-router": "8.8.6",
-    "@sentry/browser": "10.52.0",
-    "@techstark/opencv-js": "4.12.0-release.1",
+    "@ionic/core": "8.8.15",
+    "@ionic/react": "8.8.15",
+    "@ionic/react-router": "8.8.15",
+    "@react-stately/form": "^3.3.1",
+    "@sentry/browser": "10.67.0",
+    "@techstark/opencv-js": "5.0.0-release.1",
     "@turf/bbox": "^7.3.5",
     "@turf/distance": "^7.3.5",
     "@types/deep-diff": "1.0.5",
     "@types/geojson": "^7946.0.16",
-    "@types/mapbox-gl": "^3.4.1",
-    "axios": "1.16.0",
+    "@types/mapbox-gl": "^3.5.0",
+    "axios": "1.18.1",
     "capacitor-blob-writer": "1.1.20",
     "chart.js": "4.5.1",
     "clsx": "2.1.1",
     "deep-diff": "1.0.2",
     "drizzle-orm": "0.45.2",
-    "i18next": "25.10.10",
+    "i18next": "26.3.6",
     "ionicons": "8.0.13",
     "jeep-sqlite": "2.8.0",
     "jwt-decode": "4.0.0",
     "lodash": "4.18.1",
-    "mapbox-gl": "^3.25.0",
-    "mobx": "6.15.3",
-    "mobx-react": "9.2.1",
+    "mapbox-gl": "^3.27.0",
+    "mobx": "6.16.1",
+    "mobx-react": "9.2.2",
     "mobx-utils": "6.1.1",
-    "react": "19.2.6",
+    "react": "19.2.8",
     "react-chartjs-2": "5.3.1",
     "react-countup": "6.5.3",
-    "react-dom": "19.2.6",
-    "react-easy-crop": "5.5.7",
-    "react-hook-form": "7.75.0",
-    "react-i18next": "16.6.6",
+    "react-dom": "19.2.8",
+    "react-easy-crop": "6.2.2",
+    "react-hook-form": "7.82.0",
+    "react-i18next": "17.0.11",
     "react-map-gl": "^8.1.1",
     "react-router": "5.3.4",
     "react-router-dom": "5.3.4",
-    "react-window": "2.2.7",
+    "react-window": "2.3.0",
     "sql.js": "1.12.0",
-    "swiper": "12.1.4",
-    "swr": "2.4.1",
+    "swiper": "14.0.6",
+    "swr": "2.4.2",
     "wellknown": "^0.5.0",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
-    "@babel/plugin-syntax-dynamic-import": "7.8.3",
-    "@babel/plugin-transform-exponentiation-operator": "7.28.6",
-    "@babel/plugin-transform-runtime": "7.29.0",
-    "@babel/preset-env": "7.29.5",
-    "@babel/preset-react": "7.28.5",
-    "@babel/preset-typescript": "7.28.5",
-    "@capacitor/cli": "8.3.3",
+    "@babel/core": "8.0.1",
+    "@babel/plugin-transform-exponentiation-operator": "8.0.1",
+    "@babel/plugin-transform-runtime": "8.0.1",
+    "@babel/preset-env": "8.0.2",
+    "@babel/preset-react": "8.0.1",
+    "@babel/preset-typescript": "8.0.1",
+    "@capacitor/cli": "8.4.2",
     "@flumens/eslint-config": "3.0.2",
     "@flumens/fetch-onedrive-excel": "0.3.4",
     "@flumens/prettier-config": "0.4.0",
-    "@flumens/webpack-config": "6.0.4",
-    "@types/jest": "30.0.0",
+    "@flumens/webpack-config": "6.2.0",
+    "@types/jest": "^30.0.0",
     "@types/lodash": "4.17.24",
-    "@types/react": "19.2.14",
+    "@types/node": "^26.1.2",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "@types/react-router": "5.1.20",
     "@types/react-router-dom": "5.3.3",
     "@types/wellknown": "^0.5.8",
     "babel-jest": "30.4.1",
     "babel-plugin-module-resolver": "5.0.3",
-    "copy-webpack-plugin": "13.0.1",
+    "babel-plugin-polyfill-corejs3": "1.0.0",
+    "copy-webpack-plugin": "14.0.0",
     "cordova-res": "0.15.4",
     "dotenv": "17.4.2",
     "eslint": "9.39.4",
@@ -120,20 +122,16 @@
     "jest-environment-jsdom": "30.4.1",
     "jest-transform-stub": "2.0.0",
     "mock-geolocation": "1.0.11",
-    "tailwindcss": "4.3.0",
-    "tsx": "4.21.0",
-    "typescript": "5.9.3",
-    "vercel": "50.44.0",
-    "webpack": "5.106.2",
-    "webpack-cli": "6.0.1",
-    "webpack-dev-server": "5.2.4"
+    "tailwindcss": "4.3.3",
+    "tsx": "4.23.1",
+    "typescript": "6.0.3",
+    "vercel": "56.5.0",
+    "webpack": "5.108.4",
+    "webpack-cli": "7.2.1",
+    "webpack-dev-server": "6.0.0"
   },
-  "browserslist": [
-    "ChromeAndroid >= 89",
-    "iOS >= 15"
-  ],
   "engines": {
-    "node": ">=20",
+    "node": ">=22.18",
     "npm": ">=10"
   },
   "author": {
@@ -164,33 +162,17 @@
   ],
   "babel": {
     "presets": [
-      [
-        "@babel/react",
-        {
-          "runtime": "automatic"
-        }
-      ],
-      [
-        "@babel/env",
-        {
-          "loose": true,
-          "modules": "commonjs",
-          "corejs": "3.22",
-          "useBuiltIns": "usage"
-        }
-      ],
-      [
-        "@babel/typescript",
-        {
-          "allowDeclareFields": true
-        }
-      ]
+      "@babel/preset-react",
+      "@babel/preset-env",
+      "@babel/preset-typescript"
     ],
     "plugins": [
+      "@babel/plugin-transform-runtime",
       [
-        "@babel/transform-runtime",
+        "babel-plugin-polyfill-corejs3",
         {
-          "regenerator": true
+          "method": "usage-global",
+          "version": "3.46"
         }
       ],
       [
@@ -208,14 +190,7 @@
           }
         }
       ],
-      [
-        "@babel/proposal-private-property-in-object",
-        {
-          "loose": true
-        }
-      ],
-      "@babel/transform-exponentiation-operator",
-      "@babel/syntax-dynamic-import"
+      "@babel/plugin-transform-exponentiation-operator"
     ]
   },
   "prettier": "@flumens/prettier-config",

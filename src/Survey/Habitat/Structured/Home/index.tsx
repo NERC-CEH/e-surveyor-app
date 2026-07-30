@@ -6,7 +6,7 @@ import { NavContext } from '@ionic/react';
 import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import Sample from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
-import { getDetailsValidationSchema } from '../config';
+import surveyConfig, { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
 const validate = (sample: Sample) =>
@@ -32,7 +32,16 @@ const Controller = () => {
       });
       return;
     }
-    sample.metadata.completedDetails = true;
+
+    if (!sample.metadata.completedDetails) {
+      sample.metadata.completedDetails = true;
+
+      // add sub-sample quadrats to the sample
+      for (let i = 0; i < sample.data.quadrats; i++) {
+        const quadratSample = surveyConfig.smp.create();
+        sample.samples.push(quadratSample);
+      }
+    }
     sample.save();
 
     navigate(`${match.url}/quadrats`);

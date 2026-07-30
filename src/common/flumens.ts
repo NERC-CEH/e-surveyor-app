@@ -1,5 +1,5 @@
 import { BlockConf } from '@flumens/tailwind/dist/Survey';
-import { inferBlockType } from '@flumens/tailwind/dist/components/types';
+import type { inferBlockType } from '@flumens/tailwind/dist/components/types';
 
 // MODELS
 export {
@@ -68,6 +68,7 @@ export { default as InfoButton } from '@flumens/ionic/dist/components/InfoButton
 export {
   default as PhotoPicker,
   usePromptImageSource,
+  usePhotoDeletePrompt,
 } from '@flumens/ionic/dist/components/PhotoPicker';
 export { default as MenuAttrItem } from '@flumens/ionic/dist/components/MenuAttrItem';
 export {
@@ -135,7 +136,7 @@ export {
   type TextInputConf,
   type NumberInputConf,
 } from '@flumens/tailwind/dist/Survey';
-export { type inferBlockType } from '@flumens/tailwind/dist/components/types';
+export type { inferBlockType } from '@flumens/tailwind/dist/components/types';
 
 /**
  * utility type that transforms a record of block configurations

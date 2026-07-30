@@ -12,7 +12,7 @@ const TypicalSpeciesItem = ({ species }: Props) => {
 
   return (
     <IonItem
-      className="[--padding-start:0]"
+      className="ps-ion-0"
       href={`https://plantatlas2020.org/atlas/${species.bsbiid}`}
       detailIcon={openOutline}
       detail

@@ -74,7 +74,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
         <IonItem
           onClick={() => setShowModal(name)}
           key={selectedName}
-          className="[--inner-padding-end:0]"
+          className="pe-ion-i-0"
         >
           <div className="flex w-full justify-between py-4">
             <div className="">{selectedName}</div>

@@ -1,23 +1,26 @@
 /** ********************************************************************
  * Manual testing functions.
  ******************************************************************** */
+import track from 'json-loader!./track.geojson';
 import GPS from 'mock-geolocation';
-import { Plugins, FilesystemDirectory } from '@capacitor/core';
-import track from 'json-loader!./track.geojson'; // eslint-disable-line
+import {
+  Directory as FilesystemDirectory,
+  Filesystem,
+} from '@capacitor/filesystem';
 
 window.FilesystemDirectory = FilesystemDirectory;
 
 const testing = {
   files: {
     ls: async (path = '', directory = FilesystemDirectory.Data) => {
-      const { files } = await Plugins.Filesystem.readdir({
+      const { files } = await Filesystem.readdir({
         path,
         directory,
       });
 
       const filesWithInfo = [];
       const filesWithInfoWrap = async file => {
-        const stats = await Plugins.Filesystem.stat({
+        const stats = await Filesystem.stat({
           path: file,
           directory,
         });
@@ -30,20 +33,20 @@ const testing = {
     },
 
     cp: async (path = '', directory = FilesystemDirectory.Data) => {
-      await Plugins.Filesystem.copy({
+      await Filesystem.copy({
         from: path,
         to: path.split('/').pop(),
         toDirectory: directory,
       });
 
-      return Plugins.Filesystem.stat({
+      return Filesystem.stat({
         path: path.split('/').pop(),
         directory,
       });
     },
 
     rm: async (path = '', directory = FilesystemDirectory.Data) => {
-      await Plugins.Filesystem.deleteFile({
+      await Filesystem.deleteFile({
         path,
         directory,
       });

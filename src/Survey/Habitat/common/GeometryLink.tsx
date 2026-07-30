@@ -77,7 +77,7 @@ const GeometryLink = ({
       onClick={() => !isDisabled && navigate(link)}
     >
       <MapContainer
-        onReady={setMapRef as any}
+        onReady={setMapRef}
         accessToken={CONFIG.map.mapboxApiKey}
         attributionControl={false}
         initialViewState={initialViewState}

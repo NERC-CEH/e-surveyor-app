@@ -69,7 +69,7 @@ const SampleEntry = ({ sample, onDelete }: Props) => {
       <IonItem
         routerLink={`${match.url}/sample/${sample.cid}`}
         detail
-        className="[--padding-start:1px]"
+        className="ps-ion-0.5"
       >
         <div className="flex items-center gap-2">
           {getSamplePhoto(sample)}

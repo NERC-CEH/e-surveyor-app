@@ -42,20 +42,6 @@ const Controller = ({ sample }: Props) => {
     navigate(`${match.url}/report`);
   };
 
-  const onAddNewQuadrat = () => {
-    if (sample.samples.length > sample.data.steps) {
-      // in case tapped button twice
-      return;
-    }
-
-    const survey = sample.getSurvey();
-    const quadratSample = survey.smp!.create!({});
-    sample.samples.push(quadratSample);
-    sample.save();
-
-    navigate(`${match.url}/quadrat/${quadratSample.cid}`);
-  };
-
   const isDisabled = sample.isUploaded;
 
   const isInvalid = sample.validateRemote();
@@ -78,11 +64,7 @@ const Controller = ({ sample }: Props) => {
         rightSlot={uploadButton}
         subheader={isTraining && <TrainingModeBanner />}
       />
-      <Main
-        sample={sample}
-        onAddNewQuadrat={onAddNewQuadrat}
-        isDisabled={isDisabled}
-      />
+      <Main sample={sample} isDisabled={isDisabled} />
     </Page>
   );
 };

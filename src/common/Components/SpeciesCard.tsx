@@ -90,14 +90,14 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
   let localStatus: any;
   if (species.recordCleaner === 'pass')
     localStatus = (
-      <div className="flex w-full items-center justify-center border-b border-neutral-400 bg-primary-400/20 p-1 text-sm font-semibold text-neutral-800">
+      <div className="flex w-full items-center justify-center border-b border-neutral-300 bg-primary-400/20 p-1 text-sm font-semibold text-neutral-800">
         Locally abundant
       </div>
     );
 
   if (species.recordCleaner === 'fail')
     localStatus = (
-      <div className="flex w-full items-center justify-center border-b border-neutral-400 bg-neutral-100 p-1 text-sm font-semibold text-neutral-800">
+      <div className="flex w-full items-center justify-center border-b border-neutral-300 bg-neutral-100 p-1 text-sm font-semibold text-neutral-800">
         Locally absent
       </div>
     );
@@ -106,7 +106,7 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
     <>
       {getGallery()}
 
-      <div className="overflow-hidden rounded-md border border-solid border-neutral-300 bg-white [&:first-of-type]:border-[var(--color-primary-800)]">
+      <div className="overflow-hidden rounded-md border border-solid border-neutral-300 bg-white">
         {localStatus}
 
         <div className="flex w-full flex-col gap-2 p-3">

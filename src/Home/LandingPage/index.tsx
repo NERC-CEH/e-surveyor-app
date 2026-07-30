@@ -132,7 +132,7 @@ const LandingPage = () => {
 
   return (
     <Page id="home-landing">
-      <Main scrollY={false} className="[--background:#848484]!">
+      <Main scrollY={false} className="bg-ion-neutral-500!">
         <div
           style={{ backgroundImage: `url(${background})` }}
           className="absolute w-full top-0 bg-cover bg-center text-white p-10 pb-40"

@@ -1,11 +1,12 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { informationCircle } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { IonIcon } from '@ionic/react';
+import { IonIcon, NavContext } from '@ionic/react';
 import { Block, Header, Main, Page, Toggle } from 'common/flumens';
 import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
-import Footer from 'Survey/Habitat/common/Footer';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   activitiesAttr,
@@ -20,6 +21,7 @@ import useLocation from './useLocation';
 const LocationDetails = () => {
   const { url } = useRouteMatch();
   const baseUrl = url.split('/').slice(0, -1).join('/');
+  const { navigate } = useContext(NavContext);
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
 
@@ -27,10 +29,12 @@ const LocationDetails = () => {
   if (!location) return null;
 
   const isValid =
-    !!location.data[activitiesAttr.id] &&
-    (!!location.data[siteSizeAttr.id] ||
-      (!!location.data[siteLengthAttr.id] &&
-        !!location.data[siteWidthAttr.id]));
+    location.isDisabled ||
+    (!!location.data[activitiesAttr.id] &&
+      (!!location.data[siteSizeAttr.id] ||
+        (!!location.data[siteLengthAttr.id] &&
+          !!location.data[siteWidthAttr.id])));
+
   const showHectaresInput = location.data[siteSizeAttr.id] !== undefined;
 
   const recordAttrs = {
@@ -49,13 +53,23 @@ const LocationDetails = () => {
     }
   };
 
+  const nextButton = (
+    <HeaderButton
+      onClick={() => isValid && navigate(`${baseUrl}/habitat`)}
+      isInvalid={!isValid}
+    >
+      Next
+    </HeaderButton>
+  );
+
   return (
     <Page id="location-details" className="theme-habitat">
       <Header
         title="Site Details"
+        rightSlot={nextButton}
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main {...mainProps} className="[--padding-bottom:100px]">
+      <Main {...mainProps} className="pb-ion-25">
         <StarsBackground>
           Describe the site and recent management.
         </StarsBackground>
@@ -112,10 +126,6 @@ const LocationDetails = () => {
           <Block block={locationCommentAttr} {...recordAttrs} platform="web" />
         </div>
       </Main>
-
-      {(location.isDisabled || isValid) && (
-        <Footer link={`${baseUrl}/habitat`} />
-      )}
     </Page>
   );
 };

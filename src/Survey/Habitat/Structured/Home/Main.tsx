@@ -3,7 +3,6 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, Block } from '@flumens';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import useHeaderScroll from 'common/helpers/useHeaderScroll';
-import transectIcon from 'common/images/transectIconBlack.svg';
 import appModel, { SeedMix } from 'common/models/app';
 import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
@@ -18,6 +17,11 @@ import {
   seedmixAttr,
   seedmixGroupAttr,
 } from 'Survey/common/config';
+import {
+  COMMON_STANDARDS_PROTOCOL_VALUE,
+  CUSTOM_PROTOCOL_VALUE,
+  surveyProtocolAttr,
+} from '../config';
 import squareIcon from './square.svg';
 import stepsIcon from './steps.svg';
 
@@ -30,7 +34,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
   const match = useRouteMatch();
   const mainProps = useHeaderScroll();
 
-  const { type, quadratSize, steps } = sample.data;
+  const { quadratSize, quadrats } = sample.data;
   const { completedDetails } = sample.metadata;
 
   const recordAttrs = {
@@ -38,11 +42,14 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
     isDisabled: sample.isDisabled,
   };
 
-  const isCustom =
+  const type = sample.data[surveyProtocolAttr.id];
+  const isCustom = sample.data[surveyProtocolAttr.id] === CUSTOM_PROTOCOL_VALUE;
+
+  const isCustomSeedmix =
     sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE;
 
   return (
-    <Main {...mainProps} className="[--padding-bottom:100px]">
+    <Main {...mainProps} className="pb-ion-25">
       <StarsBackground />
 
       <div className="list">
@@ -61,41 +68,57 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
               <span className="mr-2">2.</span> Survey
             </div>
           </div>
-          <MenuAttrItem
-            routerLink={`${match.url}/type`}
-            value={type || ''}
-            icon={transectIcon}
-            label="Type"
-            skipValueTranslation
-            disabled={isDisabled || completedDetails}
-            lines="full"
+
+          <Block
+            block={surveyProtocolAttr}
+            record={sample.data}
+            isDisabled={isDisabled || completedDetails}
+            onChange={(value: any) => {
+              sample.data[surveyProtocolAttr.id] = value;
+              sample.data.quadrats = 10;
+              sample.data.quadratSize = 1;
+
+              if (
+                value === COMMON_STANDARDS_PROTOCOL_VALUE &&
+                !appModel.data.use10stepsForCommonStandard
+              ) {
+                sample.data.quadrats = 20;
+              }
+            }}
           />
-          <MenuAttrItem
-            routerLink={`${match.url}/steps`}
-            value={steps || ''}
-            icon={stepsIcon}
-            label="Steps"
-            skipValueTranslation
-            disabled={isDisabled || !isCustom || completedDetails}
-            lines="full"
-          />
+          <InfoMessage inline>
+            Use a recommended survey setup or pick a custom one.
+          </InfoMessage>
+          {!!type && (
+            <MenuAttrItem
+              routerLink={`${match.url}/quadrats`}
+              value={quadrats || ''}
+              icon={stepsIcon}
+              label="Number of quadrats"
+              skipValueTranslation
+              disabled={isDisabled || !isCustom || completedDetails}
+              lines="full"
+            />
+          )}
           {isDisabled ||
-            (!isCustom && !!steps && (
+            (!isCustom && !!quadrats && (
               <InfoMessage inline>
                 This is the number of times that you will stop and search for
                 plants on your transect.
               </InfoMessage>
             ))}
 
-          <MenuAttrItem
-            routerLink={`${match.url}/quadratSize`}
-            value={!!quadratSize && `${quadratSize}m`}
-            icon={squareIcon}
-            label="Quadrat size"
-            skipValueTranslation
-            disabled={isDisabled || !isCustom || completedDetails}
-            lines="full"
-          />
+          {!!type && (
+            <MenuAttrItem
+              routerLink={`${match.url}/quadratSize`}
+              value={!!quadratSize && `${quadratSize} m²`}
+              icon={squareIcon}
+              label="Quadrat size"
+              skipValueTranslation
+              disabled={isDisabled || !isCustom || completedDetails}
+              lines="full"
+            />
+          )}
           {isDisabled ||
             (!isCustom && !!quadratSize && (
               <InfoMessage inline>
@@ -103,6 +126,29 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
                 each step.
               </InfoMessage>
             ))}
+          {!!type && (
+            <MenuAttrItem
+              routerLink={`${match.url}/quadrats`}
+              value={quadrats || ''}
+              icon={stepsIcon}
+              label="Transect length"
+              skipValueTranslation
+              disabled
+              lines="full"
+            />
+          )}
+
+          {!!type && (
+            <MenuAttrItem
+              routerLink={`${match.url}/quadrats`}
+              value={quadrats || ''}
+              icon={stepsIcon}
+              label="Quadrat placement"
+              skipValueTranslation
+              disabled
+              lines="full"
+            />
+          )}
         </div>
 
         <div className="rounded-list">
@@ -150,7 +196,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
               sample.data[SEEDMIX_ATTR_ID] = value;
               delete sample.data[customSeedmixAttr.id];
 
-              if (isCustom) {
+              if (isCustomSeedmix) {
                 const byId = ({ id }: SeedMix): boolean => id === value;
                 const selectedSeedmix = appModel.data.seedmixes.find(byId);
 

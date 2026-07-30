@@ -61,12 +61,6 @@ workflows:
             - content: |
                 DIRECTORY="$BITRISE_PROJECT_NAME/$NPM_PACKAGE_VERSION"
                 npx @flumens/onedrive-upload --directory $DIRECTORY --file $BITRISE_DEPLOY_DIR/App.ipa
-      - deploy-to-itunesconnect-application-loader@1:
-          run_if: enveq "BUILD_ONLY" ""
-          inputs:
-            - password: $ITUNES_CONNECT_PASS
-            - app_password: $ITUNES_CONNECT_APP_PASS
-            - itunescon_user: $ITUNES_CONNECT_USER
       - script@1:
           title: Upload Builds to OneDrive
           inputs:
@@ -79,6 +73,12 @@ workflows:
             - content: |
                 DIRECTORY="$BITRISE_PROJECT_NAME/$NPM_PACKAGE_VERSION"
                 npx @flumens/onedrive-upload --directory $DIRECTORY --file $BITRISE_SIGNED_AAB_PATH
+      - deploy-to-itunesconnect-application-loader@1:
+          run_if: enveq "BUILD_ONLY" ""
+          inputs:
+            - password: $ITUNES_CONNECT_PASS
+            - app_password: $ITUNES_CONNECT_APP_PASS
+            - itunescon_user: $ITUNES_CONNECT_USER
       - google-play-deploy@3:
           run_if: enveq "BUILD_ONLY" ""
           inputs:

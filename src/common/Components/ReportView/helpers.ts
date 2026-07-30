@@ -5,8 +5,7 @@ type ScientificName = string;
 type CommonName = string;
 type TVK = string;
 export type SpeciesNames =
-  | [ScientificName, CommonName]
-  | [ScientificName, CommonName, TVK];
+  [ScientificName, CommonName] | [ScientificName, CommonName, TVK];
 
 export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
   const dict: any = {};

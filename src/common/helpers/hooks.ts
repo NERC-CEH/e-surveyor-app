@@ -1,4 +1,9 @@
 import { useAlert } from '@flumens';
+import {
+  getConfig,
+  useIonViewWillEnter,
+  useIonViewWillLeave,
+} from '@ionic/react';
 
 const useEntryDeleteConfirmation = () => {
   const alert = useAlert();
@@ -27,5 +32,11 @@ const useEntryDeleteConfirmation = () => {
 
   return confirmDeletion;
 };
+
+export function useDisableSwipeBack() {
+  const config = getConfig()!;
+  useIonViewWillEnter(() => config.set('swipeBackEnabled', false));
+  useIonViewWillLeave(() => config.set('swipeBackEnabled', true));
+}
 
 export default useEntryDeleteConfirmation;

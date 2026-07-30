@@ -33,7 +33,7 @@ const hasOver5UnidentifiedSpecies = (
 ) => {
   const unIdentifiedSpecies = (model: Model) => {
     const occ = model instanceof Occurrence ? model : model.occurrences[0];
-    return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying();
+    return !occ.getSpecies() && occ.canReIdentify() && !occ.isIdentifying;
   };
 
   const list: any = useSubSamples ? sample.samples : sample.occurrences;

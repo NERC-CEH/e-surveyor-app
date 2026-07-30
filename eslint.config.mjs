@@ -8,6 +8,8 @@ export default defineConfig([
     rules: {
       'import/extensions': 'off',
       'no-param-reassign': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/immutability': 'off',
       '@typescript-eslint/naming-convention': [
         'error',
         {

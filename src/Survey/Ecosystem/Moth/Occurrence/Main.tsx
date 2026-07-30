@@ -23,7 +23,7 @@ const OccurrenceMain = ({ occurrence, isDisabled, onDelete }: Props) => {
       <div className="mt-2 flex flex-col pb-5">
         <IonList lines="full">
           <div className="rounded-list">
-            <IonItem className="[--padding-start:2px] [--inner-padding-end:2px]">
+            <IonItem className="ps-ion-0.5 pe-ion-i-0.5">
               <div className="flex gap-2 w-full items-center">
                 <div className="list-avatar m-1">
                   <img src={image} alt="" className="size-full object-cover" />

@@ -74,7 +74,7 @@ const LocationsPanel = ({
       >
         {!isPartOfSurvey && (
           <IonHeader className="ion-no-border">
-            <IonToolbar className="pt-5! text-black [--background:var(--ion-page-background)]">
+            <IonToolbar className="pt-5! text-black bg-ion-neutral-100">
               <IonSegment onIonChange={onSegmentClick} value={segment}>
                 <IonSegmentButton value="pending">
                   <IonLabel className="ion-text-wrap">
@@ -92,7 +92,7 @@ const LocationsPanel = ({
           </IonHeader>
         )}
 
-        <IonContent className="[--padding-top:20px]">
+        <IonContent className="pt-ion-5">
           {segment === 'pending' && !isPartOfSurvey && (
             <LocationsList
               centroid={centroid}

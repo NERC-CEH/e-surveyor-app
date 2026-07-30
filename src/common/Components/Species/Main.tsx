@@ -10,7 +10,6 @@ import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import SpeciesCard from 'common/Components/SpeciesCard';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import { MachineInvolvement } from 'Survey/common/config';
-import './styles.scss';
 
 type Props = {
   occurrence: Occurrence;
@@ -25,12 +24,12 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
   const isPartOfSurvey = occurrence.parent;
   const isDisabled = isPartOfSurvey && occurrence.isDisabled;
 
-  const isIdentifying = occurrence.isIdentifying();
+  const { isIdentifying } = occurrence;
 
   useEffect(() => {
     if (!loader) return;
 
-    if (occurrence.isIdentifying()) {
+    if (isIdentifying) {
       loader.show('Please wait...');
       return;
     }
@@ -110,7 +109,6 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
 
   const navigateToSearch = () => navigate(`${match.url}/taxon`);
 
-  const identifying = occurrence.isIdentifying();
   const hasNoSpecies = !occurrence.getSpecies();
 
   const identifyButton = onReidentify && (
@@ -129,19 +127,14 @@ const EditSpeciesMain = ({ occurrence, onReidentify }: Props) => {
 
   return (
     <Main id="edit-species">
-      <div className="species-main-image-wrapper mx-auto -mt-1 max-w-xl">
-        <PhotoPicker
-          model={occurrence}
-          placeholderCount={1}
-          isDisabled={isDisabled}
-          allowToCrop
-        />
+      <div className="max-w-xl rounded-list m-2">
+        <PhotoPicker model={occurrence} allowToCrop />
       </div>
 
       {identifyButton}
 
       <div className="mx-auto flex max-w-xl flex-col gap-5 p-3">
-        {!identifying && hasNoSpecies && (
+        {!isIdentifying && hasNoSpecies && (
           <InfoBackgroundMessage>
             <div>Sorry, we couldn't find any species 😕</div>
           </InfoBackgroundMessage>

@@ -68,7 +68,7 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
     sample.data[seedmixGroupAttr.id] === CUSTOM_SEEDMIX_GROUP_VALUE;
 
   return (
-    <Main {...mainProps} className="[--padding-bottom:100px]">
+    <Main {...mainProps} className="pb-ion-25">
       <StarsBackground>
         {isDisabled && <UploadedRecordInfoMessage />}
 

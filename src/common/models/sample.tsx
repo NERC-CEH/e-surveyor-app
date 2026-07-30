@@ -235,13 +235,11 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
     const [occ] = this.occurrences;
     if (!occ?.media[0]) return false;
 
-    return occ.isIdentifying();
+    return occ.isIdentifying;
   }
 
   getPrettyName() {
-    if (!this.parent || this.data.surveyId === pointSurveyConfig.id) {
-      return '';
-    }
+    if (!this.parent || this.data.surveyId === pointSurveyConfig.id) return '';
 
     if (this.data.surveyId === beetleSurveyConfig.id) {
       const byId = ({ cid }: Sample) => cid === this.cid;

@@ -84,7 +84,7 @@ const UnidentifiedSpeciesEntry = ({
   const occ = model instanceof Occurrence ? model : model.occurrences[0];
   const [hasSpeciesPhoto] = occ.media;
 
-  const identifying = occ.isIdentifying();
+  const { isIdentifying } = occ;
 
   const canBeIdentified = !occ.getSpecies() && occ.canReIdentify();
 
@@ -125,16 +125,16 @@ const UnidentifiedSpeciesEntry = ({
   );
   const profilePhoto = <div className="list-avatar">{photo}</div>;
 
-  const onClickWrap = () => !identifying && onClick(model);
+  const onClickWrap = () => !isIdentifying && onClick(model);
 
   const onIdentifyWrap = () => onIdentify(model);
 
   return (
-    <IonItemSliding disabled={identifying}>
+    <IonItemSliding disabled={isIdentifying}>
       <IonItem
         detail={false}
         onClick={onClickWrap}
-        className="[--inner-padding-end:0px] [--padding-start:0px]"
+        className="pe-ion-i-0 ps-ion-0"
         {...contextMenuProps}
       >
         <div className="flex w-full items-center gap-2 bg-warning-100/50 p-1">
@@ -150,7 +150,7 @@ const UnidentifiedSpeciesEntry = ({
             </div>
 
             {!disableAI &&
-              !identifying &&
+              !isIdentifying &&
               hasSpeciesPhoto &&
               canBeIdentified && (
                 <button
@@ -165,7 +165,7 @@ const UnidentifiedSpeciesEntry = ({
                 </button>
               )}
 
-            {identifying && <IonSpinner className="mr-2 size-5" />}
+            {isIdentifying && <IonSpinner className="mr-2 size-5" />}
           </div>
         </div>
       </IonItem>

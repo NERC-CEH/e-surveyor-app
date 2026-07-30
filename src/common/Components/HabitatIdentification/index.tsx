@@ -170,12 +170,7 @@ const HabitatIdentification = ({
         </div>
 
         <div className="mt-2 max-w-xl rounded-xl overflow-hidden border border-neutral-200">
-          <PhotoPicker
-            model={location}
-            onChange={fetchSuggestions}
-            placeholderCount={2}
-            className="ion-no-border"
-          />
+          <PhotoPicker model={location as any} onChange={fetchSuggestions} />
         </div>
 
         {!location.isDisabled && !!location.media.length && (

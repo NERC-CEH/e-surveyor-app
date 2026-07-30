@@ -9,6 +9,7 @@
 @source "../../node_modules/@flumens/ionic";
 
 @import '@flumens/ionic/dist/themes/rounded.css';
+@import '@flumens/ionic/dist/themes/tailwindUtils.css';
 
 @theme {
   /* Habitat theme */

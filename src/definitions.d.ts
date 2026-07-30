@@ -20,6 +20,10 @@ declare module '*.png' {
   export default content;
 }
 
+declare module '*.jpg?originalName';
+declare module '*.scss';
+declare module '*.css';
+
 /**
  * Like Partial but creates recursive partial deep type;
  */

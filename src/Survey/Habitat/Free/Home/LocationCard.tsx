@@ -52,7 +52,7 @@ const LocationCard = ({ locationId }: Props) => {
   return (
     <IonItem
       routerLink={`${match.url}/location`}
-      className="ion-no-border p-2 [--padding-start:0px] [--inner-padding-end:0px]"
+      className="ion-no-border p-2 ps-ion-0 pe-ion-i-0"
     >
       <div className="flex w-full items-center gap-3">
         {locationPhoto}

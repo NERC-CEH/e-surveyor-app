@@ -36,6 +36,7 @@ const SeedmixFindSpecies = ({ onSpeciesSelected, selectedSpecies }: Props) => {
     if (input.current) {
       input.current.setFocus();
     }
+    // eslint-disable-next-line react-hooks/refs
   }, [input, input.current]);
 
   return (

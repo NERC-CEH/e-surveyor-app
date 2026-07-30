@@ -53,7 +53,7 @@ const MainLocations = ({
   const locations = [...(pendingLocations || []), ...uploadedLocations];
 
   return (
-    <Main className="[--padding-bottom:0] [--padding-top:0]">
+    <Main className="pb-ion-0 pt-ion-0">
       {device.isOnline && (
         <MapContainer
           onReady={ref => ref.resize()}

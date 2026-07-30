@@ -35,9 +35,7 @@ export const getShapeFromGeom = (geom?: string | null) => {
   if (!geomParsed) return undefined;
 
   return getGeomMetersToLatLon(geomParsed) as
-    | Polygon
-    | LineString
-    | MultiPolygon;
+    Polygon | LineString | MultiPolygon;
 };
 
 export const getLocationAttrsFromShape = (shape?: Shape) => ({
@@ -103,7 +101,7 @@ const ModelLocationMap = ({
   let initialViewState: any = {};
   if (useShape) {
     initialViewState = {
-      bounds: getShapeBounds(shape as Polygon),
+      bounds: getShapeBounds(shape),
       fitBoundsOptions: { padding: 100 },
     };
   } else {
@@ -145,7 +143,7 @@ const ModelLocationMap = ({
         )}
         {useShape && <Header title="Area" />}
       </MapHeader>
-      <Main className="[--padding-bottom:0px] [--padding-top:0px]">
+      <Main className="pb-ion-0 pt-ion-0">
         <MapContainer
           onReady={setMapRef}
           onClick={onMapClick}

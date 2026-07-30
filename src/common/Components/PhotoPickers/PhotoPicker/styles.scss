@@ -1,75 +1,7 @@
-#camera-container {
-  position: absolute;
-  border-bottom: 80px solid black;
-  background: black; // helps to prevent a white background flash while the camera is loading
-  width: 100vw;
-  height: 100vh;
-
-  #camera-focus-frame {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(to right, black 4px, transparent 4px) 0 0,
-      linear-gradient(to right, black 4px, transparent 4px) 0 100%,
-      linear-gradient(to left, black 4px, transparent 4px) 100% 0,
-      linear-gradient(to left, black 4px, transparent 4px) 100% 100%,
-      linear-gradient(to bottom, black 4px, transparent 4px) 0 0,
-      linear-gradient(to bottom, black 4px, transparent 4px) 100% 0,
-      linear-gradient(to top, black 4px, transparent 4px) 0 100%,
-      linear-gradient(to top, black 4px, transparent 4px) 100% 100%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    width: 300px;
-    height: 300px;
-  }
-
-  .cancel-button {
-    position: absolute;
-    bottom: -55px;
-    left: 11px;
-    background: transparent;
-    height: 32px;
-    color: white;
-    font-weight: 400;
-    font-size: 17px;
-  }
-
-  .camera-button {
-    position: absolute;
-    bottom: -64px;
-    left: 50vw;
-    transform: translateX(-50%);
-    border: 2px #cdcdcd solid;
-    border-radius: 50%;
-    background: white;
-    padding: 10px;
-    width: 50px;
-    height: 50px;
-  }
-}
-
-#img-array {
-  .warning-icon {
-    position: absolute;
-    right: 0px;
-    bottom: 5px;
-    border-radius: 100%;
-    background: #fff1f1;
-    padding: 3px;
-    color: var(--ion-color-danger);
-    font-size: 1em;
-  }
-
-  ion-spinner {
-    position: absolute;
-    right: 0;
-    bottom: 4px;
-    border-radius: 50%;
-    background: #ffffff94;
-    width: 23px;
-    height: 23px;
-  }
+div.rounded ion-item.photo-picker.with-cropper {
+  --border-style: none !important;
+  --border-radius: var(--theme-border-radius);
+  border-radius: var(--theme-border-radius);
 }
 
 ion-button[hidden] {

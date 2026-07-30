@@ -42,7 +42,7 @@ const Difficulty = ({ difficulty }: Props) => {
         isOpen={infoState.showInfo}
         onDidDismiss={hideInfo}
       >
-        <IonContent className="[--background:white] [--overflow:hidden]">
+        <IonContent className="bg-ion-white [--overflow:hidden]">
           <div className="[&>*]:mt-2">
             <div>
               <b>1</b> - Relatively easily identified.

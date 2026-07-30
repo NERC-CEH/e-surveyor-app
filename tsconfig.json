@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["node", "jest"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,13 +15,13 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
-    "noErrorTruncation": true,
     "paths": {
       "common/*": ["./src/common/*"],
       "@flumens": ["./src/common/flumens"],
       "models/*": ["./src/common/models/*"],
       "helpers/*": ["./src/common/helpers/*"],
       "Components/*": ["./src/common/Components/*"],
+      "Survey/common/Components/*": ["./src/Survey/common/Components/*"],
       "Survey/*": ["./src/Survey/*"]
     }
   },

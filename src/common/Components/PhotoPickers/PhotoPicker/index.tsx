@@ -1,142 +1,177 @@
-import { ComponentProps, useState } from 'react';
-import { observer } from 'mobx-react';
-import { close, cropOutline } from 'ionicons/icons';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Capacitor } from '@capacitor/core';
 import {
   PhotoPicker,
-  captureImage,
-  URL,
   ImageCropper,
+  captureImage,
+  useToast,
   saveFile,
   deleteFile,
 } from '@flumens';
-import { IonButton, IonIcon } from '@ionic/react';
+import { isPlatform, useIonActionSheet } from '@ionic/react';
 import Media from 'models/image';
-import Location from 'models/location';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
+import GalleryWithClassification from './GalleryWithClassification';
+import Image from './Image';
 import './styles.scss';
 
-export { usePromptImageSource } from '@flumens';
+type URL = string;
+
+export function usePromptImageSource() {
+  const { t } = useTranslation();
+  const [presentActionSheet] = useIonActionSheet();
+
+  const promptImageSource = (resolve: any) => {
+    presentActionSheet({
+      buttons: [
+        { text: t('Gallery'), handler: () => resolve(false) },
+        { text: t('Camera'), handler: () => resolve(true) },
+        { text: t('Cancel'), role: 'cancel', handler: () => resolve(null) },
+      ],
+      header: t('Choose a method to upload a photo'),
+    });
+  };
+  const promptImageSourceWrap = () =>
+    new Promise<boolean | null>(promptImageSource);
+
+  return promptImageSourceWrap;
+}
 
 type Props = {
-  model: Sample | Occurrence | Location;
-  maxImages?: number;
+  model: Sample | Occurrence;
   allowToCrop?: boolean;
-  onChange?: (media: Media[]) => void;
-} & Omit<ComponentProps<typeof PhotoPicker>, 'getImage' | 'value'>;
+  onChange?: any;
+};
 
-const AppPhotoPicker = ({
-  model,
-  allowToCrop,
-  maxImages,
-  onChange,
-  ...restProps
-}: Props) => {
-  const onAdd = async (shouldUseCamera: boolean) => {
-    if (
-      Number.isFinite(maxImages) &&
-      model.media.length >= (maxImages as number)
-    )
-      return;
+const useOnBackButton = (onCancelEdit: () => void, editImage?: Media) => {
+  const hideModal = () => {
+    const disableHardwareBackButton = (event: any) => {
+      // eslint-disable-next-line
+      event.detail.register(100, (processNextHandler: any) => {
+        if (!editImage) {
+          processNextHandler();
+          return null;
+        }
 
-    const images = await captureImage(
-      shouldUseCamera ? { camera: true } : { multiple: true }
-    );
-    if (!images?.length) return;
+        onCancelEdit();
+      });
+    };
+    document.addEventListener('ionBackButton', disableHardwareBackButton);
 
-    const imageModels = await Promise.all(
-      images.map(image => Media.getImageModel(image))
-    );
-
-    model.media.push(...imageModels);
-
-    onChange?.(imageModels);
-
-    if (!model.isPersistent()) return;
-    model.save();
+    const removeEventListener = () =>
+      document.removeEventListener('ionBackButton', disableHardwareBackButton);
+    return removeEventListener;
   };
 
-  const onRemove = async (media: any) => {
-    await media.destroy();
-    onChange?.(model.media);
-  };
+  useEffect(hideModal, [editImage]);
+};
 
+const AppPhotoPicker = ({ model, allowToCrop = true, onChange }: Props) => {
   const [editImage, setEditImage] = useState<Media>();
+  const toast = useToast();
 
-  const onDoneEdit = async (image: URL) => {
-    if (!editImage) return;
+  async function onAdd(shouldUseCamera: boolean) {
+    try {
+      const photoURLs = await captureImage(
+        shouldUseCamera ? { camera: true } : { multiple: true }
+      );
+      if (!photoURLs.length) return;
 
-    // save the new image and delete the old one
-    const oldFileName = editImage.getURL().split('/').pop() as string;
+      const getImageModel = async (imageURL: URL) =>
+        Media.getImageModel(
+          isPlatform('hybrid') ? Capacitor.convertFileSrc(imageURL) : imageURL
+        );
+      const imageModels: Media[] = await Promise.all<any>(
+        photoURLs.map(getImageModel)
+      );
+
+      const canEdit = imageModels.length === 1;
+      if (canEdit) {
+        setEditImage(imageModels[0]);
+        // don't identify until editing is over
+        return;
+      }
+
+      model.media.push(...imageModels);
+      model.save();
+
+      onChange?.();
+    } catch (e: any) {
+      toast.error(e);
+    }
+  }
+
+  const onRemove = async (m: any) => {
+    await m.destroy();
+    onChange?.();
+  };
+
+  const onDoneEdit = async (imageDataURL: URL) => {
+    const image = editImage as Media;
+
+    // overwrite existing file
+    const oldFileName: string = image?.getURL().split('/').pop() as string;
     const extension = oldFileName.split('.').pop() as string;
     const newFileName = `${Date.now()}.${extension}`;
+
     await deleteFile(oldFileName);
-    image = await saveFile(image, newFileName);
 
-    const newImageModel = await Media.getImageModel(image);
-    Object.assign(editImage?.data, {
-      ...newImageModel.data,
-      queued: null, // in case it was uploaded
-    });
+    const savedURL = await saveFile(imageDataURL, newFileName);
 
-    if (editImage.isPersistent) {
-      if (editImage.isPersistent()) editImage.save();
-    } else {
-      editImage.save();
+    // copy over new image values to existing model to preserve its observability
+    const newImageModel = await Media.getImageModel(
+      isPlatform('hybrid') ? Capacitor.convertFileSrc(savedURL) : savedURL
+    );
+    Object.assign(image?.data, { ...newImageModel.data, species: null });
+
+    if (!image.parent) {
+      // came straight from camera rather than editing existing
+      model.media.push(image);
     }
 
+    model.save();
+
     setEditImage(undefined);
+    onChange?.();
   };
 
   const onCancelEdit = () => setEditImage(undefined);
 
-  const isDisabled =
-    model instanceof Occurrence ? model.parent?.isUploaded : model.isUploaded;
-  const maxPicsReached = !!maxImages && model.media.length >= maxImages;
-  // eslint-disable-next-line react/no-unstable-nested-components
-  const ImageWithCropping = ({
-    media,
-    onDelete,
-    onClick,
-  }: {
-    media: Media;
-    onDelete: any;
-    onClick: any;
-  }) => {
-    const cropImage = () => {
-      setEditImage(media);
-    };
+  const onCropExisting = (media: Media) => {
+    if (model.isDisabled) return;
 
-    return (
-      <div className="img">
-        {!isDisabled && (
-          <IonButton fill="clear" className="delete" onClick={onDelete}>
-            <IonIcon icon={close} />
-          </IonButton>
-        )}
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-        <img src={media.getURL()} onClick={onClick} />
-        {!isDisabled && (
-          <IonButton className="crop-button" onClick={cropImage}>
-            <IonIcon icon={cropOutline} />
-          </IonButton>
-        )}
-      </div>
-    );
+    setEditImage(media);
   };
+
+  const isDisabled =
+    model instanceof Occurrence ? model.parent?.isDisabled : model.isDisabled;
+
+  const allowToEdit = allowToCrop && !isDisabled;
+
+  useOnBackButton(onCancelEdit, editImage);
+
+  if (isDisabled && !model.media.length) return null;
 
   return (
     <>
       <PhotoPicker
-        value={model.media}
+        className="with-cropper border-ion-none"
         onAdd={onAdd}
+        value={model.media}
+        Gallery={GalleryWithClassification}
+        Image={Image}
         onRemove={onRemove}
-        placeholderCount={1}
-        Image={allowToCrop ? ImageWithCropping : undefined}
-        isDisabled={isDisabled || maxPicsReached}
-        {...restProps}
+        galleryProps={{
+          onCrop: onCropExisting,
+          isDisabled,
+          onDelete: onRemove,
+        }}
+        isDisabled={isDisabled}
       />
-      {allowToCrop && (
+
+      {allowToEdit && (
         <ImageCropper
           image={editImage?.getURL()}
           onDone={onDoneEdit}
@@ -147,4 +182,4 @@ const AppPhotoPicker = ({
   );
 };
 
-export default observer(AppPhotoPicker);
+export default AppPhotoPicker;

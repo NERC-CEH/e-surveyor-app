@@ -64,17 +64,17 @@ const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
   const onSpeciesDelete = (warehouseId: number) => {
     const byId = (sp: SeedmixSpecies) => sp.warehouseId !== warehouseId;
     const filteredList = seedmix.species.filter(byId);
-    setSeedmix({ ...seedmix, species: filteredList } as SeedMix);
+    setSeedmix({ ...seedmix, species: filteredList });
   };
 
   const onSpeciesSelected = (sp: SeedmixSpecies) => {
     seedmix?.species.push(sp);
     seedmix?.species.sort(bySpeciesName);
-    setSeedmix({ ...seedmix } as SeedMix);
+    setSeedmix({ ...seedmix });
   };
 
   const onNameChange = (e: any) =>
-    setSeedmix({ ...seedmix, name: e.target.value } as SeedMix);
+    setSeedmix({ ...seedmix, name: e.target.value });
 
   const getWarehouseID = (sp: SeedmixSpecies) => sp.warehouseId;
   const selectedSpecies = seedmix.species.map(getWarehouseID);
