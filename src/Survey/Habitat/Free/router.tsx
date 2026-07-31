@@ -1,10 +1,10 @@
 import { RouteWithModels, AttrPage } from '@flumens';
 import samples from 'models/collections/samples';
 import Locations from 'Components/Locations';
-import EditSpecies from 'Components/Species';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
 import Home from './Home';
+import Occurrence from './Occurrence';
 import Report from './Report';
 import survey from './config';
 
@@ -18,7 +18,7 @@ const routes = [
   [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
   [`${baseURL}/:smpId/location`, Locations],
   [`${baseURL}/:smpId/taxon`, TaxonSearch],
-  [`${baseURL}/:smpId/species/:occId`, EditSpecies],
+  [`${baseURL}/:smpId/species/:occId`, Occurrence],
   [`${baseURL}/:smpId/species/:occId/taxon`, TaxonSearch],
   [`${baseURL}/:smpId/report`, Report],
 ];

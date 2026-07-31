@@ -1,11 +1,11 @@
 import { RouteWithModels, AttrPage } from '@flumens';
 import samples from 'models/collections/samples';
 import Locations from 'Components/Locations';
-import Occurrence from 'Components/Species';
 import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
 import Home from './Home';
+import Occurrence from './Occurrence';
 import Quadrat from './Quadrat';
 import Quadrats from './Quadrats';
 import Report from './Report';

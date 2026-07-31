@@ -292,7 +292,6 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
     return this.media.some(wasNotIdentified);
   }
 
-  // 'filter' instead of 'some' to trigger mobx listeners to all media objects
   get isIdentifying() {
     return this.identification.identifying;
   }

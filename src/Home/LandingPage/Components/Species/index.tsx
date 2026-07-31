@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
+import clsx from 'clsx';
 import { close } from 'ionicons/icons';
-import { device, useToast } from '@flumens';
+import { Button, device, Main, useToast } from '@flumens';
 import {
   IonLabel,
   IonSegment,
@@ -13,9 +14,10 @@ import {
   IonHeader,
   IonToolbar,
 } from '@ionic/react';
+import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import Occurrence from 'models/occurrence';
 import ReportView from 'Components/ReportView';
-import Profile from 'Components/Species/Main';
+import SpeciesList from 'Components/SpeciesList';
 import './styles.scss';
 
 type Props = {
@@ -69,7 +71,27 @@ const SpeciesProfile = ({ occurrence, onClose }: Props) => {
       </IonHeader>
 
       {segment === 'species' && !!occurrence && (
-        <Profile occurrence={occurrence} onReidentify={identifySpecies} />
+        <Main className="edit-species">
+          <div className="max-w-xl rounded-list m-2">
+            <PhotoPicker model={occurrence} allowToCrop />
+          </div>
+
+          <Button
+            onPress={identifySpecies}
+            color="secondary"
+            preventDefault
+            className={clsx(
+              'px-2 py-1 text-sm mx-auto my-3 w-fit bg-secondary-600',
+              occurrence.isIdentifying ? 'opacity-30' : ''
+            )}
+          >
+            Reidentify
+          </Button>
+          <SpeciesList
+            isIdentifying={occurrence.isIdentifying}
+            taxon={occurrence.data.taxon}
+          />
+        </Main>
       )}
 
       {segment === 'report' && !!occurrence && (
