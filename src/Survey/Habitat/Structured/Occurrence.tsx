@@ -68,7 +68,7 @@ const EditSpecies = ({ occurrence }: Props) => {
         <Button
           onPress={identifySpecies}
           className="px-2 py-1 text-sm mx-auto my-3"
-          isDisabled={occurrence.isIdentifying}
+          isDisabled={occurrence.isIdentifying || occurrence.isDisabled}
         >
           Reidentify
         </Button>

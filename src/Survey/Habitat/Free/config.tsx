@@ -1,7 +1,5 @@
-import { calendarOutline, leafOutline } from 'ionicons/icons';
+import { leafOutline } from 'ionicons/icons';
 import { z } from 'zod';
-import { IonIcon } from '@ionic/react';
-import config from 'common/config';
 import {
   dateFormatISO,
   inferAttrConfigTypes,
@@ -12,9 +10,7 @@ import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import {
   attachClassifierResults,
-  SEEDED_YES_VALUE,
   Survey,
-  seededAttr,
   seedmixGroupAttr,
   SEEDMIX_ATTR_ID,
 } from 'Survey/common/config';
@@ -24,23 +20,6 @@ export {
   SEEDED_YES_VALUE,
   seededAttr,
 } from 'Survey/common/config';
-
-const currentYear = new Date().getFullYear();
-const last8Years = Array.from({ length: 8 }, (_, index) => ({
-  dataName: String(currentYear - index),
-  title: String(currentYear - index),
-}));
-export const yearSownAttr = {
-  id: 'smpAttr:2089',
-  type: 'choiceInput',
-  title: 'Year sown',
-  appearance: 'button',
-  prefix: (<IonIcon src={calendarOutline} className="size-6" />) as any,
-  choices: last8Years,
-  visibility: [{ target: seededAttr.id, op: 'eq', value: SEEDED_YES_VALUE }],
-} as const;
-
-const { possibleThreshold } = config;
 
 const attrs = {
   seedmixGroup: { block: seedmixGroupAttr },
@@ -77,9 +56,7 @@ const survey = {
         .safeParse(data.taxon).error,
 
     create({ photo }) {
-      const occ = new Occurrence({
-        data: { taxon: null },
-      });
+      const occ = new Occurrence({});
 
       if (photo) occ.media.push(photo);
 
@@ -99,27 +76,14 @@ const survey = {
         surveyId: SURVEY_ID,
         training: appModel.data.useTraining,
         date: dateFormatISO.format(new Date()),
-        enteredSrefSystem: 4326,
       },
     });
 
     return sample;
   },
 
-  verify(data, sample) {
+  verify(data) {
     try {
-      // check if at least one species with possible score exists
-      let hasValidSpecies = false;
-      const showReportIfScoreHigherThanThreshold = (subSample: Sample) => {
-        const { probability } = subSample.getSpecies();
-        if (probability > possibleThreshold) hasValidSpecies = true;
-      };
-      sample.samples.forEach(showReportIfScoreHigherThanThreshold);
-
-      z.boolean()
-        .refine(val => val, { message: 'Please add some species.' })
-        .parse(hasValidSpecies);
-
       z.object({
         locationId: z.string({ error: 'Location is missing' }),
       }).parse(data);

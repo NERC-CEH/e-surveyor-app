@@ -8,7 +8,6 @@ import appModel, { SeedMix } from 'common/models/app';
 import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import LocationCard from 'Survey/Habitat/Free/Home/LocationCard';
-import { yearSownAttr } from 'Survey/Habitat/Free/config';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   CUSTOM_SEEDMIX_GROUP_VALUE,
@@ -17,6 +16,7 @@ import {
   SEEDMIX_ATTR_ID,
   seedmixAttr,
   seedmixGroupAttr,
+  yearSownAttr,
 } from 'Survey/common/config';
 import {
   COMMON_STANDARDS_PROTOCOL_VALUE,
@@ -62,7 +62,10 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
               <span className="mr-2">1.</span> Site
             </div>
           </div>
-          <LocationCard locationId={sample.data.locationId} />
+          <LocationCard
+            locationId={sample.data.locationId}
+            isDisabled={sample.isDisabled}
+          />
         </div>
 
         <div className="rounded-list">

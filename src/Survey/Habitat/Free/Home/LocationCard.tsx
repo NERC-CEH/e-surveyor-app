@@ -12,9 +12,9 @@ import {
   Data,
 } from 'Survey/Habitat/Location/config';
 
-type Props = { locationId?: string };
+type Props = { locationId?: string; isDisabled?: boolean };
 
-const LocationCard = ({ locationId }: Props) => {
+const LocationCard = ({ locationId, isDisabled }: Props) => {
   const match = useRouteMatch();
 
   const location = locations.idMap.get(locationId || '') as Location<Data>;
@@ -51,7 +51,7 @@ const LocationCard = ({ locationId }: Props) => {
 
   return (
     <IonItem
-      routerLink={`${match.url}/location`}
+      routerLink={!isDisabled ? `${match.url}/location` : undefined}
       className="ion-no-border p-2 ps-ion-0 pe-ion-i-0"
     >
       <div className="flex w-full items-center gap-3">

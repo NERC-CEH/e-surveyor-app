@@ -152,8 +152,6 @@ const AppPhotoPicker = ({ model, allowToCrop = true, onChange }: Props) => {
 
   useOnBackButton(onCancelEdit, editImage);
 
-  if (isDisabled && !model.media.length) return null;
-
   return (
     <>
       <PhotoPicker

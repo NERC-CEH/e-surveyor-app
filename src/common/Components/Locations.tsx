@@ -36,6 +36,8 @@ const LocationsController = () => {
     }
 
     sample.data.locationId = loc?.id;
+    sample.data.enteredSref = loc?.data.centroidSref;
+    sample.data.enteredSrefSystem = loc?.data.centroidSrefSystem as any;
     sample.save();
     goBack();
   };

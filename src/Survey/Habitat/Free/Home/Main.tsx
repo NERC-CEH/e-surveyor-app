@@ -19,8 +19,9 @@ import {
   customSeedmixAttr,
   SEEDMIX_ATTR_ID,
   seedmixAttr,
+  yearSownAttr,
 } from 'Survey/common/config';
-import { seededAttr, seedmixGroupAttr, yearSownAttr } from '../config';
+import { seededAttr, seedmixGroupAttr } from '../config';
 import LocationCard from './LocationCard';
 
 const { positiveThreshold } = config;

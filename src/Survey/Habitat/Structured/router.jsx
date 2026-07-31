@@ -8,7 +8,6 @@ import Home from './Home';
 import Occurrence from './Occurrence';
 import Quadrat from './Quadrat';
 import Quadrats from './Quadrats';
-import Report from './Report';
 import survey from './config';
 
 const { baseURL } = survey;
@@ -34,7 +33,6 @@ const routes = [
     `${baseURL}/:smpId/quadrats/quadrat/:subSmpId/species/:occId/taxon`,
     TaxonSearch,
   ],
-  [`${baseURL}/:smpId/report`, Report],
 ];
 
 export default RouteWithModels.fromArray(samples, routes);

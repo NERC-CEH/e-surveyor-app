@@ -149,7 +149,7 @@ const SpeciesList = ({
       return;
     }
 
-    if (!useSpeciesProfile || isDisabled) return;
+    if (!useSpeciesProfile) return;
 
     navigate(`${url}/species/${model.cid}`);
   };

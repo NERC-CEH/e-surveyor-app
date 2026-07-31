@@ -112,6 +112,21 @@ export const seedmixAttr = (data: any) =>
 
 export const customSeedmixAttr = { id: 'smpAttr:1647' } as const;
 
+const currentYear = new Date().getFullYear();
+const last8Years = Array.from({ length: 8 }, (_, index) => ({
+  dataName: String(currentYear - index),
+  title: String(currentYear - index),
+}));
+export const yearSownAttr = {
+  id: 'smpAttr:2089',
+  type: 'choiceInput',
+  title: 'Year sown',
+  appearance: 'button',
+  prefix: (<IonIcon src={calendarOutline} className="size-6" />) as any,
+  choices: last8Years,
+  visibility: [{ target: seededAttr.id, op: 'eq', value: SEEDED_YES_VALUE }],
+} as const;
+
 export const dateAttr = {
   id: 'date',
   menuProps: {

@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import { useRouteMatch } from 'react-router-dom';
 import { Header, Page, useToast } from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
@@ -15,13 +14,20 @@ type Props = {
 };
 
 const Controller = ({ sample }: Props) => {
-  const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
 
   const onUpload = async () => {
+    const isValid = checkSampleStatus();
+    if (!isValid) return;
+
+    sample.metadata.saved = true;
+    sample.save();
+
+    appModel.data['draftId:habitat-structured'] = '';
+
     const isUserOK = await checkUserStatus();
     if (!isUserOK) return;
 
@@ -31,27 +37,13 @@ const Controller = ({ sample }: Props) => {
     navigate('/home/surveys', 'root');
   };
 
-  const onFinish = async () => {
-    const isValid = checkSampleStatus();
-    if (!isValid) return;
-    sample.metadata.saved = true;
-    sample.save();
-
-    appModel.data['draftId:habitat-structured'] = '';
-
-    navigate(`${match.url}/report`);
-  };
-
   const isDisabled = sample.isUploaded;
 
   const isInvalid = sample.validateRemote();
   const uploadButton =
     isDisabled || sample.isSynchronising ? null : (
-      <HeaderButton
-        onClick={sample.metadata.saved ? onUpload : onFinish}
-        isInvalid={isInvalid}
-      >
-        {sample.metadata.saved ? 'Upload' : 'Finish'}
+      <HeaderButton onClick={onUpload} isInvalid={isInvalid}>
+        Finish
       </HeaderButton>
     );
 

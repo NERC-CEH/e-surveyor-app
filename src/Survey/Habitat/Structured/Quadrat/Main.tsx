@@ -79,6 +79,8 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
     'bg-secondary-100/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-secondary-900)_20%,transparent)]';
   const isSelected = (block: any) => subSample.data[block.id] > 0;
 
+  const hasSpecies = !!subSample.occurrences.length;
+
   return (
     <Main className="pb-ion-10">
       <div className="flex flex-col gap-4 m-3">
@@ -182,7 +184,7 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
         useSpeciesProfile
         showPhoto
       >
-        {!!subSample.occurrences.length && (
+        {hasSpecies && !subSample.isDisabled && (
           <InfoMessage
             color="secondary"
             prefix={
@@ -194,7 +196,7 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
         )}
       </SpeciesList>
 
-      {!subSample.occurrences.length && (
+      {!hasSpecies && (
         <InfoBackgroundMessage>
           Your species list is empty. <br /> Hold down the orange species button
           to list plant species yourself, or tap to take a photo for the AI to

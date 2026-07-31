@@ -78,6 +78,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
 
   const isComplete = sample.metadata.saved || sample.isDisabled; // disabled for backwards compatibility
 
+  const baseUrl = match.url.split('/').slice(0, -1).join('/');
   return (
     <Main className="pb-ion-s-10">
       <IonList lines="full">
@@ -89,7 +90,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
           <Button
             color="secondary"
             className="bg-secondary-600 mx-auto my-5"
-            onPress={() => navigate(`${match.url}/report`)}
+            onPress={() => navigate(`${baseUrl}/report`)}
           >
             See Report
           </Button>

@@ -2,7 +2,11 @@ import { appsOutline, layersOutline, readerOutline } from 'ionicons/icons';
 import { z } from 'zod';
 import { IonIcon } from '@ionic/react';
 import { schemeHabitats } from 'common/data/speciesHabitats';
-import { ChoiceInputConf, NumberInputConf } from 'common/flumens';
+import {
+  ChoiceInputConf,
+  dateFormatISO,
+  NumberInputConf,
+} from 'common/flumens';
 import squareIcon from 'common/images/square.svg';
 import transectIcon from 'common/images/transect.svg';
 import appModel from 'models/app';
@@ -12,7 +16,6 @@ import {
   locationAttr,
   attachClassifierResults,
   Survey,
-  locationSchema,
 } from 'Survey/common/config';
 
 const getHabitats = (name: any) => ({ value: name, id: name });
@@ -203,11 +206,7 @@ const survey = {
       },
 
       create({ photo }) {
-        const occ = new Occurrence({
-          data: {
-            [countAttr.id]: 1,
-          },
-        });
+        const occ = new Occurrence({ data: { [countAttr.id]: 1 } });
 
         if (photo) occ.media.push(photo);
 
@@ -216,31 +215,19 @@ const survey = {
 
       modifySubmission(submission: any, occ: Occurrence) {
         // for non-UK species
-        if (!submission.values.taxa_taxon_list_id) {
-          return null;
-        }
+        if (!submission.values.taxa_taxon_list_id) return null;
 
         return attachClassifierResults(submission, occ);
       },
     },
 
     create() {
-      const sample = new Sample({
-        data: {
-          surveyId: SURVEY_ID,
-          enteredSrefSystem: 4326,
-        },
-      });
-
-      // sample.startGPS(loc => updateModelLocation(sample, loc));
-
-      return sample;
+      return new Sample({ data: { surveyId: SURVEY_ID } });
     },
 
     verify: (data: any, sample: Sample) =>
       z
         .object({
-          location: locationSchema,
           photos: z.number().min(1, 'Please add a quadrat photo.'),
         })
         .safeParse({
@@ -254,8 +241,7 @@ const survey = {
       data: {
         surveyId: SURVEY_ID,
         training: appModel.data.useTraining,
-        date: new Date().toISOString(),
-        enteredSrefSystem: 4326,
+        date: dateFormatISO.format(new Date()),
       },
     });
 
