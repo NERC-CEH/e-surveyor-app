@@ -4,8 +4,10 @@ import {
   useState,
   useEffect,
   type ReactNode,
+  createRef,
 } from 'react';
 import { useLocation as useRouterLocation } from 'react-router';
+import { useIonViewWillEnter } from '@ionic/react';
 
 type ScrollEvent = CustomEvent<{ scrollTop: number }>;
 
@@ -26,7 +28,12 @@ const HeaderScrollHandlerContext = createContext<ScrollHandler | undefined>(
   undefined
 );
 
-export const HeaderScrollProvider = ({ children, threshold = 70 }: Props) => {
+const DEFAULT_THRESHOLD = 50;
+
+export const HeaderScrollProvider = ({
+  children,
+  threshold = DEFAULT_THRESHOLD,
+}: Props) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const routeLocation = useRouterLocation();
 
@@ -50,14 +57,30 @@ export const HeaderScrollProvider = ({ children, threshold = 70 }: Props) => {
 };
 
 const useHeaderScroll = () => {
+  const contentRef = createRef<HTMLIonContentElement>();
+
   const isScrolled = useContext(HeaderScrollContext);
   const onIonScroll = useContext(HeaderScrollHandlerContext);
-
   if (isScrolled === undefined || !onIonScroll) {
     throw new Error('useHeaderScroll must be used within HeaderScrollProvider');
   }
 
-  return { isScrolled, onIonScroll, fullscreen: true, scrollEvents: true };
+  useIonViewWillEnter(() => {
+    (async () => {
+      const el = contentRef.current;
+      if (!el) return;
+      const scrollEl = await el.getScrollElement();
+      onIonScroll({ detail: { scrollTop: scrollEl.scrollTop } } as any);
+    })();
+  }, [contentRef]);
+
+  return {
+    ref: contentRef,
+    isScrolled,
+    onIonScroll,
+    fullscreen: true,
+    scrollEvents: true,
+  };
 };
 
 export default useHeaderScroll;

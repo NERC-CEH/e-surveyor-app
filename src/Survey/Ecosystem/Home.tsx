@@ -15,7 +15,7 @@ const EcosystemHome = () => {
         title="Ecosystem Function"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main {...mainProps}>
+      <Main {...mainProps} className="pb-ion-25">
         <StarsBackground>
           Measure biodiversity within habitats by recording moths, beetles and
           day-time pollinators.

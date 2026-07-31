@@ -17,7 +17,7 @@ const HabitatHome = () => {
         title="Habitat"
         className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main {...mainProps}>
+      <Main {...mainProps} className="pb-ion-25">
         <StarsBackground>
           Record habitat type, composition and structure to describe what is
           present on site.

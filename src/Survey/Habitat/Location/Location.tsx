@@ -32,7 +32,6 @@ const LocationLocation = () => {
   const { navigate } = useContext(NavContext);
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
-
   const { location } = useLocation<Location<Data>>();
   if (!location) return null;
 
