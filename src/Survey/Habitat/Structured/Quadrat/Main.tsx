@@ -1,9 +1,13 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
-import { addCircleOutline, locationOutline } from 'ionicons/icons';
+import {
+  addCircleOutline,
+  informationCircleOutline,
+  locationOutline,
+} from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Main, MenuAttrItem, Button, Block } from '@flumens';
+import { Main, MenuAttrItem, Button, Block, InfoMessage } from '@flumens';
 import { IonIcon, NavContext } from '@ionic/react';
 import CircleIcon from 'common/Components/CircleIcon';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
@@ -177,9 +181,20 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
         isDisabled={isDisabled}
         useSpeciesProfile
         showPhoto
-      />
+      >
+        {!!subSample.occurrences.length && (
+          <InfoMessage
+            color="secondary"
+            prefix={
+              <IonIcon icon={informationCircleOutline} className="size-6" />
+            }
+          >
+            Keep recording to capture all the plants you see.
+          </InfoMessage>
+        )}
+      </SpeciesList>
 
-      {!subSample.samples.length && (
+      {!subSample.occurrences.length && (
         <InfoBackgroundMessage>
           Your species list is empty. <br /> Hold down the orange species button
           to list plant species yourself, or tap to take a photo for the AI to

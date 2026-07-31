@@ -31,7 +31,7 @@ const last8Years = Array.from({ length: 8 }, (_, index) => ({
   title: String(currentYear - index),
 }));
 export const yearSownAttr = {
-  id: 'smpAttr:-10',
+  id: 'smpAttr:2089',
   type: 'choiceInput',
   title: 'Year sown',
   appearance: 'button',

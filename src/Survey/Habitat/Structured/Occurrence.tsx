@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react';
-import { Page, Header, useToast, device, Main, Button } from '@flumens';
+import { Page, Header, useToast, device, Main, Button, Block } from '@flumens';
 import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
 import SpeciesList from 'Components/SpeciesList';
 import { MachineInvolvement } from 'Survey/common/config';
+import { countAttr, coverAttr } from './config';
 
 type Props = {
   occurrence: Occurrence;
@@ -46,10 +47,20 @@ const EditSpecies = ({ occurrence }: Props) => {
     occurrence.save();
   };
 
+  const recordAttrs = {
+    record: occurrence.data,
+    isDisabled: occurrence.isDisabled,
+  };
+
   return (
     <Page id="species-profile">
       <Header title="Species" />
       <Main id="edit-species">
+        <div className="max-w-xl rounded-list m-2">
+          <Block block={countAttr} {...recordAttrs} />
+          <Block block={coverAttr} {...recordAttrs} />
+        </div>
+
         <div className="max-w-xl rounded-list m-2">
           <PhotoPicker model={occurrence} allowToCrop />
         </div>

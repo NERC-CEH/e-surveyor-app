@@ -34,8 +34,26 @@ export const surveyProtocolAttr = {
   ],
 } as const satisfies ChoiceInputConf;
 
+export const countAttr = {
+  id: 'occAttr:1268',
+  type: 'numberInput',
+  title: 'Total individuals',
+  appearance: 'counter',
+  validation: { min: 0, max: 1000 },
+} as const satisfies NumberInputConf;
+
+export const coverAttr = {
+  id: 'occAttr:1269',
+  type: 'numberInput',
+  title: 'Estimated cover',
+  appearance: 'counter',
+  suffix: '%',
+  placeholder: '0',
+  validation: { min: 0, max: 100 },
+} as const satisfies NumberInputConf;
+
 export const vegetationCompAttr = {
-  id: 'smpAttr:-1',
+  id: 'smpAttr:2090',
   type: 'numberInput',
   appearance: 'slider',
   suffix: '%',
@@ -43,7 +61,7 @@ export const vegetationCompAttr = {
 } as const satisfies NumberInputConf;
 
 export const bareGroundAttr = {
-  id: 'smpAttr:-2',
+  id: 'smpAttr:2091',
   type: 'numberInput',
   appearance: 'slider',
   suffix: '%',
@@ -51,7 +69,7 @@ export const bareGroundAttr = {
 } as const satisfies NumberInputConf;
 
 export const litterThatchAttr = {
-  id: 'smpAttr:-3',
+  id: 'smpAttr:2092',
   type: 'numberInput',
   appearance: 'slider',
   suffix: '%',
@@ -59,7 +77,7 @@ export const litterThatchAttr = {
 } as const satisfies NumberInputConf;
 
 export const mossLiverwortAttr = {
-  id: 'smpAttr:-4',
+  id: 'smpAttr:2093',
   type: 'numberInput',
   appearance: 'slider',
   suffix: '%',
@@ -67,7 +85,7 @@ export const mossLiverwortAttr = {
 } as const satisfies NumberInputConf;
 
 export const deadWoodAttr = {
-  id: 'smpAttr:-5',
+  id: 'smpAttr:2094',
   type: 'numberInput',
   appearance: 'slider',
   suffix: '%',
@@ -75,7 +93,7 @@ export const deadWoodAttr = {
 } as const satisfies NumberInputConf;
 
 export const standingWaterAttr = {
-  id: 'smpAttr:-6',
+  id: 'smpAttr:2095',
   type: 'numberInput',
   appearance: 'slider',
   suffix: '%',
@@ -94,7 +112,7 @@ export const quadratSizeAttr = {
 } as const satisfies NumberInputConf;
 
 export const transectLengthAttr = {
-  id: 'smpAttr:-1242',
+  id: 'smpAttr:2096',
   type: 'numberInput',
   title: 'Transect Length',
   appearance: 'counter',
@@ -104,17 +122,17 @@ export const transectLengthAttr = {
   validation: { min: 1, max: 200 },
 } as const satisfies NumberInputConf;
 
-export const PLACEMENT_RANDOM_VALUE = '-1';
+export const PLACEMENT_RANDOM_VALUE = '24835';
 export const quadratPlacementAttr = {
-  id: 'smpAttr:-1212',
+  id: 'smpAttr:2097',
   type: 'choiceInput',
   title: 'Quadrat Placement',
   appearance: 'button',
   prefix: <IonIcon icon={appsOutline} className="size-6" />,
   choices: [
     { title: 'Randomly', dataName: PLACEMENT_RANDOM_VALUE },
-    { title: 'Evenly spaced', dataName: '-2' },
-    { title: 'Existing permanent quadrats', dataName: '-3' },
+    { title: 'Evenly spaced', dataName: '24836' },
+    { title: 'Existing permanent quadrats', dataName: '24837' },
   ],
 } as const satisfies ChoiceInputConf;
 
@@ -187,13 +205,11 @@ const survey = {
       create({ photo }) {
         const occ = new Occurrence({
           data: {
-            taxon: null,
+            [countAttr.id]: 1,
           },
         });
 
-        if (photo) {
-          occ.media.push(photo);
-        }
+        if (photo) occ.media.push(photo);
 
         return occ;
       },
