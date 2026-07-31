@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-import clsx from 'clsx';
 import { ellipsisHorizontalOutline } from 'ionicons/icons';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, Block } from '@flumens';
@@ -55,18 +54,22 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
 
   return (
     <Main {...mainProps} className="pb-ion-25">
-      <StarsBackground />
+      <StarsBackground>
+        {isDisabled && <UploadedRecordInfoMessage />}
 
-      <div className="list">
-        {isDisabled && (
-          <div className="rounded-list my-2 -mt-4">
-            <UploadedRecordInfoMessage />
+        {!isDisabled && (
+          <div className="px-3">
+            <b>Structured Survey</b>
+            <div>
+              Follow the survey protocol and record plants within the quadrats
+              along the route.
+            </div>
           </div>
         )}
+      </StarsBackground>
 
-        <div
-          className={clsx('card p-0! overflow-hidden', !isDisabled && 'top')}
-        >
+      <div className="list">
+        <div className="card p-0! overflow-hidden top">
           <div className="list-divider justify-between p-2">
             <div>
               <span className="mr-2">1.</span> Site
