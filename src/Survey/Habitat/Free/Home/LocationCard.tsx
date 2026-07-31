@@ -17,7 +17,7 @@ type Props = { locationId?: string };
 const LocationCard = ({ locationId }: Props) => {
   const match = useRouteMatch();
 
-  const location = locations.idMap.get(locationId!) as Location<Data>;
+  const location = locations.idMap.get(locationId || '') as Location<Data>;
   const locationName = location?.data.name ? (
     <b>{location?.data.name}</b>
   ) : (
