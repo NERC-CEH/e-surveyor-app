@@ -50,24 +50,26 @@ const EditSpecies = ({ occurrence }: Props) => {
     <Page id="species-profile">
       <Header title="Species" />
       <Main id="edit-species">
-        <div className="max-w-xl rounded-list m-2">
-          <PhotoPicker model={occurrence} allowToCrop />
+        <div className="flex flex-col gap-4 m-3">
+          <div className="max-w-xl rounded-list">
+            <PhotoPicker model={occurrence} allowToCrop />
+          </div>
+
+          <Button
+            onPress={identifySpecies}
+            className="px-2 py-1 text-sm mx-auto my-3"
+            isDisabled={occurrence.isIdentifying}
+          >
+            Reidentify
+          </Button>
+
+          <SpeciesList
+            isDisabled={occurrence.isDisabled}
+            isIdentifying={occurrence.isIdentifying}
+            taxon={occurrence.data.taxon}
+            onSelect={onSelect}
+          />
         </div>
-
-        <Button
-          onPress={identifySpecies}
-          className="px-2 py-1 text-sm mx-auto my-3"
-          isDisabled={occurrence.isIdentifying}
-        >
-          Reidentify
-        </Button>
-
-        <SpeciesList
-          isDisabled={occurrence.isDisabled}
-          isIdentifying={occurrence.isIdentifying}
-          taxon={occurrence.data.taxon}
-          onSelect={onSelect}
-        />
       </Main>
     </Page>
   );

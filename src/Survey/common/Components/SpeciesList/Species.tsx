@@ -76,6 +76,7 @@ type Props = {
   onDelete?: () => void;
   onClick: (model: Occurrence) => void;
   itemNumber?: number;
+  className?: string;
 };
 
 const Species = ({
@@ -88,6 +89,7 @@ const Species = ({
   showGallery = true,
   onReidentify,
   itemNumber,
+  className,
 }: Props) => {
   const showDeleteAlert = useDeleteAlert(onDelete);
   const showMenu = useMenu(showDeleteAlert);
@@ -229,7 +231,8 @@ const Species = ({
         detailIcon={detailsIcon}
         className={clsx(
           `[--detail-icon-opacity:1] ps-ion-0 ${idClass}`,
-          useDoughnut && 'pe-ion-i-0'
+          useDoughnut && 'pe-ion-i-0',
+          className
         )}
         onClick={onClickWrap}
       >

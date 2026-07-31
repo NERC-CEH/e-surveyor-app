@@ -7,6 +7,7 @@ import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
+import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 import Main from './Main';
 
 type Props = {
@@ -15,14 +16,12 @@ type Props = {
 
 const Controller = ({ sample }: Props) => {
   const { navigate } = useContext(NavContext);
+  const showUploadSurveyConfirmation = useUploadSurveyConfirmation();
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
 
   const onUpload = async () => {
-    const isValid = checkSampleStatus();
-    if (!isValid) return;
-
     sample.metadata.saved = true;
     sample.save();
 
@@ -39,10 +38,17 @@ const Controller = ({ sample }: Props) => {
 
   const isDisabled = sample.isUploaded;
 
+  const onFinish = () => {
+    const isValid = checkSampleStatus();
+    if (!isValid) return;
+
+    showUploadSurveyConfirmation(onUpload);
+  };
+
   const isInvalid = sample.validateRemote();
   const uploadButton =
     isDisabled || sample.isSynchronising ? null : (
-      <HeaderButton onClick={onUpload} isInvalid={isInvalid}>
+      <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
         Finish
       </HeaderButton>
     );

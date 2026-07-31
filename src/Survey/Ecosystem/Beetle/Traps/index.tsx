@@ -8,6 +8,7 @@ import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
+import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 import Main from './Main';
 
 type Props = {
@@ -20,10 +21,17 @@ const Controller = ({ sample }: Props) => {
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
+  const showUploadSurveyConfirmation = useUploadSurveyConfirmation();
 
   const onUpload = async () => {
     const isUserOK = await checkUserStatus();
     if (!isUserOK) return;
+
+    const isValid = checkSampleStatus();
+    if (!isValid) return;
+
+    const isConfirmed = await showUploadSurveyConfirmation();
+    if (!isConfirmed) return;
 
     const isUploading = await sample.syncRemote(toast.error);
     if (!isUploading) return;

@@ -40,12 +40,20 @@ const LocationCard = ({ locationId, isDisabled }: Props) => {
     }
   }
 
-  const locationPhoto = !!location?.media.length && (
+  const locationPhoto = (
     <div className="list-avatar">
-      <img
-        src={location?.media[0]?.getURL()}
-        className="size-full object-cover"
-      />
+      {!!location?.media.length && (
+        <img
+          src={location?.media[0]?.getURL()}
+          className="size-full object-cover"
+        />
+      )}
+      {!location?.media.length && (
+        <IonIcon
+          icon={locationOutline}
+          className="size-full p-3 stroke-ion-3 opacity-40"
+        />
+      )}
     </div>
   );
 
@@ -58,10 +66,7 @@ const LocationCard = ({ locationId, isDisabled }: Props) => {
         {locationPhoto}
 
         <div className="min-w-0">
-          <div className="line-clamp-1 flex items-center">
-            <IonIcon icon={locationOutline} className="mr-1 text-secondary" />
-            {locationName}
-          </div>
+          <div className="line-clamp-1 flex items-center">{locationName}</div>
           {!!location && (
             <div className="mt-1">
               <Badge size="small">{habitatType}</Badge>

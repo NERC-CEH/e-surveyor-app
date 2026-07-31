@@ -1,17 +1,75 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import { leaf } from 'ionicons/icons';
+import clsx from 'clsx';
+import { leaf, checkmark, alertCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Main, Button } from '@flumens';
 import { IonList, IonItem, IonIcon, NavContext } from '@ionic/react';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
+import {
+  bareGroundAttr,
+  deadWoodAttr,
+  litterThatchAttr,
+  mossLiverwortAttr,
+  standingWaterAttr,
+  vegetationCompAttr,
+} from '../config';
 
 function byDate(smp1: Sample, smp2: Sample) {
   const date1 = new Date(smp1.data.date);
   const date2 = new Date(smp2.data.date);
   return date2.getTime() - date1.getTime();
+}
+
+const hasUnsavedChanges = (quadratSample: Sample) => {
+  if (quadratSample.metadata.saved) return false;
+
+  const hasQuadratPhoto = quadratSample.media.length > 0;
+  const hasSpecies = quadratSample.occurrences.length > 0;
+
+  const coverAttrIds = [
+    vegetationCompAttr.id,
+    bareGroundAttr.id,
+    litterThatchAttr.id,
+    mossLiverwortAttr.id,
+    deadWoodAttr.id,
+    standingWaterAttr.id,
+  ];
+
+  const hasCoverData = coverAttrIds.some(
+    attrId => (quadratSample.data[attrId] || 0) > 0
+  );
+
+  return hasQuadratPhoto || hasSpecies || hasCoverData;
+};
+
+function getCompletionProps(quadratSample: Sample) {
+  const isQuadratComplete =
+    quadratSample.metadata.saved || quadratSample.isDisabled;
+  const isUnsaved = hasUnsavedChanges(quadratSample);
+
+  const savedQuadratClasses =
+    'bg-ion-secondary-100/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-secondary-900)_20%,transparent)]';
+  const changedQuadratClasses =
+    'bg-ion-warning-200/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-warning-600)_40%,transparent)]';
+
+  const props: any = {
+    className: clsx(
+      'ps-ion-1',
+      isQuadratComplete && savedQuadratClasses,
+      isUnsaved && changedQuadratClasses
+    ),
+  };
+
+  if (isQuadratComplete) {
+    props.detailIcon = checkmark;
+  } else if (isUnsaved) {
+    props.detailIcon = alertCircleOutline;
+  }
+
+  return props;
 }
 
 type Props = {
@@ -52,7 +110,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
       <IonItem
         key={quadratSample.cid}
         routerLink={`${match.url}/quadrat/${quadratSample.cid}`}
-        className="ps-ion-1"
+        {...getCompletionProps(quadratSample)}
       >
         <div className="px-1 py-2 w-full flex items-center">
           {getQuadratPhoto(quadratSample)}

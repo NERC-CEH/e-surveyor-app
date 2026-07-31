@@ -6,6 +6,7 @@ import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import Main from 'Components/ReportView';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 
 type Props = {
   sample: Sample;
@@ -16,6 +17,7 @@ const ReportController = ({ sample }: Props) => {
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
+  const showUploadSurveyConfirmation = useUploadSurveyConfirmation();
 
   if (!sample) return null;
 
@@ -25,6 +27,9 @@ const ReportController = ({ sample }: Props) => {
 
     const isValid = checkSampleStatus();
     if (!isValid) return;
+
+    const isConfirmed = await showUploadSurveyConfirmation();
+    if (!isConfirmed) return;
 
     const isUploading = await sample.syncRemote(toast.error);
     if (!isUploading) return;

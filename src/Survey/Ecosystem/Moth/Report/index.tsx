@@ -4,6 +4,7 @@ import { NavContext } from '@ionic/react';
 import Sample, { useValidateCheck } from 'common/models/sample';
 import { useUserStatusCheck } from 'common/models/user';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
+import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 import Main from './Main';
 import useNewnessCheck from './useNewnessCheck';
 
@@ -14,6 +15,7 @@ const Report = ({ sample }: Props) => {
   const toast = useToast();
   const checkSampleStatus = useValidateCheck(sample);
   const checkUserStatus = useUserStatusCheck();
+  const showUploadSurveyConfirmation = useUploadSurveyConfirmation();
 
   const { newnessMap } = useNewnessCheck(sample);
 
@@ -23,6 +25,9 @@ const Report = ({ sample }: Props) => {
 
     const isValid = checkSampleStatus();
     if (!isValid) return;
+
+    const isConfirmed = await showUploadSurveyConfirmation();
+    if (!isConfirmed) return;
 
     sample.syncRemote(toast.error);
 

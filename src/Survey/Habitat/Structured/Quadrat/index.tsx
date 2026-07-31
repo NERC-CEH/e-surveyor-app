@@ -1,10 +1,13 @@
+import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, device, captureImage, useAlert } from '@flumens';
+import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Sample from 'models/sample';
 import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
+import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
 
 type URL = string;
@@ -60,6 +63,7 @@ const showFirstPhotoTip = (alert: any) => {
 
 const QuadratController = ({ subSample }: Props) => {
   const alert = useAlert();
+  const { goBack } = useContext(NavContext);
 
   const isDisabled = subSample.isUploaded;
   const promptImageSource = usePromptImageSource();
@@ -101,9 +105,34 @@ const QuadratController = ({ subSample }: Props) => {
     attachImages(photoURLs);
   };
 
+  const isInvalid = !subSample.media.length;
+
+  const onDone = async () => {
+    if (isInvalid) {
+      await alert({
+        header: 'Photo required',
+        message: 'Please attach at least one photo to the quadrat.',
+        buttons: [{ text: 'OK' }],
+      });
+      return;
+    }
+
+    subSample.metadata.saved = true;
+    subSample.save();
+
+    goBack();
+  };
+
+  const doneButton =
+    isDisabled || subSample.metadata.saved ? null : (
+      <HeaderButton onClick={onDone} isInvalid={isInvalid}>
+        Done
+      </HeaderButton>
+    );
+
   return (
     <Page id="transect-quadrat" className="theme-habitat">
-      <Header title={subSample.getPrettyName()} />
+      <Header title={subSample.getPrettyName()} rightSlot={doneButton} />
       <Main
         subSample={subSample}
         isDisabled={isDisabled}

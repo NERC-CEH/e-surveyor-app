@@ -101,7 +101,7 @@ const EditSpeciesMain = ({
     );
 
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-5 p-3">
+    <div className="mx-auto flex max-w-xl flex-col gap-5">
       {getSelectedSpecies()}
 
       {getAIResults()}

@@ -7,11 +7,19 @@ import {
   locationOutline,
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
-import { Main, MenuAttrItem, Button, Block, InfoMessage } from '@flumens';
+import {
+  Main,
+  MenuAttrItem,
+  Button,
+  Block,
+  InfoMessage,
+  updateModelLocation,
+} from '@flumens';
 import { IonIcon, NavContext } from '@ionic/react';
 import CircleIcon from 'common/Components/CircleIcon';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import { useDisableSwipeBack } from 'common/helpers/hooks';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
@@ -19,6 +27,8 @@ import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import {
   bareGroundAttr,
+  countAttr,
+  coverAttr,
   deadWoodAttr,
   litterThatchAttr,
   mossLiverwortAttr,
@@ -81,9 +91,35 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
 
   const hasSpecies = !!subSample.occurrences.length;
 
+  const speciesEntryClasses =
+    'bg-ion-secondary-100/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-secondary-900)_20%,transparent)]';
+
+  const getItemClassName = (occ: Occurrence) => {
+    const data = occ.data as any;
+    const hasCover = (data[coverAttr.id] || 0) > 0;
+    const hasCount = (data[countAttr.id] || 0) > 1;
+    return hasCover || hasCount ? speciesEntryClasses : '';
+  };
+
   return (
     <Main className="pb-ion-10">
       <div className="flex flex-col gap-4 m-3">
+        <div className="rounded-list">
+          <div className="list-divider">Quadrat photo</div>
+          <PhotoPicker
+            model={subSample}
+            allowToCrop
+            onChange={() => {
+              // trigger GPS on the first photo added to the quadrat
+              const isFirstPhoto = subSample.media.length === 1;
+              if (isFirstPhoto) {
+                console.log('triggering GPS for first photo');
+                subSample.startGPS(loc => updateModelLocation(subSample, loc));
+              }
+            }}
+          />
+        </div>
+
         <div className="rounded-list">
           <MenuAttrItem
             routerLink={`${url}/map`}
@@ -94,10 +130,6 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
             disabled={isDisabled}
             className="border-ion-none"
           />
-        </div>
-        <div className="rounded-list">
-          <div className="list-divider">Quadrat photo</div>
-          <PhotoPicker model={subSample} allowToCrop />
         </div>
 
         <div className="rounded-list">
@@ -183,6 +215,7 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
         isDisabled={isDisabled}
         useSpeciesProfile
         showPhoto
+        getItemClassName={getItemClassName}
       >
         {hasSpecies && !subSample.isDisabled && (
           <InfoMessage

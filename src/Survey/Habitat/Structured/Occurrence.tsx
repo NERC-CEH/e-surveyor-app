@@ -53,32 +53,36 @@ const EditSpecies = ({ occurrence }: Props) => {
   };
 
   return (
-    <Page id="species-profile">
+    <Page id="species-profile" className="theme-habitat">
       <Header title="Species" />
       <Main id="edit-species">
-        <div className="max-w-xl rounded-list m-2">
-          <Block block={countAttr} {...recordAttrs} />
-          <Block block={coverAttr} {...recordAttrs} />
+        <div className="flex flex-col gap-4 m-3">
+          <div className="max-w-xl rounded-list">
+            <div className="list-divider">Species details</div>
+            <Block block={countAttr} {...recordAttrs} />
+            <Block block={coverAttr} {...recordAttrs} />
+          </div>
+
+          <div className="max-w-xl rounded-list">
+            <div className="list-divider">Species photos</div>
+            <PhotoPicker model={occurrence} allowToCrop />
+          </div>
+
+          <Button
+            onPress={identifySpecies}
+            className="px-2 py-1 text-sm mx-auto my-3"
+            isDisabled={occurrence.isIdentifying || occurrence.isDisabled}
+          >
+            Reidentify
+          </Button>
+
+          <SpeciesList
+            isDisabled={occurrence.isDisabled}
+            isIdentifying={occurrence.isIdentifying}
+            taxon={occurrence.data.taxon}
+            onSelect={onSelect}
+          />
         </div>
-
-        <div className="max-w-xl rounded-list m-2">
-          <PhotoPicker model={occurrence} allowToCrop />
-        </div>
-
-        <Button
-          onPress={identifySpecies}
-          className="px-2 py-1 text-sm mx-auto my-3"
-          isDisabled={occurrence.isIdentifying || occurrence.isDisabled}
-        >
-          Reidentify
-        </Button>
-
-        <SpeciesList
-          isDisabled={occurrence.isDisabled}
-          isIdentifying={occurrence.isIdentifying}
-          taxon={occurrence.data.taxon}
-          onSelect={onSelect}
-        />
       </Main>
     </Page>
   );

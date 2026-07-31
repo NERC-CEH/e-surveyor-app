@@ -72,25 +72,27 @@ const SpeciesProfile = ({ occurrence, onClose }: Props) => {
 
       {segment === 'species' && !!occurrence && (
         <Main className="edit-species">
-          <div className="max-w-xl rounded-list m-2">
-            <PhotoPicker model={occurrence} allowToCrop />
-          </div>
+          <div className="flex flex-col gap-4 m-3">
+            <div className="max-w-xl rounded-list">
+              <PhotoPicker model={occurrence} allowToCrop />
+            </div>
 
-          <Button
-            onPress={identifySpecies}
-            color="secondary"
-            preventDefault
-            className={clsx(
-              'px-2 py-1 text-sm mx-auto my-3 w-fit bg-secondary-600',
-              occurrence.isIdentifying ? 'opacity-30' : ''
-            )}
-          >
-            Reidentify
-          </Button>
-          <SpeciesList
-            isIdentifying={occurrence.isIdentifying}
-            taxon={occurrence.data.taxon}
-          />
+            <Button
+              onPress={identifySpecies}
+              color="secondary"
+              preventDefault
+              className={clsx(
+                'px-2 py-1 text-sm mx-auto my-3 w-fit bg-secondary-600',
+                occurrence.isIdentifying ? 'opacity-30' : ''
+              )}
+            >
+              Reidentify
+            </Button>
+            <SpeciesList
+              isIdentifying={occurrence.isIdentifying}
+              taxon={occurrence.data.taxon}
+            />
+          </div>
         </Main>
       )}
 

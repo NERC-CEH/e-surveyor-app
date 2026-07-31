@@ -50,6 +50,7 @@ type Props = {
   useNumberedList?: boolean;
   children?: React.ReactNode;
   label?: React.ReactNode;
+  getItemClassName?: (occ: Occurrence) => string;
 };
 
 const SpeciesList = ({
@@ -66,6 +67,7 @@ const SpeciesList = ({
   useNumberedList = false,
   children,
   label,
+  getItemClassName,
 }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
@@ -170,6 +172,7 @@ const SpeciesList = ({
           showPhoto={showPhoto}
           showGallery={showGallery}
           itemNumber={useNumberedList ? index + 1 : undefined}
+          className={getItemClassName?.(occ)}
         />
       );
     };
