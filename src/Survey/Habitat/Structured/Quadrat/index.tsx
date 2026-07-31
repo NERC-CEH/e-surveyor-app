@@ -117,6 +117,22 @@ const QuadratController = ({ subSample }: Props) => {
       return;
     }
 
+    const hasSpecies = !!subSample.occurrences.length;
+    if (!hasSpecies) {
+      const shouldContinue = await new Promise<boolean>(resolve => {
+        alert({
+          header: 'No species added',
+          message: 'Are you sure you want to proceed?',
+          buttons: [
+            { text: 'Cancel', role: 'cancel', handler: () => resolve(false) },
+            { text: 'Continue', handler: () => resolve(true) },
+          ],
+        });
+      });
+
+      if (!shouldContinue) return;
+    }
+
     subSample.metadata.saved = true;
     subSample.save();
 
@@ -126,7 +142,7 @@ const QuadratController = ({ subSample }: Props) => {
   const doneButton =
     isDisabled || subSample.metadata.saved ? null : (
       <HeaderButton onClick={onDone} isInvalid={isInvalid}>
-        Done
+        Finish
       </HeaderButton>
     );
 
