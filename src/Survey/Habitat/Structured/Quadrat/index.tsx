@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, device, captureImage, useAlert } from '@flumens';
 import { NavContext } from '@ionic/react';
+import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Sample from 'models/sample';
@@ -64,6 +65,7 @@ const showFirstPhotoTip = (alert: any) => {
 const QuadratController = ({ subSample }: Props) => {
   const alert = useAlert();
   const { goBack } = useContext(NavContext);
+  const { isScrolled } = useHeaderScroll();
 
   const isDisabled = subSample.isUploaded;
   const promptImageSource = usePromptImageSource();
@@ -148,7 +150,11 @@ const QuadratController = ({ subSample }: Props) => {
 
   return (
     <Page id="transect-quadrat" className="theme-habitat">
-      <Header title={subSample.getPrettyName()} rightSlot={doneButton} />
+      <Header
+        title={subSample.getPrettyName()}
+        rightSlot={doneButton}
+        className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
+      />
       <Main
         subSample={subSample}
         isDisabled={isDisabled}

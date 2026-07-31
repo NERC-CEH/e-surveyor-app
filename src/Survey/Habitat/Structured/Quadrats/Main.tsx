@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { leaf, checkmark, alertCircleOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import { Main, Button } from '@flumens';
-import { IonList, IonItem, IonIcon, NavContext } from '@ionic/react';
+import { Main } from '@flumens';
+import { IonItem, IonIcon } from '@ionic/react';
+import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import Sample from 'models/sample';
-import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
-import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
+import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   bareGroundAttr,
   deadWoodAttr,
@@ -74,14 +73,11 @@ function getCompletionProps(quadratSample: Sample) {
 
 type Props = {
   sample: Sample;
-  isDisabled?: boolean;
 };
 
-const MainComponent = ({ sample, isDisabled }: Props) => {
+const MainComponent = ({ sample }: Props) => {
   const match = useRouteMatch();
-  const { navigate } = useContext(NavContext);
-
-  const getQuadratsList = () => sample.samples.slice().sort(byDate);
+  const mainProps = useHeaderScroll();
 
   const getQuadratPhoto = (smp: Sample) => {
     const pic = smp.media.length && smp.media[0].getURL();
@@ -95,34 +91,28 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
     return <div className="list-avatar mr-2">{photo}</div>;
   };
 
-  const getList = () => {
-    const quadrats = getQuadratsList();
+  const quadrats = sample.samples.slice().sort(byDate);
 
-    if (!quadrats.length) {
-      return (
-        <InfoBackgroundMessage>
-          You have not added any quadrats yet.
-        </InfoBackgroundMessage>
-      );
-    }
+  const getQuadrat = (quadratSample: Sample) => (
+    <IonItem
+      key={quadratSample.cid}
+      routerLink={`${match.url}/quadrat/${quadratSample.cid}`}
+      {...getCompletionProps(quadratSample)}
+    >
+      <div className="px-1 py-2 w-full flex items-center">
+        {getQuadratPhoto(quadratSample)}
 
-    const getQuadrat = (quadratSample: Sample) => (
-      <IonItem
-        key={quadratSample.cid}
-        routerLink={`${match.url}/quadrat/${quadratSample.cid}`}
-        {...getCompletionProps(quadratSample)}
-      >
-        <div className="px-1 py-2 w-full flex items-center">
-          {getQuadratPhoto(quadratSample)}
+        <b>{quadratSample.getPrettyName()}</b>
+      </div>
+    </IonItem>
+  );
 
-          <b>{quadratSample.getPrettyName()}</b>
-        </div>
-      </IonItem>
-    );
+  return (
+    <Main {...mainProps} className="pb-ion-s-10">
+      <StarsBackground />
 
-    return (
-      <IonList className="quadrats-list" lines="full">
-        <div className="rounded-list">
+      <div className="list">
+        <div className="card p-0! overflow-hidden top">
           <div className="list-divider justify-between p-2">
             <div>Quadrats</div>
             {sample.samples.length}
@@ -130,32 +120,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
 
           {quadrats.map(getQuadrat)}
         </div>
-      </IonList>
-    );
-  };
-
-  const isComplete = sample.metadata.saved || sample.isDisabled; // disabled for backwards compatibility
-
-  const baseUrl = match.url.split('/').slice(0, -1).join('/');
-  return (
-    <Main className="pb-ion-s-10">
-      <IonList lines="full">
-        <div className="rounded-list my-2">
-          {isDisabled && <UploadedRecordInfoMessage />}
-        </div>
-
-        {isComplete && (
-          <Button
-            color="secondary"
-            className="bg-secondary-600 mx-auto my-5"
-            onPress={() => navigate(`${baseUrl}/report`)}
-          >
-            See Report
-          </Button>
-        )}
-      </IonList>
-
-      {getList()}
+      </div>
     </Main>
   );
 };

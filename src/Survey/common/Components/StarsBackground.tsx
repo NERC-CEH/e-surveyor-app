@@ -9,7 +9,7 @@ const StarsBackground = ({ children }: Props) => (
     style={{ backgroundImage: `url(${background})` }}
     className="w-full bg-cover text-white px-3 py-10 mt-[env(safe-area-inset-top)]"
   >
-    <div className="mt-10">{children}</div>
+    <div className={children ? 'mt-10' : 'mt-3'}>{children}</div>
   </div>
 );
 

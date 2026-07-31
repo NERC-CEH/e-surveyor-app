@@ -416,7 +416,7 @@ ion-toolbar.location-input-attr ion-back-button {
 }
 /* survey list helper class */
 .list > .card.top {
-  @apply -mt-4;
+  @apply -mt-5;
 }
 
 /* Generic helper class */

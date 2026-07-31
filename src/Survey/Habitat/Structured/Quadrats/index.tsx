@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Header, Page, useToast } from '@flumens';
 import { NavContext } from '@ionic/react';
+import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import appModel from 'models/app';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
@@ -20,6 +21,7 @@ const Controller = ({ sample }: Props) => {
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
+  const { isScrolled } = useHeaderScroll();
 
   const onUpload = async () => {
     sample.metadata.saved = true;
@@ -61,8 +63,9 @@ const Controller = ({ sample }: Props) => {
         title="Quadrats"
         rightSlot={uploadButton}
         subheader={isTraining && <TrainingModeBanner />}
+        className={`stars-background-header ${isScrolled ? 'header-scrolled' : ''}`}
       />
-      <Main sample={sample} isDisabled={isDisabled} />
+      <Main sample={sample} />
     </Page>
   );
 };

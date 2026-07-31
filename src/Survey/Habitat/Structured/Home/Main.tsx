@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import clsx from 'clsx';
 import { ellipsisHorizontalOutline } from 'ionicons/icons';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { Main, MenuAttrItem, InfoMessage, Block } from '@flumens';
@@ -9,6 +10,7 @@ import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import LocationCard from 'Survey/Habitat/Free/Home/LocationCard';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
+import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
 import {
   CUSTOM_SEEDMIX_GROUP_VALUE,
   customSeedmixAttr,
@@ -56,7 +58,15 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
       <StarsBackground />
 
       <div className="list">
-        <div className="card top p-0! overflow-hidden">
+        {isDisabled && (
+          <div className="rounded-list my-2 -mt-4">
+            <UploadedRecordInfoMessage />
+          </div>
+        )}
+
+        <div
+          className={clsx('card p-0! overflow-hidden', !isDisabled && 'top')}
+        >
           <div className="list-divider justify-between p-2">
             <div>
               <span className="mr-2">1.</span> Site

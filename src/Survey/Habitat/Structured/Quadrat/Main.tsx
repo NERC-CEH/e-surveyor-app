@@ -19,12 +19,14 @@ import { IonIcon, NavContext } from '@ionic/react';
 import CircleIcon from 'common/Components/CircleIcon';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import { useDisableSwipeBack } from 'common/helpers/hooks';
+import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import InfoButtonPopover from 'Components/InfoButton';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
+import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   bareGroundAttr,
   countAttr,
@@ -46,6 +48,7 @@ type Props = {
 const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
   const { navigate } = useContext(NavContext);
   const { url } = useRouteMatch();
+  const mainProps = useHeaderScroll();
 
   useDisableSwipeBack();
 
@@ -102,9 +105,10 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
   };
 
   return (
-    <Main className="pb-ion-10">
-      <div className="flex flex-col gap-4 m-3">
-        <div className="rounded-list">
+    <Main {...mainProps} className="pb-ion-10">
+      <StarsBackground />
+      <div className="list">
+        <div className="card top p-0! overflow-hidden">
           <div className="list-divider">Quadrat photo</div>
           <PhotoPicker
             model={subSample}
@@ -112,10 +116,8 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
             onChange={() => {
               // trigger GPS on the first photo added to the quadrat
               const isFirstPhoto = subSample.media.length === 1;
-              if (isFirstPhoto) {
-                console.log('triggering GPS for first photo');
-                subSample.startGPS(loc => updateModelLocation(subSample, loc));
-              }
+              if (!isFirstPhoto) return;
+              subSample.startGPS(loc => updateModelLocation(subSample, loc));
             }}
           />
         </div>
