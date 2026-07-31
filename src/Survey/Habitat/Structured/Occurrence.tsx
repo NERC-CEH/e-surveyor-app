@@ -4,7 +4,7 @@ import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
 import SpeciesList from 'Components/SpeciesList';
 import { MachineInvolvement } from 'Survey/common/config';
-import { countAttr, coverAttr } from './config';
+import { commentAttr, countAttr, coverAttr } from './config';
 
 type Props = {
   occurrence: Occurrence;
@@ -61,6 +61,7 @@ const EditSpecies = ({ occurrence }: Props) => {
             <div className="list-divider">Species details</div>
             <Block block={countAttr} {...recordAttrs} />
             <Block block={coverAttr} {...recordAttrs} />
+            <Block block={commentAttr} {...recordAttrs} />
           </div>
 
           <div className="max-w-xl rounded-list">

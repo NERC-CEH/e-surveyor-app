@@ -6,6 +6,7 @@ import {
   ChoiceInputConf,
   dateFormatISO,
   NumberInputConf,
+  TextInputConf,
 } from 'common/flumens';
 import squareIcon from 'common/images/square.svg';
 import transectIcon from 'common/images/transect.svg';
@@ -54,6 +55,14 @@ export const coverAttr = {
   placeholder: '0',
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
+
+export const commentAttr = {
+  id: 'comment',
+  type: 'textInput',
+  title: 'Comment',
+  appearance: 'multiline',
+  placeholder: 'Enter comment details',
+} as const satisfies TextInputConf;
 
 export const vegetationCompAttr = {
   id: 'smpAttr:2090',
