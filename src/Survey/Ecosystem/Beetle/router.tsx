@@ -34,15 +34,24 @@ const routes = [
     `${baseURL}/:smpId/traps/${fieldNonCropHabitatsAttr.id}`,
     FieldNonCropHabitatsPage,
   ],
-  [`${baseURL}/:smpId/trap/:subSmpId`, Trap],
-  [`${baseURL}/:smpId/trap/:subSmpId/:attr`, withSample(AttrPageFromRoute)],
-  [`${baseURL}/:smpId/trap/:subSmpId/map`, ModelLocationMap.SampleFromRoute],
-  [`${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId`, Occurrence],
+  [`${baseURL}/:smpId/traps/trap/:subSmpId`, Trap],
   [
-    `${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId/:attr`,
+    `${baseURL}/:smpId/traps/trap/:subSmpId/:attr`,
     withSample(AttrPageFromRoute),
   ],
-  [`${baseURL}/:smpId/trap/:subSmpId/occurrence/:occId/species`, EditSpecies],
+  [
+    `${baseURL}/:smpId/traps/trap/:subSmpId/map`,
+    ModelLocationMap.SampleFromRoute,
+  ],
+  [`${baseURL}/:smpId/traps/trap/:subSmpId/occurrence/:occId`, Occurrence],
+  [
+    `${baseURL}/:smpId/traps/trap/:subSmpId/occurrence/:occId/:attr`,
+    withSample(AttrPageFromRoute),
+  ],
+  [
+    `${baseURL}/:smpId/traps/trap/:subSmpId/occurrence/:occId/species`,
+    EditSpecies,
+  ],
   // [`${baseURL}/:smpId/report`, Report],
 ] as any[];
 
