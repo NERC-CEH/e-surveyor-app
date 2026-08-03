@@ -1,5 +1,5 @@
-import { RouteWithModels, AttrPage } from '@flumens';
-import samples from 'models/collections/samples';
+import { Route } from 'react-router-dom';
+import { AttrPage, withSample } from '@flumens';
 import ModelLocationMap from 'Survey/common/Components/ModelLocationMap';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Home from './Home';
@@ -19,16 +19,16 @@ const { AttrPageFromRoute } = AttrPage;
 const { baseURL } = survey;
 
 const routes = [
-  [baseURL, StartNewSurvey.with(survey), true],
+  [baseURL, StartNewSurvey.with(survey)],
   [`${baseURL}/:smpId`, Home],
-  [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/:attr`, withSample(AttrPageFromRoute)],
   [`${baseURL}/:smpId/location`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/past-locations`, PastSampleMap],
   [`${baseURL}/:smpId/report`, Report],
   [`${baseURL}/:smpId/management`, Management],
-  [`${baseURL}/:smpId/management/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/management/:attr`, withSample(AttrPageFromRoute)],
   [`${baseURL}/:smpId/som`, SOM],
-  [`${baseURL}/:smpId/som/:attr`, AttrPageFromRoute],
+  [`${baseURL}/:smpId/som/:attr`, withSample(AttrPageFromRoute)],
   [`${baseURL}/:smpId/som/lab`, Lab],
   [`${baseURL}/:smpId/som/lab/texture`, Texture],
   [`${baseURL}/:smpId/som/lab/nutrient`, Nutrient],
@@ -39,7 +39,14 @@ const routes = [
   ],
   [`${baseURL}/:smpId/sample/:subSmpId/worms`, Worms],
   [`${baseURL}/:smpId/sample/:subSmpId/vsa`, VSA],
-  [`${baseURL}/:smpId/sample/:subSmpId/vsa/:attr`, AttrPageFromRoute],
-];
+  [
+    `${baseURL}/:smpId/sample/:subSmpId/vsa/:attr`,
+    withSample(AttrPageFromRoute),
+  ],
+] as any[];
 
-export default RouteWithModels.fromArray(samples as any, routes);
+const mappedRoutes = routes.map(([route, component]) => (
+  <Route key={route} exact path={route} component={component} />
+));
+
+export default mappedRoutes;

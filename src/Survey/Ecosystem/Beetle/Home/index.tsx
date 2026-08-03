@@ -1,18 +1,17 @@
 import { useContext, useMemo } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Page, Header, useAlert, TailwindContext } from '@flumens';
+import { Page, Header, useAlert, TailwindContext, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
 import Sample from 'models/sample';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import { locationSchema } from 'Survey/common/config';
 import Main from './Main';
 
-type Props = {
-  sample: Sample;
-};
+const Controller = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
 

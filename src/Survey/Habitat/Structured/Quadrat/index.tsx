@@ -1,21 +1,23 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import { Page, Header, device, captureImage, useAlert } from '@flumens';
+import {
+  Page,
+  Header,
+  device,
+  captureImage,
+  useAlert,
+  useSample,
+} from '@flumens';
 import { NavContext } from '@ionic/react';
 import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Sample from 'models/sample';
-import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import Main from './Main';
 
 type URL = string;
-
-type Props = {
-  subSample: Sample;
-};
 
 const showFirstPhotoTip = (alert: any) => {
   if (!appModel.data.showFirstPhotoTip) return null;
@@ -62,7 +64,10 @@ const showFirstPhotoTip = (alert: any) => {
   });
 };
 
-const QuadratController = ({ subSample }: Props) => {
+const QuadratController = () => {
+  const { subSample } = useSample<Sample>();
+  if (!subSample) throw new Error('Sub-sample is missing');
+
   const alert = useAlert();
   const { goBack } = useContext(NavContext);
   const { isScrolled } = useHeaderScroll();
@@ -97,9 +102,7 @@ const QuadratController = ({ subSample }: Props) => {
     }
 
     const photoURLs = await captureImage(
-      shouldUseCamera
-        ? { getPhoto: getPhotoFromCustomCamera }
-        : { multiple: true }
+      shouldUseCamera ? { camera: true } : { multiple: true }
     );
 
     if (!photoURLs?.length) return;

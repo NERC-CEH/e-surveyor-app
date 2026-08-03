@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
 import { LineString, MultiPolygon, Polygon } from 'geojson';
+import { useRouteMatch } from 'react-router-dom';
 import wkt from 'wellknown';
 import {
   MapContainer,
@@ -21,6 +22,7 @@ import {
   Header,
   MarkerShape,
   updateModelLocation,
+  useSample,
 } from '@flumens';
 import { bbox } from '@turf/bbox';
 import config from 'common/config';
@@ -184,29 +186,34 @@ const ModelLocationMap = ({
   );
 };
 
-ModelLocationMap.SampleFromRoute = observer(
-  (props: { subSample?: Sample; sample: Sample }) => {
-    const model = props.subSample || props.sample;
+ModelLocationMap.SampleFromRoute = observer(() => {
+  const {
+    params: { subSmpId },
+  } = useRouteMatch<{ subSmpId?: string }>();
+  const { sample, subSample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
+  if (subSmpId && !subSample) throw new Error('Sub-sample is missing');
 
-    const setLocation = async (newLocation: any) => {
-      if (!newLocation) return;
-      if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
+  const model = subSample || sample;
 
-      model.data.location = { ...model.data.location, ...newLocation };
-    };
+  const setLocation = async (newLocation: any) => {
+    if (!newLocation) return;
+    if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
 
-    const location = model.data.location || {};
+    model.data.location = { ...model.data.location, ...newLocation };
+  };
 
-    return (
-      <ModelLocationMap
-        location={location}
-        setLocation={setLocation}
-        isLocating={model.isGPSRunning()}
-        stopGPS={() => model.stopGPS()}
-        startGPS={() => model.startGPS(loc => updateModelLocation(model, loc))}
-      />
-    );
-  }
-);
+  const location = model.data.location || {};
+
+  return (
+    <ModelLocationMap
+      location={location}
+      setLocation={setLocation}
+      isLocating={model.isGPSRunning()}
+      stopGPS={() => model.stopGPS()}
+      startGPS={() => model.startGPS(loc => updateModelLocation(model, loc))}
+    />
+  );
+});
 
 export default observer(ModelLocationMap);

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import { Header, Page, useToast } from '@flumens';
+import { Header, Page, useToast, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
 import useHeaderScroll from 'common/helpers/useHeaderScroll';
 import appModel from 'models/app';
@@ -11,11 +11,10 @@ import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
 import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 import Main from './Main';
 
-type Props = {
-  sample: Sample;
-};
+const Controller = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Controller = ({ sample }: Props) => {
   const { navigate } = useContext(NavContext);
   const showUploadSurveyConfirmation = useUploadSurveyConfirmation();
   const toast = useToast();

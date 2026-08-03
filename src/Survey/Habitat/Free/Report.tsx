@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import { Page, Header, useToast } from '@flumens';
+import { Page, Header, useToast, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
@@ -8,18 +8,15 @@ import Main from 'Components/ReportView';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 
-type Props = {
-  sample: Sample;
-};
+const ReportController = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const ReportController = ({ sample }: Props) => {
   const { navigate } = useContext(NavContext);
   const toast = useToast();
   const checkUserStatus = useUserStatusCheck();
   const checkSampleStatus = useValidateCheck(sample);
   const showUploadSurveyConfirmation = useUploadSurveyConfirmation();
-
-  if (!sample) return null;
 
   const onUpload = async () => {
     const isUserOK = await checkUserStatus();

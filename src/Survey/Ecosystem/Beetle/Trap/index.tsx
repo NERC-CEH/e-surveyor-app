@@ -1,17 +1,19 @@
 import { observer } from 'mobx-react';
-import { Page, Header, captureImage, useAlert, device } from '@flumens';
+import {
+  Page,
+  Header,
+  captureImage,
+  useAlert,
+  device,
+  useSample,
+} from '@flumens';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Sample from 'models/sample';
-import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import Main from './Main';
 
 type URL = string;
-
-type Props = {
-  subSample: Sample;
-};
 
 const showFirstPhotoTip = (alert: any) => {
   if (!appModel.data.showFirstPhotoTip) return null;
@@ -58,7 +60,10 @@ const showFirstPhotoTip = (alert: any) => {
   });
 };
 
-const TrapController = ({ subSample }: Props) => {
+const TrapController = () => {
+  const { subSample } = useSample<Sample>();
+  if (!subSample) throw new Error('Sub-sample is missing');
+
   const alert = useAlert();
 
   const isDisabled = subSample.isUploaded;
@@ -88,9 +93,7 @@ const TrapController = ({ subSample }: Props) => {
     if (shouldUseCamera) await showFirstPhotoTip(alert);
 
     const photoURLs = await captureImage(
-      shouldUseCamera
-        ? { getPhoto: getPhotoFromCustomCamera }
-        : { multiple: true }
+      shouldUseCamera ? { camera: true } : { multiple: true }
     );
 
     if (!photoURLs?.length) return;

@@ -9,6 +9,7 @@ import {
   Header,
   isValidLocation,
   LocationMarker,
+  useSample,
 } from '@flumens';
 import config from 'common/config';
 import Sample from 'common/models/sample';
@@ -29,11 +30,10 @@ function uuidToColor(uuid: string) {
   return `rgb(${red},${green},${blue})`;
 }
 
-type Props = {
-  sample: Sample;
-};
+const PastSampleMap = () => {
+  const { sample: model } = useSample<Sample>();
+  if (!model) throw new Error('Sample is missing');
 
-const PastSampleMap = ({ sample: model }: Props) => {
   const location = model.data.location || {};
 
   const [mapRef, setMapRef] = useState<any>();

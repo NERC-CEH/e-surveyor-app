@@ -1,7 +1,14 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
-import { Page, useToast, captureImage, device, Header } from '@flumens';
+import {
+  Page,
+  useToast,
+  captureImage,
+  device,
+  Header,
+  useSample,
+} from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
 import Media from 'models/image';
@@ -14,11 +21,10 @@ import config from '../config';
 import IntroAlert from './IntroAlert';
 import Main from './Main';
 
-type Props = {
-  sample: Sample;
-};
+const HomeController = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const HomeController = ({ sample }: Props) => {
   const match = useRouteMatch();
 
   const { navigate } = useContext(NavContext);

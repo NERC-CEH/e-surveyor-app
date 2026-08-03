@@ -14,7 +14,6 @@ import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
 import Media from 'models/image';
 import Sample from 'models/sample';
-import getPhotoFromCustomCamera from 'helpers/CustomCamera';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
@@ -103,7 +102,7 @@ const HomeController = () => {
   };
 
   const { sample } = useSample<Sample>();
-  if (!sample) return null;
+  if (!sample) throw new Error('Sample is missing');
 
   const attachImages = async (photoURLs: URL[]) => {
     // eslint-disable-next-line no-restricted-syntax
@@ -132,9 +131,7 @@ const HomeController = () => {
     }
 
     const photoURLs = await captureImage(
-      shouldUseCamera
-        ? { getPhoto: getPhotoFromCustomCamera }
-        : { multiple: true }
+      shouldUseCamera ? { camera: true } : { multiple: true }
     );
 
     if (!photoURLs?.length) return;

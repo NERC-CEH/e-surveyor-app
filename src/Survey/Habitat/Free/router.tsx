@@ -1,5 +1,5 @@
-import { RouteWithModels, AttrPage } from '@flumens';
-import samples from 'models/collections/samples';
+import { Route } from 'react-router-dom';
+import { AttrPage, withSample } from '@flumens';
 import Locations from 'Components/Locations';
 import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import TaxonSearch from 'Survey/common/Components/TaxonSearch';
@@ -12,15 +12,19 @@ const { baseURL } = survey;
 
 const { AttrPageFromRoute } = AttrPage;
 
-const routes = [
-  [baseURL, StartNewSurvey.with(survey), true],
-  [`${baseURL}/:smpId`, Home],
-  [`${baseURL}/:smpId/:attr`, AttrPageFromRoute],
-  [`${baseURL}/:smpId/location`, Locations],
-  [`${baseURL}/:smpId/taxon`, TaxonSearch],
-  [`${baseURL}/:smpId/species/:occId`, Occurrence],
-  [`${baseURL}/:smpId/species/:occId/taxon`, TaxonSearch],
-  [`${baseURL}/:smpId/report`, Report],
-];
+const routes = (
+  [
+    [baseURL, StartNewSurvey.with(survey)],
+    [`${baseURL}/:smpId`, Home],
+    [`${baseURL}/:smpId/:attr`, withSample(AttrPageFromRoute)],
+    [`${baseURL}/:smpId/location`, Locations],
+    [`${baseURL}/:smpId/taxon`, TaxonSearch],
+    [`${baseURL}/:smpId/species/:occId`, Occurrence],
+    [`${baseURL}/:smpId/species/:occId/taxon`, TaxonSearch],
+    [`${baseURL}/:smpId/report`, Report],
+  ] as any[]
+).map(([route, component]) => (
+  <Route key={route} exact path={route} component={component} />
+));
 
-export default RouteWithModels.fromArray(samples as any, routes);
+export default routes;

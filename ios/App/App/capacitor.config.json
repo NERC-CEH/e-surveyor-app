@@ -8,7 +8,6 @@
 		"adjustMarginsForEdgeToEdge": "force"
 	},
 	"packageClassList": [
-		"CameraPreview",
 		"CapacitorSQLitePlugin",
 		"AppPlugin",
 		"CAPCameraPlugin",

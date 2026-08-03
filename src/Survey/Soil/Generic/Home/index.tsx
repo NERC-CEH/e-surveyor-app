@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
-import { Page, Header, useAlert } from '@flumens';
+import { Page, Header, useAlert, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel from 'common/models/app';
 import Sample, { useValidateCheck } from 'models/sample';
@@ -40,11 +40,10 @@ const useDataSharingPrompt = () => {
   }, []);
 };
 
-type Props = {
-  sample: Sample;
-};
+const Home = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Home = ({ sample }: Props) => {
   const { url } = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const checkSampleStatus = useValidateCheck(sample);

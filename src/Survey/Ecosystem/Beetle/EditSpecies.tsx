@@ -1,10 +1,12 @@
-import { AttrPage } from 'common/flumens';
+import { AttrPage, useSample } from 'common/flumens';
 import Occurrence, { Taxon } from 'models/occurrence';
+import Sample from 'models/sample';
 import { beetleSpecies } from './config';
 
-type Props = { occurrence: Occurrence };
+const EditSpecies = () => {
+  const { occurrence } = useSample<Sample, Occurrence>();
+  if (!occurrence) throw new Error('Occurrence is missing');
 
-const EditSpecies = ({ occurrence }: Props) => {
   const attrProps = {
     input: 'radio',
     inputProps: { options: beetleSpecies },

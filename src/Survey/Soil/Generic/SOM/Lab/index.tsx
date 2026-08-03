@@ -1,14 +1,15 @@
 import { observer } from 'mobx-react';
 import { flaskOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import { Page, Main, Block, Header } from '@flumens';
+import { Page, Main, Block, Header, useSample } from '@flumens';
 import { IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
 import Sample from 'common/models/sample';
 import { labLOIAttr, labNameAttr, labSOMAttr, labTOCAttr } from '../../config';
 
-type Props = { sample: Sample };
+const Lab = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Lab = ({ sample }: Props) => {
   const { url } = useRouteMatch();
   const recordAttrs = { record: sample.data };
 

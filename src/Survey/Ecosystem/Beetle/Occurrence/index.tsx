@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react';
-import { Page, Header } from '@flumens';
+import { Page, Header, useSample } from '@flumens';
 import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import Main from './Main';
 
-type Props = {
-  occurrence: Occurrence;
-};
+const OccurrenceController = () => {
+  const { occurrence } = useSample<Sample, Occurrence>();
+  if (!occurrence) throw new Error('Occurrence is missing');
 
-const OccurrenceController = ({ occurrence }: Props) => {
   const sample = occurrence.parent;
   const isDisabled = sample?.isUploaded || false;
 

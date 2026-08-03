@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "8.0.0",
-    "@capacitor-community/camera-preview": "8.0.1",
     "@capacitor-community/sqlite": "8.1.0",
     "@capacitor/android": "8.4.2",
     "@capacitor/app": "8.1.1",

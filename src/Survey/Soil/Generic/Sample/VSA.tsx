@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { Page, Header, Main, Block } from '@flumens';
+import { Page, Header, Main, Block, useSample } from '@flumens';
 import { IonList } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'models/sample';
@@ -11,11 +11,10 @@ import {
   soilTypeAttr,
 } from '../config';
 
-type Props = {
-  subSample: Sample;
-};
+const VSA = () => {
+  const { subSample } = useSample<Sample>();
+  if (!subSample) throw new Error('Sub-sample is missing');
 
-const VSA = ({ subSample }: Props) => {
   const recordAttrs = {
     record: subSample.data,
   };

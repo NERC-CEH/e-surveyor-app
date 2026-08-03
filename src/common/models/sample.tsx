@@ -292,17 +292,22 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
     this.cleanUp();
 
     if (this.data.surveyId === soilSurveyConfig.id) {
-      onError('Uploading of a Beta survey is not enabled yet.');
+      onError?.('Uploading of a Beta survey is not enabled yet.');
       return false;
     }
 
-    if (!this.syncedAt) {
-      this.saveRemote().catch(onError);
-      return true;
-    }
+    try {
+      if (!this.syncedAt) {
+        await this.saveRemote();
+        return true;
+      }
 
-    this.updateRemote();
-    return true;
+      await this.updateRemote();
+      return true;
+    } catch (error) {
+      onError?.(error);
+      return false;
+    }
   }
 
   isPersistent() {

@@ -19,7 +19,7 @@ const Controller = () => {
   const { isScrolled } = useHeaderScroll();
 
   const { sample } = useSample<Sample>();
-  if (!sample) return null;
+  if (!sample) throw new Error('Sample is missing');
 
   const onDone = () => {
     const invalids = validate(sample.data);

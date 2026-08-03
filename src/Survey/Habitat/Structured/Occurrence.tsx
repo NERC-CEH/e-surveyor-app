@@ -1,16 +1,27 @@
 import { observer } from 'mobx-react';
-import { Page, Header, useToast, device, Main, Button, Block } from '@flumens';
-import Occurrence, { Suggestion, Taxon } from 'models/occurrence';
+import {
+  Page,
+  Header,
+  useToast,
+  device,
+  Main,
+  Button,
+  Block,
+  useSample,
+} from '@flumens';
+import type Occurrence from 'models/occurrence';
+import type { Suggestion, Taxon } from 'models/occurrence';
+import type Sample from 'models/sample';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
 import SpeciesList from 'Components/SpeciesList';
 import { MachineInvolvement } from 'Survey/common/config';
 import { commentAttr, countAttr, coverAttr } from './config';
 
-type Props = {
-  occurrence: Occurrence;
-};
+const EditSpecies = () => {
+  const { sample, occurrence } = useSample<Sample, Occurrence>();
+  if (!sample) throw new Error('Sample is missing');
+  if (!occurrence) throw new Error('Occurrence is missing');
 
-const EditSpecies = ({ occurrence }: Props) => {
   const toast = useToast();
 
   const identifySpecies = async () => {
@@ -21,8 +32,9 @@ const EditSpecies = ({ occurrence }: Props) => {
 
     try {
       await occurrence.identify();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : `${e}`;
+      toast.error(message, { position: 'bottom' });
     }
   };
 

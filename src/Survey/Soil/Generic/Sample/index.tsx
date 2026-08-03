@@ -1,6 +1,6 @@
 import { locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
-import { Page, Header, Main, Block, MenuAttrItem } from '@flumens';
+import { Page, Header, Main, Block, MenuAttrItem, useSample } from '@flumens';
 import { IonList, IonItem, IonIcon, IonLabel } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'common/models/sample';
@@ -9,9 +9,10 @@ import field from '../common/field.svg';
 import { sampleNameAttr, somAttr, wormCountAttr } from '../config';
 import worm from './worm.svg';
 
-type Props = { subSample: Sample };
+const SampleHome = () => {
+  const { subSample: sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sub-sample is missing');
 
-const SampleHome = ({ subSample: sample }: Props) => {
   const { url } = useRouteMatch();
   const worms = sample.data[wormCountAttr.id];
 

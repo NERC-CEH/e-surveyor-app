@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import { Page, Header, Main, Block } from '@flumens';
+import { Page, Header, Main, Block, useSample } from '@flumens';
 import { IonList } from '@ionic/react';
 import Sample from 'models/sample';
 import {
@@ -18,11 +18,10 @@ import {
   tillageAttr,
 } from './config';
 
-type Props = {
-  sample: Sample;
-};
+const Management = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Management = ({ sample }: Props) => {
   // const { url } = useRouteMatch();
   const hasLandUseOther =
     !!sample.data?.[landUseAttr.id]?.includes(LAND_USE_OTHER_VALUE);

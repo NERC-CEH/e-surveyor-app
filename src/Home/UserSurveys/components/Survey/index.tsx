@@ -156,7 +156,7 @@ const Survey = ({ sample, uploadIsPrimary, onDelete }: Props) => {
     const isValid = checkSampleStatus();
     if (!isValid) return;
 
-    sample.syncRemote(toast.error);
+    await sample.syncRemote(toast.error);
   };
 
   const openItem = () => {

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
-import { Header, Page, useToast } from '@flumens';
+import { Header, Page, useSample, useToast } from '@flumens';
 import { NavContext } from '@ionic/react';
 import appModel from 'models/app';
 import Sample, { useValidateCheck } from 'models/sample';
@@ -11,11 +11,10 @@ import TrainingModeBanner from 'Survey/common/Components/TrainingModeBanner';
 import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmation';
 import Main from './Main';
 
-type Props = {
-  sample: Sample;
-};
+const Controller = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Controller = ({ sample }: Props) => {
   const match = useRouteMatch();
   const { navigate } = useContext(NavContext);
   const toast = useToast();

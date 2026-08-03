@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useToast, Page, Header } from '@flumens';
+import { useToast, Page, Header, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
 import Sample, { useValidateCheck } from 'common/models/sample';
 import { useUserStatusCheck } from 'common/models/user';
@@ -8,9 +8,10 @@ import useUploadSurveyConfirmation from 'Survey/common/useUploadSurveyConfirmati
 import Main from './Main';
 import useNewnessCheck from './useNewnessCheck';
 
-type Props = { sample: Sample };
+const Report = () => {
+  const { sample } = useSample<Sample>();
+  if (!sample) throw new Error('Sample is missing');
 
-const Report = ({ sample }: Props) => {
   const { navigate } = useContext(NavContext);
   const toast = useToast();
   const checkSampleStatus = useValidateCheck(sample);
@@ -29,7 +30,8 @@ const Report = ({ sample }: Props) => {
     const isConfirmed = await showUploadSurveyConfirmation();
     if (!isConfirmed) return;
 
-    sample.syncRemote(toast.error);
+    const isUploading = await sample.syncRemote(toast.error);
+    if (!isUploading) return;
 
     navigate('/home/surveys', 'root');
   };
