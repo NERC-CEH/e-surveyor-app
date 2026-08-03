@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { LineString, MultiPolygon, Polygon } from 'geojson';
 import { MapRef } from 'react-map-gl/mapbox';
-import { isValidLocation, MapContainer, MarkerShape } from '@flumens';
+import { isValidLocation, MapContainer } from '@flumens';
 import { Location } from '@flumens/utils/dist/location';
 import { NavContext } from '@ionic/react';
 import CONFIG from 'common/config';
@@ -85,7 +85,7 @@ const GeometryLink = ({
         {...disableMapInteractions}
       >
         {location && !shape && <MapContainer.Marker {...location} />}
-        {shape && <MarkerShape shape={shape} />}
+        {shape && <MapContainer.Marker.LineArea shape={shape as Polygon} />}
       </MapContainer>
     </div>
   );

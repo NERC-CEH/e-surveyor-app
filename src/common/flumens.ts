@@ -119,7 +119,6 @@ export {
 } from '@flumens/tailwind/dist/components/Map/Container';
 export { default as MapDraw } from '@flumens/tailwind/dist/components/Map/Draw';
 export { default as LocationMarker } from '@flumens/tailwind/dist/components/Map/Container/LocationMarker';
-export { default as MarkerShape } from './MarkerShape';
 export {
   type BlockConf as BlockT,
   type ChoiceValues,

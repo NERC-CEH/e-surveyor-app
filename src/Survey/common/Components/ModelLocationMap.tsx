@@ -20,7 +20,6 @@ import {
   getGeomCenter,
   getGeomWKT,
   Header,
-  MarkerShape,
   updateModelLocation,
   useSample,
 } from '@flumens';
@@ -161,7 +160,9 @@ const ModelLocationMap = ({
             />
           )}
 
-          {useShape && <MarkerShape shape={shape} />}
+          {useShape && !!shape && (
+            <MapContainer.Marker.LineArea shape={shape} />
+          )}
           {useShape && (
             <MapDraw shape={shape} onChange={setLocation} isEditing="polygon">
               <MapDraw.Control polygon />
