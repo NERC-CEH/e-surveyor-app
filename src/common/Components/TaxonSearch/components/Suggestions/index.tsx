@@ -1,4 +1,3 @@
-import { IonList } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import Species from './components/Species';
 
@@ -62,9 +61,9 @@ const Suggestions = ({
 }: Props) => {
   if (!searchResults) {
     return (
-      <IonList id="suggestions" lines="none">
+      <div id="suggestions" className="list">
         {getSearchInfo()}
-      </IonList>
+      </div>
     );
   }
 
@@ -95,9 +94,9 @@ const Suggestions = ({
   }
 
   return (
-    <IonList id="suggestions" lines="none">
+    <div id="suggestions" className="list mx-2.5">
       {suggestionsList}
-    </IonList>
+    </div>
   );
 };
 

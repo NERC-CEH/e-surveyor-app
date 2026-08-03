@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CountUp from 'react-countup';
 import { ModalHeader, Main } from '@flumens';
-import { IonIcon, IonModal, IonItem, IonList } from '@ionic/react';
+import { IonIcon, IonModal, IonItem } from '@ionic/react';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import Seeds from 'common/images/seeds.svg';
 import Occurrence from 'models/occurrence';
@@ -46,21 +46,19 @@ const SeedmixBadge = ({ occurrences, seedmixSpecies }: Props) => {
 
     const selectedSeedmixEntries = ([latinName, commonName]: SpeciesNames) => {
       const taxonName = commonName || latinName;
-      return <IonItem key={taxonName}>{taxonName}</IonItem>;
+      return (
+        <IonItem key={taxonName} lines="none">
+          {taxonName}
+        </IonItem>
+      );
     };
 
     return (
-      <IonList>
-        <div className="rounded-list">
-          <div className="list-divider">
-            Species associated with your plants
-          </div>
+      <div className="rounded-list">
+        <div className="list-divider">Species associated with your plants</div>
 
-          {selectedSeedmixSpecies
-            .sort(bySpeciesName)
-            .map(selectedSeedmixEntries)}
-        </div>
-      </IonList>
+        {selectedSeedmixSpecies.sort(bySpeciesName).map(selectedSeedmixEntries)}
+      </div>
     );
   };
 
@@ -92,14 +90,14 @@ const SeedmixBadge = ({ occurrences, seedmixSpecies }: Props) => {
       .map(selectedSeedmixSpeciesEntries);
 
     return (
-      <IonList>
+      <div className="list">
         <h3 className="list-title">Missing species</h3>
 
         <div className="rounded-list">
           <div className="list-divider">Species</div>
           {list}
         </div>
-      </IonList>
+      </div>
     );
   };
 

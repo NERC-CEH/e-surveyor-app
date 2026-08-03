@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
 import { Page, Header, Main, Block, useSample } from '@flumens';
-import { IonList } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'models/sample';
 import { wormCountAttr } from '../config';
@@ -17,7 +16,7 @@ const WormHome = () => {
     <Page id="survey-soil-worm" className="theme-soil">
       <Header title="Earthworm" />
       <Main>
-        <IonList lines="full">
+        <div className="list">
           <div className="rounded-list">
             <SinglePhotoPicker
               label="Photo"
@@ -26,7 +25,7 @@ const WormHome = () => {
             />
             <Block block={wormCountAttr} {...recordAttrs} />
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

@@ -97,7 +97,7 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
 
   return (
     <Main>
-      <div className="flex flex-col gap-2 p-2">
+      <div className="list">
         <div className="flex items-center justify-between rounded-md bg-white px-4 py-2">
           <span>Number of individuals</span>
           <Badge className="text-lg">{`${sample.occurrences.length}`}</Badge>
@@ -108,8 +108,8 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
           <Badge className="text-lg">{`${Object.values(uniqueSpeciesObj).length}`}</Badge>
         </div>
 
-        <h3 className="list-title">Your species:</h3>
-        <div className="flex flex-col gap-2">
+        <h3 className="list-divider">Your species:</h3>
+        <div className="list">
           {Object.entries(uniqueSpeciesObjCount)
             .sort(byAbundance)
             .map(getEntry)}

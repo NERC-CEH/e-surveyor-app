@@ -1,7 +1,7 @@
 import { locationOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Header, Main, Block, MenuAttrItem, useSample } from '@flumens';
-import { IonList, IonItem, IonIcon, IonLabel } from '@ionic/react';
+import { IonItem, IonIcon, IonLabel } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'common/models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -20,9 +20,9 @@ const SampleHome = () => {
     <Page id="survey-soil-sample-home" className="theme-soil">
       <Header title="Sample" />
       <Main>
-        <IonList lines="full">
-          <div className="list-title">Details</div>
+        <div className="flex flex-column gap-3">
           <div className="rounded-list">
+            <div className="list-divider">Details</div>
             <MenuAttrItem
               routerLink={`${url}/location`}
               icon={locationOutline}
@@ -34,8 +34,8 @@ const SampleHome = () => {
             <SinglePhotoPicker label="Photo" model={sample} caption="Sample" />
           </div>
 
-          <div className="list-title">Surveys</div>
           <div className="rounded-list">
+            <div className="list-divider">Surveys</div>
             <IonItem routerLink={`${url}/vsa`}>
               <IonIcon src={field} slot="start" />
               <IonLabel>Visual Soil Assessment</IonLabel>
@@ -47,7 +47,7 @@ const SampleHome = () => {
             </IonItem>
             <Block block={somAttr} record={sample.data} />
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

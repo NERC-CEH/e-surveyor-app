@@ -7,7 +7,7 @@ import {
 } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Page, Main, Header, Collapse } from '@flumens';
-import { IonList, IonItemDivider, IonIcon } from '@ionic/react';
+import { IonIcon } from '@ionic/react';
 import beeIcon from 'common/images/bee.svg';
 import cameraButton from 'common/images/cameraButton.png';
 import mapPicker from 'common/images/mapPicker.png';
@@ -25,11 +25,9 @@ export default () => (
   <Page id="help">
     <Header title="Help" />
     <Main>
-      <IonList>
-        <IonItemDivider>
-          <T>User</T>
-        </IonItemDivider>
-        <div className="rounded-list">
+      <div className="list m-3">
+        <div className="rounded-list mt-3">
+          <div className="list-divider">User</div>
           <Collapse title="Sign in/out or register">
             <p>
               <T>
@@ -56,10 +54,9 @@ export default () => (
           </Collapse>
         </div>
 
-        <IonItemDivider>
-          <T>Surveys</T>
-        </IonItemDivider>
-        <div className="rounded-list">
+        <div className="rounded-list mt-3">
+          <div className="list-divider">Surveys</div>
+
           <Collapse title="Sync. with the website">
             <p>
               <T>All your saved surveys will be shown on your account page.</T>
@@ -96,10 +93,9 @@ export default () => (
           </Collapse>
         </div>
 
-        <IonItemDivider>
-          <T>Record a habitat</T>
-        </IonItemDivider>
-        <div className="rounded-list">
+        <div className="rounded-list mt-3">
+          <div className="list-divider">Record a habitat</div>
+
           <Collapse title="How to complete a survey">
             <div>
               <p>
@@ -231,10 +227,9 @@ export default () => (
           </Collapse>
         </div>
 
-        <IonItemDivider>
-          <T>Structured recording</T>
-        </IonItemDivider>
-        <div className="rounded-list">
+        <div className="rounded-list mt-3">
+          <div className="list-divider">Structured recording</div>
+
           <Collapse title="Why should I do a transect?">
             <p>
               Because transects are carried out using an industry standard
@@ -357,10 +352,9 @@ export default () => (
           </Collapse>
         </div>
 
-        <IonItemDivider>
-          <T>Identify a Species</T>
-        </IonItemDivider>
-        <div className="rounded-list">
+        <div className="rounded-list mt-3">
+          <div className="list-divider">Identify a Species</div>
+
           <Collapse title="Why is the AI not certain what my species is?">
             <p>
               There are some common reasons why the AI might be uncertain.
@@ -414,10 +408,9 @@ export default () => (
           </Collapse>
         </div>
 
-        <IonItemDivider>
-          <T>Other</T>
-        </IonItemDivider>
-        <div className="rounded-list">
+        <div className="rounded-list mt-3">
+          <div className="list-divider">Other</div>
+
           <Collapse title="Reset the application">
             <p>
               <T>Go to the application settings page</T>{' '}
@@ -427,12 +420,12 @@ export default () => (
             </p>
           </Collapse>
         </div>
-      </IonList>
 
-      <p>
-        If your question isn't covered by this page, please{' '}
-        <a href="mailto:esurveyor@ceh.ac.uk"> email us</a>.
-      </p>
+        <p>
+          If your question isn't covered by this page, please{' '}
+          <a href="mailto:esurveyor@ceh.ac.uk"> email us</a>.
+        </p>
+      </div>
     </Main>
   </Page>
 );

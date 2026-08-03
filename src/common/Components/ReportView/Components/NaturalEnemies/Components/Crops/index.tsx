@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ModalHeader, Main } from '@flumens';
-import { IonItem, IonLabel, IonModal, IonList } from '@ionic/react';
+import { IonItem, IonLabel, IonModal } from '@ionic/react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import Enemies from './Components/Enemies';
 
@@ -35,7 +35,11 @@ const NaturalEnemies = ({ crops, group }: Props) => {
   ]);
 
   const getGroupItem = ([groupName, count]: [string, number]) => (
-    <IonItem key={groupName} onClick={() => setShowModal(groupName)}>
+    <IonItem
+      key={groupName}
+      onClick={() => setShowModal(groupName)}
+      lines="full"
+    >
       <IonLabel slot="start">{groupName}</IonLabel>
       <IonLabel slot="end">{count}</IonLabel>
     </IonItem>
@@ -50,10 +54,9 @@ const NaturalEnemies = ({ crops, group }: Props) => {
 
   return (
     <Main className="survey-report crops">
-      <IonList lines="full">
-        <h3 className="list-title">Crops</h3>
-
+      <div className="list">
         <div className="rounded-list">
+          <div className="list-divider">Crops</div>
           <div className="list-divider">
             <div>Plant</div>
             <div>Beneficial species</div>
@@ -61,7 +64,7 @@ const NaturalEnemies = ({ crops, group }: Props) => {
 
           {groupedItems}
         </div>
-      </IonList>
+      </div>
 
       <IonModal mode="md" isOpen={!!showModal}>
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />

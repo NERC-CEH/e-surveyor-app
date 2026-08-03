@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router';
 import { Main, Block, MenuAttrItem } from '@flumens';
-import { IonList } from '@ionic/react';
 import beetleIcon from 'common/images/beetle.svg';
 import Occurrence from 'models/occurrence';
 import PhotoPicker from 'Components/PhotoPickers/PhotoPicker';
@@ -24,29 +23,28 @@ const OccurrenceMain = ({ occurrence, isDisabled }: Props) => {
 
   return (
     <Main>
-      <div className="mt-2 flex flex-col pb-5">
-        <IonList lines="full">
-          <h3 className="list-title">Photos</h3>
-          <div className="rounded-list">
-            <PhotoPicker model={occurrence} />
-          </div>
+      <div className="m-2.5 flex flex-col gap-4 pb-5">
+        <div className="rounded-list">
+          <div className="list-divider">Photos</div>
+          <PhotoPicker model={occurrence} />
+        </div>
 
-          <h3 className="list-title">Species Details</h3>
-          <div className="rounded-list">
-            <MenuAttrItem
-              routerLink={`${url}/species`}
-              value={speciesName}
-              icon={beetleIcon}
-              label="Species"
-              skipValueTranslation
-              disabled={isDisabled}
-            />
+        <div className="rounded-list">
+          <div className="list-divider">Species Details</div>
+          <MenuAttrItem
+            routerLink={`${url}/species`}
+            value={speciesName}
+            icon={beetleIcon}
+            label="Species"
+            skipValueTranslation
+            disabled={isDisabled}
+            lines="full"
+          />
 
-            <Block block={occurrenceAbundanceAttr} {...recordAttrs} />
+          <Block block={occurrenceAbundanceAttr} {...recordAttrs} />
 
-            <Block block={occurrenceCommentAttr} {...recordAttrs} />
-          </div>
-        </IonList>
+          <Block block={occurrenceCommentAttr} {...recordAttrs} />
+        </div>
       </div>
     </Main>
   );

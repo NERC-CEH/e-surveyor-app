@@ -402,7 +402,7 @@ ion-toolbar.location-input-attr ion-back-button {
 
 /* survey list helper class */
 .list {
-  @apply mx-2.5 flex flex-col gap-5;
+  @apply px-2.5 flex flex-col gap-5 w-full max-w-xl mx-auto;
 }
 /* survey list helper class */
 .list > .card {
@@ -433,5 +433,6 @@ ion-toolbar.location-input-attr ion-back-button {
 /* make list dividers theme focused */
 .list-divider {
   @apply bg-secondary-800/10 text-secondary-900 border-b border-neutral-200 font-semibold!;
+  margin: 0;
   font-weight: 500;
 }

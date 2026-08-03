@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CountUp from 'react-countup';
 import { ModalHeader, Main } from '@flumens';
-import { IonIcon, IonModal, IonLabel, IonItem, IonList } from '@ionic/react';
+import { IonIcon, IonModal, IonLabel, IonItem } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import beeIcon from 'common/images/bee.svg';
 import Sample from 'models/sample';
@@ -52,14 +52,14 @@ const PollinatorsBadge = ({ uniqueSpecies }: Props) => {
     }
 
     return (
-      <IonList>
+      <div className="list">
         <div className="rounded-list">
           <div className="list-divider">
             Species associated with your plants
           </div>
           {species}
         </div>
-      </IonList>
+      </div>
     );
   };
 

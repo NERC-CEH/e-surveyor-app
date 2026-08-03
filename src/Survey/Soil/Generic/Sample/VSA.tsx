@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
 import { Page, Header, Main, Block, useSample } from '@flumens';
-import { IonList } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import Sample from 'models/sample';
 import {
@@ -23,7 +22,7 @@ const VSA = () => {
     <Page id="survey-soil-vsa" className="theme-soil">
       <Header title="VSA" />
       <Main>
-        <IonList lines="full">
+        <div className="list">
           <div className="rounded-list">
             <Block block={soilTypeAttr} {...recordAttrs} />
             <SinglePhotoPicker label="Photo" model={subSample} caption="VSA" />
@@ -32,7 +31,7 @@ const VSA = () => {
             <Block block={soilStrengthAttr} {...recordAttrs} />
             <Block block={rootsAttr} {...recordAttrs} />
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

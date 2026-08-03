@@ -166,6 +166,7 @@ const SinglePhotoPicker = ({
       detail={!photo && !isDisabled}
       detailIcon={addOutline}
       onClick={onAddNew}
+      lines="full"
     >
       <IonIcon slot="start" icon={cameraOutline} />
       <IonLabel>{label}</IonLabel>

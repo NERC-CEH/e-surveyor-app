@@ -204,7 +204,7 @@ const LandingPage = () => {
           )}
 
           <div className="border-y border-black/10 bg-black/5">
-            <div className="flex flex-col gap-2 max-w-lg mx-auto px-3 w-full py-[3vh]">
+            <div className="list max-w-lg mx-auto px-3 w-full py-[3vh]">
               <FancyButton
                 icon={plantID}
                 label="Identify plant"

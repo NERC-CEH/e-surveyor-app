@@ -10,7 +10,7 @@ const Habitat = ({ habitat }: Props) => (
     <div className="px-2">
       <div className="rounded-md bg-white p-4">{habitat.description}</div>
 
-      <h3 className="list-title">
+      <h3 className="list-divider">
         Match:
         <Badge className="mx-2 bg-white ring-neutral-500/20">{`${habitat.matchingCoefficient.toFixed(
           0
@@ -24,8 +24,8 @@ const Habitat = ({ habitat }: Props) => (
         </InfoButtonPopover>
       </h3>
 
-      <h3 className="list-title">Typical species</h3>
       <div className="rounded-list">
+        <div className="list-divider">Typical species</div>
         {habitat.typicalSpecies.map(species => (
           <TypicalSpecies species={species} key={species.bsbiid} />
         ))}

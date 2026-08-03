@@ -51,7 +51,7 @@ const Seedmixes = () => {
 
       return (
         <IonItemSliding className="seedmix-list-item" key={id}>
-          <IonItem onClick={openSeedmix}>
+          <IonItem onClick={openSeedmix} lines="none">
             <IonLabel slot="start">{name}</IonLabel>
             <IonLabel slot="end">{speciesCount}</IonLabel>
           </IonItem>

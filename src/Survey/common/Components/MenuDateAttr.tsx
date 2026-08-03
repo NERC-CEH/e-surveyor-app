@@ -14,7 +14,10 @@ const MenuDateAttr = ({
   icon = calendarOutline,
   ...props
 }: Props) => (
-  <IonItem className="m-0! rounded-none! rounded-ion-none! [--border-style:solid]! pe-ion-i-2!">
+  <IonItem
+    className="m-0! rounded-none! rounded-ion-none! [--border-style:solid]! pe-ion-i-2!"
+    lines="full"
+  >
     <IonIcon src={icon} slot="start" />
     <IonLabel className="!opacity-100">
       <T>{label}</T>

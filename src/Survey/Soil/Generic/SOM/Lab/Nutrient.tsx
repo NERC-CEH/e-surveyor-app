@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
 import { Page, Main, Block, Header, useSample } from '@flumens';
-import { IonList } from '@ionic/react';
 import Sample from 'common/models/sample';
 import { labKAttr, labMgAttr, labPAttr, labPHAttr } from '../../config';
 
@@ -14,14 +13,14 @@ const Lab = () => {
     <Page id="survey-soil-som-lab-nutrient" className="theme-soil">
       <Header title="pH and nutrients" />
       <Main>
-        <IonList lines="full">
+        <div className="list">
           <div className="rounded-list">
             <Block block={labPHAttr} {...recordAttrs} />
             <Block block={labPAttr} {...recordAttrs} />
             <Block block={labKAttr} {...recordAttrs} />
             <Block block={labMgAttr} {...recordAttrs} />
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

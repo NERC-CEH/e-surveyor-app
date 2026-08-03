@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IonItem, IonList, IonModal } from '@ionic/react';
+import { IonItem, IonModal } from '@ionic/react';
 import { Main, ModalHeader } from 'common/flumens';
 import { NVCHabitat } from '../service';
 import NVCHabitatMain from './NVCHabitat';
@@ -10,7 +10,11 @@ const NVCHabitats = ({ habitats }: Props) => {
   const [showNVCModal, setShowNVCModal] = useState<NVCHabitat>();
 
   const getHabitatItem = (habitat: NVCHabitat) => (
-    <IonItem key={habitat.NVCHabitat} onClick={() => setShowNVCModal(habitat)}>
+    <IonItem
+      key={habitat.NVCHabitat}
+      onClick={() => setShowNVCModal(habitat)}
+      lines="full"
+    >
       <div className="flex w-full items-center justify-between gap-2 py-2">
         <div className="flex flex-col">
           <div className="line-clamp-2 font-semibold text-black/85">
@@ -29,7 +33,7 @@ const NVCHabitats = ({ habitats }: Props) => {
 
   return (
     <Main>
-      <IonList lines="full" className="my-3 w-full max-w-2xl">
+      <div className="list">
         <div className="overflow-hidden rounded-md">
           <div className="list-divider">
             <div>NVC types</div>
@@ -38,7 +42,7 @@ const NVCHabitats = ({ habitats }: Props) => {
 
           {habitats?.map(getHabitatItem) || []}
         </div>
-      </IonList>
+      </div>
 
       <IonModal isOpen={!!showNVCModal}>
         <ModalHeader

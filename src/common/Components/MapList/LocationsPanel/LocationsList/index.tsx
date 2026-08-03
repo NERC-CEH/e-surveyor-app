@@ -74,7 +74,7 @@ const SitesList = ({
   );
 
   return (
-    <IonList className="mt-2! flex flex-col gap-2">
+    <IonList className="mt-2! list">
       {entries.length ? (
         <>
           {emptyOption}

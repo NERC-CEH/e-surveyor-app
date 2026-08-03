@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { informationCircleOutline } from 'ionicons/icons';
 import { ModalHeader, Main, InfoMessage, Badge } from '@flumens';
-import { IonItem, IonLabel, IonModal, IonList, IonIcon } from '@ionic/react';
+import { IonItem, IonLabel, IonModal, IonIcon } from '@ionic/react';
 import pollination from 'common/data/pollination';
 import Sample from 'models/sample';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
@@ -152,7 +152,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
     }
 
     return (
-      <IonList>
+      <div className="list">
         <div className="rounded-list">
           <div className="list-divider">
             Species associated with your plants
@@ -160,7 +160,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
           {species}
         </div>
-      </IonList>
+      </div>
     );
   };
 
@@ -214,14 +214,14 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
           flower that supports <b>{pollinatorCount}</b> species
         </InfoMessage>
 
-        <IonList>
+        <div className="list">
           <div className="rounded-list">
             <div className="list-divider">
               Species associated with your plants
             </div>
             {species}
           </div>
-        </IonList>
+        </div>
       </>
     );
   };
@@ -233,18 +233,18 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
   return (
     <>
       {showPollinators && (
-        <IonList lines="full">
-          <h3 className="list-title">
-            Potential pollinator count
-            <InfoButton>
-              <div className="font-light">
-                This section shows you how many pollinating species are
-                supported by each of the plants in your habitat. Tap the green
-                button to find out which species each plant supports.
-              </div>
-            </InfoButton>
-          </h3>
+        <div className="list">
           <div className="rounded-list">
+            <div className="list-divider">
+              Potential pollinator count
+              <InfoButton>
+                <div className="font-light">
+                  This section shows you how many pollinating species are
+                  supported by each of the plants in your habitat. Tap the green
+                  button to find out which species each plant supports.
+                </div>
+              </InfoButton>
+            </div>
             <div className="list-divider">
               <div>Species</div>
               <div>Counts</div>
@@ -252,24 +252,26 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
 
             {getPollinators()}
           </div>
-        </IonList>
+        </div>
       )}
 
-      <IonList lines="full">
-        <h3 className="list-title">
-          Potentially supported species
-          <InfoButton>
-            <div className="font-light">
-              In this section, you can see the number of species within each
-              group that you are supporting. Tap the group name to see a full
-              list of your supported species. Bees, butterflies and hoverflies
-              are great pollinators and hoverflies are also useful in pest
-              control.
-            </div>
-          </InfoButton>
-        </h3>
-        <div className="rounded-list">{getSupportedSpecies()}</div>
-      </IonList>
+      <div className="list">
+        <div className="rounded-list">
+          <div className="list-divider">
+            Potentially supported species
+            <InfoButton>
+              <div className="font-light">
+                In this section, you can see the number of species within each
+                group that you are supporting. Tap the group name to see a full
+                list of your supported species. Bees, butterflies and hoverflies
+                are great pollinators and hoverflies are also useful in pest
+                control.
+              </div>
+            </InfoButton>
+          </div>
+          {getSupportedSpecies()}
+        </div>
+      </div>
 
       <IonModal mode="md" isOpen={!!showModal}>
         <ModalHeader title={showModal} onClose={() => setShowModal('')} />

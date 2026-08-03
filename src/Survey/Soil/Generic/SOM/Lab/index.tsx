@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import { flaskOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Main, Block, Header, useSample } from '@flumens';
-import { IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonIcon, IonItem, IonLabel } from '@ionic/react';
 import Sample from 'common/models/sample';
 import { labLOIAttr, labNameAttr, labSOMAttr, labTOCAttr } from '../../config';
 
@@ -17,7 +17,7 @@ const Lab = () => {
     <Page id="survey-soil-som-lab" className="theme-soil">
       <Header title="Lab results" />
       <Main>
-        <IonList lines="full" className="flex flex-col gap-2">
+        <div className="list">
           <div className="rounded-list">
             <Block block={labNameAttr} {...recordAttrs} />
             <Block block={labTOCAttr} {...recordAttrs} />
@@ -35,7 +35,7 @@ const Lab = () => {
               <IonLabel>pH and nutrient analysis</IonLabel>
             </IonItem>
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

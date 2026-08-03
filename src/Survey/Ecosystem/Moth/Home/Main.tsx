@@ -11,7 +11,7 @@ import {
   Input,
   InfoMessage,
 } from '@flumens';
-import { IonList, IonIcon, NavContext } from '@ionic/react';
+import { IonIcon, NavContext } from '@ionic/react';
 import SinglePhotoPicker from 'common/Components/PhotoPickers/SinglePhotoPicker';
 import habitatIcon from 'common/images/habitats.svg';
 import mothInsideBoxIcon from 'common/images/moth-inside-icon.svg';
@@ -51,12 +51,12 @@ const HomeMain = ({
 
   return (
     <Main className="pb-ion-25">
-      <IonList lines="full" className="mb-2 flex flex-col gap-4">
-        <div className="rounded-list my-2">
+      <div className="m-2.5 flex flex-col gap-4">
+        <div className="rounded-list">
           {isDisabled && <UploadedRecordInfoMessage />}
         </div>
 
-        <div className="rounded-list mb-3">
+        <div className="rounded-list">
           <Button
             href="https://www.ceh.ac.uk/our-science/projects/farmer-led-moth-recording"
             prefix={<IonIcon icon={bookOutline} className="size-6" />}
@@ -81,6 +81,7 @@ const HomeMain = ({
             skipValueTranslation
             value={<GridRefValue sample={sample} />}
             disabled={isDisabled}
+            lines="full"
           />
           <MenuDateAttr
             label="Date"
@@ -117,9 +118,10 @@ const HomeMain = ({
             attr="comment"
             skipValueTranslation
             disabled={isDisabled}
+            lines="none"
           />
         </div>
-      </IonList>
+      </div>
 
       {!isDisabled && (
         <Button

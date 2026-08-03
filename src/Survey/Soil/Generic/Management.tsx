@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react';
 import { Page, Header, Main, Block, useSample } from '@flumens';
-import { IonList } from '@ionic/react';
 import Sample from 'models/sample';
 import {
   CROP_OTHER_VALUE,
@@ -38,7 +37,7 @@ const Management = () => {
     <Page id="survey-soil-management" className="theme-soil">
       <Header title="Management" />
       <Main>
-        <IonList lines="full" className="flex flex-col gap-2">
+        <div className="list">
           <div className="rounded-list">
             <Block block={landUseAttr} {...recordAttrs} />
             {hasLandUseOther && (
@@ -66,7 +65,7 @@ const Management = () => {
           <div className="rounded-list">
             <Block block={tillageAttr} {...recordAttrs} />
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

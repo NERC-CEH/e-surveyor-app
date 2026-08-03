@@ -205,9 +205,7 @@ const HabitatIdentification = ({
               Based on your photos, here are the most likely habitat types:
             </div>
 
-            <div className="flex flex-col gap-2 my-4">
-              {habitats.map(getSuggestionItem)}
-            </div>
+            <div className="list my-4">{habitats.map(getSuggestionItem)}</div>
           </>
         )}
       </div>

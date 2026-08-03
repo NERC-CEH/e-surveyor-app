@@ -161,10 +161,10 @@ const Menu = ({
     onToggle('useExperiments', checked);
 
   return (
-    <Main className="app-settings">
-      <div className="flex flex-col gap-4 p-3">
-        <h3 className="list-title">Surveying</h3>
+    <Main className="pt-ion-10 pb-ion-10">
+      <div className="list">
         <div className="rounded-list">
+          <div className="list-divider">Surveying</div>
           <Toggle
             prefix={<IonIcon src={transectIcon} className="size-5" />}
             label="Shorter Common Standards"
@@ -205,14 +205,14 @@ const Menu = ({
             Mark any new records as &#39;training&#39; and exclude from all
             reports.
           </InfoMessage>
-          <IonItem routerLink="/settings/seedmixes" detail>
+          <IonItem routerLink="/settings/seedmixes" detail lines="full">
             <IonIcon icon={seedMixIcon} size="small" slot="start" />
             My seed mixes
           </IonItem>
         </div>
 
-        <h3 className="list-title">Application</h3>
         <div className="rounded-list">
+          <div className="list-divider">Application</div>
           <Toggle
             label="Share App Analytics"
             prefix={<IonIcon src={shareSocialOutline} className="size-5" />}
@@ -234,18 +234,18 @@ const Menu = ({
             future releases.
           </InfoMessage>
 
-          <IonItem id="app-reset-btn" onClick={showAlertDialog}>
+          <IonItem id="app-reset-btn" onClick={showAlertDialog} lines="full">
             <IonIcon icon={arrowUndoOutline} size="small" slot="start" />
             Reset app
           </IonItem>
 
-          <IonItem onClick={showDatabaseExportDialog}>
+          <IonItem onClick={showDatabaseExportDialog} lines="full">
             <IonIcon icon={cloudDownloadOutline} size="small" slot="start" />
             Export database
           </IonItem>
 
           {!isPlatform('hybrid') && (
-            <IonItem onClick={importDatabase}>
+            <IonItem onClick={importDatabase} lines="full">
               <IonIcon icon={cloudUploadOutline} size="small" slot="start" />
               Import database
             </IonItem>
@@ -253,18 +253,20 @@ const Menu = ({
         </div>
 
         {isLoggedIn && (
-          <>
-            <h3 className="list-title">Account</h3>
-            <div className="destructive-item rounded-list">
-              <IonItem onClick={showUserDeleteDialog} className="!text-danger">
-                <IonIcon icon={personRemoveOutline} size="small" slot="start" />
-                <IonLabel>Delete account</IonLabel>
-              </IonItem>
-              <InfoMessage inline>
-                You can delete your user account from the system.
-              </InfoMessage>
-            </div>
-          </>
+          <div className="destructive-item rounded-list">
+            <div className="list-divider">Account</div>
+            <IonItem
+              onClick={showUserDeleteDialog}
+              className="!text-danger"
+              lines="full"
+            >
+              <IonIcon icon={personRemoveOutline} size="small" slot="start" />
+              <IonLabel>Delete account</IonLabel>
+            </IonItem>
+            <InfoMessage inline>
+              You can delete your user account from the system.
+            </InfoMessage>
+          </div>
         )}
       </div>
 

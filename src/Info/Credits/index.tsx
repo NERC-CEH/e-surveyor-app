@@ -30,7 +30,7 @@ const Credits = () => (
           We are very grateful for all the people that helped to create this
           app:
         </P>
-        <div className="mx-4 flex flex-col gap-2">
+        <div className="mx-4 list">
           <div className="underline">UK Centre for Ecology & Hydrology:</div>
           <div>Tom August</div>
           <div>Richard Pywell</div>
@@ -43,12 +43,12 @@ const Credits = () => (
           <div>Ben Woodcock</div>
           <div>Biren Rathod</div>
         </div>
-        <div className="mx-4 mt-4 flex flex-col gap-2">
+        <div className="mx-4 mt-4 list">
           <div className="underline">Rothamsted Research</div>
           <div>Kelly Jowett</div>
         </div>
 
-        <div className="mx-4 my-4 flex flex-col gap-2">
+        <div className="mx-4 my-4 list">
           <div className="underline">Flumens</div>
           <div>Karolis Kazlauskis</div>
           <div>Vilius Stankaitis</div>

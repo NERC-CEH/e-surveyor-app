@@ -56,6 +56,7 @@ const SpeciesItem = ({ species, searchPhrase, onSelect }: Props) => {
     <IonItem
       className={`search-result ${isRecorded ? 'recorded' : ''}`}
       onClick={onClickWrap}
+      lines="none"
     >
       <div className="flex w-full items-center gap-2">
         <div className="flex w-full flex-col gap-1 px-0 py-2">

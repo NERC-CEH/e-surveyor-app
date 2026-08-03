@@ -14,7 +14,7 @@ import {
   MenuAttrItem,
   MenuAttrItemFromModel,
 } from '@flumens';
-import { IonIcon, IonList } from '@ionic/react';
+import { IonIcon } from '@ionic/react';
 import beetleIcon from 'common/images/beetle.svg';
 import Sample from 'models/sample';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -91,10 +91,10 @@ const MainComponent = ({ sample }: Props) => {
           </Button>
         </div>
 
-        <IonList lines="full" className="mb-2">
-          <h3 className="list-title">Details</h3>
+        <div className="m-2.5 list">
           <div className="rounded-list">
-            <MenuAttrItemFromModel attr="date" model={sample} />
+            <div className="list-divider">Details</div>
+            <MenuAttrItemFromModel attr="date" model={sample} lines="full" />
             <MenuAttrItem
               routerLink={`${match.url}/map`}
               value={prettyGridRef}
@@ -103,6 +103,7 @@ const MainComponent = ({ sample }: Props) => {
               skipValueTranslation
               disabled={isDisabled}
               required
+              lines="full"
             />
 
             <Block block={farmNameAttr} {...recordAttrs} />
@@ -110,8 +111,8 @@ const MainComponent = ({ sample }: Props) => {
             <Block block={trapDaysAttr} {...recordAttrs} />
           </div>
 
-          <h3 className="list-title">Field</h3>
           <div className="rounded-list">
+            <div className="list-divider">Field</div>
             <Block block={fieldNameAttr} {...recordAttrs} />
             <Block block={fieldCropAttr} {...recordAttrs} />
             {sample.data[fieldCropAttr.id] === fieldCropOtherValue && (
@@ -137,7 +138,7 @@ const MainComponent = ({ sample }: Props) => {
             <Block block={fieldCompanionCroppingAttr} {...recordAttrs} />
             <Block block={fieldIntercroppingAttr} {...recordAttrs} />
           </div>
-        </IonList>
+        </div>
       </Main>
 
       <BeetleGuide isOpen={showGuide} onClose={() => setShowGuide(false)} />

@@ -17,7 +17,7 @@ const NVCHabitatMain = ({ habitat }: Props) => {
           {habitat.fullName || 'No description'}
         </div>
 
-        <h3 className="list-title">
+        <h3 className="list-divider">
           Score:
           <Badge className="mx-2 bg-white ring-neutral-500/20">
             {habitat.similarityScore.toFixed(3)}
@@ -34,14 +34,12 @@ const NVCHabitatMain = ({ habitat }: Props) => {
         </h3>
 
         {!!typicalSpecies.length && (
-          <>
-            <h3 className="list-title">Constant species</h3>
-            <div className="rounded-list">
-              {typicalSpecies.map(species => (
-                <TypicalSpecies species={species} key={species.bsbiid} />
-              ))}
-            </div>
-          </>
+          <div className="rounded-list">
+            <div className="list-divider">Constant species</div>
+            {typicalSpecies.map(species => (
+              <TypicalSpecies species={species} key={species.bsbiid} />
+            ))}
+          </div>
         )}
       </div>
     </Main>

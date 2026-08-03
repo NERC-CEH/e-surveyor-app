@@ -8,7 +8,7 @@ import {
 } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Block, Button, Main, MenuAttrItem } from '@flumens';
-import { IonList, IonIcon, NavContext } from '@ionic/react';
+import { IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import beetleIcon from 'common/images/beetle.svg';
 import Sample from 'models/sample';
@@ -43,7 +43,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
     <>
       <Main>
         <div className="mt-2 flex flex-col pb-5">
-          <IonList lines="full">
+          <div className="list m-2.5">
             <Button
               href="https://www.rothamsted.ac.uk/sites/default/files/How%20to%20pitfall%20trap%20on%20your%20farm.pdf"
               prefix={<IonIcon icon={bookOutline} size="small" />}
@@ -61,8 +61,8 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
               Carabid identification guide
             </Button>
 
-            <h3 className="list-title">Details</h3>
-            <div className="rounded-list">
+            <div className="rounded-list mt-3">
+              <div className="list-divider">Details</div>
               <SinglePhotoPicker label="Trap photo" model={subSample} />
               <MenuAttrItem
                 routerLink={`${url}/map`}
@@ -71,12 +71,13 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
                 label="Location"
                 skipValueTranslation
                 disabled={isDisabled}
+                lines="full"
               />
 
               <Block block={trapMarginAttr} {...recordAttrs} />
               <Block block={trapCommentAttr} {...recordAttrs} />
             </div>
-          </IonList>
+          </div>
 
           {!isDisabled && (
             <Button

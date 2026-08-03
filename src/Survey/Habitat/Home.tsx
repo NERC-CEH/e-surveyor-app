@@ -22,7 +22,7 @@ const HabitatHome = () => {
           Record habitat type, composition and structure to describe what is
           present on site.
         </StarsBackground>
-        <div className="p-3 flex flex-col gap-4">
+        <div className="list">
           <SurveyCard
             header="Habitat Type"
             description={
@@ -31,7 +31,7 @@ const HabitatHome = () => {
                 including its position within the landscape. All other surveys
                 are linked to this location, ensuring consistent and
                 georeferenced data.
-                <div className="flex flex-col gap-2 mt-2">
+                <div className="list mt-2">
                   <div>
                     <IonIcon
                       icon={locationOutline}

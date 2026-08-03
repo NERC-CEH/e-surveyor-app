@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import { Block, Main, Button } from '@flumens';
-import { IonItem, IonList } from '@ionic/react';
+import { IonItem } from '@ionic/react';
 import Doughnut from 'common/Components/Doughnut';
 import Occurrence from 'models/occurrence';
 import { occurrenceAbundanceAttr } from 'Survey/common/config';
@@ -21,9 +21,9 @@ const OccurrenceMain = ({ occurrence, isDisabled, onDelete }: Props) => {
   return (
     <Main className="relative">
       <div className="mt-2 flex flex-col pb-5">
-        <IonList lines="full">
+        <div className="flex flex-col gap-3 m-2.5">
           <div className="rounded-list">
-            <IonItem className="ps-ion-0.5 pe-ion-i-0.5">
+            <IonItem className="ps-ion-1 pe-ion-i-1" lines="full">
               <div className="flex gap-2 w-full items-center">
                 <div className="list-avatar m-1">
                   <img src={image} alt="" className="size-full object-cover" />
@@ -46,7 +46,7 @@ const OccurrenceMain = ({ occurrence, isDisabled, onDelete }: Props) => {
 
             <Block block={occurrenceAbundanceAttr} {...recordAttrs} />
           </div>
-        </IonList>
+        </div>
 
         {!isDisabled && (
           <Button

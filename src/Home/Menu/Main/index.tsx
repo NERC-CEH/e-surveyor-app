@@ -16,7 +16,7 @@ import {
 } from 'ionicons/icons';
 import { Trans as T } from 'react-i18next';
 import { Main, InfoMessage } from '@flumens';
-import { IonIcon, IonList, IonItem, IonButton } from '@ionic/react';
+import { IonIcon, IonItem, IonButton, IonList } from '@ionic/react';
 import config from 'common/config';
 import { AppModel } from 'models/app';
 import './styles.scss';
@@ -54,8 +54,8 @@ const MenuMain = ({
       </h1>
 
       <IonList lines="full" className="max-w-xl">
-        <h3 className="list-title">User</h3>
         <div className="rounded-list">
+          <div className="list-divider">User</div>
           {isLoggedIn && (
             <IonItem detail id="logout-button" onClick={logOut}>
               <IonIcon icon={exitOutline} size="small" slot="start" />
@@ -98,10 +98,10 @@ const MenuMain = ({
           )}
         </div>
 
-        <h3 className="list-title">
-          <T>Settings</T>
-        </h3>
-        <div className="rounded-list">
+        <div className="rounded-list mt-5">
+          <div className="list-divider">
+            <T>Settings</T>
+          </div>
           <IonItem routerLink="/settings/menu" detail>
             <IonIcon icon={settingsOutline} size="small" slot="start" />
             <T>App</T>
@@ -112,10 +112,10 @@ const MenuMain = ({
           </IonItem>
         </div>
 
-        <h3 className="list-title">
-          <T>Info</T>
-        </h3>
-        <div className="rounded-list">
+        <div className="rounded-list mt-5">
+          <div className="list-divider">
+            <T>Info</T>
+          </div>
           <IonItem routerLink="/info/about" detail>
             <IonIcon
               icon={informationCircleOutline}

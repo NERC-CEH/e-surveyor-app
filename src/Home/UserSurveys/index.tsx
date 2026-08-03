@@ -31,11 +31,11 @@ function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
 
   if (!surveys.length) {
     return (
-      <IonList lines="full">
+      <div className="list">
         <InfoBackgroundMessage>
           No finished pending surveys.
         </InfoBackgroundMessage>
-      </IonList>
+      </div>
     );
   }
 
@@ -80,9 +80,9 @@ function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
 function getAllSurveys(surveys: any[]) {
   if (!surveys.length) {
     return (
-      <IonList lines="full">
+      <div className="list">
         <InfoBackgroundMessage>No surveys</InfoBackgroundMessage>
-      </IonList>
+      </div>
     );
   }
 

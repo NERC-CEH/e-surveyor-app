@@ -54,9 +54,9 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
 
   return (
     <Main className="pb-ion-25">
-      <IonList lines="full">
-        <div className="list-title">Details</div>
+      <div className="list">
         <div className="rounded-list">
+          <div className="list-divider">Details</div>
           <MenuDateAttr
             label="Date"
             value={sample.data.date}
@@ -81,7 +81,7 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
             <IonLabel>SOM</IonLabel>
           </IonItem>
         </div>
-      </IonList>
+      </div>
 
       <div className="mt-8 mb-4 flex items-center justify-center gap-8">
         <Button

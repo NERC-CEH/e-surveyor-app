@@ -1,5 +1,5 @@
 import { Main } from '@flumens';
-import { IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonItem, IonLabel } from '@ionic/react';
 import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
 import './styles.scss';
@@ -49,7 +49,7 @@ const NaturalEnemies = ({ crops, group, crop }: Props) => {
     .sort(byBeneficialSpeciesName);
 
   const getGroupItem = ([beneficialSpecies, plantName]: string[]) => (
-    <IonItem key={beneficialSpecies}>
+    <IonItem key={beneficialSpecies} lines="full">
       <IonLabel slot="start">{beneficialSpecies}</IonLabel>
       <IonLabel slot="end">{plantName}</IonLabel>
     </IonItem>
@@ -59,7 +59,7 @@ const NaturalEnemies = ({ crops, group, crop }: Props) => {
 
   return (
     <Main className="survey-report beneficial-species">
-      <IonList lines="full">
+      <div className="list">
         <div className="rounded-list">
           <div className="list-divider">
             <div>Beneficial species</div>
@@ -68,7 +68,7 @@ const NaturalEnemies = ({ crops, group, crop }: Props) => {
 
           {items}
         </div>
-      </IonList>
+      </div>
     </Main>
   );
 };

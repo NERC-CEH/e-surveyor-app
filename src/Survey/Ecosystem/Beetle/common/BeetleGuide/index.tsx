@@ -138,7 +138,7 @@ const BeetleGuide = ({ isOpen, onClose }: Props) => {
             </div>
           )}
           <div className="">
-            <div className="flex flex-col gap-2 border-b border-solid border-neutral-200/60 bg-[var(--ion-page-background)] p-4">
+            <div className="list border-b border-solid border-neutral-200/60 bg-[var(--ion-page-background)] p-4">
               <h2 className="text-xl font-bold text-primary-900">
                 {showSpecies?.commonName}
               </h2>

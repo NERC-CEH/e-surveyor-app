@@ -89,7 +89,7 @@ const Seedmix = ({
 
     return (
       <IonItemSliding className="seedmix-list-item" key={species.warehouseId}>
-        <IonItem>
+        <IonItem lines="none">
           <div>{taxonName}</div>
         </IonItem>
 
@@ -114,8 +114,10 @@ const Seedmix = ({
 
     return (
       <IonList>
-        <h3 className="list-title">Species</h3>
-        <div className="rounded-list">{speciesEntries}</div>
+        <div className="rounded-list">
+          <div className="list-divider">Species</div>
+          {speciesEntries}
+        </div>
       </IonList>
     );
   };
@@ -137,16 +139,16 @@ const Seedmix = ({
       </IonHeader>
 
       <IonContent>
-        <IonList className="list-with-padding">
+        <div className="list-with-padding list mx-2.5">
           <div className="rounded-list">
-            <IonItem>
+            <IonItem lines="none">
               <IonLabel position="fixed">
                 <b>Name</b>
               </IonLabel>
               <IonInput value={seedmix.name} onIonChange={onNameChange} />
             </IonItem>
           </div>
-        </IonList>
+        </div>
 
         <Button
           color="secondary"

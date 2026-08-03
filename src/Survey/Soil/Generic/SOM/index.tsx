@@ -2,7 +2,7 @@ import { observer } from 'mobx-react';
 import { flaskOutline } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { Page, Header, Main, Block, useSample } from '@flumens';
-import { IonIcon, IonItem, IonLabel, IonList } from '@ionic/react';
+import { IonIcon, IonItem, IonLabel } from '@ionic/react';
 import Sample from 'models/sample';
 import { SOMDepthAttr, SOMDiameterAttr, SOMPatternAttr } from '../config';
 
@@ -17,7 +17,7 @@ const SOMHome = () => {
     <Page id="survey-soil-som" className="theme-soil">
       <Header title="SOM" />
       <Main>
-        <IonList lines="full">
+        <div className="list">
           <div className="rounded-list">
             <Block block={SOMPatternAttr} {...recordAttrs} />
             <Block block={SOMDepthAttr} {...recordAttrs} />
@@ -28,7 +28,7 @@ const SOMHome = () => {
               <IonLabel>Lab results</IonLabel>
             </IonItem>
           </div>
-        </IonList>
+        </div>
       </Main>
     </Page>
   );

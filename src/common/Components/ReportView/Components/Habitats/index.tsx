@@ -7,7 +7,7 @@ import {
   useAlert,
   useToast,
 } from '@flumens';
-import { IonItem, IonList, IonModal, IonSkeletonText } from '@ionic/react';
+import { IonItem, IonModal, IonSkeletonText } from '@ionic/react';
 import ExpandableList from 'common/Components/ExpandableList';
 import InfoButtonPopover from 'Components/InfoButton';
 import { SpeciesNames } from '../../helpers';
@@ -151,19 +151,20 @@ const Habitats = ({ uniqueSpecies }: Props) => {
 
   return (
     <>
-      <IonList lines="full" className="w-full max-w-2xl">
-        <h3 className="list-title">
-          Habitats
-          <InfoButtonPopover>
-            <div className="font-light">
-              This section shows you which broad habitat types are associated
-              with the plant list you recorded. The associated UKHab code is
-              provided below. Tap each habitat type to find out more information
-              and to see typical plants associated with the habitat.
-            </div>
-          </InfoButtonPopover>
-        </h3>
-        <div className="overflow-hidden rounded-md">
+      <div className="list">
+        <div className="rounded-list overflow-hidden rounded-md">
+          <div className="list-divider">
+            Habitats
+            <InfoButtonPopover>
+              <div className="font-light">
+                This section shows you which broad habitat types are associated
+                with the plant list you recorded. The associated UKHab code is
+                provided below. Tap each habitat type to find out more
+                information and to see typical plants associated with the
+                habitat.
+              </div>
+            </InfoButtonPopover>
+          </div>
           <div className="list-divider">
             <div>Broad habitats</div>
             <div>Match</div>
@@ -190,7 +191,7 @@ const Habitats = ({ uniqueSpecies }: Props) => {
             </InfoButtonPopover>
           </div>
         )}
-      </IonList>
+      </div>
       <IonModal isOpen={!!showBroadModal}>
         <ModalHeader
           title={showBroadModal?.broadHabitat || ''}
