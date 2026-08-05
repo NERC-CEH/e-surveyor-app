@@ -29,6 +29,7 @@ import SpeciesList from 'Survey/common/Components/SpeciesList';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   bareGroundAttr,
+  commentAttr,
   countAttr,
   coverAttr,
   deadWoodAttr,
@@ -130,8 +131,9 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
             label="Location"
             skipValueTranslation
             disabled={isDisabled}
-            className="border-ion-none"
+            lines="full"
           />
+          <Block block={commentAttr} {...recordAttrs} />
         </div>
 
         <div className="rounded-list">

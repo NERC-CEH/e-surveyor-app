@@ -9,6 +9,7 @@ import Sample from 'models/sample';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   bareGroundAttr,
+  commentAttr,
   deadWoodAttr,
   litterThatchAttr,
   mossLiverwortAttr,
@@ -41,7 +42,12 @@ const hasUnsavedChanges = (quadratSample: Sample) => {
     attrId => (quadratSample.data[attrId] || 0) > 0
   );
 
-  return hasQuadratPhoto || hasSpecies || hasCoverData;
+  return (
+    hasQuadratPhoto ||
+    hasSpecies ||
+    hasCoverData ||
+    !!quadratSample.data[commentAttr.id]
+  );
 };
 
 function getCompletionProps(quadratSample: Sample) {

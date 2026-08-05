@@ -70,7 +70,6 @@ export type Data = SampleData & {
   type?: any;
   steps?: any;
   date?: any;
-  quadratSize?: any;
   location?: any;
 
   // beetle survey

@@ -23,8 +23,9 @@ import {
   COMMON_STANDARDS_PROTOCOL_VALUE,
   CUSTOM_PROTOCOL_VALUE,
   PLACEMENT_RANDOM_VALUE,
+  quadratLengthAttr,
   quadratPlacementAttr,
-  quadratSizeAttr,
+  quadratWidthAttr,
   surveyProtocolAttr,
   transectLengthAttr,
 } from '../config';
@@ -95,7 +96,8 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
             onChange={(value: any) => {
               sample.data[surveyProtocolAttr.id] = value;
               sample.data.quadrats = 10;
-              sample.data[quadratSizeAttr.id] = 1;
+              sample.data[quadratWidthAttr.id] = 1;
+              sample.data[quadratLengthAttr.id] = 1;
               sample.data[transectLengthAttr.id] = 100;
               sample.data[quadratPlacementAttr.id] = PLACEMENT_RANDOM_VALUE;
 
@@ -128,13 +130,18 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
               </InfoMessage>
 
               <Block
-                block={quadratSizeAttr}
+                block={quadratWidthAttr}
+                record={sample.data}
+                isDisabled={isDisabled || !isCustom || completedDetails}
+              />
+              <Block
+                block={quadratLengthAttr}
                 record={sample.data}
                 isDisabled={isDisabled || !isCustom || completedDetails}
               />
               <InfoMessage inline>
-                This is the size of the area that you will search for plants in
-                each step.
+                This is the width and length of the area that you will search
+                for plants in each step.
               </InfoMessage>
 
               <Block

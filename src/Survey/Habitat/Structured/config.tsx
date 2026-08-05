@@ -112,14 +112,25 @@ export const standingWaterAttr = {
   validation: { min: 0, max: 100 },
 } as const satisfies NumberInputConf;
 
-export const quadratSizeAttr = {
-  id: 'smpAttr:1534',
+export const quadratWidthAttr = {
+  id: 'smpAttr:2101',
   type: 'numberInput',
-  title: 'Quadrat Size',
+  title: 'Quadrat width',
   appearance: 'counter',
   placeholder: '0',
   prefix: <IonIcon icon={squareIcon} className="size-6" />,
-  suffix: 'm²',
+  suffix: 'm',
+  validation: { min: 1, max: 30 },
+} as const satisfies NumberInputConf;
+
+export const quadratLengthAttr = {
+  id: 'smpAttr:2102',
+  type: 'numberInput',
+  title: 'Quadrat length',
+  appearance: 'counter',
+  placeholder: '0',
+  prefix: <IonIcon icon={squareIcon} className="size-6" />,
+  suffix: 'm',
   validation: { min: 1, max: 30 },
 } as const satisfies NumberInputConf;
 
@@ -153,7 +164,8 @@ export const getDetailsValidationSchema = () =>
     locationId: z.string({ error: 'Location is missing' }),
     [surveyProtocolAttr.id]: z.string({ error: 'Survey protocol.' }),
     quadrats: z.number({ error: 'Survey quadrats.' }).min(1),
-    [quadratSizeAttr.id]: z.number({ error: 'Quadrat size.' }).min(1),
+    [quadratWidthAttr.id]: z.number({ error: 'Quadrat width.' }).min(1),
+    [quadratLengthAttr.id]: z.number({ error: 'Quadrat length.' }).min(1),
     [transectLengthAttr.id]: z.number({ error: 'Transect length.' }).min(1),
     [quadratPlacementAttr.id]: z.string({ error: 'Quadrat placement.' }),
   });
