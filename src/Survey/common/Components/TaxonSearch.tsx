@@ -43,10 +43,10 @@ const Controller = () => {
 
     if (!occurrence) {
       const modelSurvey = model.getSurvey();
+      const newTaxon = transformUKSIToAppTaxon(taxon);
 
-      const newOccurrence = modelSurvey.occ!.create!({
-        taxon: transformUKSIToAppTaxon(taxon),
-      });
+      const newOccurrence = modelSurvey.occ!.create!({ taxon: newTaxon });
+      newOccurrence.data.taxon = newTaxon;
       model.occurrences.push(newOccurrence);
 
       model.save();
