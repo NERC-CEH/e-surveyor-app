@@ -9,6 +9,7 @@ import {
 } from '@flumens';
 import { Location as LocationOld } from '@flumens/utils/dist/location';
 import habitats from 'common/data/ukhab';
+import appModel from 'common/models/app';
 import Location from 'models/location';
 
 const levelThreeHabitats = habitats.filter(h => h.level === 3);
@@ -98,6 +99,7 @@ const survey = {
     const location = new Location({
       data: {
         surveyId: '626', // Hardcoded, so that we bypass any site-wide mandatory location attributes. Discussed on 23/07/2026 with John.
+        training: appModel.data.useTraining,
         locationTypeId: LocationType.Site,
         name: '',
         boundaryGeom: '',
