@@ -1,4 +1,5 @@
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import type { Species as SpeciesType } from '../../utils/searchHelpers';
 import Species from './components/Species';
 
 /**
@@ -6,15 +7,18 @@ import Species from './components/Species';
  * a latin name next to it.
  * @param suggestions
  */
-function deDuplicateSuggestions(suggestions: any) {
-  let previous: any = {};
-  const results: any = [];
+function deDuplicateSuggestions(suggestions: SpeciesType[]) {
+  let previous: SpeciesType | undefined;
+  const results: SpeciesType[] = [];
 
-  const taxonWrap = (taxon: any) => {
-    const name = taxon[taxon.foundInName] || '';
+  const getFoundName = (taxon?: SpeciesType) =>
+    taxon ? taxon[taxon.foundInName] || '' : '';
+
+  const taxonWrap = (taxon: SpeciesType) => {
+    const name = getFoundName(taxon);
     const nameNormalized = name.toLocaleLowerCase();
 
-    const previousName = previous[previous.foundInName] || '';
+    const previousName = getFoundName(previous);
     const previousNameNormalized = previousName.toLocaleLowerCase();
 
     const noCommonNames = !nameNormalized || !previousNameNormalized;
@@ -50,9 +54,9 @@ const getSearchInfo = () => (
 );
 
 type Props = {
-  searchResults?: any[];
+  searchResults?: SpeciesType[] | null;
   searchPhrase: string;
-  onSpeciesSelected: any;
+  onSpeciesSelected: (species: SpeciesType, edit: boolean) => void;
 };
 const Suggestions = ({
   searchResults,
@@ -77,7 +81,7 @@ const Suggestions = ({
   } else {
     const deDuped = deDuplicateSuggestions(searchResults);
 
-    const speciesWrap = (species: any) => {
+    const speciesWrap = (species: SpeciesType) => {
       const key = `${species.warehouseId}-${species.foundInName}-${species.isFavourite}`;
 
       return (

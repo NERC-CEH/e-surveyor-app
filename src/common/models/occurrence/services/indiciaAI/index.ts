@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 import z, { object } from 'zod';
-import { LocationModel, dateFormat, isValidLocation } from '@flumens';
+import { dateFormat, type Location } from '@flumens';
+import { hasCoordinates } from 'common/helpers/location';
 import IndiciaAIResponse, { IndiciaAISuggestion } from './indiciaAIResponse.d';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -20,7 +21,7 @@ export type Suggestion = z.infer<typeof suggestionSchema>;
 
 // exported for testing purposes
 export const processSuggestion = (
-  res: IndiciaAIResponse<any>
+  res: Pick<IndiciaAIResponse<unknown>, 'suggestions'>
 ): Suggestion[] => {
   const processResult = (result: IndiciaAISuggestion): Suggestion => ({
     probability: result.probability,
@@ -64,7 +65,7 @@ type Params = {
   listId: string | number;
   model?: 'plantnet' | 'waarneming';
   date?: string | number;
-  location?: (typeof LocationModel)['prototype']['data'];
+  location?: Partial<Location>;
   taxonGroupId?: number;
 };
 
@@ -79,11 +80,11 @@ export default async function identify<T>({
   taxonGroupId,
 }: Params) {
   const dateParam = date ? dateFormat.format(new Date(date)) : '';
-  const srefParam = isValidLocation(location)
+  const srefParam = hasCoordinates(location)
     ? JSON.stringify({
         srid: 4326,
-        latitude: location!.latitude,
-        longitude: location!.longitude,
+        latitude: location.latitude,
+        longitude: location.longitude,
         accuracy: 100,
       })
     : '';
@@ -99,7 +100,7 @@ export default async function identify<T>({
 
   images.forEach((img: string) => data.append('image[]', img));
 
-  const options: any = {
+  const options: AxiosRequestConfig = {
     method: 'post',
     url: `${url}/api-proxy/indicia`,
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -128,8 +129,8 @@ export default async function identify<T>({
       suggestions: filteredSuggestions,
       raw: res.data.raw,
     };
-  } catch (error: any) {
-    if (error.message === 'Not Found')
+  } catch (error) {
+    if (error instanceof Error && error.message === 'Not Found')
       return { classifierId: '', classifierVersion: '', suggestions: [] }; // always empty list
 
     throw new Error(

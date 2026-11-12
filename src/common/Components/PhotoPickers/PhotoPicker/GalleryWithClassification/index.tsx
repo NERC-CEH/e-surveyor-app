@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { observer } from 'mobx-react';
 import { Gallery } from '@flumens';
 import Media from 'models/image';
@@ -8,11 +8,11 @@ type Props = {
   items: Media[];
   showGallery: number;
   onClose: () => boolean;
-  onCrop: any;
-  onDelete: any;
+  onCrop: (image: Media) => void;
+  onDelete: (image: Media) => void | Promise<void>;
 };
 
-const Footer = ({ children }: any) => (
+const Footer = ({ children }: { children?: ReactNode }) => (
   <div className="fixed bottom-0 w-full pb-[26px]">{children}</div>
 );
 

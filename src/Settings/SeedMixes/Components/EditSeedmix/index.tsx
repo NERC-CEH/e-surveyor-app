@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { MemoryRouter, Route, Switch } from 'react-router-dom';
 import { UUIDv7 } from '@flumens';
-import { IonModal } from '@ionic/react';
+import { IonModal, type InputCustomEvent } from '@ionic/react';
 import { SeedmixSpecies as SeedmixSpeciesFromRemote } from 'common/data/seedmix';
 import appModel, { SeedMix as SeedMixFromRemote } from 'models/app';
 import Seedmix from './Components/Seedmix';
@@ -73,8 +73,8 @@ const EditSeedmix = ({ seedMixId, onCancelSeedmix, onSaveSeedmix }: Props) => {
     setSeedmix({ ...seedmix });
   };
 
-  const onNameChange = (e: any) =>
-    setSeedmix({ ...seedmix, name: e.target.value });
+  const onNameChange = (event: InputCustomEvent) =>
+    setSeedmix({ ...seedmix, name: String(event.detail.value || '') });
 
   const getWarehouseID = (sp: SeedmixSpecies) => sp.warehouseId;
   const selectedSpecies = seedmix.species.map(getWarehouseID);

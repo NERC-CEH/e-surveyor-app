@@ -1,5 +1,5 @@
 declare module '*.svg' {
-  const content: any;
+  const content: string;
   export default content;
 }
 
@@ -11,18 +11,23 @@ declare module '*.svg?react' {
 }
 
 declare module '*.jpg' {
-  const content: any;
+  const content: string;
   export default content;
 }
 
 declare module '*.png' {
-  const content: any;
+  const content: string;
   export default content;
 }
 
 declare module '*.jpg?originalName';
 declare module '*.scss';
 declare module '*.css';
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+interface Window {
+  testing?: boolean;
+}
 
 /**
  * Like Partial but creates recursive partial deep type;

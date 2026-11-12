@@ -12,19 +12,17 @@ const { baseURL } = survey;
 
 const { AttrPageFromRoute } = AttrPage;
 
-const routes = (
-  [
-    [baseURL, StartNewSurvey.with(survey)],
-    [`${baseURL}/:smpId`, Home],
-    [`${baseURL}/:smpId/:attr`, withSample(AttrPageFromRoute)],
-    [`${baseURL}/:smpId/location`, Locations],
-    [`${baseURL}/:smpId/taxon`, TaxonSearch],
-    [`${baseURL}/:smpId/species/:occId`, Occurrence],
-    [`${baseURL}/:smpId/species/:occId/taxon`, TaxonSearch],
-    [`${baseURL}/:smpId/report`, Report],
-  ] as any[]
-).map(([route, component]) => (
+const routes = [
+  [baseURL, StartNewSurvey.with(survey)],
+  [`${baseURL}/:smpId`, Home],
+  [`${baseURL}/:smpId/:attr`, withSample(AttrPageFromRoute)],
+  [`${baseURL}/:smpId/location`, Locations],
+  [`${baseURL}/:smpId/taxon`, TaxonSearch],
+  [`${baseURL}/:smpId/species/:occId`, Occurrence],
+  [`${baseURL}/:smpId/species/:occId/taxon`, TaxonSearch],
+  [`${baseURL}/:smpId/report`, Report],
+] as const;
+
+export default routes.map(([route, component]) => (
   <Route key={route} exact path={route} component={component} />
 ));
-
-export default routes;

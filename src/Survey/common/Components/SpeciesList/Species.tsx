@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import {
@@ -28,7 +28,7 @@ import { occurrenceAbundanceAttr } from 'Survey/common/config';
 
 const { positiveThreshold, possibleThreshold } = config;
 
-const useDeleteAlert = (onDelete: any) => {
+const useDeleteAlert = (onDelete?: () => void) => {
   const alert = useAlert();
 
   return () => {
@@ -48,7 +48,7 @@ const useDeleteAlert = (onDelete: any) => {
   };
 };
 
-const useMenu = (deleteSurvey: any) => {
+const useMenu = (deleteSurvey: () => void) => {
   const [present] = useIonActionSheet();
 
   const showMenu = () => {
@@ -69,7 +69,7 @@ const useMenu = (deleteSurvey: any) => {
 type Props = {
   occurrence: Occurrence;
   isDisabled: boolean;
-  onReidentify?: any;
+  onReidentify?: (occurrence: Occurrence) => void;
   useDoughnut?: boolean;
   showGallery?: boolean;
   showPhoto?: boolean;
@@ -97,12 +97,12 @@ const Species = ({
 
   const species = occurrence.getSpecies();
 
-  let commonName: string;
-  let scientificName: string;
+  let commonName = '';
+  let scientificName = '';
   let idClass;
   let detailIcon;
   let notFoundInUK;
-  let speciesPhoto: any;
+  let speciesPhoto: string | null | undefined;
 
   const { media } = occurrence;
   if (media.length) {
@@ -111,10 +111,10 @@ const Species = ({
   }
 
   const [isShowingGallery, setIsShowingGallery] = useState(false);
-  const onPhotoPress = (e: any) => {
+  const onPhotoPress = (event: MouseEvent) => {
     if (!showGallery) return;
-    e.preventDefault();
-    e.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
     setIsShowingGallery(true);
   };
   const hideGallery = () => setIsShowingGallery(false);
@@ -132,11 +132,11 @@ const Species = ({
     );
   };
 
-  const probability = species.probability || (species as any).score || 0; // score for backward compatibility
+  const probability = species?.probability || species?.score || 0; // score for backward compatibility
 
   if (species) {
     scientificName = species.scientificName;
-    commonName = species.commonName;
+    commonName = species.commonName || '';
     notFoundInUK = !species.warehouseId;
 
     const earthIcon = notFoundInUK ? earth : checkmarkCircle;
@@ -222,7 +222,7 @@ const Species = ({
   );
 
   const showReidentify = onReidentify && probability <= 0.1;
-  const onReidentifyWrap = () => onReidentify(occurrence);
+  const onReidentifyWrap = () => onReidentify?.(occurrence);
 
   return (
     <IonItemSliding key={occurrence.cid} {...contextMenuProps}>

@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react';
 import { Trans as T } from 'react-i18next';
 import { Button, InfoMessage } from '@flumens';
 import config from 'common/config';
 
-type Props = { children?: any };
+type Props = { children?: ReactNode };
 
 const UploadedRecordInfoMessage = ({ children: childrenProp }: Props) => {
   const children = childrenProp || (

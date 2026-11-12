@@ -1,9 +1,21 @@
-import { useMapFlyToCurrentLocation, MapContainer } from '@flumens';
+import {
+  useMapFlyToCurrentLocation,
+  MapContainer,
+  type Location,
+} from '@flumens';
 import GPS from 'helpers/GPS';
+
+const GPSWithSimplerCallback = {
+  start: (onPosition: (error: Error | null, location: Location) => void) =>
+    GPS.start({
+      callback: (error, location) => onPosition(error, location as Location),
+    }),
+  stop: (processId: string | number) => GPS.stop(String(processId)),
+};
 
 const GeolocateButton = () => {
   const { isLocating, centerMapToCurrentLocation } = useMapFlyToCurrentLocation(
-    GPS as any
+    GPSWithSimplerCallback
   );
 
   return (

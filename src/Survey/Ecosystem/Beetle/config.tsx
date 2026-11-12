@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import {
   businessOutline,
   clipboardOutline,
@@ -5,7 +6,7 @@ import {
   timeOutline,
 } from 'ionicons/icons';
 import { object, z } from 'zod';
-import { RadioOption, updateModelLocation } from '@flumens';
+import { updateModelLocation } from '@flumens';
 import {
   ChoiceInputConf,
   NumberInputConf,
@@ -24,13 +25,15 @@ import {
   occurrenceAbundanceAttr,
 } from 'Survey/common/config';
 
-type ExtendedOption = RadioOption & {
-  label?: string;
+type ExtendedOption = {
+  value: string;
+  label?: ReactNode;
+  isPlaceholder?: boolean;
   commonName?: string;
   scientificName?: string;
 };
 
-const addLabels = (option: any) => {
+const addLabels = (option: ExtendedOption) => {
   if (option.label || option.isPlaceholder) return option;
 
   if (option.commonName) {
@@ -208,7 +211,7 @@ export const trapDaysAttr = {
   type: 'numberInput',
   title: 'Trapping period',
   appearance: 'counter',
-  prefix: (<IonIcon src={timeOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={timeOutline} className="size-6" />,
   suffix: 'day(s)',
   step: 1,
   validation: { min: 1 },
@@ -218,21 +221,21 @@ export const SBIAttr = {
   id: 'smpAttr:2018',
   type: 'numberInput',
   title: 'Single Business Identifier (SBI)',
-  prefix: (<IonIcon src={businessOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={businessOutline} className="size-6" />,
 } as const satisfies NumberInputConf;
 
 export const farmNameAttr = {
   id: 'location_name',
   type: 'textInput',
   title: 'Farm name',
-  prefix: (<IonIcon src={locationOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={locationOutline} className="size-6" />,
 } as const satisfies TextInputConf;
 
 export const fieldNameAttr = {
   id: 'smpAttr:1779',
   type: 'textInput',
   title: 'Name',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies TextInputConf;
 
 export const fieldMarginsAttr = {
@@ -240,7 +243,7 @@ export const fieldMarginsAttr = {
   type: 'choiceInput',
   title: 'Margins',
   appearance: 'button',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
   choices: [
     { title: 'No margin', dataName: '0' },
     { title: '2m', dataName: '2' },
@@ -258,7 +261,7 @@ export const fieldCropAttr = {
   type: 'choiceInput',
   title: 'Crop',
   appearance: 'button',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
   choices: [
     { title: 'Not Recorded', dataName: '' },
     { title: 'Bare stubble/cultivated', dataName: '21825' },
@@ -287,7 +290,7 @@ export const fieldCropOtherAttr = {
   id: 'smpAttr:1789',
   type: 'textInput',
   title: 'Crop Other',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies TextInputConf;
 
 export const fieldTillageOtherValue = '21827';
@@ -297,7 +300,7 @@ export const fieldTillageAttr = {
   type: 'choiceInput',
   title: 'Tillage',
   appearance: 'button',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
   choices: [
     { title: 'Not Recorded', dataName: '' },
     { title: 'Zero tillage', dataName: '21781' },
@@ -311,7 +314,7 @@ export const fieldTillageOtherAttr = {
   id: 'smpAttr:1788',
   type: 'textInput',
   title: 'Tillage Other',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies TextInputConf;
 
 export const fieldNonCropHabitatsOtherValue = '21838';
@@ -320,7 +323,7 @@ export const fieldNonCropHabitatsAttr = {
   id: 'smpAttr:1793',
   type: 'choiceInput',
   title: 'Non-crop habitats',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
   container: 'page',
   multiple: true,
   choices: [
@@ -337,7 +340,7 @@ export const fieldNonCropHabitatsOtherAttr = {
   id: 'smpAttr:1794',
   type: 'textInput',
   title: 'Other non-crop habitat',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies TextInputConf;
 
 export const fieldMarginsHabitatAttr = {
@@ -345,7 +348,7 @@ export const fieldMarginsHabitatAttr = {
   type: 'choiceInput',
   title: 'Margins Habitat',
   appearance: 'button',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
   choices: [
     { title: 'Not Recorded', dataName: '' },
     { title: 'Arable margins sown with tussocky grasses', dataName: '21829' },
@@ -365,35 +368,35 @@ export const fieldInsecticidesAttr = {
   id: 'smpAttr:1783',
   type: 'yesNoInput',
   title: 'Insecticides used',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies YesNoInputConf;
 
 export const fieldHerbicidesAttr = {
   id: 'smpAttr:1784',
   type: 'yesNoInput',
   title: 'Herbicides used',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies YesNoInputConf;
 
 export const fieldUndersowingAttr = {
   id: 'smpAttr:1785',
   type: 'yesNoInput',
   title: 'Undersowing',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies YesNoInputConf;
 
 export const fieldCompanionCroppingAttr = {
   id: 'smpAttr:1790',
   type: 'yesNoInput',
   title: 'Companion cropping',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies YesNoInputConf;
 
 export const fieldIntercroppingAttr = {
   id: 'smpAttr:1791',
   type: 'yesNoInput',
   title: 'Intercropping',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies YesNoInputConf;
 
 const edgeMarginValue = '21784';
@@ -422,12 +425,8 @@ export const occurrenceCommentAttr = {
   type: 'textInput',
   title: 'Comment',
   appearance: 'multiline',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
 } as const satisfies TextInputConf;
-
-export const taxonAttr = {
-  id: 'taxa_taxon_list_id',
-};
 
 const survey: Survey = {
   id: 727,
@@ -488,9 +487,7 @@ const survey: Survey = {
       object({ location: locationSchema }).safeParse(attrs).error,
 
     occ: {
-      attrs: {
-        // taxon: taxonAttr,
-      },
+      attrs: {},
 
       verify: attrs =>
         object({
@@ -505,7 +502,7 @@ const survey: Survey = {
       create({ photo }) {
         const occ = new Occurrence({
           data: {
-            taxon: null,
+            taxon: undefined,
             [occurrenceAbundanceAttr.id]: 1,
           },
         });
@@ -544,7 +541,7 @@ const survey: Survey = {
         })
         .parse(sample.isIdentifying());
 
-      z.array(z.any())
+      z.array(z.unknown())
         .min(1, 'Please add at least one trap.')
         .parse(sample.samples);
 
@@ -552,7 +549,8 @@ const survey: Survey = {
         location: locationSchema,
       }).parse(attrs);
     } catch (attrError) {
-      return attrError;
+      if (attrError instanceof z.ZodError) return attrError;
+      throw attrError;
     }
 
     return null;

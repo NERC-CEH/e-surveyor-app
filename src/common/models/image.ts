@@ -1,22 +1,28 @@
-import { observable } from 'mobx';
 import { Capacitor } from '@capacitor/core';
 import {
   Filesystem,
   Directory as FilesystemDirectory,
 } from '@capacitor/filesystem';
-import { Media as MediaOriginal, MediaAttrs, isDataURL } from '@flumens';
+import {
+  Media as MediaOriginal,
+  MediaAttrs,
+  type MediaOptions,
+  isDataURL,
+} from '@flumens';
 import { isPlatform } from '@ionic/react';
 import config from 'common/config';
-import Occurrence from './occurrence';
+import type Location from './location';
+import Occurrence, { type Taxon } from './occurrence';
 import Sample from './sample';
 import userModel from './user';
 
-export type URL = string;
-
-type Data = MediaAttrs & { identified?: boolean; species: any };
+type Data = MediaAttrs & {
+  identified?: boolean;
+  species?: Taxon | null;
+};
 
 export default class Media extends MediaOriginal<Data> {
-  static getImageModel(image: any) {
+  static getImageModel(image: string) {
     let convertedImage = image;
 
     if (isPlatform('hybrid') && !isDataURL(image)) {
@@ -31,11 +37,10 @@ export default class Media extends MediaOriginal<Data> {
     ) as Promise<Media>;
   }
 
-  declare parent?: Sample | Occurrence;
+  declare parent?: MediaOriginal<Data>['parent'] &
+    (Sample | Occurrence | Location);
 
-  identification = observable({ identifying: false });
-
-  constructor(options: any) {
+  constructor(options: MediaOptions<Data> = {}) {
     super({
       ...options,
       url: config.backend.indicia.url,
@@ -51,7 +56,7 @@ export default class Media extends MediaOriginal<Data> {
     console.log('MediaModel: destroying.');
 
     // remove from internal storage
-    if (!isPlatform('hybrid') || (window as any).testing) {
+    if (!isPlatform('hybrid') || window.testing) {
       if (!this.parent) return;
 
       this.parent.media.remove(this);
@@ -65,7 +70,7 @@ export default class Media extends MediaOriginal<Data> {
       if (this.data.path) {
         // backwards compatible - don't delete old media
         await Filesystem.deleteFile({
-          path: this.data.data,
+          path: String(this.data.data),
           directory: FilesystemDirectory.Data,
         });
       }
@@ -82,13 +87,13 @@ export default class Media extends MediaOriginal<Data> {
     }
   }
 
-  getURL() {
-    const { data: name } = this.data;
+  getURL(): string {
+    const name = String(this.data.data || '');
 
     if (
       !isPlatform('hybrid') ||
       process.env.NODE_ENV === 'test' ||
-      name?.includes('http')
+      name.includes('http')
     ) {
       return name;
     }

@@ -70,7 +70,9 @@ const useHeaderScroll = () => {
       const el = contentRef.current;
       if (!el) return;
       const scrollEl = await el.getScrollElement();
-      onIonScroll({ detail: { scrollTop: scrollEl.scrollTop } } as any);
+      onIonScroll(
+        new CustomEvent('scroll', { detail: { scrollTop: scrollEl.scrollTop } })
+      );
     })();
   }, [contentRef]);
 

@@ -30,8 +30,10 @@ const EditSpecies = () => {
 
     try {
       await occurrence.identify();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, {
+        position: 'bottom',
+      });
     }
   };
 

@@ -4,7 +4,7 @@ import { Interaction as EnemyInteraction } from 'common/data/naturalEnemies';
 import plantCommonNamesDataset from 'common/data/uksi_plants.names.json';
 import './styles.scss';
 
-const plantCommonNames = plantCommonNamesDataset as any;
+const plantCommonNames: Record<string, string> = plantCommonNamesDataset;
 
 type Props = {
   crops: EnemyInteraction[];

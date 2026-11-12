@@ -3,7 +3,6 @@ import {
   checkmarkOutline,
   pinOutline,
 } from 'ionicons/icons';
-// eslint-disable-next-line import-x/no-extraneous-dependencies
 import { twMerge } from 'tailwind-merge';
 import {
   IonIcon,

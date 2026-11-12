@@ -42,19 +42,16 @@ export async function identifyBroad(species: TVK[]): Promise<BroadHabitat[]> {
     // const res = { data: dummyBroadResponse };
     // await new Promise(r => setTimeout(r, 2000));
 
-    res.data.forEach(d => remoteBroadHabitatSchema.parse(d));
-
-    return res.data;
-  } catch (error: any) {
-    if (isAxiosNetworkError(error))
+    return z.array(remoteBroadHabitatSchema).parse(res.data);
+  } catch (error) {
+    if (axios.isAxiosError(error) && isAxiosNetworkError(error))
       throw new HandledError(
         'Request aborted because of a network issue (timeout or similar).'
       );
 
-    if ('issues' in error) {
-      const err: ZodError = error;
+    if (error instanceof ZodError) {
       throw new Error(
-        err.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
+        error.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
       );
     }
 
@@ -94,19 +91,16 @@ export async function identifyNVC(species: TVK[]): Promise<NVCHabitat[]> {
     // const res = { data: dummyNVCResponse };
     // await new Promise(r => setTimeout(r, 2000));
 
-    res.data.forEach(d => remoteNVCHabitatSchema.parse(d));
-
-    return res.data;
-  } catch (error: any) {
-    if (isAxiosNetworkError(error))
+    return z.array(remoteNVCHabitatSchema).parse(res.data);
+  } catch (error) {
+    if (axios.isAxiosError(error) && isAxiosNetworkError(error))
       throw new HandledError(
         'Request aborted because of a network issue (timeout or similar).'
       );
 
-    if ('issues' in error) {
-      const err: ZodError = error;
+    if (error instanceof ZodError) {
       throw new Error(
-        err.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
+        error.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
       );
     }
 

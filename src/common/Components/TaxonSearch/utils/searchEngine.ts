@@ -4,17 +4,15 @@
 import species from 'common/data/species/index.json';
 import searchCommonNames from './commonNamesSearch';
 import searchSciNames from './scientificNamesSearch';
-import { Species } from './searchHelpers';
-
-const loading = false;
+import type { Genera, Species } from './searchHelpers';
 
 const MAX = 300;
 
-const API = {
-  async init() {
-    // empty
-  },
+type Options = {
+  maxResults?: number;
+};
 
+const API = {
   /**
    * Returns an array of species in format
    {
@@ -29,7 +27,10 @@ const API = {
      tvk: "TVK"
    }
    */
-  async search(searchPhrase: any, options: any = {}): Promise<Species[]> {
+  async search(
+    searchPhrase: string,
+    options: Options = {}
+  ): Promise<Species[]> {
     // todo Accent Folding: https://alistapart.com/article/accent-folding-for-auto-complete
 
     const results: Species[] = [];
@@ -38,19 +39,7 @@ const API = {
       return results;
     }
 
-    // check if data exists
-    if (!species) {
-      // initialise data load
-      if (!loading) {
-        await API.init();
-        return API.search(searchPhrase || '', options);
-      }
-
-      return Promise.resolve([]);
-    }
-
     const maxResults = options.maxResults || MAX;
-    const informalGroups = options.informalGroups || [];
 
     // normalize the search phrase
     const normSearchPhrase = searchPhrase.toLowerCase();
@@ -59,12 +48,11 @@ const API = {
 
     // search sci names
     searchSciNames(
-      species as any,
+      species as Genera,
       normSearchPhrase,
       results,
       maxResults,
-      false,
-      informalGroups
+      false
     );
 
     const byFrequency = (t1: Species, t2: Species) =>

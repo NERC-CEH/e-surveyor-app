@@ -32,9 +32,8 @@ const EditSpecies = () => {
 
     try {
       await occurrence.identify();
-    } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : `${e}`;
-      toast.error(message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     }
   };
 

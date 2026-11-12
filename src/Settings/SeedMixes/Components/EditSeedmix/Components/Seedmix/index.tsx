@@ -14,6 +14,7 @@ import {
   IonItemOptions,
   IonLabel,
   IonInput,
+  type InputCustomEvent,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import { SeedmixSpecies, SeedMix } from '../..';
@@ -56,7 +57,7 @@ type Props = {
   onCancel: () => void;
   onSave: () => void;
   onSpeciesDelete: (warehouseId: number) => void;
-  onNameChange: (e: any) => void;
+  onNameChange: (event: InputCustomEvent) => void;
 };
 
 const Seedmix = ({

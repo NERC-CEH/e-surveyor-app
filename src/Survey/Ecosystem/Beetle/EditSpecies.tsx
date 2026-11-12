@@ -1,6 +1,7 @@
 import { AttrPage, useSample } from 'common/flumens';
-import Occurrence, { Taxon } from 'models/occurrence';
-import Sample from 'models/sample';
+import type Occurrence from 'models/occurrence';
+import type { Taxon } from 'models/occurrence';
+import type Sample from 'models/sample';
 import { beetleSpecies } from './config';
 
 const EditSpecies = () => {
@@ -10,20 +11,23 @@ const EditSpecies = () => {
   const attrProps = {
     input: 'radio',
     inputProps: { options: beetleSpecies },
-    set(warehouseId: number, model: Occurrence) {
-      const byWarehouseId = (option: any) => option.value === warehouseId;
+    set(warehouseId: string, model: Occurrence) {
+      const byWarehouseId = (option: (typeof beetleSpecies)[number]) =>
+        option.value === warehouseId;
       const species = beetleSpecies.find(byWarehouseId);
       const taxon: Taxon = {
         probability: 1,
-        warehouseId,
+        warehouseId: Number(warehouseId),
         commonName: species?.commonName || '',
-        scientificName: species?.scientificName || species?.label || '',
+        scientificName:
+          species?.scientificName ||
+          (typeof species?.label === 'string' ? species.label : ''),
         tvk: '',
       };
       model.data.taxon = taxon;
     },
     get() {
-      return occurrence.data.taxon?.warehouseId;
+      return occurrence.data.taxon?.warehouseId.toString();
     },
   };
 

@@ -15,7 +15,7 @@ import Main from './Main';
 
 type URL = string;
 
-const showFirstPhotoTip = (alert: any) => {
+const showFirstPhotoTip = (alert: ReturnType<typeof useAlert>) => {
   if (!appModel.data.showFirstPhotoTip) return null;
 
   appModel.data.showFirstPhotoTip = false;

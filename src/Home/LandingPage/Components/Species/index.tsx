@@ -13,6 +13,7 @@ import {
   IonButtons,
   IonHeader,
   IonToolbar,
+  type SegmentCustomEvent,
 } from '@ionic/react';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import Occurrence from 'models/occurrence';
@@ -22,14 +23,15 @@ import './styles.scss';
 
 type Props = {
   occurrence?: Occurrence;
-  onClose: any;
+  onClose: () => void;
 };
 
 const SpeciesProfile = ({ occurrence, onClose }: Props) => {
   const [segment, setSegment] = useState('species');
   const toast = useToast();
 
-  const onSegmentChange = (e: any) => setSegment(e.detail.value);
+  const onSegmentChange = (event: SegmentCustomEvent) =>
+    setSegment(String(event.detail.value));
 
   const identifySpecies = async () => {
     if (!device.isOnline) {
@@ -41,8 +43,8 @@ const SpeciesProfile = ({ occurrence, onClose }: Props) => {
 
     try {
       await occurrence.identify();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     }
   };
 

@@ -1,9 +1,11 @@
+import type { ReactNode } from 'react';
 import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
+import type { UserModel } from 'models/user';
 
 type Props = {
-  userModel: any;
-  children: any;
+  userModel: UserModel;
+  children: ReactNode;
 };
 
 const RequiresLogin = ({ userModel, children }: Props) => {

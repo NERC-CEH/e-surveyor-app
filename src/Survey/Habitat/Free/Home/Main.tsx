@@ -113,7 +113,7 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
           <Block
             block={seededAttr}
             {...recordAttrs}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[seededAttr.id] = value;
               delete sample.data[seedmixGroupAttr.id];
               delete sample.data[SEEDMIX_ATTR_ID];
@@ -125,7 +125,7 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
           <Block
             block={seedmixGroupAttr}
             {...recordAttrs}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[seedmixGroupAttr.id] = value;
               delete sample.data[SEEDMIX_ATTR_ID];
               delete sample.data[customSeedmixAttr.id];
@@ -135,7 +135,7 @@ const HomeMain = ({ sample, photoSelect }: Props) => {
           <Block
             block={seedmixAttr}
             {...recordAttrs}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[SEEDMIX_ATTR_ID] = value;
               delete sample.data[customSeedmixAttr.id];
 

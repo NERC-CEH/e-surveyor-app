@@ -1,13 +1,10 @@
 import { locationOutline } from 'ionicons/icons';
 import {
   ChoiceInputConf,
-  LocationData,
   TextInputConf,
   NumberInputConf,
   LocationType,
-  inferAttrConfigTypes,
 } from '@flumens';
-import { Location as LocationOld } from '@flumens/utils/dist/location';
 import habitats from 'common/data/ukhab';
 import appModel from 'common/models/app';
 import Location from 'models/location';
@@ -89,6 +86,7 @@ const attrs = {
 };
 
 const survey = {
+  name: 'habitat-location',
   label: 'Habitat Type',
   baseURL: '/survey/habitat/location',
   icon: locationOutline,
@@ -115,8 +113,5 @@ const survey = {
     return location;
   },
 } as const;
-
-export type Data = LocationData &
-  inferAttrConfigTypes<typeof attrs> & { location?: LocationOld };
 
 export default survey;

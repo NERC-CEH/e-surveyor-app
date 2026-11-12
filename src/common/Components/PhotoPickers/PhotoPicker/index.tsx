@@ -9,8 +9,13 @@ import {
   saveFile,
   deleteFile,
 } from '@flumens';
-import { isPlatform, useIonActionSheet } from '@ionic/react';
+import {
+  isPlatform,
+  useIonActionSheet,
+  type BackButtonEvent,
+} from '@ionic/react';
 import Media from 'models/image';
+import Location from 'models/location';
 import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import GalleryWithClassification from './GalleryWithClassification';
@@ -23,7 +28,7 @@ export function usePromptImageSource() {
   const { t } = useTranslation();
   const [presentActionSheet] = useIonActionSheet();
 
-  const promptImageSource = (resolve: any) => {
+  const promptImageSource = (resolve: (value: boolean | null) => void) => {
     presentActionSheet({
       buttons: [
         { text: t('Gallery'), handler: () => resolve(false) },
@@ -40,19 +45,18 @@ export function usePromptImageSource() {
 }
 
 type Props = {
-  model: Sample | Occurrence;
+  model: Sample | Occurrence | Location;
   allowToCrop?: boolean;
-  onChange?: any;
+  onChange?: () => void;
 };
 
 const useOnBackButton = (onCancelEdit: () => void, editImage?: Media) => {
   const hideModal = () => {
-    const disableHardwareBackButton = (event: any) => {
-      // eslint-disable-next-line
-      event.detail.register(100, (processNextHandler: any) => {
+    const disableHardwareBackButton = (event: Event) => {
+      (event as BackButtonEvent).detail.register(100, processNextHandler => {
         if (!editImage) {
           processNextHandler();
-          return null;
+          return;
         }
 
         onCancelEdit();
@@ -83,9 +87,7 @@ const AppPhotoPicker = ({ model, allowToCrop = true, onChange }: Props) => {
         Media.getImageModel(
           isPlatform('hybrid') ? Capacitor.convertFileSrc(imageURL) : imageURL
         );
-      const imageModels: Media[] = await Promise.all<any>(
-        photoURLs.map(getImageModel)
-      );
+      const imageModels = await Promise.all(photoURLs.map(getImageModel));
 
       const canEdit = imageModels.length === 1;
       if (canEdit) {
@@ -98,22 +100,26 @@ const AppPhotoPicker = ({ model, allowToCrop = true, onChange }: Props) => {
       model.save();
 
       onChange?.();
-    } catch (e: any) {
-      toast.error(e);
+    } catch (error) {
+      toast.error(error);
     }
   }
 
-  const onRemove = async (m: any) => {
-    await m.destroy();
+  const onRemove = async (media: Media) => {
+    await media.destroy();
     onChange?.();
   };
 
   const onDoneEdit = async (imageDataURL: URL) => {
-    const image = editImage as Media;
+    if (!editImage) return;
+
+    const image = editImage;
 
     // overwrite existing file
-    const oldFileName: string = image?.getURL().split('/').pop() as string;
-    const extension = oldFileName.split('.').pop() as string;
+    const oldFileName = image.getURL().split('/').pop();
+    if (!oldFileName) throw new Error('Image filename is missing.');
+
+    const extension = oldFileName.split('.').pop() || 'jpg';
     const newFileName = `${Date.now()}.${extension}`;
 
     await deleteFile(oldFileName);

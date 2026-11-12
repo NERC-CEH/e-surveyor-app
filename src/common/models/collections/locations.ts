@@ -1,24 +1,61 @@
 import { reaction } from 'mobx';
 import axios from 'axios';
-import { camelCase, map, mapKeys, mapValues } from 'lodash';
-import { ZodError } from 'zod';
+import { camelCase } from 'lodash';
+import { z, ZodError } from 'zod';
 import {
   device,
   HandledError,
   isAxiosNetworkError,
   LocationCollection as LocationCollectionBase,
-  LocationType as LocType,
+  LocationType,
+  type LocationOptions,
 } from '@flumens';
 import type { Options as LocationCollectionOptions } from '@flumens/models/dist/Indicia/LocationCollection';
 import config from 'common/config';
-import Location, { dtoSchema } from 'models/location';
+import Location, { dtoSchema, type Data, type Metadata } from 'models/location';
 import userModel from 'models/user';
 import { locationsStore } from '../store';
 
-export class LocationsCollection<
-  T extends Location = Location,
-> extends LocationCollectionBase<T> {
-  constructor(options: LocationCollectionOptions<T>) {
+const responseSchema = z.array(
+  z.object({ values: z.record(z.string(), z.unknown()) })
+);
+type LocationDTO = z.infer<typeof dtoSchema>;
+type MediaDTO = {
+  id: string;
+  cid: string;
+  createdAt: number;
+  updatedAt: number;
+  syncedAt: number;
+  data: { type: string; data: string };
+  parentId: string;
+  metadata: Record<string, never>;
+};
+type StoredLocation = Omit<
+  LocationOptions<Data, Metadata>,
+  'data' | 'metadata' | 'media'
+> & {
+  data: {
+    data: Data;
+    metadata: Metadata;
+    media: Record<string, unknown>[];
+  };
+};
+
+const camelCaseValues = ({ values }: { values: Record<string, unknown> }) =>
+  Object.fromEntries(
+    Object.entries(values).map(([key, value]) => [
+      key.includes(':') ? key : camelCase(key),
+      value,
+    ])
+  );
+
+const rawValue = (value: unknown) =>
+  value && typeof value === 'object' && 'raw_value' in value
+    ? value.raw_value
+    : value;
+
+class LocationsCollection extends LocationCollectionBase<Location> {
+  constructor(options: LocationCollectionOptions<Location>) {
     super(options);
 
     const fetchFirstTime = () => {
@@ -34,38 +71,28 @@ export class LocationsCollection<
 
     this.ready?.then(fetchFirstTime);
 
-    const onLoginChange = async (newEmail: any) => {
+    const onLoginChange = async (newEmail?: string) => {
       if (!newEmail) return;
 
       await this.ready;
-
       console.log(`📚 Collection: ${this.id} collection email has changed`);
       fetchFirstTime();
     };
-    const getEmail = () => userModel.data.email;
-    reaction(getEmail, onLoginChange);
+    reaction(() => userModel.data.email, onLoginChange);
   }
 
   async fetch() {
-    if (!this.store || !this.Model) {
+    if (!this.store) {
       this.ready.resolve(false);
       return;
     }
 
-    const modelsJSON = await this.store.findAll();
-
-    const getModel = (json: any) => {
+    const modelsJSON = (await this.store.findAll()) as StoredLocation[];
+    const models = modelsJSON.map(json => {
       const { data, metadata, media } = json.data;
-      return new this.Model({
-        ...json,
-        data,
-        metadata,
-        media,
-      });
-    };
-    const models = modelsJSON.map(getModel);
+      return new Location({ ...json, data, metadata, media });
+    });
     this.data.push(...models);
-
     this.ready.resolve(true);
   }
 
@@ -73,20 +100,20 @@ export class LocationsCollection<
     console.log(`📚 Collection: ${this.id} fetching`);
     this.remote.synchronising = true;
 
-    const docs = await this.fetchRemoteByType(LocType.Site);
-    const mediaDocs = await this.fetchRemoteMedia();
+    try {
+      const docs = await this.fetchRemoteByType(LocationType.Site);
+      const mediaDocs = await this.fetchRemoteMedia();
+      const newModels = docs.map(doc => {
+        const media = mediaDocs.filter(({ parentId }) => parentId === doc.id);
+        return Location.fromDTO(doc, { media }) as Location;
+      });
 
-    const Model = this.Model as unknown as typeof Location;
-    const newModels = docs.map(doc => {
-      const media = mediaDocs.filter(m => m.parentId === doc.cid);
-      return Model.fromDTO(doc, { media }) as T;
-    });
-    this.upsert(...newModels);
-    await Promise.all(newModels.map(m => m.save()));
-
-    await this.removeStaleLocalModels(newModels, [LocType.Site]);
-
-    this.remote.synchronising = false;
+      this.upsert(...newModels);
+      await Promise.all(newModels.map(model => model.save()));
+      await this.removeStaleLocalModels(newModels, [LocationType.Site]);
+    } finally {
+      this.remote.synchronising = false;
+    }
 
     console.log(`📚 Collection: ${this.id} collection fetching done`);
   }
@@ -94,9 +121,8 @@ export class LocationsCollection<
   private async fetchRemoteByType(
     locationTypeId: number | string,
     publicLocations = false
-  ): Promise<any[]> {
+  ): Promise<LocationDTO[]> {
     const url = `${this.remote.url}/index.php/services/rest/locations`;
-
     const token = await userModel.getAccessToken();
 
     /* eslint-disable @typescript-eslint/naming-convention */
@@ -106,125 +132,107 @@ export class LocationsCollection<
         public: publicLocations,
         verbose: 1,
       },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
       timeout: 80000,
     };
     /* eslint-enable @typescript-eslint/naming-convention */
 
     try {
-      const res = await axios.get(url, options);
-
-      const getValues = (doc: any) =>
-        mapKeys(doc.values, (_, key) =>
-          key.includes(':') ? key : camelCase(key)
-        );
-      const unverboseify = (doc: any) =>
-        mapValues(doc, (val, key) => {
-          if (!key.includes('locAttr:')) return val;
-          if (Array.isArray(val)) return map(val, (i: any) => i.raw_value || i);
-          return val.raw_value || val;
+      const { data } = await axios.get<unknown>(url, options);
+      return responseSchema
+        .parse(data)
+        .map(camelCaseValues)
+        .map(doc => {
+          const normalizeValue = ([key, value]: [string, unknown]) => {
+            if (!key.includes('locAttr:')) return [key, value];
+            return [
+              key,
+              Array.isArray(value) ? value.map(rawValue) : rawValue(value),
+            ];
+          };
+          const values = Object.fromEntries(
+            Object.entries(doc).map(normalizeValue)
+          );
+          return dtoSchema.loose().parse(values);
         });
-      const docs = res.data.map(getValues).map(unverboseify);
-
-      docs.forEach(dtoSchema.parse);
-
-      return docs;
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isCancel(error)) return [];
-
-      if (isAxiosNetworkError(error))
+      if (axios.isAxiosError(error) && isAxiosNetworkError(error))
         throw new HandledError(
           'Request aborted because of a network issue (timeout or similar).'
         );
-
-      if ('issues' in error) {
-        const err: ZodError = error;
+      if (error instanceof ZodError)
         throw new Error(
-          err.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
+          error.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
         );
-      }
-
       throw error;
     }
   }
 
-  private async fetchRemoteMedia(): Promise<any[]> {
+  private async fetchRemoteMedia(): Promise<MediaDTO[]> {
     const url = `${this.remote.url}/index.php/services/rest/location-media`;
-
     const token = await userModel.getAccessToken();
-
     const options = {
-      params: {},
       headers: { Authorization: `Bearer ${token}` },
       timeout: 80000,
     };
 
     try {
-      const res = await axios.get(url, options);
-
-      const getValues = (doc: any) =>
-        mapKeys(doc.values, (_, key) =>
-          key.includes(':') ? key : camelCase(key)
-        );
-
-      const docs = res.data.map(getValues).map((doc: any) => ({
-        id: doc.id,
-        cid: doc.id,
-        createdAt: new Date(doc.createdOn).getTime(),
-        updatedAt: new Date(doc.updatedOn).getTime(),
-        syncedAt: Date.now(),
-        data: {
-          type: 'jpeg',
-          data: `${this.remote.url}/upload/${doc.path}`,
-        },
-        parentId: doc.locationId,
-        metadata: {},
-      }));
-
-      return docs;
-    } catch (error: any) {
+      const { data } = await axios.get<unknown>(url, options);
+      return responseSchema
+        .parse(data)
+        .map(camelCaseValues)
+        .map(doc => ({
+          id: String(doc.id),
+          cid: String(doc.id),
+          createdAt: new Date(String(doc.createdOn)).getTime(),
+          updatedAt: new Date(String(doc.updatedOn)).getTime(),
+          syncedAt: Date.now(),
+          data: {
+            type: 'jpeg',
+            data: `${this.remote.url}/upload/${String(doc.path)}`,
+          },
+          parentId: String(doc.locationId),
+          metadata: {},
+        }));
+    } catch (error) {
       if (axios.isCancel(error)) return [];
-
-      if (isAxiosNetworkError(error))
+      if (axios.isAxiosError(error) && isAxiosNetworkError(error))
         throw new HandledError(
           'Request aborted because of a network issue (timeout or similar).'
         );
-
-      if ('issues' in error) {
-        const err: ZodError = error;
+      if (error instanceof ZodError)
         throw new Error(
-          err.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
+          error.issues.map(e => `${e.path.join(' ')} ${e.message}`).join(' ')
         );
-      }
-
       throw error;
     }
   }
 
-  private async removeStaleLocalModels(models: Location[], type: LocType[]) {
-    const newExternalKeys = new Set(models.map(m => m.cid));
-
-    // remove stale non-draft models that are no longer in the remote
+  private async removeStaleLocalModels(
+    models: Location[],
+    types: LocationType[]
+  ) {
+    const newExternalKeys = new Set(models.map(model => model.cid));
     const stale = this.filter(model => {
-      if (!type.includes(model.data.locationTypeId as any)) return false;
+      if (
+        !types.some(type => Number(type) === Number(model.data.locationTypeId))
+      )
+        return false;
 
-      const isLocalDuplicate = !model.id && newExternalKeys.has(model.cid); // can happen if uploaded but not reflected back in the app
-      const modelIsStale = model.id && !newExternalKeys.has(model.cid); // once uploaded, but deleted from remote
+      const isLocalDuplicate = !model.id && newExternalKeys.has(model.cid);
+      const modelIsStale = !!model.id && !newExternalKeys.has(model.cid);
       return modelIsStale || isLocalDuplicate;
     });
-    await Promise.all(stale.map(m => m.destroy()));
+    await Promise.all(stale.map(model => model.destroy()));
   }
 }
 
-const collection = new LocationsCollection<Location>({
+const collection = new LocationsCollection({
   store: locationsStore,
   Model: Location,
   url: config.backend.indicia.url,
   getAccessToken: () => userModel.getAccessToken(),
 });
-
-// (window as any).locationsCollection = collection;
 
 export default collection;

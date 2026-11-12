@@ -1,6 +1,11 @@
 import { chatboxOutline } from 'ionicons/icons';
 import { object, string } from 'zod';
-import { dateFormat, toISOTimezoneString, updateModelLocation } from '@flumens';
+import {
+  dateFormat,
+  toISOTimezoneString,
+  updateModelLocation,
+  type SampleSubmission,
+} from '@flumens';
 import icon from 'common/images/moth-icon.svg';
 import appModel from 'common/models/app';
 import Sample from 'common/models/sample';
@@ -72,7 +77,7 @@ const survey: Survey = {
       taxon: {
         remote: {
           id: 'taxa_taxon_list_id',
-          values: (taxon: any) => taxon.warehouseId,
+          values: (taxon: Taxon) => taxon.warehouseId,
         },
       },
     },
@@ -95,7 +100,7 @@ const survey: Survey = {
       return occ;
     },
 
-    modifySubmission(submission: any, occ: Occurrence) {
+    modifySubmission(submission: SampleSubmission, occ: Occurrence) {
       return attachClassifierResults(submission, occ, classifierID);
     },
   },
@@ -113,7 +118,6 @@ const survey: Survey = {
         training: appModel.data.useTraining,
         surveyEndTime: toISOTimezoneString(new Date()),
         location: null,
-        comment: null,
         enteredSrefSystem: 4326,
       },
     });

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import localRarityData from 'common/data/moths/local_rarity.json';
 import DotIcon from './one-circle.svg?react';
 import ThreeDotIcon from './three-circles.svg?react';
@@ -21,14 +22,14 @@ const LocalRarityBadge = ({ tvk, grid }: Props) => {
 
   const data = localRarityData as RarityData;
   let label = 'No data';
-  let icon: any = '';
+  let icon: ReactNode = '';
 
   const speciesData = data[tvk];
   if (speciesData) {
     label = 'Rare';
     icon = <DotIcon className="fill-danger" />;
 
-    if (speciesData?.[grid]) {
+    if (speciesData[grid]) {
       icon = <ThreeDotIcon className="fill-primary-600" />;
       label = 'Common';
 

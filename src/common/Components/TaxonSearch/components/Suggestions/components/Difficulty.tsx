@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { IonPopover, IonContent } from '@ionic/react';
 
 type Props = { difficulty?: number };
@@ -12,15 +12,15 @@ const Difficulty = ({ difficulty }: Props) => {
     'border-b-red-600',
   ][difficulty || 0];
 
-  const [infoState, setInfoState] = useState<any>({
-    showInfo: false,
-    event: undefined,
-  });
+  const [infoState, setInfoState] = useState<{
+    showInfo: boolean;
+    event?: Event;
+  }>({ showInfo: false });
 
-  const showInfo = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setInfoState({ showInfo: true, event: e });
+  const showInfo = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setInfoState({ showInfo: true, event: event.nativeEvent });
   };
 
   const hideInfo = () => setInfoState({ showInfo: false, event: undefined });

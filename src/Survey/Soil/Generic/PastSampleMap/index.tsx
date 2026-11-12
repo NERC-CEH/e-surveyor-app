@@ -1,21 +1,22 @@
 /* eslint-disable no-bitwise */
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
+import type { MapRef } from 'react-map-gl/mapbox';
 import {
   MapContainer,
   Page,
   Main,
   mapFlyToLocation,
   Header,
-  isValidLocation,
   LocationMarker,
   useSample,
 } from '@flumens';
+import GeolocateButton from 'common/Components/MapList/GeolocateButton';
 import config from 'common/config';
+import { hasCoordinates } from 'common/helpers/location';
 import Sample from 'common/models/sample';
 import samples from 'models/collections/samples';
 import surveyConfig from '../config';
-import GeolocateButton from './GeolocateButton';
 
 function uuidToColor(uuid: string) {
   let hash = 0;
@@ -34,10 +35,12 @@ const PastSampleMap = () => {
   const { sample: model } = useSample<Sample>();
   if (!model) throw new Error('Sample is missing');
 
-  const location = model.data.location || {};
+  const { location } = model.data;
 
-  const [mapRef, setMapRef] = useState<any>();
-  const flyToLocation = () => mapFlyToLocation(mapRef, location);
+  const [mapRef, setMapRef] = useState<MapRef>();
+  const flyToLocation = () => {
+    if (hasCoordinates(location)) mapFlyToLocation(mapRef, location);
+  };
   useEffect(flyToLocation, [mapRef, location]);
 
   const bySoilSurvey = (smp: Sample) => smp.data.surveyId === surveyConfig.id;
@@ -47,7 +50,7 @@ const PastSampleMap = () => {
     const randomColor = uuidToColor(smp.cid);
 
     return smp.samples.map((subSample: Sample) => {
-      if (!isValidLocation(subSample.data.location)) return null;
+      if (!hasCoordinates(subSample.data.location)) return null;
 
       return (
         <LocationMarker.Circle
@@ -74,7 +77,7 @@ const PastSampleMap = () => {
           accessToken={config.map.mapboxApiKey}
           mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
           maxPitch={0}
-          initialViewState={location}
+          initialViewState={hasCoordinates(location) ? location : undefined}
         >
           <GeolocateButton />
 

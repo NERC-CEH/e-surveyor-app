@@ -23,7 +23,7 @@ const fumariaSpecies = {
   },
 };
 
-const plantNetResponse: IndiciaAIResponse<any> = {
+const plantNetResponse: IndiciaAIResponse<unknown> = {
   suggestions: [
     {
       taxon: fumariaSpecies.species.scientificNameWithoutAuthor,
@@ -43,7 +43,7 @@ const plantNetResponse: IndiciaAIResponse<any> = {
     preferedReferential: '',
     bestMatch: '',
     remainingIdentificationRequests: 0,
-    query: null as any,
+    query: null as unknown,
   },
   classifier_id: '',
   classifier_version: '',

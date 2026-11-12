@@ -14,6 +14,7 @@ import {
   useIonViewWillLeave,
   useIonViewWillEnter,
   IonIcon,
+  type SegmentCustomEvent,
 } from '@ionic/react';
 import { InfoMessage } from 'common/flumens';
 import Location from 'models/location';
@@ -50,7 +51,8 @@ const LocationsPanel = ({
     isPartOfSurvey ? 'uploaded' : 'pending'
   );
 
-  const onSegmentClick = (e: any) => setSegment(e.detail.value);
+  const onSegmentClick = (event: SegmentCustomEvent) =>
+    setSegment(event.detail.value as 'pending' | 'uploaded');
 
   const unMountBottomSheet = () => setIsMounted(false); // hack, this component is mounted as a parent with root div
   const mountBottomSheet = () => setIsMounted(true); // hack, this component is mounted as a parent with root div
@@ -75,7 +77,11 @@ const LocationsPanel = ({
         {!isPartOfSurvey && (
           <IonHeader className="ion-no-border">
             <IonToolbar className="pt-5! text-black bg-ion-neutral-100">
-              <IonSegment onIonChange={onSegmentClick} value={segment}>
+              <IonSegment
+                className="mx-auto"
+                onIonChange={onSegmentClick}
+                value={segment}
+              >
                 <IonSegmentButton value="pending">
                   <IonLabel className="ion-text-wrap">
                     <T>Pending</T>

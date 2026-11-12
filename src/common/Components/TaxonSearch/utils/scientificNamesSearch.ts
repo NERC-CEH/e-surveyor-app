@@ -5,6 +5,7 @@ import {
   GENUS_ID_INDEX,
   GENUS_TAXON_INDEX,
   GENUS_TVK_INDEX,
+  GENUS_SPECIES_INDEX,
   SPECIES_ID_INDEX,
   SPECIES_TAXON_INDEX,
   SPECIES_TVK_INDEX,
@@ -12,7 +13,11 @@ import {
   SPECIES_DIFFICULTY_INDEX,
 } from 'common/data/species/constants';
 import commonNamesIndex from 'common/data/uksi_plants.names.json';
-import helpers, { Species } from './searchHelpers';
+import helpers, {
+  type Genera,
+  type Genus,
+  type Species,
+} from './searchHelpers';
 
 /**
  * Search Scientific names
@@ -21,12 +26,11 @@ import helpers, { Species } from './searchHelpers';
  * @returns {Array}
  */
 function search(
-  species: any[],
+  species: Genera,
   searchPhrase: string,
-  results: any,
+  results: Species[],
   maxResults: number,
-  hybridRun: boolean,
-  informalGroups: any[] = []
+  hybridRun: boolean
 ) {
   const searchWords = searchPhrase.split(' ');
 
@@ -47,15 +51,11 @@ function search(
 
   // check if hybrid eg. X Cupressocyparis
   if (!hybridRun && searchPhrase.match(/X\s.*/i)) {
-    search(species, searchPhrase, results, maxResults, true, informalGroups);
+    search(species, searchPhrase, results, maxResults, true);
   }
 
   // find first match in array
-  let speciesArrayIndex = helpers.findFirstMatching(
-    species,
-    species,
-    firstWord
-  );
+  let speciesArrayIndex = helpers.findFirstMatching(species, firstWord);
 
   // go through all
   const speciesArrayLength = species.length;
@@ -65,19 +65,14 @@ function search(
     speciesArrayIndex < speciesArrayLength &&
     results.length < maxResults
   ) {
-    const speciesEntry: any = species[speciesArrayIndex];
+    const speciesEntry: Genus = species[speciesArrayIndex];
 
     // check if matches
     if (firstWordRegex.test(speciesEntry[GENUS_TAXON_INDEX])) {
       // find species array
-      let speciesArray;
-      for (let j = 0, { length } = speciesEntry; j < length; j++) {
-        if (speciesEntry[j] instanceof Array) {
-          speciesArray = speciesEntry[j];
-        }
-      }
+      const speciesArray = speciesEntry[GENUS_SPECIES_INDEX];
 
-      let fullRes: any;
+      let fullRes: Species;
       if (!otherWordsRegex && speciesEntry[GENUS_TAXON_INDEX]) {
         // no need to add genus if searching for species
         // why speciesEntry[WAREHOUSE_INDEX] see 'sandDustHack' in generator
@@ -87,7 +82,9 @@ function search(
           foundInName: 'scientificName',
           warehouseId: speciesEntry[GENUS_ID_INDEX],
           scientificName,
-          commonName: (commonNamesIndex as any)[scientificName],
+          commonName: (commonNamesIndex as Record<string, string>)[
+            scientificName
+          ],
           tvk: speciesEntry[GENUS_TVK_INDEX],
         };
         results.push(fullRes);
@@ -103,28 +100,14 @@ function search(
         ) {
           const speciesInArray = speciesArray[speciesIndex];
           const scientificName = `${speciesEntry[GENUS_TAXON_INDEX]} ${speciesInArray[SPECIES_TAXON_INDEX]}`;
-          const commonName = (commonNamesIndex as any)[scientificName];
+          const commonName = (commonNamesIndex as Record<string, string>)[
+            scientificName
+          ];
 
-          if (otherWordsRegex) {
-            // if search through species
-            // check if matches
-            if (otherWordsRegex.test(speciesInArray[SPECIES_TAXON_INDEX])) {
-              // add full sci name
-              fullRes = {
-                arrayId: speciesArrayIndex,
-                speciesId: speciesIndex,
-                foundInName: 'scientificName',
-                warehouseId: speciesInArray[SPECIES_ID_INDEX],
-                scientificName,
-                commonName,
-                tvk: speciesInArray[SPECIES_TVK_INDEX],
-                frequency: speciesInArray[SPECIES_FREQUENCY_INDEX],
-                difficulty: speciesInArray[SPECIES_DIFFICULTY_INDEX],
-              };
-              results.push(fullRes);
-            }
-          } else {
-            // if only genus search add its species
+          if (
+            !otherWordsRegex ||
+            otherWordsRegex.test(speciesInArray[SPECIES_TAXON_INDEX])
+          ) {
             fullRes = {
               arrayId: speciesArrayIndex,
               speciesId: speciesIndex,
@@ -133,7 +116,7 @@ function search(
               scientificName,
               commonName,
               tvk: speciesInArray[SPECIES_TVK_INDEX],
-              frequency: speciesInArray[SPECIES_FREQUENCY_INDEX],
+              frequency: speciesInArray[SPECIES_FREQUENCY_INDEX] ?? undefined,
               difficulty: speciesInArray[SPECIES_DIFFICULTY_INDEX],
             };
             results.push(fullRes);
@@ -149,43 +132,18 @@ function search(
   return results;
 }
 
-const searchScientificSpeciesName = (
-  species: any,
-  searchPhrase: any,
-  results: any,
-  maxResults: any,
-  hybridRun: any,
-  informalGroups: any
-) =>
-  search(
-    species,
-    `. ${searchPhrase}`,
-    results,
-    maxResults,
-    hybridRun,
-    informalGroups
-  );
-
 function searchMulti(
-  species: any[],
+  species: Genera,
   searchPhrase: string,
   results: Species[],
   maxResults: number,
-  hybridRun: boolean,
-  informalGroups: any[] = []
+  hybridRun: boolean
 ) {
-  search(species, searchPhrase, results, maxResults, hybridRun, informalGroups);
+  search(species, searchPhrase, results, maxResults, hybridRun);
 
   const isOneWord = searchPhrase.split(' ').length;
   if (isOneWord) {
-    searchScientificSpeciesName(
-      species,
-      searchPhrase,
-      results,
-      maxResults,
-      hybridRun,
-      informalGroups
-    );
+    search(species, `. ${searchPhrase}`, results, maxResults, hybridRun);
   }
 
   const is5CharacterShortcut = searchPhrase.length === 5;
@@ -194,14 +152,7 @@ function searchMulti(
       0,
       3
     )} ${searchPhrase.substr(3, 4)}`;
-    search(
-      species,
-      searchPhraseShortcut,
-      results,
-      maxResults,
-      hybridRun,
-      informalGroups
-    );
+    search(species, searchPhraseShortcut, results, maxResults, hybridRun);
   }
 }
 

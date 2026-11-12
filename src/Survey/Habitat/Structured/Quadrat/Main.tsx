@@ -12,6 +12,7 @@ import {
   MenuAttrItem,
   Button,
   Block,
+  type BlockT,
   InfoMessage,
   updateModelLocation,
 } from '@flumens';
@@ -78,20 +79,21 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
     isDisabled: subSample.isDisabled,
   };
 
-  const totalComposition =
-    (subSample.data[vegetationCompAttr.id] || 0) +
-    (subSample.data[bareGroundAttr.id] || 0) +
-    (subSample.data[litterThatchAttr.id] || 0) +
-    (subSample.data[mossLiverwortAttr.id] || 0) +
-    (subSample.data[deadWoodAttr.id] || 0) +
-    (subSample.data[standingWaterAttr.id] || 0);
+  const totalComposition = [
+    vegetationCompAttr,
+    bareGroundAttr,
+    litterThatchAttr,
+    mossLiverwortAttr,
+    deadWoodAttr,
+    standingWaterAttr,
+  ].reduce((total, attr) => total + Number(subSample.data[attr.id] || 0), 0);
 
   const sliderClasses =
     'mx-5 mt-1 text-sm font-semibold w-full flex items-center justify-start gap-2';
 
   const selectedClasses =
     'bg-secondary-100/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-secondary-900)_20%,transparent)]';
-  const isSelected = (block: any) => subSample.data[block.id] > 0;
+  const isSelected = (block: BlockT) => Number(subSample.data[block.id]) > 0;
 
   const hasSpecies = !!subSample.occurrences.length;
 
@@ -99,9 +101,8 @@ const QuadratMain = ({ subSample, photoSelect, isDisabled }: Props) => {
     'bg-ion-secondary-100/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-secondary-900)_20%,transparent)]';
 
   const getItemClassName = (occ: Occurrence) => {
-    const data = occ.data as any;
-    const hasCover = (data[coverAttr.id] || 0) > 0;
-    const hasCount = (data[countAttr.id] || 0) > 1;
+    const hasCover = Number(occ.data[coverAttr.id]) > 0;
+    const hasCount = Number(occ.data[countAttr.id]) > 1;
     return hasCover || hasCount ? speciesEntryClasses : '';
   };
 

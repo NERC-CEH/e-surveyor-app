@@ -1,12 +1,15 @@
 import {
-  ForwardRefRenderFunction,
-  useEffect,
+  type ForwardRefRenderFunction,
+  useImperativeHandle,
+  useRef,
   useState,
-  createRef,
   forwardRef,
-  RefObject,
 } from 'react';
-import { IonSearchbar, useIonViewDidEnter } from '@ionic/react';
+import {
+  IonSearchbar,
+  useIonViewDidEnter,
+  type SearchbarCustomEvent,
+} from '@ionic/react';
 import Suggestions from './components/Suggestions';
 import './styles.scss';
 import SpeciesSearchEngine from './utils/searchEngine';
@@ -29,26 +32,22 @@ const annotateRecordedTaxa = (
 };
 
 type Props = {
-  onSpeciesSelected: any;
+  onSpeciesSelected: (species: Species, edit: boolean) => void;
   recordedTaxa?: number[];
 };
 
-const TaxonSearch: ForwardRefRenderFunction<any, Props> = (
+const TaxonSearch: ForwardRefRenderFunction<HTMLIonSearchbarElement, Props> = (
   { recordedTaxa, onSpeciesSelected },
   ref
 ) => {
-  const localRef = createRef<any>();
-  const input = (ref as RefObject<any>) || localRef;
+  const input = useRef<HTMLIonSearchbarElement>(null);
+  useImperativeHandle(ref, () => input.current!, []);
 
   const [searchPhrase, setSearchPhrase] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<any>(null);
+  const [searchResults, setSearchResults] = useState<Species[] | null>(null);
 
-  useEffect(() => {
-    SpeciesSearchEngine.init();
-  }, []);
-
-  const onInputKeystroke = async (e: any) => {
-    let newSearchPhrase = e.target.value;
+  const onInputKeystroke = async (event: SearchbarCustomEvent) => {
+    let newSearchPhrase = event.detail.value;
 
     const isValidSearch =
       typeof newSearchPhrase === 'string' &&
@@ -59,7 +58,7 @@ const TaxonSearch: ForwardRefRenderFunction<any, Props> = (
       return;
     }
 
-    newSearchPhrase = newSearchPhrase.toLowerCase();
+    newSearchPhrase = (newSearchPhrase || '').toLowerCase();
 
     // search
     const newSearchResults = await SpeciesSearchEngine.search(newSearchPhrase);
@@ -79,9 +78,7 @@ const TaxonSearch: ForwardRefRenderFunction<any, Props> = (
   };
 
   useIonViewDidEnter(() => {
-    if (input.current) {
-      input.current.setFocus();
-    }
+    input.current?.setFocus();
   }, [input]);
 
   return (

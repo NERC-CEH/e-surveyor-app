@@ -88,8 +88,8 @@ const SpeciesList = ({
 
     try {
       await Promise.all(list.map(identify));
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     }
   };
 
@@ -101,8 +101,8 @@ const SpeciesList = ({
 
     try {
       await model.identify();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     }
   };
 
@@ -122,11 +122,7 @@ const SpeciesList = ({
       );
       if (!images.length) return [];
 
-      const getImageModel = (image: any) => Media.getImageModel(image);
-
-      const imageModels = images.map(getImageModel);
-
-      return Promise.all(imageModels);
+      return Promise.all(images.map(Media.getImageModel));
     }
 
     try {
@@ -139,8 +135,8 @@ const SpeciesList = ({
       occ.media.push(images[0]);
 
       await occ.identify();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     }
   };
 

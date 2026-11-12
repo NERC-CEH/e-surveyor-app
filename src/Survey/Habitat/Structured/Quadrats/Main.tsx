@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { leaf, checkmark, alertCircleOutline } from 'ionicons/icons';
@@ -18,8 +19,8 @@ import {
 } from '../config';
 
 function byDate(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.data.date);
-  const date2 = new Date(smp2.data.date);
+  const date1 = new Date(smp1.data.date || smp1.createdAt);
+  const date2 = new Date(smp2.data.date || smp2.createdAt);
   return date2.getTime() - date1.getTime();
 }
 
@@ -39,7 +40,7 @@ const hasUnsavedChanges = (quadratSample: Sample) => {
   ];
 
   const hasCoverData = coverAttrIds.some(
-    attrId => (quadratSample.data[attrId] || 0) > 0
+    attrId => Number(quadratSample.data[attrId]) > 0
   );
 
   return (
@@ -60,7 +61,10 @@ function getCompletionProps(quadratSample: Sample) {
   const changedQuadratClasses =
     'bg-ion-warning-200/20 shadow-[inset_2px_0_0_0_color-mix(in_srgb,var(--color-warning-600)_40%,transparent)]';
 
-  const props: any = {
+  const props: Pick<
+    ComponentProps<typeof IonItem>,
+    'className' | 'detailIcon'
+  > = {
     className: clsx(
       'ps-ion-1',
       isQuadratComplete && savedQuadratClasses,

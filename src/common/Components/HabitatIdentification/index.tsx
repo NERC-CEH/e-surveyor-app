@@ -10,12 +10,12 @@ import ExpandableText from 'common/Components/ExpandableText';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import allHabitats, { Habitat } from 'common/data/ukhab';
 import Location from 'common/models/location';
-import { Data, habitatAttr } from 'Survey/Habitat/Location/config';
+import { habitatAttr } from 'Survey/Habitat/Location/config';
 import CircleIcon from '../CircleIcon';
 import meadow from './meadow.png';
 
 type Props = {
-  location: Location<Data>;
+  location: Location;
   onChange?: (suggestion: Habitat) => void;
   /**
    * If true, the component will automatically fetch habitat suggestions when it mounts. Good for modals, but not for transit pages.
@@ -35,7 +35,7 @@ const HabitatIdentification = ({
 
   const selectedHabitat = location.data[habitatAttr.id];
 
-  const addScores = (h: Habitat) => {
+  const addScores = (h: Habitat): HabitatWithScore | null => {
     const suggestion = location.metadata.habitatSuggestions?.find(
       s => s.code === h.id
     );
@@ -48,10 +48,8 @@ const HabitatIdentification = ({
 
   const habitats = allHabitats
     .map(addScores)
-    .filter(Boolean)
-    .sort(
-      (a: any, b: any) => (b.score ?? 0) - (a.score ?? 0)
-    ) as HabitatWithScore[];
+    .filter((habitat): habitat is HabitatWithScore => !!habitat)
+    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
 
   const currentCode = location.data[habitatAttr.id];
 
@@ -63,8 +61,8 @@ const HabitatIdentification = ({
       const results = await location.identifyHabitat();
       location.metadata.habitatSuggestions = results;
       if (location.isStored) await location.save();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     } finally {
       loader.hide();
     }
@@ -177,7 +175,7 @@ const HabitatIdentification = ({
         </div>
 
         <div className="mt-2 max-w-xl rounded-xl overflow-hidden border border-neutral-200">
-          <PhotoPicker model={location as any} onChange={fetchSuggestions} />
+          <PhotoPicker model={location} onChange={fetchSuggestions} />
         </div>
 
         {!location.isDisabled && !!location.media.length && (

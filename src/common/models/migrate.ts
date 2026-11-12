@@ -5,10 +5,10 @@ import { db, mainStore, samplesStore } from 'common/models/store';
 export default async () => {
   console.log('SQLite migrate: START');
 
-  async function showError(error: any) {
+  async function showError(error: unknown) {
     (
       await toastController.create({
-        message: error.message,
+        message: error instanceof Error ? error.message : String(error),
         position: 'top',
         duration: 100000000,
         color: 'danger',
@@ -25,7 +25,11 @@ export default async () => {
     await mainStore.ready;
 
     const tables = await db.query({ sql: 'select * from sqlite_schema' });
-    const hasGeneric = tables.find((t: any) => t.name === 'generic');
+    const hasName = (table: unknown): table is { name: string } =>
+      !!table && typeof table === 'object' && 'name' in table;
+    const hasGeneric = tables.find(
+      table => hasName(table) && table.name === 'generic'
+    );
     if (hasGeneric) {
       await db.query({
         sql: `INSERT OR IGNORE INTO main (id, cid, data, created_at, updated_at, synced_at)
@@ -43,7 +47,9 @@ export default async () => {
 
     await samplesStore.ready;
 
-    const hasModels = tables.find((t: any) => t.name === 'models');
+    const hasModels = tables.find(
+      table => hasName(table) && table.name === 'models'
+    );
     if (hasModels) {
       await db.query({
         sql: `INSERT OR IGNORE INTO samples (id, cid, data, created_at, updated_at, synced_at)

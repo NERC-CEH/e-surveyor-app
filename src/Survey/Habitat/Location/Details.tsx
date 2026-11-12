@@ -4,13 +4,11 @@ import { informationCircle } from 'ionicons/icons';
 import { useRouteMatch } from 'react-router';
 import { IonIcon, NavContext } from '@ionic/react';
 import { Block, Header, Main, Page, Toggle } from 'common/flumens';
-import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   activitiesAttr,
-  Data,
   locationCommentAttr,
   siteLengthAttr,
   siteSizeAttr,
@@ -25,7 +23,7 @@ const LocationDetails = () => {
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
 
-  const { location } = useLocation<Location<Data>>();
+  const { location } = useLocation();
   if (!location) return null;
 
   const isValid =

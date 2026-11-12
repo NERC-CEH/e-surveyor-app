@@ -1,17 +1,13 @@
 import { createContext, useContext } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import Collection from '@flumens/models/dist/Collection';
-import Location from '@flumens/models/dist/Indicia/Location';
+import Location from 'models/location';
 
-const byCid =
-  (val: any) =>
-  ({ cid }: any) =>
-    cid === val;
+const byCid = (value?: string) => (location: Location) =>
+  location.cid === value;
 
-const byId =
-  (val: any) =>
-  ({ id }: any) =>
-    id === val;
+const byId = (value?: string) => (location: Location) =>
+  String(location.id) === value;
 
 const isCID = (val?: string) =>
   !!val?.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/);

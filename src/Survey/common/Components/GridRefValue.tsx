@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
 import { prettyPrintLocation } from '@flumens';
 import { IonSpinner } from '@ionic/react';
+import { hasCoordinates } from 'common/helpers/location';
 import Sample from 'models/sample';
 
 function getValue(sample: Sample) {
@@ -8,7 +9,9 @@ function getValue(sample: Sample) {
     return <IonSpinner className="w-[15px]" />;
   }
 
-  return prettyPrintLocation(sample.data.location);
+  return hasCoordinates(sample.data.location)
+    ? prettyPrintLocation(sample.data.location)
+    : null;
 }
 
 type Props = {

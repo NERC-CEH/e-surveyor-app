@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { observer } from 'mobx-react';
 import 'chart.js/auto';
 import { earthOutline, checkmark } from 'ionicons/icons';
 import { Gallery, device, Button } from '@flumens';
 import { IonIcon } from '@ionic/react';
 import { Taxon } from 'models/occurrence';
+import type { Image as PlantNetImage } from 'models/occurrence/services/indiciaAI/plantNetResponse.d';
 import InfoBackgroundMessage from 'Components/InfoBackgroundMessage';
 import Doughnut from './Doughnut';
 
 type Props = {
   species: Taxon;
-  onSelect?: any;
-  selectedSpeciesByUser?: any;
+  onSelect?: (species: Taxon) => void;
+  selectedSpeciesByUser?: boolean;
 };
 
 const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
@@ -25,7 +26,7 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
   };
 
   const getGallery = () => {
-    const showSpImages = (img: any) => ({
+    const showSpImages = (img: PlantNetImage) => ({
       src: img.url.m,
       w: 800,
       h: 800,
@@ -48,7 +49,7 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
     setPhotoIndex(index);
   };
 
-  const getImage = (sp: any, index: number) => {
+  const getImage = (sp: PlantNetImage | null, index: number) => {
     if (!sp) {
       return (
         <div
@@ -81,13 +82,13 @@ const SpeciesCard = ({ species, onSelect, selectedSpeciesByUser }: Props) => {
   };
 
   const { commonName, scientificName } = species;
-  const probability = species.probability || (species as any).score; // score for backward compatibility
+  const probability = species.probability || species.score || 0; // score for backward compatibility
   const images = species.images || [];
   const { isOnline } = device;
 
-  const onSelectWrap = () => onSelect(species);
+  const onSelectWrap = () => onSelect?.(species);
 
-  let localStatus: any;
+  let localStatus: ReactNode;
   if (species.recordCleaner === 'pass')
     localStatus = (
       <div className="flex w-full items-center justify-center border-b border-neutral-300 bg-primary-400/20 p-1 text-sm font-semibold text-neutral-800">

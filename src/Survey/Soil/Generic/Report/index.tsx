@@ -39,7 +39,7 @@ const Report = () => {
 
   const finishButton =
     sample.isSynchronising || !requiresSync ? null : (
-      <HeaderButton onClick={onSync} isInvalid={isInvalid}>
+      <HeaderButton onClick={onSync} isInvalid={!!isInvalid}>
         {isUploaded ? 'Sync' : 'Upload'}
       </HeaderButton>
     );

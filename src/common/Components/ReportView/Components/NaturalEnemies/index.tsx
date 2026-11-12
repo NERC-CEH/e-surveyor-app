@@ -21,7 +21,10 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
     uniqueSpeciesFlat.includes(interaction.plantLatinName);
   const crops = naturalEnemies.filter(matchesPlant);
 
-  const groupItems = (agg: any, item: EnemyInteraction) => {
+  const groupItems = (
+    agg: Record<string, string[]>,
+    item: EnemyInteraction
+  ) => {
     if (!agg[item.cropGroup]) {
       agg[item.cropGroup] = [item.beneficialInsectCommonName];
       return agg;
@@ -30,7 +33,7 @@ const NaturalEnemies = ({ uniqueSpecies }: Props) => {
     return agg;
   };
 
-  const groups: Record<string, string[]> = crops.reduce(groupItems, {});
+  const groups = crops.reduce(groupItems, {});
 
   const groupsWithUniqueSpeciesCount: [string, number][] = Object.entries(
     groups

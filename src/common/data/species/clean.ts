@@ -1,4 +1,4 @@
-export default (taxon: any, common: any) => {
+export default (taxon: string, common: boolean) => {
   if (!taxon) {
     return null;
   }

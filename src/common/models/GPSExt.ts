@@ -1,17 +1,20 @@
 import { observable } from 'mobx';
+import type { Location } from '@flumens';
 import GPS from 'helpers/GPS';
 
 const DEFAULT_ACCURACY_LIMIT = 50; // meters
 
-export type LatLng = [number, number];
-
-export type Location = {
-  latitude: number;
-  longitude: number;
-  accuracy: number;
+export type GPSExtension = {
+  gps: { locating: string | null };
+  startGPS: (
+    setLocation: (location: Location) => void,
+    accuracyLimit?: number
+  ) => Promise<void>;
+  stopGPS: () => void;
+  isGPSRunning: () => boolean;
 };
 
-const extension = () => ({
+const extension = (): GPSExtension => ({
   gps: observable({ locating: '' }),
 
   async startGPS(
@@ -22,15 +25,14 @@ const extension = () => ({
     const options = {
       accuracyLimit,
 
-      onUpdate() {},
-
-      callback(error: Error, location: Location) {
+      callback(error: Error | null, location?: Location) {
         if (error) {
           that.stopGPS();
           return;
         }
+        if (!location) return;
 
-        if (location.accuracy <= options.accuracyLimit) {
+        if ((location.accuracy ?? Infinity) <= options.accuracyLimit) {
           that.stopGPS();
         }
 

@@ -8,17 +8,17 @@ export type Habitat = {
   level: number;
   name: string;
   definition: string;
-  children: string[];
-  landscapeAndEcologicalContext: string;
-  synonyms: string;
-  inclusions: string[];
-  exclusions: string[];
-  species: string;
+  children?: string[];
+  landscapeAndEcologicalContext?: string;
+  synonyms?: string;
+  inclusions?: string[];
+  exclusions?: string[];
+  species?: string;
 };
 
-const addWarehouseId = (habitat: any): Habitat => ({
+const addWarehouseId = (habitat: Omit<Habitat, 'warehouseId'>): Habitat => ({
   ...habitat,
-  warehouseId: (warehouseIDs as any)[habitat.id] || '',
+  warehouseId: (warehouseIDs as Record<string, string>)[habitat.id] || '',
 });
 
 export default Object.values(data).map(getCamelCaseObj).map(addWarehouseId);

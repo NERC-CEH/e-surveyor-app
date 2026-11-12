@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { observer } from 'mobx-react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Gallery, useAlert, useContextMenu } from '@flumens';
@@ -15,7 +15,7 @@ import {
 import flowerIcon from 'common/images/flowerIcon.svg';
 import Occurrence from 'models/occurrence';
 
-const useDeleteAlert = (onDelete: any) => {
+const useDeleteAlert = (onDelete?: () => void) => {
   const alert = useAlert();
 
   return () => {
@@ -39,7 +39,7 @@ const useDeleteAlert = (onDelete: any) => {
   };
 };
 
-const useMenu = (deleteSurvey: any) => {
+const useMenu = (deleteSurvey: () => void) => {
   const [present] = useIonActionSheet();
 
   const showMenu = () => {
@@ -86,9 +86,9 @@ const UnidentifiedSpeciesEntry = ({
     !occurrence.getSpecies() && occurrence.canReIdentify();
 
   const [isShowingGallery, setIsShowingGallery] = useState(false);
-  const showGallery = (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const showGallery = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     setIsShowingGallery(true);
   };
   const hideGallery = () => setIsShowingGallery(false);
@@ -152,9 +152,9 @@ const UnidentifiedSpeciesEntry = ({
               canBeIdentified && (
                 <button
                   className="occurrence-identify flex h-fit items-center justify-center gap-4 overflow-hidden rounded-md border border-solid border-secondary-800 bg-transparent px-6 py-1 text-center text-xs text-secondary-800 shadow-sm outline-none ring-0 transition hover:border-neutral-400"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    e.stopPropagation();
+                  onClick={event => {
+                    event.preventDefault();
+                    event.stopPropagation();
                     onIdentifyWrap();
                   }}
                 >

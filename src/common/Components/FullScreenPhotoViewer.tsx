@@ -13,14 +13,12 @@ type Props = {
 };
 
 const FullScreenPhotoViewer = ({ photos, onClose, showGallery }: Props) => {
-  let items: any = [];
+  let items: { src: string; footer?: string }[] = [];
   let initialSlide = 0;
   let className = 'white-background';
   const pageTitle = '';
 
   useOnHideModal(onClose);
-
-  const swiperProps: any = {};
 
   if (Number.isInteger(showGallery)) {
     items = photos?.map((photoArr: string | string[]) => {
@@ -48,7 +46,6 @@ const FullScreenPhotoViewer = ({ photos, onClose, showGallery }: Props) => {
       className={clsx('species-profile-gallery', className)}
       title={pageTitle}
       mode="md"
-      swiperProps={swiperProps}
     />
   );
 };

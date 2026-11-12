@@ -26,7 +26,7 @@ import { surveyProtocolAttr } from 'Survey/Habitat/Structured/config';
 import OnlineStatus from './OnlineStatus';
 import './styles.scss';
 
-const useDeleteAlert = (onDelete: any) => {
+const useDeleteAlert = (onDelete: () => void) => {
   const alert = useAlert();
 
   return () => {
@@ -50,14 +50,12 @@ const useDeleteAlert = (onDelete: any) => {
   };
 };
 
-const useMenu = (deleteSurvey: any) => {
+const useMenu = (deleteSurvey: () => void) => {
   const [present] = useIonActionSheet();
 
-  const showMenu = (e: any) => {
-    const isUploadButton = [
-      e?.target?.parentNode?.nodeName,
-      e?.target?.nodeName,
-    ].includes('BUTTON');
+  const showMenu = (event?: MouseEvent | TouchEvent) => {
+    const isUploadButton =
+      event?.target instanceof Element && !!event.target.closest('button');
     if (isUploadButton) return; // fixes upload button press calling context menu - for some reason react-aria button doesn't trigger touchend event to cancel timeout
 
     isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });

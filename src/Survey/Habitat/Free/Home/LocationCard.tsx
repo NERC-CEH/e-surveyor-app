@@ -3,13 +3,11 @@ import { useRouteMatch } from 'react-router-dom';
 import { Badge } from '@flumens';
 import { IonIcon, IonItem } from '@ionic/react';
 import locations from 'models/collections/locations';
-import Location from 'models/location';
 import {
   habitatAttr,
   siteLengthAttr,
   siteSizeAttr,
   siteWidthAttr,
-  Data,
 } from 'Survey/Habitat/Location/config';
 
 type Props = { locationId?: string; isDisabled?: boolean };
@@ -17,7 +15,7 @@ type Props = { locationId?: string; isDisabled?: boolean };
 const LocationCard = ({ locationId, isDisabled }: Props) => {
   const match = useRouteMatch();
 
-  const location = locations.idMap.get(locationId || '') as Location<Data>;
+  const location = locations.idMap.get(locationId || '');
   const locationName = location?.data.name ? (
     <b>{location?.data.name}</b>
   ) : (

@@ -13,7 +13,6 @@ import Occurrence from 'common/models/occurrence';
 import userModel from 'common/models/user';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import { baseURL as ecosystemURL } from 'Survey/Ecosystem/router';
-import { Data } from 'Survey/Habitat/Location/config';
 import { baseURL as habitatURL } from 'Survey/Habitat/router';
 import { baseURL as soilURL } from 'Survey/Soil/router';
 import Card from './Components/Card';
@@ -33,7 +32,7 @@ const showTermsMessage = new Date() < TERMS_MESSAGE_EXPIRY;
 
 const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
-  const [habitatLocation, setHabitatLocation] = useState<Location<Data>>();
+  const [habitatLocation, setHabitatLocation] = useState<Location>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
   const context = useContext(NavContext);
@@ -66,7 +65,7 @@ const LandingPage = () => {
 
     if (!photoURLs?.length) return;
 
-    const location = new Location<Data>({ skipStore: true }); // create a non-persistent location to hold the photos and suggestions
+    const location = new Location({ skipStore: true }); // create a non-persistent location to hold the photos and suggestions
 
     // attach selected photos before opening the modal so it auto-fetches
     const attach = async (photoURL: string) => {
@@ -106,8 +105,8 @@ const LandingPage = () => {
 
     try {
       await occurrence.identify();
-    } catch (e: any) {
-      toast.error(e.message, { position: 'bottom' });
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
     }
   };
 

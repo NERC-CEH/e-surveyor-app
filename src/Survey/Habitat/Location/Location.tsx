@@ -13,7 +13,6 @@ import {
   Page,
   RadioInput,
 } from 'common/flumens';
-import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import {
@@ -23,7 +22,7 @@ import {
 } from 'Survey/common/Components/ModelLocationMap';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import GeometryLink from '../common/GeometryLink';
-import { Data, siteNameAttr } from './config';
+import { siteNameAttr } from './config';
 import useLocation from './useLocation';
 
 const LocationLocation = () => {
@@ -32,7 +31,7 @@ const LocationLocation = () => {
   const { navigate } = useContext(NavContext);
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
-  const { location } = useLocation<Location<Data>>();
+  const { location } = useLocation();
   if (!location) return null;
 
   const isValid =

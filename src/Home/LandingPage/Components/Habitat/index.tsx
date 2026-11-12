@@ -12,10 +12,9 @@ import {
 } from '@ionic/react';
 import HabitatIdentification from 'common/Components/HabitatIdentification';
 import Location from 'common/models/location';
-import { Data } from 'Survey/Habitat/Location/config';
 
 type Props = {
-  location?: Location<Data>;
+  location?: Location;
   onClose: () => void;
 };
 

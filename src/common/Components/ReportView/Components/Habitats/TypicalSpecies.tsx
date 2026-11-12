@@ -32,8 +32,10 @@ const TypicalSpeciesItem = ({ species }: Props) => {
           {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
           <img
             src={`https://atlasimages.bsbi.org/processed/${species.bsbiid}/${species.bsbiid}-${species.bsbiphotoindex}/${species.bsbiid}-${species.bsbiphotoindex}-192w.webp`}
-            onError={(e: any) => (e.target.style.display = 'none')} // eslint-disable-line
-            onClick={(e: any) => {
+            onError={e => {
+              e.currentTarget.style.display = 'none';
+            }}
+            onClick={e => {
               e.preventDefault();
               e.stopPropagation();
               setShowGallery(1);

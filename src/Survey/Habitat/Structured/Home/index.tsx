@@ -9,7 +9,7 @@ import HeaderButton from 'Survey/common/Components/HeaderButton';
 import surveyConfig, { getDetailsValidationSchema } from '../config';
 import Main from './Main';
 
-const validate = (data: any) =>
+const validate = (data: unknown) =>
   getDetailsValidationSchema().safeParse(data).error;
 
 const Controller = () => {
@@ -27,9 +27,13 @@ const Controller = () => {
       alert({
         header: 'Missing',
         skipTranslation: true,
-        message: invalids.issues.map(i => (
-          <div key={i.path.join('.')}>{i.message}</div>
-        )) as any,
+        message: (
+          <>
+            {invalids.issues.map(issue => (
+              <div key={issue.path.join('.')}>{issue.message}</div>
+            ))}
+          </>
+        ),
         buttons: [{ text: 'Got it', role: 'cancel' }],
       });
       return;
@@ -39,7 +43,7 @@ const Controller = () => {
       sample.metadata.completedDetails = true;
 
       // add sub-sample quadrats to the sample
-      for (let i = 0; i < sample.data.quadrats; i++) {
+      for (let i = 0; i < (sample.data.quadrats || 0); i++) {
         const quadratSample = surveyConfig.smp.create();
         sample.samples.push(quadratSample);
       }

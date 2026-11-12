@@ -2,13 +2,11 @@ import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { NavContext } from '@ionic/react';
 import { Header, Main, Page, useLoader, useToast } from 'common/flumens';
-import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import {
   activitiesAttr,
-  Data,
   habitatAttr,
   siteLengthAttr,
   siteNameAttr,
@@ -36,7 +34,7 @@ const LocationSummary = () => {
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
 
-  const { location } = useLocation<Location<Data>>();
+  const { location } = useLocation();
   if (!location) return null;
 
   const onConfirm = async () => {
@@ -52,9 +50,9 @@ const LocationSummary = () => {
       await location.saveRemote();
       loader.hide();
       navigate('/', 'root');
-    } catch (error: unknown) {
+    } catch (error) {
       loader.hide();
-      toast.error(error as Error);
+      toast.error(error);
     }
   };
 
@@ -84,7 +82,7 @@ const LocationSummary = () => {
   }
 
   if (selectedValues && !Array.isArray(selectedValues)) {
-    selectedList.push(selectedValues as any);
+    selectedList.push(String(selectedValues));
   }
 
   const managementLabels = activitiesAttr.choices

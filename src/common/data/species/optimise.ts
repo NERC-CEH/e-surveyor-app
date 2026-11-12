@@ -1,173 +1,65 @@
 import taxonCleaner from './clean';
-import {
-  GENUS_ID_INDEX,
-  GENUS_TAXON_INDEX,
-  GENUS_TVK_INDEX,
-  GENUS_SPECIES_INDEX,
-  SPECIES_ID_INDEX,
-  SPECIES_TAXON_INDEX,
-  SPECIES_TVK_INDEX,
-  SPECIES_FREQUENCY_INDEX,
-  SPECIES_DIFFICULTY_INDEX,
-} from './constants';
-import { RemoteAttributes } from './make';
+import type { RemoteAttributes } from './make';
 
-function normalizeValue(value: any) {
-  // check if int
-  // https://coderwall.com/p/5tlhmw/converting-strings-to-number-in-javascript-pitfalls
-  const int = value * 1;
-  if (!Number.isNaN(int)) {
-    return int;
-  }
-  return value;
+type SpeciesEntry = [
+  id: number,
+  name: string,
+  tvk: string,
+  frequency?: number | null,
+  difficulty?: number | null,
+];
+type Genus = [id: number, name: string, tvk: string, species: SpeciesEntry[]];
+
+function getLastGenus(optimised: Genus[], genusName: string): Genus {
+  const lastGenus = optimised.at(-1);
+  if (lastGenus) return lastGenus;
+
+  const genus: Genus = [0, genusName, '', []];
+  optimised.push(genus);
+  return genus;
 }
 
-function isGenusDuplicate(
-  optimised: string | any[],
-  taxa: RemoteAttributes,
-  index?: number
-) {
-  const lastEntry = index || optimised.length - 1;
-  if (lastEntry < 0) {
-    // empty array
-    return false;
-  }
-  const genus = optimised[lastEntry];
-  if (genus.taxon !== taxa.taxon) {
-    // couldn't find duplicate
-    return false;
-  }
-
-  return true;
-}
-
-/**
- * Finds the last genus entered in the optimised list.
- * Looks for the matching taxa and informal group.
- * @param taxa
- * @param taxaNameSplitted
- * @returns {*}
- */
-function getLastGenus(
-  optimised: any[],
-  taxa: RemoteAttributes,
-  taxaNameSplitted: any[],
-  index: number = optimised.length - 1
-) {
-  const lastEntry = index;
-  const [genusName] = taxaNameSplitted;
-
-  let lastGenus;
-  if (index < 0) {
-    // create a new genus with matching group
-    lastGenus = [];
-    lastGenus[GENUS_ID_INDEX] = 0;
-    lastGenus[GENUS_TAXON_INDEX] = genusName;
-    lastGenus[GENUS_TVK_INDEX] = '';
-    lastGenus[GENUS_SPECIES_INDEX] = [];
-    optimised.push(lastGenus);
-    return lastGenus;
-  }
-
-  lastGenus = optimised[lastEntry];
-
-  // const previousGenusName = lastGenus[GENUS_TAXON_INDEX];
-  // if (previousGenusName !== genusName) {
-  //   return getLastGenus(optimised, taxa, taxaNameSplitted, lastEntry - 1);
-  // }
-
-  if (!lastGenus[GENUS_SPECIES_INDEX]) {
-    lastGenus[GENUS_SPECIES_INDEX] = [];
-  }
-  return lastGenus;
-}
-
-function addGenus(optimised: any[], taxa: RemoteAttributes) {
-  if (isGenusDuplicate(optimised, taxa)) {
-    console.warn(`Duplicate genus found: ${taxa.toString()}`);
+function addGenus(optimised: Genus[], taxa: RemoteAttributes) {
+  if (optimised.at(-1)?.[1] === taxa.taxon) {
+    console.warn(`Duplicate genus found: ${taxa.taxon}`);
     return;
   }
 
   const taxon = taxonCleaner(taxa.taxon, false);
-  if (!taxon) {
-    return;
-  }
+  if (!taxon) return;
 
-  const genus = [];
-  genus[GENUS_ID_INDEX] = Number.parseInt(taxa.id, 10);
-  genus[GENUS_TVK_INDEX] = taxa.externalKey;
-  genus[GENUS_TAXON_INDEX] = taxon;
-  genus[GENUS_SPECIES_INDEX] = [];
-
-  optimised.push(genus);
+  optimised.push([taxa.id, taxon, taxa.externalKey, []]);
 }
 
 const splitTaxonName = (taxaName: string) => {
-  const taxaNameSplitted = taxaName.split(' ');
-  // hybrid genus names starting with X should
-  // have a full genus eg. X Agropogon littoralis
-  if (taxaNameSplitted[0] === 'X') {
-    taxaNameSplitted[0] = `${taxaNameSplitted.shift()} ${taxaNameSplitted[0]}`;
-  }
-  return taxaNameSplitted;
+  const parts = taxaName.split(' ');
+  if (parts[0] === 'X') parts[0] = `${parts.shift()} ${parts[0]}`;
+  return parts;
 };
 
-function addSpecies(optimised: any[], taxa: RemoteAttributes) {
-  const taxaNameSplitted = splitTaxonName(taxa.taxon);
+function addSpecies(optimised: Genus[], taxa: RemoteAttributes) {
+  const nameParts = splitTaxonName(taxa.taxon);
+  const lastGenus = getLastGenus(optimised, nameParts[0]);
+  const taxon = taxonCleaner(nameParts.slice(1).join(' '), false);
+  if (!taxon) return;
 
-  // species that needs to be appended to genus
-  const lastGenus = getLastGenus(optimised, taxa, taxaNameSplitted);
-
-  let speciesArray = lastGenus[GENUS_SPECIES_INDEX];
-  if (!speciesArray) {
-    lastGenus[GENUS_SPECIES_INDEX] = [];
-    speciesArray = lastGenus[GENUS_SPECIES_INDEX];
-  }
-
-  const id = normalizeValue(taxa.id);
-
-  const taxon = taxaNameSplitted.slice(1).join(' ');
-  const taxonClean = taxonCleaner(taxon, false);
-  if (!taxonClean) {
-    // cleaner might stripped all
-    return;
-  }
-
-  const species = [];
-  species[SPECIES_ID_INDEX] = id;
-  species[SPECIES_TAXON_INDEX] = taxonClean;
-  species[SPECIES_TVK_INDEX] = taxa.externalKey;
-
+  const species: SpeciesEntry = [taxa.id, taxon, taxa.externalKey];
   const isPreferredOrEnglish = taxa.language !== 'Latin' || taxa.preferred;
-  if (isPreferredOrEnglish && taxa.frequency) {
-    species[SPECIES_FREQUENCY_INDEX] = taxa.frequency;
-  }
-  if (taxa.difficulty) {
-    species[SPECIES_DIFFICULTY_INDEX] = taxa.difficulty;
-  }
+  if (isPreferredOrEnglish && taxa.frequency) species[3] = taxa.frequency;
+  if (taxa.difficulty) species[4] = taxa.difficulty;
 
-  speciesArray.push(species);
+  lastGenus[3].push(species);
 }
 
-/**
- * Optimises the array by grouping species to genus.
- */
 export default function optimise(speciesFlattened: RemoteAttributes[]) {
-  const optimised: any = [];
+  const optimised: Genus[] = [];
 
-  const addToList = (taxa: RemoteAttributes) => {
+  speciesFlattened.forEach(taxa => {
     if (taxa.language !== 'Latin') return;
 
-    const hasOnlyGenusInTheName = taxa.taxon.split(' ').length === 1;
-    if (hasOnlyGenusInTheName) {
-      addGenus(optimised, taxa);
-      return;
-    }
-
-    addSpecies(optimised, taxa);
-  };
-
-  speciesFlattened.forEach(addToList);
+    if (taxa.taxon.split(' ').length === 1) addGenus(optimised, taxa);
+    else addSpecies(optimised, taxa);
+  });
 
   return optimised;
 }

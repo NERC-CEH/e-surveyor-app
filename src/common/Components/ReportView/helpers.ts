@@ -8,7 +8,7 @@ export type SpeciesNames =
   [ScientificName, CommonName] | [ScientificName, CommonName, TVK];
 
 export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
-  const dict: any = {};
+  const dict: Record<ScientificName, [CommonName, TVK]> = {};
 
   const addToUniqueDict = (occ: Occurrence) => {
     const species = occ.getSpecies();
@@ -21,7 +21,9 @@ export function getUniqueSpecies(occurrences: Occurrence[]): SpeciesNames[] {
 
   occurrences.forEach(addToUniqueDict);
 
-  return Object.entries(dict).map((s: any) => [s[0], ...s[1]] as any);
+  return Object.entries(dict).map(
+    ([scientificName, names]) => [scientificName, ...names] as SpeciesNames
+  );
 }
 
 export function getSeedmixUse(
@@ -44,8 +46,8 @@ export function getMissingSeedmixSpecies(
 ) {
   const selectedSeedmixSpecies = getSeedmixUse(occurrences, seedmixSpecies);
 
-  const getMissingSelectedSeedmixSpecies = ({ latinName }: any) => {
-    const hasLatinName = ([latin]: any) => latin === latinName;
+  const getMissingSelectedSeedmixSpecies = ({ latinName }: SeedmixSpecies) => {
+    const hasLatinName = ([latin]: SpeciesNames) => latin === latinName;
     return !selectedSeedmixSpecies.find(hasLatinName);
   };
 

@@ -397,7 +397,7 @@ ion-toolbar.location-input-attr ion-back-button {
 }
 
 .rounded-list {
-  @apply bg-white;
+  @apply bg-white [&_ion-icon[slot=start]]:me-4;
 }
 
 /* survey list helper class */

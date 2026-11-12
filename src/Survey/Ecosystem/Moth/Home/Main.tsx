@@ -26,8 +26,8 @@ import { habitatValues } from '../config';
 
 type Props = {
   sample: Sample;
-  photoSelect: any;
-  gallerySelect: any;
+  photoSelect: (shouldUseCamera?: boolean) => void;
+  gallerySelect: () => void;
   isDisabled: boolean;
 };
 
@@ -87,8 +87,9 @@ const HomeMain = ({
             label="Date"
             isDisabled={isDisabled}
             value={sample.data.date}
-            // eslint-disable-next-line no-return-assign
-            onChange={(val: any) => (sample.data.date = val)}
+            onChange={value => {
+              sample.data.date = value;
+            }}
           />
           {!sample.data.date && (
             <InfoMessage inline>
@@ -98,8 +99,10 @@ const HomeMain = ({
           )}
           <Select
             options={habitatValues}
-            onChange={(habitat: any) => (sample.data.habitat = habitat)} // eslint-disable-line
-            value={sample.data.habitat}
+            onChange={(habitat: string) => {
+              sample.data.habitat = habitat;
+            }}
+            value={sample.data.habitat || undefined}
             label="Habitat"
             prefix={<IonIcon src={habitatIcon} className="size-6" />}
             isDisabled={isDisabled}
@@ -108,7 +111,9 @@ const HomeMain = ({
             <Input
               label="Other habitat"
               prefix={<IonIcon src={habitatIcon} className="size-6" />}
-              onChange={(habitat: any) => (sample.data.otherHabitat = habitat)} // eslint-disable-line
+              onChange={habitat => {
+                sample.data.otherHabitat = habitat;
+              }}
               value={sample.data.otherHabitat}
               isDisabled={isDisabled}
             />
@@ -127,7 +132,7 @@ const HomeMain = ({
         <Button
           color="secondary"
           prefix={<IonIcon src={cameraOutline} className="size-5" />}
-          onPress={photoSelect}
+          onPress={() => photoSelect()}
           onLongPress={gallerySelect}
           className="bg-secondary-600 mx-auto mt-10 mb-5"
         >

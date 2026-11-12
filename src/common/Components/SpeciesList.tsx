@@ -75,7 +75,7 @@ const EditSpeciesMain = ({
         <SpeciesCard
           key={sp.warehouseId}
           species={suggestionAsTaxon}
-          onSelect={!isDisabled ? onSelectWrap : null}
+          onSelect={!isDisabled ? onSelectWrap : undefined}
         />
       );
     };

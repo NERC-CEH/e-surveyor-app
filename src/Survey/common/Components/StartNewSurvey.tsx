@@ -8,10 +8,20 @@ import samples from 'models/collections/samples';
 import Location from 'models/location';
 import Sample from 'models/sample';
 import userModel from 'models/user';
-import { Survey } from '../config';
+import type { Survey } from '../config';
 
-async function showDraftAlert(alert: any) {
-  const showDraftDialog = (resolve: any) => {
+type StartSurvey = {
+  baseURL: string;
+  name: keyof SurveyDraftKeys extends `draftId:${infer Name}` ? Name : never;
+  create: (
+    options: Parameters<Survey['create']>[0]
+  ) => Sample | Location | Promise<Sample | Location>;
+};
+
+async function showDraftAlert(
+  alert: ReturnType<typeof useAlert>
+): Promise<boolean> {
+  const showDraftDialog = (resolve: (continueDraft: boolean) => void) => {
     alert({
       header: 'Draft',
       message: 'Previous survey draft exists, would you like to continue it?',
@@ -36,7 +46,10 @@ async function showDraftAlert(alert: any) {
   return new Promise(showDraftDialog);
 }
 
-async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
+async function getDraft(
+  draftIdKey: keyof SurveyDraftKeys,
+  alert: ReturnType<typeof useAlert>
+) {
   const draftID = appModel.data[draftIdKey];
   if (draftID) {
     const draftById = ({ cid }: Sample) => cid === draftID;
@@ -54,8 +67,11 @@ async function getDraft(draftIdKey: keyof SurveyDraftKeys, alert: any) {
   return null;
 }
 
-async function getNewSample(survey: Survey, draftIdKey: keyof SurveyDraftKeys) {
-  const model = await survey.create!({});
+async function getNewSample(
+  survey: StartSurvey,
+  draftIdKey: keyof SurveyDraftKeys
+) {
+  const model = await survey.create({});
   await model.save();
   if (model instanceof Sample) {
     samples.push(model);
@@ -69,7 +85,7 @@ async function getNewSample(survey: Survey, draftIdKey: keyof SurveyDraftKeys) {
 }
 
 type Props = {
-  survey: Survey;
+  survey: StartSurvey;
 };
 
 function StartNewSurvey({ survey }: Props): null {
@@ -79,7 +95,7 @@ function StartNewSurvey({ survey }: Props): null {
   const alert = useAlert();
 
   const baseURL = match.url;
-  const draftIdKey: any = `draftId:${survey.name}`;
+  const draftIdKey = `draftId:${survey.name}` as keyof SurveyDraftKeys;
 
   const pickDraftOrCreateModelWrap = () => {
     const pickDraftOrCreateModel = async () => {
@@ -114,10 +130,8 @@ function StartNewSurvey({ survey }: Props): null {
   return null;
 }
 
-StartNewSurvey.with = (survey: Survey) => {
-  const StartNewSurveyWithRouter = (params: any) => (
-    <StartNewSurvey survey={survey} {...params} />
-  );
+StartNewSurvey.with = (survey: StartSurvey) => {
+  const StartNewSurveyWithRouter = () => <StartNewSurvey survey={survey} />;
   return StartNewSurveyWithRouter;
 };
 

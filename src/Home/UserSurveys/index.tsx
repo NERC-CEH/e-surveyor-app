@@ -8,6 +8,7 @@ import {
   IonLabel,
   IonSegmentButton,
   IonSegment,
+  type SegmentCustomEvent,
 } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import samples, { getPending, uploadAll } from 'models/collections/samples';
@@ -25,7 +26,7 @@ function hasManyPending(pendingSurveys: Sample[]) {
   return pendingSurveys.length > 2;
 }
 
-function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
+function getPendingSurveys(surveys: Sample[], uploadIsPrimary: boolean) {
   const byFinishedSurvey = (sample: Sample) => sample.metadata.saved;
   const finishedSurvey = surveys.find(byFinishedSurvey);
 
@@ -77,7 +78,7 @@ function getPendingSurveys(surveys: any[], uploadIsPrimary: boolean) {
   );
 }
 
-function getAllSurveys(surveys: any[]) {
+function getAllSurveys(surveys: Sample[]) {
   if (!surveys.length) {
     return (
       <div className="list">
@@ -99,7 +100,8 @@ const UserSurveys = () => {
   const [segment, setSegment] = useState('pending');
   const toast = useToast();
 
-  const onSegmentClick = (e: any) => setSegment(e.detail.value);
+  const onSegmentClick = (event: SegmentCustomEvent) =>
+    setSegment(String(event.detail.value));
 
   const getSamplesList = (pending?: boolean) => {
     const allSamples = (sample: Sample) =>
@@ -145,7 +147,11 @@ const UserSurveys = () => {
     <Page id="surveys-list">
       <IonHeader className="ion-no-border">
         <IonToolbar>
-          <IonSegment onIonChange={onSegmentClick} value={segment}>
+          <IonSegment
+            className="mx-auto [&>ion-segment-button.ios]:my-0.5"
+            onIonChange={onSegmentClick}
+            value={segment}
+          >
             <IonSegmentButton value="pending">
               <IonLabel className="ion-text-wrap">
                 Pending

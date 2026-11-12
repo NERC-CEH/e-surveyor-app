@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react';
+import { type ComponentProps, type MouseEventHandler, useState } from 'react';
 import { observer } from 'mobx-react';
 import { close, cropOutline } from 'ionicons/icons';
 import {
@@ -21,7 +21,10 @@ type Props = {
   allowToCrop?: boolean;
   disabled?: boolean;
   caption?: string;
-} & Omit<ComponentProps<typeof SinglePhotoPicker>, 'getImage'>;
+} & Omit<
+  ComponentProps<typeof SinglePhotoPicker>,
+  'model' | 'onAddNew' | 'isDisabled' | 'Image'
+>;
 
 const AppPhotoPicker = ({
   model,
@@ -55,8 +58,10 @@ const AppPhotoPicker = ({
     if (!editImage) return;
 
     // save the new image and delete the old one
-    const oldFileName = editImage.getURL().split('/').pop() as string;
-    const extension = oldFileName.split('.').pop() as string;
+    const oldFileName = editImage.getURL().split('/').pop();
+    if (!oldFileName) throw new Error('Image filename is missing.');
+
+    const extension = oldFileName.split('.').pop() || 'jpg';
     const newFileName = `${Date.now()}.${extension}`;
     await deleteFile(oldFileName);
     image = await saveFile(image, newFileName);
@@ -84,8 +89,8 @@ const AppPhotoPicker = ({
     onClick,
   }: {
     media: Media;
-    onDelete: any;
-    onClick: any;
+    onDelete: () => void;
+    onClick?: MouseEventHandler<HTMLImageElement>;
   }) => {
     const cropImage = () => {
       setEditImage(media);

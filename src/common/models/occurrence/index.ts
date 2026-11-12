@@ -2,6 +2,7 @@ import { IObservableArray, observable } from 'mobx';
 import {
   Occurrence as OccurrenceOriginal,
   OccurrenceAttrs,
+  type OccurrenceOptions,
   validateRemoteModel,
 } from '@flumens';
 import config from 'common/config';
@@ -22,6 +23,7 @@ import identifyImage from './services/indiciaAI';
 import { IndiciaAISuggestion } from './services/indiciaAI/indiciaAIResponse.d';
 import {
   Image,
+  Species as PlantNetSpecies,
   Response as PlantNetResponse,
 } from './services/indiciaAI/plantNetResponse.d';
 
@@ -32,6 +34,7 @@ type PlantNetTaxonAttrs = {
 export type Suggestion = {
   warehouseId: number;
   probability: number;
+  score?: number;
   commonNames: string[];
   scientificName: string;
   tvk: string;
@@ -39,32 +42,34 @@ export type Suggestion = {
 
 type ClassifierAttributes = {
   probability: number;
+  score?: number;
   version?: string;
   suggestions?: Suggestion[];
   machineInvolvement?: MachineInvolvement;
   recordCleaner?: IndiciaAISuggestion['record_cleaner'];
 };
 
-export type Taxon = {
+export type Taxon = Record<string, unknown> & {
   warehouseId: number;
   taxonGroupId?: number;
   preferredTaxaTaxonListId?: number;
-  commonName: string;
+  commonName?: string;
+  commonNames?: string[];
   scientificName: string;
-  foundInName?: string;
+  foundInName?: 'scientificName' | 'commonName' | number;
   tvk: string;
 } & ClassifierAttributes &
   PlantNetTaxonAttrs;
 
-type Data = OccurrenceAttrs & {
+export type Data = Omit<OccurrenceAttrs, 'taxon'> & {
   taxon?: Taxon;
   [occurrenceAbundanceAttr.id]?: number;
 };
 
 export default class Occurrence extends OccurrenceOriginal<Data> {
-  declare media: IObservableArray<Media>;
+  declare media: OccurrenceOriginal<Data>['media'] & IObservableArray<Media>;
 
-  declare parent?: Sample;
+  declare parent?: OccurrenceOriginal<Data>['parent'] & Sample;
 
   declare getSurvey: () => Survey;
 
@@ -72,11 +77,11 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
   validateRemote = validateRemoteModel;
 
-  constructor(options: any) {
+  constructor(options: OccurrenceOptions<Data> = {}) {
     super({ ...options, Media });
   }
 
-  getSpecies = (): Taxon => this.data.taxon;
+  getSpecies = () => this.data.taxon;
 
   async identify() {
     if (!this.media.length)
@@ -179,7 +184,9 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
   async identifyPlant() {
     const date = this.createdAt;
     const location =
-      this.parent?.data.location || this.parent?.parent?.data.location;
+      this.parent?.data.location ||
+      this.parent?.parent?.data.location ||
+      undefined;
 
     const upload = (img: Media) => img.uploadFile();
     await Promise.all(this.media.map(upload));
@@ -200,7 +207,8 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
     const getPlantNetImages = (taxon: string) =>
       raw?.results?.find(
-        ({ species }) => species.scientificNameWithoutAuthor === taxon
+        ({ species }: { species: PlantNetSpecies }) =>
+          species.scientificNameWithoutAuthor === taxon
       )?.images || [];
 
     const cleanSuggestions = suggestions
@@ -215,7 +223,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
     const topSuggestion = cleanSuggestions[0];
     if (!topSuggestion) {
-      this.data.taxon = null;
+      this.data.taxon = undefined;
       return;
     }
 
@@ -232,7 +240,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
       // plantNet-specific
       images: topSuggestion.images,
-    } as Taxon;
+    };
 
     if (!this.isPersistent()) return;
 
@@ -276,7 +284,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       version: classifierVersion,
       tvk: topSuggestion.tvk,
       suggestions,
-    } as Taxon;
+    };
 
     this.save();
   }
@@ -300,6 +308,8 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
     const { taxon } = this.data;
     if (!taxon) return '';
 
+    if (typeof taxon.foundInName === 'number')
+      return taxon.commonNames?.[taxon.foundInName] || '';
     if (taxon.foundInName) return taxon[taxon.foundInName];
 
     return taxon.commonName || taxon.scientificName;

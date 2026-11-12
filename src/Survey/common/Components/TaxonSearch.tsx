@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { useRouteMatch } from 'react-router-dom';
 import { Page, Main, Header, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
-import TaxonSearch from 'common/Components/TaxonSearch';
+import TaxonSearch, { type Species } from 'common/Components/TaxonSearch';
 import { Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 import { MachineInvolvement } from 'Survey/common/config';
@@ -20,17 +20,17 @@ const Controller = () => {
 
   const context = useContext(NavContext);
 
-  const transformUKSIToAppTaxon = (taxon: Taxon): Taxon => ({
+  const transformUKSIToAppTaxon = (taxon: Species): Taxon => ({
     commonName: taxon.commonName || '',
     scientificName: taxon.scientificName,
     warehouseId: taxon.warehouseId,
     machineInvolvement: MachineInvolvement.HUMAN,
     images: [],
     probability: 1,
-    tvk: taxon.tvk,
+    tvk: taxon.tvk || '',
   });
 
-  const onSpeciesSelected = async (taxon: Taxon) => {
+  const onSpeciesSelected = async (taxon: Species) => {
     const model = subSample || sample;
 
     const occurrence = params.occId

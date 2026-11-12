@@ -7,16 +7,14 @@ import Sample from 'common/models/sample';
 import { Survey, blockToAttr, locationAttr } from 'Survey/common/config';
 import field from './common/field.svg';
 
-const fieldIcon = (<IonIcon src={field} className="size-6" />) as any;
-const soilIcon = (<IonIcon src={soil} className="size-6" />) as any;
+const fieldIcon = <IonIcon src={field} className="size-6" />;
+const soilIcon = <IonIcon src={soil} className="size-6" />;
 
 const locationOutlineIcon = (
   <IonIcon src={locationOutline} className="size-6" />
-) as any;
+);
 
-const listOutlineIcon = (
-  <IonIcon src={listOutline} className="size-6" />
-) as any;
+const listOutlineIcon = <IonIcon src={listOutline} className="size-6" />;
 
 export const farmNameAttr = {
   id: 'farmName-1',
@@ -54,7 +52,11 @@ export const landUseAttr = {
     { title: 'Fallow', dataName: 'Fallow-1' },
     { title: 'Other', dataName: LAND_USE_OTHER_VALUE },
   ],
-  onChange(newValue: any, _: any, { record }: any) {
+  onChange(
+    newValue: string,
+    _: string,
+    { record }: { record: Record<string, unknown> }
+  ) {
     record[landUseAttr.id] = newValue;
     delete record[cropAttr().id];
     delete record[prevCrop1Attr().id];
@@ -116,7 +118,7 @@ const cropChoices = {
   ],
 } as const;
 
-export const cropAttr = (attrs?: any) => {
+export const cropAttr = (attrs?: Record<string, unknown>) => {
   const landUse = attrs?.[landUseAttr.id] as keyof typeof cropChoices;
   return {
     id: 'crop-1',
@@ -129,7 +131,7 @@ export const cropAttr = (attrs?: any) => {
   } as const;
 };
 
-export const prevCrop1Attr = (attrs?: any) => {
+export const prevCrop1Attr = (attrs?: Record<string, unknown>) => {
   const landUse = attrs?.[landUseAttr.id] as keyof typeof cropChoices;
   return {
     id: 'prev-crop-1',
@@ -142,7 +144,7 @@ export const prevCrop1Attr = (attrs?: any) => {
   } as const;
 };
 
-export const prevCrop2Attr = (attrs?: any) => {
+export const prevCrop2Attr = (attrs?: Record<string, unknown>) => {
   const landUse = attrs?.[landUseAttr.id] as keyof typeof cropChoices;
   return {
     id: 'prev-crop-2',

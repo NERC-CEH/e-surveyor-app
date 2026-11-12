@@ -1,66 +1,35 @@
 import fs from 'fs';
 import uksiPlants from '../cacheRemote/uksi_plants.json';
 
-const LANGUAGE_ISO_MAPPING: any = {
-  eng: 'English',
-};
+const capitalize = (value: string) =>
+  value
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 
-function turnNamesArrayIntoLangObject(array: any) {
-  const transformToUpperCase = (word: any) =>
-    word.charAt(0).toUpperCase() + word.slice(1);
-
-  const capitalize = (str: any) =>
-    str.toLowerCase().split(' ').map(transformToUpperCase).join(' ');
-
-  const result = array.reduce((agg: any, term: any) => {
-    const {
-      language: languageCode,
+const names = uksiPlants
+  .filter(({ language }) => language === 'English')
+  .map(
+    ({
       id,
-      taxon: name,
-      preferredTaxon: taxon,
-      preferredTaxaTaxonListId: preferredId,
+      taxon,
+      preferredTaxon,
+      preferredTaxaTaxonListId,
       externalKey,
       difficulty,
       frequency,
-    } = term;
-
-    if (languageCode !== 'English') {
-      // no need for latin or Welsh - see data/species/index.json file
-      return agg;
-    }
-
-    const language = LANGUAGE_ISO_MAPPING[languageCode];
-    agg[language] || (agg[language] = []);
-
-    const species = {
-      warehouseId: parseInt(id, 10),
-      commonName: capitalize(name),
-      scientificName: taxon,
-      preferredId: parseInt(preferredId, 10),
+    }) => ({
+      warehouseId: Number(id),
+      commonName: capitalize(taxon),
+      scientificName: preferredTaxon,
+      preferredId: Number(preferredTaxaTaxonListId),
       tvk: externalKey,
-      difficulty,
-      frequency,
-    };
+      difficulty: difficulty ?? undefined,
+      frequency: frequency ?? undefined,
+    })
+  )
+  .sort((a, b) => a.commonName.localeCompare(b.commonName));
 
-    agg.push(species);
-    return agg;
-  }, []);
-
-  fs.writeFileSync('./index.json', JSON.stringify(result, null, 2));
-}
-
-function sortAlphabetically(species: any) {
-  const alphabetically = (sp1: any, sp2: any) =>
-    sp1.taxon.localeCompare(sp2.taxon);
-  return species.sort(alphabetically);
-}
-
-const getData = async () => {
-  const sortedSpecies = await sortAlphabetically(uksiPlants);
-
-  turnNamesArrayIntoLangObject(sortedSpecies);
-
-  console.log('All done! 🚀');
-};
-
-getData();
+fs.writeFileSync('./index.json', JSON.stringify(names, null, 2));
+console.log('All done! 🚀');

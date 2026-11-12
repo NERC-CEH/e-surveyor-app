@@ -19,14 +19,15 @@ import { Main, InfoMessage } from '@flumens';
 import { IonIcon, IonItem, IonButton, IonList } from '@ionic/react';
 import config from 'common/config';
 import { AppModel } from 'models/app';
+import type { Data as UserData } from 'models/user';
 import './styles.scss';
 
 type Props = {
-  logOut: any;
-  refreshAccount: any;
-  resendVerificationEmail: any;
-  isLoggedIn: any;
-  user: any;
+  logOut: () => void;
+  refreshAccount: () => void;
+  resendVerificationEmail: () => void;
+  isLoggedIn: boolean;
+  user: UserData;
   userInfo: string;
   deviceInfo: string;
   appModel: AppModel;
@@ -45,7 +46,7 @@ const MenuMain = ({
   const lang = appModel.data.language;
 
   const isNotVerified = user.verified === false; // verified is undefined in old versions
-  const userEmail = user.email as string;
+  const userEmail = user.email || '';
 
   return (
     <Main className="app-menu pb-ion-25 pt-ion-s-0">
@@ -70,8 +71,8 @@ const MenuMain = ({
 
           {isLoggedIn && isNotVerified && (
             <InfoMessage className="verification-warning">
-              Looks like your <b>{{ userEmail } as any}</b> email hasn't been
-              verified yet.
+              Looks like your <b>{{ userEmail } as unknown as string}</b> email
+              hasn't been verified yet.
               <div>
                 <IonButton fill="outline" onClick={refreshAccount}>
                   Refresh

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { Swiper as SwiperInstance } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
@@ -10,7 +11,7 @@ import beetles from 'common/data/cacheRemote/beetles.json';
 import './images';
 import './styles.scss';
 
-export type Beetle = {
+type Beetle = {
   id: number;
   scientificName: string;
   commonName: string;
@@ -27,7 +28,7 @@ export type Beetle = {
 
 type Props = {
   isOpen: boolean;
-  onClose: any;
+  onClose: () => void;
 };
 
 const BeetleGuide = ({ isOpen, onClose }: Props) => {
@@ -53,33 +54,28 @@ const BeetleGuide = ({ isOpen, onClose }: Props) => {
 
   const [showGallery, setShowGallery] = useState<number>();
 
-  const showPhotoInFullScreen = (index: number) => setShowGallery(index);
-
   const getSlides = () => {
     const slideOpts = {
       initialSlide: 0,
       speed: 400,
     };
 
-    const getSlide = (imageURL: string, index: number) => {
-      const showPhotoInFullScreenWrap = () => showPhotoInFullScreen(index);
-      return (
-        <SwiperSlide
-          key={imageURL}
-          onClick={showPhotoInFullScreenWrap}
-          className="!h-60 overflow-hidden bg-white"
-        >
-          <img src={imageURL} />
-        </SwiperSlide>
-      );
-    };
+    const getSlide = (imageURL: string, index: number) => (
+      <SwiperSlide
+        key={imageURL}
+        onClick={() => setShowGallery(index)}
+        className="!h-60 overflow-hidden bg-white"
+      >
+        <img src={imageURL} />
+      </SwiperSlide>
+    );
 
     const slideImage = [
       `/images/${showSpecies?.id}_1.jpg`,
       `/images/${showSpecies?.id}_2.jpg`,
     ].map(getSlide);
 
-    const handleSlideChangeStart = (swiper: any) =>
+    const handleSlideChangeStart = (swiper: SwiperInstance) =>
       setShowAnnotations(swiper.activeIndex === 1);
 
     return (

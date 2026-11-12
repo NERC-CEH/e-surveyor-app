@@ -17,10 +17,8 @@ const routes = [
   [`${baseURL}/:smpId/occurrence/:occId`, Occurrence],
   [`${baseURL}/:smpId/location`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/report`, Report],
-] as any[];
+] as const;
 
-const mappedRoutes = routes.map(([route, component]) => (
+export default routes.map(([route, component]) => (
   <Route key={route} exact path={route} component={component} />
 ));
-
-export default mappedRoutes;

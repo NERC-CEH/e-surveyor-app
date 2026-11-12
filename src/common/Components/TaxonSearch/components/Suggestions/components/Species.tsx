@@ -1,10 +1,16 @@
+import type { MouseEvent } from 'react';
 import { IonItem } from '@ionic/react';
 import { Species } from '../../..';
 import Difficulty from './Difficulty';
 import './styles.scss';
 
-const onClick = (e: any, species: Species, onSelect: any) => {
-  const edit = e.target.tagName === 'BUTTON';
+const onClick = (
+  event: MouseEvent,
+  species: Species,
+  onSelect: (species: Species, edit: boolean) => void
+) => {
+  const edit =
+    event.target instanceof HTMLElement && event.target.tagName === 'BUTTON';
 
   onSelect(species, edit);
 };
@@ -33,8 +39,8 @@ function prettifyName(species: Species, searchPhrase: string) {
 }
 
 type Props = {
-  species: Species & { isRecorded?: boolean };
-  searchPhrase: any;
+  species: Species;
+  searchPhrase: string;
   onSelect: (species: Species, edit: boolean) => void;
 };
 
@@ -48,7 +54,8 @@ const SpeciesItem = ({ species, searchPhrase, onSelect }: Props) => {
     ? prettyName
     : species.scientificName;
 
-  const onClickWrap = (e: any) => !isRecorded && onClick(e, species, onSelect);
+  const onClickWrap = (e: MouseEvent) =>
+    !isRecorded && onClick(e, species, onSelect);
 
   const hasDifficulty = species.difficulty! > 1;
 

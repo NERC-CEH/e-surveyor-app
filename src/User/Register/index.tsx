@@ -55,8 +55,8 @@ const RegisterContainer = () => {
           },
         ],
       });
-    } catch (err: any) {
-      toast.error(err);
+    } catch (error) {
+      toast.error(error);
     }
 
     loader.hide();

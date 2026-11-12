@@ -1,25 +1,16 @@
 import { leafOutline } from 'ionicons/icons';
 import { z } from 'zod';
-import {
-  dateFormatISO,
-  inferAttrConfigTypes,
-  SampleData,
-} from 'common/flumens';
+import { dateFormatISO, type SampleSubmission } from 'common/flumens';
 import appModel from 'common/models/app';
-import Occurrence from 'models/occurrence';
+import Occurrence, { type Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 import {
   attachClassifierResults,
   Survey,
   seedmixGroupAttr,
-  SEEDMIX_ATTR_ID,
 } from 'Survey/common/config';
 
-export {
-  seedmixGroupAttr,
-  SEEDED_YES_VALUE,
-  seededAttr,
-} from 'Survey/common/config';
+export { seedmixGroupAttr, seededAttr } from 'Survey/common/config';
 
 const attrs = {
   seedmixGroup: { block: seedmixGroupAttr },
@@ -41,7 +32,7 @@ const survey = {
       taxon: {
         remote: {
           id: 'taxa_taxon_list_id',
-          values: (taxon: any) => taxon.warehouseId,
+          values: (taxon: Taxon) => taxon.warehouseId,
         },
       },
     },
@@ -63,7 +54,7 @@ const survey = {
       return occ;
     },
 
-    modifySubmission(submission: any, occ: Occurrence) {
+    modifySubmission(submission: SampleSubmission, occ: Occurrence) {
       // for non-UK species
       if (!submission.values.taxa_taxon_list_id) return null;
       return attachClassifierResults(submission, occ);
@@ -88,16 +79,12 @@ const survey = {
         locationId: z.string({ error: 'Location is missing' }),
       }).parse(data);
     } catch (attrError) {
-      return attrError;
+      if (attrError instanceof z.ZodError) return attrError;
+      throw attrError;
     }
 
     return null;
   },
 } as const satisfies Survey;
-
-export type Data = SampleData &
-  inferAttrConfigTypes<typeof attrs> & {
-    [SEEDMIX_ATTR_ID]: any;
-  };
 
 export default survey;

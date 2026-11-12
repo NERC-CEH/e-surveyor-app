@@ -81,10 +81,9 @@ const Habitats = ({ uniqueSpecies }: Props) => {
       console.log('Refreshing habitats');
       setIsLoading(true);
       try {
-        const exists = (o: any) => !!o;
         const speciesTVKs = uniqueSpecies
-          .map(([, , tvk]) => tvk!)
-          .filter(exists);
+          .map(([, , tvk]) => tvk)
+          .filter((tvk): tvk is string => !!tvk);
 
         const [newBroadHabitats, newNvcHabitats] = await Promise.all([
           identifyBroad(speciesTVKs),

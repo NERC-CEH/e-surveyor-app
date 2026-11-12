@@ -67,7 +67,7 @@ const Controller = () => {
     isDisabled || sample.isSynchronising ? null : (
       <HeaderButton
         onClick={sample.metadata.saved ? onUpload : onFinish}
-        isInvalid={isInvalid}
+        isInvalid={!!isInvalid}
       >
         {sample.metadata.saved ? 'Upload' : 'Finish'}
       </HeaderButton>

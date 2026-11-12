@@ -39,7 +39,7 @@ const Report = () => {
   const isInvalid = sample.validateRemote();
   const finishButton =
     sample.isSynchronising || sample.isDisabled ? null : (
-      <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
+      <HeaderButton onClick={onFinish} isInvalid={!!isInvalid}>
         Upload
       </HeaderButton>
     );

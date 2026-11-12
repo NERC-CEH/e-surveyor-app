@@ -82,7 +82,10 @@ const OnboardingScreens = ({ appModel }: Props) => {
         <Swiper
           onSwiper={setControlledSwiper}
           modules={[Pagination]}
-          pagination={moreSlidesExist}
+          pagination
+          className={
+            moreSlidesExist ? undefined : '[&_.swiper-pagination]:hidden'
+          }
           onSlideChange={handleSlideChangeStart}
         >
           <SwiperSlide className="first">

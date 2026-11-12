@@ -1,16 +1,23 @@
-import { FC, useState } from 'react';
+import { Children, type ReactNode, useState } from 'react';
 import clsx from 'clsx';
 import { Trans as T } from 'react-i18next';
 import { IonItem, IonLabel } from '@ionic/react';
 
 const MAX_ITEMS = 5;
 
-const ExpandableList: FC<any> = ({
-  children: itemsProp,
+type Props = {
+  children: ReactNode;
+  maxItems?: number;
+  className?: string;
+};
+
+const ExpandableList = ({
+  children,
   maxItems = MAX_ITEMS,
   className,
-}: any) => {
+}: Props) => {
   const [showMore, setShowMore] = useState(false);
+  const itemsProp = Children.toArray(children);
   const items = itemsProp.slice(0, maxItems);
   const restItems = itemsProp.slice(maxItems, itemsProp.length);
 

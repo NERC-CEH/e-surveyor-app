@@ -27,7 +27,7 @@ export type Species = {
 };
 
 export type Date = {
-  timestamp: any;
+  timestamp: unknown;
   string: string;
 };
 

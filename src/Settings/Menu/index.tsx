@@ -8,10 +8,10 @@ import { Page, Header, useToast, useLoader } from '@flumens';
 import { isPlatform, NavContext } from '@ionic/react';
 import CONFIG from 'common/config';
 import { db } from 'common/models/store';
-import appModel, { Data } from 'models/app';
+import appModel from 'models/app';
 import samples from 'models/collections/samples';
 import userModel from 'models/user';
-import Main from './Main';
+import Main, { type BooleanSetting } from './Main';
 
 const useDeleteUser = () => {
   const toast = useToast();
@@ -27,8 +27,8 @@ const useDeleteUser = () => {
       await userModel.delete();
       goBack();
       toast.success('Done');
-    } catch (err: any) {
-      toast.error(err);
+    } catch (error) {
+      toast.error(error);
     }
 
     loader.hide();
@@ -37,8 +37,8 @@ const useDeleteUser = () => {
   return deleteUser;
 };
 
-function onToggle(setting: keyof Data, checked: boolean) {
-  (appModel.data as any)[setting] = checked; // eslint-disable-line
+function onToggle(setting: BooleanSetting, checked: boolean) {
+  Object.assign(appModel.data, { [setting]: checked });
   appModel.save();
 
   isPlatform('hybrid') && Haptics.impact({ style: ImpactStyle.Light });
@@ -96,11 +96,14 @@ const MenuController = () => {
       input.type = 'file';
       input.addEventListener('change', () => {
         const fileReader = new FileReader();
-        fileReader.onloadend = async (e: any) =>
+        fileReader.onloadend = () =>
           resolve(
-            new Blob([e.target.result], { type: 'application/vnd.sqlite3' })
+            new Blob([fileReader.result!], {
+              type: 'application/vnd.sqlite3',
+            })
           );
-        fileReader.readAsArrayBuffer(input.files![0]);
+        const [file] = input.files || [];
+        if (file) fileReader.readAsArrayBuffer(file);
       });
       input.click();
     });

@@ -5,6 +5,7 @@ import {
   useToast,
   useLoader,
   device,
+  type DrupalUserModelOptions,
 } from '@flumens';
 import CONFIG from 'common/config';
 import { mainStore } from './store';
@@ -18,23 +19,23 @@ const defaults: Data = {
 };
 
 export class UserModel extends DrupalUserModel<Data> {
-  static registerSchema: any = object({
+  static registerSchema = object({
     email: z.string().email('Please fill in'),
     password: z.string().min(1, 'Please fill in'),
     fullName: z.string().min(1, 'Please fill in'),
   });
 
-  static resetSchema: any = object({
+  static resetSchema = object({
     email: z.string().email('Please fill in'),
   });
 
-  static loginSchema: any = object({
+  static loginSchema = object({
     email: z.string().email('Please fill in'),
     password: z.string().min(1, 'Please fill in'),
   });
 
-  constructor(options: any) {
-    super({ ...options, data: { ...defaults, ...options.attrs } });
+  constructor(options: DrupalUserModelOptions<Data>) {
+    super({ ...options, data: { ...defaults, ...options.data } });
 
     const checkForValidation = () => {
       if (this.isLoggedIn() && !this.data.verified) {

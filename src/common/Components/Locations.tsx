@@ -37,7 +37,8 @@ const LocationsController = () => {
 
     sample.data.locationId = loc?.id;
     sample.data.enteredSref = loc?.data.centroidSref;
-    sample.data.enteredSrefSystem = loc?.data.centroidSrefSystem as any;
+    sample.data.enteredSrefSystem = loc?.data
+      .centroidSrefSystem as unknown as Sample['data']['enteredSrefSystem'];
     sample.save();
     goBack();
   };
@@ -60,8 +61,8 @@ const LocationsController = () => {
 
     try {
       await locations.fetchRemote();
-    } catch (err: any) {
-      toast.error(err);
+    } catch (error) {
+      toast.error(error);
     }
 
     loader.hide();

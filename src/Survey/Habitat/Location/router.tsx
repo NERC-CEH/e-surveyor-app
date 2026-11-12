@@ -1,8 +1,8 @@
+import type { ElementType } from 'react';
 import { observer } from 'mobx-react';
-import { Polygon } from 'geojson';
+import type { Polygon } from 'geojson';
 import { Route } from 'react-router-dom';
-import { AttrPage, updateModelLocation } from '@flumens';
-import LocationModel from 'common/models/location';
+import { AttrPage, type BlockT, type Location as GeoLocation } from '@flumens';
 import ModelLocationMap, {
   getLocationAttrsFromLocation,
   getLocationAttrsFromShape,
@@ -19,7 +19,7 @@ import useLocation from './useLocation';
 
 const { baseURL } = survey;
 
-const withLocationAndBlock = (Component: any, block: any) => {
+const withLocationAndBlock = (Component: ElementType, block: BlockT) => {
   const WithLocationAndBlock = () => {
     const { location } = useLocation();
     if (!location) return null;
@@ -31,12 +31,12 @@ const withLocationAndBlock = (Component: any, block: any) => {
 };
 
 const ModelLocationMapWrap = observer(() => {
-  const { location: model } = useLocation<LocationModel>();
+  const { location: model } = useLocation();
   if (!model) return null;
 
   const useShape = model.data.boundaryGeom !== undefined;
 
-  const setLocation = async (newLocation: any) => {
+  const setLocation = async (newLocation?: GeoLocation | Polygon) => {
     if (!newLocation) {
       if (useShape) {
         Object.assign(model.data, getLocationAttrsFromShape());
@@ -46,11 +46,12 @@ const ModelLocationMapWrap = observer(() => {
       Object.assign(model.data, getLocationAttrsFromLocation());
       return;
     }
-    if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
+    if (model.isGPSRunning()) model.stopGPS();
 
-    const newLocationAttributes = useShape
-      ? getLocationAttrsFromShape(newLocation)
-      : getLocationAttrsFromLocation(newLocation);
+    const newLocationAttributes =
+      'type' in newLocation
+        ? getLocationAttrsFromShape(newLocation)
+        : getLocationAttrsFromLocation(newLocation);
     Object.assign(model.data, newLocationAttributes);
   };
 
@@ -65,13 +66,17 @@ const ModelLocationMapWrap = observer(() => {
       setLocation={setLocation}
       isLocating={model.isGPSRunning()}
       stopGPS={() => model.stopGPS()}
-      startGPS={() => model.startGPS(loc => updateModelLocation(model, loc))}
+      startGPS={() =>
+        model.startGPS(loc =>
+          Object.assign(model.data, getLocationAttrsFromLocation(loc))
+        )
+      }
     />
   );
 });
 
 const routes = [
-  [baseURL, StartNewSurvey.with(survey as any), true],
+  [baseURL, StartNewSurvey.with(survey)],
   [`${baseURL}/:locId`, Summary],
   [
     `${baseURL}/:locId/${habitatAttr.id}`,
@@ -81,8 +86,8 @@ const routes = [
   [`${baseURL}/:locId/location/map`, ModelLocationMapWrap],
   [`${baseURL}/:locId/details`, Details],
   [`${baseURL}/:locId/habitat`, Habitat],
-].map(([route, component]: any) => (
+] as const;
+
+export default routes.map(([route, component]) => (
   <Route key={route} path={route} component={component} exact />
 ));
-
-export default routes;

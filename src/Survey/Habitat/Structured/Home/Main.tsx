@@ -93,7 +93,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
             block={surveyProtocolAttr}
             record={sample.data}
             isDisabled={isDisabled || completedDetails}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[surveyProtocolAttr.id] = value;
               sample.data.quadrats = 10;
               sample.data[quadratWidthAttr.id] = 1;
@@ -178,7 +178,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
           <Block
             block={seededAttr}
             {...recordAttrs}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[seededAttr.id] = value;
               delete sample.data[seedmixGroupAttr.id];
               delete sample.data[SEEDMIX_ATTR_ID];
@@ -190,7 +190,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
           <Block
             block={seedmixGroupAttr}
             {...recordAttrs}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[seedmixGroupAttr.id] = value;
               delete sample.data[SEEDMIX_ATTR_ID];
               delete sample.data[customSeedmixAttr.id];
@@ -200,7 +200,7 @@ const MainComponent = ({ sample, isDisabled }: Props) => {
           <Block
             block={seedmixAttr}
             {...recordAttrs}
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               sample.data[SEEDMIX_ATTR_ID] = value;
               delete sample.data[customSeedmixAttr.id];
 

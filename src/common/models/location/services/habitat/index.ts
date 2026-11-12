@@ -2,7 +2,7 @@
 
 /* eslint-disable import-x/prefer-default-export */
 import axios from 'axios';
-import { camelCase, isArray, isPlainObject, mapKeys, mapValues } from 'lodash';
+import { camelCase } from 'lodash';
 import {
   habitatInferenceResponseSchema,
   HabitatInferenceResponse,
@@ -11,15 +11,19 @@ import {
 type UkhabPrediction =
   HabitatInferenceResponse['combinedResults']['ukhab'][number];
 
-function camelCaseKeys<T = unknown>(value: any): T {
-  if (isArray(value)) return value.map(item => camelCaseKeys(item)) as T;
+function camelCaseKeys(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(camelCaseKeys);
 
-  if (isPlainObject(value)) {
-    const camelCasedObject = mapKeys(value, (_val, key) => camelCase(key));
-    return mapValues(camelCasedObject, val => camelCaseKeys(val)) as T;
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, item]) => [
+        camelCase(key),
+        camelCaseKeys(item),
+      ])
+    );
   }
 
-  return value as T;
+  return value;
 }
 
 export async function predictUkhabHabitats(

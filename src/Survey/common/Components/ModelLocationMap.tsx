@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
-import { LineString, MultiPolygon, Polygon } from 'geojson';
+import type { LineString, MultiPolygon, Polygon } from 'geojson';
+import type { MapMouseEvent, MapProps, MapRef } from 'react-map-gl/mapbox';
 import { useRouteMatch } from 'react-router-dom';
 import wkt from 'wellknown';
 import {
@@ -23,6 +24,7 @@ import {
   updateModelLocation,
   useSample,
 } from '@flumens';
+import type { InputCustomEvent } from '@ionic/react';
 import { bbox } from '@turf/bbox';
 import config from 'common/config';
 import Sample from 'models/sample';
@@ -64,14 +66,9 @@ export const getLocationFromSref = (sref?: string) => {
   return { latitude, longitude };
 };
 
-export const getShapeCentroid = (shape?: Shape) => {
-  if (!shape) return null;
-  const [firstRing] = shape.coordinates as any;
-  const [firstPoint] = firstRing;
-  return { longitude: firstPoint[0], latitude: firstPoint[1] };
-};
-
-export const getShapeBounds = (shape?: Shape) => {
+export const getShapeBounds = (
+  shape?: Shape
+): [[number, number], [number, number]] | null => {
   if (!shape) return null;
   const [minLng, minLat, maxLng, maxLat] = bbox(shape);
   return [
@@ -82,10 +79,10 @@ export const getShapeBounds = (shape?: Shape) => {
 
 type Props = {
   useShape?: boolean;
-  location?: Location;
+  location?: Partial<Location>;
   shape?: Shape;
   isLocating?: boolean;
-  setLocation: (newLocation: Location | Shape) => Promise<void>;
+  setLocation: (newLocation?: Location | Shape) => Promise<void>;
   stopGPS: () => void;
   startGPS: () => void;
 };
@@ -99,18 +96,22 @@ const ModelLocationMap = ({
   startGPS,
   useShape,
 }: Props) => {
-  let initialViewState: any = {};
-  if (useShape) {
-    initialViewState = {
-      bounds: getShapeBounds(shape),
-      fitBoundsOptions: { padding: 100 },
-    };
-  } else {
-    initialViewState = location;
-  }
+  const bounds = getShapeBounds(shape);
+  const initialViewState: MapProps['initialViewState'] =
+    useShape && bounds
+      ? { bounds, fitBoundsOptions: { padding: 100 } }
+      : location;
 
-  const onManuallyTypedLocationChange = (e: any) =>
-    setLocation(textToLocation(e?.target?.value)!);
+  const onManuallyTypedLocationChange = (event: InputCustomEvent) => {
+    const value = event.detail.value?.trim();
+    if (!value) {
+      setLocation(undefined);
+      return;
+    }
+
+    const newLocation = textToLocation(value);
+    if (newLocation) setLocation(newLocation);
+  };
 
   const [showSettings, setShowSettings] = useState(false);
   const onCloseSettings = () => setShowSettings(false);
@@ -122,13 +123,14 @@ const ModelLocationMap = ({
     setShowSettings(false);
   };
 
-  const onMapClick = (e: any) => setLocation(mapEventToLocation(e));
+  const onMapClick = (event: MapMouseEvent) =>
+    setLocation(mapEventToLocation(event));
   const onGPSClick = () => (isLocating ? stopGPS() : startGPS());
 
-  const [mapRef, setMapRef] = useState<any>();
+  const [mapRef, setMapRef] = useState<MapRef>();
   const flyToLocation = () => {
     if (useShape) return;
-    mapFlyToLocation(mapRef, location);
+    mapFlyToLocation(mapRef, location as Location);
   };
   useEffect(flyToLocation, [mapRef, location, useShape]);
 
@@ -137,7 +139,7 @@ const ModelLocationMap = ({
       <MapHeader>
         {!useShape && (
           <MapHeader.Location
-            location={location || ({} as any)}
+            location={(location || {}) as Location}
             onChange={onManuallyTypedLocationChange}
             useGridRef
           />
@@ -147,7 +149,7 @@ const ModelLocationMap = ({
       <Main className="pb-ion-0 pt-ion-0">
         <MapContainer
           onReady={setMapRef}
-          onClick={onMapClick}
+          onClick={useShape ? undefined : onMapClick}
           accessToken={config.map.mapboxApiKey}
           mapStyle={currentStyle}
           maxPitch={0}
@@ -180,7 +182,9 @@ const ModelLocationMap = ({
             />
           </MapSettingsPanel>
 
-          {!useShape && location && <MapContainer.Marker {...location} />}
+          {!useShape && location && (
+            <MapContainer.Marker {...(location as Location)} />
+          )}
         </MapContainer>
       </Main>
     </Page>
@@ -197,9 +201,9 @@ ModelLocationMap.SampleFromRoute = observer(() => {
 
   const model = subSample || sample;
 
-  const setLocation = async (newLocation: any) => {
-    if (!newLocation) return;
-    if ('isGPSRunning' in model && model.isGPSRunning()) model.stopGPS();
+  const setLocation = async (newLocation?: Location | Shape) => {
+    if (!newLocation || 'type' in newLocation) return;
+    if (model.isGPSRunning()) model.stopGPS();
 
     model.data.location = { ...model.data.location, ...newLocation };
   };

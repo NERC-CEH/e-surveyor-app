@@ -1,4 +1,4 @@
-import { createRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonButton,
@@ -18,7 +18,7 @@ type Props = {
 
 const SeedmixFindSpecies = ({ onSpeciesSelected, selectedSpecies }: Props) => {
   const history = useHistory();
-  const input = createRef<any>();
+  const input = useRef<HTMLIonSearchbarElement>(null);
 
   const onSpeciesSelectedWrap = (sp: Species) => {
     const seedmixSpecies = {
@@ -36,8 +36,7 @@ const SeedmixFindSpecies = ({ onSpeciesSelected, selectedSpecies }: Props) => {
     if (input.current) {
       input.current.setFocus();
     }
-    // eslint-disable-next-line react-hooks/refs
-  }, [input, input.current]);
+  }, []);
 
   return (
     <div id="seedmix-find-species" className="ion-page">

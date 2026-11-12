@@ -11,7 +11,7 @@ import './styles.scss';
 const useConfirmationDialog = () => {
   const alert = useAlert();
 
-  return (callback: any) => {
+  return (callback: () => void) => {
     alert({
       header: 'Logout',
       message: (
@@ -67,8 +67,8 @@ const Controller = () => {
       if (!userModel.data.verified) {
         toast.warn('The user has not been activated or is blocked.');
       }
-    } catch (err: any) {
-      toast.error(err);
+    } catch (error) {
+      toast.error(error);
     }
     loader.hide();
   };
@@ -80,8 +80,8 @@ const Controller = () => {
       toast.success(
         'A new verification email was successfully sent now. If you did not receive the email, then check your Spam or Junk email folders.'
       );
-    } catch (err: any) {
-      toast.error(err);
+    } catch (error) {
+      toast.error(error);
     }
     loader.hide();
   };

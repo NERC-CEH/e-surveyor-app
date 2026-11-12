@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import clsx from 'clsx';
 import { informationCircleOutline } from 'ionicons/icons';
 import { Button } from '@flumens';
@@ -11,18 +11,18 @@ type Props = {
 };
 
 const InfoButton = ({ children, className }: Props) => {
-  const [infoState, setInfoState] = useState<any>({
-    showInfo: false,
-    event: undefined,
-  });
+  const [infoState, setInfoState] = useState<{
+    showInfo: boolean;
+    event?: Event;
+  }>({ showInfo: false });
 
-  const showInfo = (e: any) => setInfoState({ showInfo: true, event: e });
+  const showInfo = (event: Event) => setInfoState({ showInfo: true, event });
   const hideInfo = () => setInfoState({ showInfo: false, event: undefined });
 
   return (
     <Button
       fill="clear"
-      onPress={showInfo}
+      onClick={event => showInfo(event.nativeEvent)}
       className={clsx('inline-block py-0', className)}
     >
       <IonIcon src={informationCircleOutline} />

@@ -54,7 +54,9 @@ const GeometryLink = ({
   const flyToLocation = () => {
     if (shape) {
       // has to be first because it will always be a valid location
-      const bounds: any = getShapeBounds(shape as Polygon)!;
+      const bounds = getShapeBounds(shape as Polygon);
+      if (!bounds) return;
+
       mapRef?.fitBounds(bounds, {
         padding: 100,
         duration: 0,

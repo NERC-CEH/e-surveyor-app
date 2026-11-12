@@ -1,14 +1,14 @@
-import { useContext } from 'react';
+import { useContext, type ReactNode } from 'react';
 import { IonIcon, NavContext } from '@ionic/react';
 import { Button } from 'common/flumens';
 
 type Props = {
-  icon?: any;
-  header?: any;
-  description?: any;
+  icon?: string;
+  header?: ReactNode;
+  description?: ReactNode;
   className?: string;
-  link?: any;
-  moreInfo?: any;
+  link?: string;
+  moreInfo?: ReactNode;
 };
 
 const SurveyCard = ({
@@ -21,7 +21,7 @@ const SurveyCard = ({
 }: Props) => {
   const { navigate } = useContext(NavContext);
 
-  const openPage = () => navigate(link);
+  const openPage = () => link && navigate(link);
 
   return (
     <div

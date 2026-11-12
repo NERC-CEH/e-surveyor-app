@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-array-sort-compare */
 import useSWR from 'swr';
 import { device } from '@flumens';
 import Sample from 'common/models/sample';
@@ -10,7 +9,9 @@ const useNewnessCheck = (sample: Sample) => {
   // collect unique TVK keys from all occurrences
   const externalKeys = [
     ...new Set(
-      sample.occurrences.map(occ => occ.data.taxon?.tvk).filter(Boolean)
+      sample.occurrences
+        .map(occ => occ.data.taxon?.tvk)
+        .filter((tvk): tvk is string => !!tvk)
     ),
   ];
 
@@ -25,7 +26,10 @@ const useNewnessCheck = (sample: Sample) => {
     ? `newness-${externalKeys.sort().join(',')}-${lat}-${lon}`
     : null;
 
-  const fetcher = () => fetchNewness({ externalKeys, lat, lon });
+  const fetcher = () => {
+    if (lat === undefined || lon === undefined) return Promise.resolve([]);
+    return fetchNewness({ externalKeys, lat, lon });
+  };
 
   const { data, error, isLoading } = useSWR<NewnessResult[]>(
     cacheKey,

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { observer } from 'mobx-react';
 import { Page, Header, useToast, useSample } from '@flumens';
 import { NavContext } from '@ionic/react';
+import type { SeedmixSpecies } from 'common/data/seedmix';
 import Sample, { useValidateCheck } from 'models/sample';
 import { useUserStatusCheck } from 'models/user';
 import Main from 'Components/ReportView';
@@ -43,7 +44,7 @@ const ReportController = () => {
 
   const occurrences = sample.samples.map(smp => smp.occurrences[0]);
 
-  const seedmixSpecies: any = []; // TODO:
+  const seedmixSpecies: SeedmixSpecies[] = []; // TODO:
   // if (sample.data.seedmixgroup === CUSTOM_SEEDMIX_GROUP_VALUE) {
   //   seedmixSpecies = sample.data[customSeedmixAttr.id] || []; // TODO: stores species ids as string now
   // } else {

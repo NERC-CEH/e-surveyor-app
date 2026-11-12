@@ -8,6 +8,7 @@ import {
   SampleOptions,
   SampleMetadata,
   ChoiceValues,
+  type Location,
 } from '@flumens';
 import config from 'common/config';
 import appModel from 'models/app';
@@ -24,7 +25,6 @@ import transectSurveyConfig from 'Survey/Habitat/Structured/config';
 import soilSurveyConfig, {
   SOMIDAttr,
   coverCropAttr,
-  cropAttr,
   labClayAttr,
   labSandAttr,
   labSiltAttr,
@@ -41,9 +41,10 @@ import Media from './image';
 import Occurrence from './occurrence';
 import { samplesStore } from './store';
 
-export type SoilSubSampleType = 'worms' | 'som' | 'vsa';
+type SoilSubSampleType = 'worms' | 'som' | 'vsa';
 
 type Metadata = SampleMetadata & {
+  deleted?: boolean;
   /**
    * If the sample was saved and ready for upload.
    */
@@ -56,32 +57,34 @@ type Metadata = SampleMetadata & {
   /**
    * Soil survey sub-samples.
    */
-  type: SoilSubSampleType;
+  type?: SoilSubSampleType;
+  survey?: Survey['name'] | 'point' | 'transect';
 };
 
-const cropAttrId = cropAttr().id;
+const cropAttrId = 'crop-1';
 
 export type Data = SampleData & {
   [dateAttr.id]?: string;
 
-  surveyId: any;
-  habitat?: any;
-  name?: any;
-  type?: any;
-  steps?: any;
-  date?: any;
-  location?: any;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  survey_id?: number;
+  habitat?: string | null;
+  name?: string | null;
+  type?: string;
+  steps?: number;
+  quadrats?: number;
+  location?: (Partial<Location> & Record<string, unknown>) | null;
 
   // beetle survey
-  [fieldTillageAttr.id]: string;
+  [fieldTillageAttr.id]?: string;
   [fieldNonCropHabitatsAttr.id]?: ChoiceValues<
     typeof fieldNonCropHabitatsAttr.choices
   >[];
-  [fieldCropAttr.id]: string;
+  [fieldCropAttr.id]?: string;
 
   // moth survey
-  surveyEndTime?: any;
-  otherHabitat?: any;
+  surveyEndTime?: string;
+  otherHabitat?: string;
 
   // soil survey
   [landUseAttr.id]?: ChoiceValues<typeof landUseAttr.choices>[];
@@ -92,15 +95,12 @@ export type Data = SampleData & {
   [wormCountAttr.id]?: number;
   [SOMIDAttr.id]?: string;
   [sampleNameAttr.id]?: string;
-  [labSandAttr.id]: number;
-  [labSiltAttr.id]: number;
-  [labClayAttr.id]: number;
+  [labSandAttr.id]?: number;
+  [labSiltAttr.id]?: number;
+  [labClayAttr.id]?: number;
 };
 
-export default class Sample<T extends SampleData = Data> extends SampleModel<
-  T,
-  Metadata
-> {
+export default class Sample extends SampleModel<Data, Metadata> {
   static getSupportedSpeciesList(plants: SpeciesNames[]) {
     const pollinators: Interaction[] = [];
 
@@ -134,17 +134,19 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
     const pollinatorsNameList = pollinators.map(getPollinatorName);
     const uniquePollinatorsNameList = Array.from(new Set(pollinatorsNameList));
 
-    const nonEmpty = (interaction: Interaction | undefined) => !!interaction;
+    const nonEmpty = (
+      interaction: Interaction | undefined
+    ): interaction is Interaction => !!interaction;
     return uniquePollinatorsNameList.map(getPollinatorProfile).filter(nonEmpty);
   }
 
   declare occurrences: IObservableArray<Occurrence>;
 
-  declare samples: IObservableArray<Sample<any>>;
+  declare samples: IObservableArray<Sample>;
 
   declare media: IObservableArray<Media>;
 
-  declare parent?: Sample<any>;
+  declare parent?: Sample;
 
   declare survey: Survey;
 
@@ -157,11 +159,11 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
     accuracyLimit?: number
   ) => Promise<void>;
 
-  stopGPS: any;
+  declare stopGPS: () => void;
 
-  isGPSRunning: any;
+  declare isGPSRunning: () => boolean;
 
-  constructor(options: SampleOptions) {
+  constructor(options: SampleOptions<Data, Metadata>) {
     super({
       ...options,
       url: config.backend.indicia.url,
@@ -171,7 +173,7 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
       store: samplesStore,
     });
 
-    const surveyConfigs = {
+    const surveyConfigs: Record<number, Survey> = {
       [pointSurveyConfig.id]: pointSurveyConfig,
       [transectSurveyConfig.id]: transectSurveyConfig,
       [beetleSurveyConfig.id]: beetleSurveyConfig,
@@ -179,24 +181,30 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
       [soilSurveyConfig.id]: soilSurveyConfig,
     };
 
-    this.survey = surveyConfigs[this.data.surveyId as any];
+    const surveyConfigsByName: Record<
+      NonNullable<Metadata['survey']>,
+      Survey
+    > = {
+      point: pointSurveyConfig,
+      'habitat-free': pointSurveyConfig,
+      transect: transectSurveyConfig,
+      'habitat-structured': transectSurveyConfig,
+      beetle: beetleSurveyConfig,
+      moth: mothSurveyConfig,
+      soil: soilSurveyConfig,
+    };
 
-    if (!this.survey) {
-      // backwards compatible
-      this.survey = surveyConfigs[(this.data as any).survey_id];
+    const surveyId = this.data.surveyId ?? this.data.survey_id;
+    this.survey =
+      surveyConfigs[Number(surveyId) || 0] ||
+      (this.metadata.survey
+        ? surveyConfigsByName[this.metadata.survey]
+        : undefined);
 
-      const surveyConfigsByName: any = {
-        point: pointSurveyConfig,
-        transect: transectSurveyConfig,
-        beetle: beetleSurveyConfig,
-        moth: mothSurveyConfig,
-        soil: soilSurveyConfig,
-      };
+    if (!this.survey)
+      throw new Error(`Survey config was missing ${this.data.surveyId}`);
 
-      this.survey =
-        this.survey || surveyConfigsByName[(this.metadata as any).survey];
-      this.data.surveyId = this.survey.id;
-    }
+    this.data.surveyId = this.survey.id;
 
     Object.assign(this, GPSExtension());
 
@@ -277,7 +285,7 @@ export default class Sample<T extends SampleData = Data> extends SampleModel<
     return super.destroy();
   };
 
-  async syncRemote(onError?: any) {
+  async syncRemote(onError?: (error: unknown) => void) {
     if (this.isSynchronising || !this.requiresRemoteSync()) return true;
 
     const invalids = this.validateRemote();

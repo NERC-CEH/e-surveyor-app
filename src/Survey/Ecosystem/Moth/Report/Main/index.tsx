@@ -1,4 +1,5 @@
-import { Badge, Main, locationToGrid } from '@flumens';
+import { Badge, Main, locationToGrid, type Location } from '@flumens';
+import { hasCoordinates } from 'common/helpers/location';
 import Occurrence from 'common/models/occurrence';
 import Sample from 'common/models/sample';
 import { NewnessMap } from '../useNewnessCheck';
@@ -8,13 +9,14 @@ import LocalRarityBadge from './LocalRarityBadge';
 import NationalRarityBadge from './NationalRarityBadge';
 import NewnessBadges from './NewnessBadges';
 
-const byAbundance = ([, a1]: any, [, a2]: any) => a2 - a1;
+const byAbundance = ([, a1]: [string, number], [, a2]: [string, number]) =>
+  a2 - a1;
 
 /**
  * Extracts the grid square letters (e.g. "SU", "TQ") from a location.
  */
-const get100kmGrid = (location?: any) => {
-  if (!location) return null;
+const get100kmGrid = (location?: Partial<Location> | null) => {
+  if (!hasCoordinates(location)) return null;
 
   const gridref = location.gridref || locationToGrid(location);
   if (!gridref) return null;
@@ -30,11 +32,14 @@ type Props = {
 };
 
 const ReportMain = ({ sample, newnessMap }: Props) => {
-  const uniqueSpeciesObj: any = {};
-  const uniqueSpeciesObjCount: any = {};
+  const uniqueSpeciesObj: Record<string, Occurrence> = {};
+  const uniqueSpeciesObjCount: Record<string, number> = {};
 
   sample.occurrences.forEach(occ => {
-    const { scientificName } = occ.data.taxon;
+    const { taxon } = occ.data;
+    if (!taxon) return;
+
+    const { scientificName } = taxon;
     uniqueSpeciesObj[scientificName] = occ;
     if (!uniqueSpeciesObjCount[scientificName])
       uniqueSpeciesObjCount[scientificName] = 0;
@@ -44,10 +49,9 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
   // compute grid square letters once for all species
   const grid = get100kmGrid(sample.data.location);
 
-  const getEntry = ([scientificNameKey, abundance]: any) => {
-    const occ: Occurrence = uniqueSpeciesObj[scientificNameKey];
-
-    const { commonName, scientificName, tvk } = occ.data.taxon;
+  const getEntry = ([scientificNameKey, abundance]: [string, number]) => {
+    const occ = uniqueSpeciesObj[scientificNameKey];
+    const { commonName, scientificName, tvk } = occ.data.taxon!;
     const link = scientificName
       ? `https://ukmoths.org.uk/species/${scientificName.replaceAll(' ', '-')}`
       : 'https://ukmoths.org.uk/top-20/';
@@ -80,7 +84,7 @@ const ReportMain = ({ sample, newnessMap }: Props) => {
 
         <div className="flex gap-1 flex-nowrap mt-1 border border-neutral-200 p-2 w-full bg-neutral-50 rounded-md justify-between items-center">
           <div className="flex flex-col">
-            <LocalRarityBadge tvk={tvk} grid={grid} />
+            <LocalRarityBadge tvk={tvk} grid={grid || undefined} />
             <NationalRarityBadge tvk={tvk} />
           </div>
           <div className="border-l border-neutral-200 h-full pl-4">

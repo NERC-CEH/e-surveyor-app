@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import type { MouseEventHandler } from 'react';
 import { observer } from 'mobx-react';
 import Media from 'models/image';
 
 type Props = {
   media: Media;
-  onClick: any;
+  onClick: MouseEventHandler<HTMLImageElement>;
 };
 
 const Image = ({ media, onClick }: Props) => (

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { ellipseOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 import mothTraits, { SpeciesTraits } from 'common/data/moths/traits';
@@ -23,7 +24,7 @@ type Props = {
   tvk: string;
 };
 
-const icons: any = {
+const icons: Record<string, ReactNode> = {
   Increasing: <TriangleIcon className="fill-primary-600" />,
   Widespread: <CircleIcon className="fill-primary-600" />,
   'No trend': <RectangleIcon className="fill-primary-600" />,

@@ -1,9 +1,10 @@
 import { Geolocation, Position } from '@capacitor/geolocation';
+import type { Location } from '@flumens';
 
 type Options = {
-  callback: any;
-  onUpdate?: any;
-  accuracyLimit?: any;
+  callback: (error: Error | null, location?: Location) => void;
+  onUpdate?: (location: Location) => void;
+  accuracyLimit?: number;
 };
 
 const GPS_ACCURACY_LIMIT = 100; // meters
@@ -19,7 +20,7 @@ const API = {
       timeout: 60000,
     };
 
-    const onPosition = (position: Position | null, err: Error) => {
+    const onPosition = (position: Position | null, err?: Error) => {
       if (err) {
         callback?.(new Error(err.message));
         return;
@@ -28,11 +29,11 @@ const API = {
       if (!position) return;
 
       const location = {
-        latitude: position.coords.latitude.toFixed(8),
-        longitude: position.coords.longitude.toFixed(8),
+        latitude: Number(position.coords.latitude.toFixed(8)),
+        longitude: Number(position.coords.longitude.toFixed(8)),
         accuracy: position.coords.accuracy,
-        altitude: position.coords.altitude,
-        altitudeAccuracy: position.coords.altitudeAccuracy,
+        altitude: position.coords.altitude ?? undefined,
+        altitudeAccuracy: position.coords.altitudeAccuracy ?? undefined,
       };
 
       if (location.accuracy <= accuracyLimit) {

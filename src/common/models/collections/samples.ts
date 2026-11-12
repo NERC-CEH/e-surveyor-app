@@ -7,13 +7,13 @@ import userModel from '../user';
 
 console.log('SavedSamples: initializing');
 
-const samples: SampleCollection<Sample> = new SampleCollection({
+const samples = new SampleCollection<Sample>({
   store: samplesStore,
   Model: Sample,
   Occurrence,
   url: config.backend.indicia.url,
   getAccessToken: () => userModel.getAccessToken(),
-}) as any;
+});
 
 export async function uploadAll() {
   console.log('SavedSamples: uploading all.');
@@ -32,8 +32,8 @@ export function getPending() {
 }
 
 export function byDate(smp1: Sample, smp2: Sample) {
-  const date1 = new Date(smp1.data.date);
-  const date2 = new Date(smp2.data.date);
+  const date1 = new Date(smp1.data.date || smp1.createdAt);
+  const date2 = new Date(smp2.data.date || smp2.createdAt);
   return date2.getTime() - date1.getTime();
 }
 

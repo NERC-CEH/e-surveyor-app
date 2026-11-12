@@ -7,6 +7,7 @@ export default defineConfig([
     extends: [config],
     rules: {
       'import/extensions': 'off',
+      '@typescript-eslint/no-explicit-any': ['error', { fixToUnknown: true }],
       'no-param-reassign': 'off',
       'react-hooks/set-state-in-effect': 'off',
       'react-hooks/immutability': 'off',

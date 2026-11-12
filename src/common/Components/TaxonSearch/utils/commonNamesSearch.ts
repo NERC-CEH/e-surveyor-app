@@ -1,15 +1,12 @@
 import speciesNames from 'common/data/commonNames/index.json';
+import type { Species } from './searchHelpers';
 
 const MAX_RESULTS = 200;
 
-export default (normSearchPhrase: any, results: any) => {
-  const languageSpeciesNames = speciesNames;
-  if (!languageSpeciesNames) {
-    return results;
-  }
+export default (normSearchPhrase: string, results: Species[]) => {
+  const commonNames: Species[] = [];
 
-  let commonNames: any = [];
-  languageSpeciesNames.forEach(
+  speciesNames.forEach(
     ({
       warehouseId,
       scientificName,
@@ -19,8 +16,10 @@ export default (normSearchPhrase: any, results: any) => {
       difficulty,
       frequency,
     }) => {
-      const matches = commonName.match(new RegExp(normSearchPhrase, 'i'));
-      if (matches && results.length + commonNames.length <= MAX_RESULTS) {
+      if (
+        commonName.match(new RegExp(normSearchPhrase, 'i')) &&
+        results.length + commonNames.length <= MAX_RESULTS
+      ) {
         commonNames.push({
           foundInName: 'commonName',
           warehouseId,
@@ -35,13 +34,11 @@ export default (normSearchPhrase: any, results: any) => {
     }
   );
 
-  const alphabetically = (sp1: any, sp2: any) =>
-    sp1.commonName.localeCompare(sp2.commonName);
-
-  const byCommonNameLength = (sp1: any, sp2: any) =>
-    sp1.commonName.split(' ').length - sp2.commonName.split(' ').length;
-
-  commonNames = commonNames.sort(alphabetically).sort(byCommonNameLength);
+  commonNames.sort(
+    (a, b) =>
+      a.commonName!.split(' ').length - b.commonName!.split(' ').length ||
+      a.commonName!.localeCompare(b.commonName!)
+  );
 
   results.push(...commonNames);
   return results;

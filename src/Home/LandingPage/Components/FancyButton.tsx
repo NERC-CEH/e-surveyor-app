@@ -8,7 +8,7 @@ import { NavContext } from '@ionic/react';
 type Props = {
   label: string;
   path?: string;
-  onClick?: any;
+  onClick?: () => void;
   description?: string;
   icon: string;
 } & JSX.IonButton;
@@ -21,7 +21,7 @@ const FancyButton = ({
   onClick,
   ...otherProps
 }: Props) => {
-  const { pathname } = useLocation<any>();
+  const { pathname } = useLocation();
 
   const ref = useRef<HTMLDivElement>(null);
   const [fullyVisible, setFullyVisible] = useState(true);

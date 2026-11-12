@@ -12,7 +12,10 @@ type Props = {
 const NaturalEnemies = ({ crops, group }: Props) => {
   const [showModal, setShowModal] = useState('');
 
-  const groupItems = (agg: any, item: EnemyInteraction) => {
+  const groupItems = (
+    agg: Record<string, string[]>,
+    item: EnemyInteraction
+  ) => {
     if (!agg[item.cropCommonName]) {
       agg[item.cropCommonName] = [item.beneficialInsectCommonName];
       return agg;
@@ -23,9 +26,7 @@ const NaturalEnemies = ({ crops, group }: Props) => {
 
   const bySelectedGroup = (crop: EnemyInteraction) => crop.cropGroup === group;
 
-  const groups: Record<string, string[]> = crops
-    .filter(bySelectedGroup)
-    .reduce(groupItems, {});
+  const groups = crops.filter(bySelectedGroup).reduce(groupItems, {});
 
   const groupsWithUniqueSpeciesCount: [string, number][] = Object.entries(
     groups

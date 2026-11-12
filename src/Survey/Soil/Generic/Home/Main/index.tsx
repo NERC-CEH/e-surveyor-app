@@ -60,8 +60,9 @@ const MainSoilHome = ({ sample, onSampleDelete, onSampleAdd }: Props) => {
           <MenuDateAttr
             label="Date"
             value={sample.data.date}
-            // eslint-disable-next-line no-return-assign
-            onChange={(val: any) => (sample.data.date = val)}
+            onChange={value => {
+              sample.data.date = value;
+            }}
           />
           <MenuAttrItem
             routerLink={`${url}/location`}

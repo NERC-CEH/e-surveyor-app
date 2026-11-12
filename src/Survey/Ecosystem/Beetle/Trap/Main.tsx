@@ -11,6 +11,7 @@ import { Block, Button, Main, MenuAttrItem } from '@flumens';
 import { IonIcon, NavContext } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import beetleIcon from 'common/images/beetle.svg';
+import Occurrence from 'models/occurrence';
 import Sample from 'models/sample';
 import SinglePhotoPicker from 'Components/PhotoPickers/SinglePhotoPicker';
 import GridRefValue from 'Survey/common/Components/GridRefValue';
@@ -34,7 +35,7 @@ const TrapMain = ({ subSample, onAddNewSpecies, isDisabled }: Props) => {
 
   const recordAttrs = { isDisabled, record: subSample.data };
 
-  const navigateToOccurrence = (model: any) => {
+  const navigateToOccurrence = (model: Sample | Occurrence) => {
     if (isDisabled) return;
     navigate(`${url}/occurrence/${model.cid}`);
   };

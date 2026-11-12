@@ -13,7 +13,7 @@ import {
 import { useAlert, useContextMenu } from 'common/flumens';
 import Sample from 'models/sample';
 
-const useDeleteAlert = (onDelete: any) => {
+const useDeleteAlert = (onDelete: () => void) => {
   const alert = useAlert();
 
   return () =>
@@ -28,7 +28,7 @@ const useDeleteAlert = (onDelete: any) => {
     });
 };
 
-const useMenu = (deleteSurvey: any) => {
+const useMenu = (deleteSurvey: () => void) => {
   const [present] = useIonActionSheet();
 
   const showMenu = () => {
@@ -46,7 +46,10 @@ const useMenu = (deleteSurvey: any) => {
   return showMenu;
 };
 
-type Props = { sample: Sample; onTrapDelete: any };
+type Props = {
+  sample: Sample;
+  onTrapDelete: (sample: Sample) => void;
+};
 
 const Trap = ({ sample: trapSample, onTrapDelete }: Props) => {
   const match = useRouteMatch();

@@ -1,12 +1,13 @@
 import { observer } from 'mobx-react';
 import { cropOutline, trashBinOutline } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
-import { Button, Occurrence, usePhotoDeletePrompt } from 'common/flumens';
+import { Button, usePhotoDeletePrompt } from 'common/flumens';
 import Media from 'models/image';
+import Occurrence from 'models/occurrence';
 
 type Props = {
-  onCrop: any;
-  onDelete: any;
+  onCrop: (image: Media) => void;
+  onDelete: (image: Media) => void | Promise<void>;
   image: Media;
 };
 

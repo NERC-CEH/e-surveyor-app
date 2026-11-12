@@ -17,9 +17,17 @@ import config from 'common/config';
 import flowerIcon from 'common/images/flowerIcon.svg';
 import seedMixIcon from 'common/images/seeds.svg';
 import transectIcon from 'common/images/transectIconBlack.svg';
-import { Data } from 'common/models/app';
 
-function useDatabaseExportDialog(exportFn: any) {
+type Action = () => void | Promise<void>;
+export type BooleanSetting =
+  | 'sendAnalytics'
+  | 'use10stepsForCommonStandard'
+  | 'useAutoIDWhenBackOnline'
+  | 'useWiFiDataConnection'
+  | 'useTraining'
+  | 'useExperiments';
+
+function useDatabaseExportDialog(exportFn: Action) {
   const alert = useAlert();
 
   const showDatabaseExportDialog = () => {
@@ -49,7 +57,7 @@ function useDatabaseExportDialog(exportFn: any) {
 
   return showDatabaseExportDialog;
 }
-function useUserDeleteDialog(deleteUser: any) {
+function useUserDeleteDialog(deleteUser: Action) {
   const alert = useAlert();
 
   const showUserDeleteDialog = () => {
@@ -64,9 +72,9 @@ function useUserDeleteDialog(deleteUser: any) {
             skipTranslation
           >
             This will remove your account on the{' '}
-            <b>{{ url: config.backend.url } as any}</b> website. You will lose
-            access to any records that you have previously submitted using the
-            app or website.
+            <b>{{ url: config.backend.url } as unknown as string}</b> website.
+            You will lose access to any records that you have previously
+            submitted using the app or website.
           </InfoMessage>
         </>
       ),
@@ -87,7 +95,7 @@ function useUserDeleteDialog(deleteUser: any) {
   return showUserDeleteDialog;
 }
 
-const useResetDialog = (resetApp: any) => {
+const useResetDialog = (resetApp: Action) => {
   const alert = useAlert();
 
   return () =>
@@ -114,8 +122,8 @@ const useResetDialog = (resetApp: any) => {
 };
 
 type Props = {
-  resetApp: any;
-  onToggle: (prop: keyof Data, checked: boolean) => void;
+  resetApp: Action;
+  onToggle: (prop: BooleanSetting, checked: boolean) => void;
   sendAnalytics: boolean;
   use10stepsForCommonStandard: boolean;
   useAutoIDWhenBackOnline: boolean;
@@ -123,9 +131,9 @@ type Props = {
   useTraining: boolean;
   useExperiments: boolean;
   isLoggedIn: boolean;
-  deleteUser: any;
-  exportDatabase: any;
-  importDatabase: any;
+  deleteUser: Action;
+  exportDatabase: Action;
+  importDatabase: Action;
 };
 
 const Menu = ({

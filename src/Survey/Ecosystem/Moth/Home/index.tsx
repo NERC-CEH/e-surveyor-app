@@ -61,7 +61,7 @@ const HomeController = () => {
 
     try {
       await occ.identify();
-    } catch (error: any) {
+    } catch (error) {
       toast.error(error);
     }
   };
@@ -73,11 +73,7 @@ const HomeController = () => {
       );
       if (!images.length) return [];
 
-      const getImageModel = (image: any) => Media.getImageModel(image);
-
-      const imageModels = images.map(getImageModel);
-
-      return Promise.all(imageModels);
+      return Promise.all(images.map(Media.getImageModel));
     }
 
     const images = await getImage();
@@ -97,7 +93,7 @@ const HomeController = () => {
   const isInvalid = sample.validateRemote();
 
   const finishButton = sample.isSynchronising ? null : (
-    <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
+    <HeaderButton onClick={onFinish} isInvalid={!!isInvalid}>
       {sample.metadata.saved ? 'Report' : 'Finish'}
     </HeaderButton>
   );

@@ -40,7 +40,7 @@ const OccurrenceMain = ({ occurrence, isDisabled, onDelete }: Props) => {
                   </div>
                 </div>
 
-                <Doughnut probability={species?.probability} />
+                <Doughnut probability={species?.probability || 0} />
               </div>
             </IonItem>
 

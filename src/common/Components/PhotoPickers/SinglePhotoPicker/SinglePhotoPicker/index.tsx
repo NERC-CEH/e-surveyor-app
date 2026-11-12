@@ -1,3 +1,4 @@
+import type { ElementType, MouseEventHandler } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { addOutline, cameraOutline, closeOutline } from 'ionicons/icons';
@@ -10,10 +11,20 @@ import {
   IonLabel,
   useIonActionSheet,
 } from '@ionic/react';
+import Media from 'models/image';
+import Occurrence from 'models/occurrence';
+import Sample from 'models/sample';
 import './styles.scss';
 
+export type ImageProps = {
+  media: Media;
+  isDisabled?: boolean;
+  onDelete: () => void;
+  onClick?: MouseEventHandler<HTMLImageElement>;
+};
+
 const ImageDefault = observer(
-  ({ media, isDisabled, onDelete, onClick }: any) => {
+  ({ media, isDisabled, onDelete, onClick }: ImageProps) => {
     const mediaSrc = media.getURL();
 
     return (
@@ -34,11 +45,11 @@ type Props = {
   /**
    * Sample or Occurrence model.
    */
-  model: any;
+  model: Sample | Occurrence;
   /**
    * Function called when the new photo button is pressed.
    */
-  onAddNew?: any;
+  onAddNew: (useCamera: boolean) => void | Promise<void>;
   /**
    * Disable any editing.
    */
@@ -58,14 +69,14 @@ type Props = {
   /**
    * Image component class.
    */
-  Image?: any;
+  Image?: ElementType<ImageProps>;
 };
 
 export function usePromptImageSource() {
   const { t } = useTranslation();
   const [presentActionSheet] = useIonActionSheet();
 
-  const promptImageSource = (resolve: any) => {
+  const promptImageSource = (resolve: (value: boolean | null) => void) => {
     presentActionSheet({
       buttons: [
         { text: t('Gallery'), handler: () => resolve(false) },
@@ -85,7 +96,7 @@ function useDeletePrompt() {
   const alert = useAlert();
 
   return () =>
-    new Promise(resolve => {
+    new Promise<boolean>(resolve => {
       alert({
         header: 'Delete',
         message: (
@@ -122,7 +133,8 @@ const SinglePhotoPicker = ({
   Image = ImageDefault,
   caption,
 }: Props) => {
-  const byCaption = (m: any) => (caption ? m.data.caption === caption : true);
+  const byCaption = (media: Media) =>
+    caption ? media.data.caption === caption : true;
   const [photo] = model.media.filter(byCaption);
   const promptToDelete = useDeletePrompt();
   const promptImageSource = usePromptImageSource();
@@ -137,7 +149,7 @@ const SinglePhotoPicker = ({
   const getPhoto = () => {
     if (!photo) return null;
 
-    // const showGalleryWrap = () => setShowGallery(index as any);
+    // const showGalleryWrap = () => setShowGallery(index);
 
     return (
       <Image

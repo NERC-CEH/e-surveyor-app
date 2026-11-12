@@ -21,16 +21,6 @@ const newnessResultSchema = z.object({
 
 export type NewnessResult = z.infer<typeof newnessResultSchema>;
 
-/* eslint-disable @typescript-eslint/naming-convention */
-// raw API response uses snake_case
-type RawNewnessResult = {
-  external_key: string;
-  is_new_for_website: boolean;
-  is_new_for_year: boolean;
-  is_new_for_grid: boolean;
-};
-/* eslint-enable @typescript-eslint/naming-convention */
-
 type Params = {
   externalKeys: string[];
   lat: number;
@@ -62,19 +52,27 @@ const fetchNewness = async ({
   /* eslint-enable @typescript-eslint/naming-convention */
 
   try {
-    const { data } = await axios<RawNewnessResult[]>({
+    const { data } = await axios<unknown>({
       url: `${config.backend.indicia.url}/index.php/services/rest/occurrences/check-newness`,
       method: 'get',
       params,
       headers: { Authorization: `Bearer ${await userModel.getAccessToken()}` },
     });
 
-    const camelCaseData = data.map(getCamelCaseObj) as NewnessResult[];
-    camelCaseData.forEach(result => newnessResultSchema.parse(result));
-
-    return camelCaseData;
-  } catch (error: any) {
-    if (isAxiosNetworkError(error) || 'issues' in error) {
+    const rawData = z
+      .array(
+        z
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          .object({ external_key: z.string() })
+          .passthrough()
+      )
+      .parse(data);
+    return z.array(newnessResultSchema).parse(rawData.map(getCamelCaseObj));
+  } catch (error) {
+    if (
+      (axios.isAxiosError(error) && isAxiosNetworkError(error)) ||
+      error instanceof z.ZodError
+    ) {
       throw new HandledError('Network error during newness check.');
     }
 

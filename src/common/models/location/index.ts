@@ -1,5 +1,5 @@
 import { IObservableArray, observable, toJS } from 'mobx';
-import axios from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 import {
   LocationModel as IndiciaLocation,
   LocationOptions,
@@ -17,17 +17,15 @@ import { locationsStore } from '../store';
 import userModel from '../user';
 import { predictUkhabHabitats as predictUKHabHabitats } from './services/habitat';
 
-export { locationDtoSchema as dtoSchema, LocationType } from '@flumens';
+export { locationDtoSchema as dtoSchema } from '@flumens';
 
-type Data = LocationData;
-type Metadata = LocationMetadata & {
+export type Data = LocationData;
+export type Metadata = LocationMetadata & {
   habitatSuggestions?: HabitatSuggestion[];
 };
 
-const getUKHabDefinition = (code: string): string | undefined => {
-  const entry = (ukhabData as Record<string, any>)[code];
-  return entry?.definition;
-};
+const getUKHabDefinition = (code: string): string | undefined =>
+  (ukhabData as Record<string, { definition?: string }>)[code]?.definition;
 
 export type HabitatSuggestion = {
   name: string;
@@ -36,13 +34,11 @@ export type HabitatSuggestion = {
   definition?: string;
 };
 
-type Options<T, R> = { skipStore?: boolean } & LocationOptions<T, R>;
+type Options = { skipStore?: boolean } & LocationOptions<Data, Metadata>;
 
-export default class Location<
-  T extends LocationData = Data,
-  R extends LocationMetadata = Metadata,
-> extends IndiciaLocation<T, R> {
-  declare media: IObservableArray<Media>;
+export default class Location extends IndiciaLocation<Data, Metadata> {
+  declare media: IndiciaLocation<Data, Metadata>['media'] &
+    IObservableArray<Media>;
 
   identification = observable({ identifying: false });
 
@@ -55,11 +51,11 @@ export default class Location<
     accuracyLimit?: number
   ) => Promise<void>;
 
-  stopGPS: any;
+  declare stopGPS: () => void;
 
-  isGPSRunning: any;
+  declare isGPSRunning: () => boolean;
 
-  constructor({ skipStore, ...options }: Options<T, R> = {}) {
+  constructor({ skipStore, ...options }: Options = {}) {
     super({
       ...options,
       store: skipStore ? undefined : locationsStore,
@@ -162,12 +158,14 @@ export default class Location<
 
       /* eslint-disable @typescript-eslint/naming-convention */
 
-      const { habitatSuggestions } = this.metadata as any;
+      const { habitatSuggestions = [] } = this.metadata;
       const suggestions = habitatSuggestions.map(
         (suggestion: HabitatSuggestion) => ({
           values: {
             location_attribute_id: HABITAT_ID,
-            termlists_term_id: (warehouseIDs as any)[suggestion.code],
+            termlists_term_id: (warehouseIDs as Record<string, string>)[
+              suggestion.code
+            ],
             term_given: suggestion.code,
             probability_given: suggestion.confidence,
           },
@@ -186,7 +184,7 @@ export default class Location<
       };
       /* eslint-enable @typescript-eslint/naming-convention */
 
-      const options: any = {
+      const options: AxiosRequestConfig = {
         url,
         method: 'post',
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -200,7 +198,7 @@ export default class Location<
 
       console.log('Location classifier uploading done');
       return this;
-    } catch (e: any) {
+    } catch (e) {
       this.remote.synchronising = false;
 
       // throw e; // silently fail for now, we don't want to block the user from continuing

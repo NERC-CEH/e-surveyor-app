@@ -44,7 +44,7 @@ const Controller = () => {
 
   const { isDisabled } = sample;
 
-  const origContext: any = useContext(TailwindContext as any);
+  const origContext = useContext(TailwindContext);
   const tailwindContext = useMemo(
     () => ({ ...origContext, isDisabled }),
     [origContext, isDisabled]

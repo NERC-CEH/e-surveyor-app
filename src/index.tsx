@@ -7,6 +7,8 @@ import { App as AppPlugin } from '@capacitor/app';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { sentryOptions } from '@flumens';
+import { addNamespace as ionic } from '@flumens/ionic/locales';
+import { addNamespace as tailwind } from '@flumens/tailwind/locales';
 import { loadingController } from '@ionic/core';
 import { setupIonicReact, isPlatform } from '@ionic/react';
 import { init } from '@sentry/browser';
@@ -19,7 +21,10 @@ import { db } from 'models/store';
 import userModel from 'models/user';
 import App from './App';
 
-i18n.use(initReactI18next).init({ lng: 'en' });
+i18n.use(initReactI18next).init({
+  lng: 'en',
+  resources: ionic(tailwind({ en: {} })),
+});
 
 console.log('🚩 App starting.');
 

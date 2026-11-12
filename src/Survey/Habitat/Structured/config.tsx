@@ -7,11 +7,12 @@ import {
   dateFormatISO,
   NumberInputConf,
   TextInputConf,
+  type SampleSubmission,
 } from 'common/flumens';
 import squareIcon from 'common/images/square.svg';
 import transectIcon from 'common/images/transect.svg';
 import appModel from 'models/app';
-import Occurrence from 'models/occurrence';
+import Occurrence, { type Taxon } from 'models/occurrence';
 import Sample from 'models/sample';
 import {
   locationAttr,
@@ -19,7 +20,7 @@ import {
   Survey,
 } from 'Survey/common/config';
 
-const getHabitats = (name: any) => ({ value: name, id: name });
+const getHabitats = (name: string) => ({ value: name, id: name });
 const agriEnvironmentHabitats = schemeHabitats.AES.sort().map(getHabitats);
 const commonStandardsHabitats = schemeHabitats.CSM.sort().map(getHabitats);
 
@@ -219,7 +220,7 @@ const survey = {
         taxon: {
           remote: {
             id: 'taxa_taxon_list_id',
-            values(taxon: any) {
+            values(taxon: Taxon) {
               return taxon.warehouseId;
             },
           },
@@ -234,7 +235,7 @@ const survey = {
         return occ;
       },
 
-      modifySubmission(submission: any, occ: Occurrence) {
+      modifySubmission(submission: SampleSubmission, occ: Occurrence) {
         // for non-UK species
         if (!submission.values.taxa_taxon_list_id) return null;
 
@@ -246,7 +247,7 @@ const survey = {
       return new Sample({ data: { surveyId: SURVEY_ID } });
     },
 
-    verify: (data: any, sample: Sample) =>
+    verify: (data: Record<string, unknown>, sample: Sample) =>
       z
         .object({
           photos: z.number().min(1, 'Please add a quadrat photo.'),
@@ -269,7 +270,7 @@ const survey = {
     return sample;
   },
 
-  verify(data: any, sample: Sample) {
+  verify(data: Record<string, unknown>, sample: Sample) {
     try {
       z.boolean()
         .refine(val => !val, { message: 'Is still identifying' })
@@ -283,7 +284,8 @@ const survey = {
 
       getDetailsValidationSchema().parse(data);
     } catch (attrError) {
-      return attrError;
+      if (attrError instanceof z.ZodError) return attrError;
+      throw attrError;
     }
 
     return null;

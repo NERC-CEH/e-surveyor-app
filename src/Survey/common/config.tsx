@@ -6,6 +6,8 @@ import {
   MenuAttrItemFromModelMenuProps,
   PageProps,
   RemoteConfig,
+  type Location,
+  type SampleSubmission,
 } from '@flumens';
 import {
   ChoiceInputConf,
@@ -22,17 +24,13 @@ import Sample from 'models/sample';
 
 const { possibleThreshold } = config;
 
-const seedMixGroups = seedmixData
-  .reduce(
-    (a: any, m: any) => (a.includes(m.mixGroup) ? a : [...a, m.mixGroup]),
-    []
-  )
-  .map((seedMixGroup: any) => ({ dataName: seedMixGroup }))
-  .sort((v1: any, v2: any) => v1.dataName.localeCompare(v2.dataName));
+const seedMixGroups = [...new Set(seedmixData.map(({ mixGroup }) => mixGroup))]
+  .map(dataName => ({ dataName }))
+  .sort((a, b) => a.dataName.localeCompare(b.dataName));
 
 export const CUSTOM_SEEDMIX_GROUP_VALUE = 'Custom';
 
-const getSeedMixes = (seedmixgroup: any) => {
+const getSeedMixes = (seedmixgroup: string) => {
   if (seedmixgroup === CUSTOM_SEEDMIX_GROUP_VALUE) {
     const getSeedmixEntry = (seedmix: SeedMix) => ({
       dataName: seedmix.id,
@@ -42,13 +40,11 @@ const getSeedMixes = (seedmixgroup: any) => {
     return appModel.data.seedmixes.map(getSeedmixEntry);
   }
 
-  return seedmixData
-    .filter((seedmix: any) => seedmix.mixGroup === seedmixgroup)
-    .reduce(
-      (a: any, m: any) => (a.includes(m.mixName) ? a : [...a, m.mixName]),
-      []
-    )
-    .map((seedMixGroup: any) => ({ dataName: seedMixGroup }));
+  const names = seedmixData
+    .filter(seedmix => seedmix.mixGroup === seedmixgroup)
+    .map(({ mixName }) => mixName);
+
+  return [...new Set(names)].map(dataName => ({ dataName }));
 };
 
 // export const seedmixGroupAttr = {
@@ -62,7 +58,7 @@ const getSeedMixes = (seedmixgroup: any) => {
 //   },
 // };
 
-export const SEEDED_YES_VALUE = '22177';
+const SEEDED_YES_VALUE = '22177';
 
 export const seededAttr = {
   id: 'smpAttr:1868',
@@ -93,7 +89,7 @@ export const seedmixGroupAttr = {
 
 export const SEEDMIX_ATTR_ID = 'smpAttr:1530';
 
-export const seedmixAttr = (data: any) =>
+export const seedmixAttr = (data: Sample['data']) =>
   ({
     id: SEEDMIX_ATTR_ID,
     type: 'choiceInput',
@@ -102,11 +98,11 @@ export const seedmixAttr = (data: any) =>
     prefix: <SeedsIcon className="size-6" />,
     choices: [
       { dataName: '', title: 'Not recorded' },
-      ...getSeedMixes(data[seedmixGroupAttr.id]),
+      ...getSeedMixes(String(data[seedmixGroupAttr.id] || '')),
     ],
     visibility: [
       { target: seedmixGroupAttr.id, op: 'ne', value: '' },
-      { target: seedmixGroupAttr.id, op: 'ne', value: undefined as any },
+      { target: seedmixGroupAttr.id, op: 'ne', value: undefined as never },
     ],
   }) as const satisfies ChoiceInputConf;
 
@@ -122,7 +118,7 @@ export const yearSownAttr = {
   type: 'choiceInput',
   title: 'Year sown',
   appearance: 'button',
-  prefix: (<IonIcon src={calendarOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={calendarOutline} className="size-6" />,
   choices: last8Years,
   visibility: [{ target: seededAttr.id, op: 'eq', value: SEEDED_YES_VALUE }],
 } as const;
@@ -140,28 +136,17 @@ export const dateAttr = {
     },
   },
   remote: { values: (date: string) => dateFormat.format(new Date(date)) },
-};
+} as const;
 
 export const locationAttr = {
   remote: {
     id: 'entered_sref',
-    values(location: any) {
-      return `${parseFloat(location.latitude).toFixed(7)}, ${parseFloat(
-        location.longitude
-      ).toFixed(7)}`;
+    values(location: Location) {
+      return `${location.latitude.toFixed(7)}, ${location.longitude.toFixed(
+        7
+      )}`;
     },
   },
-};
-
-export const nameAttr = {
-  pageProps: {
-    headerProps: { title: 'Survey Name' },
-    attrProps: {
-      input: 'textarea',
-      info: 'You can change your survey name here.',
-    },
-  },
-  remote: { id: 1531 },
 };
 
 export const occurrenceAbundanceAttr = {
@@ -169,7 +154,7 @@ export const occurrenceAbundanceAttr = {
   type: 'numberInput',
   title: 'Abundance',
   appearance: 'counter',
-  prefix: (<IonIcon src={clipboardOutline} className="size-6" />) as any,
+  prefix: <IonIcon src={clipboardOutline} className="size-6" />,
   step: 1,
   validation: { min: 1 },
 } as const satisfies NumberInputConf;
@@ -183,8 +168,7 @@ export const locationSchema = z
     { error: 'Location is missing.' }
   )
   .refine(
-    (val: any) =>
-      Number.isFinite(val.latitude) && Number.isFinite(val.longitude),
+    val => Number.isFinite(val.latitude) && Number.isFinite(val.longitude),
     'Location is missing.'
   );
 
@@ -216,21 +200,22 @@ export enum MachineInvolvement {
 }
 
 export function attachClassifierResults(
-  submission: any,
+  submission: SampleSubmission,
   occ: Occurrence,
   classifierID?: string | number
 ) {
   const taxon = occ.getSpecies();
   const classifierVersion = taxon?.version || '';
 
-  const getMediaPath = (media: any) => media.values.queued;
+  const getMediaPath = (media: SampleSubmission['media'][number]) =>
+    media.values.queued;
   const mediaPaths = submission.media.map(getMediaPath);
 
   const getSuggestion = (
     { scientificName, warehouseId, ...other }: Suggestion,
     index: number
   ) => {
-    const probability = other.probability || (other as any).score; // score for backward compatibility
+    const probability = other.probability || other.score || 0; // score for backward compatibility
     const topSpecies = index === 0;
     const classifierChosen =
       topSpecies && probability >= possibleThreshold ? 't' : 'f';
@@ -287,7 +272,7 @@ export function attachClassifierResults(
 
 type MenuProps = MenuAttrItemFromModelMenuProps;
 
-export type AttrConfig = {
+type AttrConfig = {
   menuProps?: MenuProps;
   pageProps?: Omit<PageProps, 'attr' | 'model'>;
   block?: BlockOrFn;
@@ -302,11 +287,14 @@ type OccurrenceCreateOptions = {
 };
 
 type OccurrenceConfig = {
-  render?: any[] | ((model: Occurrence) => any[]);
+  render?: BlockT[] | ((model: Occurrence) => BlockT[]);
   attrs: Attrs;
   create?: (options: OccurrenceCreateOptions) => Occurrence;
-  verify?: (data: any) => any;
-  modifySubmission?: (submission: any, model: any) => any;
+  verify?: (data: Record<string, unknown>) => z.ZodError | null | undefined;
+  modifySubmission?: (
+    submission: SampleSubmission,
+    model: Occurrence
+  ) => SampleSubmission | null;
   /**
    * Set to true if multi-species surveys shouldn't auto-increment it to 1 when adding to lists.
    */
@@ -324,18 +312,24 @@ type SampleCreateOptions = {
 };
 
 export type SampleConfig = {
-  render?: any[] | ((model: Sample) => any[]);
+  render?: BlockT[] | ((model: Sample) => BlockT[]);
   attrs?: Attrs;
   create?: (options: SampleCreateOptions) => Sample;
-  verify?: (data: any, model: any) => any;
-  modifySubmission?: (submission: any, model: any) => any;
+  verify?: (
+    data: Record<string, unknown>,
+    model: Sample
+  ) => z.ZodError | null | undefined;
+  modifySubmission?: (
+    submission: SampleSubmission,
+    model: Sample
+  ) => SampleSubmission | null;
   smp?: Omit<SampleConfig, 'smp'>;
   occ?: OccurrenceConfig;
 };
 
-export type BlockOrFn = BlockT | ((record?: any) => BlockT);
+export type BlockOrFn = BlockT | ((record?: never) => BlockT);
 
-type AttrType = Record<string, { block: BlockT | ((record?: any) => BlockT) }>;
+type AttrType = Record<string, { block: BlockOrFn }>;
 export const blockToAttr = (blockOrFn: BlockOrFn): AttrType =>
   typeof blockOrFn === 'function'
     ? { [blockOrFn().id]: { block: blockOrFn } }
@@ -358,7 +352,7 @@ export type Survey = {
   /**
    * Base URL path for this survey's routes.
    */
-  baseURL?: string;
+  baseURL: string;
 
   /**
    * Remote website survey edit page path.
@@ -369,4 +363,6 @@ export type Survey = {
    * The icon of the survey.
    */
   icon?: string;
-} & SampleConfig;
+} & SampleConfig & {
+    create: NonNullable<SampleConfig['create']>;
+  };

@@ -5,11 +5,10 @@ import { NavContext } from '@ionic/react';
 import HabitatIdentification from 'common/Components/HabitatIdentification';
 import { Habitat } from 'common/data/ukhab';
 import { Button, Header, Main, Page } from 'common/flumens';
-import Location from 'models/location';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import HeaderButton from 'Survey/common/Components/HeaderButton';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
-import { Data, habitatAttr } from './config';
+import { habitatAttr } from './config';
 import useLocation from './useLocation';
 
 const LocationHabitat = () => {
@@ -20,7 +19,7 @@ const LocationHabitat = () => {
 
   const { isScrolled, ...mainProps } = useHeaderScroll();
 
-  const { location } = useLocation<Location<Data>>();
+  const { location } = useLocation();
   if (!location) return null;
 
   const isValid = !!location.data[habitatAttr.id] && !!location.media.length;

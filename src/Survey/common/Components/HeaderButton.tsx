@@ -1,10 +1,11 @@
+import type { ReactNode } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
 import { Button } from '@flumens';
 
 type Props = {
-  children: any;
-  onClick: any;
+  children: ReactNode;
+  onClick: () => void;
   isInvalid?: boolean;
   className?: string;
   color?: 'primary' | 'secondary';

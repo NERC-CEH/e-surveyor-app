@@ -43,10 +43,8 @@ const routes = [
     `${baseURL}/:smpId/sample/:subSmpId/vsa/:attr`,
     withSample(AttrPageFromRoute),
   ],
-] as any[];
+] as const;
 
-const mappedRoutes = routes.map(([route, component]) => (
+export default routes.map(([route, component]) => (
   <Route key={route} exact path={route} component={component} />
 ));
-
-export default mappedRoutes;

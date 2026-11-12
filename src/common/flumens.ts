@@ -1,6 +1,3 @@
-import { BlockConf } from '@flumens/tailwind/dist/Survey';
-import type { inferBlockType } from '@flumens/tailwind/dist/components/types';
-
 // MODELS
 export {
   default as Model,
@@ -12,6 +9,7 @@ export {
   type Data as SampleData,
   type Options as SampleOptions,
   type Metadata as SampleMetadata,
+  type Submission as SampleSubmission,
   type RemoteConfig,
 } from '@flumens/models/dist/Indicia/Sample';
 export {
@@ -25,15 +23,18 @@ export {
 export {
   default as Media,
   type Data as MediaAttrs,
+  type Options as MediaOptions,
 } from '@flumens/models/dist/Indicia/Media';
 export { validateRemoteModel } from '@flumens/models/dist/Indicia/helpers';
 export {
   default as Occurrence,
   type Data as OccurrenceAttrs,
+  type Options as OccurrenceOptions,
 } from '@flumens/models/dist/Indicia/Occurrence';
 export {
   default as DrupalUserModel,
   type Data as DrupalUserModelAttrs,
+  type Options as DrupalUserModelOptions,
 } from '@flumens/models/dist/Drupal/User';
 export { default as Collection } from '@flumens/models/dist/Collection';
 export { default as SampleCollection } from '@flumens/models/dist/Indicia/SampleCollection';
@@ -51,8 +52,6 @@ export * from '@flumens/utils/dist/location';
 
 // IONIC
 export { default as Page } from '@flumens/ionic/dist/components/Page';
-// export { default as RouteWithModels } from '@flumens/ionic/dist/components/RouteWithModels';
-export { default as RouteWithModels } from './RouteWithModels';
 export { default as Main } from '@flumens/ionic/dist/components/Main';
 export { default as Header } from '@flumens/ionic/dist/components/Header';
 export { default as Collapse } from '@flumens/ionic/dist/components/Collapse';
@@ -129,29 +128,11 @@ export {
 } from '@flumens/tailwind/dist/components/Block/Context';
 export { default as Block } from '@flumens/tailwind/dist/components/Block';
 export { default as useContextMenu } from '@flumens/tailwind/dist/hooks/useContextMenu';
-export * from '@flumens/tailwind/dist/components/Map/utils';
+export * from '@flumens/tailwind/dist/components/Map/helpers';
+export * from '@flumens/tailwind/dist/components/Map/hooks';
 export {
   type ChoiceInputConf,
   type TextInputConf,
   type NumberInputConf,
 } from '@flumens/tailwind/dist/Survey';
 export type { inferBlockType } from '@flumens/tailwind/dist/components/types';
-
-/**
- * utility type that transforms a record of block configurations
- * into a record of their corresponding value types
- *
- * @example
- * type Config = {
- *   'smpAttr:123': { block: NumberInputConf };
- *   'smpAttr:456': { block: TextInputConf };
- *   'other': { something: string }; // returns unknown
- * };
- * type Result = inferAttrConfigTypes<Config>;
- * // Result = { 'smpAttr:123': number; 'smpAttr:456': string; 'other': unknown }
- */
-export type inferAttrConfigTypes<T extends Record<string, unknown>> = {
-  -readonly [K in keyof T]: T[K] extends { block: infer B extends BlockConf }
-    ? inferBlockType<B>
-    : unknown;
-};

@@ -22,7 +22,7 @@ import Main from './Main';
 
 type URL = string;
 
-const showFirstSurveyTip = (alert: any) => {
+const showFirstSurveyTip = (alert: ReturnType<typeof useAlert>) => {
   alert({
     skipTranslation: true,
     header: 'Your first survey',
@@ -45,7 +45,7 @@ const showFirstSurveyTip = (alert: any) => {
   appModel.data.showFirstSurveyTip = false;
 };
 
-const showFirstPhotoTip = (alert: any) => {
+const showFirstPhotoTip = (alert: ReturnType<typeof useAlert>) => {
   if (!appModel.data.showFirstPhotoTip) return null;
 
   appModel.data.showFirstPhotoTip = false;
@@ -142,17 +142,23 @@ const HomeController = () => {
   const onFinish = async () => {
     const invalids = sample.validateRemote();
     if (invalids) {
-      const hasUnidentifiedOcc = ({ attributes }: any) =>
-        attributes.errors.includes('Plant has not been identified');
+      const hasUnidentified = (value: unknown): boolean => {
+        if (!value || typeof value !== 'object') return false;
 
-      const hasUnidentifiedSample = ({ models }: any) =>
-        Object.values(models).some(hasUnidentifiedOcc);
+        const validation = value as {
+          attributes?: { errors?: unknown };
+          models?: Record<string, unknown>;
+        };
+        if (
+          Array.isArray(validation.attributes?.errors) &&
+          validation.attributes.errors.includes('Plant has not been identified')
+        )
+          return true;
 
-      const hasUnidentified = Object.values(invalids.models).some(
-        hasUnidentifiedSample
-      );
+        return Object.values(validation.models || {}).some(hasUnidentified);
+      };
 
-      if (hasUnidentified) {
+      if (hasUnidentified(invalids)) {
         alert({
           header: "Some of photos you have taken haven't been identified",
           message:
@@ -186,7 +192,7 @@ const HomeController = () => {
   const finishButton = sample.isSynchronising ? null : (
     <HeaderButton
       onClick={sample.metadata.saved ? navToReport : onFinish}
-      isInvalid={isInvalid}
+      isInvalid={!!isInvalid}
     >
       {sample.metadata.saved ? 'Report' : 'Finish'}
     </HeaderButton>

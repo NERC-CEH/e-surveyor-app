@@ -1,8 +1,9 @@
-import { Model, ModelAttrs } from '@flumens';
+import { Model, ModelAttrs, type ModelOptions } from '@flumens';
 import { SeedmixSpecies } from 'common/data/seedmix';
 import { mainStore } from './store';
 
 export type SurveyDraftKeys = {
+  'draftId:habitat-location'?: string;
   'draftId:habitat-free'?: string;
   'draftId:habitat-structured'?: string;
   'draftId:beetle'?: string;
@@ -44,7 +45,6 @@ export type Data = {
    * Flag new samples for training.
    */
   useTraining: boolean;
-  transects?: any[];
   seedmixes: SeedMix[];
 } & ModelAttrs &
   SurveyDraftKeys;
@@ -72,8 +72,8 @@ const defaults: Data = {
 };
 
 export class AppModel extends Model<Data> {
-  constructor(options: any) {
-    super({ ...options, data: { ...defaults, ...options.attrs } });
+  constructor(options: ModelOptions<Data>) {
+    super({ ...options, data: { ...defaults, ...options.data } });
   }
 
   deleteSeedmix(seedmixId: string) {

@@ -80,7 +80,7 @@ const Home = () => {
   const isInvalid = sample.validateRemote();
 
   const finishButton = sample.isSynchronising ? null : (
-    <HeaderButton onClick={onFinish} isInvalid={isInvalid}>
+    <HeaderButton onClick={onFinish} isInvalid={!!isInvalid}>
       {sample.metadata.saved ? 'Report' : 'Finish'}
     </HeaderButton>
   );
