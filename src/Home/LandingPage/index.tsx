@@ -15,14 +15,18 @@ import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import { baseURL as ecosystemURL } from 'Survey/Ecosystem/router';
 import { baseURL as habitatURL } from 'Survey/Habitat/router';
 import { baseURL as soilURL } from 'Survey/Soil/router';
+import BeetleProfile from './Components/Beetle';
 import Card from './Components/Card';
 import FancyButton from './Components/FancyButton';
 import HabitatProfile from './Components/Habitat';
+import MothProfile from './Components/Moth';
 import SpeciesProfile from './Components/Species';
+import beetleID from './beetleID.png';
 import ecosystem from './ecosystem.jpg';
 import habitat from './habitat.jpg';
 import habitatID from './habitatID.png';
 import logo from './logo.svg';
+import mothID from './mothID.png';
 import plantID from './plantID.png';
 import soil from './soil.jpg';
 
@@ -32,6 +36,8 @@ const showTermsMessage = new Date() < TERMS_MESSAGE_EXPIRY;
 
 const LandingPage = () => {
   const [species, setSpecies] = useState<Occurrence>();
+  const [moth, setMoth] = useState<Occurrence>();
+  const [beetle, setBeetle] = useState<Occurrence>();
   const [habitatLocation, setHabitatLocation] = useState<Location>();
   const toast = useToast();
   const promptImageSource = usePromptImageSource();
@@ -42,27 +48,46 @@ const LandingPage = () => {
     setSpecies(undefined);
   };
 
+  const hideMothModal = () => {
+    moth?.media.slice().forEach(media => media.destroy());
+    setMoth(undefined);
+  };
+
+  const hideBeetleModal = () => {
+    beetle?.media.slice().forEach(media => media.destroy());
+    setBeetle(undefined);
+  };
+
   const hideHabitatModal = () => setHabitatLocation(undefined);
 
-  const identifyHabitat = async () => {
+  const canIdentify = () => {
     if (!userModel.isLoggedIn()) {
       context.navigate('/user/register');
-      return;
+      return false;
     }
 
     if (!device.isOnline) {
       toast.warn('Looks like you are offline!');
-      return;
+      return false;
     }
 
+    return true;
+  };
+
+  const pickIdentificationPhotos = async (multiple = false) => {
     const shouldUseCamera = await promptImageSource();
     const cancelled = shouldUseCamera === null;
-    if (cancelled) return;
+    if (cancelled) return [];
 
-    const photoURLs = await captureImage(
-      shouldUseCamera ? { camera: true } : { multiple: true }
-    );
+    if (multiple && !shouldUseCamera) return captureImage({ multiple: true });
 
+    return captureImage({ camera: shouldUseCamera });
+  };
+
+  const identifyHabitat = async () => {
+    if (!canIdentify()) return;
+
+    const photoURLs = await pickIdentificationPhotos(true);
     if (!photoURLs?.length) return;
 
     const location = new Location({ skipStore: true }); // create a non-persistent location to hold the photos and suggestions
@@ -80,21 +105,9 @@ const LandingPage = () => {
   };
 
   const identifyPhoto = async () => {
-    if (!userModel.isLoggedIn()) {
-      context.navigate('/user/register');
-      return;
-    }
+    if (!canIdentify()) return;
 
-    if (!device.isOnline) {
-      toast.warn('Looks like you are offline!');
-      return;
-    }
-
-    const shouldUseCamera = await promptImageSource();
-    const cancelled = shouldUseCamera === null;
-    if (cancelled) return;
-
-    const [image] = await captureImage({ camera: shouldUseCamera });
+    const [image] = await pickIdentificationPhotos();
     if (!image) return;
 
     const occurrence = new Occurrence({});
@@ -105,6 +118,44 @@ const LandingPage = () => {
 
     try {
       await occurrence.identify();
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
+    }
+  };
+
+  const identifyMoth = async () => {
+    if (!canIdentify()) return;
+
+    const [image] = await pickIdentificationPhotos();
+    if (!image) return;
+
+    const occurrence = new Occurrence({});
+    const media = await Media.getImageModel(image);
+
+    occurrence.media.push(media);
+    setMoth(occurrence);
+
+    try {
+      await occurrence.identify('moth');
+    } catch (error) {
+      toast.error(error, { position: 'bottom' });
+    }
+  };
+
+  const identifyBeetle = async () => {
+    if (!canIdentify()) return;
+
+    const [image] = await pickIdentificationPhotos();
+    if (!image) return;
+
+    const occurrence = new Occurrence({});
+    const media = await Media.getImageModel(image);
+
+    occurrence.media.push(media);
+    setBeetle(occurrence);
+
+    try {
+      await occurrence.identify('beetle');
     } catch (error) {
       toast.error(error, { position: 'bottom' });
     }
@@ -216,12 +267,26 @@ const LandingPage = () => {
                 onClick={identifyHabitat}
                 description="Get habitat suggestions"
               />
+              <FancyButton
+                icon={mothID}
+                label="Identify moth"
+                onClick={identifyMoth}
+                description="Identify a moth from a photo"
+              />
+              <FancyButton
+                icon={beetleID}
+                label="Identify beetle"
+                onClick={identifyBeetle}
+                description="Identify a beetle from a photo"
+              />
             </div>
           </div>
         </div>
       </Main>
 
       <SpeciesProfile occurrence={species} onClose={hideSpeciesModal} />
+      <MothProfile occurrence={moth} onClose={hideMothModal} />
+      <BeetleProfile occurrence={beetle} onClose={hideBeetleModal} />
       <HabitatProfile location={habitatLocation} onClose={hideHabitatModal} />
     </Page>
   );

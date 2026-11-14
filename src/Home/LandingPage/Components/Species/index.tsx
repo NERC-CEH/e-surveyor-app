@@ -1,25 +1,18 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react';
 import clsx from 'clsx';
-import { close } from 'ionicons/icons';
 import { Button, device, Main, useToast } from '@flumens';
 import {
   IonLabel,
   IonSegment,
-  IonButton,
   IonSegmentButton,
   IonModal,
-  IonIcon,
-  IonButtons,
-  IonHeader,
-  IonToolbar,
   type SegmentCustomEvent,
 } from '@ionic/react';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import Occurrence from 'models/occurrence';
 import ReportView from 'Components/ReportView';
 import SpeciesList from 'Components/SpeciesList';
-import './styles.scss';
 
 type Props = {
   occurrence?: Occurrence;
@@ -52,25 +45,24 @@ const SpeciesProfile = ({ occurrence, onClose }: Props) => {
     <IonModal
       isOpen={!!occurrence}
       backdropDismiss={false}
-      className="species-modal"
+      breakpoints={[0, 0.85, 1]}
+      initialBreakpoint={0.85}
+      onDidDismiss={onClose}
+      aria-label="Identify plant"
+      className="[&>.ion-page]:pt-2"
     >
-      <IonHeader>
-        <IonToolbar>
-          <IonSegment value={segment} onIonChange={onSegmentChange}>
-            <IonSegmentButton value="species">
-              <IonLabel>Species</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="report">
-              <IonLabel>Report</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
-          <IonButtons slot="end">
-            <IonButton onClick={onClose}>
-              <IonIcon slot="icon-only" icon={close} />
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
+      <IonSegment
+        value={segment}
+        onIonChange={onSegmentChange}
+        className="mx-auto mt-4 mb-2 w-[90%] shrink-0"
+      >
+        <IonSegmentButton value="species">
+          <IonLabel>Species</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="report">
+          <IonLabel>Report</IonLabel>
+        </IonSegmentButton>
+      </IonSegment>
 
       {segment === 'species' && !!occurrence && (
         <Main className="edit-species">

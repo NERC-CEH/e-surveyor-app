@@ -83,10 +83,13 @@ const FancyButton = ({
         )}
       </div>
 
-      <img
-        src={icon}
-        className="size-13 ml-2.5 rounded-xl shrink-0 border-primary-700/20 border"
-      />
+      <div className="size-13 ml-2.5 rounded-xl shrink-0 overflow-hidden border-primary-700/20 border">
+        <img
+          src={icon}
+          alt=""
+          className="size-full object-cover object-center"
+        />
+      </div>
     </div>
   );
 };

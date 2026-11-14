@@ -83,18 +83,29 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
   getSpecies = () => this.data.taxon;
 
-  async identify() {
+  async identify(group?: 'moth' | 'beetle' | 'plant') {
     if (!this.media.length)
       throw new Error('Occurrence media is missing for automatic ID.');
+
+    if (!group) {
+      const surveyId = this.parent?.data.surveyId;
+      if (surveyId === beetleSurveyConfig.id) {
+        group = 'beetle';
+      } else if (surveyId === mothSurveyConfig.id) {
+        group = 'moth';
+      } else {
+        group = 'plant';
+      }
+    }
 
     try {
       this.identification.identifying = true;
 
-      switch (this.parent?.data.surveyId) {
-        case beetleSurveyConfig.id:
+      switch (group) {
+        case 'beetle':
           await this.identifyBeetle();
           break;
-        case mothSurveyConfig.id:
+        case 'moth':
           await this.identifyMoth();
           break;
         default:
@@ -147,10 +158,7 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
 
     // check if same species already exists in the trap
     const trap = this.parent;
-    if (!trap) {
-      this.save();
-      return;
-    }
+    if (!trap) return; // Standalone identification has no parent record to save or merge into.
 
     const matchingSpecies = (occ: Occurrence) =>
       occ !== this && occ.data.taxon?.warehouseId === taxon.warehouseId;
@@ -285,6 +293,9 @@ export default class Occurrence extends OccurrenceOriginal<Data> {
       tvk: topSuggestion.tvk,
       suggestions,
     };
+
+    // Standalone identification has no parent record to save.
+    if (!this.isPersistent()) return;
 
     this.save();
   }

@@ -49,7 +49,10 @@ const EditSpeciesMain = ({
       taxon.machineInvolvement ===
         MachineInvolvement.HUMAN_ACCEPTED_LESS_PREFERRED;
 
-    const selectedSpeciesByUser = !taxon.images || setByUser;
+    const selectedSpeciesByUser =
+      setByUser ||
+      (!taxon.images &&
+        taxon.machineInvolvement !== MachineInvolvement.MACHINE);
 
     return (
       <SpeciesCard
@@ -101,7 +104,7 @@ const EditSpeciesMain = ({
     );
 
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-5">
+    <div className="mx-auto flex w-full max-w-xl flex-col gap-5">
       {getSelectedSpecies()}
 
       {getAIResults()}
