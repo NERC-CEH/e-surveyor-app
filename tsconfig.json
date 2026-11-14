@@ -25,5 +25,5 @@
       "Survey/*": ["./src/Survey/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "test/*.ts", "playwright.config.ts"]
 }

@@ -5,6 +5,9 @@ dist
 .env*
 *.patch
 coverage
+/playwright-report
+/test-results
+/blob-report
 .vscode
 .nowbuild
 .now
