@@ -179,7 +179,7 @@ const LandingPage = () => {
             <p className="mt-6 mb-3 max-w-xs text-lg leading-snug text-white">
               What is e-Surveyor? Read more about it{' '}
               <IonRouterLink
-                href="/info/about"
+                routerLink="/info/about"
                 className="text-white font-bold"
               >
                 here
