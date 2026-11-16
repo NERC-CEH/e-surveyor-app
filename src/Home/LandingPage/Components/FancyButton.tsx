@@ -1,8 +1,5 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import clsx from 'clsx';
+import { useContext, type ButtonHTMLAttributes } from 'react';
 import { Trans as T } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
-import { JSX } from '@ionic/core';
 import { NavContext } from '@ionic/react';
 
 type Props = {
@@ -11,7 +8,7 @@ type Props = {
   onClick?: () => void;
   description?: string;
   icon: string;
-} & JSX.IonButton;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>;
 
 const FancyButton = ({
   label,
@@ -21,35 +18,6 @@ const FancyButton = ({
   onClick,
   ...otherProps
 }: Props) => {
-  const { pathname } = useLocation();
-
-  const ref = useRef<HTMLDivElement>(null);
-  const [fullyVisible, setFullyVisible] = useState(true);
-  const [isAnimationActive, setIsAnimationActive] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    const isOnActivePage = pathname === '/home/home';
-
-    setTimeout(() => setIsAnimationActive(isOnActivePage), 100);
-  }, [pathname]);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    // threshold 1.0 fires only when the element is 100% visible
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => setFullyVisible(entry.intersectionRatio >= 1),
-      { threshold: 1.0 }
-    );
-
-    observerRef.current.observe(el);
-
-    // disconnect observer when component unmounts
-    return () => observerRef.current?.disconnect(); // eslint-disable-line consistent-return
-  }, []);
-
   const { navigate } = useContext(NavContext);
 
   const onClickWrap = () => {
@@ -61,36 +29,42 @@ const FancyButton = ({
   };
 
   return (
-    <div
-      className={clsx(
-        'flex justify-between items-center w-full p-2 pl-5 shadow-[0_20px_50px_rgba(0,0,0,0.35),0_5px_10px_rgba(0,0,0,0.35)] overflow-hidden rounded-xl bg-white',
-        isAnimationActive && 'transition-opacity duration-300',
-        !fullyVisible ? 'opacity-70' : 'opacity-100'
-      )}
-      color="light"
+    <button
+      type="button"
+      className="flex items-center gap-3 w-full p-3 text-left rounded-2xl border border-white/10 bg-white/15 text-white transition-colors hover:bg-white/10 active:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-300"
       onClick={onClickWrap}
       {...otherProps}
-      ref={ref}
     >
-      <div className="flex flex-col">
-        <div className="line-clamp-1 font-bold! text-primary-900">
-          <T>{label}</T>
-        </div>
-        {description && (
-          <span className="text-sm line-clamp-1">
-            <T>{description}</T>
-          </span>
-        )}
-      </div>
-
-      <div className="size-13 ml-2.5 rounded-xl shrink-0 overflow-hidden border-primary-700/20 border">
+      <div className="size-14 rounded-xl shrink-0 overflow-hidden bg-[#f4f3e9]">
         <img
           src={icon}
           alt=""
           className="size-full object-cover object-center"
         />
       </div>
-    </div>
+
+      <div className="flex flex-1 min-w-0 flex-col gap-1">
+        <span className="text-base font-semibold leading-tight">
+          <T>{label}</T>
+        </span>
+        {description && (
+          <span className="text-sm font-normal leading-snug text-neutral-300">
+            <T>{description}</T>
+          </span>
+        )}
+      </div>
+
+      <svg
+        className="size-4 shrink-0 text-white/40"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden="true"
+      >
+        <path d="m9 5 7 7-7 7" />
+      </svg>
+    </button>
   );
 };
 

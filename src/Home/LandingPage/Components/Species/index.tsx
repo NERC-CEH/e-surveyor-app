@@ -6,13 +6,13 @@ import {
   IonLabel,
   IonSegment,
   IonSegmentButton,
-  IonModal,
   type SegmentCustomEvent,
 } from '@ionic/react';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import Occurrence from 'models/occurrence';
 import ReportView from 'Components/ReportView';
 import SpeciesList from 'Components/SpeciesList';
+import IdentificationModal from '../IdentificationModal';
 
 type Props = {
   occurrence?: Occurrence;
@@ -42,14 +42,10 @@ const SpeciesProfile = ({ occurrence, onClose }: Props) => {
   };
 
   return (
-    <IonModal
+    <IdentificationModal
       isOpen={!!occurrence}
-      backdropDismiss={false}
-      breakpoints={[0, 0.85, 1]}
-      initialBreakpoint={0.85}
-      onDidDismiss={onClose}
-      aria-label="Identify plant"
-      className="[&>.ion-page]:pt-2"
+      onClose={onClose}
+      title="Identify plant"
     >
       <IonSegment
         value={segment}
@@ -93,7 +89,7 @@ const SpeciesProfile = ({ occurrence, onClose }: Props) => {
       {segment === 'report' && !!occurrence && (
         <ReportView occurrences={[occurrence]} />
       )}
-    </IonModal>
+    </IdentificationModal>
   );
 };
 

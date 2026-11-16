@@ -1,9 +1,8 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import 'swiper/css';
-import 'swiper/css/grid';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page, Main, device, useToast, captureImage } from '@flumens';
-import { NavContext, isPlatform, IonRouterLink } from '@ionic/react';
+import { NavContext, IonRouterLink } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
 import config from 'common/config';
 import background from 'common/images/branches.jpg';
@@ -25,6 +24,7 @@ import beetleID from './beetleID.png';
 import ecosystem from './ecosystem.jpg';
 import habitat from './habitat.jpg';
 import habitatID from './habitatID.png';
+import identificationWave from './identificationWave.svg';
 import logo from './logo.svg';
 import mothID from './mothID.png';
 import plantID from './plantID.png';
@@ -161,57 +161,37 @@ const LandingPage = () => {
     }
   };
 
-  const tabletLayout = isPlatform('tablet')
-    ? {
-        slidesPerView: 3,
-      }
-    : {};
-
-  const overlayRef = useRef<HTMLDivElement>(null);
-
-  const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
-
-    // max opacity at full scroll
-    const maxOpacity = 0.7;
-    const progress = scrollTop / (scrollHeight - clientHeight);
-    const opacity = progress * maxOpacity;
-
-    if (overlayRef.current) overlayRef.current.style.opacity = String(opacity);
-  };
-
   return (
     <Page id="home-landing">
-      <Main scrollY={false} className="bg-ion-neutral-500!">
-        <div
-          style={{ backgroundImage: `url(${background})` }}
-          className="absolute w-full top-[env(safe-area-inset-top)] bg-cover bg-center text-white p-10 pb-40"
-        >
-          <img src={logo} className="max-w-3/4 w-full" />
+      <Main scrollY={false} className="[--background:#020202]!">
+        <div className="h-full overflow-y-auto pt-[env(safe-area-inset-top)]">
+          <header
+            style={{ backgroundImage: `url(${background})` }}
+            className="bg-cover bg-center px-6 pt-8 pb-8 text-white"
+          >
+            <img
+              src={logo}
+              alt="UKCEH e-Surveyor"
+              className="w-60 max-w-full"
+            />
 
-          <div className="mt-6">
-            What is e-Surveyor? Read more about it{' '}
-            <IonRouterLink href="/info/about" className="text-white font-bold">
-              here
-            </IonRouterLink>
-            .
-          </div>
-        </div>
+            <p className="mt-6 mb-3 max-w-xs text-lg leading-snug text-white">
+              What is e-Surveyor? Read more about it{' '}
+              <IonRouterLink
+                href="/info/about"
+                className="text-white font-bold"
+              >
+                here
+              </IonRouterLink>
+              .
+            </p>
+          </header>
 
-        {/* darkening overlay that increases with scroll */}
-        <div
-          ref={overlayRef}
-          className="absolute size-full z-30 bg-black opacity-0 pointer-events-none"
-        />
-
-        <div
-          className="absolute h-full z-50 pt-[35vh] pb-25 overflow-scroll"
-          onScroll={onScroll}
-        >
           <Swiper
-            className="w-screen py-5! [&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:h-auto! [&_.swiper-slide]:flex [&_.swiper-slide]:flex-col"
-            slidesPerView={2.3}
-            {...tabletLayout}
+            className="w-full px-5! py-1! [&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:h-auto! [&_.swiper-slide]:flex [&_.swiper-slide]:flex-col"
+            slidesPerView={1.65}
+            spaceBetween={12}
+            breakpoints={{ 768: { slidesPerView: 3 } }}
           >
             <SwiperSlide>
               <Card
@@ -245,7 +225,7 @@ const LandingPage = () => {
           {showTermsMessage && (
             <InfoBackgroundMessage
               name="showTermsUpdatedMessage"
-              className="mb-6 max-w-2/3 w-full text-center"
+              className="my-6 mx-5 w-[calc(100%-2.5rem)] max-w-none! text-center"
             >
               We’ve updated our{' '}
               <a href={`${config.backend.url}/terms-of-use`}>Terms of Use</a>.
@@ -253,8 +233,28 @@ const LandingPage = () => {
             </InfoBackgroundMessage>
           )}
 
-          <div className="border-y border-black/10 bg-black/5">
-            <div className="list max-w-lg mx-auto px-3 w-full py-[3vh]">
+          <div className="relative mt-12 pb-25">
+            <div
+              className="pointer-events-none absolute inset-x-0 -top-10 bottom-0 bg-linear-to-b from-[#25332b]/95 to-[#111a16]/95 backdrop-blur-sm"
+              style={{
+                maskImage: `url(${identificationWave}), linear-gradient(white, white)`,
+                maskSize: '100% 2.5rem, 100% calc(100% - 2.5rem)',
+                maskPosition: 'top, bottom',
+                maskRepeat: 'no-repeat',
+              }}
+              aria-hidden="true"
+            />
+
+            <div className="relative flex flex-col gap-3 max-w-lg mx-auto px-5 w-full pt-2 pb-6">
+              <div className="mb-2 px-1">
+                <h2 className="m-0 text-lg font-semibold text-white!">
+                  Identify in the field
+                </h2>
+                <p className="mt-1 mb-0 text-sm text-neutral-300">
+                  Get identification suggestions from a photo.
+                </p>
+              </div>
+
               <FancyButton
                 icon={plantID}
                 label="Identify plant"

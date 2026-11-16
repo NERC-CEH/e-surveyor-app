@@ -23,7 +23,7 @@ const HomeController = () => (
     </IonRouterOutlet>
 
     <div className="absolute bottom-0 left-0 w-full">
-      <div className="pointer-events-none absolute -top-12 left-0 w-full h-[calc(100%+3rem)] backdrop-blur-xl bg-white/10 [mask-image:linear-gradient(to_top,black_50%,transparent_100%)]" />
+      <div className="pointer-events-none absolute -top-4 left-0 w-full h-[calc(100%+1rem)] backdrop-blur-xl bg-white/10 [mask-image:linear-gradient(to_top,black_50%,transparent_100%)]" />
       <IonTabBar slot="bottom" className="relative">
         <IonTabButton tab="home/landing" href="/home/landing">
           <IonIcon icon={homeOutline} />

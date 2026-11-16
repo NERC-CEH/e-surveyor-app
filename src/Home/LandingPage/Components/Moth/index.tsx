@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react';
 import { Button, device, Main, useToast } from '@flumens';
-import { IonModal } from '@ionic/react';
 import PhotoPicker from 'common/Components/PhotoPickers/PhotoPicker';
 import Occurrence from 'models/occurrence';
 import SpeciesList from 'Components/SpeciesList';
+import IdentificationModal from '../IdentificationModal';
 
 type Props = {
   occurrence?: Occurrence;
@@ -29,14 +29,10 @@ const MothProfile = ({ occurrence, onClose }: Props) => {
   };
 
   return (
-    <IonModal
+    <IdentificationModal
       isOpen={!!occurrence}
-      backdropDismiss={false}
-      breakpoints={[0, 0.85, 1]}
-      initialBreakpoint={0.85}
-      onDidDismiss={onClose}
-      aria-label="Identify moth"
-      className="[&>.ion-page]:pt-2"
+      onClose={onClose}
+      title="Identify moth"
     >
       {!!occurrence && (
         <Main>
@@ -61,7 +57,7 @@ const MothProfile = ({ occurrence, onClose }: Props) => {
           </div>
         </Main>
       )}
-    </IonModal>
+    </IdentificationModal>
   );
 };
 

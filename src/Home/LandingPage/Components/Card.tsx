@@ -23,35 +23,28 @@ const Card = ({
   <IonRouterLink
     routerLink={link}
     className={clsx(
-      'm-1 h-full overflow-hidden rounded-md shadow-md bg-white',
-      theme === 'soil' &&
-        'bg-soil-200/10 text-soil-950 border border-soil-800/50',
-      theme === 'habitat' &&
-        'bg-habitat-200/10 text-habitat-950 border border-habitat-800/50',
-      theme === 'ecosystem' &&
-        'bg-ecosystem-200/10 text-ecosystem-950 border border-ecosystem-800/50',
+      'flex h-full flex-col overflow-hidden rounded-2xl border text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-300',
+      theme === 'light' && 'border-neutral-950/85 bg-white',
+      theme === 'soil' && 'border-soil-950/85 bg-soil-50',
+      theme === 'habitat' && 'border-habitat-950/85 bg-habitat-50',
+      theme === 'ecosystem' && 'border-ecosystem-950/85 bg-ecosystem-50',
       className
     )}
     onClick={onClick}
   >
-    <div
-      className={clsx(
-        'flex size-full flex-col',
-        theme === 'light' && 'bg-white',
-        theme === 'soil' && 'bg-soil-200/10 text-soil-950',
-        theme === 'habitat' && 'bg-habitat-200/10 text-habitat-950 ',
-        theme === 'ecosystem' && 'bg-ecosystem-200/10 text-ecosystem-950 '
-      )}
-    >
-      <img
-        src={image}
-        className="shrink-0 flex-1 w-full object-cover h-3/7! m-1 rounded border border-neutral-200"
-      />
+    <img
+      src={image}
+      alt=""
+      className="aspect-3/2 w-full shrink-0 object-cover"
+    />
 
-      <div className="flex size-full flex-col items-center justify-evenly gap-1  p-3 pt-0">
-        <div className="line-clamp-2 text-base font-bold!">{title}</div>
-        {!!description && <div className="text-sm! m-0!">{description}</div>}
-      </div>
+    <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="text-base font-semibold text-neutral-900">{title}</div>
+      {!!description && (
+        <div className="flex-1 text-sm leading-relaxed text-neutral-600">
+          {description}
+        </div>
+      )}
     </div>
   </IonRouterLink>
 );

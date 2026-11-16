@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react';
-import { IonModal, IonContent } from '@ionic/react';
+import { IonContent } from '@ionic/react';
 import HabitatIdentification from 'common/Components/HabitatIdentification';
 import Location from 'common/models/location';
+import IdentificationModal from '../IdentificationModal';
 
 type Props = {
   location?: Location;
@@ -9,14 +10,10 @@ type Props = {
 };
 
 const HabitatProfile = ({ location, onClose }: Props) => (
-  <IonModal
+  <IdentificationModal
     isOpen={!!location}
-    backdropDismiss={false}
-    breakpoints={[0, 0.85, 1]}
-    initialBreakpoint={0.85}
-    onDidDismiss={onClose}
-    aria-label="Identify habitat"
-    className="[&>.ion-page]:pt-2"
+    onClose={onClose}
+    title="Identify habitat"
   >
     {!!location && (
       <IonContent>
@@ -25,7 +22,7 @@ const HabitatProfile = ({ location, onClose }: Props) => (
         </div>
       </IonContent>
     )}
-  </IonModal>
+  </IdentificationModal>
 );
 
 export default observer(HabitatProfile);
