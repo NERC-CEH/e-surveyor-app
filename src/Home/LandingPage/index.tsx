@@ -18,6 +18,7 @@ import BeetleProfile from './Components/Beetle';
 import Card from './Components/Card';
 import FancyButton from './Components/FancyButton';
 import HabitatProfile from './Components/Habitat';
+import IntroVideo from './Components/IntroVideo';
 import MothProfile from './Components/Moth';
 import SpeciesProfile from './Components/Species';
 import beetleID from './beetleID.png';
@@ -185,6 +186,8 @@ const LandingPage = () => {
               </IonRouterLink>
               .
             </p>
+
+            <IntroVideo />
           </header>
 
           <Swiper
