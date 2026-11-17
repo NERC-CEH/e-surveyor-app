@@ -17,12 +17,12 @@ import {
 } from '@ionic/react';
 import '@ionic/react/css/ionic-swiper.css';
 import AppModelType from 'models/app';
+import aerialImage from './images/aerial.jpg';
 import meadowImage from './images/first.jpg';
 import denseMeadowImage from './images/fourth.jpg';
 import insectImage from './images/insectImage.jpg';
+import mothImage from './images/moth.jpg';
 import personImage from './images/personImage.jpg';
-import flowersImage from './images/second.jpg';
-import seedsImage from './images/third.jpg';
 import './styles.scss';
 
 // Fixes iOS 12 scrolling issue.
@@ -97,8 +97,8 @@ const OnboardingScreens = ({ appModel }: Props) => {
               <div className="message">
                 <h2>Welcome</h2>
                 <p>
-                  e-Surveyor helps you to assess the quality of habitats you
-                  manage.
+                  e-Surveyor helps you find out how nature is doing on the land
+                  you manage, and how it changes over time.
                 </p>
               </div>
             </div>
@@ -111,10 +111,11 @@ const OnboardingScreens = ({ appModel }: Props) => {
             >
               <WaveShape />
               <div className="message two">
+                <h2>Habitat, wildlife and soil</h2>
                 <p>
-                  Create a survey to identify and record all of the plants in
-                  your area, and find out which beneficial insects you are
-                  supporting.
+                  Surveys are grouped into three areas: Habitat, Ecosystem
+                  Function (the insects that pollinate and control pests) and
+                  Soil.
                 </p>
               </div>
             </div>
@@ -123,13 +124,15 @@ const OnboardingScreens = ({ appModel }: Props) => {
           <SwiperSlide className="second">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${personImage})` }}
+              style={{ backgroundImage: `url(${mothImage})` }}
             >
               <WaveShape />
               <div className="message two">
+                <h2>Identify what you find</h2>
                 <p>
-                  Use the transect (structured recording) method to find out how
-                  your habitat performs against industry standard criteria.
+                  Take a photo and the app's AI suggests what it is: plants,
+                  habitat types, moths and ground beetles. Experts check your
+                  records.
                 </p>
               </div>
             </div>
@@ -138,14 +141,14 @@ const OnboardingScreens = ({ appModel }: Props) => {
           <SwiperSlide className="third">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${flowersImage})` }}
+              style={{ backgroundImage: `url(${aerialImage})` }}
             >
               <WaveShape />
               <div className="message two">
-                <h2>Identify plants</h2>
+                <h2>Add your sites</h2>
                 <p>
-                  Using AI technology the app can help you to identify plant
-                  species from images you take.
+                  Map your fields, margins and meadows once. Every survey uses
+                  them, so you can go back to the same spots each year.
                 </p>
               </div>
             </div>
@@ -154,14 +157,14 @@ const OnboardingScreens = ({ appModel }: Props) => {
           <SwiperSlide className="fourth">
             <div
               className="slide-header"
-              style={{ backgroundImage: `url(${seedsImage})` }}
+              style={{ backgroundImage: `url(${personImage})` }}
             >
               <WaveShape />
               <div className="message two">
-                <h2>Compare what you see</h2>
+                <h2>See your results</h2>
                 <p>
-                  Compare the species present in your habitat to those in your
-                  seed mix or against benchmark species lists.
+                  Get a report after each survey, compare your plants with your
+                  seed mix, and watch your results build up over the years.
                 </p>
               </div>
             </div>
@@ -174,10 +177,11 @@ const OnboardingScreens = ({ appModel }: Props) => {
             >
               <WaveShape />
               <div className="message two">
-                <h2>Our expertise</h2>
+                <h2>Backed by UKCEH science</h2>
                 <p>
-                  Research from the UKCEH built into the app can assess the
-                  quality of the habitat you have created.
+                  e-Surveyor is built by the UK Centre for Ecology &amp;
+                  Hydrology. Every survey you upload helps you, and helps us
+                  understand nature on farms.
                 </p>
 
                 <Button

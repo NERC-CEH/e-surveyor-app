@@ -36,7 +36,8 @@ $text-color: #132f00;
     top: 0;
     background-size: cover;
     width: 100%;
-    height: 50%;
+    // Reserve space for the text and controls without enlarging the panel on tall screens.
+    height: min(50%, calc(100% - 27rem));
   }
   @include wave;
 }
