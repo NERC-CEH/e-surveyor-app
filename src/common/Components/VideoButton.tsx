@@ -1,12 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { type ReactNode, useEffect, useRef } from 'react';
 import { closeCircleOutline, playCircle } from 'ionicons/icons';
 import { Button, useToast } from '@flumens';
 import { IonIcon } from '@ionic/react';
-import introVideo from 'common/videos/CAPTIONED_01_Intro video_What is E-Surveyor_Assemble_V7_020926_mobile_1080p_hevc_small.mp4';
 
-const IntroVideo = () => {
-  const introPlayerRef = useRef<HTMLDivElement>(null);
-  const introVideoRef = useRef<
+type Props = {
+  src: string;
+  label: string;
+  className?: string;
+  children?: ReactNode;
+};
+
+const VideoButton = ({ src, label, className, children }: Props) => {
+  const playerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<
     HTMLVideoElement & {
       webkitEnterFullscreen?: () => void;
     }
@@ -14,7 +20,7 @@ const IntroVideo = () => {
   const toast = useToast();
 
   useEffect(() => {
-    const video = introVideoRef.current;
+    const video = videoRef.current;
 
     if (!video) return undefined;
 
@@ -33,9 +39,9 @@ const IntroVideo = () => {
     };
   }, []);
 
-  const openIntroVideo = async () => {
-    const video = introVideoRef.current;
-    const player = introPlayerRef.current;
+  const openVideo = async () => {
+    const video = videoRef.current;
+    const player = playerRef.current;
 
     if (!video || !player) return;
 
@@ -57,17 +63,21 @@ const IntroVideo = () => {
     <>
       <Button
         shape="round"
-        onPress={openIntroVideo}
+        onPress={openVideo}
+        aria-label={label}
+        skipTranslation={!!children}
         prefix={
-          <IonIcon icon={playCircle} className="size-7" aria-hidden="true" />
+          !children && (
+            <IonIcon icon={playCircle} className="size-7" aria-hidden="true" />
+          )
         }
-        className="min-h-11 w-fit max-w-full gap-2 border-white/50 bg-white/15 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-white backdrop-blur-sm data-[hovered=true]:bg-white/25"
+        className={className}
       >
-        Watch the 90-second video
+        {children ?? label}
       </Button>
 
       <div
-        ref={introPlayerRef}
+        ref={playerRef}
         className="group pointer-events-none absolute size-px overflow-hidden bg-black opacity-0 [&:fullscreen]:pointer-events-auto [&:fullscreen]:size-full [&:fullscreen]:opacity-100"
       >
         <Button
@@ -89,13 +99,13 @@ const IntroVideo = () => {
         {/* Captions are burned into the supplied video. */}
         {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
-          ref={introVideoRef}
-          src={introVideo}
+          ref={videoRef}
+          src={src}
           controls
           playsInline
           preload="metadata"
           tabIndex={-1}
-          aria-label="Introduction to e-Surveyor"
+          aria-label={label}
           className="size-full object-contain"
         />
       </div>
@@ -103,4 +113,4 @@ const IntroVideo = () => {
   );
 };
 
-export default IntroVideo;
+export default VideoButton;

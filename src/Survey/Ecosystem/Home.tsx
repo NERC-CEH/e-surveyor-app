@@ -1,10 +1,13 @@
-import { Header, Main, Page } from 'common/flumens';
+import { playCircleOutline } from 'ionicons/icons';
+import { IonIcon, IonRouterLink } from '@ionic/react';
+import { Badge, Header, Main, Page } from 'common/flumens';
 import beeIcon from 'common/images/bee.svg';
 import useHeaderScroll from 'helpers/useHeaderScroll';
 import StarsBackground from 'Survey/common/Components/StarsBackground';
 import SurveyCard from 'Survey/common/Components/SurveyCard';
 import beetleSurvey from './Beetle/config';
 import mothSurvey from './Moth/config';
+import { baseURL as mothBaseURL } from './Moth/router';
 
 const EcosystemHome = () => {
   const { isScrolled, ...mainProps } = useHeaderScroll();
@@ -39,6 +42,26 @@ const EcosystemHome = () => {
             link={mothSurvey.baseURL}
             className="-mt-8"
             icon={mothSurvey.icon}
+            moreInfo={
+              <IonRouterLink
+                routerLink={`${mothBaseURL}/videos`}
+                className="m-4 block"
+              >
+                <Badge
+                  color="tertiary"
+                  prefix={
+                    <IonIcon
+                      icon={playCircleOutline}
+                      className="size-6"
+                      aria-hidden="true"
+                    />
+                  }
+                  className="w-full gap-2 whitespace-normal text-left font-semibold"
+                >
+                  New to moth trapping? Watch the 4 how-to videos
+                </Badge>
+              </IonRouterLink>
+            }
           />
 
           <SurveyCard

@@ -4,12 +4,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Page, Main, device, useToast, captureImage } from '@flumens';
 import { NavContext, IonRouterLink } from '@ionic/react';
 import InfoBackgroundMessage from 'common/Components/InfoBackgroundMessage';
+import VideoButton from 'common/Components/VideoButton';
 import config from 'common/config';
 import background from 'common/images/branches.jpg';
 import Media from 'common/models/image';
 import Location from 'common/models/location';
 import Occurrence from 'common/models/occurrence';
 import userModel from 'common/models/user';
+import introVideo from 'common/videos/CAPTIONED_01_Intro video_What is E-Surveyor_Assemble_V7_020926_mobile_1080p_hevc_small.mp4';
 import { usePromptImageSource } from 'Components/PhotoPickers/PhotoPicker';
 import { baseURL as ecosystemURL } from 'Survey/Ecosystem/router';
 import { baseURL as habitatURL } from 'Survey/Habitat/router';
@@ -18,8 +20,8 @@ import BeetleProfile from './Components/Beetle';
 import Card from './Components/Card';
 import FancyButton from './Components/FancyButton';
 import HabitatProfile from './Components/Habitat';
-import IntroVideo from './Components/IntroVideo';
 import MothProfile from './Components/Moth';
+import Notifications from './Components/Notifications';
 import SpeciesProfile from './Components/Species';
 import beetleID from './beetleID.png';
 import ecosystem from './ecosystem.jpg';
@@ -170,11 +172,10 @@ const LandingPage = () => {
             style={{ backgroundImage: `url(${background})` }}
             className="bg-cover bg-center px-6 pt-8 pb-8 text-white"
           >
-            <img
-              src={logo}
-              alt="UKCEH e-Surveyor"
-              className="w-60 max-w-full"
-            />
+            <div className="flex items-start justify-between gap-3">
+              <img src={logo} alt="UKCEH e-Surveyor" className="w-60 min-w-0" />
+              <Notifications />
+            </div>
 
             <p className="mt-6 mb-3 max-w-xs text-lg leading-snug text-white">
               What is e-Surveyor? Read more about it{' '}
@@ -187,7 +188,11 @@ const LandingPage = () => {
               .
             </p>
 
-            <IntroVideo />
+            <VideoButton
+              src={introVideo}
+              label="Watch the 90-second video"
+              className="min-h-11 w-fit max-w-full gap-2 border-white/50 bg-white/15 py-1.5 pl-1.5 pr-4 text-sm font-semibold text-white backdrop-blur-sm data-[hovered=true]:bg-white/25"
+            />
           </header>
 
           <Swiper
@@ -241,7 +246,8 @@ const LandingPage = () => {
               className="pointer-events-none absolute inset-x-0 -top-10 bottom-0 bg-linear-to-b from-[#25332b]/95 to-[#111a16]/95 backdrop-blur-sm"
               style={{
                 maskImage: `url(${identificationWave}), linear-gradient(white, white)`,
-                maskSize: '100% 2.5rem, 100% calc(100% - 2.5rem)',
+                // Overlap the masks by 1px to avoid a subpixel rendering seam.
+                maskSize: '100% 2.5rem, 100% calc(100% - 2.5rem + 1px)',
                 maskPosition: 'top, bottom',
                 maskRepeat: 'no-repeat',
               }}

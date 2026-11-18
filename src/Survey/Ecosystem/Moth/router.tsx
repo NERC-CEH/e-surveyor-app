@@ -5,10 +5,11 @@ import StartNewSurvey from 'Survey/common/Components/StartNewSurvey';
 import Home from './Home';
 import Occurrence from './Occurrence';
 import Report from './Report';
+import Videos from './Videos';
 import survey from './config';
 
 const { AttrPageFromRoute } = AttrPage;
-const { baseURL } = survey;
+export const { baseURL } = survey;
 
 const routes = [
   [baseURL, StartNewSurvey.with(survey)],
@@ -17,6 +18,8 @@ const routes = [
   [`${baseURL}/:smpId/occurrence/:occId`, Occurrence],
   [`${baseURL}/:smpId/location`, ModelLocationMap.SampleFromRoute],
   [`${baseURL}/:smpId/report`, Report],
+  // Ionic uses the last match, so this must follow the :smpId route.
+  [`${baseURL}/videos`, Videos],
 ] as const;
 
 export default routes.map(([route, component]) => (

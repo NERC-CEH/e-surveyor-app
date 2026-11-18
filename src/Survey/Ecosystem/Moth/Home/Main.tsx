@@ -1,7 +1,12 @@
 import { useContext } from 'react';
 import { observer } from 'mobx-react';
-import { bookOutline, cameraOutline, openOutline } from 'ionicons/icons';
-import { useRouteMatch } from 'react-router';
+import {
+  bookOutline,
+  cameraOutline,
+  openOutline,
+  playCircleOutline,
+} from 'ionicons/icons';
+import { useHistory, useRouteMatch } from 'react-router';
 import {
   Main,
   MenuAttrItem,
@@ -22,7 +27,7 @@ import GridRefValue from 'Survey/common/Components/GridRefValue';
 import MenuDateAttr from 'Survey/common/Components/MenuDateAttr';
 import SpeciesList from 'Survey/common/Components/SpeciesList';
 import UploadedRecordInfoMessage from 'Survey/common/Components/UploadedRecordInfoMessage';
-import { habitatValues } from '../config';
+import survey, { habitatValues } from '../config';
 
 type Props = {
   sample: Sample;
@@ -38,6 +43,7 @@ const HomeMain = ({
   gallerySelect,
 }: Props) => {
   const { url } = useRouteMatch();
+  const history = useHistory();
   const { navigate } = useContext(NavContext);
 
   const hasSpecies = !!sample.occurrences.length;
@@ -64,6 +70,15 @@ const HomeMain = ({
             className="border-none text-left bg-white!"
           >
             Project information
+          </Button>
+          <Button
+            onPress={() =>
+              history.push(`${survey.baseURL}/videos`, { fromSurvey: true })
+            }
+            prefix={<IonIcon icon={playCircleOutline} className="size-6" />}
+            className="border-none text-left bg-white!"
+          >
+            Help and how-to videos
           </Button>
         </div>
 

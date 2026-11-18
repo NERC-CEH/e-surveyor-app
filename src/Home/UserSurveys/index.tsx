@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react';
+import { useLocation } from 'react-router';
 import { Page, Main, device, useToast, Button, Badge } from '@flumens';
 import {
   IonList,
@@ -98,7 +99,16 @@ function getAllSurveys(surveys: Sample[]) {
 
 const UserSurveys = () => {
   const [segment, setSegment] = useState('pending');
+  const { search } = useLocation();
   const toast = useToast();
+
+  useEffect(() => {
+    const requestedSegment = new URLSearchParams(search).get('segment');
+
+    if (requestedSegment === 'pending') {
+      setSegment(requestedSegment);
+    }
+  }, [search]);
 
   const onSegmentClick = (event: SegmentCustomEvent) =>
     setSegment(String(event.detail.value));

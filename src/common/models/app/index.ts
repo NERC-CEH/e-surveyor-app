@@ -1,6 +1,10 @@
 import { Model, ModelAttrs, type ModelOptions } from '@flumens';
 import { SeedmixSpecies } from 'common/data/seedmix';
-import { mainStore } from './store';
+import { mainStore } from '../store';
+import initialise, {
+  type AppNotification,
+  type Extension as NotificationsExtension,
+} from './notificationsExt';
 
 export type SurveyDraftKeys = {
   'draftId:habitat-location'?: string;
@@ -18,6 +22,7 @@ export type SeedMix = {
 };
 
 export type Data = {
+  notifications: AppNotification[];
   language: string;
   appSession: number;
   showedWelcome: boolean;
@@ -50,6 +55,7 @@ export type Data = {
   SurveyDraftKeys;
 
 const defaults: Data = {
+  notifications: [],
   language: '',
   appSession: 0,
   showedWelcome: false,
@@ -72,8 +78,12 @@ const defaults: Data = {
 };
 
 export class AppModel extends Model<Data> {
+  declare notifications: NotificationsExtension;
+
   constructor(options: ModelOptions<Data>) {
     super({ ...options, data: { ...defaults, ...options.data } });
+
+    this.notifications = initialise(this);
   }
 
   deleteSeedmix(seedmixId: string) {

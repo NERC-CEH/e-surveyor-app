@@ -1,6 +1,48 @@
 import { expect, test } from './fixtures';
 import { expectPending, openSurvey } from './utils';
 
+test('uses one videos route before and during a moth survey', async ({
+  homePage,
+}) => {
+  await homePage
+    .locator('ion-router-link[router-link="/survey/ecosystem"]')
+    .click();
+  await homePage
+    .getByText('New to moth trapping? Watch the 4 how-to videos', {
+      exact: true,
+    })
+    .click();
+
+  const videos = homePage.locator('#moth-videos');
+  await expect(homePage).toHaveURL(/\/survey\/ecosystem\/moth\/videos$/);
+  await expect(videos).toBeVisible();
+  await videos
+    .getByRole('button', { name: 'Start survey', exact: true })
+    .click();
+
+  const survey = homePage.locator('#survey-moth-home');
+  await expect(survey).toBeVisible();
+  const surveyURL = homePage.url();
+
+  await survey.getByRole('button', { name: 'Watch the how-to videos' }).click();
+  await expect(homePage).toHaveURL(/\/survey\/ecosystem\/moth\/videos$/);
+  await expect(videos).toBeVisible();
+  await videos.getByRole('button', { name: 'Back to my survey' }).click();
+  await expect(homePage).toHaveURL(surveyURL);
+  await expect(
+    survey.getByRole('button', { name: 'Make records' })
+  ).toBeHidden();
+
+  await survey.getByRole('button', { name: 'Help and how-to videos' }).click();
+  await expect(homePage).toHaveURL(/\/survey\/ecosystem\/moth\/videos$/);
+  await expect(videos).toBeVisible();
+  await videos.getByRole('button', { name: 'Back to my survey' }).click();
+  await expect(homePage).toHaveURL(surveyURL);
+  await expect(
+    survey.getByRole('button', { name: 'Add', exact: true })
+  ).toBeVisible();
+});
+
 test('requires a date before finishing moth recording', async ({
   homePage,
 }) => {

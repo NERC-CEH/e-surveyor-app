@@ -1,8 +1,13 @@
+import { Fragment } from 'react';
 import { Header, Page, Main, Section } from '@flumens';
 import flumensLogo from 'common/images/flumens.svg';
-import rothamstedLogo from 'common/images/rothamsted-logo.png';
+import LogoGrid from './LogoGrid';
 import plantNetLogo from './Pl@ntNet_logo.png';
 import UKCEHLogo from './UKCEHLogo.svg';
+import { FUNDERS, PARTNERS, PEOPLE, VERIFIERS } from './content';
+import bounceLogo from './images/bounce-video.svg';
+import observationLogo from './images/observation-org.png';
+import lincolnLogo from './images/university-of-lincoln.png';
 
 const { P, H } = Section;
 
@@ -12,7 +17,13 @@ const Credits = () => (
     <Main>
       <Section>
         <H>Developed by UKCEH</H>
-        <img src={UKCEHLogo} className="mx-auto block max-w-[70%]" />
+        <a href="https://www.ceh.ac.uk">
+          <img
+            src={UKCEHLogo}
+            alt="UK Centre for Ecology & Hydrology"
+            className="mx-auto block max-w-[70%]"
+          />
+        </a>
       </Section>
 
       <Section>
@@ -21,54 +32,38 @@ const Credits = () => (
           We are grateful to the UKRI ASSIST project, Defra and the Joint Nature
           Conservation Committee for funding this application. The moth
           application and the habitat reporting received funding from JNCC
-          through the Natural Capital Ecosystem Assessment.
+          through the Natural Capital and Ecosystem Assessment (NCEA). AI-HAB,
+          which suggests your habitat type, is funded by the UKRI Natural
+          Environment Research Council (NERC). We are also grateful for funding
+          from AgZero+ and UK-SCAPE (UKCEH National Capability).
         </P>
+        <LogoGrid logos={FUNDERS} />
       </Section>
 
       <Section>
+        <H>Partners</H>
+        <P>We are also grateful to our project partners:</P>
+        <LogoGrid logos={PARTNERS} />
+      </Section>
+
+      <Section>
+        <H>People</H>
         <P>
           We are very grateful for all the people that helped to create this
           app:
         </P>
-        <div className="mx-4 list">
-          <div className="underline">UK Centre for Ecology & Hydrology:</div>
-          <div>Tom August</div>
-          <div>Richard Pywell</div>
-          <div>Michael Pocock</div>
-          <div>Abigail Lowe</div>
-          <div>Lucy Ridding</div>
-          <div>Grace Skinner</div>
-          <div>Zeke Marshall</div>
-          <div>Alba Gomez Segura</div>
-          <div>Ben Woodcock</div>
-          <div>Biren Rathod</div>
+        <div className="mx-4 mb-8">
+          {PEOPLE.map(({ organisation, names }) => (
+            <Fragment key={organisation}>
+              <div className="underline my-2">{organisation}</div>
+              <div className="px-2">
+                {names.map(name => (
+                  <div key={name}>{name}</div>
+                ))}
+              </div>
+            </Fragment>
+          ))}
         </div>
-        <div className="mx-4 mt-4 list">
-          <div className="underline">Rothamsted Research</div>
-          <div>Kelly Jowett</div>
-        </div>
-
-        <div className="mx-4 my-4 list">
-          <div className="underline">Flumens</div>
-          <div>Karolis Kazlauskis</div>
-          <div>Vilius Stankaitis</div>
-        </div>
-      </Section>
-
-      <Section>
-        <img src={rothamstedLogo} className="mx-auto my-10 block max-w-[70%]" />
-      </Section>
-
-      <Section>
-        <img
-          src={plantNetLogo}
-          className="mx-auto mb-0 mt-[30px] block w-2/5 max-w-[200px]"
-        />
-        <P>
-          The image-based plant species identification service used, is based on
-          the Pl@ntNet recognition api, regularly updated and accessible through
-          the <a href="https://my.plantnet.org">Pl@ntNet website</a>.
-        </P>
       </Section>
 
       <Section>
@@ -80,17 +75,96 @@ const Credits = () => (
           />
         </a>
         <P>
-          <a href="https://flumens.io" style={{ whiteSpace: 'nowrap' }}>
+          Made with care by{' '}
+          <a href="https://flumens.io" className="whitespace-nowrap">
             Flumens
           </a>
-          , a technical consultancy specializing in creating customized
-          environmental science and community-focused solutions, created this
-          app with love. If you have any feedback or suggestions, please don't
-          hesitate to{' '}
+          , a technology consultancy creating tailored digital solutions for
+          environmental science and communities. We'd love to hear from you! If
+          you have feedback, ideas, or suggestions, please{' '}
           <a href="mailto:enquiries%40flumens.io?subject=App%20Feedback">
-            contact us
+            get in touch
           </a>
           .
+        </P>
+      </Section>
+
+      <Section>
+        <a href="https://my.plantnet.org">
+          <img
+            src={plantNetLogo}
+            alt="Pl@ntNet"
+            className="mx-auto mb-0 mt-[30px] block w-2/5 max-w-[200px]"
+          />
+        </a>
+        <P>
+          The image-based plant species identification service used, is based on
+          the Pl@ntNet recognition api, regularly updated and accessible through
+          the <a href="https://my.plantnet.org">Pl@ntNet website</a>.
+        </P>
+      </Section>
+
+      <Section>
+        <a href="https://observation.org">
+          <img
+            src={observationLogo}
+            alt="Observation.org"
+            className="mx-auto my-6 block w-2/5 max-w-[70px]"
+          />
+        </a>
+        <P>
+          Moths and ground beetles (carabids) are identified using the image
+          recognition models from{' '}
+          <a href="https://observation.org">Observation.org</a>.
+        </P>
+      </Section>
+
+      <Section>
+        <a href="https://www.lincoln.ac.uk">
+          <img
+            src={lincolnLogo}
+            alt="University of Lincoln"
+            className="mx-auto my-6 block w-2/5 max-w-[200px]"
+          />
+        </a>
+        <P>
+          AI-HAB, which suggests your habitat type from photos, was built by
+          UKCEH with the{' '}
+          <a href="https://www.lincoln.ac.uk">University of Lincoln</a>.
+        </P>
+      </Section>
+
+      <Section>
+        <H>Checking your records</H>
+        <P>
+          Records are verified on <a href="https://irecord.org.uk">iRecord</a>{' '}
+          by the{' '}
+          <a href="https://butterfly-conservation.org">
+            National Moth Recording Scheme (Butterfly Conservation)
+          </a>{' '}
+          and the{' '}
+          <a href="https://www.brc.ac.uk/scheme/ground-beetle-recording-scheme">
+            Ground Beetle Recording Scheme
+          </a>{' '}
+          (Biological Records Centre). Thank you to all the expert verifiers.
+        </P>
+        <LogoGrid logos={VERIFIERS} />
+      </Section>
+
+      <Section>
+        <a
+          href="https://www.bouncevideo.co.uk"
+          className="mx-4 mt-4 block rounded-lg bg-neutral-800! p-4"
+        >
+          <img
+            src={bounceLogo}
+            alt="Bounce Video"
+            className="mx-auto block w-2/5 max-w-[200px]"
+          />
+        </a>
+        <P>
+          The guidance videos were made by{' '}
+          <a href="https://www.bouncevideo.co.uk">Bounce Video</a>.
         </P>
       </Section>
 
@@ -105,6 +179,7 @@ const Credits = () => (
           <a href="https://www.flaticon.com/" title="Flaticon">
             www.flaticon.com
           </a>
+          .{' '}
           <a href="https://www.freepik.com/vectors/flower">
             Flower vector created by rawpixel.com - www.freepik.com
           </a>

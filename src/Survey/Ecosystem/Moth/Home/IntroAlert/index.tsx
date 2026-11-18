@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import { playCircleOutline } from 'ionicons/icons';
+import { useHistory } from 'react-router';
+import { IonIcon } from '@ionic/react';
 import { Button } from 'common/flumens';
+import survey from '../../config';
 import CustomAlert from '../CustomAlert';
 import addImage from './add.png';
 import deleteImage from './delete.png';
@@ -9,6 +13,7 @@ import moth2Image from './moth2.png';
 // functional component for IntroAlert
 const IntroAlert = () => {
   const [showAlert, setShowAlert] = useState(true);
+  const history = useHistory();
   if (!showAlert) return null;
 
   // handle continue button click
@@ -51,6 +56,18 @@ const IntroAlert = () => {
         Swipe left to delete the record.
         <img src={deleteImage} className="mx-auto" />
       </div>
+
+      <Button
+        color="secondary"
+        prefix={<IonIcon icon={playCircleOutline} className="size-6" />}
+        onPress={() => {
+          setShowAlert(false);
+          history.push(`${survey.baseURL}/videos`, { fromSurvey: true });
+        }}
+        className="mx-auto mt-6"
+      >
+        Watch the how-to videos
+      </Button>
 
       <Button
         color="primary"
